@@ -254,52 +254,6 @@ jobs:
           name: demo-android-aot
           path: artifacts/*.zip
 
-  demo-ios:
-    name: Build iOS simulator demo
-    needs: prepare
-    if: needs.prepare.outputs.should_release == 'true'
-    runs-on: macos-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 10.0.x
-
-      - name: Install iOS workload
-        run: dotnet workload install ios
-
-      - name: Publish iOS simulator demo
-        shell: bash
-        run: |
-          version="${{ needs.prepare.outputs.package_version }}"
-          arch="$(uname -m)"
-          if [ "$arch" = "arm64" ]; then
-            rid="iossimulator-arm64"
-          else
-            rid="iossimulator-x64"
-          fi
-          publish_dir="artifacts/demo/$rid"
-
-          dotnet publish demo/LuminaUI.Demo.iOS/LuminaUI.Demo.iOS.csproj \
-            --configuration "$CONFIGURATION" \
-            --runtime "$rid" \
-            --self-contained true \
-            --output "$publish_dir" \
-            /p:ContinuousIntegrationBuild=true
-
-          cd "$publish_dir"
-          zip -r "../../LuminaUI.Demo.iOS.${rid}.${version}.zip" .
-
-      - name: Upload iOS simulator demo
-        uses: actions/upload-artifact@v4
-        with:
-          name: demo-ios-simulator
-          path: artifacts/*.zip
-
   release:
     name: Publish NuGet and GitHub Release
     needs:
@@ -308,7 +262,6 @@ jobs:
       - demo-desktop
       - demo-browser
       - demo-android
-      - demo-ios
     if: needs.prepare.outputs.should_release == 'true'
     runs-on: ubuntu-latest
 
