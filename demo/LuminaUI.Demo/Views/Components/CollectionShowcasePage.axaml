@@ -1,0 +1,64 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             x:Class="LuminaUI.Demo.Views.CollectionShowcasePage">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0228}" />
+                <TextBlock Text="{DynamicResource Sandbox.Text.0229}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="280" MaxItemWidth="460" HorizontalSpacing="16" VerticalSpacing="16">
+            <lumina:LuminaCard>
+                <StackPanel Spacing="16">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1148}" />
+                    <ListBox SelectedIndex="1" MaxHeight="180">
+                        <ListBoxItem Content="{DynamicResource Sandbox.Text.0230}" />
+                        <ListBoxItem Content="{DynamicResource Sandbox.Text.0231}" />
+                        <ListBoxItem Content="{DynamicResource Sandbox.Text.0232}" />
+                        <ListBoxItem Content="{DynamicResource Sandbox.Text.0233}" />
+                        <ListBoxItem Content="{DynamicResource Sandbox.Text.0234}" IsEnabled="False" />
+                    </ListBox>
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard>
+                <StackPanel Spacing="16">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1149}" />
+                    <TreeView MaxHeight="220">
+                        <TreeViewItem Header="{DynamicResource Sandbox.Text.0084}" IsExpanded="True">
+                            <TreeViewItem Header="{DynamicResource Sandbox.Text.0235}" IsExpanded="True">
+                                <TreeViewItem Header="{DynamicResource Sandbox.Text.0236}" />
+                                <TreeViewItem Header="{DynamicResource Sandbox.Text.0237}" />
+                                <TreeViewItem Header="{DynamicResource Sandbox.Text.0238}" />
+                            </TreeViewItem>
+                            <TreeViewItem Header="{DynamicResource Sandbox.Text.0239}">
+                                <TreeViewItem Header="{DynamicResource Sandbox.Text.0188}" />
+                                <TreeViewItem Header="{DynamicResource Sandbox.Text.0240}" />
+                            </TreeViewItem>
+                        </TreeViewItem>
+                    </TreeView>
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard>
+                <StackPanel Spacing="16">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1150}" />
+                    <ItemsControl>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <Border Width="120" Height="64" Margin="0,0,12,12" CornerRadius="8" Background="{DynamicResource LuminaPrimaryBgBrush}" />
+                        <Border Width="120" Height="64" Margin="0,0,12,12" CornerRadius="8" Background="{DynamicResource LuminaSuccessBgBrush}" />
+                        <Border Width="120" Height="64" Margin="0,0,12,12" CornerRadius="8" Background="{DynamicResource LuminaWarningBgBrush}" />
+                    </ItemsControl>
+                </StackPanel>
+            </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

@@ -1,0 +1,22 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StaticResource x:Key="DataGridLineBrush" ResourceKey="LuminaBorderSubtleBrush" />
+    <SolidColorBrush x:Key="DataGridCellBackground" Color="#00FFFFFF" />
+    <StaticResource x:Key="DataGridCellFocusBorderBrush" ResourceKey="LuminaPrimaryBrush" />
+    <StaticResource x:Key="DataGridCellCurrentBorderBrush" ResourceKey="LuminaBorderStrongBrush" />
+    <StaticResource x:Key="DataGridCellErrorBrush" ResourceKey="LuminaDangerBgBrush" />
+    <StaticResource x:Key="DataGridColumnHeaderForeground" ResourceKey="LuminaTextTertiaryBrush" />
+    <SolidColorBrush x:Key="DataGridColumnHeaderBackground" Color="#00FFFFFF" />
+    <StaticResource x:Key="DataGridColumnHeaderPointeroverBackground" ResourceKey="LuminaHoverBackgroundBrush" />
+    <StaticResource x:Key="DataGridColumnHeaderPressedBackground" ResourceKey="LuminaStatePressedBrush" />
+    <SolidColorBrush x:Key="DataGridRowBackground" Color="#00FFFFFF" />
+    <StaticResource x:Key="DataGridRowErrorBackground" ResourceKey="LuminaDangerBgBrush" />
+    <SolidColorBrush x:Key="DataGridDetailsPresenterBackground" Color="#00FFFFFF" />
+    <StaticResource x:Key="DataGridRowPointeroverBackground" ResourceKey="LuminaHoverBackgroundBrush" />
+    <StaticResource x:Key="DataGridRowSelectedBackground" ResourceKey="LuminaPrimaryBgBrush" />
+    <StaticResource x:Key="DataGridRowSelectedPointeroverBackground" ResourceKey="LuminaPrimaryBgBrush" />
+    <StaticResource x:Key="DataGridRowGroupHeaderExpandIconForeground" ResourceKey="LuminaTextTertiaryBrush" />
+    <StaticResource x:Key="DataGridRowGroupHeaderBackground" ResourceKey="LuminaHoverBackgroundBrush" />
+    <StaticResource x:Key="DataGridRowGroupHeaderCurrentBorderBrush" ResourceKey="LuminaBorderDefaultBrush" />
+    <StaticResource x:Key="DataGridDisabledBackground" ResourceKey="LuminaActionDisabledBgBrush" />
+</ResourceDictionary>

@@ -1,0 +1,229 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:lumina="using:LuminaUI.Controls">
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaSteps}" TargetType="lumina:LuminaSteps">
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaSteps">
+                <ItemsPresenter ItemsPanel="{TemplateBinding ItemsPanel}" />
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaStepItem}" TargetType="lumina:LuminaStepItem">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaStepItem">
+                <Grid Name="PART_Root"
+                      ColumnDefinitions="Auto,*"
+                      RowDefinitions="Auto,Auto">
+                    <Grid Name="PART_IconContainer"
+                          Grid.Row="0"
+                          Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Border Name="PART_Circle"
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Width="32"
+                                Height="32"
+                                CornerRadius="16"
+                                Background="{DynamicResource LuminaBorderSubtleBrush}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                            <Panel>
+                                <TextBlock Name="PART_Number"
+                                           Text="{TemplateBinding StepNumber}"
+                                           FontSize="14"
+                                           FontWeight="DemiBold"
+                                           Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center" />
+                                <ContentPresenter Content="{TemplateBinding Icon}"
+                                                  ContentTemplate="{TemplateBinding IconTemplate}"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  IsVisible="{TemplateBinding Icon, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                            </Panel>
+                        </Border>
+
+                        <Border Name="PART_HorizontalConnector"
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Height="2"
+                                Margin="8,0,8,0"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center"
+                                Background="{DynamicResource LuminaBorderBrush}" />
+
+                        <Border Name="PART_VerticalConnector"
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Width="2"
+                                MinHeight="24"
+                                Margin="0,8,0,8"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Stretch"
+                                Background="{DynamicResource LuminaBorderBrush}"
+                                IsVisible="False" />
+                    </Grid>
+
+                    <StackPanel Name="PART_TextContainer"
+                                Grid.Row="1"
+                                Grid.Column="0">
+                        <ContentPresenter Name="PART_Header"
+                                          Content="{TemplateBinding Header}"
+                                          ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                          FontWeight="DemiBold"
+                                          FontSize="14"
+                                          Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                        <ContentPresenter Name="PART_Content"
+                                          Margin="0,4,0,0"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          TextElement.Foreground="{DynamicResource LuminaTextTertiaryBrush}"
+                                          TextElement.FontSize="13" />
+                    </StackPanel>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^ /template/ Grid#PART_IconContainer">
+            <Setter Property="Grid.ColumnSpan" Value="2" />
+        </Style>
+
+        <Style Selector="^ /template/ StackPanel#PART_TextContainer">
+            <Setter Property="Margin" Value="0,8,16,0" />
+        </Style>
+
+        <Style Selector="^:last /template/ Border#PART_HorizontalConnector">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+
+        <Style Selector="^:last /template/ Border#PART_VerticalConnector">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+
+        <Style Selector="^:wait /template/ Border#PART_Circle">
+            <Setter Property="Background" Value="{DynamicResource LuminaBorderSubtleBrush}" />
+        </Style>
+
+        <Style Selector="^:wait /template/ TextBlock#PART_Number">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextMutedBrush}" />
+        </Style>
+
+        <Style Selector="^:wait /template/ ContentPresenter#PART_Header">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextMutedBrush}" />
+        </Style>
+
+        <Style Selector="^:current /template/ Border#PART_Circle">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="^:current /template/ TextBlock#PART_Number">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaPrimaryForegroundBrush}" />
+        </Style>
+
+        <Style Selector="^:current /template/ ContentPresenter#PART_Header">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+
+        <Style Selector="^:current /template/ Border#PART_HorizontalConnector">
+            <Setter Property="Background" Value="{DynamicResource LuminaBorderBrush}" />
+        </Style>
+
+        <Style Selector="^:current /template/ Border#PART_VerticalConnector">
+            <Setter Property="Background" Value="{DynamicResource LuminaBorderBrush}" />
+        </Style>
+
+        <Style Selector="^:finished /template/ Border#PART_Circle">
+            <Setter Property="Background" Value="{DynamicResource LuminaSuccessBrush}" />
+        </Style>
+
+        <Style Selector="^:finished /template/ TextBlock#PART_Number">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaSuccessForegroundBrush}" />
+        </Style>
+
+        <Style Selector="^:finished /template/ ContentPresenter#PART_Header">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+        </Style>
+
+        <Style Selector="^:finished /template/ Border#PART_HorizontalConnector">
+            <Setter Property="Background" Value="{DynamicResource LuminaSuccessBrush}" />
+        </Style>
+
+        <Style Selector="^:finished /template/ Border#PART_VerticalConnector">
+            <Setter Property="Background" Value="{DynamicResource LuminaSuccessBrush}" />
+        </Style>
+
+        <Style Selector="^:error /template/ Border#PART_Circle">
+            <Setter Property="Background" Value="{DynamicResource LuminaDangerBrush}" />
+        </Style>
+
+        <Style Selector="^:error /template/ TextBlock#PART_Number">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaDangerForegroundBrush}" />
+        </Style>
+
+        <Style Selector="^:error /template/ ContentPresenter#PART_Header">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaDangerBrush}" />
+        </Style>
+
+        <Style Selector="^:error /template/ Border#PART_HorizontalConnector">
+            <Setter Property="Background" Value="{DynamicResource LuminaDangerBrush}" />
+        </Style>
+
+        <Style Selector="^:error /template/ Border#PART_VerticalConnector">
+            <Setter Property="Background" Value="{DynamicResource LuminaDangerBrush}" />
+        </Style>
+
+        <Style Selector="^:vertical">
+            <Setter Property="MinHeight" Value="72" />
+        </Style>
+
+        <Style Selector="^:vertical /template/ Grid#PART_IconContainer">
+            <Setter Property="Grid.ColumnSpan" Value="1" />
+            <Setter Property="Grid.RowSpan" Value="2" />
+        </Style>
+
+        <Style Selector="^:vertical /template/ StackPanel#PART_TextContainer">
+            <Setter Property="Grid.Row" Value="0" />
+            <Setter Property="Grid.Column" Value="1" />
+            <Setter Property="Grid.RowSpan" Value="2" />
+            <Setter Property="Margin" Value="12,4,0,24" />
+        </Style>
+
+        <Style Selector="^:vertical /template/ Border#PART_HorizontalConnector">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+
+        <Style Selector="^:vertical /template/ Border#PART_VerticalConnector">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+
+        <Style Selector="^:vertical:last /template/ Border#PART_VerticalConnector">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+
+        <Style Selector="^.Small /template/ Border#PART_Circle">
+            <Setter Property="Width" Value="24" />
+            <Setter Property="Height" Value="24" />
+            <Setter Property="CornerRadius" Value="12" />
+        </Style>
+
+        <Style Selector="^.Small /template/ TextBlock#PART_Number">
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+
+        <Style Selector="^.Small /template/ ContentPresenter#PART_Header">
+            <Setter Property="FontSize" Value="13" />
+        </Style>
+    </ControlTheme>
+</ResourceDictionary>

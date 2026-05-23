@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+<resheader name="resmimetype"><value>text/microsoft-resx</value></resheader><resheader name="version"><value>1.3</value></resheader><resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><data name="Lumina.Picker.SelectColor" xml:space="preserve"><value>Select color</value></data>
+  <data name="Lumina.Picker.SelectTime" xml:space="preserve"><value>Select time</value></data>
+  <data name="Lumina.Picker.SelectDate" xml:space="preserve"><value>Select date</value></data>
+  <data name="Lumina.Page.Loading" xml:space="preserve"><value>Loading</value></data>
+  <data name="Lumina.Picker.Day" xml:space="preserve"><value>Day</value></data>
+  <data name="Lumina.Picker.Second" xml:space="preserve"><value>Second</value></data>
+  <data name="Lumina.Picker.Period" xml:space="preserve"><value>AM/PM</value></data>
+  <data name="Lumina.Common.Confirm" xml:space="preserve"><value>Confirm</value></data>
+  <data name="Lumina.ActionMenu.Title" xml:space="preserve"><value>Actions</value></data>
+  <data name="Lumina.Cascader.ChooseOption" xml:space="preserve"><value>Choose an option</value></data>
+  <data name="Lumina.Cascader.CurrentFormat" xml:space="preserve"><value>Current: {0}</value></data>
+  <data name="Lumina.Cascader.SelectCurrentFormat" xml:space="preserve"><value>Select {0}</value></data>
+  <data name="Lumina.Picker.SelectOption" xml:space="preserve"><value>Select option</value></data>
+  <data name="Lumina.Picker.Year" xml:space="preserve"><value>Year</value></data>
+  <data name="Lumina.Picker.Hour" xml:space="preserve"><value>Hour</value></data>
+  <data name="Lumina.Picker.Pm" xml:space="preserve"><value>PM</value></data>
+  <data name="Lumina.Picker.Am" xml:space="preserve"><value>AM</value></data>
+  <data name="Lumina.Picker.DateSummaryFormat" xml:space="preserve"><value>dddd, MMM d, yyyy</value></data>
+  <data name="Lumina.Picker.TimeSummaryFormat12HourSeconds" xml:space="preserve"><value>h:mm:ss tt</value></data>
+  <data name="Lumina.Picker.TimeSummaryFormat12Hour" xml:space="preserve"><value>h:mm tt</value></data>
+  <data name="Lumina.Picker.Minute" xml:space="preserve"><value>Minute</value></data>
+  <data name="Lumina.Image.Unavailable" xml:space="preserve"><value>Image unavailable</value></data>
+  <data name="Lumina.Common.Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Lumina.Common.Clear" xml:space="preserve"><value>Clear</value></data>
+  <data name="Lumina.Common.Close" xml:space="preserve"><value>Close</value></data>
+  <data name="Lumina.Common.Apply" xml:space="preserve"><value>Apply</value></data>
+  <data name="Lumina.Picker.Month" xml:space="preserve"><value>Month</value></data>
+  <data name="Lumina.Common.Done" xml:space="preserve"><value>Done</value></data>
+  <data name="Lumina.Page.Empty" xml:space="preserve"><value>No content</value></data>
+  <data name="Lumina.Page.Error" xml:space="preserve"><value>Something went wrong</value></data>
+  </root>

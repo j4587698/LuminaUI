@@ -1,0 +1,117 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:luminaColorPicker="using:LuminaUI.ColorPicker"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.ColorPickerShowcasePage"
+             x:DataType="vm:ColorPickerShowcaseViewModel">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0686}" />
+                <TextBlock Text="{DynamicResource Sandbox.Text.0687}"
+                           Foreground="{DynamicResource LuminaTextMutedBrush}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="320" MaxItemWidth="680" HorizontalSpacing="16" VerticalSpacing="16">
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0688}" />
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <ColorPicker Color="{Binding AccentColor, Mode=TwoWay}"
+                                         IsAlphaEnabled="True"
+                                         IsAlphaVisible="{Binding IsAlphaVisible}"
+                                         IsColorPaletteVisible="{Binding IsColorPaletteVisible}"
+                                         IsColorComponentsVisible="{Binding IsColorComponentsVisible}"
+                                         IsColorSpectrumVisible="{Binding IsColorSpectrumVisible}"
+                                         IsColorPreviewVisible="{Binding IsColorPreviewVisible}"
+                                         IsHexInputVisible="{Binding IsHexInputVisible}" />
+                            <ColorPicker Classes="Compact"
+                                         Color="{Binding AccentColor, Mode=TwoWay}"
+                                         IsAlphaEnabled="True"
+                                         IsAlphaVisible="{Binding IsAlphaVisible}" />
+                            <ColorPicker Classes="Large"
+                                         Color="{Binding AccentColor, Mode=TwoWay}"
+                                         IsAlphaEnabled="True"
+                                         IsAlphaVisible="{Binding IsAlphaVisible}" />
+                        </StackPanel>
+                        <Border Height="92"
+                                CornerRadius="10"
+                                Background="{Binding AccentBrush}">
+                            <StackPanel Margin="18" VerticalAlignment="Center" Spacing="4">
+                                <TextBlock Text="{Binding HexValue}" FontSize="18" FontWeight="Bold" Foreground="White" />
+                                <TextBlock Text="{DynamicResource Sandbox.Text.0689}"
+                                           Foreground="#DFFFFFFF"
+                                           TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0798}" />
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <ColorPicker Color="{Binding AccentColor, Mode=TwoWay}"
+                                         IsAlphaEnabled="True"
+                                         IsAlphaVisible="{Binding IsAlphaVisible}">
+                                <ColorPicker.Palette>
+                                    <luminaColorPicker:LuminaColorPalette ShadeCount="8"
+                                                                           ColorValues="#2563EB,#0EA5E9,#14B8A6,#22C55E,#EAB308,#F97316,#EF4444,#A855F7" />
+                                </ColorPicker.Palette>
+                            </ColorPicker>
+                            <TextBlock VerticalAlignment="Center"
+                                       Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                       Text="{DynamicResource Sandbox.Text.0877}"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0119}" />
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <ColorPicker Color="{Binding AccentColor, Mode=TwoWay}"
+                                         IsAlphaEnabled="True"
+                                         IsAlphaVisible="{Binding IsAlphaVisible}"
+                                         lumina:LuminaOptions.PopupType="Sheet" />
+                            <TextBlock VerticalAlignment="Center"
+                                       Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                       Text="{DynamicResource Sandbox.Text.0835}"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0690}" />
+                        <ColorView Color="{Binding AccentColor, Mode=TwoWay}"
+                                   IsAlphaEnabled="True"
+                                   IsAlphaVisible="{Binding IsAlphaVisible}"
+                                   IsColorPaletteVisible="{Binding IsColorPaletteVisible}"
+                                   IsColorComponentsVisible="{Binding IsColorComponentsVisible}"
+                                   IsColorSpectrumVisible="{Binding IsColorSpectrumVisible}"
+                                   IsColorPreviewVisible="{Binding IsColorPreviewVisible}"
+                                   IsHexInputVisible="{Binding IsHexInputVisible}" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="12">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0691}" />
+                        <ToggleSwitch Content="{DynamicResource Sandbox.Text.0692}" IsChecked="{Binding IsAlphaVisible}" />
+                        <ToggleSwitch Content="{DynamicResource Sandbox.Text.0693}" IsChecked="{Binding IsColorPaletteVisible}" />
+                        <ToggleSwitch Content="{DynamicResource Sandbox.Text.0694}" IsChecked="{Binding IsColorComponentsVisible}" />
+                        <ToggleSwitch Content="{DynamicResource Sandbox.Text.0695}" IsChecked="{Binding IsColorSpectrumVisible}" />
+                        <ToggleSwitch Content="{DynamicResource Sandbox.Text.0696}" IsChecked="{Binding IsColorPreviewVisible}" />
+                        <ToggleSwitch Content="{DynamicResource Sandbox.Text.0697}" IsChecked="{Binding IsHexInputVisible}" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

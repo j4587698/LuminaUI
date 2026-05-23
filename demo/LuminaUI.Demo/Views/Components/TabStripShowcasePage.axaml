@@ -1,0 +1,210 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             x:Class="LuminaUI.Demo.Views.TabStripShowcasePage">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24"
+                    Width="{Binding #PageScroll.Bounds.Width}"
+                    HorizontalAlignment="Stretch"
+                    Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0420}" />
+                <TextBlock Classes="Body"
+                           Text="{DynamicResource Sandbox.Text.0421}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="300"
+                                          MaxItemWidth="620"
+                                          HorizontalSpacing="16"
+                                          VerticalSpacing="16">
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0422}" />
+                        <TabStrip x:Name="LineTabStrip" SelectedIndex="1">
+                            <TabStripItem Content="{DynamicResource Sandbox.Text.0230}" />
+                            <TabStripItem Content="{DynamicResource Sandbox.Text.0423}" />
+                            <TabStripItem Content="{DynamicResource Sandbox.Text.0199}" IsEnabled="False" />
+                        </TabStrip>
+                        <Border Padding="14"
+                                Background="{DynamicResource LuminaHoverBackgroundBrush}"
+                                CornerRadius="8">
+                            <TextBlock Classes="Helper" Text="{DynamicResource Sandbox.Text.0424}" />
+                        </Border>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0425}" />
+                        <TabStrip x:Name="ChromeTabStrip" Classes="Chrome" SelectedIndex="0">
+                            <TabStripItem Content="{DynamicResource Sandbox.Text.0351}" />
+                            <TabStripItem Content="{DynamicResource Sandbox.Text.0426}" />
+                            <TabStripItem Content="{DynamicResource Sandbox.Text.0427}" />
+                        </TabStrip>
+                        <Border Padding="16"
+                                Background="{DynamicResource LuminaSurfaceBrush}"
+                                BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
+                                BorderThickness="1"
+                                CornerRadius="0,0,8,8">
+                            <TextBlock Text="{DynamicResource Sandbox.Text.0428}" TextWrapping="Wrap" />
+                        </Border>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0429}" />
+                        <TabStrip x:Name="PillTabStrip" Classes="Pills" SelectedIndex="2">
+                            <TabStripItem Content="{DynamicResource Sandbox.Text.0430}" />
+                            <TabStripItem Content="{DynamicResource Sandbox.Text.0431}" />
+                            <TabStripItem Content="{DynamicResource Sandbox.Text.0432}" />
+                        </TabStrip>
+                        <Border Padding="14"
+                                Background="{DynamicResource LuminaHoverBackgroundBrush}"
+                                CornerRadius="8">
+                            <TextBlock Classes="Helper" Text="{DynamicResource Sandbox.Text.0433}" />
+                        </Border>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0155}" />
+                        <TabStrip x:Name="CompactTabStrip" Classes="Compact" SelectedIndex="0">
+                            <TabStripItem Content="{DynamicResource Sandbox.Text.0434}" />
+                            <TabStripItem Content="{DynamicResource Sandbox.Text.0212}" />
+                            <TabStripItem Content="{DynamicResource Sandbox.Text.0435}" />
+                            <TabStripItem Content="{DynamicResource Sandbox.Text.0436}" />
+                        </TabStrip>
+                        <Border Padding="14"
+                                Background="{DynamicResource LuminaHoverBackgroundBrush}"
+                                CornerRadius="8">
+                            <TextBlock Classes="Helper" Text="{DynamicResource Sandbox.Text.0437}" />
+                        </Border>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0361}" />
+                        <Border Padding="14"
+                                Background="{DynamicResource LuminaHoverBackgroundBrush}"
+                                CornerRadius="8">
+                            <TextBlock Classes="Helper" Text="{DynamicResource Sandbox.Text.0438}" />
+                        </Border>
+                        <TabStrip x:Name="BottomTabStrip" Classes="Bottom" SelectedIndex="0">
+                            <TabStripItem Content="{DynamicResource Sandbox.Text.0439}" />
+                            <TabStripItem Content="{DynamicResource Sandbox.Text.0407}" />
+                            <TabStripItem Content="{DynamicResource Sandbox.Text.0409}" />
+                        </TabStrip>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <Grid ColumnDefinitions="2*,3*" ColumnSpacing="16">
+                        <StackPanel Spacing="16">
+                            <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0440}" />
+                            <TabStrip x:Name="VerticalTabStrip" Classes="Vertical" SelectedIndex="1">
+                                <TabStripItem Content="{DynamicResource Sandbox.Text.0362}" />
+                                <TabStripItem Content="{DynamicResource Sandbox.Text.0441}" />
+                                <TabStripItem Content="{DynamicResource Sandbox.Text.0233}" />
+                                <TabStripItem Content="{DynamicResource Sandbox.Text.0356}" />
+                            </TabStrip>
+                        </StackPanel>
+                        <Border Grid.Column="1"
+                                Padding="16"
+                                Background="{DynamicResource LuminaHoverBackgroundBrush}"
+                                CornerRadius="8">
+                            <StackPanel Spacing="8">
+                                <TextBlock Classes="Label" Text="{DynamicResource Sandbox.Text.0442}" />
+                                <TextBlock Text="{DynamicResource Sandbox.Text.0443}"
+                                           TextWrapping="Wrap"
+                                           Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0444}" />
+                        <TabStrip x:Name="RichTabStrip" Classes="Chrome" SelectedIndex="1">
+                            <TabStripItem>
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <Border Width="8" Height="8" CornerRadius="4" Background="{DynamicResource LuminaSuccessBrush}" />
+                                    <TextBlock Text="{DynamicResource Sandbox.Text.0445}" />
+                                </StackPanel>
+                            </TabStripItem>
+                            <TabStripItem>
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <Border Width="8" Height="8" CornerRadius="4" Background="{DynamicResource LuminaPrimaryBrush}" />
+                                    <TextBlock Text="{DynamicResource Sandbox.Text.0446}" />
+                                </StackPanel>
+                            </TabStripItem>
+                            <TabStripItem>
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <Border Width="8" Height="8" CornerRadius="4" Background="{DynamicResource LuminaWarningBrush}" />
+                                    <TextBlock Text="{DynamicResource Sandbox.Text.0447}" />
+                                </StackPanel>
+                            </TabStripItem>
+                        </TabStrip>
+                        <Border Padding="16"
+                                Background="{DynamicResource LuminaSurfaceBrush}"
+                                BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
+                                BorderThickness="1"
+                                CornerRadius="0,0,8,8">
+                            <TextBlock Text="{DynamicResource Sandbox.Text.0448}" TextWrapping="Wrap" />
+                        </Border>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0449}" />
+                        <TabStrip x:Name="MobileTabStrip" Classes="Mobile" SelectedIndex="0">
+                            <TabStripItem>
+                                <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                    <PathIcon HorizontalAlignment="Center"
+                                              Width="16"
+                                              Height="16"
+                                              Data="M4,11 L12,4 L20,11 L20,20 L14,20 L14,14 L10,14 L10,20 L4,20 Z" />
+                                    <TextBlock FontSize="12" FontWeight="SemiBold" Text="{DynamicResource Sandbox.Text.0354}" />
+                                </StackPanel>
+                            </TabStripItem>
+                            <TabStripItem>
+                                <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                    <PathIcon HorizontalAlignment="Center"
+                                              Width="16"
+                                              Height="16"
+                                              Data="M10,4 A6,6 0 1,0 10,16 A6,6 0 1,0 10,4 M15,15 L20,20" />
+                                    <TextBlock FontSize="12" FontWeight="SemiBold" Text="{DynamicResource Sandbox.Text.0046}" />
+                                </StackPanel>
+                            </TabStripItem>
+                            <TabStripItem>
+                                <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                    <PathIcon HorizontalAlignment="Center"
+                                              Width="16"
+                                              Height="16"
+                                              Data="M4,6 L20,6 L20,18 L4,18 Z M4,12 L9,12 L11,15 L13,15 L15,12 L20,12" />
+                                    <TextBlock FontSize="12" FontWeight="SemiBold" Text="{DynamicResource Sandbox.Text.0348}" />
+                                </StackPanel>
+                            </TabStripItem>
+                            <TabStripItem>
+                                <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                    <PathIcon HorizontalAlignment="Center"
+                                              Width="16"
+                                              Height="16"
+                                              Data="M12,5 A4,4 0 1,0 12,13 A4,4 0 1,0 12,5 M5,21 A7,5 0 0,1 19,21" />
+                                    <TextBlock FontSize="12" FontWeight="SemiBold" Text="{DynamicResource Sandbox.Text.0362}" />
+                                </StackPanel>
+                            </TabStripItem>
+                        </TabStrip>
+                        <TextBlock Classes="Helper" Text="{DynamicResource Sandbox.Text.0450}" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

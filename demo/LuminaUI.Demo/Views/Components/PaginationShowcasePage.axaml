@@ -1,0 +1,51 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.PaginationShowcasePage"
+             x:DataType="vm:PaginationShowcaseViewModel">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0130}" />
+                <TextBlock Text="{DynamicResource Sandbox.Text.0131}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="300" MaxItemWidth="560" HorizontalSpacing="16" VerticalSpacing="16">
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0685}" />
+                        <lumina:LuminaPagination CurrentPage="{Binding CurrentPage}"
+                                                 TotalCount="{Binding TotalCount}"
+                                                 PageSize="{Binding PageSize}"
+                                                 MaxVisiblePages="7"
+                                                 ShowTotal="True"
+                                                 ShowQuickJump="True"
+                                                 ShowPageSizeSelector="True"
+                                                 QuickJumpText="{DynamicResource Sandbox.Text.1235}"
+                                                 PageText="{DynamicResource Sandbox.Text.1236}"
+                                                 TotalTextFormat="{}{0} records"
+                                                 PageChangedCommand="{Binding PageChangedCommand}" />
+                        <TextBlock Text="{Binding PageStatus}" Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0133}" />
+                        <lumina:LuminaPagination CurrentPage="{Binding CompactPage}"
+                                                 PageCount="6"
+                                                 MaxVisiblePages="3"
+                                                 ShowEdgeButtons="False"
+                                                 ShowFastJump="False"
+                                                 ShowQuickJump="True"
+                                                 DisplayCurrentPageInQuickJumper="True"
+                                                 ShowPageInfo="False" />
+                        <TextBlock Text="{DynamicResource Sandbox.Text.0135}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

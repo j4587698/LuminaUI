@@ -1,0 +1,12 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StreamGeometry x:Key="TreeDataGridSortIconAscendingPath">M7 4L12 10H2L7 4Z</StreamGeometry>
+    <StreamGeometry x:Key="TreeDataGridSortIconDescendingPath">M7 12L2 6H12L7 12Z</StreamGeometry>
+    <StreamGeometry x:Key="TreeDataGridItemCollapsedChevronPathData">M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z</StreamGeometry>
+    <x:Double x:Key="TreeDataGridItemCollapsedChevronWidth">24</x:Double>
+    <CornerRadius x:Key="TreeDataGridColumnHeaderCornerRadius">6</CornerRadius>
+    <x:Double x:Key="TreeDataGridColumnHeaderMinHeight">40</x:Double>
+    <CornerRadius x:Key="TreeDataGridRowCornerRadius">6</CornerRadius>
+    <x:Double x:Key="TreeDataGridRowMinHeight">38</x:Double>
+    <Thickness x:Key="TreeDataGridRowMargin">2,1</Thickness>
+</ResourceDictionary>

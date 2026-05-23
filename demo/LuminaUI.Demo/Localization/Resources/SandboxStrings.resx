@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Sandbox.App.Title" xml:space="preserve">
+    <value>LuminaUI Sandbox</value>
+  </data>
+  <data name="Sandbox.Shell.Title" xml:space="preserve">
+    <value>Lumina Showcase</value>
+  </data>
+  <data name="Sandbox.User.Name" xml:space="preserve">
+    <value>Pro User</value>
+  </data>
+  <data name="Sandbox.Menu.File" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="Sandbox.Menu.NewWindow" xml:space="preserve">
+    <value>New Window</value>
+  </data>
+  <data name="Sandbox.Menu.OpenSandbox" xml:space="preserve">
+    <value>Open Sandbox</value>
+  </data>
+  <data name="Sandbox.Menu.Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Sandbox.Menu.View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="Sandbox.Menu.ToggleSidebar" xml:space="preserve">
+    <value>Toggle Sidebar</value>
+  </data>
+  <data name="Sandbox.Menu.Components" xml:space="preserve">
+    <value>Components</value>
+  </data>
+  <data name="Sandbox.Menu.Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Sandbox.Menu.Help" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="Sandbox.Menu.Documentation" xml:space="preserve">
+    <value>Documentation</value>
+  </data>
+  <data name="Sandbox.Menu.About" xml:space="preserve">
+    <value>About LuminaUI</value>
+  </data>
+  <data name="Sandbox.Menu.Action.OpenedSandbox" xml:space="preserve">
+    <value>Sandbox home opened.</value>
+  </data>
+  <data name="Sandbox.Menu.Action.OpenedComponents" xml:space="preserve">
+    <value>Components page opened.</value>
+  </data>
+  <data name="Sandbox.Menu.Action.OpenedSettings" xml:space="preserve">
+    <value>Settings page opened.</value>
+  </data>
+  <data name="Sandbox.Menu.Action.OpenedDocumentation" xml:space="preserve">
+    <value>Localization resources documentation opened.</value>
+  </data>
+  <data name="Sandbox.Menu.Action.SidebarOpened" xml:space="preserve">
+    <value>Sidebar opened.</value>
+  </data>
+  <data name="Sandbox.Menu.Action.SidebarClosed" xml:space="preserve">
+    <value>Sidebar closed.</value>
+  </data>
+  <data name="Sandbox.Menu.Action.AboutMessage" xml:space="preserve">
+    <value>LuminaUI demo shell with custom title bar, native-menu fallback, theme switching, and component showcases.</value>
+  </data>
+  <data name="Sandbox.Nav.DesignSystem" xml:space="preserve">
+    <value>Design System</value>
+  </data>
+  <data name="Sandbox.Nav.Colors" xml:space="preserve">
+    <value>Color Palette</value>
+  </data>
+  <data name="Sandbox.Nav.Components" xml:space="preserve">
+    <value>Components</value>
+  </data>
+  <data name="Sandbox.Nav.Foundation" xml:space="preserve">
+    <value>Foundation</value>
+  </data>
+  <data name="Sandbox.Nav.Cards" xml:space="preserve">
+    <value>Cards</value>
+  </data>
+  <data name="Sandbox.Nav.GroupBox" xml:space="preserve">
+    <value>GroupBox</value>
+  </data>
+  <data name="Sandbox.Nav.Images" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="Sandbox.Nav.AvatarBadge" xml:space="preserve">
+    <value>Avatar &amp; Badge</value>
+  </data>
+  <data name="Sandbox.Nav.Buttons" xml:space="preserve">
+    <value>Buttons</value>
+  </data>
+  <data name="Sandbox.Nav.ButtonGroup" xml:space="preserve">
+    <value>ButtonGroup</value>
+  </data>
+  <data name="Sandbox.Nav.Loading" xml:space="preserve">
+    <value>Loading</value>
+  </data>
+  <data name="Sandbox.Nav.Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Sandbox.Nav.PopConfirm" xml:space="preserve">
+    <value>PopConfirm</value>
+  </data>
+  <data name="Sandbox.Nav.HeaderedContentControl" xml:space="preserve">
+    <value>HeaderedContentControl</value>
+  </data>
+  <data name="Sandbox.Nav.ItemsControl" xml:space="preserve">
+    <value>ItemsControl</value>
+  </data>
+  <data name="Sandbox.Nav.SplitView" xml:space="preserve">
+    <value>SplitView</value>
+  </data>
+  <data name="Sandbox.Nav.NavigationPage" xml:space="preserve">
+    <value>NavigationPage</value>
+  </data>
+  <data name="Sandbox.Nav.DrawerPage" xml:space="preserve">
+    <value>DrawerPage</value>
+  </data>
+  <data name="Sandbox.Nav.TabbedPage" xml:space="preserve">
+    <value>TabbedPage</value>
+  </data>
+  <data name="Sandbox.Nav.Carousel" xml:space="preserve">
+    <value>Carousel</value>
+  </data>
+  <data name="Sandbox.Nav.TransitioningContentControl" xml:space="preserve">
+    <value>TransitioningContentControl</value>
+  </data>
+  <data name="Sandbox.Nav.Breadcrumb" xml:space="preserve">
+    <value>Breadcrumb</value>
+  </data>
+  <data name="Sandbox.Nav.TabStrip" xml:space="preserve">
+    <value>TabStrip</value>
+  </data>
+  <data name="Sandbox.Nav.TabControl" xml:space="preserve">
+    <value>TabControl</value>
+  </data>
+  <data name="Sandbox.Nav.TextInputs" xml:space="preserve">
+    <value>Text Inputs</value>
+  </data>
+  <data name="Sandbox.Nav.InputOtp" xml:space="preserve">
+    <value>InputOTP</value>
+  </data>
+  <data name="Sandbox.Nav.Selection" xml:space="preserve">
+    <value>Selection</value>
+  </data>
+  <data name="Sandbox.Nav.Pickers" xml:space="preserve">
+    <value>Pickers</value>
+  </data>
+  <data name="Sandbox.Nav.ColorPicker" xml:space="preserve">
+    <value>ColorPicker</value>
+  </data>
+  <data name="Sandbox.Nav.DateRangePicker" xml:space="preserve">
+    <value>DateRangePicker</value>
+  </data>
+  <data name="Sandbox.Nav.Range" xml:space="preserve">
+    <value>Range &amp; Progress</value>
+  </data>
+  <data name="Sandbox.Nav.RangeSlider" xml:space="preserve">
+    <value>RangeSlider</value>
+  </data>
+  <data name="Sandbox.Nav.Pagination" xml:space="preserve">
+    <value>Pagination</value>
+  </data>
+  <data name="Sandbox.Nav.Timeline" xml:space="preserve">
+    <value>Timeline</value>
+  </data>
+  <data name="Sandbox.Nav.Descriptions" xml:space="preserve">
+    <value>Descriptions</value>
+  </data>
+  <data name="Sandbox.Nav.Properties" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="Sandbox.Nav.Rating" xml:space="preserve">
+    <value>Rating</value>
+  </data>
+  <data name="Sandbox.Nav.Collections" xml:space="preserve">
+    <value>Collections</value>
+  </data>
+  <data name="Sandbox.Nav.DataGrid" xml:space="preserve">
+    <value>DataGrid</value>
+  </data>
+  <data name="Sandbox.Nav.TreeDataGrid" xml:space="preserve">
+    <value>TreeDataGrid</value>
+  </data>
+  <data name="Sandbox.Nav.AutoScrollText" xml:space="preserve">
+    <value>Auto Scroll Text</value>
+  </data>
+  <data name="Sandbox.Nav.IndexedList" xml:space="preserve">
+    <value>Indexed List</value>
+  </data>
+  <data name="Sandbox.Nav.LinkedCategory" xml:space="preserve">
+    <value>Linked Category</value>
+  </data>
+  <data name="Sandbox.Nav.TabsExpanders" xml:space="preserve">
+    <value>Expander</value>
+  </data>
+  <data name="Sandbox.Nav.Patterns" xml:space="preserve">
+    <value>Patterns</value>
+  </data>
+  <data name="Sandbox.Nav.Menus" xml:space="preserve">
+    <value>Menus &amp; Flyouts</value>
+  </data>
+  <data name="Sandbox.Nav.Overlays" xml:space="preserve">
+    <value>Overlays</value>
+  </data>
+  <data name="Sandbox.Nav.Layout" xml:space="preserve">
+    <value>Layout Helpers</value>
+  </data>
+  <data name="Sandbox.Nav.Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Sandbox.Language.English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Sandbox.Language.Chinese" xml:space="preserve">
+    <value>Chinese</value>
+  </data>
+  <data name="Sandbox.Language.CurrentValue" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Sandbox.Settings.Title" xml:space="preserve">
+    <value>Settings &amp; Preferences</value>
+  </data>
+  <data name="Sandbox.Settings.MobileTitle" xml:space="preserve">
+    <value>Mobile Settings</value>
+  </data>
+  <data name="Sandbox.Settings.MobileDescription" xml:space="preserve">
+    <value>Grouped touch-friendly options with value text, chevrons, and click support.</value>
+  </data>
+  <data name="Sandbox.Settings.Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Sandbox.Settings.ProfileDescription" xml:space="preserve">
+    <value>Avatar, nickname, and personal information.</value>
+  </data>
+  <data name="Sandbox.Settings.Notifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="Sandbox.Settings.NotificationsDescription" xml:space="preserve">
+    <value>Push alerts and quiet hours.</value>
+  </data>
+  <data name="Sandbox.Settings.Enabled" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="Sandbox.Settings.Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Sandbox.Settings.Storage" xml:space="preserve">
+    <value>Storage</value>
+  </data>
+  <data name="Sandbox.Settings.DeleteAccount" xml:space="preserve">
+    <value>Delete Account</value>
+  </data>
+  <data name="Sandbox.Settings.DeleteAccountDescription" xml:space="preserve">
+    <value>This row can opt out of the chevron.</value>
+  </data>
+  <data name="Sandbox.Settings.TapHint" xml:space="preserve">
+    <value>Tap an option to test the row click behavior.</value>
+  </data>
+  <data name="Sandbox.Settings.TappedFormat" xml:space="preserve">
+    <value>{0} tapped</value>
+  </data>
+  <data name="Sandbox.Settings.Appearance" xml:space="preserve">
+    <value>Appearance</value>
+  </data>
+  <data name="Sandbox.Settings.AppearanceDescription" xml:space="preserve">
+    <value>Manage your theme and visual preferences here.</value>
+  </data>
+  <data name="Sandbox.Settings.DarkMode" xml:space="preserve">
+    <value>Dark Mode</value>
+  </data>
+  <data name="Sandbox.Settings.DarkModeDescription" xml:space="preserve">
+    <value>Switch between light and dark themes.</value>
+  </data>
+  <data name="Sandbox.Settings.ToggleTheme" xml:space="preserve">
+    <value>Toggle Theme</value>
+  </data>
+  <data name="Sandbox.Settings.ThemeMode" xml:space="preserve">
+    <value>Theme Mode</value>
+  </data>
+  <data name="Sandbox.Settings.ThemeModeDescription" xml:space="preserve">
+    <value>Follow the system theme, or force light or dark mode.</value>
+  </data>
+  <data name="Sandbox.Settings.ThemeMode.System" xml:space="preserve">
+    <value>Follow system</value>
+  </data>
+  <data name="Sandbox.Settings.ThemeMode.Light" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="Sandbox.Settings.ThemeMode.Dark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="Sandbox.Settings.ThemeColor" xml:space="preserve">
+    <value>Theme Color</value>
+  </data>
+  <data name="Sandbox.Settings.ThemeColorDescription" xml:space="preserve">
+    <value>Controls primary actions, focus accents, selected navigation, and component highlights.</value>
+  </data>
+  <data name="Sandbox.Settings.ReduceAnimations" xml:space="preserve">
+    <value>Reduce Animations</value>
+  </data>
+  <data name="Sandbox.Settings.ReduceAnimationsDescription" xml:space="preserve">
+    <value>Disable hover scaling and transitions for a stiffer UI.</value>
+  </data>
+  <data name="Sandbox.Settings.Disabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="Sandbox.Settings.Account" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="Sandbox.Settings.AccountDescription" xml:space="preserve">
+    <value>Manage your email, password, and subscription.</value>
+  </data>
+  <data name="Sandbox.Settings.LogOut" xml:space="preserve">
+    <value>Log Out</value>
+  </data>
+  <data name="Sandbox.Settings.InvalidColor" xml:space="preserve">
+    <value>Invalid color</value>
+  </data>
+  <data name="Sandbox.Picker.Title" xml:space="preserve">
+    <value>Pickers</value>
+  </data>
+  <data name="Sandbox.Picker.Description" xml:space="preserve">
+    <value>ComboBox, DatePicker, TimePicker, and CalendarDatePicker.</value>
+  </data>
+  <data name="Sandbox.Picker.ComboAdaptive" xml:space="preserve">
+    <value>ComboBox (Adaptive)</value>
+  </data>
+  <data name="Sandbox.Picker.ModeDropdown" xml:space="preserve">
+    <value>Mode: Dropdown (PC)</value>
+  </data>
+  <data name="Sandbox.Picker.ModeSheet" xml:space="preserve">
+    <value>Mode: Sheet (Mobile)</value>
+  </data>
+  <data name="Sandbox.Picker.DateTimeAdaptive" xml:space="preserve">
+    <value>Date &amp; Time (Adaptive)</value>
+  </data>
+  <data name="Sandbox.Picker.CalendarDate" xml:space="preserve">
+    <value>Calendar date</value>
+  </data>
+  <data name="Sandbox.Picker.Item1" xml:space="preserve">
+    <value>Item 1</value>
+  </data>
+  <data name="Sandbox.Picker.Item2" xml:space="preserve">
+    <value>Item 2</value>
+  </data>
+  <data name="Sandbox.Picker.Item3" xml:space="preserve">
+    <value>Item 3</value>
+  </data>
+  <data name="Sandbox.Actions.SheetActions" xml:space="preserve">
+    <value>Sheet actions</value>
+  </data>
+  <data name="Sandbox.Actions.Duplicate" xml:space="preserve">
+    <value>Duplicate</value>
+  </data>
+  <data name="Sandbox.Actions.Rename" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="Sandbox.Actions.Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Sandbox.Localization.OverrideTitle" xml:space="preserve">
+    <value>Resource override</value>
+  </data>
+  <data name="Sandbox.Localization.OverrideDescription" xml:space="preserve">
+    <value>The value on the right overrides Lumina.Common.Done from a higher-priority app resx.</value>
+  </data>
+  <data name="Sandbox.Common.SelectedFormat" xml:space="preserve">
+    <value>Selected: {0}</value>
+  </data>
+  <data name="Sandbox.WindowGlass.Unavailable" xml:space="preserve">
+    <value>Window glass unavailable</value>
+  </data>
+  <data name="Sandbox.WindowGlass.ActiveFormat" xml:space="preserve">
+    <value>Window glass active: {0}</value>
+  </data>
+  <data name="Sandbox.IndexedList.GroupFormat" xml:space="preserve">
+    <value>Group {0}</value>
+  </data>
+  <data name="Sandbox.WindowGlass.FallbackFormat" xml:space="preserve">
+    <value>Window glass fallback: {0}</value>
+  </data>
+  <data name="Sandbox.Common.CopiedFormat" xml:space="preserve">
+    <value>Copied {0}</value>
+  </data>
+  <data name="Sandbox.Nav.LocalizationResources" xml:space="preserve">
+    <value>Localization Keys</value>
+  </data>
+  <data name="Sandbox.LocalizationResources.Title" xml:space="preserve">
+    <value>Localization Keys</value>
+  </data>
+  <data name="Sandbox.LocalizationResources.Description" xml:space="preserve">
+    <value>Built-in LuminaUI resource keys, default values, and the currently effective value after app-level overrides. Click a key to copy it into your own resx.</value>
+  </data>
+  <data name="Sandbox.LocalizationResources.CountFormat" xml:space="preserve">
+    <value>Built-in keys: {0}</value>
+  </data>
+  <data name="Sandbox.LocalizationResources.CopiedFormat" xml:space="preserve">
+    <value>Copied {0}</value>
+  </data>
+  <data name="Sandbox.LocalizationResources.SnippetTitle" xml:space="preserve">
+    <value>Override example</value>
+  </data>
+  <data name="Sandbox.LocalizationResources.SnippetDescription" xml:space="preserve">
+    <value>Add a resx with the same key and register it with a higher priority to replace the component library value.</value>
+  </data>
+  <data name="Sandbox.LocalizationResources.Overridden" xml:space="preserve">
+    <value>Override</value>
+  </data>
+  <data name="Sandbox.LocalizationResources.Header.Group" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="Sandbox.LocalizationResources.Header.Key" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="Sandbox.LocalizationResources.Header.English" xml:space="preserve">
+    <value>Built-in en-US</value>
+  </data>
+  <data name="Sandbox.LocalizationResources.Header.Chinese" xml:space="preserve">
+    <value>Built-in zh-CN</value>
+  </data>
+  <data name="Sandbox.LocalizationResources.Header.CurrentFormat" xml:space="preserve">
+    <value>Current value ({0})</value>
+  </data>
+  <data name="Sandbox.LocalizationResources.Header.Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Sandbox.Nav.Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Sandbox.Nav.FoundationGroup" xml:space="preserve">
+    <value>Foundation</value>
+  </data>
+  <data name="Sandbox.Nav.AutoCompleteBox" xml:space="preserve">
+    <value>AutoCompleteBox</value>
+  </data>
+  <data name="Sandbox.Nav.LayoutGroup" xml:space="preserve">
+    <value>Layout &amp; Navigation</value>
+  </data>
+  <data name="Sandbox.Nav.DataEntryGroup" xml:space="preserve">
+    <value>Data Entry</value>
+  </data>
+  <data name="Sandbox.Nav.Form" xml:space="preserve">
+    <value>Form</value>
+  </data>
+  <data name="Sandbox.Nav.MultiSelect" xml:space="preserve">
+    <value>Multi Select</value>
+  </data>
+  <data name="Sandbox.Nav.TagInput" xml:space="preserve">
+    <value>Tag Input</value>
+  </data>
+  <data name="Sandbox.Nav.DataDisplayGroup" xml:space="preserve">
+    <value>Data Display</value>
+  </data>
+  <data name="Sandbox.Nav.FeedbackGroup" xml:space="preserve">
+    <value>Feedback &amp; Overlays</value>
+  </data>
+  <data name="Sandbox.Nav.LoadingContainer" xml:space="preserve">
+    <value>Loading Container</value>
+  </data>
+  <data name="Sandbox.Nav.Banner" xml:space="preserve">
+    <value>Banner</value>
+  </data>
+  <data name="Sandbox.Nav.NotificationCard" xml:space="preserve">
+    <value>Notification Cards</value>
+  </data>
+  <data name="Sandbox.Nav.DropDownButton" xml:space="preserve">
+    <value>DropDownButton</value>
+  </data>
+  <data name="Sandbox.Nav.SplitButton" xml:space="preserve">
+    <value>SplitButton</value>
+  </data>
+  <data name="Sandbox.Nav.CommandBar" xml:space="preserve">
+    <value>CommandBar</value>
+  </data>
+</root>

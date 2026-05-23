@@ -1,0 +1,459 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ControlTheme x:Key="{x:Type TabControl}" TargetType="TabControl">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Padding" Value="16" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="ItemContainerTheme" Value="{StaticResource LuminaLineTabItem}" />
+        <Setter Property="ItemsPanel">
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+        </Setter>
+        <Setter Property="Template">
+            <ControlTemplate TargetType="TabControl">
+                <Border HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                        Background="Transparent">
+                    <DockPanel>
+                        <Border Name="PART_TabStripHost"
+                                DockPanel.Dock="{TemplateBinding TabStripPlacement}"
+                                Background="Transparent"
+                                BorderBrush="Transparent"
+                                BorderThickness="0"
+                                CornerRadius="0"
+                                ClipToBounds="True">
+                            <Grid>
+                                <ScrollViewer Name="PART_TabScrollViewer"
+                                              HorizontalScrollBarVisibility="Auto"
+                                              VerticalScrollBarVisibility="Disabled">
+                                    <ItemsPresenter Name="PART_ItemsPresenter"
+                                                    ItemsPanel="{TemplateBinding ItemsPanel}" />
+                                </ScrollViewer>
+                                <Border Name="PART_Separator"
+                                        Background="{DynamicResource LuminaDividerBrush}" />
+                            </Grid>
+                        </Border>
+
+                        <Border Name="PART_ContentBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding CornerRadius}">
+                            <ContentPresenter Name="PART_SelectedContentHost"
+                                              Margin="{TemplateBinding Padding}"
+                                              Content="{TemplateBinding SelectedContent}"
+                                              ContentTemplate="{TemplateBinding SelectedContentTemplate}"
+                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^[TabStripPlacement=Top] /template/ Border#PART_Separator">
+            <Setter Property="Height" Value="1" />
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+        </Style>
+
+        <Style Selector="^[TabStripPlacement=Bottom] /template/ Border#PART_Separator">
+            <Setter Property="Height" Value="1" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+        </Style>
+
+        <Style Selector="^[TabStripPlacement=Left]">
+            <Setter Property="ItemsPanel">
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical" />
+                </ItemsPanelTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="^[TabStripPlacement=Right]">
+            <Setter Property="ItemsPanel">
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical" />
+                </ItemsPanelTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="^[TabStripPlacement=Left] /template/ ScrollViewer#PART_TabScrollViewer">
+            <Setter Property="HorizontalScrollBarVisibility" Value="Disabled" />
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+        </Style>
+
+        <Style Selector="^[TabStripPlacement=Right] /template/ ScrollViewer#PART_TabScrollViewer">
+            <Setter Property="HorizontalScrollBarVisibility" Value="Disabled" />
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+        </Style>
+
+        <Style Selector="^[TabStripPlacement=Left] /template/ Border#PART_Separator">
+            <Setter Property="Width" Value="1" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+
+        <Style Selector="^[TabStripPlacement=Right] /template/ Border#PART_Separator">
+            <Setter Property="Width" Value="1" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+        </Style>
+
+        <Style Selector="^.Chrome">
+            <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="ItemContainerTheme" Value="{StaticResource LuminaChromeTabItem}" />
+        </Style>
+
+        <Style Selector="^.Chrome[TabStripPlacement=Top] /template/ Border#PART_TabStripHost">
+            <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderSubtleBrush}" />
+            <Setter Property="BorderThickness" Value="1,1,1,0" />
+            <Setter Property="CornerRadius" Value="8,8,0,0" />
+        </Style>
+
+        <Style Selector="^.Chrome[TabStripPlacement=Top] /template/ Border#PART_ContentBorder">
+            <Setter Property="CornerRadius" Value="0,0,8,8" />
+        </Style>
+
+        <Style Selector="^.Chrome[TabStripPlacement=Bottom] /template/ Border#PART_TabStripHost">
+            <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderSubtleBrush}" />
+            <Setter Property="BorderThickness" Value="1,0,1,1" />
+            <Setter Property="CornerRadius" Value="0,0,8,8" />
+        </Style>
+
+        <Style Selector="^.Chrome[TabStripPlacement=Bottom] /template/ Border#PART_ContentBorder">
+            <Setter Property="CornerRadius" Value="8,8,0,0" />
+        </Style>
+
+        <Style Selector="^.Pills">
+            <Setter Property="ItemContainerTheme" Value="{StaticResource LuminaPillTabItem}" />
+        </Style>
+
+        <Style Selector="^.Pills /template/ Border#PART_TabStripHost">
+            <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderSubtleBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="999" />
+        </Style>
+
+        <Style Selector="^.Pills /template/ Border#PART_Separator">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+
+        <Style Selector="^.Compact">
+            <Setter Property="Padding" Value="12" />
+            <Setter Property="ItemContainerTheme" Value="{StaticResource LuminaCompactTabItem}" />
+        </Style>
+
+        <Style Selector="^.Vertical">
+            <Setter Property="ItemContainerTheme" Value="{StaticResource LuminaVerticalTabItem}" />
+            <Setter Property="ItemsPanel">
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical" />
+                </ItemsPanelTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="^.Mobile">
+            <Setter Property="Padding" Value="12" />
+            <Setter Property="ItemContainerTheme" Value="{StaticResource LuminaMobileTabItem}" />
+            <Setter Property="ItemsPanel">
+                <ItemsPanelTemplate>
+                    <UniformGrid Rows="1" />
+                </ItemsPanelTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="^.Mobile /template/ Border#PART_TabStripHost">
+            <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderSubtleBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="16" />
+        </Style>
+
+        <Style Selector="^.Mobile /template/ Border#PART_Separator">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="LuminaLineTabItem" TargetType="TabItem">
+        <Setter Property="Padding" Value="12,8" />
+        <Setter Property="MinHeight" Value="38" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="CornerRadius" Value="7" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="TabItem">
+                <Grid RowDefinitions="2,*,2" ColumnDefinitions="3,*,3">
+                    <Border Name="PART_TopIndicator"
+                            Grid.ColumnSpan="3"
+                            Height="2"
+                            Margin="8,0"
+                            Background="Transparent"
+                            CornerRadius="1"
+                            IsVisible="False" />
+                    <Border Name="PART_LeftIndicator"
+                            Grid.RowSpan="3"
+                            Width="3"
+                            Background="Transparent"
+                            CornerRadius="2"
+                            IsVisible="False" />
+                    <Border Name="PART_TabBackground"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="{TemplateBinding Padding}">
+                        <DockPanel HorizontalSpacing="8">
+                            <ContentPresenter Name="PART_IconPresenter"
+                                              DockPanel.Dock="Left"
+                                              Content="{TemplateBinding Icon}"
+                                              ContentTemplate="{TemplateBinding IconTemplate}"
+                                              IsVisible="{Binding $self.Content, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                              TextElement.Foreground="{TemplateBinding Foreground}" />
+                            <ContentPresenter Name="PART_HeaderPresenter"
+                                              Content="{TemplateBinding Header}"
+                                              ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              RecognizesAccessKey="True"
+                                              TextElement.Foreground="{TemplateBinding Foreground}" />
+                        </DockPanel>
+                    </Border>
+                    <Border Name="PART_RightIndicator"
+                            Grid.RowSpan="3"
+                            Grid.Column="2"
+                            Width="3"
+                            Background="Transparent"
+                            CornerRadius="2"
+                            IsVisible="False" />
+                    <Border Name="PART_BottomIndicator"
+                            Grid.Row="2"
+                            Grid.ColumnSpan="3"
+                            Height="2"
+                            Margin="8,0"
+                            Background="Transparent"
+                            CornerRadius="1"
+                            IsVisible="False" />
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="^:pointerover /template/ Border#PART_TabBackground">
+            <Setter Property="Background" Value="{DynamicResource LuminaStateHoverBrush}" />
+        </Style>
+
+        <Style Selector="^:selected">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="^:selected[TabStripPlacement=Top] /template/ Border#PART_BottomIndicator">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBrush}" />
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+
+        <Style Selector="^:selected[TabStripPlacement=Bottom] /template/ Border#PART_TopIndicator">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBrush}" />
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+
+        <Style Selector="^:selected[TabStripPlacement=Left] /template/ Border#PART_LeftIndicator">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBrush}" />
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+
+        <Style Selector="^:selected[TabStripPlacement=Right] /template/ Border#PART_RightIndicator">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBrush}" />
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+
+        <Style Selector="^:disabled">
+            <Setter Property="Opacity" Value="0.45" />
+            <Setter Property="Cursor" Value="Arrow" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type TabItem}" TargetType="TabItem" BasedOn="{StaticResource LuminaLineTabItem}" />
+
+    <ControlTheme x:Key="LuminaChromeTabItem" TargetType="TabItem">
+        <Setter Property="Margin" Value="2,2,0,0" />
+        <Setter Property="Padding" Value="14,8" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="1,1,1,0" />
+        <Setter Property="CornerRadius" Value="7,7,0,0" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="TabItem">
+                <Border Name="PART_Tab"
+                        MinHeight="36"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <DockPanel HorizontalSpacing="8">
+                        <ContentPresenter DockPanel.Dock="Left"
+                                          Content="{TemplateBinding Icon}"
+                                          ContentTemplate="{TemplateBinding IconTemplate}"
+                                          IsVisible="{Binding $self.Content, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                          TextElement.Foreground="{TemplateBinding Foreground}" />
+                        <ContentPresenter Content="{TemplateBinding Header}"
+                                          ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          RecognizesAccessKey="True"
+                                          TextElement.Foreground="{TemplateBinding Foreground}" />
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^[TabStripPlacement=Bottom]">
+            <Setter Property="Margin" Value="2,0,0,2" />
+            <Setter Property="BorderThickness" Value="1,0,1,1" />
+            <Setter Property="CornerRadius" Value="0,0,7,7" />
+        </Style>
+
+        <Style Selector="^:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+            <Setter Property="Background" Value="{DynamicResource LuminaStateHoverBrush}" />
+        </Style>
+
+        <Style Selector="^:selected">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+            <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderSubtleBrush}" />
+        </Style>
+
+        <Style Selector="^:disabled">
+            <Setter Property="Opacity" Value="0.45" />
+            <Setter Property="Cursor" Value="Arrow" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="LuminaPillTabItem" TargetType="TabItem">
+        <Setter Property="Margin" Value="2" />
+        <Setter Property="Padding" Value="13,7" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="999" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="TabItem">
+                <Border MinHeight="32"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <DockPanel HorizontalSpacing="8">
+                        <ContentPresenter DockPanel.Dock="Left"
+                                          Content="{TemplateBinding Icon}"
+                                          ContentTemplate="{TemplateBinding IconTemplate}"
+                                          IsVisible="{Binding $self.Content, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                          TextElement.Foreground="{TemplateBinding Foreground}" />
+                        <ContentPresenter Content="{TemplateBinding Header}"
+                                          ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          RecognizesAccessKey="True"
+                                          TextElement.Foreground="{TemplateBinding Foreground}" />
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+            <Setter Property="Background" Value="{DynamicResource LuminaStateHoverBrush}" />
+        </Style>
+
+        <Style Selector="^:selected">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaPrimaryForegroundBrush}" />
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="^:disabled">
+            <Setter Property="Opacity" Value="0.45" />
+            <Setter Property="Cursor" Value="Arrow" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="LuminaVerticalTabItem" TargetType="TabItem" BasedOn="{StaticResource LuminaLineTabItem}">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Padding" Value="12,9" />
+    </ControlTheme>
+
+    <ControlTheme x:Key="LuminaCompactTabItem" TargetType="TabItem" BasedOn="{StaticResource LuminaLineTabItem}">
+        <Setter Property="Padding" Value="9,5" />
+        <Setter Property="MinHeight" Value="30" />
+        <Setter Property="CornerRadius" Value="5" />
+    </ControlTheme>
+
+    <ControlTheme x:Key="LuminaMobileTabItem" TargetType="TabItem">
+        <Setter Property="MinHeight" Value="62" />
+        <Setter Property="MinWidth" Value="64" />
+        <Setter Property="Padding" Value="8,6" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="TabItem">
+                <Border Name="PART_TabBackground"
+                        Margin="4"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <StackPanel Spacing="4"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                        <ContentPresenter Name="PART_IconPresenter"
+                                          HorizontalAlignment="Center"
+                                          Content="{TemplateBinding Icon}"
+                                          ContentTemplate="{TemplateBinding IconTemplate}"
+                                          IsVisible="{Binding $self.Content, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                          TextElement.Foreground="{TemplateBinding Foreground}" />
+                        <ContentPresenter Name="PART_HeaderPresenter"
+                                          HorizontalAlignment="Center"
+                                          Content="{TemplateBinding Header}"
+                                          ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                          FontSize="12"
+                                          FontWeight="SemiBold"
+                                          RecognizesAccessKey="True"
+                                          TextElement.Foreground="{TemplateBinding Foreground}" />
+                    </StackPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+            <Setter Property="Background" Value="{DynamicResource LuminaStateHoverBrush}" />
+        </Style>
+
+        <Style Selector="^:selected">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaPrimaryBrush}" />
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBgBrush}" />
+        </Style>
+
+        <Style Selector="^:disabled">
+            <Setter Property="Opacity" Value="0.45" />
+            <Setter Property="Cursor" Value="Arrow" />
+        </Style>
+    </ControlTheme>
+</ResourceDictionary>

@@ -1,0 +1,130 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:DataType="vm:SplitButtonShowcaseViewModel"
+             x:Class="LuminaUI.Demo.Views.SplitButtonShowcasePage">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24"
+                    Width="{Binding #PageScroll.Bounds.Width}"
+                    HorizontalAlignment="Stretch"
+                    Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.1246}" />
+                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0763}" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="280"
+                                          MaxItemWidth="500"
+                                          HorizontalSpacing="16"
+                                          VerticalSpacing="16">
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1246}" />
+                        <WrapPanel>
+                            <SplitButton Content="{DynamicResource Sandbox.Text.0161}" Margin="0,0,12,12">
+                                <SplitButton.Flyout>
+                                    <MenuFlyout>
+                                        <MenuItem Header="{DynamicResource Sandbox.Text.0162}">
+                                            <MenuItem.Icon>
+                                                <PathIcon Width="16" Height="16" Data="M6,3 L15,3 L20,8 L20,21 L6,21 Z M15,3 L15,8 L20,8 M9,12 L17,12 M9,16 L17,16" />
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <MenuItem Header="{DynamicResource Sandbox.Text.0163}">
+                                            <MenuItem.Icon>
+                                                <PathIcon Width="16" Height="16" Data="M8,7 L5,12 L8,17 M16,7 L19,12 L16,17 M13,6 L11,18" />
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <MenuItem Header="{DynamicResource Sandbox.Text.0164}">
+                                            <MenuItem.Icon>
+                                                <PathIcon Width="16" Height="16" Data="M6,3 L15,3 L20,8 L20,21 L6,21 Z M15,3 L15,8 L20,8 M9,13 L17,13 M9,17 L14,17" />
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                    </MenuFlyout>
+                                </SplitButton.Flyout>
+                            </SplitButton>
+                            <ToggleSplitButton Content="{DynamicResource Sandbox.Text.0165}"
+                                               IsChecked="True"
+                                               Margin="0,0,12,12"
+                                               lumina:LuminaOptions.PopupType="Sheet">
+                                <ToggleSplitButton.Flyout>
+                                    <MenuFlyout>
+                                        <MenuItem Header="{DynamicResource Sandbox.Text.0166}">
+                                            <MenuItem.Icon>
+                                                <PathIcon Width="16" Height="16" Data="M20,12 A8,8 0 0,1 6.4,17.6 L4,20 L4,14 L10,14 L7.8,16.2 A5,5 0 0,0 17,12 Z M4,12 A8,8 0 0,1 17.6,6.4 L20,4 L20,10 L14,10 L16.2,7.8 A5,5 0 0,0 7,12 Z" />
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <MenuItem Header="{DynamicResource Sandbox.Text.0167}">
+                                            <MenuItem.Icon>
+                                                <PathIcon Width="16" Height="16" Data="M12,3 A9,9 0 1,0 12,21 A9,9 0 1,0 12,3 M12,7 L12,12 L16,14" />
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                    </MenuFlyout>
+                                </ToggleSplitButton.Flyout>
+                            </ToggleSplitButton>
+                        </WrapPanel>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1155}" />
+                        <WrapPanel>
+                            <SplitButton Content="{DynamicResource Sandbox.Text.0190}" Classes="Primary" Margin="0,0,12,12">
+                                <SplitButton.Flyout>
+                                    <MenuFlyout>
+                                        <MenuItem Header="{DynamicResource Sandbox.Text.1156}" />
+                                    </MenuFlyout>
+                                </SplitButton.Flyout>
+                            </SplitButton>
+                            
+                            <SplitButton Content="{DynamicResource Sandbox.Text.0194}" Classes="Outline" Margin="0,0,12,12">
+                                <SplitButton.Flyout>
+                                    <MenuFlyout>
+                                        <MenuItem Header="{DynamicResource Sandbox.Text.1156}" />
+                                    </MenuFlyout>
+                                </SplitButton.Flyout>
+                            </SplitButton>
+
+                            <SplitButton Content="{DynamicResource Sandbox.Text.0195}" Classes="Ghost" Margin="0,0,12,12">
+                                <SplitButton.Flyout>
+                                    <MenuFlyout>
+                                        <MenuItem Header="{DynamicResource Sandbox.Text.1156}" />
+                                    </MenuFlyout>
+                                </SplitButton.Flyout>
+                            </SplitButton>
+                        </WrapPanel>
+
+                        <WrapPanel>
+                            <SplitButton Content="{DynamicResource Sandbox.Text.0196}" Classes="Small" Margin="0,0,12,12">
+                                <SplitButton.Flyout>
+                                    <MenuFlyout>
+                                        <MenuItem Header="{DynamicResource Sandbox.Text.1156}" />
+                                    </MenuFlyout>
+                                </SplitButton.Flyout>
+                            </SplitButton>
+                            
+                            <SplitButton Content="{DynamicResource Sandbox.Text.0656}" Classes="Large" Margin="0,0,12,12">
+                                <SplitButton.Flyout>
+                                    <MenuFlyout>
+                                        <MenuItem Header="{DynamicResource Sandbox.Text.1156}" />
+                                    </MenuFlyout>
+                                </SplitButton.Flyout>
+                            </SplitButton>
+
+                            <SplitButton Classes="Icon" Margin="0,0,12,12">
+                                <PathIcon Width="16" Height="16" Data="M12,3 A9,9 0 1,0 12,21 A9,9 0 1,0 12,3" />
+                                <SplitButton.Flyout>
+                                    <MenuFlyout>
+                                        <MenuItem Header="{DynamicResource Sandbox.Text.1156}" />
+                                    </MenuFlyout>
+                                </SplitButton.Flyout>
+                            </SplitButton>
+                        </WrapPanel>
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

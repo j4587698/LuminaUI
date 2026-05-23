@@ -1,0 +1,71 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.TagInputShowcasePage"
+             x:DataType="vm:TagInputShowcaseViewModel">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24"
+                    Width="{Binding #PageScroll.Bounds.Width}"
+                    HorizontalAlignment="Stretch"
+                    Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0891}" />
+                <TextBlock Text="{DynamicResource Sandbox.Text.0823}"
+                           Foreground="{DynamicResource LuminaTextMutedBrush}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="320"
+                                          MaxItemWidth="620"
+                                          HorizontalSpacing="16"
+                                          VerticalSpacing="16">
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0890}" />
+                        <lumina:LuminaTagInput Watermark="{DynamicResource Sandbox.Text.0892}"
+                                               CanRemoveTags="False"
+                                               CanInput="False"
+                                               Tags="{Binding LockedLabels}" />
+                        <lumina:LuminaTagInput Watermark="{DynamicResource Sandbox.Text.1173}"
+                                               AllowDuplicates="False"
+                                               Tags="{Binding Labels}"
+                                               TagAddedCommand="{Binding TagAddedCommand}"
+                                               TagRemovedCommand="{Binding TagRemovedCommand}" />
+                        <WrapPanel>
+                            <Button Content="{DynamicResource Sandbox.Text.0775}"
+                                    Classes="Outline"
+                                    Margin="0,0,8,8"
+                                    Command="{Binding AddDefaultTagsCommand}" />
+                        </WrapPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="10"
+                                    VerticalAlignment="Center">
+                            <TextBlock Text="{DynamicResource Sandbox.Text.0794}"
+                                       VerticalAlignment="Center"
+                                       Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                            <lumina:LuminaCloseButton Command="{Binding RunCloseButtonCommand}"
+                                                      ToolTip.Tip="Close" />
+                        </StackPanel>
+                        <TextBlock Text="{Binding StatusText}" Classes="Caption" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1284}" />
+                        
+                        <TextBlock Text="{DynamicResource Sandbox.Text.0199}" Classes="Label" />
+                        <lumina:LuminaTagInput Tags="{Binding Labels}"
+                                               IsEnabled="False" />
+                                               
+                        <TextBlock Text="{DynamicResource Sandbox.Text.1285}" Classes="Label" Margin="0,8,0,0" />
+                        <lumina:LuminaTagInput Watermark="{DynamicResource Sandbox.Text.1286}"
+                                               MaxCount="3" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

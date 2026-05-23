@@ -1,0 +1,79 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.AvatarBadgeShowcasePage"
+             x:DataType="vm:AvatarBadgeShowcaseViewModel">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.1115}" />
+                <TextBlock Text="{DynamicResource Sandbox.Text.0033}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="280" MaxItemWidth="460" HorizontalSpacing="16" VerticalSpacing="16">
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1116}" />
+                        <WrapPanel>
+                            <lumina:LuminaAvatar DisplayName="Ada Lovelace" Margin="0,0,12,12" />
+                            <lumina:LuminaAvatar Initials="UI" Classes="Large" Badge="5" Margin="0,0,12,12" />
+                            <lumina:LuminaAvatar Content="{DynamicResource Sandbox.Text.1117}" Classes="Square" Margin="0,0,12,12" />
+                            <lumina:LuminaAvatar Initials="OP" Classes="Small" Badge="" Margin="0,0,12,12" />
+                        </WrapPanel>
+                        <TextBlock Text="{DynamicResource Sandbox.Text.0034}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1118}" />
+                        <WrapPanel>
+                            <lumina:LuminaBadge Count="{Binding NotificationCount}" Margin="10,10,18,18">
+                                <Button Content="{DynamicResource Sandbox.Text.0348}" Classes="Outline" />
+                            </lumina:LuminaBadge>
+
+                            <lumina:LuminaBadge Count="{Binding ReviewCount}" OverflowCount="99" Classes="Primary" Margin="10,10,18,18">
+                                <Button Content="{DynamicResource Sandbox.Text.0035}" Classes="Outline" />
+                            </lumina:LuminaBadge>
+
+                            <lumina:LuminaBadge IsDot="True" Classes="Success" Margin="10,10,18,18">
+                                <Button Content="{DynamicResource Sandbox.Text.0036}" Classes="Outline" />
+                            </lumina:LuminaBadge>
+                        </WrapPanel>
+
+                        <TextBlock Text="{DynamicResource Sandbox.Text.0039}" FontWeight="SemiBold" />
+                        <WrapPanel>
+                            <lumina:LuminaBadge BadgeContent="{DynamicResource Sandbox.Text.1119}" Classes="Danger" CornerPosition="TopRight" Margin="10,10,18,18">
+                                <lumina:LuminaAvatar Initials="TR" Classes="Square" />
+                            </lumina:LuminaBadge>
+                            <lumina:LuminaBadge BadgeContent="{DynamicResource Sandbox.Text.1119}" Classes="Warning" CornerPosition="BottomRight" Margin="10,10,18,18">
+                                <lumina:LuminaAvatar Initials="BR" Classes="Square" />
+                            </lumina:LuminaBadge>
+                            <lumina:LuminaBadge BadgeContent="{DynamicResource Sandbox.Text.1120}" Classes="Light Primary" CornerPosition="TopLeft" Margin="10,10,18,18">
+                                <lumina:LuminaAvatar Initials="TL" Classes="Square" />
+                            </lumina:LuminaBadge>
+                            <lumina:LuminaBadge IsDot="True" Classes="Success" CornerPosition="BottomLeft" Margin="10,10,18,18">
+                                <lumina:LuminaAvatar Initials="BL" Classes="Square" />
+                            </lumina:LuminaBadge>
+                        </WrapPanel>
+
+                        <TextBlock Text="{DynamicResource Sandbox.Text.0040}" FontWeight="SemiBold" />
+                        <WrapPanel>
+                            <lumina:LuminaBadge BadgeContent="{DynamicResource Sandbox.Text.1120}" Classes="Light Primary" Margin="0,0,12,12" />
+                            <lumina:LuminaBadge Count="{Binding ReviewCount}" OverflowCount="10" Classes="Danger" Margin="0,0,12,12" />
+                            <lumina:LuminaBadge IsDot="True" Classes="Success" Margin="0,0,12,12" />
+                            <lumina:LuminaBadge BadgeContent="{DynamicResource Sandbox.Text.1121}" Classes="Secondary" BadgeFontSize="11" BadgePadding="8,1" Margin="0,0,12,12" />
+                        </WrapPanel>
+
+                        <WrapPanel>
+                            <Button Content="{DynamicResource Sandbox.Text.0037}" Classes="Primary" Command="{Binding AddNotificationCommand}" Margin="0,0,8,8" />
+                            <Button Content="{DynamicResource Sandbox.Text.0038}" Classes="Outline" Command="{Binding ClearNotificationsCommand}" Margin="0,0,8,8" />
+                        </WrapPanel>
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

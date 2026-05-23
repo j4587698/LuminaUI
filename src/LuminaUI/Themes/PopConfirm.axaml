@@ -1,0 +1,133 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:lumina="using:LuminaUI.Controls">
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaPopConfirm}" TargetType="lumina:LuminaPopConfirm">
+        <Setter Property="Placement" Value="BottomEdgeAlignedLeft" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaPopConfirm">
+                <Panel>
+                    <Border Name="PART_TargetHost" Background="#00FFFFFF">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}" />
+                    </Border>
+
+                    <Popup Name="PART_Popup"
+                           IsOpen="{TemplateBinding IsOpen, Mode=TwoWay}"
+                           OverlayInputPassThroughElement="{Binding #PART_TargetHost}"
+                           Placement="{TemplateBinding Placement}"
+                           PlacementTarget="{Binding #PART_TargetHost}"
+                           IsLightDismissEnabled="True"
+                           WindowManagerAddShadowHint="False">
+                        <Border MinWidth="260"
+                                MaxWidth="340"
+                                Margin="12,20,12,12"
+                                Padding="14"
+                                Background="{DynamicResource LuminaPopoverBrush}"
+                                BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="10"
+                                BoxShadow="{DynamicResource LuminaShadowPopup}">
+                            <Grid RowDefinitions="Auto,Auto"
+                                  ColumnDefinitions="Auto,*,Auto"
+                                  ColumnSpacing="10">
+                                <Panel Grid.Row="0"
+                                       Grid.Column="0"
+                                       Width="22"
+                                       Height="22"
+                                       VerticalAlignment="Top">
+                                    <ContentPresenter Content="{TemplateBinding Icon}"
+                                                      IsVisible="{TemplateBinding Icon, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                                    <PathIcon Name="PART_DefaultIcon"
+                                              Data="M12 2 L22 20 H2 Z M12 8 V13 M12 16 V18"
+                                              Width="20"
+                                              Height="20"
+                                              Foreground="{DynamicResource LuminaWarningBrush}"
+                                              IsVisible="{TemplateBinding Icon, Converter={x:Static ObjectConverters.IsNull}}" />
+                                </Panel>
+
+                                <StackPanel Grid.Row="0"
+                                            Grid.Column="1"
+                                            Spacing="6"
+                                            HorizontalAlignment="Stretch">
+                                    <ContentControl Content="{TemplateBinding PopupHeader}"
+                                                    ContentTemplate="{TemplateBinding PopupHeaderTemplate}"
+                                                    HorizontalContentAlignment="Stretch">
+                                        <ContentControl.DataTemplates>
+                                            <DataTemplate DataType="x:String">
+                                                <TextBlock Text="{Binding}"
+                                                           TextWrapping="Wrap"
+                                                           FontWeight="DemiBold"
+                                                           Foreground="{DynamicResource LuminaTextPrimaryBrush}" />
+                                            </DataTemplate>
+                                        </ContentControl.DataTemplates>
+                                    </ContentControl>
+
+                                    <ContentControl Content="{TemplateBinding PopupContent}"
+                                                    ContentTemplate="{TemplateBinding PopupContentTemplate}"
+                                                    HorizontalContentAlignment="Stretch">
+                                        <ContentControl.DataTemplates>
+                                            <DataTemplate DataType="x:String">
+                                                <TextBlock Text="{Binding}"
+                                                           TextWrapping="Wrap"
+                                                           FontSize="13"
+                                                           Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                                            </DataTemplate>
+                                        </ContentControl.DataTemplates>
+                                    </ContentControl>
+                                </StackPanel>
+
+                                <Button Name="PART_CloseButton"
+                                        Grid.Row="0"
+                                        Grid.Column="2"
+                                        Classes="Small Icon Ghost"
+                                        Theme="{StaticResource LuminaButton}"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Top"
+                                        Command="{TemplateBinding CancelCommand}"
+                                        CommandParameter="{TemplateBinding CancelCommandParameter}">
+                                    <PathIcon Width="12"
+                                              Height="12"
+                                              Data="M6,6 L18,18 M18,6 L6,18" />
+                                </Button>
+
+                                <StackPanel Grid.Row="1"
+                                            Grid.Column="0"
+                                            Grid.ColumnSpan="3"
+                                            Margin="0,18,0,0"
+                                            Orientation="Horizontal"
+                                            HorizontalAlignment="Right"
+                                            Spacing="8">
+                                    <Button Name="PART_CancelButton"
+                                            Classes="Small Ghost"
+                                            Theme="{StaticResource LuminaButton}"
+                                            Content="{TemplateBinding CancelText}"
+                                            Command="{TemplateBinding CancelCommand}"
+                                            CommandParameter="{TemplateBinding CancelCommandParameter}" />
+                                    <Button Name="PART_ConfirmButton"
+                                            Classes="Small Primary"
+                                            Theme="{StaticResource LuminaButton}"
+                                            Content="{TemplateBinding ConfirmText}"
+                                            Command="{TemplateBinding ConfirmCommand}"
+                                            CommandParameter="{TemplateBinding ConfirmCommandParameter}" />
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </Popup>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^.Danger /template/ PathIcon#PART_DefaultIcon">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaDangerBrush}" />
+        </Style>
+
+        <Style Selector="^.Success /template/ PathIcon#PART_DefaultIcon">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaSuccessBrush}" />
+        </Style>
+
+        <Style Selector="^.Info /template/ PathIcon#PART_DefaultIcon">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaPrimaryBrush}" />
+        </Style>
+    </ControlTheme>
+</ResourceDictionary>

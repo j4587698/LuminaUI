@@ -1,0 +1,12 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StaticResource x:Key="TreeDataGridGridLinesBrush" ResourceKey="LuminaBorderSubtleBrush" />
+    <StaticResource x:Key="TreeDataGridHeaderPointeroverBackground" ResourceKey="LuminaHoverBackgroundBrush" />
+    <StaticResource x:Key="TreeDataGridHeaderPressedBackground" ResourceKey="LuminaStatePressedBrush" />
+    <SolidColorBrush x:Key="TreeDataGridHeaderPointeroverBorderBrush" Color="#00FFFFFF" />
+    <SolidColorBrush x:Key="TreeDataGridHeaderPressedBorderBrush" Color="#00FFFFFF" />
+    <StaticResource x:Key="TreeDataGridHeaderPointeroverForeground" ResourceKey="LuminaTextPrimaryBrush" />
+    <StaticResource x:Key="TreeDataGridHeaderPressedForeground" ResourceKey="LuminaTextPrimaryBrush" />
+    <StaticResource x:Key="TreeDataGridCellSelectedBackground" ResourceKey="LuminaPrimaryBgBrush" />
+    <StaticResource x:Key="TreeDataGridColumnHeaderForeground" ResourceKey="LuminaTextTertiaryBrush" />
+</ResourceDictionary>

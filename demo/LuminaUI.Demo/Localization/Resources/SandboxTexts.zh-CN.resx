@@ -1,0 +1,3951 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Sandbox.Text.0001" xml:space="preserve">
+    <value>玻璃卡片</value>
+  </data>
+  <data name="Sandbox.Text.0002" xml:space="preserve">
+    <value>透明表面使用背景模糊和可读色调。</value>
+  </data>
+  <data name="Sandbox.Text.0003" xml:space="preserve">
+    <value>玻璃表面</value>
+  </data>
+  <data name="Sandbox.Text.0004" xml:space="preserve">
+    <value>玻璃卡片使用 LuminaBackdropBlur 和较轻的可读色调。</value>
+  </data>
+  <data name="Sandbox.Text.0005" xml:space="preserve">
+    <value>玻璃</value>
+  </data>
+  <data name="Sandbox.Text.0006" xml:space="preserve">
+    <value>背景模糊配合稳定边缘。</value>
+  </data>
+  <data name="Sandbox.Text.0007" xml:space="preserve">
+    <value>密集内容</value>
+  </data>
+  <data name="Sandbox.Text.0008" xml:space="preserve">
+    <value>色调保持较轻，模糊后的背景仍然可见。</value>
+  </data>
+  <data name="Sandbox.Text.0009" xml:space="preserve">
+    <value>伪玻璃 (Pseudo)</value>
+  </data>
+  <data name="Sandbox.Text.0010" xml:space="preserve">
+    <value>稳定的色调和边缘处理，不捕获背景。</value>
+  </data>
+  <data name="Sandbox.Text.0011" xml:space="preserve">
+    <value>Acrylic</value>
+  </data>
+  <data name="Sandbox.Text.0012" xml:space="preserve">
+    <value>使用原生 acrylic 材质和更轻的色调。</value>
+  </data>
+  <data name="Sandbox.Text.0013" xml:space="preserve">
+    <value>浮起 Pseudo</value>
+  </data>
+  <data name="Sandbox.Text.0014" xml:space="preserve">
+    <value>同一玻璃体系，为浮动内容提供更强分离感。</value>
+  </data>
+  <data name="Sandbox.Text.0015" xml:space="preserve">
+    <value>正在检查卡片玻璃...</value>
+  </data>
+  <data name="Sandbox.Text.0016" xml:space="preserve">
+    <value>卡片玻璃：acrylic 材质。</value>
+  </data>
+  <data name="Sandbox.Text.0017" xml:space="preserve">
+    <value>卡片玻璃：pseudo 回退。</value>
+  </data>
+  <data name="Sandbox.Text.0018" xml:space="preserve">
+    <value>卡片玻璃：背景模糊。</value>
+  </data>
+  <data name="Sandbox.Text.0019" xml:space="preserve">
+    <value>窗口玻璃已启用：{0}</value>
+  </data>
+  <data name="Sandbox.Text.0020" xml:space="preserve">
+    <value>窗口玻璃回退：{0}</value>
+  </data>
+  <data name="Sandbox.Text.0021" xml:space="preserve">
+    <value>玻璃表面</value>
+  </data>
+  <data name="Sandbox.Text.0022" xml:space="preserve">
+    <value>透明表面使用可读色调和稳定边缘。</value>
+  </data>
+  <data name="Sandbox.Text.0023" xml:space="preserve">
+    <value>卡片玻璃：仅使用 tint 回退，不进行局部背景采样。</value>
+  </data>
+  <data name="Sandbox.Text.0024" xml:space="preserve">
+    <value>玻璃变体</value>
+  </data>
+  <data name="Sandbox.Text.0025" xml:space="preserve">
+    <value>玻璃卡片默认避免局部背景采样。稳定表面使用 tint，平台支持时可使用 Acrylic。</value>
+  </data>
+  <data name="Sandbox.Text.0026" xml:space="preserve">
+    <value>色调玻璃</value>
+  </data>
+  <data name="Sandbox.Text.0027" xml:space="preserve">
+    <value>默认回退模式。不捕获背景，在列表和滚动视图中保持稳定。</value>
+  </data>
+  <data name="Sandbox.Text.0028" xml:space="preserve">
+    <value>Acrylic</value>
+  </data>
+  <data name="Sandbox.Text.0029" xml:space="preserve">
+    <value>在可用平台使用 Avalonia Acrylic 材质，并保持一致的色调和边缘处理。</value>
+  </data>
+  <data name="Sandbox.Text.0030" xml:space="preserve">
+    <value>浮起玻璃</value>
+  </data>
+  <data name="Sandbox.Text.0031" xml:space="preserve">
+    <value>同一材质体系，为覆盖层和浮动内容提供更强分离感。</value>
+  </data>
+  <data name="Sandbox.Text.0032" xml:space="preserve">
+    <value>头像与徽标</value>
+  </data>
+  <data name="Sandbox.Text.0033" xml:space="preserve">
+    <value>身份视觉、计数、红点和状态徽标。</value>
+  </data>
+  <data name="Sandbox.Text.0034" xml:space="preserve">
+    <value>头像支持缩写、自定义内容、状态徽标和尺寸样式。</value>
+  </data>
+  <data name="Sandbox.Text.0035" xml:space="preserve">
+    <value>评审</value>
+  </data>
+  <data name="Sandbox.Text.0036" xml:space="preserve">
+    <value>在线</value>
+  </data>
+  <data name="Sandbox.Text.0037" xml:space="preserve">
+    <value>增加</value>
+  </data>
+  <data name="Sandbox.Text.0038" xml:space="preserve">
+    <value>清空</value>
+  </data>
+  <data name="Sandbox.Text.0039" xml:space="preserve">
+    <value>角落位置</value>
+  </data>
+  <data name="Sandbox.Text.0040" xml:space="preserve">
+    <value>独立徽标</value>
+  </data>
+  <data name="Sandbox.Text.0041" xml:space="preserve">
+    <value>图标按钮</value>
+  </data>
+  <data name="Sandbox.Text.0042" xml:space="preserve">
+    <value>支持左侧、右侧、上方、下方和纯图标内容的按钮。</value>
+  </data>
+  <data name="Sandbox.Text.0043" xml:space="preserve">
+    <value>纯图标</value>
+  </data>
+  <data name="Sandbox.Text.0044" xml:space="preserve">
+    <value>位置</value>
+  </data>
+  <data name="Sandbox.Text.0045" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="Sandbox.Text.0046" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="Sandbox.Text.0047" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="Sandbox.Text.0048" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="Sandbox.Text.0049" xml:space="preserve">
+    <value>上传</value>
+  </data>
+  <data name="Sandbox.Text.0050" xml:space="preserve">
+    <value>确认</value>
+  </data>
+  <data name="Sandbox.Text.0051" xml:space="preserve">
+    <value>右侧</value>
+  </data>
+  <data name="Sandbox.Text.0052" xml:space="preserve">
+    <value>上方</value>
+  </data>
+  <data name="Sandbox.Text.0053" xml:space="preserve">
+    <value>下方</value>
+  </data>
+  <data name="Sandbox.Text.0054" xml:space="preserve">
+    <value>还没有操作</value>
+  </data>
+  <data name="Sandbox.Text.0055" xml:space="preserve">
+    <value>分组框</value>
+  </data>
+  <data name="Sandbox.Text.0056" xml:space="preserve">
+    <value>带标题、说明和可选右侧操作的内容分组容器。</value>
+  </data>
+  <data name="Sandbox.Text.0057" xml:space="preserve">
+    <value>类似 WinForms 的分组框，标题压在边框线上，内容由边框收束。</value>
+  </data>
+  <data name="Sandbox.Text.0058" xml:space="preserve">
+    <value>图片</value>
+  </data>
+  <data name="Sandbox.Text.0059" xml:space="preserve">
+    <value>异步图片加载，支持 base64 数据、Web URL、内存缓存和磁盘缓存。</value>
+  </data>
+  <data name="Sandbox.Text.0060" xml:space="preserve">
+    <value>带缓存的 Web 图片</value>
+  </data>
+  <data name="Sandbox.Text.0061" xml:space="preserve">
+    <value>正在下载图片</value>
+  </data>
+  <data name="Sandbox.Text.0062" xml:space="preserve">
+    <value>Base64 图片</value>
+  </data>
+  <data name="Sandbox.Text.0063" xml:space="preserve">
+    <value>Source 属性支持 data:image/*;base64 字符串和纯 base64 内容。</value>
+  </data>
+  <data name="Sandbox.Text.0064" xml:space="preserve">
+    <value>Avares 资源</value>
+  </data>
+  <data name="Sandbox.Text.0065" xml:space="preserve">
+    <value>仅自定义 HttpClient</value>
+  </data>
+  <data name="Sandbox.Text.0066" xml:space="preserve">
+    <value>正在使用自定义 HttpClient</value>
+  </data>
+  <data name="Sandbox.Text.0067" xml:space="preserve">
+    <value>只替换 HttpClient，仍然使用 Lumina 默认缓存。</value>
+  </data>
+  <data name="Sandbox.Text.0068" xml:space="preserve">
+    <value>仅自定义缓存</value>
+  </data>
+  <data name="Sandbox.Text.0069" xml:space="preserve">
+    <value>正在使用自定义缓存</value>
+  </data>
+  <data name="Sandbox.Text.0070" xml:space="preserve">
+    <value>只替换 ILuminaImageCache，仍然使用默认共享 HttpClient。</value>
+  </data>
+  <data name="Sandbox.Text.0071" xml:space="preserve">
+    <value>圆形裁剪</value>
+  </data>
+  <data name="Sandbox.Text.0072" xml:space="preserve">
+    <value>需要 URL 加载和缓存时，也可以用同一个组件做头像类图片。</value>
+  </data>
+  <data name="Sandbox.Text.0073" xml:space="preserve">
+    <value>默认错误模板</value>
+  </data>
+  <data name="Sandbox.Text.0074" xml:space="preserve">
+    <value>图片需要授权</value>
+  </data>
+  <data name="Sandbox.Text.0075" xml:space="preserve">
+    <value>ErrorText、ErrorBackground 和 ErrorForeground 可自定义默认加载失败界面。</value>
+  </data>
+  <data name="Sandbox.Text.0076" xml:space="preserve">
+    <value>自定义错误内容</value>
+  </data>
+  <data name="Sandbox.Text.0077" xml:space="preserve">
+    <value>ErrorContent 会替换整个默认错误模板。</value>
+  </data>
+  <data name="Sandbox.Text.0078" xml:space="preserve">
+    <value>账户</value>
+  </data>
+  <data name="Sandbox.Text.0079" xml:space="preserve">
+    <value>当多个控件属于同一个设置区域时使用。</value>
+  </data>
+  <data name="Sandbox.Text.0080" xml:space="preserve">
+    <value>标题覆盖顶部边框，辅助说明保留在框体内部。</value>
+  </data>
+  <data name="Sandbox.Text.0081" xml:space="preserve">
+    <value>显示名称</value>
+  </data>
+  <data name="Sandbox.Text.0082" xml:space="preserve">
+    <value>邮箱</value>
+  </data>
+  <data name="Sandbox.Text.0083" xml:space="preserve">
+    <value>接收每周摘要</value>
+  </data>
+  <data name="Sandbox.Text.0084" xml:space="preserve">
+    <value>工作区</value>
+  </data>
+  <data name="Sandbox.Text.0085" xml:space="preserve">
+    <value>操作保持在分组标题区，不会干扰内容布局。</value>
+  </data>
+  <data name="Sandbox.Text.0086" xml:space="preserve">
+    <value>当分组需要紧凑命令时，操作可以放在右上边框区域。</value>
+  </data>
+  <data name="Sandbox.Text.0087" xml:space="preserve">
+    <value>生产环境</value>
+  </data>
+  <data name="Sandbox.Text.0088" xml:space="preserve">
+    <value>预发环境</value>
+  </data>
+  <data name="Sandbox.Text.0089" xml:space="preserve">
+    <value>本地</value>
+  </data>
+  <data name="Sandbox.Text.0090" xml:space="preserve">
+    <value>适合密集表单，或已经有明显背景面的页面。</value>
+  </data>
+  <data name="Sandbox.Text.0091" xml:space="preserve">
+    <value>适合密集表单，或页面背景已经足够明确的轻量边框。</value>
+  </data>
+  <data name="Sandbox.Text.0092" xml:space="preserve">
+    <value>使用情况报告</value>
+  </data>
+  <data name="Sandbox.Text.0093" xml:space="preserve">
+    <value>填充</value>
+  </data>
+  <data name="Sandbox.Text.0094" xml:space="preserve">
+    <value>用于看板、Sheet 和浮动面板的更强表面。</value>
+  </data>
+  <data name="Sandbox.Text.0095" xml:space="preserve">
+    <value>填充态只增强框体内部背景，不改变分组框结构。</value>
+  </data>
+  <data name="Sandbox.Text.0096" xml:space="preserve">
+    <value>当前套餐</value>
+  </data>
+  <data name="Sandbox.Text.0097" xml:space="preserve">
+    <value>专业版</value>
+  </data>
+  <data name="Sandbox.Text.0098" xml:space="preserve">
+    <value>发光</value>
+  </data>
+  <data name="Sandbox.Text.0099" xml:space="preserve">
+    <value>发光样式适合当前焦点区域，或需要强调的配置区域。</value>
+  </data>
+  <data name="Sandbox.Text.0100" xml:space="preserve">
+    <value>在工具窗格和窄侧栏中使用紧凑密度。</value>
+  </data>
+  <data name="Sandbox.Text.0101" xml:space="preserve">
+    <value>重置</value>
+  </data>
+  <data name="Sandbox.Text.0102" xml:space="preserve">
+    <value>应用</value>
+  </data>
+  <data name="Sandbox.Text.0103" xml:space="preserve">
+    <value>标题可以是任意内容，不只是纯文本。</value>
+  </data>
+  <data name="Sandbox.Text.0104" xml:space="preserve">
+    <value>自定义标题</value>
+  </data>
+  <data name="Sandbox.Text.0105" xml:space="preserve">
+    <value>这个分组使用组合标题内容，同时保持一致间距。</value>
+  </data>
+  <data name="Sandbox.Text.0106" xml:space="preserve">
+    <value>打开详情</value>
+  </data>
+  <data name="Sandbox.Text.0107" xml:space="preserve">
+    <value>按钮组</value>
+  </data>
+  <data name="Sandbox.Text.0108" xml:space="preserve">
+    <value>暴露 SelectedIndex 的分段操作组件，可直接用于 MVVM 绑定。</value>
+  </data>
+  <data name="Sandbox.Text.0109" xml:space="preserve">
+    <value>等宽操作组</value>
+  </data>
+  <data name="Sandbox.Text.0110" xml:space="preserve">
+    <value>已选择紧凑密度</value>
+  </data>
+  <data name="Sandbox.Text.0111" xml:space="preserve">
+    <value>已选择舒适密度</value>
+  </data>
+  <data name="Sandbox.Text.0112" xml:space="preserve">
+    <value>已选择展开密度</value>
+  </data>
+  <data name="Sandbox.Text.0113" xml:space="preserve">
+    <value>已选择每日计费</value>
+  </data>
+  <data name="Sandbox.Text.0114" xml:space="preserve">
+    <value>已选择每周计费</value>
+  </data>
+  <data name="Sandbox.Text.0115" xml:space="preserve">
+    <value>已选择每月计费</value>
+  </data>
+  <data name="Sandbox.Text.0116" xml:space="preserve">
+    <value>日期范围选择器</value>
+  </data>
+  <data name="Sandbox.Text.0117" xml:space="preserve">
+    <value>支持双向绑定、自定义日期格式和自适应弹出模式的日期范围选择。</value>
+  </data>
+  <data name="Sandbox.Text.0118" xml:space="preserve">
+    <value>下拉模式</value>
+  </data>
+  <data name="Sandbox.Text.0119" xml:space="preserve">
+    <value>Sheet 模式</value>
+  </data>
+  <data name="Sandbox.Text.0120" xml:space="preserve">
+    <value>本周</value>
+  </data>
+  <data name="Sandbox.Text.0121" xml:space="preserve">
+    <value>下个月</value>
+  </data>
+  <data name="Sandbox.Text.0122" xml:space="preserve">
+    <value>未选择日期范围</value>
+  </data>
+  <data name="Sandbox.Text.0123" xml:space="preserve">
+    <value>使用 PopupType 让移动端行为与其他选择器保持一致。</value>
+  </data>
+  <data name="Sandbox.Text.0124" xml:space="preserve">
+    <value>验证码输入</value>
+  </data>
+  <data name="Sandbox.Text.0125" xml:space="preserve">
+    <value>一次性验证码输入，支持粘贴分发、方向键导航和完成命令。</value>
+  </data>
+  <data name="Sandbox.Text.0126" xml:space="preserve">
+    <value>验证码</value>
+  </data>
+  <data name="Sandbox.Text.0127" xml:space="preserve">
+    <value>隐藏支付码</value>
+  </data>
+  <data name="Sandbox.Text.0128" xml:space="preserve">
+    <value>等待输入</value>
+  </data>
+  <data name="Sandbox.Text.0129" xml:space="preserve">
+    <value>支付码或安全码可启用 IsMasked。</value>
+  </data>
+  <data name="Sandbox.Text.0130" xml:space="preserve">
+    <value>分页</value>
+  </data>
+  <data name="Sandbox.Text.0131" xml:space="preserve">
+    <value>分页导航支持首尾按钮、紧凑模式和 MVVM 页码变更。</value>
+  </data>
+  <data name="Sandbox.Text.0132" xml:space="preserve">
+    <value>默认分页</value>
+  </data>
+  <data name="Sandbox.Text.0133" xml:space="preserve">
+    <value>紧凑分页</value>
+  </data>
+  <data name="Sandbox.Text.0134" xml:space="preserve">
+    <value>当前页：4</value>
+  </data>
+  <data name="Sandbox.Text.0135" xml:space="preserve">
+    <value>在高密度工具栏中可以隐藏首尾按钮和页码文本。</value>
+  </data>
+  <data name="Sandbox.Text.0136" xml:space="preserve">
+    <value>范围滑块</value>
+  </data>
+  <data name="Sandbox.Text.0137" xml:space="preserve">
+    <value>用于数值筛选的双滑块范围输入，支持 MVVM 下限和上限绑定。</value>
+  </data>
+  <data name="Sandbox.Text.0138" xml:space="preserve">
+    <value>价格范围</value>
+  </data>
+  <data name="Sandbox.Text.0139" xml:space="preserve">
+    <value>评分范围</value>
+  </data>
+  <data name="Sandbox.Text.0140" xml:space="preserve">
+    <value>预设</value>
+  </data>
+  <data name="Sandbox.Text.0141" xml:space="preserve">
+    <value>等待范围命令</value>
+  </data>
+  <data name="Sandbox.Text.0142" xml:space="preserve">
+    <value>密度</value>
+  </data>
+  <data name="Sandbox.Text.0143" xml:space="preserve">
+    <value>Small 和 Large 样式会让轨道与滑块尺寸跟主题保持一致。</value>
+  </data>
+  <data name="Sandbox.Text.0144" xml:space="preserve">
+    <value>半圆进度条</value>
+  </data>
+  <data name="Sandbox.Text.0145" xml:space="preserve">
+    <value>可使用默认百分比，也可以在中间放入自定义内容。</value>
+  </data>
+  <data name="Sandbox.Text.0146" xml:space="preserve">
+    <value>使用一个 Slider 控制多个半圆进度条，所有进度条都使用同一个 0-100 数值。</value>
+  </data>
+  <data name="Sandbox.Text.0147" xml:space="preserve">
+    <value>联动进度</value>
+  </data>
+  <data name="Sandbox.Text.0148" xml:space="preserve">
+    <value>使用一个数值控制本页所有确定态 Slider 和 ProgressBar。</value>
+  </data>
+  <data name="Sandbox.Text.0149" xml:space="preserve">
+    <value>存储</value>
+  </data>
+  <data name="Sandbox.Text.0150" xml:space="preserve">
+    <value>昵称</value>
+  </data>
+  <data name="Sandbox.Text.0151" xml:space="preserve">
+    <value>操作</value>
+  </data>
+  <data name="Sandbox.Text.0152" xml:space="preserve">
+    <value>命令、下拉、步进器、分页、自动完成和刷新基础组件。</value>
+  </data>
+  <data name="Sandbox.Text.0153" xml:space="preserve">
+    <value>搜索组件</value>
+  </data>
+  <data name="Sandbox.Text.0154" xml:space="preserve">
+    <value>查看选项</value>
+  </data>
+  <data name="Sandbox.Text.0155" xml:space="preserve">
+    <value>紧凑</value>
+  </data>
+  <data name="Sandbox.Text.0156" xml:space="preserve">
+    <value>舒适</value>
+  </data>
+  <data name="Sandbox.Text.0157" xml:space="preserve">
+    <value>展开</value>
+  </data>
+  <data name="Sandbox.Text.0158" xml:space="preserve">
+    <value>更多操作</value>
+  </data>
+  <data name="Sandbox.Text.0159" xml:space="preserve">
+    <value>快捷操作</value>
+  </data>
+  <data name="Sandbox.Text.0160" xml:space="preserve">
+    <value>运行检查</value>
+  </data>
+  <data name="Sandbox.Text.0161" xml:space="preserve">
+    <value>导出</value>
+  </data>
+  <data name="Sandbox.Text.0162" xml:space="preserve">
+    <value>导出 CSV</value>
+  </data>
+  <data name="Sandbox.Text.0163" xml:space="preserve">
+    <value>导出 JSON</value>
+  </data>
+  <data name="Sandbox.Text.0164" xml:space="preserve">
+    <value>导出 PDF</value>
+  </data>
+  <data name="Sandbox.Text.0165" xml:space="preserve">
+    <value>同步</value>
+  </data>
+  <data name="Sandbox.Text.0166" xml:space="preserve">
+    <value>立即同步</value>
+  </data>
+  <data name="Sandbox.Text.0167" xml:space="preserve">
+    <value>计划同步</value>
+  </data>
+  <data name="Sandbox.Text.0168" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Sandbox.Text.0169" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="Sandbox.Text.0170" xml:space="preserve">
+    <value>固定</value>
+  </data>
+  <data name="Sandbox.Text.0171" xml:space="preserve">
+    <value>归档</value>
+  </data>
+  <data name="Sandbox.Text.0172" xml:space="preserve">
+    <value>使用 PopupType 让确认操作适配移动端，同时不改变命令写法。</value>
+  </data>
+  <data name="Sandbox.Text.0173" xml:space="preserve">
+    <value>重置设置？</value>
+  </data>
+  <data name="Sandbox.Text.0174" xml:space="preserve">
+    <value>确认内容会显示在当前 Shell 的 Sheet 中，命令和关闭行为保持一致。</value>
+  </data>
+  <data name="Sandbox.Text.0175" xml:space="preserve">
+    <value>打开 Sheet 确认</value>
+  </data>
+  <data name="Sandbox.Text.0176" xml:space="preserve">
+    <value>支持下拉的滚动内容</value>
+  </data>
+  <data name="Sandbox.Text.0177" xml:space="preserve">
+    <value>桌面端使用普通滚动，触控界面可触发刷新手势。</value>
+  </data>
+  <data name="Sandbox.Text.0178" xml:space="preserve">
+    <value>10:30 已更新</value>
+  </data>
+  <data name="Sandbox.Text.0179" xml:space="preserve">
+    <value>自动滚动文字</value>
+  </data>
+  <data name="Sandbox.Text.0180" xml:space="preserve">
+    <value>自动滚动文字</value>
+  </data>
+  <data name="Sandbox.Text.0181" xml:space="preserve">
+    <value>单行文本仅在内容超出视口时启动跑马灯滚动。</value>
+  </data>
+  <data name="Sandbox.Text.0182" xml:space="preserve">
+    <value>溢出状态</value>
+  </data>
+  <data name="Sandbox.Text.0183" xml:space="preserve">
+    <value>限时特惠：鳗鱼饭套餐、松露薯条、茉莉气泡茶和季节蛋糕供应至 21:30。</value>
+  </data>
+  <data name="Sandbox.Text.0184" xml:space="preserve">
+    <value>静态状态</value>
+  </data>
+  <data name="Sandbox.Text.0185" xml:space="preserve">
+    <value>短文本保持静止。</value>
+  </data>
+  <data name="Sandbox.Text.0186" xml:space="preserve">
+    <value>弱化样式</value>
+  </data>
+  <data name="Sandbox.Text.0187" xml:space="preserve">
+    <value>长元数据可滚动展示，不会撑开所在行的布局。</value>
+  </data>
+  <data name="Sandbox.Text.0188" xml:space="preserve">
+    <value>按钮</value>
+  </data>
+  <data name="Sandbox.Text.0189" xml:space="preserve">
+    <value>Button、ToggleButton 和 RepeatButton 的状态。</value>
+  </data>
+  <data name="Sandbox.Text.0190" xml:space="preserve">
+    <value>Primary</value>
+  </data>
+  <data name="Sandbox.Text.0191" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="Sandbox.Text.0192" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="Sandbox.Text.0193" xml:space="preserve">
+    <value>Danger</value>
+  </data>
+  <data name="Sandbox.Text.0194" xml:space="preserve">
+    <value>Outline</value>
+  </data>
+  <data name="Sandbox.Text.0195" xml:space="preserve">
+    <value>Ghost</value>
+  </data>
+  <data name="Sandbox.Text.0196" xml:space="preserve">
+    <value>Small</value>
+  </data>
+  <data name="Sandbox.Text.0197" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="Sandbox.Text.0198" xml:space="preserve">
+    <value>Large</value>
+  </data>
+  <data name="Sandbox.Text.0199" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="Sandbox.Text.0200" xml:space="preserve">
+    <value>Unselected</value>
+  </data>
+  <data name="Sandbox.Text.0201" xml:space="preserve">
+    <value>Selected</value>
+  </data>
+  <data name="Sandbox.Text.0202" xml:space="preserve">
+    <value>Ghost toggle</value>
+  </data>
+  <data name="Sandbox.Text.0203" xml:space="preserve">
+    <value>长按操作</value>
+  </data>
+  <data name="Sandbox.Text.0204" xml:space="preserve">
+    <value>卡片</value>
+  </data>
+  <data name="Sandbox.Text.0205" xml:space="preserve">
+    <value>统一的表面、细腻层级、语义边框和可读的玻璃效果。</value>
+  </data>
+  <data name="Sandbox.Text.0206" xml:space="preserve">
+    <value>基础卡片在整个库中使用同一套中性表面。</value>
+  </data>
+  <data name="Sandbox.Text.0207" xml:space="preserve">
+    <value>Elevated</value>
+  </data>
+  <data name="Sandbox.Text.0208" xml:space="preserve">
+    <value>层级仅增强阴影和边缘，不再变成另一种灰色卡片。</value>
+  </data>
+  <data name="Sandbox.Text.0209" xml:space="preserve">
+    <value>主要操作</value>
+  </data>
+  <data name="Sandbox.Text.0210" xml:space="preserve">
+    <value>可交互</value>
+  </data>
+  <data name="Sandbox.Text.0211" xml:space="preserve">
+    <value>悬停时仍保持同一材质族，只增加轻量状态变化。</value>
+  </data>
+  <data name="Sandbox.Text.0212" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="Sandbox.Text.0213" xml:space="preserve">
+    <value>语义</value>
+  </data>
+  <data name="Sandbox.Text.0214" xml:space="preserve">
+    <value>状态卡片使用彩色边框，而不是整块染色表面。</value>
+  </data>
+  <data name="Sandbox.Text.0215" xml:space="preserve">
+    <value>选中或高亮。</value>
+  </data>
+  <data name="Sandbox.Text.0216" xml:space="preserve">
+    <value>健康的完成状态。</value>
+  </data>
+  <data name="Sandbox.Text.0217" xml:space="preserve">
+    <value>配置需要检查。</value>
+  </data>
+  <data name="Sandbox.Text.0218" xml:space="preserve">
+    <value>阻塞或破坏性状态。</value>
+  </data>
+  <data name="Sandbox.Text.0219" xml:space="preserve">
+    <value>彩色背景上的玻璃</value>
+  </data>
+  <data name="Sandbox.Text.0220" xml:space="preserve">
+    <value>正在检查窗口玻璃...</value>
+  </data>
+  <data name="Sandbox.Text.0221" xml:space="preserve">
+    <value>复合玻璃内容</value>
+  </data>
+  <data name="Sandbox.Text.0222" xml:space="preserve">
+    <value>玻璃卡片内的控件保持与实体卡片一致的间距和交互状态。</value>
+  </data>
+  <data name="Sandbox.Text.0223" xml:space="preserve">
+    <value>卡片标题</value>
+  </data>
+  <data name="Sandbox.Text.0224" xml:space="preserve">
+    <value>默认密度</value>
+  </data>
+  <data name="Sandbox.Text.0225" xml:space="preserve">
+    <value>紧凑密度</value>
+  </data>
+  <data name="Sandbox.Text.0226" xml:space="preserve">
+    <value>已固定</value>
+  </data>
+  <data name="Sandbox.Text.0227" xml:space="preserve">
+    <value>实时更新</value>
+  </data>
+  <data name="Sandbox.Text.0228" xml:space="preserve">
+    <value>集合</value>
+  </data>
+  <data name="Sandbox.Text.0229" xml:space="preserve">
+    <value>ListBox、TreeView 和 ItemsControl 示例。</value>
+  </data>
+  <data name="Sandbox.Text.0230" xml:space="preserve">
+    <value>概览</value>
+  </data>
+  <data name="Sandbox.Text.0231" xml:space="preserve">
+    <value>活动</value>
+  </data>
+  <data name="Sandbox.Text.0232" xml:space="preserve">
+    <value>部署</value>
+  </data>
+  <data name="Sandbox.Text.0233" xml:space="preserve">
+    <value>账单</value>
+  </data>
+  <data name="Sandbox.Text.0234" xml:space="preserve">
+    <value>禁用项</value>
+  </data>
+  <data name="Sandbox.Text.0235" xml:space="preserve">
+    <value>Design Tokens</value>
+  </data>
+  <data name="Sandbox.Text.0236" xml:space="preserve">
+    <value>色彩</value>
+  </data>
+  <data name="Sandbox.Text.0237" xml:space="preserve">
+    <value>排版</value>
+  </data>
+  <data name="Sandbox.Text.0238" xml:space="preserve">
+    <value>间距</value>
+  </data>
+  <data name="Sandbox.Text.0239" xml:space="preserve">
+    <value>组件</value>
+  </data>
+  <data name="Sandbox.Text.0240" xml:space="preserve">
+    <value>输入</value>
+  </data>
+  <data name="Sandbox.Text.0241" xml:space="preserve">
+    <value>索引列表</value>
+  </data>
+  <data name="Sandbox.Text.0242" xml:space="preserve">
+    <value>带右侧索引的分组列表。点击索引跳转到对应分组，滚动时同步更新当前索引。</value>
+  </data>
+  <data name="Sandbox.Text.0243" xml:space="preserve">
+    <value>字母索引</value>
+  </data>
+  <data name="Sandbox.Text.0244" xml:space="preserve">
+    <value>产品设计师</value>
+  </data>
+  <data name="Sandbox.Text.0245" xml:space="preserve">
+    <value>前端工程师</value>
+  </data>
+  <data name="Sandbox.Text.0246" xml:space="preserve">
+    <value>运营负责人</value>
+  </data>
+  <data name="Sandbox.Text.0247" xml:space="preserve">
+    <value>动效设计师</value>
+  </data>
+  <data name="Sandbox.Text.0248" xml:space="preserve">
+    <value>数据分析师</value>
+  </data>
+  <data name="Sandbox.Text.0249" xml:space="preserve">
+    <value>支持专员</value>
+  </data>
+  <data name="Sandbox.Text.0250" xml:space="preserve">
+    <value>研究经理</value>
+  </data>
+  <data name="Sandbox.Text.0251" xml:space="preserve">
+    <value>平台工程师</value>
+  </data>
+  <data name="Sandbox.Text.0252" xml:space="preserve">
+    <value>品牌策略师</value>
+  </data>
+  <data name="Sandbox.Text.0253" xml:space="preserve">
+    <value>测试工程师</value>
+  </data>
+  <data name="Sandbox.Text.0254" xml:space="preserve">
+    <value>设计系统</value>
+  </data>
+  <data name="Sandbox.Text.0255" xml:space="preserve">
+    <value>技术文档</value>
+  </data>
+  <data name="Sandbox.Text.0256" xml:space="preserve">
+    <value>移动端工程师</value>
+  </data>
+  <data name="Sandbox.Text.0257" xml:space="preserve">
+    <value>客户经理</value>
+  </data>
+  <data name="Sandbox.Text.0258" xml:space="preserve">
+    <value>中文通讯录（拼音与自定义索引）</value>
+  </data>
+  <data name="Sandbox.Text.0259" xml:space="preserve">
+    <value>中文通讯录（拼音与自定义索引）</value>
+  </data>
+  <data name="Sandbox.Text.0260" xml:space="preserve">
+    <value>通过 Key 属性可以显示完整中文分组标题，同时让右侧索引保持简洁（例如 A-Z 或 ★）。</value>
+  </data>
+  <data name="Sandbox.Text.0261" xml:space="preserve">
+    <value>星标朋友</value>
+  </data>
+  <data name="Sandbox.Text.0262" xml:space="preserve">
+    <value>星标朋友</value>
+  </data>
+  <data name="Sandbox.Text.0263" xml:space="preserve">
+    <value>张三 (BOSS)</value>
+  </data>
+  <data name="Sandbox.Text.0264" xml:space="preserve">
+    <value>张三 (BOSS)</value>
+  </data>
+  <data name="Sandbox.Text.0265" xml:space="preserve">
+    <value>董事长</value>
+  </data>
+  <data name="Sandbox.Text.0266" xml:space="preserve">
+    <value>董事长</value>
+  </data>
+  <data name="Sandbox.Text.0267" xml:space="preserve">
+    <value>李四</value>
+  </data>
+  <data name="Sandbox.Text.0268" xml:space="preserve">
+    <value>李四</value>
+  </data>
+  <data name="Sandbox.Text.0269" xml:space="preserve">
+    <value>核心架构师</value>
+  </data>
+  <data name="Sandbox.Text.0270" xml:space="preserve">
+    <value>核心架构师</value>
+  </data>
+  <data name="Sandbox.Text.0271" xml:space="preserve">
+    <value>C - 财务部</value>
+  </data>
+  <data name="Sandbox.Text.0272" xml:space="preserve">
+    <value>C - 财务部</value>
+  </data>
+  <data name="Sandbox.Text.0273" xml:space="preserve">
+    <value>陈总</value>
+  </data>
+  <data name="Sandbox.Text.0274" xml:space="preserve">
+    <value>陈总</value>
+  </data>
+  <data name="Sandbox.Text.0275" xml:space="preserve">
+    <value>出纳</value>
+  </data>
+  <data name="Sandbox.Text.0276" xml:space="preserve">
+    <value>出纳</value>
+  </data>
+  <data name="Sandbox.Text.0277" xml:space="preserve">
+    <value>曹会计</value>
+  </data>
+  <data name="Sandbox.Text.0278" xml:space="preserve">
+    <value>曹会计</value>
+  </data>
+  <data name="Sandbox.Text.0279" xml:space="preserve">
+    <value>L - 研发部</value>
+  </data>
+  <data name="Sandbox.Text.0280" xml:space="preserve">
+    <value>L - 研发部</value>
+  </data>
+  <data name="Sandbox.Text.0281" xml:space="preserve">
+    <value>李雷</value>
+  </data>
+  <data name="Sandbox.Text.0282" xml:space="preserve">
+    <value>李雷</value>
+  </data>
+  <data name="Sandbox.Text.0283" xml:space="preserve">
+    <value>后端工程师</value>
+  </data>
+  <data name="Sandbox.Text.0284" xml:space="preserve">
+    <value>后端工程师</value>
+  </data>
+  <data name="Sandbox.Text.0285" xml:space="preserve">
+    <value>刘梅</value>
+  </data>
+  <data name="Sandbox.Text.0286" xml:space="preserve">
+    <value>刘梅</value>
+  </data>
+  <data name="Sandbox.Text.0287" xml:space="preserve">
+    <value>测试工程师</value>
+  </data>
+  <data name="Sandbox.Text.0288" xml:space="preserve">
+    <value>W - 市场部</value>
+  </data>
+  <data name="Sandbox.Text.0289" xml:space="preserve">
+    <value>W - 市场部</value>
+  </data>
+  <data name="Sandbox.Text.0290" xml:space="preserve">
+    <value>王建国</value>
+  </data>
+  <data name="Sandbox.Text.0291" xml:space="preserve">
+    <value>王建国</value>
+  </data>
+  <data name="Sandbox.Text.0292" xml:space="preserve">
+    <value>市场总监</value>
+  </data>
+  <data name="Sandbox.Text.0293" xml:space="preserve">
+    <value>市场总监</value>
+  </data>
+  <data name="Sandbox.Text.0294" xml:space="preserve">
+    <value>吴芳</value>
+  </data>
+  <data name="Sandbox.Text.0295" xml:space="preserve">
+    <value>吴芳</value>
+  </data>
+  <data name="Sandbox.Text.0296" xml:space="preserve">
+    <value>公关媒介</value>
+  </data>
+  <data name="Sandbox.Text.0297" xml:space="preserve">
+    <value>公关媒介</value>
+  </data>
+  <data name="Sandbox.Text.0298" xml:space="preserve">
+    <value>Z - 行政部</value>
+  </data>
+  <data name="Sandbox.Text.0299" xml:space="preserve">
+    <value>Z - 行政部</value>
+  </data>
+  <data name="Sandbox.Text.0300" xml:space="preserve">
+    <value>赵云</value>
+  </data>
+  <data name="Sandbox.Text.0301" xml:space="preserve">
+    <value>赵云</value>
+  </data>
+  <data name="Sandbox.Text.0302" xml:space="preserve">
+    <value>行政主管</value>
+  </data>
+  <data name="Sandbox.Text.0303" xml:space="preserve">
+    <value>行政主管</value>
+  </data>
+  <data name="Sandbox.Text.0304" xml:space="preserve">
+    <value>郑钱</value>
+  </data>
+  <data name="Sandbox.Text.0305" xml:space="preserve">
+    <value>郑钱</value>
+  </data>
+  <data name="Sandbox.Text.0306" xml:space="preserve">
+    <value>前台接待</value>
+  </data>
+  <data name="Sandbox.Text.0307" xml:space="preserve">
+    <value>前台接待</value>
+  </data>
+  <data name="Sandbox.Text.0308" xml:space="preserve">
+    <value>动态数据自动分组（LoadFlatData）</value>
+  </data>
+  <data name="Sandbox.Text.0309" xml:space="preserve">
+    <value>注入大规模扁平列表（例如来自 API）。LuminaUI 会解析回调并自动生成分组、区段和右侧索引栏。</value>
+  </data>
+  <data name="Sandbox.Text.0310" xml:space="preserve">
+    <value>联动分类列表</value>
+  </data>
+  <data name="Sandbox.Text.0311" xml:space="preserve">
+    <value>联动分类列表</value>
+  </data>
+  <data name="Sandbox.Text.0312" xml:space="preserve">
+    <value>智能组件</value>
+  </data>
+  <data name="Sandbox.Text.0313" xml:space="preserve">
+    <value>用于溢出文本、字母索引和联动分类滚动的可复用交互组件。</value>
+  </data>
+  <data name="Sandbox.Text.0314" xml:space="preserve">
+    <value>字母索引列表</value>
+  </data>
+  <data name="Sandbox.Text.0315" xml:space="preserve">
+    <value>点餐式联动导航。左侧分类可跳转右侧列表，右侧滚动时同步左侧选中分类。</value>
+  </data>
+  <data name="Sandbox.Text.0316" xml:space="preserve">
+    <value>菜单分类</value>
+  </data>
+  <data name="Sandbox.Text.0317" xml:space="preserve">
+    <value>热门</value>
+  </data>
+  <data name="Sandbox.Text.0318" xml:space="preserve">
+    <value>招牌牛肉饭</value>
+  </data>
+  <data name="Sandbox.Text.0319" xml:space="preserve">
+    <value>慢炖牛肉、溏心蛋、秘制酱汁。</value>
+  </data>
+  <data name="Sandbox.Text.0320" xml:space="preserve">
+    <value>脆皮鸡肉饭</value>
+  </data>
+  <data name="Sandbox.Text.0321" xml:space="preserve">
+    <value>鸡腿肉、腌黄瓜、辣味蛋黄酱。</value>
+  </data>
+  <data name="Sandbox.Text.0322" xml:space="preserve">
+    <value>面食</value>
+  </data>
+  <data name="Sandbox.Text.0323" xml:space="preserve">
+    <value>豚骨拉面</value>
+  </data>
+  <data name="Sandbox.Text.0324" xml:space="preserve">
+    <value>豚骨汤、叉烧、笋干。</value>
+  </data>
+  <data name="Sandbox.Text.0325" xml:space="preserve">
+    <value>麻酱冷面</value>
+  </data>
+  <data name="Sandbox.Text.0326" xml:space="preserve">
+    <value>芝麻酱、黄瓜、葱花。</value>
+  </data>
+  <data name="Sandbox.Text.0327" xml:space="preserve">
+    <value>小吃</value>
+  </data>
+  <data name="Sandbox.Text.0328" xml:space="preserve">
+    <value>松露薯条</value>
+  </data>
+  <data name="Sandbox.Text.0329" xml:space="preserve">
+    <value>帕玛森、欧芹、黑松露油。</value>
+  </data>
+  <data name="Sandbox.Text.0330" xml:space="preserve">
+    <value>煎饺</value>
+  </data>
+  <data name="Sandbox.Text.0331" xml:space="preserve">
+    <value>猪肉煎饺、醋酱油。</value>
+  </data>
+  <data name="Sandbox.Text.0332" xml:space="preserve">
+    <value>饮品</value>
+  </data>
+  <data name="Sandbox.Text.0333" xml:space="preserve">
+    <value>茉莉气泡茶</value>
+  </data>
+  <data name="Sandbox.Text.0334" xml:space="preserve">
+    <value>冷萃茶搭配柑橘气泡水。</value>
+  </data>
+  <data name="Sandbox.Text.0335" xml:space="preserve">
+    <value>柚子柠檬水</value>
+  </data>
+  <data name="Sandbox.Text.0336" xml:space="preserve">
+    <value>柚子皮、柠檬、清糖浆。</value>
+  </data>
+  <data name="Sandbox.Text.0337" xml:space="preserve">
+    <value>导航与容器</value>
+  </data>
+  <data name="Sandbox.Text.0338" xml:space="preserve">
+    <value>原生导航页、内容容器、轮播、过渡内容和通知表面。</value>
+  </data>
+  <data name="Sandbox.Text.0339" xml:space="preserve">
+    <value>服务状态</value>
+  </data>
+  <data name="Sandbox.Text.0340" xml:space="preserve">
+    <value>API 正常</value>
+  </data>
+  <data name="Sandbox.Text.0341" xml:space="preserve">
+    <value>同步完成</value>
+  </data>
+  <data name="Sandbox.Text.0342" xml:space="preserve">
+    <value>账单检查待处理</value>
+  </data>
+  <data name="Sandbox.Text.0343" xml:space="preserve">
+    <value>设计</value>
+  </data>
+  <data name="Sandbox.Text.0344" xml:space="preserve">
+    <value>构建</value>
+  </data>
+  <data name="Sandbox.Text.0345" xml:space="preserve">
+    <value>验证</value>
+  </data>
+  <data name="Sandbox.Text.0346" xml:space="preserve">
+    <value>发布</value>
+  </data>
+  <data name="Sandbox.Text.0347" xml:space="preserve">
+    <value>窗格</value>
+  </data>
+  <data name="Sandbox.Text.0348" xml:space="preserve">
+    <value>收件箱</value>
+  </data>
+  <data name="Sandbox.Text.0349" xml:space="preserve">
+    <value>紧凑内联布局</value>
+  </data>
+  <data name="Sandbox.Text.0350" xml:space="preserve">
+    <value>窗格在桌面端保持可读，在窄布局中可折叠为紧凑条。</value>
+  </data>
+  <data name="Sandbox.Text.0351" xml:space="preserve">
+    <value>项目</value>
+  </data>
+  <data name="Sandbox.Text.0352" xml:space="preserve">
+    <value>导航根页</value>
+  </data>
+  <data name="Sandbox.Text.0353" xml:space="preserve">
+    <value>打开详情</value>
+  </data>
+  <data name="Sandbox.Text.0354" xml:space="preserve">
+    <value>首页</value>
+  </data>
+  <data name="Sandbox.Text.0355" xml:space="preserve">
+    <value>报表</value>
+  </data>
+  <data name="Sandbox.Text.0356" xml:space="preserve">
+    <value>团队</value>
+  </data>
+  <data name="Sandbox.Text.0357" xml:space="preserve">
+    <value>抽屉内容</value>
+  </data>
+  <data name="Sandbox.Text.0358" xml:space="preserve">
+    <value>DrawerPage 是应用级导航的原生侧边栏模式。</value>
+  </data>
+  <data name="Sandbox.Text.0359" xml:space="preserve">
+    <value>左侧</value>
+  </data>
+  <data name="Sandbox.Text.0360" xml:space="preserve">
+    <value>顶部</value>
+  </data>
+  <data name="Sandbox.Text.0361" xml:space="preserve">
+    <value>底部</value>
+  </data>
+  <data name="Sandbox.Text.0362" xml:space="preserve">
+    <value>个人资料</value>
+  </data>
+  <data name="Sandbox.Text.0363" xml:space="preserve">
+    <value>首页内容</value>
+  </data>
+  <data name="Sandbox.Text.0364" xml:space="preserve">
+    <value>搜索页内容</value>
+  </data>
+  <data name="Sandbox.Text.0365" xml:space="preserve">
+    <value>个人资料页内容</value>
+  </data>
+  <data name="Sandbox.Text.0366" xml:space="preserve">
+    <value>轮播</value>
+  </data>
+  <data name="Sandbox.Text.0367" xml:space="preserve">
+    <value>自动播放</value>
+  </data>
+  <data name="Sandbox.Text.0368" xml:space="preserve">
+    <value>发布看板</value>
+  </data>
+  <data name="Sandbox.Text.0369" xml:space="preserve">
+    <value>在一个紧凑表面中跟踪构建健康度、评审队列和组件覆盖。</value>
+  </data>
+  <data name="Sandbox.Text.0370" xml:space="preserve">
+    <value>组件审计</value>
+  </data>
+  <data name="Sandbox.Text.0371" xml:space="preserve">
+    <value>导航、覆盖层、选择器和操作控件现在都有独立示例。</value>
+  </data>
+  <data name="Sandbox.Text.0372" xml:space="preserve">
+    <value>响应式预览</value>
+  </data>
+  <data name="Sandbox.Text.0373" xml:space="preserve">
+    <value>轮播会随卡片缩放，并让控件固定在组件内部。</value>
+  </data>
+  <data name="Sandbox.Text.0374" xml:space="preserve">
+    <value>已更新的内容表面</value>
+  </data>
+  <data name="Sandbox.Text.0375" xml:space="preserve">
+    <value>提示卡片</value>
+  </data>
+  <data name="Sandbox.Text.0376" xml:space="preserve">
+    <value>通知时长</value>
+  </data>
+  <data name="Sandbox.Text.0377" xml:space="preserve">
+    <value>通知位置</value>
+  </data>
+  <data name="Sandbox.Text.0378" xml:space="preserve">
+    <value>左上</value>
+  </data>
+  <data name="Sandbox.Text.0379" xml:space="preserve">
+    <value>右上</value>
+  </data>
+  <data name="Sandbox.Text.0380" xml:space="preserve">
+    <value>左下</value>
+  </data>
+  <data name="Sandbox.Text.0381" xml:space="preserve">
+    <value>右下</value>
+  </data>
+  <data name="Sandbox.Text.0382" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="Sandbox.Text.0383" xml:space="preserve">
+    <value>展开器</value>
+  </data>
+  <data name="Sandbox.Text.0384" xml:space="preserve">
+    <value>用于渐进式设置和高级内容的可展开面板。</value>
+  </data>
+  <data name="Sandbox.Text.0385" xml:space="preserve">
+    <value>基础</value>
+  </data>
+  <data name="Sandbox.Text.0386" xml:space="preserve">
+    <value>连接设置</value>
+  </data>
+  <data name="Sandbox.Text.0387" xml:space="preserve">
+    <value>主机</value>
+  </data>
+  <data name="Sandbox.Text.0388" xml:space="preserve">
+    <value>区域</value>
+  </data>
+  <data name="Sandbox.Text.0389" xml:space="preserve">
+    <value>高级限制</value>
+  </data>
+  <data name="Sandbox.Text.0390" xml:space="preserve">
+    <value>紧凑分组</value>
+  </data>
+  <data name="Sandbox.Text.0391" xml:space="preserve">
+    <value>筛选</value>
+  </data>
+  <data name="Sandbox.Text.0392" xml:space="preserve">
+    <value>仅活动项</value>
+  </data>
+  <data name="Sandbox.Text.0393" xml:space="preserve">
+    <value>包含已归档</value>
+  </data>
+  <data name="Sandbox.Text.0394" xml:space="preserve">
+    <value>导出选项</value>
+  </data>
+  <data name="Sandbox.Text.0395" xml:space="preserve">
+    <value>标签页</value>
+  </data>
+  <data name="Sandbox.Text.0396" xml:space="preserve">
+    <value>完整内容标签页，包含下划线、浏览器、胶囊、垂直、底部和移动端底部导航样式。</value>
+  </data>
+  <data name="Sandbox.Text.0397" xml:space="preserve">
+    <value>默认下划线标签让选中页与内容保持紧密关联。</value>
+  </data>
+  <data name="Sandbox.Text.0398" xml:space="preserve">
+    <value>适合普通文档或设置分区。</value>
+  </data>
+  <data name="Sandbox.Text.0399" xml:space="preserve">
+    <value>项目内容位于与浏览器样式标签相连的边框表面中。</value>
+  </data>
+  <data name="Sandbox.Text.0400" xml:space="preserve">
+    <value>选中标签会与下方内容表面衔接。</value>
+  </data>
+  <data name="Sandbox.Text.0401" xml:space="preserve">
+    <value>适合编辑器、控制台和仪表盘面板。</value>
+  </data>
+  <data name="Sandbox.Text.0402" xml:space="preserve">
+    <value>每日指标</value>
+  </data>
+  <data name="Sandbox.Text.0403" xml:space="preserve">
+    <value>每周指标</value>
+  </data>
+  <data name="Sandbox.Text.0404" xml:space="preserve">
+    <value>每月指标</value>
+  </data>
+  <data name="Sandbox.Text.0405" xml:space="preserve">
+    <value>底部标签</value>
+  </data>
+  <data name="Sandbox.Text.0406" xml:space="preserve">
+    <value>底部布局会把指示条移动到标签文字上方。</value>
+  </data>
+  <data name="Sandbox.Text.0407" xml:space="preserve">
+    <value>时间线</value>
+  </data>
+  <data name="Sandbox.Text.0408" xml:space="preserve">
+    <value>时间线内容</value>
+  </data>
+  <data name="Sandbox.Text.0409" xml:space="preserve">
+    <value>文件</value>
+  </data>
+  <data name="Sandbox.Text.0410" xml:space="preserve">
+    <value>文件内容</value>
+  </data>
+  <data name="Sandbox.Text.0411" xml:space="preserve">
+    <value>个人资料设置</value>
+  </data>
+  <data name="Sandbox.Text.0412" xml:space="preserve">
+    <value>安全设置</value>
+  </data>
+  <data name="Sandbox.Text.0413" xml:space="preserve">
+    <value>账单设置</value>
+  </data>
+  <data name="Sandbox.Text.0414" xml:space="preserve">
+    <value>垂直 TabControl 将标签列表和选中内容保留在同一个原生控件内。</value>
+  </data>
+  <data name="Sandbox.Text.0415" xml:space="preserve">
+    <value>移动端底部导航</value>
+  </data>
+  <data name="Sandbox.Text.0416" xml:space="preserve">
+    <value>移动端布局让内容保持在标签栏上方。</value>
+  </data>
+  <data name="Sandbox.Text.0417" xml:space="preserve">
+    <value>搜索内容</value>
+  </data>
+  <data name="Sandbox.Text.0418" xml:space="preserve">
+    <value>收件箱内容</value>
+  </data>
+  <data name="Sandbox.Text.0419" xml:space="preserve">
+    <value>个人资料内容</value>
+  </data>
+  <data name="Sandbox.Text.0420" xml:space="preserve">
+    <value>标签条</value>
+  </data>
+  <data name="Sandbox.Text.0421" xml:space="preserve">
+    <value>独立 TabStrip 变体，包括下划线标签、浏览器标签、分段胶囊、垂直导航和紧凑工具表面。</value>
+  </data>
+  <data name="Sandbox.Text.0422" xml:space="preserve">
+    <value>下划线</value>
+  </data>
+  <data name="Sandbox.Text.0423" xml:space="preserve">
+    <value>用法</value>
+  </data>
+  <data name="Sandbox.Text.0424" xml:space="preserve">
+    <value>适合简单内容区域的默认下划线样式。</value>
+  </data>
+  <data name="Sandbox.Text.0425" xml:space="preserve">
+    <value>浏览器样式</value>
+  </data>
+  <data name="Sandbox.Text.0426" xml:space="preserve">
+    <value>构建日志</value>
+  </data>
+  <data name="Sandbox.Text.0427" xml:space="preserve">
+    <value>预览</value>
+  </data>
+  <data name="Sandbox.Text.0428" xml:space="preserve">
+    <value>浏览器样式标签会在视觉上连接到底部面板。</value>
+  </data>
+  <data name="Sandbox.Text.0429" xml:space="preserve">
+    <value>胶囊</value>
+  </data>
+  <data name="Sandbox.Text.0430" xml:space="preserve">
+    <value>每日</value>
+  </data>
+  <data name="Sandbox.Text.0431" xml:space="preserve">
+    <value>每周</value>
+  </data>
+  <data name="Sandbox.Text.0432" xml:space="preserve">
+    <value>每月</value>
+  </data>
+  <data name="Sandbox.Text.0433" xml:space="preserve">
+    <value>胶囊标签适合作为分段模式切换。</value>
+  </data>
+  <data name="Sandbox.Text.0434" xml:space="preserve">
+    <value>全部</value>
+  </data>
+  <data name="Sandbox.Text.0435" xml:space="preserve">
+    <value>已关闭</value>
+  </data>
+  <data name="Sandbox.Text.0436" xml:space="preserve">
+    <value>已归档</value>
+  </data>
+  <data name="Sandbox.Text.0437" xml:space="preserve">
+    <value>紧凑标签适合高密度工具栏和数据面板。</value>
+  </data>
+  <data name="Sandbox.Text.0438" xml:space="preserve">
+    <value>内容区在上方，标签选择器在下方。</value>
+  </data>
+  <data name="Sandbox.Text.0439" xml:space="preserve">
+    <value>摘要</value>
+  </data>
+  <data name="Sandbox.Text.0440" xml:space="preserve">
+    <value>垂直</value>
+  </data>
+  <data name="Sandbox.Text.0441" xml:space="preserve">
+    <value>安全</value>
+  </data>
+  <data name="Sandbox.Text.0442" xml:space="preserve">
+    <value>设置面板</value>
+  </data>
+  <data name="Sandbox.Text.0443" xml:space="preserve">
+    <value>垂直标签适合偏好设置页和并排编辑器。</value>
+  </data>
+  <data name="Sandbox.Text.0444" xml:space="preserve">
+    <value>富内容</value>
+  </data>
+  <data name="Sandbox.Text.0445" xml:space="preserve">
+    <value>稳定</value>
+  </data>
+  <data name="Sandbox.Text.0446" xml:space="preserve">
+    <value>运行中</value>
+  </data>
+  <data name="Sandbox.Text.0447" xml:space="preserve">
+    <value>排队中</value>
+  </data>
+  <data name="Sandbox.Text.0448" xml:space="preserve">
+    <value>TabStripItem 内容可由图标、计数器或状态标记组合而成。</value>
+  </data>
+  <data name="Sandbox.Text.0449" xml:space="preserve">
+    <value>移动端</value>
+  </data>
+  <data name="Sandbox.Text.0450" xml:space="preserve">
+    <value>移动端样式将图标放在文字上方，并让项目自动平分可用宽度。</value>
+  </data>
+  <data name="Sandbox.Text.0451" xml:space="preserve">
+    <value>文本输入</value>
+  </data>
+  <data name="Sandbox.Text.0452" xml:space="preserve">
+    <value>TextBox、PasswordBox 和 NumericUpDown 示例。</value>
+  </data>
+  <data name="Sandbox.Text.0453" xml:space="preserve">
+    <value>单行值</value>
+  </data>
+  <data name="Sandbox.Text.0454" xml:space="preserve">
+    <value>只读值</value>
+  </data>
+  <data name="Sandbox.Text.0455" xml:space="preserve">
+    <value>多行备注</value>
+  </data>
+  <data name="Sandbox.Text.0456" xml:space="preserve">
+    <value>禁用字段</value>
+  </data>
+  <data name="Sandbox.Text.0457" xml:space="preserve">
+    <value>输入组合</value>
+  </data>
+  <data name="Sandbox.Text.0458" xml:space="preserve">
+    <value>工作区</value>
+  </data>
+  <data name="Sandbox.Text.0459" xml:space="preserve">
+    <value>用户</value>
+  </data>
+  <data name="Sandbox.Text.0460" xml:space="preserve">
+    <value>工单</value>
+  </data>
+  <data name="Sandbox.Text.0461" xml:space="preserve">
+    <value>搜索关键字</value>
+  </data>
+  <data name="Sandbox.Text.0462" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="Sandbox.Text.0463" xml:space="preserve">
+    <value>禁用密码</value>
+  </data>
+  <data name="Sandbox.Text.0464" xml:space="preserve">
+    <value>选择</value>
+  </data>
+  <data name="Sandbox.Text.0465" xml:space="preserve">
+    <value>CheckBox、RadioButton 和 ToggleSwitch 的状态。</value>
+  </data>
+  <data name="Sandbox.Text.0466" xml:space="preserve">
+    <value>未选中</value>
+  </data>
+  <data name="Sandbox.Text.0467" xml:space="preserve">
+    <value>已选中</value>
+  </data>
+  <data name="Sandbox.Text.0468" xml:space="preserve">
+    <value>不确定</value>
+  </data>
+  <data name="Sandbox.Text.0469" xml:space="preserve">
+    <value>通知</value>
+  </data>
+  <data name="Sandbox.Text.0470" xml:space="preserve">
+    <value>后台同步</value>
+  </data>
+  <data name="Sandbox.Text.0471" xml:space="preserve">
+    <value>禁用开关</value>
+  </data>
+  <data name="Sandbox.Text.0472" xml:space="preserve">
+    <value>范围与进度</value>
+  </data>
+  <data name="Sandbox.Text.0473" xml:space="preserve">
+    <value>Slider 和 ProgressBar 状态。</value>
+  </data>
+  <data name="Sandbox.Text.0474" xml:space="preserve">
+    <value>Slider、播放进度条和 ProgressBar 状态。</value>
+  </data>
+  <data name="Sandbox.Text.0475" xml:space="preserve">
+    <value>播放进度条</value>
+  </data>
+  <data name="Sandbox.Text.0476" xml:space="preserve">
+    <value>点击轨道任意位置即可跳转，可拖动滑块，并在当前位置后方显示缓冲进度。</value>
+  </data>
+  <data name="Sandbox.Text.0477" xml:space="preserve">
+    <value>基础</value>
+  </data>
+  <data name="Sandbox.Text.0478" xml:space="preserve">
+    <value>文本、表面、标签、链接、校验、图标和滚动基础组件。</value>
+  </data>
+  <data name="Sandbox.Text.0479" xml:space="preserve">
+    <value>标题文本</value>
+  </data>
+  <data name="Sandbox.Text.0480" xml:space="preserve">
+    <value>标签文本</value>
+  </data>
+  <data name="Sandbox.Text.0481" xml:space="preserve">
+    <value>正文会自然换行，并使用次要文本色降低高密度界面的视觉噪音。</value>
+  </data>
+  <data name="Sandbox.Text.0482" xml:space="preserve">
+    <value>用于辅助说明和元数据的说明文字。</value>
+  </data>
+  <data name="Sandbox.Text.0483" xml:space="preserve">
+    <value>标记</value>
+  </data>
+  <data name="Sandbox.Text.0484" xml:space="preserve">
+    <value>下划线</value>
+  </data>
+  <data name="Sandbox.Text.0485" xml:space="preserve">
+    <value>删除线</value>
+  </data>
+  <data name="Sandbox.Text.0486" xml:space="preserve">
+    <value>弱化</value>
+  </data>
+  <data name="Sandbox.Text.0487" xml:space="preserve">
+    <value>次要</value>
+  </data>
+  <data name="Sandbox.Text.0488" xml:space="preserve">
+    <value>中性</value>
+  </data>
+  <data name="Sandbox.Text.0489" xml:space="preserve">
+    <value>边框表面</value>
+  </data>
+  <data name="Sandbox.Text.0490" xml:space="preserve">
+    <value>表面</value>
+  </data>
+  <data name="Sandbox.Text.0491" xml:space="preserve">
+    <value>默认面板。</value>
+  </data>
+  <data name="Sandbox.Text.0492" xml:space="preserve">
+    <value>抬高面板。</value>
+  </data>
+  <data name="Sandbox.Text.0493" xml:space="preserve">
+    <value>轻量</value>
+  </data>
+  <data name="Sandbox.Text.0494" xml:space="preserve">
+    <value>安静面板。</value>
+  </data>
+  <data name="Sandbox.Text.0495" xml:space="preserve">
+    <value>带色玻璃。</value>
+  </data>
+  <data name="Sandbox.Text.0496" xml:space="preserve">
+    <value>主链接</value>
+  </data>
+  <data name="Sandbox.Text.0497" xml:space="preserve">
+    <value>轻量下划线链接</value>
+  </data>
+  <data name="Sandbox.Text.0498" xml:space="preserve">
+    <value>按钮式链接</value>
+  </data>
+  <data name="Sandbox.Text.0499" xml:space="preserve">
+    <value>邮箱已存在。</value>
+  </data>
+  <data name="Sandbox.Text.0500" xml:space="preserve">
+    <value>保存前请使用唯一地址。</value>
+  </data>
+  <data name="Sandbox.Text.0501" xml:space="preserve">
+    <value>可滚动行 1</value>
+  </data>
+  <data name="Sandbox.Text.0502" xml:space="preserve">
+    <value>可滚动行 2</value>
+  </data>
+  <data name="Sandbox.Text.0503" xml:space="preserve">
+    <value>可滚动行 3</value>
+  </data>
+  <data name="Sandbox.Text.0504" xml:space="preserve">
+    <value>可滚动行 4</value>
+  </data>
+  <data name="Sandbox.Text.0505" xml:space="preserve">
+    <value>可滚动行 5</value>
+  </data>
+  <data name="Sandbox.Text.0506" xml:space="preserve">
+    <value>可滚动行 6</value>
+  </data>
+  <data name="Sandbox.Text.0507" xml:space="preserve">
+    <value>可滚动行 7</value>
+  </data>
+  <data name="Sandbox.Text.0508" xml:space="preserve">
+    <value>可滚动行 8</value>
+  </data>
+  <data name="Sandbox.Text.0509" xml:space="preserve">
+    <value>LuminaUI 设计系统</value>
+  </data>
+  <data name="Sandbox.Text.0510" xml:space="preserve">
+    <value>切换主题</value>
+  </data>
+  <data name="Sandbox.Text.0511" xml:space="preserve">
+    <value>1. 语义颜色</value>
+  </data>
+  <data name="Sandbox.Text.0512" xml:space="preserve">
+    <value>一致、可访问且鲜明的语义 Token。</value>
+  </data>
+  <data name="Sandbox.Text.0513" xml:space="preserve">
+    <value>2. 排版</value>
+  </data>
+  <data name="Sandbox.Text.0514" xml:space="preserve">
+    <value>一级标题（36px，Black）</value>
+  </data>
+  <data name="Sandbox.Text.0515" xml:space="preserve">
+    <value>二级标题（28px，Bold）</value>
+  </data>
+  <data name="Sandbox.Text.0516" xml:space="preserve">
+    <value>三级标题（20px，SemiBold）</value>
+  </data>
+  <data name="Sandbox.Text.0517" xml:space="preserve">
+    <value>正文（14px，Regular）。LuminaUI 使用高对比文本保证可读性，同时避免纯黑或纯白。</value>
+  </data>
+  <data name="Sandbox.Text.0518" xml:space="preserve">
+    <value>弱化文本（12px）。用于说明、占位符和次要信息。</value>
+  </data>
+  <data name="Sandbox.Text.0519" xml:space="preserve">
+    <value>3. 表面与层级</value>
+  </data>
+  <data name="Sandbox.Text.0520" xml:space="preserve">
+    <value>一套统一的表面体系，包含细腻边框、阴影和玻璃效果。</value>
+  </data>
+  <data name="Sandbox.Text.0521" xml:space="preserve">
+    <value>层级 1：实体</value>
+  </data>
+  <data name="Sandbox.Text.0522" xml:space="preserve">
+    <value>带 1px outline 的扁平中性表面。</value>
+  </data>
+  <data name="Sandbox.Text.0523" xml:space="preserve">
+    <value>Level 2: Elevated</value>
+  </data>
+  <data name="Sandbox.Text.0524" xml:space="preserve">
+    <value>仍属于同一表面体系，只增强深度而不是另起灰色填充。</value>
+  </data>
+  <data name="Sandbox.Text.0525" xml:space="preserve">
+    <value>层级 3：玻璃</value>
+  </data>
+  <data name="Sandbox.Text.0526" xml:space="preserve">
+    <value>带可读色调的半透明模糊材质，适合叠在平面背景上。</value>
+  </data>
+  <data name="Sandbox.Text.0527" xml:space="preserve">
+    <value>🎨 企业级 Token 系统</value>
+  </data>
+  <data name="Sandbox.Text.0528" xml:space="preserve">
+    <value>LuminaUI 依赖一套严格定义的语义色彩 Token。将 UI 元素映射到逻辑 Token 而不是硬编码色值后，应用即可获得零成本的深浅色切换。</value>
+  </data>
+  <data name="Sandbox.Text.0529" xml:space="preserve">
+    <value>1. 应用背景与表面</value>
+  </data>
+  <data name="Sandbox.Text.0530" xml:space="preserve">
+    <value>层级 0：应用底层</value>
+  </data>
+  <data name="Sandbox.Text.0531" xml:space="preserve">
+    <value>层级 1：卡片</value>
+  </data>
+  <data name="Sandbox.Text.0532" xml:space="preserve">
+    <value>层级 3：下拉层</value>
+  </data>
+  <data name="Sandbox.Text.0533" xml:space="preserve">
+    <value>禁用表面</value>
+  </data>
+  <data name="Sandbox.Text.0534" xml:space="preserve">
+    <value>2. 文本层级</value>
+  </data>
+  <data name="Sandbox.Text.0535" xml:space="preserve">
+    <value>标题与大标题</value>
+  </data>
+  <data name="Sandbox.Text.0536" xml:space="preserve">
+    <value>正文</value>
+  </data>
+  <data name="Sandbox.Text.0537" xml:space="preserve">
+    <value>弱化 / 元信息</value>
+  </data>
+  <data name="Sandbox.Text.0538" xml:space="preserve">
+    <value>禁用文本</value>
+  </data>
+  <data name="Sandbox.Text.0539" xml:space="preserve">
+    <value>3. 边框层级</value>
+  </data>
+  <data name="Sandbox.Text.0540" xml:space="preserve">
+    <value>分隔线 / 弱线条</value>
+  </data>
+  <data name="Sandbox.Text.0541" xml:space="preserve">
+    <value>Component Outlines</value>
+  </data>
+  <data name="Sandbox.Text.0542" xml:space="preserve">
+    <value>悬停输入框</value>
+  </data>
+  <data name="Sandbox.Text.0543" xml:space="preserve">
+    <value>禁用组件</value>
+  </data>
+  <data name="Sandbox.Text.0544" xml:space="preserve">
+    <value>4. 语义：品牌与反馈</value>
+  </data>
+  <data name="Sandbox.Text.0545" xml:space="preserve">
+    <value>浅色背景</value>
+  </data>
+  <data name="Sandbox.Text.0546" xml:space="preserve">
+    <value>扩展色板（用于图表、徽标和主题）</value>
+  </data>
+  <data name="Sandbox.Text.0547" xml:space="preserve">
+    <value>交互与合成</value>
+  </data>
+  <data name="Sandbox.Text.0548" xml:space="preserve">
+    <value>Token</value>
+  </data>
+  <data name="Sandbox.Text.0549" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="Sandbox.Text.0550" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="Sandbox.Text.0551" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="Sandbox.Text.0552" xml:space="preserve">
+    <value>Opacity</value>
+  </data>
+  <data name="Sandbox.Text.0553" xml:space="preserve">
+    <value>Shadow</value>
+  </data>
+  <data name="Sandbox.Text.0554" xml:space="preserve">
+    <value>Light value</value>
+  </data>
+  <data name="Sandbox.Text.0555" xml:space="preserve">
+    <value>Dark value</value>
+  </data>
+  <data name="Sandbox.Text.0556" xml:space="preserve">
+    <value>Copy key</value>
+  </data>
+  <data name="Sandbox.Text.0557" xml:space="preserve">
+    <value>已复制 {0}</value>
+  </data>
+  <data name="Sandbox.Text.0558" xml:space="preserve">
+    <value>Background</value>
+  </data>
+  <data name="Sandbox.Text.0559" xml:space="preserve">
+    <value>蓝色</value>
+  </data>
+  <data name="Sandbox.Text.0560" xml:space="preserve">
+    <value>靛蓝</value>
+  </data>
+  <data name="Sandbox.Text.0561" xml:space="preserve">
+    <value>紫罗兰</value>
+  </data>
+  <data name="Sandbox.Text.0562" xml:space="preserve">
+    <value>青色</value>
+  </data>
+  <data name="Sandbox.Text.0563" xml:space="preserve">
+    <value>青蓝</value>
+  </data>
+  <data name="Sandbox.Text.0564" xml:space="preserve">
+    <value>翠绿</value>
+  </data>
+  <data name="Sandbox.Text.0565" xml:space="preserve">
+    <value>玫瑰</value>
+  </data>
+  <data name="Sandbox.Text.0566" xml:space="preserve">
+    <value>紫色</value>
+  </data>
+  <data name="Sandbox.Text.0567" xml:space="preserve">
+    <value>粉色</value>
+  </data>
+  <data name="Sandbox.Text.0568" xml:space="preserve">
+    <value>橙色</value>
+  </data>
+  <data name="Sandbox.Text.0569" xml:space="preserve">
+    <value>布局辅助</value>
+  </data>
+  <data name="Sandbox.Text.0570" xml:space="preserve">
+    <value>GridSplitter、Separator 和 ScrollViewer 示例。</value>
+  </data>
+  <data name="Sandbox.Text.0571" xml:space="preserve">
+    <value>可调整窗格</value>
+  </data>
+  <data name="Sandbox.Text.0572" xml:space="preserve">
+    <value>内容窗格</value>
+  </data>
+  <data name="Sandbox.Text.0573" xml:space="preserve">
+    <value>顶部内容</value>
+  </data>
+  <data name="Sandbox.Text.0574" xml:space="preserve">
+    <value>底部内容</value>
+  </data>
+  <data name="Sandbox.Text.0575" xml:space="preserve">
+    <value>菜单与浮层</value>
+  </data>
+  <data name="Sandbox.Text.0576" xml:space="preserve">
+    <value>Menu、ContextMenu、Flyout 和 ToolTip 示例。</value>
+  </data>
+  <data name="Sandbox.Text.0577" xml:space="preserve">
+    <value>文件</value>
+  </data>
+  <data name="Sandbox.Text.0578" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="Sandbox.Text.0579" xml:space="preserve">
+    <value>新建</value>
+  </data>
+  <data name="Sandbox.Text.0580" xml:space="preserve">
+    <value>退出</value>
+  </data>
+  <data name="Sandbox.Text.0581" xml:space="preserve">
+    <value>撤销</value>
+  </data>
+  <data name="Sandbox.Text.0582" xml:space="preserve">
+    <value>重做</value>
+  </data>
+  <data name="Sandbox.Text.0583" xml:space="preserve">
+    <value>打开浮层</value>
+  </data>
+  <data name="Sandbox.Text.0584" xml:space="preserve">
+    <value>发布变更</value>
+  </data>
+  <data name="Sandbox.Text.0585" xml:space="preserve">
+    <value>浮层内容可以包含任意原生控件。</value>
+  </data>
+  <data name="Sandbox.Text.0586" xml:space="preserve">
+    <value>发布</value>
+  </data>
+  <data name="Sandbox.Text.0587" xml:space="preserve">
+    <value>菜单浮层</value>
+  </data>
+  <data name="Sandbox.Text.0588" xml:space="preserve">
+    <value>复制</value>
+  </data>
+  <data name="Sandbox.Text.0589" xml:space="preserve">
+    <value>悬停提示</value>
+  </data>
+  <data name="Sandbox.Text.0590" xml:space="preserve">
+    <value>提示内容使用 Lumina 弹层样式。</value>
+  </data>
+  <data name="Sandbox.Text.0591" xml:space="preserve">
+    <value>右键点击此表面</value>
+  </data>
+  <data name="Sandbox.Text.0592" xml:space="preserve">
+    <value>覆盖层</value>
+  </data>
+  <data name="Sandbox.Text.0593" xml:space="preserve">
+    <value>LuminaShell 的 Dialog 与 Toast 示例，包括 AXAML 组件内容。</value>
+  </data>
+  <data name="Sandbox.Text.0594" xml:space="preserve">
+    <value>内联 AXAML 对话框</value>
+  </data>
+  <data name="Sandbox.Text.0595" xml:space="preserve">
+    <value>发布摘要</value>
+  </data>
+  <data name="Sandbox.Text.0596" xml:space="preserve">
+    <value>该对话框直接声明在 OverlaysShowcasePage.axaml 中，C# 只负责把它交给 Shell。</value>
+  </data>
+  <data name="Sandbox.Text.0597" xml:space="preserve">
+    <value>Design Tokens 已编译</value>
+  </data>
+  <data name="Sandbox.Text.0598" xml:space="preserve">
+    <value>覆盖层示例已添加</value>
+  </data>
+  <data name="Sandbox.Text.0599" xml:space="preserve">
+    <value>对话框内容保持可复用</value>
+  </data>
+  <data name="Sandbox.Text.0600" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="Sandbox.Text.0601" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Sandbox.Text.0602" xml:space="preserve">
+    <value>完成</value>
+  </data>
+  <data name="Sandbox.Text.0603" xml:space="preserve">
+    <value>对话框</value>
+  </data>
+  <data name="Sandbox.Text.0604" xml:space="preserve">
+    <value>对话框内容可以是可复用 AXAML 组件，也可以是当前页面声明的对话框。</value>
+  </data>
+  <data name="Sandbox.Text.0605" xml:space="preserve">
+    <value>打开组件</value>
+  </data>
+  <data name="Sandbox.Text.0606" xml:space="preserve">
+    <value>打开页面 AXAML</value>
+  </data>
+  <data name="Sandbox.Text.0607" xml:space="preserve">
+    <value>轻提示</value>
+  </data>
+  <data name="Sandbox.Text.0608" xml:space="preserve">
+    <value>轻提示托管在同一 Shell 覆盖层中，用于紧凑的状态反馈。</value>
+  </data>
+  <data name="Sandbox.Text.0609" xml:space="preserve">
+    <value>底部 Sheet</value>
+  </data>
+  <data name="Sandbox.Text.0610" xml:space="preserve">
+    <value>底部 Sheet 提供适合移动端的操作菜单，并支持拖拽关闭。</value>
+  </data>
+  <data name="Sandbox.Text.0611" xml:space="preserve">
+    <value>打开底部 Sheet</value>
+  </data>
+  <data name="Sandbox.Text.0612" xml:space="preserve">
+    <value>可复用组件</value>
+  </data>
+  <data name="Sandbox.Text.0613" xml:space="preserve">
+    <value>下方对话框主体来自 DeleteProjectDialogContent.axaml 这个 UserControl。</value>
+  </data>
+  <data name="Sandbox.Text.0614" xml:space="preserve">
+    <value>组件对话框</value>
+  </data>
+  <data name="Sandbox.Text.0615" xml:space="preserve">
+    <value>已保存</value>
+  </data>
+  <data name="Sandbox.Text.0616" xml:space="preserve">
+    <value>本地草稿已更新。</value>
+  </data>
+  <data name="Sandbox.Text.0617" xml:space="preserve">
+    <value>已发布</value>
+  </data>
+  <data name="Sandbox.Text.0618" xml:space="preserve">
+    <value>组件包已就绪。</value>
+  </data>
+  <data name="Sandbox.Text.0619" xml:space="preserve">
+    <value>需要检查</value>
+  </data>
+  <data name="Sandbox.Text.0620" xml:space="preserve">
+    <value>两个 Token 正在使用 fallback 颜色。</value>
+  </data>
+  <data name="Sandbox.Text.0621" xml:space="preserve">
+    <value>构建失败</value>
+  </data>
+  <data name="Sandbox.Text.0622" xml:space="preserve">
+    <value>请处理缺失的 resource key。</value>
+  </data>
+  <data name="Sandbox.Text.0623" xml:space="preserve">
+    <value>删除项目</value>
+  </data>
+  <data name="Sandbox.Text.0624" xml:space="preserve">
+    <value>这是一个普通 AXAML UserControl，对话框宿主只把它作为内容接收。</value>
+  </data>
+  <data name="Sandbox.Text.0625" xml:space="preserve">
+    <value>Aurora 看板</value>
+  </data>
+  <data name="Sandbox.Text.0626" xml:space="preserve">
+    <value>12 个界面，4 个共享 Token</value>
+  </data>
+  <data name="Sandbox.Text.0627" xml:space="preserve">
+    <value>移动端操作菜单</value>
+  </data>
+  <data name="Sandbox.Text.0628" xml:space="preserve">
+    <value>分享给好友</value>
+  </data>
+  <data name="Sandbox.Text.0629" xml:space="preserve">
+    <value>复制链接</value>
+  </data>
+  <data name="Sandbox.Text.0630" xml:space="preserve">
+    <value>删除项目</value>
+  </data>
+  <data name="Sandbox.Text.0631" xml:space="preserve">
+    <value>已选择：{0}</value>
+  </data>
+  <data name="Sandbox.Text.0632" xml:space="preserve">
+    <value>详情</value>
+  </data>
+  <data name="Sandbox.Text.0633" xml:space="preserve">
+    <value>你正在详情页！</value>
+  </data>
+  <data name="Sandbox.Text.0634" xml:space="preserve">
+    <value>使用按钮返回上一个沙盒页面。</value>
+  </data>
+  <data name="Sandbox.Text.0635" xml:space="preserve">
+    <value>返回</value>
+  </data>
+  <data name="Sandbox.Text.0636" xml:space="preserve">
+    <value>模拟操作</value>
+  </data>
+  <data name="Sandbox.Text.0637" xml:space="preserve">
+    <value>返回</value>
+  </data>
+  <data name="Sandbox.Text.0638" xml:space="preserve">
+    <value>项目详情</value>
+  </data>
+  <data name="Sandbox.Text.0639" xml:space="preserve">
+    <value>详情页</value>
+  </data>
+  <data name="Sandbox.Text.0640" xml:space="preserve">
+    <value>该页面已推入 NavigationPage 栈。</value>
+  </data>
+  <data name="Sandbox.Text.0641" xml:space="preserve">
+    <value>系统消息</value>
+  </data>
+  <data name="Sandbox.Text.0642" xml:space="preserve">
+    <value>后台同步已完成。</value>
+  </data>
+  <data name="Sandbox.Text.0643" xml:space="preserve">
+    <value>工作区设置已保存。</value>
+  </data>
+  <data name="Sandbox.Text.0644" xml:space="preserve">
+    <value>注意</value>
+  </data>
+  <data name="Sandbox.Text.0645" xml:space="preserve">
+    <value>下一次同步需要确认。</value>
+  </data>
+  <data name="Sandbox.Text.0646" xml:space="preserve">
+    <value>加载按钮</value>
+  </data>
+  <data name="Sandbox.Text.0647" xml:space="preserve">
+    <value>提交</value>
+  </data>
+  <data name="Sandbox.Text.0648" xml:space="preserve">
+    <value>提交中</value>
+  </data>
+  <data name="Sandbox.Text.0649" xml:space="preserve">
+    <value>保存更改</value>
+  </data>
+  <data name="Sandbox.Text.0650" xml:space="preserve">
+    <value>汉堡菜单</value>
+  </data>
+  <data name="Sandbox.Text.0651" xml:space="preserve">
+    <value>加载</value>
+  </data>
+  <data name="Sandbox.Text.0652" xml:space="preserve">
+    <value>独立加载指示器、加载覆盖层和禁用容器。</value>
+  </data>
+  <data name="Sandbox.Text.0653" xml:space="preserve">
+    <value>独立加载</value>
+  </data>
+  <data name="Sandbox.Text.0654" xml:space="preserve">
+    <value>转圈</value>
+  </data>
+  <data name="Sandbox.Text.0655" xml:space="preserve">
+    <value>条形</value>
+  </data>
+  <data name="Sandbox.Text.0656" xml:space="preserve">
+    <value>Large</value>
+  </data>
+  <data name="Sandbox.Text.0657" xml:space="preserve">
+    <value>加载容器</value>
+  </data>
+  <data name="Sandbox.Text.0658" xml:space="preserve">
+    <value>成员同步中</value>
+  </data>
+  <data name="Sandbox.Text.0659" xml:space="preserve">
+    <value>团队工作区</value>
+  </data>
+  <data name="Sandbox.Text.0660" xml:space="preserve">
+    <value>成员、角色和审计状态会保留在加载遮罩下。</value>
+  </data>
+  <data name="Sandbox.Text.0661" xml:space="preserve">
+    <value>切换加载</value>
+  </data>
+  <data name="Sandbox.Text.0662" xml:space="preserve">
+    <value>禁用容器</value>
+  </data>
+  <data name="Sandbox.Text.0663" xml:space="preserve">
+    <value>这个区域由容器禁用。</value>
+  </data>
+  <data name="Sandbox.Text.0664" xml:space="preserve">
+    <value>项目名称</value>
+  </data>
+  <data name="Sandbox.Text.0665" xml:space="preserve">
+    <value>Lumina 看板</value>
+  </data>
+  <data name="Sandbox.Text.0666" xml:space="preserve">
+    <value>保存项目</value>
+  </data>
+  <data name="Sandbox.Text.0667" xml:space="preserve">
+    <value>切换禁用</value>
+  </data>
+  <data name="Sandbox.Text.0668" xml:space="preserve">
+    <value>带状态标记、时间文本和交错布局的垂直事件流。</value>
+  </data>
+  <data name="Sandbox.Text.0669" xml:space="preserve">
+    <value>ItemsSource 时间线</value>
+  </data>
+  <data name="Sandbox.Text.0670" xml:space="preserve">
+    <value>交错时间线</value>
+  </data>
+  <data name="Sandbox.Text.0671" xml:space="preserve">
+    <value>居中时间</value>
+  </data>
+  <data name="Sandbox.Text.0672" xml:space="preserve">
+    <value>草稿</value>
+  </data>
+  <data name="Sandbox.Text.0673" xml:space="preserve">
+    <value>准备方案详情。</value>
+  </data>
+  <data name="Sandbox.Text.0674" xml:space="preserve">
+    <value>审批</value>
+  </data>
+  <data name="Sandbox.Text.0675" xml:space="preserve">
+    <value>等待财务审批。</value>
+  </data>
+  <data name="Sandbox.Text.0676" xml:space="preserve">
+    <value>部署</value>
+  </data>
+  <data name="Sandbox.Text.0677" xml:space="preserve">
+    <value>安排生产发布。</value>
+  </data>
+  <data name="Sandbox.Text.0678" xml:space="preserve">
+    <value>归档已完成的请求。</value>
+  </data>
+  <data name="Sandbox.Text.0679" xml:space="preserve">
+    <value>订单已支付</value>
+  </data>
+  <data name="Sandbox.Text.0680" xml:space="preserve">
+    <value>客户已完成支付。</value>
+  </data>
+  <data name="Sandbox.Text.0681" xml:space="preserve">
+    <value>商家已接单</value>
+  </data>
+  <data name="Sandbox.Text.0682" xml:space="preserve">
+    <value>商家已接受订单。</value>
+  </data>
+  <data name="Sandbox.Text.0683" xml:space="preserve">
+    <value>配送</value>
+  </data>
+  <data name="Sandbox.Text.0684" xml:space="preserve">
+    <value>骑手正前往目的地。</value>
+  </data>
+  <data name="Sandbox.Text.0685" xml:space="preserve">
+    <value>普通分页</value>
+  </data>
+  <data name="Sandbox.Text.0686" xml:space="preserve">
+    <value>颜色选择</value>
+  </data>
+  <data name="Sandbox.Text.0687" xml:space="preserve">
+    <value>可选颜色选择模块，包含 ColorPicker 和 ColorView 主题。</value>
+  </data>
+  <data name="Sandbox.Text.0688" xml:space="preserve">
+    <value>选择按钮</value>
+  </data>
+  <data name="Sandbox.Text.0689" xml:space="preserve">
+    <value>双向颜色绑定会立即更新这个预览。</value>
+  </data>
+  <data name="Sandbox.Text.0690" xml:space="preserve">
+    <value>颜色视图</value>
+  </data>
+  <data name="Sandbox.Text.0691" xml:space="preserve">
+    <value>功能开关</value>
+  </data>
+  <data name="Sandbox.Text.0692" xml:space="preserve">
+    <value>透明度滑块</value>
+  </data>
+  <data name="Sandbox.Text.0693" xml:space="preserve">
+    <value>色板标签</value>
+  </data>
+  <data name="Sandbox.Text.0694" xml:space="preserve">
+    <value>分量标签</value>
+  </data>
+  <data name="Sandbox.Text.0695" xml:space="preserve">
+    <value>色谱标签</value>
+  </data>
+  <data name="Sandbox.Text.0696" xml:space="preserve">
+    <value>预览行</value>
+  </data>
+  <data name="Sandbox.Text.0697" xml:space="preserve">
+    <value>十六进制输入</value>
+  </data>
+  <data name="Sandbox.Text.0698" xml:space="preserve">
+    <value>数据表格</value>
+  </data>
+  <data name="Sandbox.Text.0699" xml:space="preserve">
+    <value>可选表格模块，用于可编辑、可排序、可调整列宽的表格数据。</value>
+  </data>
+  <data name="Sandbox.Text.0700" xml:space="preserve">
+    <value>可编辑表格</value>
+  </data>
+  <data name="Sandbox.Text.0701" xml:space="preserve">
+    <value>文本、复选框和模板列保持在同一个 Lumina 表格表面中。</value>
+  </data>
+  <data name="Sandbox.Text.0702" xml:space="preserve">
+    <value>新增行</value>
+  </data>
+  <data name="Sandbox.Text.0703" xml:space="preserve">
+    <value>嵌入式表格</value>
+  </data>
+  <data name="Sandbox.Text.0704" xml:space="preserve">
+    <value>进度</value>
+  </data>
+  <data name="Sandbox.Text.0705" xml:space="preserve">
+    <value>已启用</value>
+  </data>
+  <data name="Sandbox.Text.0706" xml:space="preserve">
+    <value>树表格</value>
+  </data>
+  <data name="Sandbox.Text.0707" xml:space="preserve">
+    <value>可选层级表格模块，支持扁平和树形数据源。</value>
+  </data>
+  <data name="Sandbox.Text.0708" xml:space="preserve">
+    <value>层级数据源</value>
+  </data>
+  <data name="Sandbox.Text.0709" xml:space="preserve">
+    <value>扁平数据源</value>
+  </data>
+  <data name="Sandbox.Text.0710" xml:space="preserve">
+    <value>类型</value>
+  </data>
+  <data name="Sandbox.Text.0711" xml:space="preserve">
+    <value>目标框架</value>
+  </data>
+  <data name="Sandbox.Text.0712" xml:space="preserve">
+    <value>已加载</value>
+  </data>
+  <data name="Sandbox.Text.0713" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="Sandbox.Text.0714" xml:space="preserve">
+    <value>类型</value>
+  </data>
+  <data name="Sandbox.Text.0715" xml:space="preserve">
+    <value>区域</value>
+  </data>
+  <data name="Sandbox.Text.0716" xml:space="preserve">
+    <value>面包屑</value>
+  </data>
+  <data name="Sandbox.Text.0717" xml:space="preserve">
+    <value>带图标、分隔符和 MVVM 命令的导航路径。</value>
+  </data>
+  <data name="Sandbox.Text.0718" xml:space="preserve">
+    <value>静态项</value>
+  </data>
+  <data name="Sandbox.Text.0719" xml:space="preserve">
+    <value>ItemsSource</value>
+  </data>
+  <data name="Sandbox.Text.0720" xml:space="preserve">
+    <value>自定义项模板</value>
+  </data>
+  <data name="Sandbox.Text.0721" xml:space="preserve">
+    <value>尚未选择面包屑项</value>
+  </data>
+  <data name="Sandbox.Text.0722" xml:space="preserve">
+    <value>已选择：工作区</value>
+  </data>
+  <data name="Sandbox.Text.0723" xml:space="preserve">
+    <value>已选择：产品</value>
+  </data>
+  <data name="Sandbox.Text.0724" xml:space="preserve">
+    <value>已选择：LuminaUI</value>
+  </data>
+  <data name="Sandbox.Text.0725" xml:space="preserve">
+    <value>已选择：发布</value>
+  </data>
+  <data name="Sandbox.Text.0726" xml:space="preserve">
+    <value>描述列表</value>
+  </data>
+  <data name="Sandbox.Text.0727" xml:space="preserve">
+    <value>用于详情、摘要和元数据的可读键值组。</value>
+  </data>
+  <data name="Sandbox.Text.0728" xml:space="preserve">
+    <value>左侧标签</value>
+  </data>
+  <data name="Sandbox.Text.0729" xml:space="preserve">
+    <value>顶部标签</value>
+  </data>
+  <data name="Sandbox.Text.0730" xml:space="preserve">
+    <value>内联声明</value>
+  </data>
+  <data name="Sandbox.Text.0731" xml:space="preserve">
+    <value>版本</value>
+  </data>
+  <data name="Sandbox.Text.0732" xml:space="preserve">
+    <value>平台</value>
+  </data>
+  <data name="Sandbox.Text.0733" xml:space="preserve">
+    <value>负责人</value>
+  </data>
+  <data name="Sandbox.Text.0734" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="Sandbox.Text.0735" xml:space="preserve">
+    <value>更新时间</value>
+  </data>
+  <data name="Sandbox.Text.0736" xml:space="preserve">
+    <value>Tokens</value>
+  </data>
+  <data name="Sandbox.Text.0737" xml:space="preserve">
+    <value>主题</value>
+  </data>
+  <data name="Sandbox.Text.0738" xml:space="preserve">
+    <value>覆盖</value>
+  </data>
+  <data name="Sandbox.Text.0739" xml:space="preserve">
+    <value>环境</value>
+  </data>
+  <data name="Sandbox.Text.0740" xml:space="preserve">
+    <value>确认弹层</value>
+  </data>
+  <data name="Sandbox.Text.0741" xml:space="preserve">
+    <value>用于危险或重要操作的内联确认弹层。</value>
+  </data>
+  <data name="Sandbox.Text.0742" xml:space="preserve">
+    <value>危险操作</value>
+  </data>
+  <data name="Sandbox.Text.0743" xml:space="preserve">
+    <value>删除发布？</value>
+  </data>
+  <data name="Sandbox.Text.0744" xml:space="preserve">
+    <value>该操作会移除选中的发布草稿。</value>
+  </data>
+  <data name="Sandbox.Text.0745" xml:space="preserve">
+    <value>该操作会移除选中的发布草稿以及关联的所有待发布任务。请在确认包负责人之后再继续。</value>
+  </data>
+  <data name="Sandbox.Text.0746" xml:space="preserve">
+    <value>等待确认</value>
+  </data>
+  <data name="Sandbox.Text.0747" xml:space="preserve">
+    <value>自定义按钮文案</value>
+  </data>
+  <data name="Sandbox.Text.0748" xml:space="preserve">
+    <value>发布变更？</value>
+  </data>
+  <data name="Sandbox.Text.0749" xml:space="preserve">
+    <value>当前包将对所有使用者可见。</value>
+  </data>
+  <data name="Sandbox.Text.0750" xml:space="preserve">
+    <value>稍后检查</value>
+  </data>
+  <data name="Sandbox.Text.0751" xml:space="preserve">
+    <value>自定义内容</value>
+  </data>
+  <data name="Sandbox.Text.0752" xml:space="preserve">
+    <value>归档工作区</value>
+  </data>
+  <data name="Sandbox.Text.0753" xml:space="preserve">
+    <value>该工作区 30 天内仍可恢复。</value>
+  </data>
+  <data name="Sandbox.Text.0754" xml:space="preserve">
+    <value>仍需要负责人审批。</value>
+  </data>
+  <data name="Sandbox.Text.0755" xml:space="preserve">
+    <value>评分</value>
+  </data>
+  <data name="Sandbox.Text.0756" xml:space="preserve">
+    <value>支持半星、清空和只读展示的评分输入。</value>
+  </data>
+  <data name="Sandbox.Text.0757" xml:space="preserve">
+    <value>半星评分</value>
+  </data>
+  <data name="Sandbox.Text.0758" xml:space="preserve">
+    <value>只读</value>
+  </data>
+  <data name="Sandbox.Text.0759" xml:space="preserve">
+    <value>紧凑刻度</value>
+  </data>
+  <data name="Sandbox.Text.0760" xml:space="preserve">
+    <value>2个项目，8分钟后就绪</value>
+  </data>
+  <data name="Sandbox.Text.0761" xml:space="preserve">
+    <value>3. 表面与层级</value>
+  </data>
+  <data name="Sandbox.Text.0762" xml:space="preserve">
+    <value>打开下拉菜单的按钮。</value>
+  </data>
+  <data name="Sandbox.Text.0763" xml:space="preserve">
+    <value>具有主操作和用于次要操作的下拉菜单的按钮。</value>
+  </data>
+  <data name="Sandbox.Text.0764" xml:space="preserve">
+    <value>支持层级导航的容器。</value>
+  </data>
+  <data name="Sandbox.Text.0765" xml:space="preserve">
+    <value>为其内容提供标题的容器。</value>
+  </data>
+  <data name="Sandbox.Text.0766" xml:space="preserve">
+    <value>带有滑动抽屉的容器。</value>
+  </data>
+  <data name="Sandbox.Text.0767" xml:space="preserve">
+    <value>包含两个视图的容器：导航窗格和内容区域。</value>
+  </data>
+  <data name="Sandbox.Text.0768" xml:space="preserve">
+    <value>当内容改变时应用过渡效果的内容控件。</value>
+  </data>
+  <data name="Sandbox.Text.0769" xml:space="preserve">
+    <value>一次展示集合中一个项目的控件。</value>
+  </data>
+  <data name="Sandbox.Text.0770" xml:space="preserve">
+    <value>展示项目集合的控件。</value>
+  </data>
+  <data name="Sandbox.Text.0771" xml:space="preserve">
+    <value>在用户输入时提供建议的控件。</value>
+  </data>
+  <data name="Sandbox.Text.0772" xml:space="preserve">
+    <value>允许用户使用选项卡在不同视图之间切换的页面。</value>
+  </data>
+  <data name="Sandbox.Text.0773" xml:space="preserve">
+    <value>用于应用程序级别命令的工具栏。</value>
+  </data>
+  <data name="Sandbox.Text.0774" xml:space="preserve">
+    <value>活跃于发布计划和设计评审。</value>
+  </data>
+  <data name="Sandbox.Text.0775" xml:space="preserve">
+    <value>添加标签</value>
+  </data>
+  <data name="Sandbox.Text.0776" xml:space="preserve">
+    <value>动画化面板</value>
+  </data>
+  <data name="Sandbox.Text.0777" xml:space="preserve">
+    <value>动画显示</value>
+  </data>
+  <data name="Sandbox.Text.0778" xml:space="preserve">
+    <value>用于布局运动、大小调整、透明度更改和简洁 C# 动画的 AOT 安全辅助 API。</value>
+  </data>
+  <data name="Sandbox.Text.0779" xml:space="preserve">
+    <value>应用程序</value>
+  </data>
+  <data name="Sandbox.Text.0780" xml:space="preserve">
+    <value>自动骨架屏</value>
+  </data>
+  <data name="Sandbox.Text.0781" xml:space="preserve">
+    <value>Avalonia 12 更新</value>
+  </data>
+  <data name="Sandbox.Text.0782" xml:space="preserve">
+    <value>头像与徽标</value>
+  </data>
+  <data name="Sandbox.Text.0783" xml:space="preserve">
+    <value>回弹缓动</value>
+  </data>
+  <data name="Sandbox.Text.0784" xml:space="preserve">
+    <value>BACKGROUND</value>
+  </data>
+  <data name="Sandbox.Text.0785" xml:space="preserve">
+    <value>横幅</value>
+  </data>
+  <data name="Sandbox.Text.0786" xml:space="preserve">
+    <value>从 ViewModel 绑定 Rotation，无需后台代码即可更改角度。</value>
+  </data>
+  <data name="Sandbox.Text.0787" xml:space="preserve">
+    <value>直接绑定分组视图模型和项目模板。索引栏仍由 LuminaIndexedList 生成。</value>
+  </data>
+  <data name="Sandbox.Text.0788" xml:space="preserve">
+    <value>从 ViewModel 绑定 TranslateX/Y 和 Scale 以实现直观的变换动画。</value>
+  </data>
+  <data name="Sandbox.Text.0789" xml:space="preserve">
+    <value>模糊背景</value>
+  </data>
+  <data name="Sandbox.Text.0790" xml:space="preserve">
+    <value>模糊示例</value>
+  </data>
+  <data name="Sandbox.Text.0791" xml:space="preserve">
+    <value>无边框行</value>
+  </data>
+  <data name="Sandbox.Text.0792" xml:space="preserve">
+    <value>可以通过 Key 属性显示完整中文分组标题，同时保持右侧索引栏简洁（例如 A-Z 或 ★）。</value>
+  </data>
+  <data name="Sandbox.Text.0793" xml:space="preserve">
+    <value>更改已应用，无需离开页面。</value>
+  </data>
+  <data name="Sandbox.Text.0794" xml:space="preserve">
+    <value>关闭按钮</value>
+  </data>
+  <data name="Sandbox.Text.0795" xml:space="preserve">
+    <value>用于选择多个项目的控件。</value>
+  </data>
+  <data name="Sandbox.Text.0796" xml:space="preserve">
+    <value>已分配快递员</value>
+  </data>
+  <data name="Sandbox.Text.0797" xml:space="preserve">
+    <value>自定义列表骨架屏</value>
+  </data>
+  <data name="Sandbox.Text.0798" xml:space="preserve">
+    <value>自定义调色板</value>
+  </data>
+  <data name="Sandbox.Text.0799" xml:space="preserve">
+    <value>危险区域</value>
+  </data>
+  <data name="Sandbox.Text.0800" xml:space="preserve">
+    <value>桌面端和移动端都使用 TopView + Shell；此页面仅隐藏 shell 框架。</value>
+  </data>
+  <data name="Sandbox.Text.0801" xml:space="preserve">
+    <value>桌面端可以使用 LuminaWindow 包装相同的根视图。移动端可以直接将根视图用作第一个视觉元素。</value>
+  </data>
+  <data name="Sandbox.Text.0802" xml:space="preserve">
+    <value>适用于 shell 范围和顶层全屏范围的对话框、轻提示和操作表示例。</value>
+  </data>
+  <data name="Sandbox.Text.0803" xml:space="preserve">
+    <value>禁用动画</value>
+  </data>
+  <data name="Sandbox.Text.0804" xml:space="preserve">
+    <value>圆点</value>
+  </data>
+  <data name="Sandbox.Text.0805" xml:space="preserve">
+    <value>动态数据 (MVVM ItemsSource)</value>
+  </data>
+  <data name="Sandbox.Text.0806" xml:space="preserve">
+    <value>东亚</value>
+  </data>
+  <data name="Sandbox.Text.0807" xml:space="preserve">
+    <value>可编辑检查器</value>
+  </data>
+  <data name="Sandbox.Text.0808" xml:space="preserve">
+    <value>空</value>
+  </data>
+  <data name="Sandbox.Text.0809" xml:space="preserve">
+    <value>入场、显示/隐藏和禁用反馈是附加属性。</value>
+  </data>
+  <data name="Sandbox.Text.0810" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="Sandbox.Text.0811" xml:space="preserve">
+    <value>淡入</value>
+  </data>
+  <data name="Sandbox.Text.0812" xml:space="preserve">
+    <value>淡入淡出、可见性和禁用</value>
+  </data>
+  <data name="Sandbox.Text.0813" xml:space="preserve">
+    <value>按负责人、标签或状态过滤</value>
+  </data>
+  <data name="Sandbox.Text.0814" xml:space="preserve">
+    <value>浮出控件</value>
+  </data>
+  <data name="Sandbox.Text.0815" xml:space="preserve">
+    <value>忘记密码</value>
+  </data>
+  <data name="Sandbox.Text.0816" xml:space="preserve">
+    <value>表单布局</value>
+  </data>
+  <data name="Sandbox.Text.0817" xml:space="preserve">
+    <value>用于组织输入的表单布局。</value>
+  </data>
+  <data name="Sandbox.Text.0818" xml:space="preserve">
+    <value>辅助类与动画</value>
+  </data>
+  <data name="Sandbox.Text.0819" xml:space="preserve">
+    <value>悬停和按下缩放</value>
+  </data>
+  <data name="Sandbox.Text.0820" xml:space="preserve">
+    <value>悬停我</value>
+  </data>
+  <data name="Sandbox.Text.0821" xml:space="preserve">
+    <value>悬停或按下</value>
+  </data>
+  <data name="Sandbox.Text.0822" xml:space="preserve">
+    <value>图标内容</value>
+  </data>
+  <data name="Sandbox.Text.0823" xml:space="preserve">
+    <value>带有标签和关闭按钮的输入控件。</value>
+  </data>
+  <data name="Sandbox.Text.0824" xml:space="preserve">
+    <value>标签</value>
+  </data>
+  <data name="Sandbox.Text.0825" xml:space="preserve">
+    <value>标签</value>
+  </data>
+  <data name="Sandbox.Text.0826" xml:space="preserve">
+    <value>加载和骨架屏</value>
+  </data>
+  <data name="Sandbox.Text.0827" xml:space="preserve">
+    <value>加载和骨架屏状态。</value>
+  </data>
+  <data name="Sandbox.Text.0828" xml:space="preserve">
+    <value>加载容器</value>
+  </data>
+  <data name="Sandbox.Text.0829" xml:space="preserve">
+    <value>加载遮罩</value>
+  </data>
+  <data name="Sandbox.Text.0830" xml:space="preserve">
+    <value>Lumina 管理后台</value>
+  </data>
+  <data name="Sandbox.Text.0831" xml:space="preserve">
+    <value>LUMINA 玻璃效果</value>
+  </data>
+  <data name="Sandbox.Text.0832" xml:space="preserve">
+    <value>成员</value>
+  </data>
+  <data name="Sandbox.Text.0833" xml:space="preserve">
+    <value>菜单</value>
+  </data>
+  <data name="Sandbox.Text.0834" xml:space="preserve">
+    <value>菜单和浮出控件</value>
+  </data>
+  <data name="Sandbox.Text.0835" xml:space="preserve">
+    <value>移动端在带有预览、选项卡和堆叠操作的底部抽屉中打开选择器。</value>
+  </data>
+  <data name="Sandbox.Text.0836" xml:space="preserve">
+    <value>移动端根节点</value>
+  </data>
+  <data name="Sandbox.Text.0837" xml:space="preserve">
+    <value>移动端 Shell 标题区</value>
+  </data>
+  <data name="Sandbox.Text.0838" xml:space="preserve">
+    <value>移动</value>
+  </data>
+  <data name="Sandbox.Text.0839" xml:space="preserve">
+    <value>移动和缩放</value>
+  </data>
+  <data name="Sandbox.Text.0840" xml:space="preserve">
+    <value>多选</value>
+  </data>
+  <data name="Sandbox.Text.0841" xml:space="preserve">
+    <value>多选</value>
+  </data>
+  <data name="Sandbox.Text.0842" xml:space="preserve">
+    <value>下一步</value>
+  </data>
+  <data name="Sandbox.Text.0843" xml:space="preserve">
+    <value>正常</value>
+  </data>
+  <data name="Sandbox.Text.0844" xml:space="preserve">
+    <value>透明度和布局辅助类可以结合使用，以实现小的状态变化。</value>
+  </data>
+  <data name="Sandbox.Text.0845" xml:space="preserve">
+    <value>打开个人资料</value>
+  </data>
+  <data name="Sandbox.Text.0846" xml:space="preserve">
+    <value>打开顶部操作表</value>
+  </data>
+  <data name="Sandbox.Text.0847" xml:space="preserve">
+    <value>打开顶层视图</value>
+  </data>
+  <data name="Sandbox.Text.0848" xml:space="preserve">
+    <value>可选</value>
+  </data>
+  <data name="Sandbox.Text.0849" xml:space="preserve">
+    <value>订单</value>
+  </data>
+  <data name="Sandbox.Text.0850" xml:space="preserve">
+    <value>负责组件质量保证、无障碍检查和发布说明。</value>
+  </data>
+  <data name="Sandbox.Text.0851" xml:space="preserve">
+    <value>密码输入框</value>
+  </data>
+  <data name="Sandbox.Text.0852" xml:space="preserve">
+    <value>持久指引和消息。</value>
+  </data>
+  <data name="Sandbox.Text.0853" xml:space="preserve">
+    <value>手机 Shell 预览</value>
+  </data>
+  <data name="Sandbox.Text.0854" xml:space="preserve">
+    <value>取货订单</value>
+  </data>
+  <data name="Sandbox.Text.0855" xml:space="preserve">
+    <value>胶囊和搜索</value>
+  </data>
+  <data name="Sandbox.Text.0856" xml:space="preserve">
+    <value>无需处理程序或页面后台代码即可获得指针反馈。</value>
+  </data>
+  <data name="Sandbox.Text.0857" xml:space="preserve">
+    <value>优先级</value>
+  </data>
+  <data name="Sandbox.Text.0858" xml:space="preserve">
+    <value>产品团队</value>
+  </data>
+  <data name="Sandbox.Text.0859" xml:space="preserve">
+    <value>属性</value>
+  </data>
+  <data name="Sandbox.Text.0860" xml:space="preserve">
+    <value>范围和进度</value>
+  </data>
+  <data name="Sandbox.Text.0861" xml:space="preserve">
+    <value>只读行</value>
+  </data>
+  <data name="Sandbox.Text.0862" xml:space="preserve">
+    <value>推荐的根结构</value>
+  </data>
+  <data name="Sandbox.Text.0863" xml:space="preserve">
+    <value>发布名称</value>
+  </data>
+  <data name="Sandbox.Text.0864" xml:space="preserve">
+    <value>记住此设备</value>
+  </data>
+  <data name="Sandbox.Text.0865" xml:space="preserve">
+    <value>重新排列列</value>
+  </data>
+  <data name="Sandbox.Text.0866" xml:space="preserve">
+    <value>重置选择</value>
+  </data>
+  <data name="Sandbox.Text.0867" xml:space="preserve">
+    <value>调整列大小</value>
+  </data>
+  <data name="Sandbox.Text.0868" xml:space="preserve">
+    <value>可复用的背景模糊表面。Card.Glass 在底层使用相同的模糊渲染器。</value>
+  </data>
+  <data name="Sandbox.Text.0869" xml:space="preserve">
+    <value>旋转</value>
+  </data>
+  <data name="Sandbox.Text.0870" xml:space="preserve">
+    <value>旋转</value>
+  </data>
+  <data name="Sandbox.Text.0871" xml:space="preserve">
+    <value>圆角命令输入框</value>
+  </data>
+  <data name="Sandbox.Text.0872" xml:space="preserve">
+    <value>缩放</value>
+  </data>
+  <data name="Sandbox.Text.0873" xml:space="preserve">
+    <value>搜索组件</value>
+  </data>
+  <data name="Sandbox.Text.0874" xml:space="preserve">
+    <value>搜索文件、符号或命令</value>
+  </data>
+  <data name="Sandbox.Text.0875" xml:space="preserve">
+    <value>选择成员</value>
+  </data>
+  <data name="Sandbox.Text.0876" xml:space="preserve">
+    <value>选择优先级</value>
+  </data>
+  <data name="Sandbox.Text.0877" xml:space="preserve">
+    <value>使用 LuminaColorPalette 设置 ColorPicker.Palette。</value>
+  </data>
+  <data name="Sandbox.Text.0878" xml:space="preserve">
+    <value>登录</value>
+  </data>
+  <data name="Sandbox.Text.0879" xml:space="preserve">
+    <value>登录沙盒</value>
+  </data>
+  <data name="Sandbox.Text.0880" xml:space="preserve">
+    <value>大小和透明度</value>
+  </data>
+  <data name="Sandbox.Text.0881" xml:space="preserve">
+    <value>某些设置在重启后生效。</value>
+  </data>
+  <data name="Sandbox.Text.0882" xml:space="preserve">
+    <value>弹簧</value>
+  </data>
+  <data name="Sandbox.Text.0883" xml:space="preserve">
+    <value>弹簧和挤压</value>
+  </data>
+  <data name="Sandbox.Text.0884" xml:space="preserve">
+    <value>弹簧隐藏</value>
+  </data>
+  <data name="Sandbox.Text.0885" xml:space="preserve">
+    <value>无需页面处理程序即可实现弹簧/回弹缓动和指针驱动的挤压。</value>
+  </data>
+  <data name="Sandbox.Text.0886" xml:space="preserve">
+    <value>挤压悬停</value>
+  </data>
+  <data name="Sandbox.Text.0887" xml:space="preserve">
+    <value>稳定内容</value>
+  </data>
+  <data name="Sandbox.Text.0888" xml:space="preserve">
+    <value>状态内容可以隐藏而不留空隙。</value>
+  </data>
+  <data name="Sandbox.Text.0889" xml:space="preserve">
+    <value>用于向用户显示通知的表面。</value>
+  </data>
+  <data name="Sandbox.Text.0890" xml:space="preserve">
+    <value>标签输入</value>
+  </data>
+  <data name="Sandbox.Text.0891" xml:space="preserve">
+    <value>标签输入</value>
+  </data>
+  <data name="Sandbox.Text.0892" xml:space="preserve">
+    <value>没有移除按钮的标签</value>
+  </data>
+  <data name="Sandbox.Text.0893" xml:space="preserve">
+    <value>目标</value>
+  </data>
+  <data name="Sandbox.Text.0894" xml:space="preserve">
+    <value>任务</value>
+  </data>
+  <data name="Sandbox.Text.0895" xml:space="preserve">
+    <value>该辅助类保留在 C# 中，因为它以具体控件为目标；对于 MVVM 状态更改，首选 LuminaMotion 附加属性。</value>
+  </data>
+  <data name="Sandbox.Text.0896" xml:space="preserve">
+    <value>当嵌入在密集卡片中时，可以使用相同的无网格线双列模板。</value>
+  </data>
+  <data name="Sandbox.Text.0897" xml:space="preserve">
+    <value>ViewModel 更改简单属性；LuminaMotion 为视觉过渡制作动画。</value>
+  </data>
+  <data name="Sandbox.Text.0898" xml:space="preserve">
+    <value>切换启用状态</value>
+  </data>
+  <data name="Sandbox.Text.0899" xml:space="preserve">
+    <value>切换透明度</value>
+  </data>
+  <data name="Sandbox.Text.0913" xml:space="preserve">
+    <value>Color Tokens</value>
+  </data>
+  <data name="Sandbox.Text.0914" xml:space="preserve">
+    <value>将表面、文本、边框、语义色、交互状态和阴影整理成表格。每一行都对比浅色和深色值，方便审查设计决策。</value>
+  </data>
+  <data name="Sandbox.Text.0915" xml:space="preserve">
+    <value>Elevation Shadows</value>
+  </data>
+  <data name="Sandbox.Text.0916" xml:space="preserve">
+    <value>BoxShadow Token 单独成表，因为它们表达的是层级深度，而不是颜色本身。</value>
+  </data>
+  <data name="Sandbox.Text.0917" xml:space="preserve">
+    <value>App Surfaces</value>
+  </data>
+  <data name="Sandbox.Text.0918" xml:space="preserve">
+    <value>用于 Shell、页面、卡片、弹层和禁用表面的基础层级。</value>
+  </data>
+  <data name="Sandbox.Text.0919" xml:space="preserve">
+    <value>Text Hierarchy</value>
+  </data>
+  <data name="Sandbox.Text.0920" xml:space="preserve">
+    <value>按信息强调程度排序的可读文本 Token。</value>
+  </data>
+  <data name="Sandbox.Text.0921" xml:space="preserve">
+    <value>Borders And Dividers</value>
+  </data>
+  <data name="Sandbox.Text.0922" xml:space="preserve">
+    <value>用于弱分隔线、默认 outline 和悬停/焦点强调的边框强度。</value>
+  </data>
+  <data name="Sandbox.Text.0923" xml:space="preserve">
+    <value>Semantic Colors</value>
+  </data>
+  <data name="Sandbox.Text.0924" xml:space="preserve">
+    <value>动作和反馈颜色，包含基础、悬停、按下、前景和背景变体。</value>
+  </data>
+  <data name="Sandbox.Text.0925" xml:space="preserve">
+    <value>Extended Palette</value>
+  </data>
+  <data name="Sandbox.Text.0926" xml:space="preserve">
+    <value>用于图表、标签、插图和可选主题强调的辅助色。</value>
+  </data>
+  <data name="Sandbox.Text.0927" xml:space="preserve">
+    <value>Interaction And Glass</value>
+  </data>
+  <data name="Sandbox.Text.0928" xml:space="preserve">
+    <value>用于状态覆盖、窗口玻璃和卡片玻璃的合成表面 Token。</value>
+  </data>
+  <data name="Sandbox.Text.0929" xml:space="preserve">
+    <value>hex alpha</value>
+  </data>
+  <data name="Sandbox.Text.0930" xml:space="preserve">
+    <value>mixed</value>
+  </data>
+  <data name="Sandbox.Text.0931" xml:space="preserve">
+    <value>85% / 78%</value>
+  </data>
+  <data name="Sandbox.Text.0932" xml:space="preserve">
+    <value>50% / 58%</value>
+  </data>
+  <data name="Sandbox.Text.0933" xml:space="preserve">
+    <value>基础表面深度。</value>
+  </data>
+  <data name="Sandbox.Text.0934" xml:space="preserve">
+    <value>Elevated 卡片和层级边缘。</value>
+  </data>
+  <data name="Sandbox.Text.0935" xml:space="preserve">
+    <value>鼠标悬停、浮层表面和更强弹层。</value>
+  </data>
+  <data name="Sandbox.Text.0936" xml:space="preserve">
+    <value>应用底层背景。</value>
+  </data>
+  <data name="Sandbox.Text.0937" xml:space="preserve">
+    <value>侧边栏和导航 Shell。</value>
+  </data>
+  <data name="Sandbox.Text.0938" xml:space="preserve">
+    <value>导航面板中的项目背景。</value>
+  </data>
+  <data name="Sandbox.Text.0939" xml:space="preserve">
+    <value>选中导航项背景。</value>
+  </data>
+  <data name="Sandbox.Text.0940" xml:space="preserve">
+    <value>默认卡片和内容面板。</value>
+  </data>
+  <data name="Sandbox.Text.0941" xml:space="preserve">
+    <value>浮起卡片和悬停表面。</value>
+  </data>
+  <data name="Sandbox.Text.0942" xml:space="preserve">
+    <value>菜单、浮层、对话框和弹窗。</value>
+  </data>
+  <data name="Sandbox.Text.0943" xml:space="preserve">
+    <value>禁用控件和非活动表面。</value>
+  </data>
+  <data name="Sandbox.Text.0944" xml:space="preserve">
+    <value>标题和主要标签。</value>
+  </data>
+  <data name="Sandbox.Text.0945" xml:space="preserve">
+    <value>正文和常规内容。</value>
+  </data>
+  <data name="Sandbox.Text.0946" xml:space="preserve">
+    <value>元信息、提示和说明文字。</value>
+  </data>
+  <data name="Sandbox.Text.0947" xml:space="preserve">
+    <value>禁用或不可用文本。</value>
+  </data>
+  <data name="Sandbox.Text.0948" xml:space="preserve">
+    <value>兼容用前景色别名。</value>
+  </data>
+  <data name="Sandbox.Text.0949" xml:space="preserve">
+    <value>兼容用弱化文本别名。</value>
+  </data>
+  <data name="Sandbox.Text.0950" xml:space="preserve">
+    <value>弱分隔线和低强调分隔。</value>
+  </data>
+  <data name="Sandbox.Text.0951" xml:space="preserve">
+    <value>默认组件 outline。</value>
+  </data>
+  <data name="Sandbox.Text.0952" xml:space="preserve">
+    <value>悬停、焦点和 Elevated 边缘。</value>
+  </data>
+  <data name="Sandbox.Text.0953" xml:space="preserve">
+    <value>禁用组件 outline。</value>
+  </data>
+  <data name="Sandbox.Text.0954" xml:space="preserve">
+    <value>兼容用 border alias。</value>
+  </data>
+  <data name="Sandbox.Text.0955" xml:space="preserve">
+    <value>兼容用分割线别名。</value>
+  </data>
+  <data name="Sandbox.Text.0956" xml:space="preserve">
+    <value>主要操作和品牌强调。</value>
+  </data>
+  <data name="Sandbox.Text.0957" xml:space="preserve">
+    <value>主要操作悬停态。</value>
+  </data>
+  <data name="Sandbox.Text.0958" xml:space="preserve">
+    <value>主要操作按下态。</value>
+  </data>
+  <data name="Sandbox.Text.0959" xml:space="preserve">
+    <value>Primary 表面上的文字和图标。</value>
+  </data>
+  <data name="Sandbox.Text.0960" xml:space="preserve">
+    <value>轻量选中或高亮背景。</value>
+  </data>
+  <data name="Sandbox.Text.0961" xml:space="preserve">
+    <value>成功操作和健康状态。</value>
+  </data>
+  <data name="Sandbox.Text.0962" xml:space="preserve">
+    <value>成功操作悬停态。</value>
+  </data>
+  <data name="Sandbox.Text.0963" xml:space="preserve">
+    <value>轻量成功背景。</value>
+  </data>
+  <data name="Sandbox.Text.0964" xml:space="preserve">
+    <value>警告和需要检查的状态。</value>
+  </data>
+  <data name="Sandbox.Text.0965" xml:space="preserve">
+    <value>警告操作悬停态。</value>
+  </data>
+  <data name="Sandbox.Text.0966" xml:space="preserve">
+    <value>轻量警告背景。</value>
+  </data>
+  <data name="Sandbox.Text.0967" xml:space="preserve">
+    <value>错误和危险操作。</value>
+  </data>
+  <data name="Sandbox.Text.0968" xml:space="preserve">
+    <value>危险操作悬停态。</value>
+  </data>
+  <data name="Sandbox.Text.0969" xml:space="preserve">
+    <value>轻量危险背景。</value>
+  </data>
+  <data name="Sandbox.Text.0970" xml:space="preserve">
+    <value>数据可视化和状态强调。</value>
+  </data>
+  <data name="Sandbox.Text.0971" xml:space="preserve">
+    <value>次要数据和冷色高亮。</value>
+  </data>
+  <data name="Sandbox.Text.0972" xml:space="preserve">
+    <value>导航、产品和集成强调。</value>
+  </data>
+  <data name="Sandbox.Text.0973" xml:space="preserve">
+    <value>创意或 AI 相关强调。</value>
+  </data>
+  <data name="Sandbox.Text.0974" xml:space="preserve">
+    <value>装饰性和表达性强调。</value>
+  </data>
+  <data name="Sandbox.Text.0975" xml:space="preserve">
+    <value>暖色数据点和注意力强调。</value>
+  </data>
+  <data name="Sandbox.Text.0976" xml:space="preserve">
+    <value>通用悬停背景。</value>
+  </data>
+  <data name="Sandbox.Text.0977" xml:space="preserve">
+    <value>Ghost 控件悬停背景。</value>
+  </data>
+  <data name="Sandbox.Text.0978" xml:space="preserve">
+    <value>透明悬停覆盖层。</value>
+  </data>
+  <data name="Sandbox.Text.0979" xml:space="preserve">
+    <value>透明按下覆盖层。</value>
+  </data>
+  <data name="Sandbox.Text.0980" xml:space="preserve">
+    <value>窗口级玻璃背景。</value>
+  </data>
+  <data name="Sandbox.Text.0981" xml:space="preserve">
+    <value>窗口玻璃面板色调。</value>
+  </data>
+  <data name="Sandbox.Text.0982" xml:space="preserve">
+    <value>可读的 fallback 玻璃色调。</value>
+  </data>
+  <data name="Sandbox.Text.0983" xml:space="preserve">
+    <value>玻璃边缘 outline。</value>
+  </data>
+  <data name="Sandbox.Text.0984" xml:space="preserve">
+    <value>玻璃背景层。</value>
+  </data>
+  <data name="Sandbox.Text.0985" xml:space="preserve">
+    <value>Acrylic 覆盖层。</value>
+  </data>
+  <data name="Sandbox.Text.0986" xml:space="preserve">
+    <value>玻璃可读性色调。</value>
+  </data>
+  <data name="Sandbox.Text.0987" xml:space="preserve">
+    <value>明亮玻璃边缘。</value>
+  </data>
+  <data name="Sandbox.Text.0988" xml:space="preserve">
+    <value>顶层视图对话框</value>
+  </data>
+  <data name="Sandbox.Text.0989" xml:space="preserve">
+    <value>⌂</value>
+  </data>
+  <data name="Sandbox.Text.0990" xml:space="preserve">
+    <value>◫</value>
+  </data>
+  <data name="Sandbox.Text.0991" xml:space="preserve">
+    <value>产品</value>
+  </data>
+  <data name="Sandbox.Text.0992" xml:space="preserve">
+    <value>●</value>
+  </data>
+  <data name="Sandbox.Text.0993" xml:space="preserve">
+    <value>LuminaUI</value>
+  </data>
+  <data name="Sandbox.Text.0994" xml:space="preserve">
+    <value>◆</value>
+  </data>
+  <data name="Sandbox.Text.0995" xml:space="preserve">
+    <value>LUM-1201</value>
+  </data>
+  <data name="Sandbox.Text.0996" xml:space="preserve">
+    <value>LUM-1202</value>
+  </data>
+  <data name="Sandbox.Text.0997" xml:space="preserve">
+    <value>桌面外壳</value>
+  </data>
+  <data name="Sandbox.Text.0998" xml:space="preserve">
+    <value>LUM-1203</value>
+  </data>
+  <data name="Sandbox.Text.0999" xml:space="preserve">
+    <value>移动端设置</value>
+  </data>
+  <data name="Sandbox.Text.1000" xml:space="preserve">
+    <value>LUM-1204</value>
+  </data>
+  <data name="Sandbox.Text.1001" xml:space="preserve">
+    <value>选择器面板</value>
+  </data>
+  <data name="Sandbox.Text.1002" xml:space="preserve">
+    <value>LUM-1205</value>
+  </data>
+  <data name="Sandbox.Text.1003" xml:space="preserve">
+    <value>覆盖层</value>
+  </data>
+  <data name="Sandbox.Text.1004" xml:space="preserve">
+    <value>LUM-1206</value>
+  </data>
+  <data name="Sandbox.Text.1005" xml:space="preserve">
+    <value>表格模块</value>
+  </data>
+  <data name="Sandbox.Text.1006" xml:space="preserve">
+    <value>12.0 预览版</value>
+  </data>
+  <data name="Sandbox.Text.1007" xml:space="preserve">
+    <value>桌面 / 移动 / 浏览器</value>
+  </data>
+  <data name="Sandbox.Text.1008" xml:space="preserve">
+    <value>设计系统团队</value>
+  </data>
+  <data name="Sandbox.Text.1009" xml:space="preserve">
+    <value>活跃</value>
+  </data>
+  <data name="Sandbox.Text.1010" xml:space="preserve">
+    <value>2026-05-11</value>
+  </data>
+  <data name="Sandbox.Text.1011" xml:space="preserve">
+    <value>64</value>
+  </data>
+  <data name="Sandbox.Text.1012" xml:space="preserve">
+    <value>128</value>
+  </data>
+  <data name="Sandbox.Text.1013" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="Sandbox.Text.1014" xml:space="preserve">
+    <value>支持 AOT</value>
+  </data>
+  <data name="Sandbox.Text.1015" xml:space="preserve">
+    <value>Alice</value>
+  </data>
+  <data name="Sandbox.Text.1016" xml:space="preserve">
+    <value>alice@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1017" xml:space="preserve">
+    <value>Aiden</value>
+  </data>
+  <data name="Sandbox.Text.1018" xml:space="preserve">
+    <value>aiden@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1019" xml:space="preserve">
+    <value>Bob</value>
+  </data>
+  <data name="Sandbox.Text.1020" xml:space="preserve">
+    <value>bob@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1021" xml:space="preserve">
+    <value>Charlie</value>
+  </data>
+  <data name="Sandbox.Text.1022" xml:space="preserve">
+    <value>charlie@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1023" xml:space="preserve">
+    <value>David</value>
+  </data>
+  <data name="Sandbox.Text.1024" xml:space="preserve">
+    <value>david@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1025" xml:space="preserve">
+    <value>Eva</value>
+  </data>
+  <data name="Sandbox.Text.1026" xml:space="preserve">
+    <value>eva@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1027" xml:space="preserve">
+    <value>Frank</value>
+  </data>
+  <data name="Sandbox.Text.1028" xml:space="preserve">
+    <value>frank@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1029" xml:space="preserve">
+    <value>Grace</value>
+  </data>
+  <data name="Sandbox.Text.1030" xml:space="preserve">
+    <value>grace@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1031" xml:space="preserve">
+    <value>Henry</value>
+  </data>
+  <data name="Sandbox.Text.1032" xml:space="preserve">
+    <value>henry@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1033" xml:space="preserve">
+    <value>Ivy</value>
+  </data>
+  <data name="Sandbox.Text.1034" xml:space="preserve">
+    <value>ivy@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1035" xml:space="preserve">
+    <value>Jack</value>
+  </data>
+  <data name="Sandbox.Text.1036" xml:space="preserve">
+    <value>jack@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1037" xml:space="preserve">
+    <value>Kevin</value>
+  </data>
+  <data name="Sandbox.Text.1038" xml:space="preserve">
+    <value>kevin@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1039" xml:space="preserve">
+    <value>Lily</value>
+  </data>
+  <data name="Sandbox.Text.1040" xml:space="preserve">
+    <value>lily@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1041" xml:space="preserve">
+    <value>Mia</value>
+  </data>
+  <data name="Sandbox.Text.1042" xml:space="preserve">
+    <value>mina@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1043" xml:space="preserve">
+    <value>Nancy</value>
+  </data>
+  <data name="Sandbox.Text.1044" xml:space="preserve">
+    <value>nancy@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1045" xml:space="preserve">
+    <value>Oliver</value>
+  </data>
+  <data name="Sandbox.Text.1046" xml:space="preserve">
+    <value>oliver@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1047" xml:space="preserve">
+    <value>Paul</value>
+  </data>
+  <data name="Sandbox.Text.1048" xml:space="preserve">
+    <value>paul@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1049" xml:space="preserve">
+    <value>Queen</value>
+  </data>
+  <data name="Sandbox.Text.1050" xml:space="preserve">
+    <value>queen@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1051" xml:space="preserve">
+    <value>rose@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1052" xml:space="preserve">
+    <value>Sam</value>
+  </data>
+  <data name="Sandbox.Text.1053" xml:space="preserve">
+    <value>sam@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1054" xml:space="preserve">
+    <value>Tom</value>
+  </data>
+  <data name="Sandbox.Text.1055" xml:space="preserve">
+    <value>tom@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1056" xml:space="preserve">
+    <value>Ursula</value>
+  </data>
+  <data name="Sandbox.Text.1057" xml:space="preserve">
+    <value>ursula@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1058" xml:space="preserve">
+    <value>Victor</value>
+  </data>
+  <data name="Sandbox.Text.1059" xml:space="preserve">
+    <value>victor@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1060" xml:space="preserve">
+    <value>Wendy</value>
+  </data>
+  <data name="Sandbox.Text.1061" xml:space="preserve">
+    <value>wendy@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1062" xml:space="preserve">
+    <value>Xavier</value>
+  </data>
+  <data name="Sandbox.Text.1063" xml:space="preserve">
+    <value>xavier@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1064" xml:space="preserve">
+    <value>Yvonne</value>
+  </data>
+  <data name="Sandbox.Text.1065" xml:space="preserve">
+    <value>yvonne@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1066" xml:space="preserve">
+    <value>Zack</value>
+  </data>
+  <data name="Sandbox.Text.1067" xml:space="preserve">
+    <value>zack@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1068" xml:space="preserve">
+    <value>程序集</value>
+  </data>
+  <data name="Sandbox.Text.1069" xml:space="preserve">
+    <value>LuminaUI.Demo</value>
+  </data>
+  <data name="Sandbox.Text.1070" xml:space="preserve">
+    <value>命名空间</value>
+  </data>
+  <data name="Sandbox.Text.1071" xml:space="preserve">
+    <value>LuminaUI.Demo.Views.Components</value>
+  </data>
+  <data name="Sandbox.Text.1072" xml:space="preserve">
+    <value>AOT</value>
+  </data>
+  <data name="Sandbox.Text.1073" xml:space="preserve">
+    <value>使用编译绑定，避免仅依赖反射的行生成。</value>
+  </data>
+  <data name="Sandbox.Text.1074" xml:space="preserve">
+    <value>备注</value>
+  </data>
+  <data name="Sandbox.Text.1075" xml:space="preserve">
+    <value>长字符串值由 LuminaProperties 字符串模板换行，而不改变全局 Label 行为。</value>
+  </data>
+  <data name="Sandbox.Text.1076" xml:space="preserve">
+    <value>创建账户</value>
+  </data>
+  <data name="Sandbox.Text.1077" xml:space="preserve">
+    <value>填写您的详细信息。</value>
+  </data>
+  <data name="Sandbox.Text.1078" xml:space="preserve">
+    <value>验证邮箱</value>
+  </data>
+  <data name="Sandbox.Text.1079" xml:space="preserve">
+    <value>检查您的收件箱以获取验证码。</value>
+  </data>
+  <data name="Sandbox.Text.1080" xml:space="preserve">
+    <value>设置工作区</value>
+  </data>
+  <data name="Sandbox.Text.1081" xml:space="preserve">
+    <value>自定义您的环境。</value>
+  </data>
+  <data name="Sandbox.Text.1082" xml:space="preserve">
+    <value>邀请团队</value>
+  </data>
+  <data name="Sandbox.Text.1083" xml:space="preserve">
+    <value>添加协作者到您的项目。</value>
+  </data>
+  <data name="Sandbox.Text.1084" xml:space="preserve">
+    <value>上传文件</value>
+  </data>
+  <data name="Sandbox.Text.1085" xml:space="preserve">
+    <value>选择要上传的文件。</value>
+  </data>
+  <data name="Sandbox.Text.1086" xml:space="preserve">
+    <value>验证数据</value>
+  </data>
+  <data name="Sandbox.Text.1087" xml:space="preserve">
+    <value>检查文件完整性。</value>
+  </data>
+  <data name="Sandbox.Text.1088" xml:space="preserve">
+    <value>处理</value>
+  </data>
+  <data name="Sandbox.Text.1089" xml:space="preserve">
+    <value>将更改应用到系统。</value>
+  </data>
+  <data name="Sandbox.Text.1090" xml:space="preserve">
+    <value>完成</value>
+  </data>
+  <data name="Sandbox.Text.1091" xml:space="preserve">
+    <value>检查并确认。</value>
+  </data>
+  <data name="Sandbox.Text.1092" xml:space="preserve">
+    <value>创建请求</value>
+  </data>
+  <data name="Sandbox.Text.1093" xml:space="preserve">
+    <value>客户提交了企业入驻请求。</value>
+  </data>
+  <data name="Sandbox.Text.1094" xml:space="preserve">
+    <value>审查合同</value>
+  </data>
+  <data name="Sandbox.Text.1095" xml:space="preserve">
+    <value>法务审查仍在进行中。</value>
+  </data>
+  <data name="Sandbox.Text.1096" xml:space="preserve">
+    <value>准备工作区</value>
+  </data>
+  <data name="Sandbox.Text.1097" xml:space="preserve">
+    <value>批准后将创建一个工作区。</value>
+  </data>
+  <data name="Sandbox.Text.1098" xml:space="preserve">
+    <value>邀请成员</value>
+  </data>
+  <data name="Sandbox.Text.1099" xml:space="preserve">
+    <value>发送初始管理员邀请。</value>
+  </data>
+  <data name="Sandbox.Text.1100" xml:space="preserve">
+    <value>核心</value>
+  </data>
+  <data name="Sandbox.Text.1101" xml:space="preserve">
+    <value>LuminaUI.ColorPicker</value>
+  </data>
+  <data name="Sandbox.Text.1102" xml:space="preserve">
+    <value>LuminaUI.DataGrid</value>
+  </data>
+  <data name="Sandbox.Text.1103" xml:space="preserve">
+    <value>LuminaUI.TreeDataGrid</value>
+  </data>
+  <data name="Sandbox.Text.1104" xml:space="preserve">
+    <value>沙盒</value>
+  </data>
+  <data name="Sandbox.Text.1105" xml:space="preserve">
+    <value>src</value>
+  </data>
+  <data name="Sandbox.Text.1106" xml:space="preserve">
+    <value>文件夹</value>
+  </data>
+  <data name="Sandbox.Text.1107" xml:space="preserve">
+    <value>demo</value>
+  </data>
+  <data name="Sandbox.Text.1108" xml:space="preserve">
+    <value>LuminaUI.Demo.Desktop</value>
+  </data>
+  <data name="Sandbox.Text.1109" xml:space="preserve">
+    <value>LuminaUI.Demo.Browser</value>
+  </data>
+  <data name="Sandbox.Text.1110" xml:space="preserve">
+    <value>AutoCompleteBox</value>
+  </data>
+  <data name="Sandbox.Text.1111" xml:space="preserve">
+    <value>状态与模板</value>
+  </data>
+  <data name="Sandbox.Text.1112" xml:space="preserve">
+    <value>无法搜索</value>
+  </data>
+  <data name="Sandbox.Text.1113" xml:space="preserve">
+    <value>自定义 ItemTemplate</value>
+  </data>
+  <data name="Sandbox.Text.1114" xml:space="preserve">
+    <value>使用模板搜索</value>
+  </data>
+  <data name="Sandbox.Text.1115" xml:space="preserve">
+    <value>头像与徽标</value>
+  </data>
+  <data name="Sandbox.Text.1116" xml:space="preserve">
+    <value>头像</value>
+  </data>
+  <data name="Sandbox.Text.1117" xml:space="preserve">
+    <value>A</value>
+  </data>
+  <data name="Sandbox.Text.1118" xml:space="preserve">
+    <value>徽标</value>
+  </data>
+  <data name="Sandbox.Text.1119" xml:space="preserve">
+    <value>VIP</value>
+  </data>
+  <data name="Sandbox.Text.1120" xml:space="preserve">
+    <value>NEW</value>
+  </data>
+  <data name="Sandbox.Text.1121" xml:space="preserve">
+    <value>SYNC</value>
+  </data>
+  <data name="Sandbox.Text.1122" xml:space="preserve">
+    <value>使用页面级横幅提供持久指引。</value>
+  </data>
+  <data name="Sandbox.Text.1123" xml:space="preserve">
+    <value>在进行破坏性操作之前使用内联警告。</value>
+  </data>
+  <data name="Sandbox.Text.1124" xml:space="preserve">
+    <value>2026</value>
+  </data>
+  <data name="Sandbox.Text.1125" xml:space="preserve">
+    <value>五月</value>
+  </data>
+  <data name="Sandbox.Text.1126" xml:space="preserve">
+    <value>按钮</value>
+  </data>
+  <data name="Sandbox.Text.1127" xml:space="preserve">
+    <value>切换按钮</value>
+  </data>
+  <data name="Sandbox.Text.1128" xml:space="preserve">
+    <value>重复按钮</value>
+  </data>
+  <data name="Sandbox.Text.1129" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="Sandbox.Text.1130" xml:space="preserve">
+    <value>+</value>
+  </data>
+  <data name="Sandbox.Text.1131" xml:space="preserve">
+    <value>0123456789</value>
+  </data>
+  <data name="Sandbox.Text.1132" xml:space="preserve">
+    <value>98%</value>
+  </data>
+  <data name="Sandbox.Text.1133" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="Sandbox.Text.1134" xml:space="preserve">
+    <value>级联选择器</value>
+  </data>
+  <data name="Sandbox.Text.1135" xml:space="preserve">
+    <value>通过级联下拉面板进行分层选择。</value>
+  </data>
+  <data name="Sandbox.Text.1136" xml:space="preserve">
+    <value>地区选择器</value>
+  </data>
+  <data name="Sandbox.Text.1137" xml:space="preserve">
+    <value>选择地区</value>
+  </data>
+  <data name="Sandbox.Text.1138" xml:space="preserve">
+    <value>中间选择</value>
+  </data>
+  <data name="Sandbox.Text.1139" xml:space="preserve">
+    <value>悬停展开子项；点击父项可选择并关闭。</value>
+  </data>
+  <data name="Sandbox.Text.1140" xml:space="preserve">
+    <value>请选择省/市/区</value>
+  </data>
+  <data name="Sandbox.Text.1141" xml:space="preserve">
+    <value>分类选择器</value>
+  </data>
+  <data name="Sandbox.Text.1142" xml:space="preserve">
+    <value>选择分类</value>
+  </data>
+  <data name="Sandbox.Text.1143" xml:space="preserve">
+    <value>延迟加载</value>
+  </data>
+  <data name="Sandbox.Text.1144" xml:space="preserve">
+    <value>悬停以加载</value>
+  </data>
+  <data name="Sandbox.Text.1145" xml:space="preserve">
+    <value>长列表</value>
+  </data>
+  <data name="Sandbox.Text.1146" xml:space="preserve">
+    <value>50 组 / 30 项</value>
+  </data>
+  <data name="Sandbox.Text.1147" xml:space="preserve">
+    <value>以面板打开</value>
+  </data>
+  <data name="Sandbox.Text.1148" xml:space="preserve">
+    <value>列表框</value>
+  </data>
+  <data name="Sandbox.Text.1149" xml:space="preserve">
+    <value>树形视图</value>
+  </data>
+  <data name="Sandbox.Text.1150" xml:space="preserve">
+    <value>项目控件</value>
+  </data>
+  <data name="Sandbox.Text.1151" xml:space="preserve">
+    <value>命令栏</value>
+  </data>
+  <data name="Sandbox.Text.1152" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Sandbox.Text.1153" xml:space="preserve">
+    <value>抽屉页面</value>
+  </data>
+  <data name="Sandbox.Text.1154" xml:space="preserve">
+    <value>下拉按钮</value>
+  </data>
+  <data name="Sandbox.Text.1155" xml:space="preserve">
+    <value>主题与尺寸</value>
+  </data>
+  <data name="Sandbox.Text.1156" xml:space="preserve">
+    <value>操作 1</value>
+  </data>
+  <data name="Sandbox.Text.1157" xml:space="preserve">
+    <value>当没有数据展示时的空状态占位符。</value>
+  </data>
+  <data name="Sandbox.Text.1158" xml:space="preserve">
+    <value>默认空状态</value>
+  </data>
+  <data name="Sandbox.Text.1159" xml:space="preserve">
+    <value>带描述</value>
+  </data>
+  <data name="Sandbox.Text.1160" xml:space="preserve">
+    <value>未找到结果</value>
+  </data>
+  <data name="Sandbox.Text.1161" xml:space="preserve">
+    <value>尝试调整您的搜索或筛选条件以找到您需要的内容。</value>
+  </data>
+  <data name="Sandbox.Text.1162" xml:space="preserve">
+    <value>带操作按钮</value>
+  </data>
+  <data name="Sandbox.Text.1163" xml:space="preserve">
+    <value>暂无项目</value>
+  </data>
+  <data name="Sandbox.Text.1164" xml:space="preserve">
+    <value>创建您的第一个项目以开始使用。</value>
+  </data>
+  <data name="Sandbox.Text.1165" xml:space="preserve">
+    <value>创建项目</value>
+  </data>
+  <data name="Sandbox.Text.1166" xml:space="preserve">
+    <value>紧凑样式</value>
+  </data>
+  <data name="Sandbox.Text.1167" xml:space="preserve">
+    <value>没有项目</value>
+  </data>
+  <data name="Sandbox.Text.1168" xml:space="preserve">
+    <value>这里什么也没有。</value>
+  </data>
+  <data name="Sandbox.Text.1169" xml:space="preserve">
+    <value>?</value>
+  </data>
+  <data name="Sandbox.Text.1170" xml:space="preserve">
+    <value>自定义空状态</value>
+  </data>
+  <data name="Sandbox.Text.1171" xml:space="preserve">
+    <value>您可以将整个布局替换为自定义内容。</value>
+  </data>
+  <data name="Sandbox.Text.1172" xml:space="preserve">
+    <value>表单</value>
+  </data>
+  <data name="Sandbox.Text.1173" xml:space="preserve">
+    <value>输入并按回车键</value>
+  </data>
+  <data name="Sandbox.Text.1174" xml:space="preserve">
+    <value>顶部标签布局</value>
+  </data>
+  <data name="Sandbox.Text.1175" xml:space="preserve">
+    <value>admin@lumina.dev</value>
+  </data>
+  <data name="Sandbox.Text.1176" xml:space="preserve">
+    <value>https://</value>
+  </data>
+  <data name="Sandbox.Text.1177" xml:space="preserve">
+    <value>lumina-cloud</value>
+  </data>
+  <data name="Sandbox.Text.1178" xml:space="preserve">
+    <value>.dev</value>
+  </data>
+  <data name="Sandbox.Text.1179" xml:space="preserve">
+    <value>带标题的内容控件</value>
+  </data>
+  <data name="Sandbox.Text.1180" xml:space="preserve">
+    <value>Alicia Chen</value>
+  </data>
+  <data name="Sandbox.Text.1181" xml:space="preserve">
+    <value>Austin Reed</value>
+  </data>
+  <data name="Sandbox.Text.1182" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="Sandbox.Text.1183" xml:space="preserve">
+    <value>Bella Stone</value>
+  </data>
+  <data name="Sandbox.Text.1184" xml:space="preserve">
+    <value>Benson Lee</value>
+  </data>
+  <data name="Sandbox.Text.1185" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="Sandbox.Text.1186" xml:space="preserve">
+    <value>Carmen Xu</value>
+  </data>
+  <data name="Sandbox.Text.1187" xml:space="preserve">
+    <value>Colin Baker</value>
+  </data>
+  <data name="Sandbox.Text.1188" xml:space="preserve">
+    <value>D</value>
+  </data>
+  <data name="Sandbox.Text.1189" xml:space="preserve">
+    <value>Daphne Ray</value>
+  </data>
+  <data name="Sandbox.Text.1190" xml:space="preserve">
+    <value>Derek Huang</value>
+  </data>
+  <data name="Sandbox.Text.1191" xml:space="preserve">
+    <value>M</value>
+  </data>
+  <data name="Sandbox.Text.1192" xml:space="preserve">
+    <value>Mina Park</value>
+  </data>
+  <data name="Sandbox.Text.1193" xml:space="preserve">
+    <value>Morgan Wells</value>
+  </data>
+  <data name="Sandbox.Text.1194" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="Sandbox.Text.1195" xml:space="preserve">
+    <value>Sofia Young</value>
+  </data>
+  <data name="Sandbox.Text.1196" xml:space="preserve">
+    <value>Simon White</value>
+  </data>
+  <data name="Sandbox.Text.1197" xml:space="preserve">
+    <value>Z</value>
+  </data>
+  <data name="Sandbox.Text.1198" xml:space="preserve">
+    <value>Zara Liu</value>
+  </data>
+  <data name="Sandbox.Text.1199" xml:space="preserve">
+    <value>Zed Cooper</value>
+  </data>
+  <data name="Sandbox.Text.1200" xml:space="preserve">
+    <value>中文通讯录 (Pinyin &amp;amp; Custom Keys)</value>
+  </data>
+  <data name="Sandbox.Text.1201" xml:space="preserve">
+    <value>星标朋友</value>
+  </data>
+  <data name="Sandbox.Text.1202" xml:space="preserve">
+    <value>张三 (BOSS)</value>
+  </data>
+  <data name="Sandbox.Text.1203" xml:space="preserve">
+    <value>董事长</value>
+  </data>
+  <data name="Sandbox.Text.1204" xml:space="preserve">
+    <value>李四</value>
+  </data>
+  <data name="Sandbox.Text.1205" xml:space="preserve">
+    <value>核心架构师</value>
+  </data>
+  <data name="Sandbox.Text.1206" xml:space="preserve">
+    <value>C - 财务部</value>
+  </data>
+  <data name="Sandbox.Text.1207" xml:space="preserve">
+    <value>陈总</value>
+  </data>
+  <data name="Sandbox.Text.1208" xml:space="preserve">
+    <value>CFO</value>
+  </data>
+  <data name="Sandbox.Text.1209" xml:space="preserve">
+    <value>曹会计</value>
+  </data>
+  <data name="Sandbox.Text.1210" xml:space="preserve">
+    <value>出纳</value>
+  </data>
+  <data name="Sandbox.Text.1211" xml:space="preserve">
+    <value>L - 研发部</value>
+  </data>
+  <data name="Sandbox.Text.1212" xml:space="preserve">
+    <value>李雷</value>
+  </data>
+  <data name="Sandbox.Text.1213" xml:space="preserve">
+    <value>后端工程师</value>
+  </data>
+  <data name="Sandbox.Text.1214" xml:space="preserve">
+    <value>刘梅</value>
+  </data>
+  <data name="Sandbox.Text.1215" xml:space="preserve">
+    <value>测试工程师</value>
+  </data>
+  <data name="Sandbox.Text.1216" xml:space="preserve">
+    <value>W - 市场部</value>
+  </data>
+  <data name="Sandbox.Text.1217" xml:space="preserve">
+    <value>王建国</value>
+  </data>
+  <data name="Sandbox.Text.1218" xml:space="preserve">
+    <value>市场总监</value>
+  </data>
+  <data name="Sandbox.Text.1219" xml:space="preserve">
+    <value>吴芳</value>
+  </data>
+  <data name="Sandbox.Text.1220" xml:space="preserve">
+    <value>公关媒介</value>
+  </data>
+  <data name="Sandbox.Text.1221" xml:space="preserve">
+    <value>Z - 行政部</value>
+  </data>
+  <data name="Sandbox.Text.1222" xml:space="preserve">
+    <value>赵云</value>
+  </data>
+  <data name="Sandbox.Text.1223" xml:space="preserve">
+    <value>行政主管</value>
+  </data>
+  <data name="Sandbox.Text.1224" xml:space="preserve">
+    <value>郑钱</value>
+  </data>
+  <data name="Sandbox.Text.1225" xml:space="preserve">
+    <value>前台接待</value>
+  </data>
+  <data name="Sandbox.Text.1226" xml:space="preserve">
+    <value>尺寸</value>
+  </data>
+  <data name="Sandbox.Text.1227" xml:space="preserve">
+    <value>1234</value>
+  </data>
+  <data name="Sandbox.Text.1228" xml:space="preserve">
+    <value>123456</value>
+  </data>
+  <data name="Sandbox.Text.1229" xml:space="preserve">
+    <value>Ava Chen</value>
+  </data>
+  <data name="Sandbox.Text.1230" xml:space="preserve">
+    <value>Mia Johnson</value>
+  </data>
+  <data name="Sandbox.Text.1231" xml:space="preserve">
+    <value>U</value>
+  </data>
+  <data name="Sandbox.Text.1232" xml:space="preserve">
+    <value>无法选择</value>
+  </data>
+  <data name="Sandbox.Text.1233" xml:space="preserve">
+    <value>导航页</value>
+  </data>
+  <data name="Sandbox.Text.1234" xml:space="preserve">
+    <value>复杂</value>
+  </data>
+  <data name="Sandbox.Text.1235" xml:space="preserve">
+    <value>跳转到</value>
+  </data>
+  <data name="Sandbox.Text.1236" xml:space="preserve">
+    <value>页</value>
+  </data>
+  <data name="Sandbox.Text.1237" xml:space="preserve">
+    <value>用于编辑器面板、检查器和紧凑设置表面的双列属性行。</value>
+  </data>
+  <data name="Sandbox.Text.1238" xml:space="preserve">
+    <value>范围与进度</value>
+  </data>
+  <data name="Sandbox.Text.1239" xml:space="preserve">
+    <value>/</value>
+  </data>
+  <data name="Sandbox.Text.1240" xml:space="preserve">
+    <value>0:00</value>
+  </data>
+  <data name="Sandbox.Text.1241" xml:space="preserve">
+    <value>滑块</value>
+  </data>
+  <data name="Sandbox.Text.1242" xml:space="preserve">
+    <value>进度条</value>
+  </data>
+  <data name="Sandbox.Text.1243" xml:space="preserve">
+    <value>复选框</value>
+  </data>
+  <data name="Sandbox.Text.1244" xml:space="preserve">
+    <value>单选按钮</value>
+  </data>
+  <data name="Sandbox.Text.1245" xml:space="preserve">
+    <value>切换开关</value>
+  </data>
+  <data name="Sandbox.Text.1246" xml:space="preserve">
+    <value>拆分按钮</value>
+  </data>
+  <data name="Sandbox.Text.1247" xml:space="preserve">
+    <value>拆分视图</value>
+  </data>
+  <data name="Sandbox.Text.1248" xml:space="preserve">
+    <value>步骤条</value>
+  </data>
+  <data name="Sandbox.Text.1249" xml:space="preserve">
+    <value>带有进度指示的多步流程引导。</value>
+  </data>
+  <data name="Sandbox.Text.1250" xml:space="preserve">
+    <value>基础步骤条</value>
+  </data>
+  <data name="Sandbox.Text.1251" xml:space="preserve">
+    <value>已完成</value>
+  </data>
+  <data name="Sandbox.Text.1252" xml:space="preserve">
+    <value>此步骤已完成。</value>
+  </data>
+  <data name="Sandbox.Text.1253" xml:space="preserve">
+    <value>此步骤也已完成。</value>
+  </data>
+  <data name="Sandbox.Text.1254" xml:space="preserve">
+    <value>进行中</value>
+  </data>
+  <data name="Sandbox.Text.1255" xml:space="preserve">
+    <value>此步骤当前处于活动状态。</value>
+  </data>
+  <data name="Sandbox.Text.1256" xml:space="preserve">
+    <value>等待中</value>
+  </data>
+  <data name="Sandbox.Text.1257" xml:space="preserve">
+    <value>此步骤正在等待。</value>
+  </data>
+  <data name="Sandbox.Text.1258" xml:space="preserve">
+    <value>MVVM 绑定</value>
+  </data>
+  <data name="Sandbox.Text.1259" xml:space="preserve">
+    <value>带错误状态</value>
+  </data>
+  <data name="Sandbox.Text.1260" xml:space="preserve">
+    <value>小尺寸</value>
+  </data>
+  <data name="Sandbox.Text.1261" xml:space="preserve">
+    <value>步骤 1</value>
+  </data>
+  <data name="Sandbox.Text.1262" xml:space="preserve">
+    <value>步骤 2</value>
+  </data>
+  <data name="Sandbox.Text.1263" xml:space="preserve">
+    <value>步骤 3</value>
+  </data>
+  <data name="Sandbox.Text.1264" xml:space="preserve">
+    <value>步骤 4</value>
+  </data>
+  <data name="Sandbox.Text.1265" xml:space="preserve">
+    <value>垂直方向</value>
+  </data>
+  <data name="Sandbox.Text.1266" xml:space="preserve">
+    <value>登录</value>
+  </data>
+  <data name="Sandbox.Text.1267" xml:space="preserve">
+    <value>输入凭据进行登录。</value>
+  </data>
+  <data name="Sandbox.Text.1268" xml:space="preserve">
+    <value>验证</value>
+  </data>
+  <data name="Sandbox.Text.1269" xml:space="preserve">
+    <value>完成安全验证。</value>
+  </data>
+  <data name="Sandbox.Text.1270" xml:space="preserve">
+    <value>一切准备就绪！</value>
+  </data>
+  <data name="Sandbox.Text.1271" xml:space="preserve">
+    <value>选择计划</value>
+  </data>
+  <data name="Sandbox.Text.1272" xml:space="preserve">
+    <value>选择您的订阅层级。</value>
+  </data>
+  <data name="Sandbox.Text.1273" xml:space="preserve">
+    <value>支付</value>
+  </data>
+  <data name="Sandbox.Text.1274" xml:space="preserve">
+    <value>输入账单信息。</value>
+  </data>
+  <data name="Sandbox.Text.1275" xml:space="preserve">
+    <value>查看您的订单详情。</value>
+  </data>
+  <data name="Sandbox.Text.1276" xml:space="preserve">
+    <value>订单已成功提交。</value>
+  </data>
+  <data name="Sandbox.Text.1277" xml:space="preserve">
+    <value>上一步</value>
+  </data>
+  <data name="Sandbox.Text.1278" xml:space="preserve">
+    <value>选项卡页面</value>
+  </data>
+  <data name="Sandbox.Text.1279" xml:space="preserve">
+    <value>api.lumina.dev</value>
+  </data>
+  <data name="Sandbox.Text.1280" xml:space="preserve">
+    <value>us-east</value>
+  </data>
+  <data name="Sandbox.Text.1281" xml:space="preserve">
+    <value>CSV</value>
+  </data>
+  <data name="Sandbox.Text.1282" xml:space="preserve">
+    <value>JSON</value>
+  </data>
+  <data name="Sandbox.Text.1283" xml:space="preserve">
+    <value>PDF</value>
+  </data>
+  <data name="Sandbox.Text.1284" xml:space="preserve">
+    <value>状态与限制</value>
+  </data>
+  <data name="Sandbox.Text.1285" xml:space="preserve">
+    <value>最多 3 个标签</value>
+  </data>
+  <data name="Sandbox.Text.1286" xml:space="preserve">
+    <value>最多允许 3 个标签</value>
+  </data>
+  <data name="Sandbox.Text.1287" xml:space="preserve">
+    <value>文本框</value>
+  </data>
+  <data name="Sandbox.Text.1288" xml:space="preserve">
+    <value>Ctrl K</value>
+  </data>
+  <data name="Sandbox.Text.1289" xml:space="preserve">
+    <value>.com</value>
+  </data>
+  <data name="Sandbox.Text.1290" xml:space="preserve">
+    <value>.io</value>
+  </data>
+  <data name="Sandbox.Text.1291" xml:space="preserve">
+    <value>$</value>
+  </data>
+  <data name="Sandbox.Text.1292" xml:space="preserve">
+    <value>USD</value>
+  </data>
+  <data name="Sandbox.Text.1293" xml:space="preserve">
+    <value>lumina</value>
+  </data>
+  <data name="Sandbox.Text.1294" xml:space="preserve">
+    <value>数字输入框</value>
+  </data>
+  <data name="Sandbox.Text.1295" xml:space="preserve">
+    <value>过渡内容控件</value>
+  </data>
+  <data name="Sandbox.Text.1296" xml:space="preserve">
+    <value>3. 表面与层级</value>
+  </data>
+  <data name="Sandbox.Text.1297" xml:space="preserve">
+    <value>文本块</value>
+  </data>
+  <data name="Sandbox.Text.1298" xml:space="preserve">
+    <value>超链接按钮</value>
+  </data>
+  <data name="Sandbox.Text.1299" xml:space="preserve">
+    <value>可选中文本块</value>
+  </data>
+  <data name="Sandbox.Text.1300" xml:space="preserve">
+    <value>数据验证错误</value>
+  </data>
+  <data name="Sandbox.Text.1301" xml:space="preserve">
+    <value>路径图标</value>
+  </data>
+  <data name="Sandbox.Text.1302" xml:space="preserve">
+    <value>滚动视图</value>
+  </data>
+  <data name="Sandbox.Text.1303" xml:space="preserve">
+    <value>网格分割线</value>
+  </data>
+  <data name="Sandbox.Text.1304" xml:space="preserve">
+    <value>分隔线</value>
+  </data>
+  <data name="Sandbox.Text.1305" xml:space="preserve">
+    <value>菜单与浮层</value>
+  </data>
+  <data name="Sandbox.Text.1306" xml:space="preserve">
+    <value>上下文菜单</value>
+  </data>
+  <data name="Sandbox.Text.1307" xml:space="preserve">
+    <value>TopView、Shell、登录和移动端合成。</value>
+  </data>
+  <data name="Sandbox.Text.1308" xml:space="preserve">
+    <value>在视觉根部使用一个 TopView，然后将 Shell 放入其中。登录和启动页面由 Shell 路由，并隐藏 Shell 框架。</value>
+  </data>
+  <data name="Sandbox.Text.1309" xml:space="preserve">
+    <value>$18</value>
+  </data>
+  <data name="Sandbox.Text.1310" xml:space="preserve">
+    <value>$32</value>
+  </data>
+  <data name="Sandbox.Text.1311" xml:space="preserve">
+    <value>我</value>
+  </data>
+  <data name="Sandbox.Text.1312" xml:space="preserve">
+    <value>&amp;lt;lumina:LuminaTopView&amp;gt;&amp;#x0a;  &amp;lt;lumina:LuminaShell x:Name=&amp;quot;AppShell&amp;quot;&amp;gt;&amp;#x0a;    &amp;lt;!-- pages, routes, menu, overlays --&amp;gt;&amp;#x0a;  &amp;lt;/lumina:LuminaShell&amp;gt;&amp;#x0a;&amp;lt;/lumina:LuminaTopView&amp;gt;</value>
+  </data>
+  <data name="Sandbox.Text.1313" xml:space="preserve">
+    <value>辅助类与动画</value>
+  </data>
+  <data name="Sandbox.Text.1314" xml:space="preserve">
+    <value>卡片</value>
+  </data>
+  <data name="Sandbox.Text.1315" xml:space="preserve">
+    <value>lumina:LuminaMotion.HoverScale=&amp;quot;1.08&amp;quot;  lumina:LuminaMotion.PressedScale=&amp;quot;0.94&amp;quot;</value>
+  </data>
+  <data name="Sandbox.Text.1316" xml:space="preserve">
+    <value>可见</value>
+  </data>
+  <data name="Sandbox.Text.1317" xml:space="preserve">
+    <value>切换可见性</value>
+  </data>
+  <data name="Sandbox.Text.1318" xml:space="preserve">
+    <value>切换弹簧效果</value>
+  </data>
+  <data name="Sandbox.Text.1319" xml:space="preserve">
+    <value>切换尺寸</value>
+  </data>
+  <data name="Sandbox.Text.1320" xml:space="preserve">
+    <value>C# 动画辅助类</value>
+  </data>
+  <data name="Sandbox.Text.1321" xml:space="preserve">
+    <value>从组件代码中使用流式辅助类来实现显式的一次性动画。</value>
+  </data>
+  <data name="Sandbox.Text.1322" xml:space="preserve">
+    <value>顶层视图</value>
+  </data>
+  <data name="Sandbox.Text.1323" xml:space="preserve">
+    <value>AXAML</value>
+  </data>
+  <data name="Sandbox.Text.1324" xml:space="preserve">
+    <value>C#</value>
+  </data>
+  <data name="Sandbox.Text.1325" xml:space="preserve">
+    <value>视图模型</value>
+  </data>
+</root>

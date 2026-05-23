@@ -1,0 +1,175 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.DataGridShowcasePage"
+             x:DataType="vm:DataGridShowcaseViewModel">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0698}" />
+                <TextBlock Text="{DynamicResource Sandbox.Text.0699}"
+                           Foreground="{DynamicResource LuminaTextMutedBrush}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="420" MaxItemWidth="960" HorizontalSpacing="16" VerticalSpacing="16">
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                            <StackPanel Spacing="4">
+                                <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0700}" />
+                                <TextBlock Text="{DynamicResource Sandbox.Text.0701}"
+                                           Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                           TextWrapping="Wrap" />
+                            </StackPanel>
+                            <Button Grid.Column="1"
+                                    Classes="Primary"
+                                    Content="{DynamicResource Sandbox.Text.0702}"
+                                    Command="{Binding AddOrderCommand}" />
+                        </Grid>
+
+                        <WrapPanel>
+                            <ToggleSwitch Content="{DynamicResource Sandbox.Text.0867}"
+                                          Margin="0,0,16,0"
+                                          IsChecked="{Binding CanResizeColumns}" />
+                            <ToggleSwitch Content="{DynamicResource Sandbox.Text.0865}"
+                                          IsChecked="{Binding CanReorderColumns}" />
+                        </WrapPanel>
+
+                        <DataGrid MinHeight="320"
+                                  AutoGenerateColumns="False"
+                                  ItemsSource="{Binding Orders}"
+                                  SelectedItem="{Binding SelectedOrder}"
+                                  IsReadOnly="False"
+                                  CanUserResizeColumns="{Binding CanResizeColumns}"
+                                  CanUserReorderColumns="{Binding CanReorderColumns}"
+                                  CanUserSortColumns="True"
+                                  HeadersVisibility="Column">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="{DynamicResource Sandbox.Text.1152}" Width="120" MinWidth="96" SortMemberPath="Id">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate x:DataType="vm:DataGridOrderViewModel">
+                                            <TextBlock Text="{Binding Id}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <DataGridTemplateColumn.CellEditingTemplate>
+                                        <DataTemplate x:DataType="vm:DataGridOrderViewModel">
+                                            <TextBox Classes="Small" Text="{Binding Id, Mode=TwoWay}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellEditingTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="{DynamicResource Sandbox.Text.0351}" Width="260" MinWidth="180" SortMemberPath="Project">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate x:DataType="vm:DataGridOrderViewModel">
+                                            <TextBlock Text="{Binding Project}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <DataGridTemplateColumn.CellEditingTemplate>
+                                        <DataTemplate x:DataType="vm:DataGridOrderViewModel">
+                                            <TextBox Classes="Small" Text="{Binding Project, Mode=TwoWay}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellEditingTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="{DynamicResource Sandbox.Text.0734}" Width="150" SortMemberPath="Status">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate x:DataType="vm:DataGridOrderViewModel">
+                                            <Border Padding="8,3"
+                                                    CornerRadius="999"
+                                                    HorizontalAlignment="Left"
+                                                    VerticalAlignment="Center"
+                                                    Background="{DynamicResource LuminaPrimaryBgBrush}">
+                                                <TextBlock Text="{Binding Status}"
+                                                           FontSize="12"
+                                                           Foreground="{DynamicResource LuminaTextPrimaryBrush}" />
+                                            </Border>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <DataGridTemplateColumn.CellEditingTemplate>
+                                        <DataTemplate x:DataType="vm:DataGridOrderViewModel">
+                                            <ComboBox ItemsSource="{Binding $parent[ContentPage].DataContext.StatusOptions}"
+                                                      SelectedItem="{Binding Status}"
+                                                      HorizontalAlignment="Stretch" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellEditingTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="{DynamicResource Sandbox.Text.0733}" Width="160" MinWidth="130" SortMemberPath="Owner">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate x:DataType="vm:DataGridOrderViewModel">
+                                            <TextBlock Text="{Binding Owner}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <DataGridTemplateColumn.CellEditingTemplate>
+                                        <DataTemplate x:DataType="vm:DataGridOrderViewModel">
+                                            <TextBox Classes="Small" Text="{Binding Owner, Mode=TwoWay}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellEditingTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="{DynamicResource Sandbox.Text.0704}" Width="110" MinWidth="96" SortMemberPath="Progress">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate x:DataType="vm:DataGridOrderViewModel">
+                                            <TextBlock Text="{Binding Progress, StringFormat='{}{0}%'}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <DataGridTemplateColumn.CellEditingTemplate>
+                                        <DataTemplate x:DataType="vm:DataGridOrderViewModel">
+                                            <NumericUpDown Classes="Small"
+                                                           Minimum="0"
+                                                           Maximum="100"
+                                                           Value="{Binding Progress, Mode=TwoWay}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellEditingTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridCheckBoxColumn x:DataType="vm:DataGridOrderViewModel"
+                                                        Header="{DynamicResource Sandbox.Text.0705}"
+                                                        Width="100"
+                                                        Binding="{Binding Enabled}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0703}" />
+                        <DataGrid Classes="Inset"
+                                  MinHeight="220"
+                                  AutoGenerateColumns="False"
+                                  ItemsSource="{Binding Orders}"
+                                  IsReadOnly="True"
+                                  CanUserResizeColumns="{Binding CanResizeColumns}"
+                                  CanUserReorderColumns="{Binding CanReorderColumns}"
+                                  CanUserSortColumns="True"
+                                  HeadersVisibility="Column"
+                                  GridLinesVisibility="Horizontal">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="{DynamicResource Sandbox.Text.0351}" Width="260" MinWidth="180" SortMemberPath="Project">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate x:DataType="vm:DataGridOrderViewModel">
+                                            <TextBlock Text="{Binding Project}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="{DynamicResource Sandbox.Text.0734}" Width="150" MinWidth="120" SortMemberPath="Status">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate x:DataType="vm:DataGridOrderViewModel">
+                                            <TextBlock Text="{Binding Status}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="{DynamicResource Sandbox.Text.0733}" Width="160" MinWidth="130" SortMemberPath="Owner">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate x:DataType="vm:DataGridOrderViewModel">
+                                            <TextBlock Text="{Binding Owner}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

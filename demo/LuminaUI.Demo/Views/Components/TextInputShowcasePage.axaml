@@ -1,0 +1,161 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             x:Class="LuminaUI.Demo.Views.TextInputShowcasePage">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0451}" />
+                <TextBlock Text="{DynamicResource Sandbox.Text.0452}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaCard>
+                <StackPanel Spacing="16">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1287}" />
+                    <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0453}" />
+                    <TextBox Text="{DynamicResource Sandbox.Text.0454}" IsReadOnly="True" />
+                    <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0455}" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="96" />
+                    <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0456}" IsEnabled="False" />
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard>
+                <StackPanel Spacing="16">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0855}" />
+                    <TextBox Classes="Pill"
+                             PlaceholderText="{DynamicResource Sandbox.Text.0871}" />
+                    <TextBox Classes="Pill Search"
+                             PlaceholderText="{DynamicResource Sandbox.Text.0874}">
+                        <TextBox.InnerLeftContent>
+                            <Grid Width="32" Height="32">
+                                <Viewbox Width="14" Height="14" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Path Stretch="Uniform"
+                                          Stroke="{DynamicResource LuminaTextMutedBrush}"
+                                          StrokeThickness="1.8"
+                                          StrokeLineCap="Round"
+                                          Fill="Transparent"
+                                          Data="M10.5,18 C14.642,18 18,14.642 18,10.5 C18,6.358 14.642,3 10.5,3 C6.358,3 3,6.358 3,10.5 C3,14.642 6.358,18 10.5,18 Z M16,16 L21,21" />
+                                </Viewbox>
+                            </Grid>
+                        </TextBox.InnerLeftContent>
+                        <TextBox.InnerRightContent>
+                            <Border CornerRadius="5"
+                                    Padding="6,2"
+                                    Margin="8,0,8,0"
+                                    Background="{DynamicResource LuminaStateHoverBrush}">
+                                <TextBlock Text="{DynamicResource Sandbox.Text.1288}"
+                                           FontSize="11"
+                                           Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                            </Border>
+                        </TextBox.InnerRightContent>
+                    </TextBox>
+                    <TextBox Classes="Pill Search"
+                             Text="LuminaPlatformMenu"
+                             PlaceholderText="{DynamicResource Sandbox.Text.0873}">
+                        <TextBox.InnerLeftContent>
+                            <Grid Width="32" Height="32">
+                                <Viewbox Width="14" Height="14" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Path Stretch="Uniform"
+                                          Stroke="{DynamicResource LuminaTextMutedBrush}"
+                                          StrokeThickness="1.8"
+                                          StrokeLineCap="Round"
+                                          Fill="Transparent"
+                                          Data="M10.5,18 C14.642,18 18,14.642 18,10.5 C18,6.358 14.642,3 10.5,3 C6.358,3 3,6.358 3,10.5 C3,14.642 6.358,18 10.5,18 Z M16,16 L21,21" />
+                                </Viewbox>
+                            </Grid>
+                        </TextBox.InnerLeftContent>
+                        <TextBox.InnerRightContent>
+                            <Button MinWidth="0"
+                                    MinHeight="0"
+                                    Width="32"
+                                    Height="32"
+                                    Padding="0"
+                                    Margin="0"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Foreground="{DynamicResource LuminaTextMutedBrush}">
+                                <Viewbox Width="12" Height="12">
+                                    <Path Stretch="Uniform"
+                                          Fill="{Binding $parent[Button].Foreground}"
+                                          Data="M18.3,5.71 L12,12 L18.3,18.29 L16.89,19.7 L10.59,13.41 L4.29,19.7 L2.88,18.29 L9.17,12 L2.88,5.71 L4.29,4.3 L10.59,10.59 L16.89,4.3 Z" />
+                                </Viewbox>
+                            </Button>
+                        </TextBox.InnerRightContent>
+                    </TextBox>
+                    <TextBox Classes="Pill Search"
+                             PlaceholderText="{DynamicResource Sandbox.Text.0813}">
+                        <TextBox.InnerLeftContent>
+                            <Grid Width="32" Height="32">
+                                <Viewbox Width="14" Height="14" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Path Stretch="Uniform"
+                                          Fill="{DynamicResource LuminaTextMutedBrush}"
+                                          Data="M3,5 H21 L14,13 V19 L10,21 V13 Z" />
+                                </Viewbox>
+                            </Grid>
+                        </TextBox.InnerLeftContent>
+                        <TextBox.InnerRightContent>
+                            <TextBlock Text="{DynamicResource Sandbox.Text.0848}"
+                                       Margin="8,0,8,0"
+                                       FontSize="12"
+                                       Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                       VerticalAlignment="Center" />
+                        </TextBox.InnerRightContent>
+                    </TextBox>
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard>
+                <StackPanel Spacing="16">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0457}" />
+                    <lumina:LuminaInputGroup>
+                        <lumina:LuminaInputGroupAddon Content="{DynamicResource Sandbox.Text.1176}" />
+                        <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0458}" />
+                        <ComboBox SelectedIndex="0">
+                            <ComboBoxItem Content="{DynamicResource Sandbox.Text.1289}" />
+                            <ComboBoxItem Content="{DynamicResource Sandbox.Text.1178}" />
+                            <ComboBoxItem Content="{DynamicResource Sandbox.Text.1290}" />
+                        </ComboBox>
+                    </lumina:LuminaInputGroup>
+
+                    <lumina:LuminaInputGroup>
+                        <lumina:LuminaInputGroupAddon Content="{DynamicResource Sandbox.Text.1291}" />
+                        <NumericUpDown Minimum="0"
+                                       Maximum="9999"
+                                       Value="128"
+                                       FormatString="0.00" />
+                        <lumina:LuminaInputGroupAddon Content="{DynamicResource Sandbox.Text.1292}" />
+                    </lumina:LuminaInputGroup>
+
+                    <lumina:LuminaInputGroup>
+                        <ComboBox SelectedIndex="0">
+                            <ComboBoxItem Content="{DynamicResource Sandbox.Text.0351}" />
+                            <ComboBoxItem Content="{DynamicResource Sandbox.Text.0459}" />
+                            <ComboBoxItem Content="{DynamicResource Sandbox.Text.0460}" />
+                        </ComboBox>
+                        <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0461}" />
+                        <Button Classes="Outline" Content="{DynamicResource Sandbox.Text.0046}" />
+                    </lumina:LuminaInputGroup>
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard>
+                <StackPanel Spacing="16">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0851}" />
+                    <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0462}" Text="{DynamicResource Sandbox.Text.1293}" PasswordChar="*" />
+                    <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0463}" PasswordChar="*" IsEnabled="False" />
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard>
+                <StackPanel Spacing="16">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1294}" />
+                    <lumina:LuminaResponsivePanel MinItemWidth="160" HorizontalSpacing="12" VerticalSpacing="12">
+                        <NumericUpDown Minimum="0" Maximum="100" Increment="1" Value="42" />
+                        <NumericUpDown Minimum="-10" Maximum="10" Increment="0.5" Value="2.5" />
+                    </lumina:LuminaResponsivePanel>
+                </StackPanel>
+            </lumina:LuminaCard>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

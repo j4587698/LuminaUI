@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+    <PackageId>LuminaUI</PackageId>
+    <Description>A modern Avalonia UI control library and theme package.</Description>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" />
+    <PackageReference Include="Avalonia.Skia" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controls/LuminaIconPlacement.cs" />
+    <Compile Remove="Controls/LuminaStepsEnums.cs" />
+    <Compile Remove="Controls/LuminaTimelineEnums.cs" />
+    <Compile Remove="Controls/LuminaWheelPickerSheet.cs" />
+  </ItemGroup>
+
+</Project>

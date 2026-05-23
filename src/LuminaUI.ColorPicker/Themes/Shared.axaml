@@ -1,0 +1,329 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:lumina="using:LuminaUI.Controls"
+        xmlns:local="using:LuminaUI.ColorPicker">
+  <Styles.Resources>
+    <ResourceDictionary>
+      <SolidColorBrush x:Key="ColorViewContentBackgroundBrush" Color="{DynamicResource LuminaSurface}" />
+      <SolidColorBrush x:Key="ColorViewContentBorderBrush" Color="{DynamicResource LuminaBorderDefault}" />
+      <SolidColorBrush x:Key="ColorViewTabBorderBrush" Color="{DynamicResource LuminaBorderDefault}" />
+      <SolidColorBrush x:Key="ColorControlLightSelectorBrush" Color="#FFFFFFFF" />
+      <SolidColorBrush x:Key="ColorControlDarkSelectorBrush" Color="#E409090B" />
+      <x:Double x:Key="ColorSliderSize">18</x:Double>
+      <x:Double x:Key="ColorSliderTrackSize">18</x:Double>
+      <CornerRadius x:Key="ColorSliderCornerRadius">999</CornerRadius>
+      <CornerRadius x:Key="ColorSliderTrackCornerRadius">999</CornerRadius>
+
+      <ControlTheme x:Key="LuminaColorPickerFlyoutPresenterTheme"
+                    TargetType="FlyoutPresenter">
+        <Setter Property="Background" Value="{DynamicResource LuminaPopoverBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
+        <Setter Property="Template">
+          <ControlTemplate>
+            <Panel Margin="10" ClipToBounds="False">
+              <Border Background="{TemplateBinding Background}"
+                      BorderBrush="{TemplateBinding BorderBrush}"
+                      BorderThickness="{TemplateBinding BorderThickness}"
+                      CornerRadius="{TemplateBinding CornerRadius}"
+                      BoxShadow="{DynamicResource LuminaShadowPopup}" />
+              <Border Background="{TemplateBinding Background}"
+                      BorderBrush="{TemplateBinding BorderBrush}"
+                      BorderThickness="{TemplateBinding BorderThickness}"
+                      CornerRadius="{TemplateBinding CornerRadius}"
+                      ClipToBounds="True">
+                <ContentPresenter Content="{TemplateBinding Content}"
+                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                  HorizontalContentAlignment="Stretch"
+                                  VerticalContentAlignment="Stretch" />
+              </Border>
+            </Panel>
+          </ControlTemplate>
+        </Setter>
+      </ControlTheme>
+    </ResourceDictionary>
+  </Styles.Resources>
+
+  <Style Selector="ColorPicker">
+    <Setter Property="Palette">
+      <local:LuminaColorPalette />
+    </Setter>
+    <Setter Property="Height" Value="32" />
+    <Setter Property="Width" Value="64" />
+    <Setter Property="MinWidth" Value="64" />
+    <Setter Property="CornerRadius" Value="7" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="VerticalContentAlignment" Value="Stretch" />
+    <Setter Property="Content">
+      <Template>
+        <Panel>
+          <Border Background="{DynamicResource LuminaPrimaryBgBrush}"
+                  CornerRadius="{TemplateBinding CornerRadius, Converter={StaticResource LeftCornerRadiusFilterConverter}}"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  Margin="1,1,0,1" />
+          <Border Background="{StaticResource ColorControlCheckeredBackgroundBrush}"
+                  CornerRadius="{TemplateBinding CornerRadius, Converter={StaticResource LeftCornerRadiusFilterConverter}}"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  Margin="3,3,0,3" />
+          <Border Background="{TemplateBinding HsvColor, Converter={StaticResource ToBrushConverter}}"
+                  CornerRadius="{TemplateBinding CornerRadius, Converter={StaticResource LeftCornerRadiusFilterConverter}}"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  Margin="3,3,0,3" />
+        </Panel>
+      </Template>
+    </Setter>
+    <Setter Property="Template">
+      <ControlTemplate TargetType="ColorPicker">
+        <DropDownButton Background="{DynamicResource LuminaPrimaryBgBrush}"
+                        BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                        Foreground="{DynamicResource LuminaPrimaryBrush}"
+                        lumina:LuminaOptions.PopupType="{Binding (lumina:LuminaOptions.PopupType), RelativeSource={RelativeSource TemplatedParent}}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Height="{TemplateBinding Height}"
+                        Width="{TemplateBinding Width}"
+                        MinHeight="0"
+                        MinWidth="0"
+                        Content="{TemplateBinding Content}"
+                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                        Padding="0,0,10,0"
+                        UseLayoutRounding="False">
+          <DropDownButton.Flyout>
+            <Flyout FlyoutPresenterClasses="nopadding"
+                    FlyoutPresenterTheme="{StaticResource LuminaColorPickerFlyoutPresenterTheme}"
+                    Placement="{DynamicResource ColorPickerFlyoutPlacement}">
+              <Viewbox x:Name="LuminaColorPickerPopupScaleBox"
+                       Width="356"
+                       Height="338"
+                       Stretch="Uniform">
+                <ColorView x:Name="LuminaColorPickerPopupView"
+                           Color="{Binding Color, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                           HsvColor="{Binding HsvColor, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                           SelectedIndex="{Binding SelectedIndex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                           ColorModel="{TemplateBinding ColorModel}"
+                           ColorSpectrumComponents="{TemplateBinding ColorSpectrumComponents}"
+                           ColorSpectrumShape="{TemplateBinding ColorSpectrumShape}"
+                           HexInputAlphaPosition="{TemplateBinding HexInputAlphaPosition}"
+                           IsAccentColorsVisible="{TemplateBinding IsAccentColorsVisible}"
+                           IsAlphaEnabled="{TemplateBinding IsAlphaEnabled}"
+                           IsAlphaVisible="{TemplateBinding IsAlphaVisible}"
+                           IsColorComponentsVisible="{TemplateBinding IsColorComponentsVisible}"
+                           IsColorModelVisible="{TemplateBinding IsColorModelVisible}"
+                           IsColorPaletteVisible="{TemplateBinding IsColorPaletteVisible}"
+                           IsColorPreviewVisible="{TemplateBinding IsColorPreviewVisible}"
+                           IsColorSpectrumVisible="{TemplateBinding IsColorSpectrumVisible}"
+                           IsColorSpectrumSliderVisible="{TemplateBinding IsColorSpectrumSliderVisible}"
+                           IsComponentSliderVisible="{TemplateBinding IsComponentSliderVisible}"
+                           IsComponentTextInputVisible="{TemplateBinding IsComponentTextInputVisible}"
+                           IsHexInputVisible="{TemplateBinding IsHexInputVisible}"
+                           MaxHue="{TemplateBinding MaxHue}"
+                           MaxSaturation="{TemplateBinding MaxSaturation}"
+                           MaxValue="{TemplateBinding MaxValue}"
+                           MinHue="{TemplateBinding MinHue}"
+                           MinSaturation="{TemplateBinding MinSaturation}"
+                           MinValue="{TemplateBinding MinValue}"
+                           Palette="{TemplateBinding Palette}"
+                           PaletteColors="{TemplateBinding PaletteColors}"
+                           PaletteColumnCount="{TemplateBinding PaletteColumnCount}" />
+              </Viewbox>
+            </Flyout>
+          </DropDownButton.Flyout>
+        </DropDownButton>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+  <Style Selector="ColorPicker.Compact">
+    <Setter Property="Height" Value="26" />
+    <Setter Property="Width" Value="50" />
+    <Setter Property="MinWidth" Value="50" />
+    <Setter Property="CornerRadius" Value="6" />
+  </Style>
+
+  <Style Selector="ColorPicker.Large">
+    <Setter Property="Height" Value="36" />
+    <Setter Property="Width" Value="76" />
+    <Setter Property="MinWidth" Value="76" />
+    <Setter Property="CornerRadius" Value="8" />
+  </Style>
+
+  <Style Selector="ColorPicker /template/ DropDownButton">
+    <Setter Property="MinHeight" Value="0" />
+    <Setter Property="MinWidth" Value="0" />
+    <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBgBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource LuminaPrimaryBrush}" />
+  </Style>
+
+  <Style Selector="ColorPicker:pointerover /template/ DropDownButton">
+    <Setter Property="Background" Value="{DynamicResource LuminaStateHoverBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryHoverBrush}" />
+  </Style>
+
+  <Style Selector="ColorPicker:focus-within /template/ DropDownButton">
+    <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryBrush}" />
+  </Style>
+
+  <Style Selector="ColorPicker /template/ DropDownButton /template/ PathIcon">
+    <Setter Property="Foreground" Value="{DynamicResource LuminaPrimaryBrush}" />
+  </Style>
+
+  <Style Selector="ColorView">
+    <Setter Property="Palette">
+      <local:LuminaColorPalette />
+    </Setter>
+    <Setter Property="CornerRadius" Value="10" />
+    <Setter Property="MinWidth" Value="320" />
+  </Style>
+
+  <Style Selector="ColorView /template/ Border#TabBackgroundBorder,
+                   ColorPicker /template/ Border#TabBackgroundBorder">
+    <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
+    <Setter Property="BorderThickness" Value="1,1,1,0" />
+    <Setter Property="CornerRadius" Value="10,10,0,0" />
+  </Style>
+
+  <Style Selector="ColorView /template/ Border#ContentBackgroundBorder,
+                   ColorPicker /template/ Border#ContentBackgroundBorder">
+    <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="0,0,10,10" />
+  </Style>
+
+  <Style Selector="ColorView /template/ TabControl#PART_TabControl,
+                   ColorPicker /template/ TabControl#PART_TabControl">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="0" />
+  </Style>
+
+  <Style Selector="ColorPicker /template/ TabControl#PART_TabControl">
+    <Setter Property="MaxWidth" Value="310" />
+    <Setter Property="MaxHeight" Value="292" />
+  </Style>
+
+  <Style Selector="ColorPicker /template/ ColorPreviewer">
+    <Setter Property="MaxHeight" Value="42" />
+  </Style>
+
+  <Style Selector="ColorView /template/ Border#PART_TabStripHost,
+                   ColorPicker /template/ Border#PART_TabStripHost">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+  </Style>
+
+  <Style Selector="ColorView /template/ Border#PART_ContentBorder,
+                   ColorPicker /template/ Border#PART_ContentBorder">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+  </Style>
+
+  <Style Selector="ColorView /template/ Border#PART_Separator,
+                   ColorPicker /template/ Border#PART_Separator">
+    <Setter Property="Background" Value="{DynamicResource LuminaDividerBrush}" />
+  </Style>
+
+  <Style Selector="ColorView /template/ TabItem,
+                   ColorPicker /template/ TabItem">
+    <Setter Property="Foreground" Value="{DynamicResource LuminaTextMutedBrush}" />
+    <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
+    <Setter Property="CornerRadius" Value="7" />
+    <Setter Property="Padding" Value="8,0" />
+  </Style>
+
+  <Style Selector="ColorView /template/ TabItem:pointerover,
+                   ColorPicker /template/ TabItem:pointerover">
+    <Setter Property="Background" Value="{DynamicResource LuminaStateHoverBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+  </Style>
+
+  <Style Selector="ColorView /template/ TabItem:selected,
+                   ColorPicker /template/ TabItem:selected">
+    <Setter Property="Foreground" Value="{DynamicResource LuminaPrimaryBrush}" />
+    <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBgBrush}" />
+  </Style>
+
+  <Style Selector="ColorView /template/ TabItem /template/ Border#PART_LayoutRoot,
+                   ColorPicker /template/ TabItem /template/ Border#PART_LayoutRoot">
+    <Setter Property="Background" Value="{Binding $parent[TabItem].Background}" />
+    <Setter Property="CornerRadius" Value="{Binding $parent[TabItem].CornerRadius}" />
+  </Style>
+
+  <Style Selector="ColorView /template/ TabItem:selected /template/ Border#PART_SelectedPipe,
+                   ColorPicker /template/ TabItem:selected /template/ Border#PART_SelectedPipe">
+    <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBrush}" />
+  </Style>
+
+  <Style Selector="ColorView /template/ ListBox,
+                   ColorPicker /template/ ListBox">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="0" />
+  </Style>
+
+  <Style Selector="ColorView /template/ ListBoxItem,
+                   ColorPicker /template/ ListBoxItem">
+    <Setter Property="CornerRadius" Value="5" />
+    <Setter Property="Margin" Value="1" />
+  </Style>
+
+  <Style Selector="ColorView /template/ ListBoxItem /template/ Rectangle#BorderRectangle,
+                   ColorPicker /template/ ListBoxItem /template/ Rectangle#BorderRectangle">
+    <Setter Property="StrokeThickness" Value="2" />
+  </Style>
+
+  <Style Selector="ColorView /template/ RadioButton#RgbRadioButton,
+                   ColorView /template/ RadioButton#HsvRadioButton,
+                   ColorPicker /template/ RadioButton#RgbRadioButton,
+                   ColorPicker /template/ RadioButton#HsvRadioButton">
+    <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+    <Setter Property="Padding" Value="12,6" />
+  </Style>
+
+  <Style Selector="ColorView /template/ RadioButton#RgbRadioButton:pointerover,
+                   ColorView /template/ RadioButton#HsvRadioButton:pointerover,
+                   ColorPicker /template/ RadioButton#RgbRadioButton:pointerover,
+                   ColorPicker /template/ RadioButton#HsvRadioButton:pointerover">
+    <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+  </Style>
+
+  <Style Selector="ColorView /template/ RadioButton#RgbRadioButton:checked,
+                   ColorView /template/ RadioButton#HsvRadioButton:checked,
+                   ColorPicker /template/ RadioButton#RgbRadioButton:checked,
+                   ColorPicker /template/ RadioButton#HsvRadioButton:checked">
+    <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBgBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource LuminaPrimaryBrush}" />
+  </Style>
+
+  <Style Selector="ColorSlider /template/ Thumb#ColorSliderThumb">
+    <Setter Property="BorderThickness" Value="3" />
+  </Style>
+
+  <Style Selector="ColorSpectrum /template/ Ellipse#BorderEllipse,
+                   ColorSpectrum /template/ Rectangle#BorderRectangle">
+    <Setter Property="Stroke" Value="{DynamicResource LuminaBorderDefaultBrush}" />
+    <Setter Property="StrokeThickness" Value="1" />
+  </Style>
+</Styles>

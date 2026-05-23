@@ -1,0 +1,135 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:lumina="using:LuminaUI.Controls">
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaTimeline}" TargetType="lumina:LuminaTimeline">
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaTimeline">
+                <ItemsPresenter ItemsPanel="{TemplateBinding ItemsPanel}" />
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaTimelineItem}" TargetType="lumina:LuminaTimelineItem">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaTimelineItem">
+                <Grid Name="PART_Root"
+                      ColumnDefinitions="*,Auto,*"
+                      RowDefinitions="Auto,Auto,Auto"
+                      MinHeight="62">
+                    <Grid Grid.Column="1"
+                          Grid.Row="0"
+                          Grid.RowSpan="3"
+                          RowDefinitions="Auto,*">
+                        <Panel Grid.Row="0"
+                               Width="28"
+                               Height="28">
+                            <Border Name="PART_DefaultIcon"
+                                    Width="12"
+                                    Height="12"
+                                    CornerRadius="6"
+                                    Background="{DynamicResource LuminaBorderBrush}"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    IsVisible="False" />
+                            <ContentPresenter Content="{TemplateBinding Icon}"
+                                              ContentTemplate="{TemplateBinding IconTemplate}"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              IsVisible="{TemplateBinding Icon, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                        </Panel>
+
+                        <Border Name="PART_Line"
+                                Grid.Row="1"
+                                Width="2"
+                                Background="{DynamicResource LuminaBorderBrush}"
+                                HorizontalAlignment="Center" />
+                    </Grid>
+
+                    <ContentPresenter Name="PART_Header"
+                                      Grid.Column="2"
+                                      Grid.Row="0"
+                                      Margin="10,3,0,0"
+                                      Content="{TemplateBinding Header}"
+                                      ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                      FontWeight="DemiBold"
+                                      Foreground="{DynamicResource LuminaTextForegroundBrush}" />
+
+                    <ContentPresenter Name="PART_Content"
+                                      Grid.Column="2"
+                                      Grid.Row="1"
+                                      Margin="10,4,0,0"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      TextElement.Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                      TextElement.FontSize="13" />
+
+                    <TextBlock Name="PART_Time"
+                               Grid.Column="2"
+                               Grid.Row="2"
+                               Margin="10,5,0,16"
+                               Text="{TemplateBinding DisplayTime}"
+                               FontSize="12"
+                               Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:last /template/ Border#PART_Line">
+            <Setter Property="Background" Value="#00FFFFFF" />
+        </Style>
+
+        <Style Selector="^:empty-icon /template/ Border#PART_DefaultIcon">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+
+        <Style Selector="^:left /template/ ContentPresenter#PART_Header">
+            <Setter Property="Grid.Column" Value="0" />
+            <Setter Property="Margin" Value="0,3,10,0" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+
+        <Style Selector="^:left /template/ ContentPresenter#PART_Content">
+            <Setter Property="Grid.Column" Value="0" />
+            <Setter Property="Margin" Value="0,4,10,0" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+
+        <Style Selector="^:left /template/ TextBlock#PART_Time">
+            <Setter Property="Grid.Column" Value="0" />
+            <Setter Property="Margin" Value="0,5,10,16" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="TextAlignment" Value="Right" />
+        </Style>
+
+        <Style Selector="^:separate /template/ TextBlock#PART_Time">
+            <Setter Property="Grid.Column" Value="0" />
+            <Setter Property="Grid.Row" Value="0" />
+            <Setter Property="Margin" Value="0,4,10,0" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="TextAlignment" Value="Right" />
+        </Style>
+
+        <Style Selector="^[Status=Info] /template/ Border#PART_DefaultIcon">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="^[Status=Ongoing] /template/ Border#PART_DefaultIcon">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBrush}" />
+            <Setter Property="BoxShadow" Value="0 0 0 4 #334C7DFF" />
+        </Style>
+
+        <Style Selector="^[Status=Success] /template/ Border#PART_DefaultIcon">
+            <Setter Property="Background" Value="{DynamicResource LuminaSuccessBrush}" />
+        </Style>
+
+        <Style Selector="^[Status=Warning] /template/ Border#PART_DefaultIcon">
+            <Setter Property="Background" Value="{DynamicResource LuminaWarningBrush}" />
+        </Style>
+
+        <Style Selector="^[Status=Danger] /template/ Border#PART_DefaultIcon">
+            <Setter Property="Background" Value="{DynamicResource LuminaDangerBrush}" />
+        </Style>
+    </ControlTheme>
+</ResourceDictionary>

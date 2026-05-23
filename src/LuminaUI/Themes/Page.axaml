@@ -1,0 +1,178 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaPage}" TargetType="lumina:LuminaPage">
+        <Setter Property="AutomaticallyApplySafeAreaPadding" Value="True" />
+        <Setter Property="Background" Value="{DynamicResource LuminaBackgroundBrush}" />
+        <Setter Property="Padding" Value="16" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        Padding="{TemplateBinding Padding}">
+                    <Grid RowDefinitions="Auto,Auto,*,Auto">
+                        <Border Grid.Row="0"
+                                Margin="0,0,0,16"
+                                IsVisible="{TemplateBinding Header, Converter={x:Static ObjectConverters.IsNotNull}}">
+                            <ContentPresenter Content="{TemplateBinding Header}"
+                                              TextElement.FontSize="28"
+                                              TextElement.FontWeight="Bold"
+                                              TextElement.Foreground="{DynamicResource LuminaTextForegroundBrush}" />
+                        </Border>
+
+                        <ContentPresenter Grid.Row="1"
+                                          Margin="0,0,0,12"
+                                          Content="{TemplateBinding TopCommandBar}"
+                                          IsVisible="{TemplateBinding TopCommandBar, Converter={x:Static ObjectConverters.IsNotNull}}" />
+
+                        <Grid Grid.Row="2" ClipToBounds="True">
+                            <ContentPresenter Name="PART_ContentPresenter"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+                            <Border Name="PART_StateHost"
+                                    Background="{TemplateBinding Background}"
+                                    Padding="24">
+                                <Grid MaxWidth="420"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center">
+                                    <Grid Name="PART_LoadingState">
+                                        <StackPanel Spacing="16"
+                                                    HorizontalAlignment="Center"
+                                                    IsVisible="{TemplateBinding LoadingContent, Converter={x:Static ObjectConverters.IsNull}}">
+                                            <ProgressBar Width="160"
+                                                         Height="4"
+                                                         IsIndeterminate="True"
+                                                         Foreground="{DynamicResource LuminaPrimaryBrush}" />
+                                            <TextBlock Text="{DynamicResource Lumina.Page.Loading}"
+                                                       FontSize="14"
+                                                       FontWeight="SemiBold"
+                                                       TextAlignment="Center"
+                                                       Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                                        </StackPanel>
+                                        <ContentPresenter Content="{TemplateBinding LoadingContent}"
+                                                          IsVisible="{TemplateBinding LoadingContent, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                                    </Grid>
+
+                                    <Grid Name="PART_EmptyState">
+                                        <StackPanel Spacing="14"
+                                                    HorizontalAlignment="Center"
+                                                    IsVisible="{TemplateBinding EmptyContent, Converter={x:Static ObjectConverters.IsNull}}">
+                                            <Border Width="48"
+                                                    Height="48"
+                                                    CornerRadius="24"
+                                                    Background="{DynamicResource LuminaSurfaceBrush}"
+                                                    BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                                                    BorderThickness="1">
+                                                <TextBlock Text="—"
+                                                           FontSize="22"
+                                                           FontWeight="SemiBold"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"
+                                                           Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                                            </Border>
+                                            <TextBlock Text="{DynamicResource Lumina.Page.Empty}"
+                                                       FontSize="14"
+                                                       FontWeight="SemiBold"
+                                                       TextAlignment="Center"
+                                                       Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                                        </StackPanel>
+                                        <ContentPresenter Content="{TemplateBinding EmptyContent}"
+                                                          IsVisible="{TemplateBinding EmptyContent, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                                    </Grid>
+
+                                    <Grid Name="PART_ErrorState">
+                                        <StackPanel Spacing="14"
+                                                    HorizontalAlignment="Center"
+                                                    IsVisible="{TemplateBinding ErrorContent, Converter={x:Static ObjectConverters.IsNull}}">
+                                            <Border Width="48"
+                                                    Height="48"
+                                                    CornerRadius="24"
+                                                    Background="{DynamicResource LuminaDangerHoverBrush}">
+                                                <TextBlock Text="!"
+                                                           FontSize="22"
+                                                           FontWeight="Bold"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"
+                                                           Foreground="{DynamicResource LuminaDangerForegroundBrush}" />
+                                            </Border>
+                                            <TextBlock Text="{DynamicResource Lumina.Page.Error}"
+                                                       FontSize="14"
+                                                       FontWeight="SemiBold"
+                                                       TextAlignment="Center"
+                                                       Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                                        </StackPanel>
+                                        <ContentPresenter Content="{TemplateBinding ErrorContent}"
+                                                          IsVisible="{TemplateBinding ErrorContent, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </Grid>
+
+                        <ContentPresenter Grid.Row="3"
+                                          Margin="0,12,0,0"
+                                          Content="{TemplateBinding BottomCommandBar}"
+                                          IsVisible="{TemplateBinding BottomCommandBar, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^ /template/ Border#PART_StateHost">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+
+        <Style Selector="^ /template/ Grid#PART_LoadingState">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+
+        <Style Selector="^ /template/ Grid#PART_EmptyState">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+
+        <Style Selector="^ /template/ Grid#PART_ErrorState">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+
+        <Style Selector="^[PageState=Loading] /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+
+        <Style Selector="^[PageState=Loading] /template/ Border#PART_StateHost">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+
+        <Style Selector="^[PageState=Loading] /template/ Grid#PART_LoadingState">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+
+        <Style Selector="^[PageState=Empty] /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+
+        <Style Selector="^[PageState=Empty] /template/ Border#PART_StateHost">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+
+        <Style Selector="^[PageState=Empty] /template/ Grid#PART_EmptyState">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+
+        <Style Selector="^[PageState=Error] /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+
+        <Style Selector="^[PageState=Error] /template/ Border#PART_StateHost">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+
+        <Style Selector="^[PageState=Error] /template/ Grid#PART_ErrorState">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+    </ControlTheme>
+
+</ResourceDictionary>

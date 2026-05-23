@@ -1,0 +1,82 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:lumina="using:LuminaUI.Controls">
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaBreadcrumb}"
+                  TargetType="lumina:LuminaBreadcrumb">
+        <Setter Property="ItemsPanel">
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+        </Setter>
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaBreadcrumb">
+                <ItemsPresenter Name="PART_ItemsPresenter"
+                                ItemsPanel="{TemplateBinding ItemsPanel}" />
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaBreadcrumbItem}"
+                  TargetType="lumina:LuminaBreadcrumbItem">
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaBreadcrumbItem">
+                <Grid ColumnDefinitions="Auto,Auto"
+                      VerticalAlignment="Center">
+                    <Border Name="PART_ItemRoot"
+                            MinHeight="30"
+                            Padding="7,4"
+                            CornerRadius="6"
+                            Background="Transparent">
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="6"
+                                    VerticalAlignment="Center">
+                            <ContentPresenter Content="{TemplateBinding Icon}"
+                                              ContentTemplate="{TemplateBinding IconTemplate}"
+                                              IsVisible="{TemplateBinding Icon, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                              VerticalAlignment="Center"
+                                              TextElement.FontSize="13"
+                                              TextElement.FontWeight="SemiBold"
+                                              TextElement.Foreground="{TemplateBinding Foreground}" />
+                            <ContentPresenter Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              VerticalAlignment="Center"
+                                              RecognizesAccessKey="True"
+                                              TextElement.FontSize="14"
+                                              TextElement.FontWeight="SemiBold"
+                                              TextElement.Foreground="{TemplateBinding Foreground}" />
+                        </StackPanel>
+                    </Border>
+
+                    <ContentPresenter Name="PART_SeparatorPresenter"
+                                      Grid.Column="1"
+                                      Margin="4,0"
+                                      Content="{TemplateBinding Separator}"
+                                      VerticalAlignment="Center"
+                                      TextElement.FontSize="13"
+                                      TextElement.FontWeight="SemiBold"
+                                      TextElement.Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:pointerover /template/ Border#PART_ItemRoot">
+            <Setter Property="Background" Value="{DynamicResource LuminaFillTertiaryBrush}" />
+        </Style>
+
+        <Style Selector="^:pressed /template/ Border#PART_ItemRoot">
+            <Setter Property="Background" Value="{DynamicResource LuminaFillSecondaryBrush}" />
+        </Style>
+
+        <Style Selector="^:last">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
+            <Setter Property="Cursor" Value="Arrow" />
+        </Style>
+
+        <Style Selector="^:last /template/ ContentPresenter#PART_SeparatorPresenter">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+    </ControlTheme>
+</ResourceDictionary>

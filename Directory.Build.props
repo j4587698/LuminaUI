@@ -1,0 +1,26 @@
+<Project>
+  <PropertyGroup>
+    <LuminaUIVersion>0.1.0</LuminaUIVersion>
+
+    <Version>$(LuminaUIVersion)</Version>
+    <PackageVersion>$(LuminaUIVersion)</PackageVersion>
+    <LuminaUIAssemblyVersion>0.1.0.0</LuminaUIAssemblyVersion>
+    <AssemblyVersion>$(LuminaUIAssemblyVersion)</AssemblyVersion>
+    <FileVersion>$(LuminaUIAssemblyVersion)</FileVersion>
+    <InformationalVersion>$(LuminaUIVersion)</InformationalVersion>
+
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+
+    <Authors>LuminaUI Contributors</Authors>
+    <Company>LuminaUI</Company>
+    <Product>LuminaUI</Product>
+    <PackageTags>Avalonia;UI;Controls;Theme;LuminaUI</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+</Project>

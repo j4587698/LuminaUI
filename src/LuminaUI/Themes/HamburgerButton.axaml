@@ -1,0 +1,59 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaHamburgerButton}" TargetType="lumina:LuminaHamburgerButton">
+        <Setter Property="Width" Value="36" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaHamburgerButton">
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                    <Grid Width="18"
+                          Height="14"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center">
+                        <Border Name="PART_Top"
+                                Height="2"
+                                CornerRadius="1"
+                                Background="{TemplateBinding Foreground}"
+                                VerticalAlignment="Top" />
+                        <Border Name="PART_Middle"
+                                Height="2"
+                                CornerRadius="1"
+                                Background="{TemplateBinding Foreground}"
+                                VerticalAlignment="Center" />
+                        <Border Name="PART_Bottom"
+                                Height="2"
+                                CornerRadius="1"
+                                Background="{TemplateBinding Foreground}"
+                                VerticalAlignment="Bottom" />
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:pointerover">
+            <Setter Property="Background" Value="{DynamicResource LuminaStateHoverBrush}" />
+        </Style>
+
+        <Style Selector="^:pressed">
+            <Setter Property="Background" Value="{DynamicResource LuminaStatePressedBrush}" />
+            <Setter Property="RenderTransform" Value="scale(0.98)" />
+        </Style>
+
+        <Style Selector="^:checked">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBgBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaPrimaryBrush}" />
+        </Style>
+    </ControlTheme>
+</ResourceDictionary>

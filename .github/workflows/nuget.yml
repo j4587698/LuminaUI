@@ -1,0 +1,382 @@
+name: LuminaUI
+
+on:
+  push:
+    branches:
+      - master
+      - main
+    paths:
+      - "Directory.Build.props"
+      - "Directory.Build.targets"
+      - "Directory.Packages.props"
+      - "src/**"
+      - "demo/**"
+      - "README.md"
+      - "README.zh-CN.md"
+      - "LICENSE"
+      - ".github/workflows/nuget.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  CONFIGURATION: Release
+  DOTNET_NOLOGO: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  NUGET_SOURCE: https://api.nuget.org/v3/index.json
+
+jobs:
+  prepare:
+    name: Prepare release
+    runs-on: ubuntu-latest
+
+    outputs:
+      should_release: ${{ steps.prepare.outputs.should_release }}
+      package_version: ${{ steps.prepare.outputs.package_version }}
+      tag_name: ${{ steps.prepare.outputs.tag_name }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve version
+        id: prepare
+        shell: pwsh
+        run: |
+          [xml]$props = Get-Content -LiteralPath "Directory.Build.props"
+          $version = [string]$props.Project.PropertyGroup.LuminaUIVersion
+
+          if ([string]::IsNullOrWhiteSpace($version)) {
+            throw "LuminaUIVersion is missing in Directory.Build.props."
+          }
+
+          $parsedVersion = $null
+          if (-not [Version]::TryParse($version, [ref]$parsedVersion)) {
+            throw "LuminaUIVersion must be a stable numeric SemVer version such as 0.1.0. Current value: '$version'."
+          }
+
+          $tagName = "v$version"
+          $existingTag = git tag --list $tagName
+
+          "package_version=$version" >> $env:GITHUB_OUTPUT
+          "tag_name=$tagName" >> $env:GITHUB_OUTPUT
+
+          if (-not [string]::IsNullOrWhiteSpace($existingTag)) {
+            Write-Host "Tag '$tagName' already exists. Nothing to publish."
+            "should_release=false" >> $env:GITHUB_OUTPUT
+            exit 0
+          }
+
+          $latestTag = git tag --list "v[0-9]*" --sort=-v:refname | Select-Object -First 1
+          if (-not [string]::IsNullOrWhiteSpace($latestTag)) {
+            $latestVersionText = $latestTag.Substring(1)
+            $latestVersion = $null
+
+            if ([Version]::TryParse($latestVersionText, [ref]$latestVersion) -and $parsedVersion -le $latestVersion) {
+              throw "LuminaUIVersion '$version' is not higher than the latest release tag '$latestTag'."
+            }
+          }
+
+          Write-Host "Preparing release '$tagName'."
+          "should_release=true" >> $env:GITHUB_OUTPUT
+
+  nuget:
+    name: Build NuGet packages
+    needs: prepare
+    if: needs.prepare.outputs.should_release == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+            10.0.x
+
+      - name: Restore
+        run: |
+          dotnet restore src/LuminaUI/LuminaUI.csproj
+          dotnet restore src/LuminaUI.ColorPicker/LuminaUI.ColorPicker.csproj
+          dotnet restore src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj
+          dotnet restore src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj
+
+      - name: Build
+        run: |
+          dotnet build src/LuminaUI/LuminaUI.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
+          dotnet build src/LuminaUI.ColorPicker/LuminaUI.ColorPicker.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
+          dotnet build src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
+          dotnet build src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
+
+      - name: Pack
+        run: |
+          mkdir -p artifacts/packages
+          dotnet pack src/LuminaUI/LuminaUI.csproj --configuration "$CONFIGURATION" --no-build --output artifacts/packages /p:ContinuousIntegrationBuild=true
+          dotnet pack src/LuminaUI.ColorPicker/LuminaUI.ColorPicker.csproj --configuration "$CONFIGURATION" --no-build --output artifacts/packages /p:ContinuousIntegrationBuild=true
+          dotnet pack src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj --configuration "$CONFIGURATION" --no-build --output artifacts/packages /p:ContinuousIntegrationBuild=true
+          dotnet pack src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj --configuration "$CONFIGURATION" --no-build --output artifacts/packages /p:ContinuousIntegrationBuild=true
+
+      - name: Upload NuGet artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-packages
+          path: artifacts/packages/*
+
+  demo-desktop:
+    name: Build desktop demo AOT
+    needs: prepare
+    if: needs.prepare.outputs.should_release == 'true'
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Publish Windows x64 Native AOT demo
+        shell: pwsh
+        run: |
+          $version = "${{ needs.prepare.outputs.package_version }}"
+          $publishDir = "artifacts/demo/desktop-win-x64-aot"
+          $assetPath = "artifacts/LuminaUI.Demo.Desktop.win-x64.aot.$version.zip"
+
+          dotnet publish "demo/LuminaUI.Demo.Desktop/LuminaUI.Demo.Desktop.csproj" `
+            --configuration "$env:CONFIGURATION" `
+            --runtime win-x64 `
+            --self-contained true `
+            --output $publishDir `
+            /p:PublishAot=true `
+            /p:ContinuousIntegrationBuild=true
+
+          Compress-Archive -Path "$publishDir/*" -DestinationPath $assetPath -Force
+
+      - name: Upload desktop demo
+        uses: actions/upload-artifact@v4
+        with:
+          name: demo-desktop-win-x64-aot
+          path: artifacts/*.zip
+
+  demo-browser:
+    name: Build browser demo AOT
+    needs: prepare
+    if: needs.prepare.outputs.should_release == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Install WebAssembly workload
+        run: dotnet workload install wasm-tools
+
+      - name: Publish browser WebAssembly AOT demo
+        run: |
+          version="${{ needs.prepare.outputs.package_version }}"
+          publish_dir="artifacts/demo/browser-wasm-aot"
+          asset_path="artifacts/LuminaUI.Demo.Browser.wasm-aot.${version}.zip"
+
+          dotnet publish demo/LuminaUI.Demo.Browser/LuminaUI.Demo.Browser.csproj \
+            --configuration "$CONFIGURATION" \
+            --output "$publish_dir" \
+            /p:RunAOTCompilation=true \
+            /p:ContinuousIntegrationBuild=true
+
+          cd "$publish_dir"
+          zip -r "../../LuminaUI.Demo.Browser.wasm-aot.${version}.zip" .
+
+      - name: Upload browser demo
+        uses: actions/upload-artifact@v4
+        with:
+          name: demo-browser-wasm-aot
+          path: artifacts/*.zip
+
+  demo-android:
+    name: Build Android demo AOT
+    needs: prepare
+    if: needs.prepare.outputs.should_release == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Install Android workload
+        run: dotnet workload install android
+
+      - name: Publish Android AOT demo
+        shell: bash
+        run: |
+          version="${{ needs.prepare.outputs.package_version }}"
+          publish_dir="artifacts/demo/android-aot"
+          asset_path="artifacts/LuminaUI.Demo.Android.aot.${version}.zip"
+
+          dotnet publish demo/LuminaUI.Demo.Android/LuminaUI.Demo.Android.csproj \
+            --configuration "$CONFIGURATION" \
+            --output "$publish_dir" \
+            /p:AndroidPackageFormat=apk \
+            /p:AndroidKeyStore=false \
+            /p:RunAOTCompilation=true \
+            /p:ContinuousIntegrationBuild=true
+
+          cd "$publish_dir"
+          zip -r "../../LuminaUI.Demo.Android.aot.${version}.zip" .
+
+      - name: Upload Android demo
+        uses: actions/upload-artifact@v4
+        with:
+          name: demo-android-aot
+          path: artifacts/*.zip
+
+  demo-ios:
+    name: Build iOS simulator demo
+    needs: prepare
+    if: needs.prepare.outputs.should_release == 'true'
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Install iOS workload
+        run: dotnet workload install ios
+
+      - name: Publish iOS simulator demo
+        shell: bash
+        run: |
+          version="${{ needs.prepare.outputs.package_version }}"
+          arch="$(uname -m)"
+          if [ "$arch" = "arm64" ]; then
+            rid="iossimulator-arm64"
+          else
+            rid="iossimulator-x64"
+          fi
+          publish_dir="artifacts/demo/$rid"
+
+          dotnet publish demo/LuminaUI.Demo.iOS/LuminaUI.Demo.iOS.csproj \
+            --configuration "$CONFIGURATION" \
+            --runtime "$rid" \
+            --self-contained true \
+            --output "$publish_dir" \
+            /p:ContinuousIntegrationBuild=true
+
+          cd "$publish_dir"
+          zip -r "../../LuminaUI.Demo.iOS.${rid}.${version}.zip" .
+
+      - name: Upload iOS simulator demo
+        uses: actions/upload-artifact@v4
+        with:
+          name: demo-ios-simulator
+          path: artifacts/*.zip
+
+  release:
+    name: Publish NuGet and GitHub Release
+    needs:
+      - prepare
+      - nuget
+      - demo-desktop
+      - demo-browser
+      - demo-android
+      - demo-ios
+    if: needs.prepare.outputs.should_release == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Download release artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts/release
+
+      - name: Publish packages to NuGet
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        shell: bash
+        run: |
+          shopt -s nullglob
+
+          if [ -z "$NUGET_API_KEY" ]; then
+            echo "NUGET_API_KEY secret is required to publish packages."
+            exit 1
+          fi
+
+          packages=(artifacts/release/nuget-packages/*.nupkg)
+          symbols=(artifacts/release/nuget-packages/*.snupkg)
+
+          if [ ${#packages[@]} -eq 0 ]; then
+            echo "No .nupkg files were produced."
+            exit 1
+          fi
+
+          for package in "${packages[@]}"; do
+            dotnet nuget push "$package" \
+              --api-key "$NUGET_API_KEY" \
+              --source "$NUGET_SOURCE" \
+              --skip-duplicate
+          done
+
+          for symbol in "${symbols[@]}"; do
+            dotnet nuget push "$symbol" \
+              --api-key "$NUGET_API_KEY" \
+              --source "$NUGET_SOURCE" \
+              --skip-duplicate
+          done
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG_NAME: ${{ needs.prepare.outputs.tag_name }}
+          PACKAGE_VERSION: ${{ needs.prepare.outputs.package_version }}
+        shell: bash
+        run: |
+          mapfile -t assets < <(find artifacts/release -type f | sort)
+
+          if [ ${#assets[@]} -eq 0 ]; then
+            echo "No release assets were downloaded."
+            exit 1
+          fi
+
+          gh release create "$TAG_NAME" "${assets[@]}" \
+            --target "$GITHUB_SHA" \
+            --title "LuminaUI $PACKAGE_VERSION" \
+            --generate-notes

@@ -1,0 +1,44 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.LinkedCategoryListShowcasePage"
+             x:DataType="vm:LinkedCategoryListShowcaseViewModel">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24"
+                    Width="{Binding #PageScroll.Bounds.Width}"
+                    HorizontalAlignment="Stretch"
+                    Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0310}" />
+                <TextBlock Classes="Body"
+                           Text="{DynamicResource Sandbox.Text.0315}" />
+            </StackPanel>
+
+            <lumina:LuminaCard MaxWidth="760" HorizontalAlignment="Stretch">
+                <StackPanel Spacing="16">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0316}" />
+                    <lumina:LuminaLinkedCategoryList Height="460"
+                                                      ItemsSource="{Binding MenuSections}">
+                        <lumina:LuminaLinkedCategoryList.ItemTemplate>
+                            <DataTemplate x:DataType="vm:LinkedCategorySectionViewModel">
+                                <lumina:LuminaLinkedCategorySection Header="{Binding Header}"
+                                                                    ItemsSource="{Binding Items}">
+                                    <lumina:LuminaLinkedCategorySection.ItemTemplate>
+                                        <DataTemplate x:DataType="vm:ListItemViewModel">
+                                            <lumina:LuminaListItem Icon="{Binding Icon}"
+                                                                   Header="{Binding Header}"
+                                                                   Description="{Binding Description}"
+                                                                   Value="{Binding Value}" />
+                                        </DataTemplate>
+                                    </lumina:LuminaLinkedCategorySection.ItemTemplate>
+                                </lumina:LuminaLinkedCategorySection>
+                            </DataTemplate>
+                        </lumina:LuminaLinkedCategoryList.ItemTemplate>
+                    </lumina:LuminaLinkedCategoryList>
+                </StackPanel>
+            </lumina:LuminaCard>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

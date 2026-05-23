@@ -1,0 +1,280 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="using:LuminaUI.Converters">
+
+    <StreamGeometry x:Key="LuminaCarouselPreviousGlyph">M15,6 L9,12 L15,18</StreamGeometry>
+    <StreamGeometry x:Key="LuminaCarouselNextGlyph">M9,6 L15,12 L9,18</StreamGeometry>
+
+    <ControlTheme x:Key="LuminaCarouselIndicatorDotItem" TargetType="ListBoxItem">
+        <Setter Property="Margin" Value="3,0" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Background" Value="{DynamicResource LuminaTextMutedBrush}" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="ListBoxItem">
+                <Border Name="PART_Dot"
+                        Width="7"
+                        Height="7"
+                        CornerRadius="4"
+                        Background="{TemplateBinding Background}">
+                    <Border.Transitions>
+                        <Transitions>
+                            <DoubleTransition Property="Width" Duration="0:0:0.16" />
+                            <BrushTransition Property="Background" Duration="0:0:0.16" />
+                        </Transitions>
+                    </Border.Transitions>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:pointerover">
+            <Setter Property="Background" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+        </Style>
+
+        <Style Selector="^:selected">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="^:selected /template/ Border#PART_Dot">
+            <Setter Property="Width" Value="20" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="LuminaCarouselIndicatorLineItem"
+                  TargetType="ListBoxItem"
+                  BasedOn="{StaticResource LuminaCarouselIndicatorDotItem}">
+        <Setter Property="Margin" Value="2,0" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="ListBoxItem">
+                <Border Name="PART_Line"
+                        Height="4"
+                        CornerRadius="2"
+                        Background="{TemplateBinding Background}">
+                    <Border.Transitions>
+                        <Transitions>
+                            <BrushTransition Property="Background" Duration="0:0:0.16" />
+                        </Transitions>
+                    </Border.Transitions>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+    <ControlTheme x:Key="LuminaCarouselIndicatorColumnarItem"
+                  TargetType="ListBoxItem"
+                  BasedOn="{StaticResource LuminaCarouselIndicatorDotItem}">
+        <Setter Property="Width" Value="5" />
+        <Setter Property="Height" Value="22" />
+        <Setter Property="Margin" Value="3,0" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="ListBoxItem">
+                <Border Name="PART_Column"
+                        Width="5"
+                        Height="10"
+                        VerticalAlignment="Bottom"
+                        CornerRadius="3"
+                        Background="{TemplateBinding Background}">
+                    <Border.Transitions>
+                        <Transitions>
+                            <DoubleTransition Property="Height" Duration="0:0:0.18" />
+                            <BrushTransition Property="Background" Duration="0:0:0.16" />
+                        </Transitions>
+                    </Border.Transitions>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:selected /template/ Border#PART_Column">
+            <Setter Property="Height" Value="22" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="LuminaCarouselButton" TargetType="Button">
+        <Setter Property="Width" Value="36" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Background" Value="#66000000" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="BorderBrush" Value="#26FFFFFF" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="18" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="Button">
+                <Border Name="PART_ButtonRoot"
+                        Width="{TemplateBinding Width}"
+                        Height="{TemplateBinding Height}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                    <Viewbox Width="18"
+                             Height="18"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             Stretch="Uniform">
+                        <Canvas Width="24" Height="24">
+                            <Path Data="{TemplateBinding Content}"
+                                  Fill="Transparent"
+                                  Stroke="{TemplateBinding Foreground}"
+                                  StrokeLineCap="Round"
+                                  StrokeJoin="Round"
+                                  StrokeThickness="2.4" />
+                        </Canvas>
+                    </Viewbox>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:pointerover">
+            <Setter Property="Background" Value="#99000000" />
+            <Setter Property="BorderBrush" Value="#40FFFFFF" />
+        </Style>
+
+        <Style Selector="^:pressed">
+            <Setter Property="Background" Value="#B3000000" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type Carousel}" TargetType="Carousel">
+        <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="AutoScrollToSelectedItem" Value="False" />
+        <Setter Property="PageTransition">
+            <PageSlide Orientation="Horizontal" Duration="0.28" />
+        </Setter>
+        <Setter Property="Template">
+            <ControlTemplate TargetType="Carousel">
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="10"
+                        ClipToBounds="True">
+                    <Grid RowDefinitions="*,Auto">
+                        <ScrollViewer Name="PART_ScrollViewer"
+                                      Grid.Row="0"
+                                      Grid.RowSpan="2"
+                                      Background="Transparent"
+                                      BringIntoViewOnFocusChange="False"
+                                      HorizontalScrollBarVisibility="Hidden"
+                                      VerticalScrollBarVisibility="Hidden">
+                            <ItemsPresenter Name="PART_ItemsPresenter"
+                                            Margin="{TemplateBinding Padding}"
+                                            ItemsPanel="{TemplateBinding ItemsPanel}" />
+                        </ScrollViewer>
+
+                        <Border Name="PART_IndicatorScrim"
+                                Grid.Row="1"
+                                Height="52"
+                                VerticalAlignment="Bottom"
+                                IsHitTestVisible="False">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                    <GradientStop Color="#00000000" Offset="0" />
+                                    <GradientStop Color="#66000000" Offset="1" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+
+                        <ListBox Name="PART_Indicators"
+                                 Grid.Row="1"
+                                 Margin="0,0,0,16"
+                                 Padding="0"
+                                 MinHeight="20"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Bottom"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 AutoScrollToSelectedItem="False"
+                                 Focusable="False"
+                                 ScrollViewer.BringIntoViewOnFocusChange="False"
+                                 ItemContainerTheme="{StaticResource LuminaCarouselIndicatorDotItem}"
+                                 ItemsSource="{TemplateBinding ItemCount, Converter={x:Static converters:LuminaCarouselConverters.ItemToObjectConverter}}"
+                                 IsVisible="{TemplateBinding ItemCount, Converter={x:Static converters:LuminaCarouselConverters.ItemVisibleConverter}}"
+                                 SelectedIndex="{TemplateBinding SelectedIndex, Mode=TwoWay}">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                        </ListBox>
+
+                        <Button Name="PART_PreviousButton"
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Margin="14,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Theme="{StaticResource LuminaCarouselButton}"
+                                Content="{StaticResource LuminaCarouselPreviousGlyph}"
+                                IsVisible="{TemplateBinding ItemCount, Converter={x:Static converters:LuminaCarouselConverters.ItemVisibleConverter}}"
+                                Command="{Binding $parent[Carousel].Previous}" />
+
+                        <Button Name="PART_NextButton"
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Margin="0,0,14,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Theme="{StaticResource LuminaCarouselButton}"
+                                Content="{StaticResource LuminaCarouselNextGlyph}"
+                                IsVisible="{TemplateBinding ItemCount, Converter={x:Static converters:LuminaCarouselConverters.ItemVisibleConverter}}"
+                                Command="{Binding $parent[Carousel].Next}" />
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^.Line /template/ ListBox#PART_Indicators">
+            <Setter Property="ItemContainerTheme" Value="{StaticResource LuminaCarouselIndicatorLineItem}" />
+            <Setter Property="Width" Value="180" />
+            <Setter Property="ItemsPanel">
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="{TemplateBinding ItemCount}" Rows="1" />
+                </ItemsPanelTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="^.Columnar /template/ ListBox#PART_Indicators">
+            <Setter Property="ItemContainerTheme" Value="{StaticResource LuminaCarouselIndicatorColumnarItem}" />
+        </Style>
+
+        <Style Selector="^.HideIndicators /template/ Border#PART_IndicatorScrim">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+
+        <Style Selector="^.HideIndicators /template/ ListBox#PART_Indicators">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+
+        <Style Selector="^.HideNavigationButtons /template/ Button#PART_PreviousButton">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+
+        <Style Selector="^.HideNavigationButtons /template/ Button#PART_NextButton">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+
+        <Style Selector="^.Left /template/ ListBox#PART_Indicators">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Margin" Value="18,0,0,16" />
+        </Style>
+
+        <Style Selector="^.Center /template/ ListBox#PART_Indicators">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+
+        <Style Selector="^.Right /template/ ListBox#PART_Indicators">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Margin" Value="0,0,18,16" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type CarouselPage}" TargetType="CarouselPage" BasedOn="{StaticResource {x:Type CarouselPage}}">
+        <Setter Property="Background" Value="Transparent" />
+    </ControlTheme>
+
+</ResourceDictionary>

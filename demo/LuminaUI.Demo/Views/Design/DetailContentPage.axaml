@@ -1,0 +1,33 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="LuminaUI.Demo.Views.DetailContentPage"
+             x:DataType="vm:DetailContentPageViewModel"
+             Header="{DynamicResource Sandbox.Text.0632}"
+             NavigationPage.HasNavigationBar="False">
+             
+    <Border Padding="16">
+        <StackPanel Spacing="24" HorizontalAlignment="Stretch">
+            <lumina:LuminaCard>
+                <StackPanel Spacing="12">
+                    <TextBlock Text="{DynamicResource Sandbox.Text.0633}" FontSize="20" FontWeight="Bold" Foreground="{DynamicResource LuminaTextForegroundBrush}"/>
+                    <TextBlock Text="{DynamicResource Sandbox.Text.0634}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap"/>
+                
+                    <WrapPanel Margin="0,12,0,0">
+                        <Button Content="{DynamicResource Sandbox.Text.0635}"
+                                Classes="Outline"
+                                Margin="0,0,16,0"
+                                lumina:LuminaCommand.ClickCommand="{Binding GoBackCommand}"
+                                lumina:LuminaCommand.PassEventArgsToCommand="True" />
+                        <Button Content="{DynamicResource Sandbox.Text.0636}" Classes="Success" />
+                    </WrapPanel>
+                </StackPanel>
+            </lumina:LuminaCard>
+        </StackPanel>
+    </Border>
+    
+</ContentPage>

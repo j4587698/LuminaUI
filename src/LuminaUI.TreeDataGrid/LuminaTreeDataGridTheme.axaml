@@ -1,0 +1,60 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:tdg="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls.TreeDataGrid"
+        xmlns:tdgp="clr-namespace:Avalonia.Controls.Primitives;assembly=Avalonia.Controls.TreeDataGrid"
+        x:Class="LuminaUI.TreeDataGrid.LuminaTreeDataGridTheme">
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceInclude x:Key="Light" Source="avares://LuminaUI.TreeDataGrid/Themes/Light.axaml" />
+                <ResourceInclude x:Key="Dark" Source="avares://LuminaUI.TreeDataGrid/Themes/Dark.axaml" />
+            </ResourceDictionary.ThemeDictionaries>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://LuminaUI.TreeDataGrid/Themes/Shared.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+
+    <StyleInclude Source="avares://Avalonia.Controls.TreeDataGrid/Themes/Fluent.axaml" />
+
+    <Style Selector="tdg|TreeDataGrid">
+        <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="8" />
+    </Style>
+
+    <Style Selector="tdgp|TreeDataGridColumnHeader">
+        <Setter Property="Background" Value="#00FFFFFF" />
+        <Setter Property="Foreground" Value="{DynamicResource TreeDataGridColumnHeaderForeground}" />
+        <Setter Property="Padding" Value="12,2,8,2" />
+        <Setter Property="MinHeight" Value="{DynamicResource TreeDataGridColumnHeaderMinHeight}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource TreeDataGridColumnHeaderCornerRadius}" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Cursor" Value="Hand" />
+    </Style>
+
+    <Style Selector="tdgp|TreeDataGridColumnHeader:pointerover">
+        <Setter Property="Background" Value="{DynamicResource TreeDataGridHeaderPointeroverBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource TreeDataGridHeaderPointeroverForeground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource TreeDataGridHeaderPointeroverBorderBrush}" />
+    </Style>
+
+    <Style Selector="tdgp|TreeDataGridColumnHeader:pressed">
+        <Setter Property="Background" Value="{DynamicResource TreeDataGridHeaderPressedBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource TreeDataGridHeaderPressedForeground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource TreeDataGridHeaderPressedBorderBrush}" />
+    </Style>
+
+    <Style Selector="tdgp|TreeDataGridRow">
+        <Setter Property="MinHeight" Value="{DynamicResource TreeDataGridRowMinHeight}" />
+        <Setter Property="Margin" Value="{DynamicResource TreeDataGridRowMargin}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource TreeDataGridRowCornerRadius}" />
+    </Style>
+
+    <Style Selector="tdgp|TreeDataGridCell:selected">
+        <Setter Property="Background" Value="{DynamicResource TreeDataGridCellSelectedBackground}" />
+    </Style>
+</Styles>

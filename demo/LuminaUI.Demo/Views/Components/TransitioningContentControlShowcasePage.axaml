@@ -1,0 +1,92 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.TransitioningContentControlShowcasePage"
+             x:DataType="vm:TransitioningContentControlShowcaseViewModel">
+    <ScrollViewer Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.1295}" />
+                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0768}" TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="300" MaxItemWidth="640" HorizontalSpacing="16" VerticalSpacing="16">
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <Grid ColumnDefinitions="*,220" ColumnSpacing="16">
+                            <StackPanel Spacing="4">
+                                <TextBlock Classes="SectionTitle" Text="Content transition" />
+                                <TextBlock Classes="Helper"
+                                           Text="Switch Page 1, Page 2, and Page 3 with the selected transition."
+                                           TextWrapping="Wrap" />
+                            </StackPanel>
+
+                            <ComboBox Grid.Column="1"
+                                      ItemsSource="{Binding TransitionChoices}"
+                                      SelectedItem="{Binding SelectedTransitionChoice}"
+                                      HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Top">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate x:DataType="vm:PageTransitionChoice">
+                                        <TextBlock Text="{Binding Name}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+
+                        <WrapPanel>
+                            <Button Classes="Outline"
+                                    Content="Page 1"
+                                    Command="{Binding ShowPageCommand}"
+                                    CommandParameter="1"
+                                    Margin="0,0,8,8" />
+                            <Button Classes="Outline"
+                                    Content="Page 2"
+                                    Command="{Binding ShowPageCommand}"
+                                    CommandParameter="2"
+                                    Margin="0,0,8,8" />
+                            <Button Classes="Outline"
+                                    Content="Page 3"
+                                    Command="{Binding ShowPageCommand}"
+                                    CommandParameter="3"
+                                    Margin="0,0,8,8" />
+                        </WrapPanel>
+
+                        <TransitioningContentControl Content="{Binding CurrentPage}"
+                                                     PageTransition="{Binding PageTransition}">
+                            <TransitioningContentControl.ContentTemplate>
+                                <DataTemplate x:DataType="vm:TransitionContentPageItem">
+                                    <Border MinHeight="220"
+                                            Padding="24"
+                                            Background="{DynamicResource LuminaSurfaceElevatedBrush}"
+                                            BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                                            BorderThickness="1"
+                                            CornerRadius="10">
+                                        <Grid RowDefinitions="*,Auto">
+                                            <StackPanel HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        Spacing="8">
+                                                <TextBlock Text="{Binding Title}"
+                                                           FontSize="36"
+                                                           FontWeight="Bold"
+                                                           HorizontalAlignment="Center" />
+                                                <TextBlock Text="{Binding Subtitle}"
+                                                           Classes="Helper"
+                                                           HorizontalAlignment="Center" />
+                                            </StackPanel>
+                                            <TextBlock Grid.Row="1"
+                                                       Text="{Binding Number, StringFormat='Content index: {0}'}"
+                                                       Classes="Helper"
+                                                       HorizontalAlignment="Right" />
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </TransitioningContentControl.ContentTemplate>
+                        </TransitioningContentControl>
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

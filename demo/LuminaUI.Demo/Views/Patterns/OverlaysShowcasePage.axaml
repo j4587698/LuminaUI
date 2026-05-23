@@ -1,0 +1,196 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:views="clr-namespace:LuminaUI.Demo.Views"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.OverlaysShowcasePage"
+             x:DataType="vm:OverlaysShowcaseViewModel">
+  <ContentPage.Resources>
+    <lumina:LuminaDialog x:Key="InlineStatusDialog" Title="{DynamicResource Sandbox.Text.0594}">
+      <StackPanel Spacing="16" MinWidth="320" MaxWidth="440">
+        <StackPanel Spacing="6">
+          <TextBlock Text="{DynamicResource Sandbox.Text.0595}"
+                     FontSize="18"
+                     FontWeight="SemiBold"/>
+          <TextBlock Text="{DynamicResource Sandbox.Text.0596}"
+                     TextWrapping="Wrap"
+                     Foreground="{DynamicResource LuminaTextSecondaryBrush}"/>
+        </StackPanel>
+
+        <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*" RowSpacing="10" ColumnSpacing="12">
+          <Border Width="8"
+                  Height="8"
+                  CornerRadius="4"
+                  Background="{DynamicResource LuminaSuccessBrush}"/>
+          <TextBlock Grid.Column="1" Text="{DynamicResource Sandbox.Text.0597}"/>
+
+          <Border Grid.Row="1"
+                  Width="8"
+                  Height="8"
+                  CornerRadius="4"
+                  Background="{DynamicResource LuminaPrimaryBrush}"/>
+          <TextBlock Grid.Row="1" Grid.Column="1" Text="{DynamicResource Sandbox.Text.0598}"/>
+
+          <Border Grid.Row="2"
+                  Width="8"
+                  Height="8"
+                  CornerRadius="4"
+                  Background="{DynamicResource LuminaWarningBrush}"/>
+          <TextBlock Grid.Row="2" Grid.Column="1" Text="{DynamicResource Sandbox.Text.0599}"/>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Spacing="10">
+          <Button Content="{DynamicResource Sandbox.Text.0600}"
+                  Classes="Outline"
+                  Command="{Binding CloseDialogCommand}"/>
+          <Button Content="{DynamicResource Sandbox.Text.0602}"
+                  Classes="Primary"
+                  Command="{Binding CloseDialogCommand}"/>
+        </StackPanel>
+      </StackPanel>
+    </lumina:LuminaDialog>
+  </ContentPage.Resources>
+
+  <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+    <StackPanel Spacing="24"
+                Width="{Binding #PageScroll.Bounds.Width}"
+                Margin="0,0,0,24">
+      <StackPanel Spacing="8" MaxWidth="760">
+        <TextBlock Text="{DynamicResource Sandbox.Text.0592}"
+                   Classes="Display"/>
+        <TextBlock Text="{DynamicResource Sandbox.Text.0802}"
+                   Classes="Body"
+                   Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                   TextWrapping="Wrap"/>
+      </StackPanel>
+
+      <lumina:LuminaResponsivePanel MinItemWidth="280" MaxItemWidth="520" HorizontalSpacing="16" VerticalSpacing="16">
+        <lumina:LuminaCard Padding="18" Classes="Glass">
+          <StackPanel Spacing="16">
+            <StackPanel Spacing="6">
+              <TextBlock Text="{DynamicResource Sandbox.Text.0603}"
+                         FontSize="20"
+                         FontWeight="SemiBold"/>
+              <TextBlock Text="{DynamicResource Sandbox.Text.0604}"
+                         Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                         TextWrapping="Wrap"/>
+            </StackPanel>
+
+            <WrapPanel>
+              <Button Name="OpenComponentDialogButton"
+                      Content="{DynamicResource Sandbox.Text.0605}"
+                      Classes="Primary"
+                      Margin="0,0,10,10"
+                      Command="{Binding OpenComponentDialogCommand}"/>
+              <Button Name="OpenInlineDialogButton"
+                      Content="{DynamicResource Sandbox.Text.0606}"
+                      Classes="Outline"
+                      Margin="0,0,10,10"
+                      Command="{Binding OpenInlineDialogCommand}"
+                      CommandParameter="{StaticResource InlineStatusDialog}"/>
+              <Button Name="OpenTopDialogButton"
+                      Content="{DynamicResource Sandbox.Text.0847}"
+                      Classes="Outline"
+                      Margin="0,0,10,10"
+                      Command="{Binding OpenTopDialogCommand}"/>
+            </WrapPanel>
+          </StackPanel>
+        </lumina:LuminaCard>
+
+        <lumina:LuminaCard Padding="18" Classes="Glass">
+          <StackPanel Spacing="16">
+            <StackPanel Spacing="6">
+              <TextBlock Text="{DynamicResource Sandbox.Text.0607}"
+                         FontSize="20"
+                         FontWeight="SemiBold"/>
+              <TextBlock Text="{DynamicResource Sandbox.Text.0608}"
+                         Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                         TextWrapping="Wrap"/>
+            </StackPanel>
+
+            <WrapPanel>
+              <Button Name="ShowNeutralToastButton"
+                      Content="{DynamicResource Sandbox.Text.0488}"
+                      Classes="Outline"
+                      MinWidth="96"
+                      Margin="0,0,10,10"
+                      Command="{Binding ShowToastCommand}"
+                      CommandParameter="Neutral"/>
+              <Button Name="ShowSuccessToastButton"
+                      Content="{DynamicResource Sandbox.Text.0191}"
+                      Classes="Outline Success"
+                      MinWidth="96"
+                      Margin="0,0,10,10"
+                      Command="{Binding ShowToastCommand}"
+                      CommandParameter="Success"/>
+              <Button Name="ShowWarningToastButton"
+                      Content="{DynamicResource Sandbox.Text.0192}"
+                      Classes="Outline Warning"
+                      MinWidth="96"
+                      Margin="0,0,10,10"
+                      Command="{Binding ShowToastCommand}"
+                      CommandParameter="Warning"/>
+              <Button Name="ShowDangerToastButton"
+                      Content="{DynamicResource Sandbox.Text.0193}"
+                      Classes="Outline Danger"
+                      MinWidth="96"
+                      Margin="0,0,10,10"
+                      Command="{Binding ShowToastCommand}"
+                      CommandParameter="Danger"/>
+              <Button Name="ShowTopToastButton"
+                      Content="{DynamicResource Sandbox.Text.1322}"
+                      Classes="Outline"
+                      MinWidth="96"
+                      Margin="0,0,10,10"
+                      Command="{Binding ShowToastCommand}"
+                      CommandParameter="Top"/>
+            </WrapPanel>
+          </StackPanel>
+        </lumina:LuminaCard>
+
+        <lumina:LuminaCard Padding="18" Classes="Glass">
+          <StackPanel Spacing="16">
+            <StackPanel Spacing="6">
+              <TextBlock Text="{DynamicResource Sandbox.Text.0609}"
+                         FontSize="20"
+                         FontWeight="SemiBold"/>
+              <TextBlock Text="{DynamicResource Sandbox.Text.0610}"
+                         Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                         TextWrapping="Wrap"/>
+            </StackPanel>
+
+            <WrapPanel>
+              <Button Name="OpenBottomSheetButton"
+                      Content="{DynamicResource Sandbox.Text.0611}"
+                      Classes="Outline"
+                      Margin="0,0,10,10"
+                      Command="{Binding OpenBottomSheetCommand}"/>
+              <Button Name="OpenTopBottomSheetButton"
+                      Content="{DynamicResource Sandbox.Text.0846}"
+                      Classes="Outline"
+                      Margin="0,0,10,10"
+                      Command="{Binding OpenTopBottomSheetCommand}"/>
+            </WrapPanel>
+          </StackPanel>
+        </lumina:LuminaCard>
+
+        <lumina:LuminaCard Padding="18" Classes="Glass Subtle">
+          <StackPanel Spacing="14">
+            <StackPanel Spacing="6">
+              <TextBlock Text="{DynamicResource Sandbox.Text.0612}"
+                         FontSize="20"
+                         FontWeight="SemiBold"/>
+              <TextBlock Text="{DynamicResource Sandbox.Text.0613}"
+                         Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                         TextWrapping="Wrap"/>
+            </StackPanel>
+            <views:DeleteProjectDialogContent IsHitTestVisible="False"
+                                               Opacity="0.9"/>
+          </StackPanel>
+        </lumina:LuminaCard>
+      </lumina:LuminaResponsivePanel>
+    </StackPanel>
+  </ScrollViewer>
+</ContentPage>

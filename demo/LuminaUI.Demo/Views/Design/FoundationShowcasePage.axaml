@@ -1,0 +1,172 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.FoundationShowcasePage"
+             x:DataType="vm:FoundationShowcaseViewModel">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24"
+                    Width="{Binding #PageScroll.Bounds.Width}"
+                    HorizontalAlignment="Stretch"
+                    Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0477}" />
+                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0478}" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="280"
+                                          MaxItemWidth="460"
+                                          HorizontalSpacing="16"
+                                          VerticalSpacing="16">
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1297}" />
+                        <StackPanel Spacing="10">
+                            <TextBlock Classes="Title" Text="{DynamicResource Sandbox.Text.0479}" />
+                            <TextBlock Classes="Label" Text="{DynamicResource Sandbox.Text.0480}" />
+                            <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0481}" />
+                            <TextBlock Classes="Caption" Text="{DynamicResource Sandbox.Text.0482}" />
+                            <WrapPanel>
+                                <TextBlock Classes="Code" Text="LuminaTheme" Margin="0,0,8,8" />
+                                <TextBlock Classes="Mark" Text="{DynamicResource Sandbox.Text.0483}" Margin="0,0,8,8" />
+                                <TextBlock Classes="Underline" Text="{DynamicResource Sandbox.Text.0484}" Margin="0,0,8,8" />
+                                <TextBlock Classes="Strikethrough" Text="{DynamicResource Sandbox.Text.0485}" Margin="0,0,8,8" />
+                            </WrapPanel>
+                            <WrapPanel>
+                                <TextBlock Classes="Success" Text="{DynamicResource Sandbox.Text.0191}" Margin="0,0,12,8" />
+                                <TextBlock Classes="Warning" Text="{DynamicResource Sandbox.Text.0192}" Margin="0,0,12,8" />
+                                <TextBlock Classes="Danger" Text="{DynamicResource Sandbox.Text.0193}" Margin="0,0,12,8" />
+                                <TextBlock Classes="Muted" Text="{DynamicResource Sandbox.Text.0486}" Margin="0,0,12,8" />
+                            </WrapPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0824}" />
+                        <StackPanel Spacing="12">
+                            <WrapPanel>
+                                <Label Content="{DynamicResource Sandbox.Text.0197}" Margin="0,0,10,10" />
+                                <Label Classes="Secondary" Content="{DynamicResource Sandbox.Text.0487}" Margin="0,0,10,10" />
+                                <Label Classes="Muted" Content="{DynamicResource Sandbox.Text.0486}" Margin="0,0,10,10" />
+                                <Label Classes="Danger" Content="{DynamicResource Sandbox.Text.0193}" Margin="0,0,10,10" />
+                            </WrapPanel>
+                            <WrapPanel>
+                                <Label Classes="Tag" Content="{DynamicResource Sandbox.Text.0488}" Margin="0,0,8,8" />
+                                <Label Classes="Tag Primary" Content="{DynamicResource Sandbox.Text.0190}" Margin="0,0,8,8" />
+                                <Label Classes="Tag Success" Content="{DynamicResource Sandbox.Text.0191}" Margin="0,0,8,8" />
+                                <Label Classes="Tag Warning" Content="{DynamicResource Sandbox.Text.0192}" Margin="0,0,8,8" />
+                                <Label Classes="Tag Danger" Content="{DynamicResource Sandbox.Text.0193}" Margin="0,0,8,8" />
+                            </WrapPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0489}" />
+                        <lumina:LuminaResponsivePanel MinItemWidth="140"
+                                                      MaxItemWidth="220"
+                                                      HorizontalSpacing="10"
+                                                      VerticalSpacing="10">
+                            <Border Classes="Surface" Padding="12">
+                                <StackPanel Spacing="4">
+                                    <TextBlock Classes="Label" Text="{DynamicResource Sandbox.Text.0490}" />
+                                    <TextBlock Classes="Caption" Text="{DynamicResource Sandbox.Text.0491}" />
+                                </StackPanel>
+                            </Border>
+                            <Border Classes="Elevated" Padding="12">
+                                <StackPanel Spacing="4">
+                                    <TextBlock Classes="Label" Text="{DynamicResource Sandbox.Text.0207}" />
+                                    <TextBlock Classes="Caption" Text="{DynamicResource Sandbox.Text.0492}" />
+                                </StackPanel>
+                            </Border>
+                            <Border Classes="Subtle" Padding="12">
+                                <StackPanel Spacing="4">
+                                    <TextBlock Classes="Label" Text="{DynamicResource Sandbox.Text.0493}" />
+                                    <TextBlock Classes="Caption" Text="{DynamicResource Sandbox.Text.0494}" />
+                                </StackPanel>
+                            </Border>
+                            <Border Classes="Glass" Padding="12">
+                                <StackPanel Spacing="4">
+                                    <TextBlock Classes="Label" Text="{DynamicResource Sandbox.Text.0005}" />
+                                    <TextBlock Classes="Caption" Text="{DynamicResource Sandbox.Text.0495}" />
+                                </StackPanel>
+                            </Border>
+                        </lumina:LuminaResponsivePanel>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1298}" />
+                        <StackPanel Spacing="10" HorizontalAlignment="Left">
+                            <HyperlinkButton Content="{DynamicResource Sandbox.Text.0496}" NavigateUri="https://example.com" />
+                            <HyperlinkButton Classes="Subtle Underline" Content="{DynamicResource Sandbox.Text.0497}" NavigateUri="https://example.com" />
+                            <HyperlinkButton Classes="ButtonLike" Content="{DynamicResource Sandbox.Text.0498}" NavigateUri="https://example.com" />
+                        </StackPanel>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1299}" />
+                        <SelectableTextBlock Classes="Code"
+                                             TextWrapping="Wrap"
+                                             Text="var card = new LuminaCard { Classes = { &quot;Glass&quot; } };" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1300}" />
+                        <TextBox x:Name="InvalidField"
+                                 Text="{Binding InvalidEmail}"
+                                 DataValidationErrors.Errors="{Binding InvalidEmailErrors}" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1301}" />
+                        <WrapPanel>
+                            <Border Classes="Subtle" Width="44" Height="44" Padding="12" Margin="0,0,10,10">
+                                <PathIcon Width="20" Height="20" Data="M3,12 L9,18 L21,6" Foreground="{DynamicResource LuminaSuccessBrush}" />
+                            </Border>
+                            <Border Classes="Subtle" Width="44" Height="44" Padding="12" Margin="0,0,10,10">
+                                <PathIcon Width="20" Height="20" Data="M12,2 L12,22 M2,12 L22,12" Foreground="{DynamicResource LuminaPrimaryBrush}" />
+                            </Border>
+                            <Border Classes="Subtle" Width="44" Height="44" Padding="12" Margin="0,0,10,10">
+                                <PathIcon Width="20" Height="20" Data="M4,4 L20,20 M20,4 L4,20" Foreground="{DynamicResource LuminaDangerBrush}" />
+                            </Border>
+                        </WrapPanel>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1302}" />
+                        <ScrollViewer Height="150"
+                                      BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                                      BorderThickness="1"
+                                      Padding="12"
+                                      VerticalScrollBarVisibility="Auto">
+                            <StackPanel Spacing="8">
+                                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0501}" />
+                                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0502}" />
+                                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0503}" />
+                                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0504}" />
+                                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0505}" />
+                                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0506}" />
+                                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0507}" />
+                                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0508}" />
+                            </StackPanel>
+                        </ScrollViewer>
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

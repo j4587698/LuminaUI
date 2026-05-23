@@ -1,0 +1,554 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
+
+    <ControlTheme x:Key="LuminaMultiSelectOptionButtonTheme" TargetType="Button">
+        <Setter Property="MinHeight" Value="34" />
+        <Setter Property="Padding" Value="9,7" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+        <Setter Property="CornerRadius" Value="7" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="Button">
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <ContentPresenter Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      TextElement.Foreground="{TemplateBinding Foreground}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:pointerover">
+            <Setter Property="Background" Value="{DynamicResource LuminaStateHoverBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="^:pressed">
+            <Setter Property="Background" Value="{DynamicResource LuminaStatePressedBrush}" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaForm}" TargetType="lumina:LuminaForm">
+        <Setter Property="ItemsPanel">
+            <ItemsPanelTemplate>
+                <StackPanel Spacing="14" />
+            </ItemsPanelTemplate>
+        </Setter>
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaForm">
+                <ItemsPresenter />
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaFormGroup}" TargetType="lumina:LuminaFormGroup">
+        <Setter Property="ItemsPanel">
+            <ItemsPanelTemplate>
+                <StackPanel Spacing="14" />
+            </ItemsPanelTemplate>
+        </Setter>
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaFormGroup">
+                <StackPanel Spacing="12">
+                    <StackPanel IsVisible="{TemplateBinding HasHeader}" Spacing="3">
+                        <ContentPresenter Content="{TemplateBinding Header}"
+                                          ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                          TextElement.Foreground="{DynamicResource LuminaTextPrimaryBrush}"
+                                          TextElement.FontSize="14"
+                                          TextElement.FontWeight="SemiBold" />
+                        <TextBlock Text="{TemplateBinding Description}"
+                                   IsVisible="{TemplateBinding HasDescription}"
+                                   Classes="Caption" />
+                    </StackPanel>
+                    <ItemsPresenter />
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaFormItem}" TargetType="lumina:LuminaFormItem">
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaFormItem">
+                <Grid Name="PART_Layout"
+                      RowDefinitions="Auto,Auto,Auto"
+                      ColumnDefinitions="Auto,*"
+                      ColumnSpacing="12"
+                      RowSpacing="6"
+                      Margin="{TemplateBinding Margin}">
+                    <StackPanel Name="PART_LabelHost"
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Width="{TemplateBinding EffectiveLabelWidth}"
+                                IsVisible="{TemplateBinding HasLabel}"
+                                Orientation="Horizontal"
+                                Spacing="4"
+                                VerticalAlignment="Center">
+                        <ContentPresenter Content="{TemplateBinding Label}"
+                                          VerticalAlignment="Center"
+                                          TextElement.Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                                          TextElement.FontSize="13"
+                                          TextElement.FontWeight="SemiBold" />
+                        <TextBlock Text="*"
+                                   IsVisible="{TemplateBinding IsRequired}"
+                                   Foreground="{DynamicResource LuminaDangerBrush}"
+                                   FontWeight="Bold" />
+                    </StackPanel>
+
+                    <ContentPresenter Name="PART_ContentHost"
+                                      Grid.Row="0"
+                                      Grid.Column="1"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+                    <TextBlock Name="PART_Description"
+                               Grid.Row="1"
+                               Grid.Column="1"
+                               Text="{TemplateBinding Description}"
+                               IsVisible="{TemplateBinding HasDescription}"
+                               Classes="Caption" />
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^[LabelPosition=Top] /template/ StackPanel#PART_LabelHost">
+            <Setter Property="Grid.ColumnSpan" Value="2" />
+            <Setter Property="Width" Value="NaN" />
+        </Style>
+
+        <Style Selector="^[LabelPosition=Top] /template/ ContentPresenter#PART_ContentHost">
+            <Setter Property="Grid.Row" Value="1" />
+            <Setter Property="Grid.Column" Value="0" />
+            <Setter Property="Grid.ColumnSpan" Value="2" />
+        </Style>
+
+        <Style Selector="^[LabelPosition=Top] /template/ TextBlock#PART_Description">
+            <Setter Property="Grid.Row" Value="2" />
+            <Setter Property="Grid.Column" Value="0" />
+            <Setter Property="Grid.ColumnSpan" Value="2" />
+        </Style>
+
+        <Style Selector="^[NoLabel=True] /template/ ContentPresenter#PART_ContentHost">
+            <Setter Property="Grid.Column" Value="0" />
+            <Setter Property="Grid.ColumnSpan" Value="2" />
+        </Style>
+
+        <Style Selector="^[NoLabel=True] /template/ TextBlock#PART_Description">
+            <Setter Property="Grid.Column" Value="0" />
+            <Setter Property="Grid.ColumnSpan" Value="2" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaMultiSelect}" TargetType="lumina:LuminaMultiSelect">
+        <Setter Property="MinHeight" Value="36" />
+        <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaMultiSelect">
+                <Grid>
+                    <Button Name="PART_SurfaceButton"
+                            MinHeight="{TemplateBinding MinHeight}"
+                            Padding="10,5"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Center"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Foreground="{TemplateBinding Foreground}"
+                            Theme="{StaticResource LuminaPickerFlyoutButton}">
+                        <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="6">
+                            <TextBlock Text="{TemplateBinding SelectionSummary}"
+                                       IsVisible="{TemplateBinding HasSelection}"
+                                       VerticalAlignment="Center"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       TextTrimming="CharacterEllipsis" />
+                            <TextBlock Text="{TemplateBinding Watermark}"
+                                       IsVisible="{Binding !$parent[lumina:LuminaMultiSelect].HasSelection}"
+                                       VerticalAlignment="Center"
+                                       Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                       TextTrimming="CharacterEllipsis" />
+                            <lumina:LuminaCloseButton Name="PART_ClearButton"
+                                                      Grid.Column="1"
+                                                      IsVisible="{TemplateBinding ShowClearButton}"
+                                                      IconSize="11" />
+                            <PathIcon Grid.Column="2"
+                                      Width="14"
+                                      Height="14"
+                                      VerticalAlignment="Center"
+                                      Data="M7,10 L12,15 L17,10 Z"
+                                      Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                        </Grid>
+                    </Button>
+
+                    <Popup Name="PART_Popup"
+                           IsOpen="{TemplateBinding IsDropDownOpen}"
+                           Placement="Bottom"
+                           PlacementTarget="{TemplateBinding}"
+                           IsLightDismissEnabled="True"
+                           WindowManagerAddShadowHint="False">
+                        <Border MinWidth="220"
+                                MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                                Margin="0,6,0,0"
+                                Padding="6"
+                                Background="{DynamicResource LuminaPopoverBrush}"
+                                BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="10"
+                                BoxShadow="{DynamicResource LuminaShadowPopup}">
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                          VerticalScrollBarVisibility="Auto">
+                                <ItemsControl ItemsSource="{TemplateBinding Options}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate DataType="lumina:LuminaMultiSelectOption">
+                                            <Button Name="PART_OptionButton"
+                                                    Theme="{StaticResource LuminaMultiSelectOptionButtonTheme}">
+                                                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                                    <CheckBox IsChecked="{Binding IsSelected}"
+                                                              IsHitTestVisible="False"
+                                                              VerticalAlignment="Center" />
+                                                    <TextBlock Grid.Column="1"
+                                                               Text="{Binding DisplayText}"
+                                                               TextTrimming="CharacterEllipsis"
+                                                               VerticalAlignment="Center"
+                                                               Foreground="{DynamicResource LuminaTextPrimaryBrush}" />
+                                                </Grid>
+                                            </Button>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
+                        </Border>
+                    </Popup>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:pointerover /template/ Button#PART_SurfaceButton">
+            <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryHoverBrush}" />
+        </Style>
+
+        <Style Selector="^[(lumina|LuminaOptions.PopupType)=Sheet]">
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="LuminaTagInputTextBoxTheme"
+                  TargetType="TextBox"
+                  BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="MinHeight" Value="24" />
+        <Setter Property="Padding" Value="4,0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+
+        <Style Selector="^ /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BoxShadow" Value="0 0 0 0 #00000000" />
+        </Style>
+
+        <Style Selector="^:pointerover /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BoxShadow" Value="0 0 0 0 #00000000" />
+        </Style>
+
+        <Style Selector="^:focus /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BoxShadow" Value="0 0 0 0 #00000000" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaTagInput}" TargetType="lumina:LuminaTagInput">
+        <Setter Property="MinHeight" Value="36" />
+        <Setter Property="Padding" Value="8,7,8,1" />
+        <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaTagInput">
+                <Border Name="PART_Root"
+                        MinHeight="{TemplateBinding MinHeight}"
+                        Padding="{TemplateBinding Padding}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                    <WrapPanel VerticalAlignment="Center">
+                        <ItemsControl ItemsSource="{TemplateBinding Tags}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Margin="0,0,6,6"
+                                            Padding="8,3,3,3"
+                                            MinHeight="26"
+                                            Background="{DynamicResource LuminaStateHoverBrush}"
+                                            BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
+                                            BorderThickness="1"
+                                            CornerRadius="7">
+                                        <Grid ColumnDefinitions="Auto,Auto" ColumnSpacing="5">
+                                            <TextBlock Text="{Binding}"
+                                                       VerticalAlignment="Center"
+                                                       FontSize="13"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                                            <lumina:LuminaCloseButton Name="PART_RemoveTagButton"
+                                                                      Grid.Column="1"
+                                                                      Width="20"
+                                                                      Height="20"
+                                                                      MinWidth="20"
+                                                                      MinHeight="20"
+                                                                      IsVisible="{Binding $parent[lumina:LuminaTagInput].CanRemoveTags}"
+                                                                      IconSize="9" />
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <TextBox Name="PART_TextBox"
+                                 MinWidth="120"
+                                 MinHeight="24"
+                                 Margin="0,0,0,6"
+                                 Padding="4,0"
+                                 IsVisible="{TemplateBinding CanInput}"
+                                 PlaceholderText="{TemplateBinding Watermark}"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 Theme="{StaticResource LuminaTagInputTextBoxTheme}" />
+                    </WrapPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:pointerover /template/ Border#PART_Root">
+            <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryHoverBrush}" />
+        </Style>
+
+        <Style Selector="^:focus-within /template/ Border#PART_Root">
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryBrush}" />
+            <Setter Property="BoxShadow" Value="0 0 0 3 #332563EB" />
+        </Style>
+
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaBanner}" TargetType="lumina:LuminaBanner">
+        <Setter Property="Padding" Value="14" />
+        <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBgBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryHoverBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaBanner">
+                <Border Name="PART_Root"
+                        Padding="{TemplateBinding Padding}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                        <Border Name="PART_Icon"
+                                IsVisible="{TemplateBinding ShowIcon}"
+                                Width="28"
+                                Height="28"
+                                CornerRadius="14"
+                                Background="{DynamicResource LuminaPrimaryBrush}"
+                                VerticalAlignment="Top">
+                            <ContentPresenter Content="{TemplateBinding EffectiveIcon}"
+                                              HorizontalContentAlignment="Center"
+                                              VerticalContentAlignment="Center"
+                                              TextElement.Foreground="{DynamicResource LuminaPrimaryForegroundBrush}"
+                                              TextElement.FontSize="11"
+                                              TextElement.FontWeight="Bold" />
+                        </Border>
+                        <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                            <ContentPresenter Content="{TemplateBinding Header}"
+                                              IsVisible="{TemplateBinding HasHeader}"
+                                              TextElement.Foreground="{DynamicResource LuminaTextPrimaryBrush}"
+                                              TextElement.FontWeight="SemiBold" />
+                            <ContentPresenter Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              TextElement.Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                        </StackPanel>
+                        <lumina:LuminaCloseButton Name="PART_CloseButton"
+                                                  Grid.Column="2"
+                                                  IsVisible="{TemplateBinding CanClose}"
+                                                  Width="28"
+                                                  Height="28"
+                                                  MinWidth="28"
+                                                  MinHeight="28"
+                                                  IconSize="11" />
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^[Type=Success]">
+            <Setter Property="Background" Value="{DynamicResource LuminaSuccessBgBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaSuccessBrush}" />
+        </Style>
+        <Style Selector="^[Type=Success] /template/ Border#PART_Icon">
+            <Setter Property="Background" Value="{DynamicResource LuminaSuccessBrush}" />
+        </Style>
+
+        <Style Selector="^[Type=Warning]">
+            <Setter Property="Background" Value="{DynamicResource LuminaWarningBgBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaWarningBrush}" />
+        </Style>
+        <Style Selector="^[Type=Warning] /template/ Border#PART_Icon">
+            <Setter Property="Background" Value="{DynamicResource LuminaWarningBrush}" />
+        </Style>
+
+        <Style Selector="^[Type=Danger]">
+            <Setter Property="Background" Value="{DynamicResource LuminaDangerBgBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaDangerBrush}" />
+        </Style>
+        <Style Selector="^[Type=Danger] /template/ Border#PART_Icon">
+            <Setter Property="Background" Value="{DynamicResource LuminaDangerBrush}" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaLoadingContainer}" TargetType="lumina:LuminaLoadingContainer">
+        <Setter Property="OverlayBackground" Value="{DynamicResource LuminaLoadingOverlayBackgroundBrush}" />
+        <Setter Property="MessageForeground" Value="{DynamicResource LuminaPrimaryBrush}" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaLoadingContainer">
+                <Grid>
+                    <ContentPresenter Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}" />
+                    <Border IsVisible="{TemplateBinding IsLoading}"
+                            Background="{TemplateBinding OverlayBackground}"
+                            CornerRadius="8">
+                        <StackPanel Spacing="10"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                            <ContentPresenter Content="{TemplateBinding Indicator}"
+                                              IsVisible="{TemplateBinding Indicator, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                            <lumina:LuminaLoading Content="{TemplateBinding LoadingMessage}"
+                                                   ContentTemplate="{TemplateBinding LoadingMessageTemplate}"
+                                                   Foreground="{TemplateBinding MessageForeground}"
+                                                   IsActive="{TemplateBinding IsLoading}"
+                                                   IsVisible="{TemplateBinding Indicator, Converter={x:Static ObjectConverters.IsNull}}"
+                                                   Kind="{TemplateBinding LoadingKind}"
+                                                   Size="28"
+                                                   StrokeThickness="3.4" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaSkeletonContainer}" TargetType="lumina:LuminaSkeletonContainer">
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaSkeletonContainer">
+                <Grid>
+                    <ContentPresenter Name="PART_ContentPresenter"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}" />
+                    <ContentPresenter Name="PART_SkeletonPresenter"
+                                      Content="{Binding ActiveSkeletonContent, RelativeSource={RelativeSource TemplatedParent}}"
+                                      ContentTemplate="{Binding ActiveSkeletonContentTemplate, RelativeSource={RelativeSource TemplatedParent}}"
+                                      IsHitTestVisible="False"
+                                      IsVisible="{Binding HasActiveSkeletonContent, RelativeSource={RelativeSource TemplatedParent}}" />
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaSkeleton}" TargetType="lumina:LuminaSkeleton">
+        <Setter Property="Height" Value="16" />
+        <Setter Property="MinWidth" Value="64" />
+        <Setter Property="Fill" Value="{DynamicResource LuminaSkeletonBrush}" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="Opacity" Value="1" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaSkeleton">
+                <Border Name="PART_Root"
+                        Background="{TemplateBinding Fill}"
+                        ClipToBounds="True"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                    <Border Name="PART_Shimmer"
+                            Width="144"
+                            HorizontalAlignment="Left"
+                            IsHitTestVisible="False"
+                            Opacity="0.78">
+                        <Border.RenderTransform>
+                            <TranslateTransform X="-180" />
+                        </Border.RenderTransform>
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0%,50%" EndPoint="100%,50%">
+                                <GradientStop Color="#00FFFFFF" Offset="0" />
+                                <GradientStop Color="#99FFFFFF" Offset="0.5" />
+                                <GradientStop Color="#00FFFFFF" Offset="1" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^[IsAnimated=True] /template/ Border#PART_Shimmer">
+            <Style.Animations>
+                <Animation Duration="0:0:1.35"
+                           IterationCount="Infinite"
+                           PlaybackDirection="Normal">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="TranslateTransform.X" Value="-180" />
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="TranslateTransform.X" Value="900" />
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+
+        <Style Selector="^[IsAnimated=False] /template/ Border#PART_Shimmer">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+
+        <Style Selector="^.Text">
+            <Setter Property="Height" Value="14" />
+            <Setter Property="CornerRadius" Value="999" />
+        </Style>
+
+        <Style Selector="^.Title">
+            <Setter Property="Height" Value="22" />
+            <Setter Property="CornerRadius" Value="999" />
+        </Style>
+
+        <Style Selector="^.Circle">
+            <Setter Property="Width" Value="44" />
+            <Setter Property="Height" Value="44" />
+            <Setter Property="CornerRadius" Value="999" />
+        </Style>
+
+        <Style Selector="^.Block">
+            <Setter Property="Height" Value="96" />
+            <Setter Property="CornerRadius" Value="8" />
+        </Style>
+    </ControlTheme>
+</ResourceDictionary>

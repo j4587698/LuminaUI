@@ -1,0 +1,92 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.IconButtonShowcasePage"
+             x:DataType="vm:IconButtonShowcaseViewModel">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="IconButton" />
+                <TextBlock Text="Buttons with leading, trailing, top, bottom, or icon-only content." Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="300" MaxItemWidth="560" HorizontalSpacing="16" VerticalSpacing="16">
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="Actions" />
+                        <WrapPanel>
+                            <lumina:LuminaIconButton Content="Refresh" Command="{Binding RunActionCommand}" CommandParameter="Refresh" Margin="0,0,8,8">
+                                <lumina:LuminaIconButton.Icon>
+                                    <PathIcon Width="16" Height="16" Data="M17,1 L21,1 L21,5 M20.5,2 C18.7,0.8 16.5,0 14,0 C8.5,0 4,4.5 4,10 C4,11.5 4.3,12.9 4.9,14.2 M7,23 L3,23 L3,19 M3.5,22 C5.3,23.2 7.5,24 10,24 C15.5,24 20,19.5 20,14 C20,12.5 19.7,11.1 19.1,9.8" />
+                                </lumina:LuminaIconButton.Icon>
+                            </lumina:LuminaIconButton>
+
+                            <lumina:LuminaIconButton Content="Search" Classes="Outline" Command="{Binding RunActionCommand}" CommandParameter="Search" Margin="0,0,8,8">
+                                <lumina:LuminaIconButton.Icon>
+                                    <PathIcon Width="16" Height="16" Data="M10,18 C5.6,18 2,14.4 2,10 C2,5.6 5.6,2 10,2 C14.4,2 18,5.6 18,10 C18,11.8 17.4,13.5 16.4,14.9 L22,20.5 L20.5,22 L14.9,16.4 C13.5,17.4 11.8,18 10,18 Z M10,16 C13.3,16 16,13.3 16,10 C16,6.7 13.3,4 10,4 C6.7,4 4,6.7 4,10 C4,13.3 6.7,16 10,16 Z" />
+                                </lumina:LuminaIconButton.Icon>
+                            </lumina:LuminaIconButton>
+
+                            <lumina:LuminaIconButton Content="Delete" Classes="Danger" Command="{Binding RunActionCommand}" CommandParameter="Delete" Margin="0,0,8,8">
+                                <lumina:LuminaIconButton.Icon>
+                                    <PathIcon Width="16" Height="16" Data="M6,7 L18,7 L17,21 L7,21 Z M9,4 L15,4 L16,6 L8,6 Z M4,6 L20,6 L20,8 L4,8 Z" />
+                                </lumina:LuminaIconButton.Icon>
+                            </lumina:LuminaIconButton>
+                        </WrapPanel>
+                        <TextBlock Text="{Binding LastAction}" Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="Icon-only" />
+                        <WrapPanel>
+                            <lumina:LuminaIconButton Classes="Ghost" ToolTip.Tip="Settings" Command="{Binding RunActionCommand}" CommandParameter="Settings" Margin="0,0,8,8">
+                                <lumina:LuminaIconButton.Icon>
+                                    <PathIcon Width="16" Height="16" Data="M12,8 A4,4 0 1 1 12,16 A4,4 0 0 1 12,8 M4,13 L2,12 L4,11 L5,8 L4,6 L6,4 L8,5 L11,4 L12,2 L13,4 L16,5 L18,4 L20,6 L19,8 L20,11 L22,12 L20,13 L19,16 L20,18 L18,20 L16,19 L13,20 L12,22 L11,20 L8,19 L6,20 L4,18 L5,16 Z" />
+                                </lumina:LuminaIconButton.Icon>
+                            </lumina:LuminaIconButton>
+
+                            <lumina:LuminaIconButton Classes="Outline" ToolTip.Tip="Upload" Command="{Binding RunActionCommand}" CommandParameter="Upload" Margin="0,0,8,8">
+                                <lumina:LuminaIconButton.Icon>
+                                    <PathIcon Width="16" Height="16" Data="M12,3 L17,8 L14,8 L14,15 L10,15 L10,8 L7,8 Z M5,18 L19,18 L19,21 L5,21 Z" />
+                                </lumina:LuminaIconButton.Icon>
+                            </lumina:LuminaIconButton>
+
+                            <lumina:LuminaIconButton Classes="Success" ToolTip.Tip="Confirm" Command="{Binding RunActionCommand}" CommandParameter="Confirm" Margin="0,0,8,8">
+                                <lumina:LuminaIconButton.Icon>
+                                    <PathIcon Width="16" Height="16" Data="M9,16 L4,11 L5.5,9.5 L9,13 L18.5,3.5 L20,5 Z" />
+                                </lumina:LuminaIconButton.Icon>
+                            </lumina:LuminaIconButton>
+                        </WrapPanel>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="Placement" />
+                        <WrapPanel>
+                            <lumina:LuminaIconButton Content="Right" IconPlacement="Right" Classes="Outline" Margin="0,0,8,8">
+                                <lumina:LuminaIconButton.Icon>
+                                    <PathIcon Width="16" Height="16" Data="M8,5 L15,12 L8,19 Z" />
+                                </lumina:LuminaIconButton.Icon>
+                            </lumina:LuminaIconButton>
+                            <lumina:LuminaIconButton Content="Top" IconPlacement="Top" Classes="Outline" Margin="0,0,8,8">
+                                <lumina:LuminaIconButton.Icon>
+                                    <PathIcon Width="16" Height="16" Data="M12,5 L19,12 L5,12 Z" />
+                                </lumina:LuminaIconButton.Icon>
+                            </lumina:LuminaIconButton>
+                            <lumina:LuminaIconButton Content="Bottom" IconPlacement="Bottom" Classes="Outline" Margin="0,0,8,8">
+                                <lumina:LuminaIconButton.Icon>
+                                    <PathIcon Width="16" Height="16" Data="M5,12 L19,12 L12,19 Z" />
+                                </lumina:LuminaIconButton.Icon>
+                            </lumina:LuminaIconButton>
+                        </WrapPanel>
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

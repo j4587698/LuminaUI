@@ -1,0 +1,75 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaLoading}" TargetType="lumina:LuminaLoading">
+        <Setter Property="Foreground" Value="{DynamicResource LuminaPrimaryBrush}" />
+        <Setter Property="Size" Value="22" />
+        <Setter Property="StrokeThickness" Value="3" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaLoading">
+                <StackPanel IsVisible="{TemplateBinding IsActive}"
+                            Orientation="Horizontal"
+                            Spacing="8"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                    <Grid VerticalAlignment="Center">
+                        <ProgressBar Name="PART_Bar"
+                                     Width="{TemplateBinding Size}"
+                                     Height="{TemplateBinding StrokeThickness}"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     Foreground="{TemplateBinding Foreground}"
+                                     IsIndeterminate="True"
+                                     IsVisible="False" />
+                        <lumina:LuminaLoadingVisual Name="PART_Visual"
+                                                     Kind="{TemplateBinding Kind}"
+                                                     Size="{TemplateBinding Size}"
+                                                     StrokeThickness="{TemplateBinding StrokeThickness}"
+                                                     Brush="{TemplateBinding Foreground}"
+                                                     IsActive="{TemplateBinding IsActive}"
+                                                     IsVisible="False"
+                                                     VerticalAlignment="Center" />
+                    </Grid>
+
+                    <ContentPresenter Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      IsVisible="{TemplateBinding Content, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                      VerticalAlignment="Center"
+                                      TextElement.Foreground="{TemplateBinding Foreground}"
+                                      TextElement.FontSize="{TemplateBinding FontSize}"
+                                      TextElement.FontWeight="{TemplateBinding FontWeight}" />
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^[Kind=Bar] /template/ ProgressBar#PART_Bar">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+
+        <Style Selector="^[Kind=Bar]">
+            <Setter Property="Size" Value="112" />
+        </Style>
+
+        <Style Selector="^[Kind=Ring] /template/ lumina|LuminaLoadingVisual#PART_Visual">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+
+        <Style Selector="^[Kind=Dots] /template/ lumina|LuminaLoadingVisual#PART_Visual">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+
+        <Style Selector="^.Small">
+            <Setter Property="Size" Value="14" />
+            <Setter Property="StrokeThickness" Value="2" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+
+        <Style Selector="^.Large">
+            <Setter Property="Size" Value="34" />
+            <Setter Property="StrokeThickness" Value="4" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+        </Style>
+    </ControlTheme>
+</ResourceDictionary>

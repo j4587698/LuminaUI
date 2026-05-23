@@ -1,0 +1,97 @@
+<lumina:LuminaPage xmlns="https://github.com/avaloniaui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+                   xmlns:vm="using:LuminaUI.Demo.ViewModels"
+                   x:Class="LuminaUI.Demo.Views.LoginPage"
+                   x:DataType="vm:LoginPageViewModel"
+                   ShowShellChrome="False"
+                   Padding="0"
+                   Background="{DynamicResource LuminaBackgroundBrush}">
+    <Grid RowDefinitions="*,Auto" Margin="24">
+        <Grid MaxWidth="420"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center">
+            <lumina:LuminaCard Padding="24"
+                               BorderThickness="1"
+                               Background="{DynamicResource LuminaSurfaceBrush}">
+                <StackPanel Spacing="18">
+                    <StackPanel Spacing="6">
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Border Width="28"
+                                    Height="28"
+                                    CornerRadius="8"
+                                    Background="{DynamicResource LuminaPrimaryBrush}" />
+                            <TextBlock Text="Lumina UI"
+                                       FontSize="22"
+                                       FontWeight="Black"
+                                       Foreground="{DynamicResource LuminaTextForegroundBrush}"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                        <TextBlock Text="{DynamicResource Sandbox.Text.0879}"
+                                   FontSize="13"
+                                   Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                    </StackPanel>
+
+                    <StackPanel Spacing="10">
+                        <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0082}"
+                                 Text="{Binding Email}"
+                                 HorizontalContentAlignment="Left"
+                                 VerticalContentAlignment="Center">
+                            <TextBox.InnerLeftContent>
+                                <Grid Width="36" Height="36">
+                                    <Viewbox Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Path Stretch="Uniform"
+                                              Stroke="{DynamicResource LuminaTextMutedBrush}"
+                                              StrokeThickness="1.7"
+                                              StrokeLineCap="Round"
+                                              Fill="Transparent"
+                                              Data="M12,12 C14.761,12 17,9.761 17,7 C17,4.239 14.761,2 12,2 C9.239,2 7,4.239 7,7 C7,9.761 9.239,12 12,12 Z M4,22 C4,17.582 7.582,14 12,14 C16.418,14 20,17.582 20,22" />
+                                    </Viewbox>
+                                </Grid>
+                            </TextBox.InnerLeftContent>
+                        </TextBox>
+                        <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0462}"
+                                 Text="{Binding Password}"
+                                 PasswordChar="*"
+                                 HorizontalContentAlignment="Left"
+                                 VerticalContentAlignment="Center">
+                            <TextBox.InnerLeftContent>
+                                <Grid Width="36" Height="36">
+                                    <Viewbox Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Path Stretch="Uniform"
+                                              Stroke="{DynamicResource LuminaTextMutedBrush}"
+                                              StrokeThickness="1.7"
+                                              StrokeLineCap="Round"
+                                              Fill="Transparent"
+                                              Data="M7,10 V8 C7,5.239 9.239,3 12,3 C14.761,3 17,5.239 17,8 V10 M6,10 H18 C19.105,10 20,10.895 20,12 V20 C20,21.105 19.105,22 18,22 H6 C4.895,22 4,21.105 4,20 V12 C4,10.895 4.895,10 6,10 Z" />
+                                    </Viewbox>
+                                </Grid>
+                            </TextBox.InnerLeftContent>
+                        </TextBox>
+                    </StackPanel>
+
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                        <CheckBox Content="{DynamicResource Sandbox.Text.0864}"
+                                  IsChecked="{Binding RememberMe}"
+                                  VerticalAlignment="Center" />
+                        <Button Grid.Column="1"
+                                Content="{DynamicResource Sandbox.Text.0815}"
+                                Classes="Ghost Small" />
+                    </Grid>
+
+                    <Button Content="{DynamicResource Sandbox.Text.0878}"
+                            Classes="Primary"
+                            HorizontalAlignment="Stretch"
+                            Command="{Binding LoginCommand}" />
+                </StackPanel>
+            </lumina:LuminaCard>
+        </Grid>
+
+        <TextBlock Grid.Row="1"
+                   Text="{DynamicResource Sandbox.Text.0800}"
+                   TextWrapping="Wrap"
+                   TextAlignment="Center"
+                   Foreground="{DynamicResource LuminaTextMutedBrush}"
+                   Margin="0,20,0,0" />
+    </Grid>
+</lumina:LuminaPage>

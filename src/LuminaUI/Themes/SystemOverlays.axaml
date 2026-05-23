@@ -1,0 +1,385 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:chrome="clr-namespace:Avalonia.Controls.Chrome;assembly=Avalonia.Controls"
+                    xmlns:dialogs="using:Avalonia.Dialogs"
+                    xmlns:dialogModels="clr-namespace:Avalonia.Dialogs.Internal;assembly=Avalonia.Dialogs"
+                    xmlns:lumina="clr-namespace:LuminaUI.Controls"
+                    xmlns:notifications="clr-namespace:Avalonia.Controls.Notifications;assembly=Avalonia.Controls"
+                    xmlns:primitives="clr-namespace:Avalonia.Controls.Primitives;assembly=Avalonia.Controls">
+
+    <ControlTheme x:Key="{x:Type EmbeddableControlRoot}" TargetType="EmbeddableControlRoot">
+        <Setter Property="Background" Value="{DynamicResource LuminaBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
+        <Setter Property="FontFamily" Value="{DynamicResource LuminaFontFamily}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="EmbeddableControlRoot">
+                <Panel>
+                    <Border Name="PART_TransparencyFallback"
+                            Background="{DynamicResource LuminaBackgroundBrush}"
+                            IsHitTestVisible="False" />
+                    <Border Background="{TemplateBinding Background}">
+                        <VisualLayerManager Name="PART_VisualLayerManager">
+                            <ContentPresenter Name="PART_ContentPresenter"
+                                              Margin="{TemplateBinding Padding}"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}" />
+                        </VisualLayerManager>
+                    </Border>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type Window}" TargetType="Window" BasedOn="{StaticResource {x:Type Window}}">
+        <Setter Property="Background" Value="{DynamicResource LuminaBackgroundBrush}" />
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type chrome:WindowDrawnDecorations}" TargetType="chrome:WindowDrawnDecorations" BasedOn="{StaticResource {x:Type chrome:WindowDrawnDecorations}}">
+        <Setter Property="DefaultTitleBarHeight" Value="40" />
+        <Setter Property="DefaultFrameThickness" Value="0" />
+        <Setter Property="DefaultShadowThickness" Value="12" />
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type primitives:AdornerLayer}" TargetType="primitives:AdornerLayer" BasedOn="{StaticResource {x:Type primitives:AdornerLayer}}" />
+
+    <ControlTheme x:Key="{x:Type primitives:PopupRoot}" TargetType="primitives:PopupRoot" BasedOn="{StaticResource {x:Type primitives:PopupRoot}}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="TransparencyLevelHint" Value="Transparent" />
+        <Setter Property="WindowManagerAddShadowHint" Value="False" />
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type primitives:OverlayPopupHost}" TargetType="primitives:OverlayPopupHost" BasedOn="{StaticResource {x:Type primitives:OverlayPopupHost}}" />
+
+    <ControlTheme x:Key="{x:Type dialogs:ManagedFileChooser}" TargetType="dialogs:ManagedFileChooser">
+        <Setter Property="Template">
+            <ControlTemplate TargetType="dialogs:ManagedFileChooser">
+                <Grid x:DataType="dialogModels:ManagedFileChooserViewModel"
+                      RowDefinitions="Auto,*,Auto"
+                      ColumnDefinitions="180,*"
+                      Background="{DynamicResource LuminaBackgroundBrush}">
+                    <Border Grid.Row="0"
+                            Grid.ColumnSpan="2"
+                            Padding="14,12"
+                            Background="{DynamicResource LuminaSurfaceBrush}"
+                            BorderBrush="{DynamicResource LuminaDividerBrush}"
+                            BorderThickness="0,0,0,1">
+                        <DockPanel LastChildFill="True">
+                            <Button DockPanel.Dock="Left"
+                                    Classes="Ghost Icon"
+                                    Command="{Binding GoUp}"
+                                    Margin="0,0,8,0">
+                                <PathIcon Width="16"
+                                          Height="16"
+                                          Data="M12,5 L5,12 L7,14 L11,10 L11,20 L13,20 L13,10 L17,14 L19,12 Z"
+                                          Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                            </Button>
+                            <TextBox Name="Location"
+                                     Text="{Binding Location}"
+                                     PlaceholderText="Location">
+                                <TextBox.KeyBindings>
+                                    <KeyBinding Gesture="Enter" Command="{Binding EnterPressed}" />
+                                </TextBox.KeyBindings>
+                            </TextBox>
+                        </DockPanel>
+                    </Border>
+
+                    <Border Grid.Row="1"
+                            Grid.Column="0"
+                            Padding="10"
+                            Background="{DynamicResource LuminaNavigationPaneBrush}"
+                            BorderBrush="{DynamicResource LuminaDividerBrush}"
+                            BorderThickness="0,0,1,0">
+                        <ListBox Name="PART_QuickLinks"
+                                 Focusable="False"
+                                 ItemsSource="{Binding QuickLinks}"
+                                 SelectedIndex="{Binding QuickLinksSelectedIndex}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate x:DataType="dialogModels:ManagedFileChooserItemViewModel">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <PathIcon Width="16"
+                                                  Height="16"
+                                                  Data="M4,5 L10,5 L12,7 L20,7 L20,19 L4,19 Z"
+                                                  Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                                        <TextBlock Text="{Binding DisplayName}"
+                                                   TextTrimming="CharacterEllipsis"
+                                                   VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Border>
+
+                    <Border Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="12"
+                            Padding="10"
+                            Background="{DynamicResource LuminaSurfaceBrush}"
+                            BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="8">
+                        <DockPanel Grid.IsSharedSizeScope="True">
+                            <Grid DockPanel.Dock="Top"
+                                  ColumnDefinitions="24,*,144,120,96"
+                                  ColumnSpacing="10"
+                                  MinHeight="30">
+                                <TextBlock Grid.Column="1"
+                                           Classes="Label"
+                                           Text="{DynamicResource STRING_CHOOSER_NAME_COLUMN}" />
+                                <TextBlock Grid.Column="2"
+                                           Classes="Label"
+                                           Text="{DynamicResource STRING_CHOOSER_DATEMODIFIED_COLUMN}" />
+                                <TextBlock Grid.Column="3"
+                                           Classes="Label"
+                                           Text="{DynamicResource STRING_CHOOSER_TYPE_COLUMN}" />
+                                <TextBlock Grid.Column="4"
+                                           Classes="Label"
+                                           Text="{DynamicResource STRING_CHOOSER_SIZE_COLUMN}" />
+                            </Grid>
+                            <ListBox Name="PART_Files"
+                                     ItemsSource="{Binding Items}"
+                                     SelectedItems="{Binding SelectedItems}"
+                                     SelectionMode="{Binding SelectionMode}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate x:DataType="dialogModels:ManagedFileChooserItemViewModel">
+                                        <Grid ColumnDefinitions="24,*,144,120,96"
+                                              ColumnSpacing="10"
+                                              MinHeight="32">
+                                            <PathIcon Width="16"
+                                                      Height="16"
+                                                      VerticalAlignment="Center"
+                                                      Data="M6,3 L14,3 L20,9 L20,21 L6,21 Z M14,3 L14,9 L20,9"
+                                                      Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                                            <TextBlock Grid.Column="1"
+                                                       Text="{Binding DisplayName}"
+                                                       TextTrimming="CharacterEllipsis"
+                                                       VerticalAlignment="Center" />
+                                            <TextBlock Grid.Column="2"
+                                                       Text="{Binding Modified}"
+                                                       TextTrimming="CharacterEllipsis"
+                                                       VerticalAlignment="Center" />
+                                            <TextBlock Grid.Column="3"
+                                                       Text="{Binding Type}"
+                                                       TextTrimming="CharacterEllipsis"
+                                                       VerticalAlignment="Center" />
+                                            <TextBlock Grid.Column="4"
+                                                       Text="{Binding Size}"
+                                                       TextTrimming="CharacterEllipsis"
+                                                       VerticalAlignment="Center" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </DockPanel>
+                    </Border>
+
+                    <Border Grid.Row="2"
+                            Grid.ColumnSpan="2"
+                            Padding="14,12"
+                            Background="{DynamicResource LuminaSurfaceBrush}"
+                            BorderBrush="{DynamicResource LuminaDividerBrush}"
+                            BorderThickness="0,1,0,0">
+                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="10">
+                            <TextBox Text="{Binding FileName}"
+                                     PlaceholderText="{DynamicResource STRING_CHOOSER_FILE_NAME}"
+                                     IsVisible="{Binding !SelectingFolder}" />
+                            <ComboBox Grid.Column="1"
+                                      MinWidth="180"
+                                      ItemsSource="{Binding Filters}"
+                                      SelectedItem="{Binding SelectedFilter}"
+                                      IsVisible="{Binding ShowFilters}" />
+                            <CheckBox Grid.Row="1"
+                                      Content="{DynamicResource STRING_CHOOSER_SHOW_HIDDEN_FILES}"
+                                      IsChecked="{Binding ShowHiddenFiles}" />
+                            <StackPanel Grid.Row="1"
+                                        Grid.Column="1"
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Right"
+                                        Spacing="10">
+                                <Button Content="{DynamicResource STRING_CHOOSER_DIALOG_CANCEL}"
+                                        Classes="Outline"
+                                        Command="{Binding Cancel}" />
+                                <Button Content="{DynamicResource STRING_CHOOSER_DIALOG_OK}"
+                                        Classes="Primary"
+                                        Command="{Binding Ok}" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type dialogs:ManagedFileChooserOverwritePrompt}"
+                  TargetType="dialogs:ManagedFileChooserOverwritePrompt">
+        <Setter Property="MaxWidth" Value="420" />
+        <Setter Property="Padding" Value="16" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="dialogs:ManagedFileChooserOverwritePrompt">
+                <Border x:DataType="dialogs:ManagedFileChooserOverwritePrompt"
+                        Background="{DynamicResource LuminaPopoverBrush}"
+                        BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="10"
+                        Padding="{TemplateBinding Padding}">
+                    <StackPanel Spacing="14">
+                        <StackPanel Spacing="6">
+                            <TextBlock Text="File already exists"
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource LuminaTextPrimaryBrush}" />
+                            <TextBlock Text="{TemplateBinding FileName}"
+                                       TextWrapping="Wrap"
+                                       Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Right"
+                                    Orientation="Horizontal"
+                                    Spacing="10">
+                            <Button Content="{DynamicResource STRING_CHOOSER_DIALOG_CANCEL}"
+                                    Classes="Outline"
+                                    IsCancel="True"
+                                    Command="{Binding Cancel, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Button Content="{DynamicResource STRING_CHOOSER_DIALOG_OK}"
+                                    Classes="Primary"
+                                    IsDefault="True"
+                                    Command="{Binding Confirm, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type DatePickerPresenter}" TargetType="DatePickerPresenter" BasedOn="{StaticResource {x:Type DatePickerPresenter}}">
+        <Setter Property="Background" Value="{DynamicResource LuminaPopoverBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type TimePickerPresenter}" TargetType="TimePickerPresenter" BasedOn="{StaticResource {x:Type TimePickerPresenter}}">
+        <Setter Property="Background" Value="{DynamicResource LuminaPopoverBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type notifications:NotificationCard}" TargetType="notifications:NotificationCard">
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Background" Value="{DynamicResource LuminaPopoverBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="RenderTransformOrigin" Value="50%,50%" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="notifications:NotificationCard">
+                <LayoutTransformControl Name="PART_LayoutTransformControl" UseRenderTransform="True">
+                    <Border Margin="0,0,0,10"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="14"
+                            BoxShadow="{DynamicResource LuminaShadowNotification}">
+                        <DockPanel MinWidth="280" MaxWidth="420">
+                            <PathIcon Name="NotificationIcon"
+                                      Width="18"
+                                      Height="18"
+                                      Margin="0,1,12,0"
+                                      VerticalAlignment="Top"
+                                      Data="M12,2 A10,10 0,1,0 12,22 A10,10 0,1,0 12,2 M11,10 L13,10 L13,17 L11,17 Z M11,7 L13,7 L13,9 L11,9 Z"
+                                      Foreground="{DynamicResource LuminaPrimaryBrush}"
+                                      IsVisible="False" />
+                            <ContentControl Name="PART_Content"
+                                            Content="{TemplateBinding Content}">
+                                <ContentControl.DataTemplates>
+                                    <DataTemplate DataType="notifications:INotification">
+                                        <StackPanel Spacing="4">
+                                            <SelectableTextBlock Text="{Binding Title}"
+                                                                 FontWeight="SemiBold"
+                                                                 Foreground="{DynamicResource LuminaTextPrimaryBrush}"
+                                                                 IsVisible="{Binding Title, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+                                            <SelectableTextBlock Text="{Binding Message}"
+                                                                 TextWrapping="Wrap"
+                                                                 Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                                                                 IsVisible="{Binding Message, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                    <DataTemplate DataType="x:String">
+                                        <SelectableTextBlock Text="{Binding}"
+                                                             TextWrapping="Wrap"
+                                                             Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                                    </DataTemplate>
+                                </ContentControl.DataTemplates>
+                            </ContentControl>
+                        </DockPanel>
+                    </Border>
+                </LayoutTransformControl>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:information /template/ PathIcon#NotificationIcon">
+            <Setter Property="IsVisible" Value="True" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="^:success /template/ PathIcon#NotificationIcon">
+            <Setter Property="IsVisible" Value="True" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaSuccessBrush}" />
+        </Style>
+
+        <Style Selector="^:warning /template/ PathIcon#NotificationIcon">
+            <Setter Property="IsVisible" Value="True" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaWarningBrush}" />
+        </Style>
+
+        <Style Selector="^:error /template/ PathIcon#NotificationIcon">
+            <Setter Property="IsVisible" Value="True" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaDangerBrush}" />
+        </Style>
+
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type notifications:WindowNotificationManager}" TargetType="notifications:WindowNotificationManager">
+        <Setter Property="Margin" Value="16" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="notifications:WindowNotificationManager">
+                <ReversibleStackPanel Name="PART_Items" Spacing="8" />
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:topleft /template/ ReversibleStackPanel#PART_Items">
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+        </Style>
+
+        <Style Selector="^:topright /template/ ReversibleStackPanel#PART_Items">
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+
+        <Style Selector="^:topcenter /template/ ReversibleStackPanel#PART_Items">
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+
+        <Style Selector="^:bottomleft /template/ ReversibleStackPanel#PART_Items">
+            <Setter Property="ReverseOrder" Value="True" />
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+        </Style>
+
+        <Style Selector="^:bottomright /template/ ReversibleStackPanel#PART_Items">
+            <Setter Property="ReverseOrder" Value="True" />
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+
+        <Style Selector="^:bottomcenter /template/ ReversibleStackPanel#PART_Items">
+            <Setter Property="ReverseOrder" Value="True" />
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+    </ControlTheme>
+
+</ResourceDictionary>

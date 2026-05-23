@@ -1,0 +1,151 @@
+<lumina:LuminaWindow xmlns="https://github.com/avaloniaui"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+                     xmlns:views="using:LuminaUI.Demo.Views"
+                     x:Class="LuminaUI.Demo.MainWindow"
+                     Title="{DynamicResource Sandbox.App.Title}"
+                     Width="900"
+                     Height="720"
+                     MinWidth="360"
+                     MinHeight="520"
+                     WindowStartupLocation="CenterScreen"
+                     WindowChromeMode="Extended"
+                     ExtendedSystemButtonMode="Auto"
+                     UseWindowGlass="True"
+                     ShowPinButton="True"
+                     ShowFullScreenButton="True">
+
+    <lumina:LuminaWindow.TitleBarLeftContent>
+        <StackPanel Orientation="Horizontal" Spacing="12">
+            <StackPanel x:Name="TitleBarBrand" Orientation="Horizontal" Spacing="12">
+                <Border Width="16" Height="16" CornerRadius="4" Background="{DynamicResource LuminaPrimaryBrush}" />
+                <TextBlock Text="LUMINA APP"
+                           FontSize="11"
+                           FontWeight="Bold"
+                           LetterSpacing="1"
+                           Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                           VerticalAlignment="Center"
+                           Margin="0,0,16,0" />
+            </StackPanel>
+            <lumina:LuminaPlatformMenu Name="PlatformMenu"
+                                       NativeMenuMode="Auto"
+                                       HideVisualMenuWhenNative="True">
+                <lumina:LuminaPlatformMenu.NativeMenu>
+                    <NativeMenu>
+                        <NativeMenuItem Header="File">
+                            <NativeMenu>
+                                <NativeMenuItem Header="New Window"
+                                                CommandParameter="NewWindow"
+                                                Click="PlatformNativeMenuItem_OnClick" />
+                                <NativeMenuItem Header="Open Sandbox"
+                                                CommandParameter="OpenSandbox"
+                                                Click="PlatformNativeMenuItem_OnClick" />
+                                <NativeMenuItemSeparator Header="-" />
+                                <NativeMenuItem Header="Close"
+                                                CommandParameter="CloseWindow"
+                                                Click="PlatformNativeMenuItem_OnClick" />
+                            </NativeMenu>
+                        </NativeMenuItem>
+                        <NativeMenuItem Header="View">
+                            <NativeMenu>
+                                <NativeMenuItem Header="Toggle Sidebar"
+                                                CommandParameter="ToggleSidebar"
+                                                Click="PlatformNativeMenuItem_OnClick" />
+                                <NativeMenuItem Header="Components"
+                                                CommandParameter="OpenComponents"
+                                                Click="PlatformNativeMenuItem_OnClick" />
+                                <NativeMenuItem Header="Settings"
+                                                CommandParameter="OpenSettings"
+                                                Click="PlatformNativeMenuItem_OnClick" />
+                            </NativeMenu>
+                        </NativeMenuItem>
+                        <NativeMenuItem Header="Help">
+                            <NativeMenu>
+                                <NativeMenuItem Header="Documentation"
+                                                CommandParameter="OpenDocumentation"
+                                                Click="PlatformNativeMenuItem_OnClick" />
+                                <NativeMenuItem Header="About"
+                                                CommandParameter="OpenAbout"
+                                                Click="PlatformNativeMenuItem_OnClick" />
+                            </NativeMenu>
+                        </NativeMenuItem>
+                    </NativeMenu>
+                </lumina:LuminaPlatformMenu.NativeMenu>
+            </lumina:LuminaPlatformMenu>
+        </StackPanel>
+    </lumina:LuminaWindow.TitleBarLeftContent>
+
+    <lumina:LuminaWindow.TitleBarRightContent>
+        <Button Name="TitleBarThemeButton"
+                Theme="{StaticResource LuminaTitleBarButton}"
+                Width="40"
+                Height="40"
+                ToolTip.Tip="{DynamicResource Sandbox.Settings.ThemeMode}">
+            <Button.Flyout>
+                <MenuFlyout>
+                    <MenuItem Name="TitleBarThemeSystemMenuItem"
+                              Header="{DynamicResource Sandbox.Settings.ThemeMode.System}"
+                              Click="ThemeModeSystemMenuItem_OnClick">
+                        <MenuItem.Icon>
+                            <Path Width="16"
+                                  Height="16"
+                                  Stretch="Uniform"
+                                  Stroke="{Binding $parent[MenuItem].Foreground}"
+                                  StrokeThickness="1.8"
+                                  StrokeLineCap="Round"
+                                  Data="M4,5 L20,5 L20,16 L4,16 Z M9,20 L15,20 M12,16 L12,20" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="TitleBarThemeLightMenuItem"
+                              Header="{DynamicResource Sandbox.Settings.ThemeMode.Light}"
+                              Click="ThemeModeLightMenuItem_OnClick">
+                        <MenuItem.Icon>
+                            <Path Width="16"
+                                  Height="16"
+                                  Stretch="Uniform"
+                                  Stroke="{Binding $parent[MenuItem].Foreground}"
+                                  StrokeThickness="1.8"
+                                  StrokeLineCap="Round"
+                                  Data="M12,4 L12,2 M12,22 L12,20 M4,12 L2,12 M22,12 L20,12 M5.6,5.6 L4.2,4.2 M19.8,19.8 L18.4,18.4 M18.4,5.6 L19.8,4.2 M4.2,19.8 L5.6,18.4 M12,7 A5,5 0 1,1 12,17 A5,5 0 0,1 12,7" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="TitleBarThemeDarkMenuItem"
+                              Header="{DynamicResource Sandbox.Settings.ThemeMode.Dark}"
+                              Click="ThemeModeDarkMenuItem_OnClick">
+                        <MenuItem.Icon>
+                            <Path Width="16"
+                                  Height="16"
+                                  Stretch="Uniform"
+                                  Stroke="{Binding $parent[MenuItem].Foreground}"
+                                  StrokeThickness="1.8"
+                                  StrokeLineCap="Round"
+                                  Data="M20,14.5 A7.5,7.5 0 0,1 9.5,4 A8,8 0 1,0 20,14.5" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuFlyout>
+            </Button.Flyout>
+            <Grid Width="16" Height="16">
+                <Path Name="TitleBarSystemIcon"
+                      Width="16"
+                      Height="16"
+                      Stretch="Uniform"
+                      Stroke="{Binding $parent[Button].Foreground}"
+                      StrokeThickness="1.8"
+                      StrokeLineCap="Round"
+                      Data="M4,5 L20,5 L20,16 L4,16 Z M9,20 L15,20 M12,16 L12,20" />
+                <PathIcon Name="TitleBarSunIcon"
+                          Width="16"
+                          Height="16"
+                          Data="M12,4 L12,2 M12,22 L12,20 M4,12 L2,12 M22,12 L20,12 M5.6,5.6 L4.2,4.2 M19.8,19.8 L18.4,18.4 M18.4,5.6 L19.8,4.2 M4.2,19.8 L5.6,18.4 M12,7 A5,5 0 1,1 12,17 A5,5 0 0,1 12,7"
+                          Foreground="{Binding $parent[Button].Foreground}" />
+                <PathIcon Name="TitleBarMoonIcon"
+                          Width="16"
+                          Height="16"
+                          Data="M20,14.5 A7.5,7.5 0 0,1 9.5,4 A8,8 0 1,0 20,14.5"
+                          Foreground="{Binding $parent[Button].Foreground}" />
+            </Grid>
+        </Button>
+    </lumina:LuminaWindow.TitleBarRightContent>
+
+    <views:SandboxRootView x:Name="SandboxRoot" />
+</lumina:LuminaWindow>

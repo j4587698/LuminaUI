@@ -1,0 +1,171 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- ======================================================= -->
+    <!-- ENTERPRISE SEMANTIC COLOR TOKENS (LIGHT MODE)           -->
+    <!-- ======================================================= -->
+
+    <!-- 1. Backgrounds & Surfaces (App Level) -->
+    <Color x:Key="LuminaBackground">#F4F4F5</Color>             <!-- Level 0: App Base (Zinc 100) -->
+    <Color x:Key="LuminaNavigationPane">#E7ECF3</Color>         <!-- App navigation pane -->
+    <Color x:Key="LuminaNavigationPaneItem">#F8FAFC</Color>     <!-- Items placed on navigation pane -->
+    <Color x:Key="LuminaNavigationPaneItemSelected">#DBEAFE</Color>
+    <Color x:Key="LuminaNavigationPaneItemSelectedForeground">#1D4ED8</Color>
+    <Color x:Key="LuminaSurface">#FFFFFF</Color>                <!-- Level 1: Cards (White) -->
+    <Color x:Key="LuminaSurfaceElevated">#FFFFFF</Color>        <!-- Level 2: Elevated Cards -->
+    <Color x:Key="LuminaPopover">#FFFFFF</Color>                <!-- Level 3: Modals/Dropdowns -->
+    <Color x:Key="LuminaActionDisabledBg">#E4E4E7</Color>       <!-- Disabled surface (Zinc 200) -->
+
+    <!-- 2. Typography (Text Hierarchy) -->
+    <Color x:Key="LuminaTextPrimary">#09090B</Color>            <!-- Primary Text: Headings (Zinc 950) -->
+    <Color x:Key="LuminaTextSecondary">#3F3F46</Color>          <!-- Secondary Text: Body (Zinc 700) -->
+    <Color x:Key="LuminaTextTertiary">#71717A</Color>           <!-- Tertiary Text: Captions/Muted (Zinc 500) -->
+    <Color x:Key="LuminaTextDisabled">#A1A1AA</Color>           <!-- Disabled Text (Zinc 400) -->
+    
+    <!-- Legacy aliases for compatibility -->
+    <Color x:Key="LuminaTextForeground">#09090B</Color> 
+    <Color x:Key="LuminaTextMuted">#71717A</Color>      
+
+    <!-- 3. Borders & Dividers -->
+    <Color x:Key="LuminaBorderSubtle">#F4F4F5</Color>           <!-- Subtle dividers (Zinc 100) -->
+    <Color x:Key="LuminaBorderDefault">#E4E4E7</Color>          <!-- Default Component Border (Zinc 200) -->
+    <Color x:Key="LuminaBorderStrong">#A1A1AA</Color>           <!-- Strong/Hover Border (Zinc 400) -->
+    <Color x:Key="LuminaBorderDisabled">#E4E4E7</Color>         <!-- Disabled Border -->
+
+    <!-- Legacy aliases -->
+    <Color x:Key="LuminaBorder">#E4E4E7</Color>
+    <Color x:Key="LuminaDivider">#F4F4F5</Color>
+    
+    <!-- 4. Semantic: Primary (Brand) -->
+    <Color x:Key="LuminaPrimary">#2563EB</Color>                <!-- Brand Base -->
+    <Color x:Key="LuminaPrimaryHover">#1D4ED8</Color>
+    <Color x:Key="LuminaPrimaryPressed">#1E3A8A</Color>
+    <Color x:Key="LuminaPrimaryForeground">#FAFAFA</Color>
+    <Color x:Key="LuminaPrimaryBg">#EFF6FF</Color>              <!-- Pale background for alerts/tags -->
+    
+    <!-- 5. Semantic: Feedback -->
+    <!-- Success -->
+    <Color x:Key="LuminaSuccess">#16A34A</Color>
+    <Color x:Key="LuminaSuccessHover">#15803D</Color>
+    <Color x:Key="LuminaSuccessForeground">#FAFAFA</Color>
+    <Color x:Key="LuminaSuccessBg">#F0FDF4</Color>              <!-- Pale Green -->
+    <!-- Warning -->
+    <Color x:Key="LuminaWarning">#F59E0B</Color>
+    <Color x:Key="LuminaWarningHover">#D97706</Color>
+    <Color x:Key="LuminaWarningForeground">#FAFAFA</Color>
+    <Color x:Key="LuminaWarningBg">#FFFBEB</Color>              <!-- Pale Yellow -->
+    <!-- Danger -->
+    <Color x:Key="LuminaDanger">#EF4444</Color>
+    <Color x:Key="LuminaDangerHover">#DC2626</Color>
+    <Color x:Key="LuminaDangerForeground">#FAFAFA</Color>
+    <Color x:Key="LuminaDangerBg">#FEF2F2</Color>               <!-- Pale Red -->
+
+    <!-- 6. Extended Color Palette -->
+    <Color x:Key="LuminaTeal">#0D9488</Color>
+    <Color x:Key="LuminaCyan">#0891B2</Color>
+    <Color x:Key="LuminaIndigo">#4F46E5</Color>
+    <Color x:Key="LuminaPurple">#9333EA</Color>
+    <Color x:Key="LuminaPink">#DB2777</Color>
+    <Color x:Key="LuminaOrange">#EA580C</Color>
+
+    <!-- 7. Action / Interactive states -->
+    <Color x:Key="LuminaHoverBackground">#F4F4F5</Color>
+    <Color x:Key="LuminaGhostHover">#E4E4E7</Color>
+    <Color x:Key="LuminaMenuItemHover">#05000000</Color>
+    <Color x:Key="LuminaStateHover">#08000000</Color>
+    <Color x:Key="LuminaStatePressed">#0D000000</Color>
+    <Color x:Key="LuminaSkeleton">#E2E8F0</Color>
+
+    <!-- ======================================================= -->
+    <!-- BRUSH GENERATION (Mapping Colors to Brushes)            -->
+    <!-- ======================================================= -->
+
+    <!-- Surfaces -->
+    <SolidColorBrush x:Key="LuminaBackgroundBrush" Color="{StaticResource LuminaBackground}" />
+    <SolidColorBrush x:Key="LuminaNavigationPaneBrush" Color="{StaticResource LuminaNavigationPane}" />
+    <SolidColorBrush x:Key="LuminaNavigationPaneItemBrush" Color="{StaticResource LuminaNavigationPaneItem}" />
+    <SolidColorBrush x:Key="LuminaNavigationPaneItemSelectedBrush" Color="{StaticResource LuminaNavigationPaneItemSelected}" />
+    <SolidColorBrush x:Key="LuminaNavigationPaneItemSelectedForegroundBrush" Color="{StaticResource LuminaNavigationPaneItemSelectedForeground}" />
+    <SolidColorBrush x:Key="LuminaSurfaceBrush" Color="{StaticResource LuminaSurface}" />
+    <SolidColorBrush x:Key="LuminaSurfaceElevatedBrush" Color="{StaticResource LuminaSurfaceElevated}" />
+    <SolidColorBrush x:Key="LuminaPopoverBrush" Color="{StaticResource LuminaPopover}" />
+    <SolidColorBrush x:Key="LuminaActionDisabledBgBrush" Color="{StaticResource LuminaActionDisabledBg}" />
+    <SolidColorBrush x:Key="LuminaWindowGlassBackgroundBrush" Color="#CCF4F4F5" />
+    <SolidColorBrush x:Key="LuminaWindowGlassPaneBrush" Color="{StaticResource LuminaNavigationPane}" />
+    <SolidColorBrush x:Key="LuminaLoadingOverlayBackgroundBrush" Color="#B8FFFFFF" />
+    <SolidColorBrush x:Key="LuminaOverlayScrimBrush" Color="#7A000000" />
+    
+    <!-- Text -->
+    <SolidColorBrush x:Key="LuminaTextPrimaryBrush" Color="{StaticResource LuminaTextPrimary}" />
+    <SolidColorBrush x:Key="LuminaTextSecondaryBrush" Color="{StaticResource LuminaTextSecondary}" />
+    <SolidColorBrush x:Key="LuminaTextTertiaryBrush" Color="{StaticResource LuminaTextTertiary}" />
+    <SolidColorBrush x:Key="LuminaTextDisabledBrush" Color="{StaticResource LuminaTextDisabled}" />
+    <SolidColorBrush x:Key="LuminaTextForegroundBrush" Color="{StaticResource LuminaTextForeground}" />
+    <SolidColorBrush x:Key="LuminaTextMutedBrush" Color="{StaticResource LuminaTextMuted}" />
+    
+    <!-- Borders -->
+    <SolidColorBrush x:Key="LuminaBorderSubtleBrush" Color="{StaticResource LuminaBorderSubtle}" />
+    <SolidColorBrush x:Key="LuminaBorderDefaultBrush" Color="{StaticResource LuminaBorderDefault}" />
+    <SolidColorBrush x:Key="LuminaBorderStrongBrush" Color="{StaticResource LuminaBorderStrong}" />
+    <SolidColorBrush x:Key="LuminaBorderDisabledBrush" Color="{StaticResource LuminaBorderDisabled}" />
+    <SolidColorBrush x:Key="LuminaBorderBrush" Color="{StaticResource LuminaBorder}" />
+    <SolidColorBrush x:Key="LuminaDividerBrush" Color="{StaticResource LuminaDivider}" />
+    
+    <!-- Semantic -->
+    <SolidColorBrush x:Key="LuminaPrimaryBrush" Color="{StaticResource LuminaPrimary}" />
+    <SolidColorBrush x:Key="LuminaPrimaryHoverBrush" Color="{StaticResource LuminaPrimaryHover}" />
+    <SolidColorBrush x:Key="LuminaPrimaryPressedBrush" Color="{StaticResource LuminaPrimaryPressed}" />
+    <SolidColorBrush x:Key="LuminaPrimaryForegroundBrush" Color="{StaticResource LuminaPrimaryForeground}" />
+    <SolidColorBrush x:Key="LuminaPrimaryBgBrush" Color="{StaticResource LuminaPrimaryBg}" />
+    
+    <SolidColorBrush x:Key="LuminaSuccessBrush" Color="{StaticResource LuminaSuccess}" />
+    <SolidColorBrush x:Key="LuminaSuccessHoverBrush" Color="{StaticResource LuminaSuccessHover}" />
+    <SolidColorBrush x:Key="LuminaSuccessForegroundBrush" Color="{StaticResource LuminaSuccessForeground}" />
+    <SolidColorBrush x:Key="LuminaSuccessBgBrush" Color="{StaticResource LuminaSuccessBg}" />
+    
+    <SolidColorBrush x:Key="LuminaWarningBrush" Color="{StaticResource LuminaWarning}" />
+    <SolidColorBrush x:Key="LuminaWarningHoverBrush" Color="{StaticResource LuminaWarningHover}" />
+    <SolidColorBrush x:Key="LuminaWarningForegroundBrush" Color="{StaticResource LuminaWarningForeground}" />
+    <SolidColorBrush x:Key="LuminaWarningBgBrush" Color="{StaticResource LuminaWarningBg}" />
+
+    <SolidColorBrush x:Key="LuminaDangerBrush" Color="{StaticResource LuminaDanger}" />
+    <SolidColorBrush x:Key="LuminaDangerHoverBrush" Color="{StaticResource LuminaDangerHover}" />
+    <SolidColorBrush x:Key="LuminaDangerForegroundBrush" Color="{StaticResource LuminaDangerForeground}" />
+    <SolidColorBrush x:Key="LuminaDangerBgBrush" Color="{StaticResource LuminaDangerBg}" />
+
+    <!-- Extended Palette Brushes -->
+    <SolidColorBrush x:Key="LuminaTealBrush" Color="{StaticResource LuminaTeal}" />
+    <SolidColorBrush x:Key="LuminaCyanBrush" Color="{StaticResource LuminaCyan}" />
+    <SolidColorBrush x:Key="LuminaIndigoBrush" Color="{StaticResource LuminaIndigo}" />
+    <SolidColorBrush x:Key="LuminaPurpleBrush" Color="{StaticResource LuminaPurple}" />
+    <SolidColorBrush x:Key="LuminaPinkBrush" Color="{StaticResource LuminaPink}" />
+    <SolidColorBrush x:Key="LuminaOrangeBrush" Color="{StaticResource LuminaOrange}" />
+    
+    <!-- Interaction -->
+    <SolidColorBrush x:Key="LuminaHoverBackgroundBrush" Color="{StaticResource LuminaHoverBackground}" />
+    <SolidColorBrush x:Key="LuminaGhostHoverBrush" Color="{StaticResource LuminaGhostHover}" />
+    <SolidColorBrush x:Key="LuminaMenuItemHoverBrush" Color="{StaticResource LuminaMenuItemHover}" />
+    <SolidColorBrush x:Key="LuminaStateHoverBrush" Color="{StaticResource LuminaStateHover}" />
+    <SolidColorBrush x:Key="LuminaStatePressedBrush" Color="{StaticResource LuminaStatePressed}" />
+    <SolidColorBrush x:Key="LuminaSkeletonBrush" Color="{StaticResource LuminaSkeleton}" />
+
+    <!-- Elevation -->
+    <BoxShadows x:Key="LuminaShadowSurface">0 1 2 #0F000000</BoxShadows>
+    <BoxShadows x:Key="LuminaShadowElevated">0 1 2 #12000000, 0 8 18 #16000000</BoxShadows>
+    <BoxShadows x:Key="LuminaShadowFloating">0 2 4 #14000000, 0 12 24 #1C000000</BoxShadows>
+    <BoxShadows x:Key="LuminaShadowPopup">0 2 6 #12000000, 0 10 22 #18000000</BoxShadows>
+    <BoxShadows x:Key="LuminaShadowNotification">0 1 2 #10000000, 0 4 10 #10000000</BoxShadows>
+    <SolidColorBrush x:Key="LuminaCardElevatedBackgroundBrush" Color="{StaticResource LuminaSurfaceElevated}" />
+    <SolidColorBrush x:Key="LuminaCardElevatedBorderBrush" Color="#CBD5E1" />
+    <BoxShadows x:Key="LuminaCardShadowElevated">0 1 2 #10000000, 0 10 22 #16000000</BoxShadows>
+    <BoxShadows x:Key="LuminaCardShadowFloating">0 2 4 #14000000, 0 14 28 #20000000</BoxShadows>
+
+    <!-- Glass Effect Brushes -->
+    <SolidColorBrush x:Key="LuminaCardPseudoGlassBrush" Color="{StaticResource LuminaSurface}" Opacity="0.85" />
+    <SolidColorBrush x:Key="LuminaCardGlassBorderBrush" Color="{StaticResource LuminaBorderDefault}" Opacity="0.34" />
+    
+    <SolidColorBrush x:Key="LuminaCardGlassBackgroundBrush" Color="#FFFFFF" Opacity="0.40" />
+    <SolidColorBrush x:Key="LuminaCardGlassTintBrush" Color="#33FFFFFF" />
+    <SolidColorBrush x:Key="LuminaCardGlassEdgeBrush" Color="#99FFFFFF" />
+    <SolidColorBrush x:Key="LuminaBlurBackgroundTintBrush" Color="#33FFFFFF" />
+    <SolidColorBrush x:Key="LuminaBlurBackgroundEdgeBrush" Color="#99FFFFFF" />
+</ResourceDictionary>

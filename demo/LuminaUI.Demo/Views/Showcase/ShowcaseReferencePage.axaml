@@ -1,0 +1,74 @@
+<lumina:LuminaPage xmlns="https://github.com/avaloniaui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+                   xmlns:vm="using:LuminaUI.Demo.ViewModels"
+                   x:Class="LuminaUI.Demo.Views.ShowcaseReferencePage"
+                   x:DataType="vm:ShowcaseReferenceViewModel"
+                   Padding="8,0,8,8">
+    <Grid>
+        <TabControl HorizontalAlignment="Stretch"
+                    Classes="Compact"
+                    Padding="8"
+                    VerticalAlignment="Stretch">
+            <TabItem Header="{DynamicResource Sandbox.Text.0427}">
+                <ContentControl Content="{Binding PreviewContent}"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                HorizontalContentAlignment="Stretch"
+                                VerticalContentAlignment="Stretch" />
+            </TabItem>
+
+            <TabItem Header="{DynamicResource Sandbox.Text.1323}">
+                <Border Background="{DynamicResource LuminaSurfaceBrush}"
+                        BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        ClipToBounds="True">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                  VerticalScrollBarVisibility="Auto">
+                        <SelectableTextBlock Text="{Binding AxamlSource}"
+                                             TextWrapping="NoWrap"
+                                             FontFamily="Consolas"
+                                             FontSize="13"
+                                             Padding="16" />
+                    </ScrollViewer>
+                </Border>
+            </TabItem>
+
+            <TabItem Header="{DynamicResource Sandbox.Text.1324}">
+                <Border Background="{DynamicResource LuminaSurfaceBrush}"
+                        BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        ClipToBounds="True">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                  VerticalScrollBarVisibility="Auto">
+                        <SelectableTextBlock Text="{Binding CSharpSource}"
+                                             TextWrapping="NoWrap"
+                                             FontFamily="Consolas"
+                                             FontSize="13"
+                                             Padding="16" />
+                    </ScrollViewer>
+                </Border>
+            </TabItem>
+
+            <TabItem Header="{DynamicResource Sandbox.Text.1325}"
+                     IsVisible="{Binding HasViewModelSource}">
+                <Border Background="{DynamicResource LuminaSurfaceBrush}"
+                        BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        ClipToBounds="True">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                  VerticalScrollBarVisibility="Auto">
+                        <SelectableTextBlock Text="{Binding ViewModelSource}"
+                                             TextWrapping="NoWrap"
+                                             FontFamily="Consolas"
+                                             FontSize="13"
+                                             Padding="16" />
+                    </ScrollViewer>
+                </Border>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</lumina:LuminaPage>

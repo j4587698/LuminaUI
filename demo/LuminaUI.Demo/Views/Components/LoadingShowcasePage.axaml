@@ -1,0 +1,88 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.LoadingShowcasePage"
+             x:DataType="vm:LoadingShowcaseViewModel">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0651}" />
+                <TextBlock Text="{DynamicResource Sandbox.Text.0652}"
+                           Foreground="{DynamicResource LuminaTextMutedBrush}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="300" MaxItemWidth="560" HorizontalSpacing="16" VerticalSpacing="16">
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0653}" />
+                        <WrapPanel>
+                            <lumina:LuminaLoading Kind="Ring"
+                                                  Content="{DynamicResource Sandbox.Text.0654}"
+                                                  Margin="0,0,24,16" />
+                            <lumina:LuminaLoading Kind="Bar"
+                                                  Content="{DynamicResource Sandbox.Text.0655}"
+                                                  Size="112"
+                                                  Margin="0,0,24,16" />
+                            <lumina:LuminaLoading Kind="Dots"
+                                                  Content="{DynamicResource Sandbox.Text.0804}"
+                                                  Margin="0,0,24,16" />
+                            <lumina:LuminaLoading Kind="Ring"
+                                                  Classes="Large"
+                                                  Content="{DynamicResource Sandbox.Text.0656}"
+                                                  Margin="0,0,24,16" />
+                        </WrapPanel>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0657}" />
+                        <lumina:LuminaLoadingContainer IsLoading="{Binding IsLoading}"
+                                                       LoadingKind="Ring"
+                                                       LoadingMessage="Syncing members"
+                                                       MinHeight="180">
+                            <Border Padding="16"
+                                    CornerRadius="8"
+                                    Background="{DynamicResource LuminaStateHoverBrush}">
+                                <StackPanel Spacing="8">
+                                    <TextBlock Text="{DynamicResource Sandbox.Text.0659}"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource LuminaTextForegroundBrush}" />
+                                    <TextBlock Text="{DynamicResource Sandbox.Text.0660}"
+                                               TextWrapping="Wrap"
+                                               Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                                    <ProgressBar Value="68" />
+                                </StackPanel>
+                            </Border>
+                        </lumina:LuminaLoadingContainer>
+                        <Button Content="{DynamicResource Sandbox.Text.0661}"
+                                Classes="Outline"
+                                HorizontalAlignment="Left"
+                                Command="{Binding ToggleLoadingCommand}" />
+                        <TextBlock Text="{Binding StatusText}" Classes="Helper" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0662}" />
+                        <lumina:LuminaDisableContainer IsDisabled="{Binding IsDisabled}"
+                                                       DisabledTip="This section is disabled by the container.">
+                            <StackPanel Spacing="10">
+                                <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0664}" Text="Lumina dashboard" />
+                                <Button Content="{DynamicResource Sandbox.Text.0666}" Classes="Primary" HorizontalAlignment="Left" />
+                            </StackPanel>
+                        </lumina:LuminaDisableContainer>
+                        <Button Content="{DynamicResource Sandbox.Text.0667}"
+                                Classes="Outline"
+                                HorizontalAlignment="Left"
+                                Command="{Binding ToggleDisabledCommand}" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

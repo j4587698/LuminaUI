@@ -1,0 +1,37 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             x:Class="LuminaUI.Demo.Views.TabbedPageShowcasePage">
+    <ScrollViewer Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.1278}" />
+                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0772}" TextWrapping="Wrap" />
+            </StackPanel>
+            <lumina:LuminaResponsivePanel MinItemWidth="300" MaxItemWidth="640" HorizontalSpacing="16" VerticalSpacing="16">
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1278}" />
+                        <Border Height="260"
+                                BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                ClipToBounds="True">
+                            <TabbedPage TabPlacement="Top">
+                                <ContentPage Header="{DynamicResource Sandbox.Text.0354}">
+                                    <TextBlock Margin="16,64,16,16" Text="{DynamicResource Sandbox.Text.0363}" />
+                                </ContentPage>
+                                <ContentPage Header="{DynamicResource Sandbox.Text.0046}">
+                                    <TextBlock Margin="16,64,16,16" Text="{DynamicResource Sandbox.Text.0364}" />
+                                </ContentPage>
+                                <ContentPage Header="{DynamicResource Sandbox.Text.0362}">
+                                    <TextBlock Margin="16,64,16,16" Text="{DynamicResource Sandbox.Text.0365}" />
+                                </ContentPage>
+                            </TabbedPage>
+                        </Border>
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

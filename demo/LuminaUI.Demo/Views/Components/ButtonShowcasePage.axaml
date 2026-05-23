@@ -1,0 +1,144 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.ButtonShowcasePage"
+             x:DataType="vm:ButtonShowcaseViewModel">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0188}" />
+                <TextBlock Text="{DynamicResource Sandbox.Text.0189}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="280" MaxItemWidth="420" HorizontalSpacing="16" VerticalSpacing="16">
+            <lumina:LuminaCard>
+                <StackPanel Spacing="16">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1126}" />
+                    <WrapPanel>
+                        <Button Content="{DynamicResource Sandbox.Text.0190}" Classes="Primary" Margin="0,0,12,12" />
+                        <Button Content="{DynamicResource Sandbox.Text.0191}" Classes="Success" Margin="0,0,12,12" />
+                        <Button Content="{DynamicResource Sandbox.Text.0192}" Classes="Warning" Margin="0,0,12,12" />
+                        <Button Content="{DynamicResource Sandbox.Text.0193}" Classes="Danger" Margin="0,0,12,12" />
+                        <Button Content="{DynamicResource Sandbox.Text.0194}" Classes="Outline" Margin="0,0,12,12" />
+                        <Button Content="{DynamicResource Sandbox.Text.0195}" Classes="Ghost" Margin="0,0,12,12" />
+                    </WrapPanel>
+                    <WrapPanel>
+                        <Button Content="{DynamicResource Sandbox.Text.0196}" Classes="Small Outline" Margin="0,0,12,12" />
+                        <Button Content="{DynamicResource Sandbox.Text.0197}" Classes="Outline" Margin="0,0,12,12" />
+                        <Button Content="{DynamicResource Sandbox.Text.0656}" Classes="Large Primary" Margin="0,0,12,12" />
+                        <Button Content="{DynamicResource Sandbox.Text.0199}" IsEnabled="False" Margin="0,0,12,12" />
+                    </WrapPanel>
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard>
+                <StackPanel Spacing="16">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0822}" />
+                    <WrapPanel>
+                        <Button Content="{DynamicResource Sandbox.Text.0046}" Classes="Outline" Margin="0,0,12,12">
+                            <lumina:LuminaButton.Icon>
+                                <PathIcon Width="16" Height="16" Data="M10,18 C5.6,18 2,14.4 2,10 C2,5.6 5.6,2 10,2 C14.4,2 18,5.6 18,10 C18,11.8 17.4,13.5 16.4,14.9 L22,20.5 L20.5,22 L14.9,16.4 C13.5,17.4 11.8,18 10,18 Z M10,16 C13.3,16 16,13.3 16,10 C16,6.7 13.3,4 10,4 C6.7,4 4,6.7 4,10 C4,13.3 6.7,16 10,16 Z" />
+                            </lumina:LuminaButton.Icon>
+                        </Button>
+                        <Button Content="{DynamicResource Sandbox.Text.0842}" lumina:LuminaButton.IconPlacement="Right" Margin="0,0,12,12">
+                            <lumina:LuminaButton.Icon>
+                                <PathIcon Width="16" Height="16" Data="M8,5 L15,12 L8,19 Z" />
+                            </lumina:LuminaButton.Icon>
+                        </Button>
+                        <Button Classes="Ghost" ToolTip.Tip="Settings" Margin="0,0,12,12">
+                            <lumina:LuminaButton.Icon>
+                                <PathIcon Width="16" Height="16" Data="M12,8 A4,4 0 1 1 12,16 A4,4 0 0 1 12,8 M4,13 L2,12 L4,11 L5,8 L4,6 L6,4 L8,5 L11,4 L12,2 L13,4 L16,5 L18,4 L20,6 L19,8 L20,11 L22,12 L20,13 L19,16 L20,18 L18,20 L16,19 L13,20 L12,22 L11,20 L8,19 L6,20 L4,18 L5,16 Z" />
+                            </lumina:LuminaButton.Icon>
+                        </Button>
+                    </WrapPanel>
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard>
+                <StackPanel Spacing="16">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1127}" />
+                    <WrapPanel>
+                        <ToggleButton Content="{DynamicResource Sandbox.Text.0200}" Margin="0,0,12,12" />
+                        <ToggleButton Content="{DynamicResource Sandbox.Text.0201}" IsChecked="True" Margin="0,0,12,12" />
+                        <ToggleButton Content="{DynamicResource Sandbox.Text.0202}" Classes="Ghost" Margin="0,0,12,12" />
+                        <ToggleButton Content="{DynamicResource Sandbox.Text.0199}" IsEnabled="False" Margin="0,0,12,12" />
+                    </WrapPanel>
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard>
+                <StackPanel Spacing="16">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1128}" />
+                    <WrapPanel>
+                        <RepeatButton Content="{DynamicResource Sandbox.Text.1129}" Width="44" Margin="0,0,8,12" />
+                        <RepeatButton Content="{DynamicResource Sandbox.Text.1130}" Width="44" Margin="0,0,12,12" />
+                        <RepeatButton Content="{DynamicResource Sandbox.Text.0203}" Classes="Outline" Margin="0,0,12,12" />
+                    </WrapPanel>
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard>
+                <StackPanel Spacing="16">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0646}" />
+                    <WrapPanel>
+                        <Button Content="{DynamicResource Sandbox.Text.0647}"
+                                Classes="Primary"
+                                Command="{Binding SubmitCommand}"
+                                lumina:LuminaButton.IsLoading="{Binding IsSubmitting}"
+                                Margin="0,0,12,12" />
+                        <Button Content="{DynamicResource Sandbox.Text.0649}"
+                                Classes="Outline"
+                                Command="{Binding SubmitCommand}"
+                                lumina:LuminaButton.IsLoading="{Binding IsSubmitting}"
+                                lumina:LuminaButton.LoadingKind="Bar"
+                                Margin="0,0,12,12" />
+                        <Button Content="{DynamicResource Sandbox.Text.0049}"
+                                Classes="Success"
+                                Command="{Binding SubmitCommand}"
+                                lumina:LuminaButton.IsLoading="{Binding IsSubmitting}"
+                                Margin="0,0,12,12">
+                            <lumina:LuminaButton.Icon>
+                                <PathIcon Width="16" Height="16" Data="M12,3 L17,8 L14,8 L14,15 L10,15 L10,8 L7,8 Z M5,18 L19,18 L19,21 L5,21 Z" />
+                            </lumina:LuminaButton.Icon>
+                        </Button>
+                        <Button Content="{DynamicResource Sandbox.Text.0045}"
+                                Classes="Outline"
+                                Command="{Binding SubmitCommand}"
+                                lumina:LuminaButton.IconPlacement="Right"
+                                lumina:LuminaButton.IsLoading="{Binding IsSubmitting}"
+                                Margin="0,0,12,12">
+                            <lumina:LuminaButton.Icon>
+                                <PathIcon Width="16" Height="16" Data="M20,12 A8,8 0 0,1 6.4,17.6 L4,20 L4,14 L10,14 L7.8,16.2 A5,5 0 0,0 17,12 Z M4,12 A8,8 0 0,1 17.6,6.4 L20,4 L20,10 L14,10 L16.2,7.8 A5,5 0 0,0 7,12 Z" />
+                            </lumina:LuminaButton.Icon>
+                        </Button>
+                        <Button Classes="Ghost"
+                                ToolTip.Tip="Icon-only loading"
+                                Command="{Binding SubmitCommand}"
+                                lumina:LuminaButton.IsLoading="{Binding IsSubmitting}"
+                                Margin="0,0,12,12">
+                            <lumina:LuminaButton.Icon>
+                                <PathIcon Width="16" Height="16" Data="M12,3 A9,9 0 1,0 12,21 A9,9 0 1,0 12,3 M12,7 L12,12 L16,14" />
+                            </lumina:LuminaButton.Icon>
+                        </Button>
+                    </WrapPanel>
+                    <TextBlock Text="{Binding ButtonStatus}" Classes="Helper" />
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard>
+                <StackPanel Spacing="16">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0650}" />
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <lumina:LuminaHamburgerButton IsOpen="{Binding IsMenuOpen}" />
+                        <TextBlock VerticalAlignment="Center"
+                                   Text="{Binding IsMenuOpen, StringFormat='Menu open: {0}'}"
+                                   Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                    </StackPanel>
+                </StackPanel>
+            </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

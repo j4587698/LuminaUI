@@ -1,0 +1,44 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             x:Class="LuminaUI.Demo.Views.SelectionShowcasePage">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0464}" />
+                <TextBlock Text="{DynamicResource Sandbox.Text.0465}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="240" MaxItemWidth="360" HorizontalSpacing="16" VerticalSpacing="16">
+            <lumina:LuminaCard>
+                <StackPanel Spacing="12">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1243}" />
+                    <CheckBox Content="{DynamicResource Sandbox.Text.0466}" />
+                    <CheckBox Content="{DynamicResource Sandbox.Text.0467}" IsChecked="True" />
+                    <CheckBox Content="{DynamicResource Sandbox.Text.0468}" IsThreeState="True" IsChecked="{x:Null}" />
+                    <CheckBox Content="{DynamicResource Sandbox.Text.0199}" IsEnabled="False" />
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard>
+                <StackPanel Spacing="12">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1244}" />
+                    <RadioButton GroupName="Density" Content="{DynamicResource Sandbox.Text.0156}" IsChecked="True" />
+                    <RadioButton GroupName="Density" Content="{DynamicResource Sandbox.Text.0155}" />
+                    <RadioButton GroupName="Density" Content="{DynamicResource Sandbox.Text.0199}" IsEnabled="False" />
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard>
+                <StackPanel Spacing="12">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1245}" />
+                    <ToggleSwitch Content="{DynamicResource Sandbox.Text.0469}" IsChecked="True" />
+                    <ToggleSwitch Content="{DynamicResource Sandbox.Text.0470}" />
+                    <ToggleSwitch Content="{DynamicResource Sandbox.Text.0471}" IsEnabled="False" />
+                </StackPanel>
+            </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

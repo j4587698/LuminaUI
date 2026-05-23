@@ -1,0 +1,84 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.NavigationPageShowcasePage"
+             x:DataType="vm:NavigationPageShowcaseViewModel">
+    <ScrollViewer Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.1233}" />
+                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0764}" TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="300" MaxItemWidth="640" HorizontalSpacing="16" VerticalSpacing="16">
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <Grid ColumnDefinitions="*,220" ColumnSpacing="16">
+                            <StackPanel Spacing="4">
+                                <TextBlock Classes="SectionTitle" Text="Navigation transition" />
+                                <TextBlock Classes="Helper"
+                                           Text="Pick a transition, then push and pop Page 1, Page 2, and Page 3."
+                                           TextWrapping="Wrap" />
+                            </StackPanel>
+
+                            <ComboBox Grid.Column="1"
+                                      ItemsSource="{Binding TransitionChoices}"
+                                      SelectedItem="{Binding SelectedTransitionChoice}"
+                                      HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Top">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate x:DataType="vm:PageTransitionChoice">
+                                        <TextBlock Text="{Binding Name}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+
+                        <Border Height="320"
+                                BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="10"
+                                ClipToBounds="True">
+                            <NavigationPage x:Name="DemoNavigationPage"
+                                            PageTransition="{Binding PageTransition}">
+                                <ContentPage Header="Page 1">
+                                    <Grid Margin="16,68,16,16" RowDefinitions="*,Auto">
+                                        <StackPanel HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Spacing="8">
+                                            <TextBlock Text="Page 1"
+                                                       FontSize="34"
+                                                       FontWeight="Bold"
+                                                       HorizontalAlignment="Center" />
+                                            <TextBlock Classes="Helper"
+                                                       Text="Root page. Push another page to see the NavigationPage transition."
+                                                       TextAlignment="Center"
+                                                       TextWrapping="Wrap"
+                                                       MaxWidth="360"
+                                                       HorizontalAlignment="Center" />
+                                            <Border Padding="10,5"
+                                                    Background="#14000000"
+                                                    CornerRadius="999"
+                                                    HorizontalAlignment="Center">
+                                                <TextBlock Text="Root stack page" FontSize="12" />
+                                            </Border>
+                                        </StackPanel>
+
+                                        <Button x:Name="PushNavigationButton"
+                                                Grid.Row="1"
+                                                Classes="Primary Small"
+                                                Content="Push Page 2"
+                                                HorizontalAlignment="Center"
+                                                Command="{Binding PushNavigationCommand}"
+                                                CommandParameter="{Binding #DemoNavigationPage}" />
+                                    </Grid>
+                                </ContentPage>
+                            </NavigationPage>
+                        </Border>
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

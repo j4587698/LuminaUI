@@ -1,0 +1,212 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.SandboxRootView"
+             x:Name="RootView">
+    <lumina:LuminaTopView x:Name="RootTopView"
+                          TopViewKey="SandboxRoot">
+        <Grid>
+            <lumina:LuminaShell x:Name="AppShell"
+                                ShellKey="Sandbox"
+                                DefaultPageTitle="{DynamicResource Sandbox.Shell.Title}"
+                                IsWindowGlassEnabled="{Binding $parent[lumina:LuminaWindow].IsWindowGlassEnabled, FallbackValue=False}">
+                <lumina:LuminaShell.MenuHeader>
+                    <StackPanel Orientation="Horizontal" Spacing="16">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Border Width="24" Height="24" CornerRadius="6" Background="{DynamicResource LuminaPrimaryBrush}" />
+                            <TextBlock Text="Lumina UI"
+                                       FontSize="20"
+                                       FontWeight="Black"
+                                       Foreground="{DynamicResource LuminaTextForegroundBrush}"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                    </StackPanel>
+                </lumina:LuminaShell.MenuHeader>
+
+                <lumina:LuminaShell.MenuFooter>
+                    <lumina:LuminaCard Padding="12"
+                                       Margin="0"
+                                       Background="{DynamicResource LuminaNavigationPaneItemBrush}"
+                                       BorderThickness="0"
+                                       Classes="Interactive">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <Border Width="36" Height="36" CornerRadius="18" Background="{DynamicResource LuminaBorderBrush}" />
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="{DynamicResource Sandbox.User.Name}"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Foreground="{DynamicResource LuminaTextForegroundBrush}" />
+                                <TextBlock Text="{DynamicResource Sandbox.Text.1175}"
+                                           FontSize="12"
+                                           Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </lumina:LuminaCard>
+                </lumina:LuminaShell.MenuFooter>
+
+                <lumina:LuminaShell.MenuContent>
+                    <lumina:LuminaNavigationView Name="AppNavView"
+                                                 SelectedKey="{Binding #AppShell.ActiveNavigationKey, Mode=TwoWay}">
+                        <lumina:LuminaNavigationItem Name="NavDesignSystem" Header="{DynamicResource Sandbox.Nav.DesignSystem}" Icon="DS" />
+                        <lumina:LuminaNavigationItem Name="NavLocalizationResources" Header="{DynamicResource Sandbox.Nav.LocalizationResources}" Icon="LR" />
+                        <lumina:LuminaNavigationItem Name="NavColors" Header="{DynamicResource Sandbox.Nav.Colors}" Icon="CL" />
+
+                        <lumina:LuminaNavigationItem Name="NavFoundationGroup" Header="{DynamicResource Sandbox.Nav.FoundationGroup}" Icon="Aa" IsExpanded="True">
+                            <lumina:LuminaNavigationItem Name="NavFoundation" Classes="Child" Header="{DynamicResource Sandbox.Nav.Foundation}" Icon="Aa" />
+                            <lumina:LuminaNavigationItem Name="NavCards" Classes="Child" Header="{DynamicResource Sandbox.Nav.Cards}" Icon="CA" />
+                            <lumina:LuminaNavigationItem Name="NavGroupBox" Classes="Child" Header="{DynamicResource Sandbox.Nav.GroupBox}" Icon="GB" />
+                            <lumina:LuminaNavigationItem Name="NavImages" Classes="Child" Header="{DynamicResource Sandbox.Nav.Images}" Icon="IM" />
+                            <lumina:LuminaNavigationItem Name="NavAvatarBadge" Classes="Child" Header="{DynamicResource Sandbox.Nav.AvatarBadge}" Icon="AB" />
+                            <lumina:LuminaNavigationItem Name="NavButtons" Classes="Child" Header="{DynamicResource Sandbox.Nav.Buttons}" Icon="BT" />
+                            <lumina:LuminaNavigationItem Name="NavButtonGroup" Classes="Child" Header="{DynamicResource Sandbox.Nav.ButtonGroup}" Icon="BG" />
+                            <lumina:LuminaNavigationItem Name="NavAutoCompleteBox" Classes="Child" Header="{DynamicResource Sandbox.Nav.AutoCompleteBox}" Icon="AB" />
+                            <lumina:LuminaNavigationItem Name="NavDropDownButton" Classes="Child" Header="{DynamicResource Sandbox.Nav.DropDownButton}" Icon="DB" />
+                            <lumina:LuminaNavigationItem Name="NavSplitButton" Classes="Child" Header="{DynamicResource Sandbox.Nav.SplitButton}" Icon="SB" />
+                            <lumina:LuminaNavigationItem Name="NavCommandBar" Classes="Child" Header="{DynamicResource Sandbox.Nav.CommandBar}" Icon="CB" />
+                        </lumina:LuminaNavigationItem>
+
+                        <lumina:LuminaNavigationItem Name="NavLayoutGroup" Header="{DynamicResource Sandbox.Nav.LayoutGroup}" Icon="LY">
+                            <lumina:LuminaNavigationItem Name="NavHeaderedContentControl" Classes="Child" Header="{DynamicResource Sandbox.Nav.HeaderedContentControl}" Icon="HC" />
+                            <lumina:LuminaNavigationItem Name="NavItemsControl" Classes="Child" Header="{DynamicResource Sandbox.Nav.ItemsControl}" Icon="IC" />
+                            <lumina:LuminaNavigationItem Name="NavSplitView" Classes="Child" Header="{DynamicResource Sandbox.Nav.SplitView}" Icon="SV" />
+                            <lumina:LuminaNavigationItem Name="NavNavigationPage" Classes="Child" Header="{DynamicResource Sandbox.Nav.NavigationPage}" Icon="NP" />
+                            <lumina:LuminaNavigationItem Name="NavDrawerPage" Classes="Child" Header="{DynamicResource Sandbox.Nav.DrawerPage}" Icon="DP" />
+                            <lumina:LuminaNavigationItem Name="NavTabbedPage" Classes="Child" Header="{DynamicResource Sandbox.Nav.TabbedPage}" Icon="TP" />
+                            <lumina:LuminaNavigationItem Name="NavCarousel" Classes="Child" Header="{DynamicResource Sandbox.Nav.Carousel}" Icon="CR" />
+                            <lumina:LuminaNavigationItem Name="NavTransitioningContentControl" Classes="Child" Header="{DynamicResource Sandbox.Nav.TransitioningContentControl}" Icon="TC" />
+                            <lumina:LuminaNavigationItem Name="NavBreadcrumb" Classes="Child" Header="{DynamicResource Sandbox.Nav.Breadcrumb}" Icon="BR" />
+                            <lumina:LuminaNavigationItem Name="NavTabStrip" Classes="Child" Header="{DynamicResource Sandbox.Nav.TabStrip}" Icon="TS" />
+                            <lumina:LuminaNavigationItem Name="NavTabControl" Classes="Child" Header="{DynamicResource Sandbox.Nav.TabControl}" Icon="TC" />
+                            <lumina:LuminaNavigationItem Name="NavTabsExpanders" Classes="Child" Header="{DynamicResource Sandbox.Nav.TabsExpanders}" Icon="TE" />
+                        </lumina:LuminaNavigationItem>
+
+                        <lumina:LuminaNavigationItem Name="NavDataEntryGroup" Header="{DynamicResource Sandbox.Nav.DataEntryGroup}" Icon="TX">
+                            <lumina:LuminaNavigationItem Name="NavTextInputs" Classes="Child" Header="{DynamicResource Sandbox.Nav.TextInputs}" Icon="TX" />
+                            <lumina:LuminaNavigationItem Name="NavInputOtp" Classes="Child" Header="{DynamicResource Sandbox.Nav.InputOtp}" Icon="OTP" />
+                            <lumina:LuminaNavigationItem Name="NavForm" Classes="Child" Header="{DynamicResource Sandbox.Nav.Form}" Icon="FM" />
+                            <lumina:LuminaNavigationItem Name="NavMultiSelect" Classes="Child" Header="{DynamicResource Sandbox.Nav.MultiSelect}" Icon="MS" />
+                            <lumina:LuminaNavigationItem Name="NavTagInput" Classes="Child" Header="{DynamicResource Sandbox.Nav.TagInput}" Icon="TI" />
+                            <lumina:LuminaNavigationItem Name="NavCascader" Classes="Child" Header="{DynamicResource Sandbox.Text.1134}" Icon="CA" />
+                            <lumina:LuminaNavigationItem Name="NavSelection" Classes="Child" Header="{DynamicResource Sandbox.Nav.Selection}" Icon="SE" />
+                            <lumina:LuminaNavigationItem Name="NavPickers" Classes="Child" Header="{DynamicResource Sandbox.Nav.Pickers}" Icon="PK" />
+                            <lumina:LuminaNavigationItem Name="NavColorPicker" Classes="Child" Header="{DynamicResource Sandbox.Nav.ColorPicker}" Icon="CP" />
+                            <lumina:LuminaNavigationItem Name="NavDateRangePicker" Classes="Child" Header="{DynamicResource Sandbox.Nav.DateRangePicker}" Icon="DR" />
+                            <lumina:LuminaNavigationItem Name="NavRange" Classes="Child" Header="{DynamicResource Sandbox.Nav.Range}" Icon="RG" />
+                            <lumina:LuminaNavigationItem Name="NavRangeSlider" Classes="Child" Header="{DynamicResource Sandbox.Nav.RangeSlider}" Icon="RS" />
+                            <lumina:LuminaNavigationItem Name="NavRating" Classes="Child" Header="{DynamicResource Sandbox.Nav.Rating}" Icon="RT" />
+                        </lumina:LuminaNavigationItem>
+
+                        <lumina:LuminaNavigationItem Name="NavDataDisplayGroup" Header="{DynamicResource Sandbox.Nav.DataDisplayGroup}" Icon="DG">
+                            <lumina:LuminaNavigationItem Name="NavDescriptions" Classes="Child" Header="{DynamicResource Sandbox.Nav.Descriptions}" Icon="DE" />
+                            <lumina:LuminaNavigationItem Name="NavProperties" Classes="Child" Header="{DynamicResource Sandbox.Nav.Properties}" Icon="PR" />
+                            <lumina:LuminaNavigationItem Name="NavCollections" Classes="Child" Header="{DynamicResource Sandbox.Nav.Collections}" Icon="CO" />
+                            <lumina:LuminaNavigationItem Name="NavDataGrid" Classes="Child" Header="{DynamicResource Sandbox.Nav.DataGrid}" Icon="DG" />
+                            <lumina:LuminaNavigationItem Name="NavTreeDataGrid" Classes="Child" Header="{DynamicResource Sandbox.Nav.TreeDataGrid}" Icon="TG" />
+                            <lumina:LuminaNavigationItem Name="NavAutoScrollText" Classes="Child" Header="{DynamicResource Sandbox.Nav.AutoScrollText}" Icon="AT" />
+                            <lumina:LuminaNavigationItem Name="NavIndexedList" Classes="Child" Header="{DynamicResource Sandbox.Nav.IndexedList}" Icon="IL" />
+                            <lumina:LuminaNavigationItem Name="NavLinkedCategory" Classes="Child" Header="{DynamicResource Sandbox.Nav.LinkedCategory}" Icon="LC" />
+                            <lumina:LuminaNavigationItem Name="NavPagination" Classes="Child" Header="{DynamicResource Sandbox.Nav.Pagination}" Icon="PG" />
+                            <lumina:LuminaNavigationItem Name="NavTimeline" Classes="Child" Header="{DynamicResource Sandbox.Nav.Timeline}" Icon="TL" />
+                            <lumina:LuminaNavigationItem Name="NavSteps" Classes="Child" Header="{DynamicResource Sandbox.Text.1248}" Icon="ST" />
+                            <lumina:LuminaNavigationItem Name="NavEmpty" Classes="Child" Header="{DynamicResource Sandbox.Text.0808}" Icon="EM" />
+                        </lumina:LuminaNavigationItem>
+
+                        <lumina:LuminaNavigationItem Name="NavFeedbackGroup" Header="{DynamicResource Sandbox.Nav.FeedbackGroup}" Icon="PC">
+                            <lumina:LuminaNavigationItem Name="NavLoading" Classes="Child" Header="{DynamicResource Sandbox.Nav.Loading}" Icon="LD" />
+                            <lumina:LuminaNavigationItem Name="NavLoadingContainer" Classes="Child" Header="{DynamicResource Sandbox.Nav.LoadingContainer}" Icon="LC" />
+                            <lumina:LuminaNavigationItem Name="NavBanner" Classes="Child" Header="{DynamicResource Sandbox.Nav.Banner}" Icon="BN" />
+                            <lumina:LuminaNavigationItem Name="NavPopConfirm" Classes="Child" Header="{DynamicResource Sandbox.Nav.PopConfirm}" Icon="PC" />
+                            <lumina:LuminaNavigationItem Name="NavNotificationCard" Classes="Child" Header="{DynamicResource Sandbox.Nav.NotificationCard}" Icon="PC" />
+                        </lumina:LuminaNavigationItem>
+
+                        <lumina:LuminaNavigationItem Name="NavPatternsGroup" Header="{DynamicResource Sandbox.Nav.Patterns}" Icon="PT">
+                            <lumina:LuminaNavigationItem Name="NavMenus" Classes="Child" Header="{DynamicResource Sandbox.Nav.Menus}" Icon="MN" />
+                            <lumina:LuminaNavigationItem Name="NavOverlays" Classes="Child" Header="{DynamicResource Sandbox.Nav.Overlays}" Icon="OV" />
+                            <lumina:LuminaNavigationItem Name="NavLayout" Classes="Child" Header="{DynamicResource Sandbox.Nav.Layout}" Icon="LY" />
+                            <lumina:LuminaNavigationItem Name="NavMotion" Classes="Child" Header="{DynamicResource Sandbox.Text.1313}" Icon="HM" />
+                            <lumina:LuminaNavigationItem Name="NavMobileRoot" Classes="Child" Header="{DynamicResource Sandbox.Text.0836}" Icon="MO" />
+                            <lumina:LuminaNavigationItem Name="NavLogin" Classes="Child" Header="{DynamicResource Sandbox.Nav.Login}" Icon="LG" />
+                        </lumina:LuminaNavigationItem>
+
+                        <Separator Margin="0,6" />
+                        <lumina:LuminaNavigationItem Name="NavSettings" Header="{DynamicResource Sandbox.Nav.Settings}" Icon="ST" />
+                    </lumina:LuminaNavigationView>
+                </lumina:LuminaShell.MenuContent>
+
+                <lumina:LuminaShell.Title>
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="16">
+                        <lumina:LuminaHamburgerButton Grid.Column="0"
+                                                      IsOpen="{Binding #AppShell.IsMenuOpen}" />
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding #AppShell.ActivePageTitle}"
+                                       FontSize="24"
+                                       FontWeight="Bold"
+                                       VerticalAlignment="Center" />
+                            <TextBlock Text="{Binding #AppShell.ActivePageSubtitle}"
+                                       FontSize="12"
+                                       Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                       IsVisible="{Binding #AppShell.ActivePageSubtitle, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                        </StackPanel>
+                        <ContentPresenter Grid.Column="2"
+                                          Content="{Binding #AppShell.ActivePageActions}"
+                                          VerticalAlignment="Center"
+                                          IsVisible="{Binding #AppShell.ActivePageActions, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                    </Grid>
+                </lumina:LuminaShell.Title>
+            </lumina:LuminaShell>
+
+            <ItemsControl ItemsSource="{Binding #RootView.NotificationCenter.Notifications}"
+                          HorizontalAlignment="{Binding #RootView.NotificationCenter.HorizontalAlignment}"
+                          VerticalAlignment="{Binding #RootView.NotificationCenter.VerticalAlignment}"
+                          Margin="24,56,24,24"
+                          MaxWidth="360"
+                          ZIndex="2500">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Spacing="14" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="vm:SandboxNotificationItem">
+                        <Border MinWidth="280"
+                                MaxWidth="360"
+                                Padding="14"
+                                Background="{DynamicResource LuminaPopoverBrush}"
+                                BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="10"
+                                BoxShadow="{DynamicResource LuminaShadowNotification}"
+                                Cursor="Hand"
+                                lumina:LuminaCommand.TappedCommand="{Binding CloseCommand}"
+                                lumina:LuminaCommand.MarkHandled="True">
+                            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                                <Border Width="10"
+                                        Height="10"
+                                        CornerRadius="5"
+                                        Background="{Binding AccentBrush}"
+                                        VerticalAlignment="Top"
+                                        Margin="0,5,0,0" />
+                                <StackPanel Grid.Column="1" Spacing="4">
+                                    <TextBlock Text="{Binding Title}"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource LuminaTextPrimaryBrush}" />
+                                    <TextBlock Text="{Binding Message}"
+                                               TextWrapping="Wrap"
+                                               Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                                </StackPanel>
+                                <PathIcon Grid.Column="2"
+                                          Width="14"
+                                          Height="14"
+                                          Margin="8,3,0,0"
+                                          VerticalAlignment="Top"
+                                          Data="M6,6 L18,18 M18,6 L6,18"
+                                          Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </lumina:LuminaTopView>
+</UserControl>

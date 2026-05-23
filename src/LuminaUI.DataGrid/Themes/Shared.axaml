@@ -1,0 +1,24 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Thickness x:Key="DataGridCellTextBlockDefaultMargin">12,0,12,0</Thickness>
+    <x:Double x:Key="DataGridCellMinHeight">38</x:Double>
+    <Thickness x:Key="DataGridCellVisualBorderThickness">1</Thickness>
+    <x:Double x:Key="DataGridCellVisualStrokeThickness">1</x:Double>
+
+    <Thickness x:Key="DataGridColumnHeaderPadding">12,0,8,0</Thickness>
+    <x:Double x:Key="DataGridColumnHeaderMinHeight">40</x:Double>
+    <CornerRadius x:Key="DataGridColumnHeaderCornerRadius">6</CornerRadius>
+    <StreamGeometry x:Key="DataGridColumnHeaderAscendingGlyph">M7 4L12 10H2L7 4Z</StreamGeometry>
+    <StreamGeometry x:Key="DataGridColumnHeaderDescendingGlyph">M7 12L2 6H12L7 12Z</StreamGeometry>
+
+    <Thickness x:Key="DataGridRowHeaderMargin">8,0</Thickness>
+    <CornerRadius x:Key="DataGridRowCornerRadius">6</CornerRadius>
+    <Thickness x:Key="DataGridRowMargin">2</Thickness>
+
+    <x:Double x:Key="DataGridRowGroupHeaderMinHeight">38</x:Double>
+    <StreamGeometry x:Key="DataGridRowGroupHeaderExpandIconGlyph">M5 3L11 8L5 13V3Z</StreamGeometry>
+    <x:Double x:Key="DataGridRowGroupHeaderVisualStrokeThickness">1</x:Double>
+
+    <CornerRadius x:Key="DataGridDisabledCornerRadius">8</CornerRadius>
+    <x:Double x:Key="DataGridGridLineThickness">1</x:Double>
+</ResourceDictionary>

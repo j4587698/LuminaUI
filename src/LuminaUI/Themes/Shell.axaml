@@ -1,0 +1,188 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaShell}" TargetType="lumina:LuminaShell">
+        <Setter Property="Background" Value="{DynamicResource LuminaBackgroundBrush}" />
+        <Setter Property="PaneBackground" Value="{DynamicResource LuminaNavigationPaneBrush}" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid Name="PART_Root" Background="{TemplateBinding Background}">
+                    <SplitView Name="PART_SplitView" 
+                               IsPaneOpen="{TemplateBinding EffectiveIsMenuOpen}" 
+                               OpenPaneLength="{TemplateBinding EffectiveOpenPaneLength}"
+                               CompactPaneLength="{TemplateBinding EffectiveCompactPaneLength}"
+                               PaneBackground="{TemplateBinding PaneBackground}"
+                               Background="Transparent">
+                        
+                        <SplitView.Pane>
+                            <!-- Menu pane is separated by surface tone, not by an extra border. -->
+                            <Border Background="{TemplateBinding PaneBackground}"
+                                    IsVisible="{TemplateBinding IsShellChromeVisible}">
+                                <Grid RowDefinitions="Auto,*,Auto">
+                                    <!-- 菜单头部插槽 -->
+                                    <Border Grid.Row="0" Margin="16" Height="48">
+                                        <ContentPresenter Content="{TemplateBinding MenuHeader}" VerticalAlignment="Center" />
+                                    </Border>
+                                    
+                                    <!-- 菜单内容投射器 -->
+                                    <ScrollViewer Name="PART_MenuScrollViewer"
+                                                  Grid.Row="1"
+                                                  Margin="16,0,16,16"
+                                                  BringIntoViewOnFocusChange="False"
+                                                  HorizontalScrollBarVisibility="Disabled"
+                                                  VerticalScrollBarVisibility="Hidden">
+                                        <ContentPresenter Content="{TemplateBinding MenuContent}" />
+                                    </ScrollViewer>
+                                    
+                                    <!-- 菜单底部插槽 -->
+                                    <Border Grid.Row="2" Margin="16" BorderThickness="0" Padding="0,16,0,0">
+                                        <ContentPresenter Content="{TemplateBinding MenuFooter}" />
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </SplitView.Pane>
+                        
+                        <SplitView.Content>
+                            <Grid RowDefinitions="Auto,*">
+                                <!-- 主区域头部栏插槽 -->
+                                <Border Grid.Row="0"
+                                        Height="48"
+                                        Margin="16"
+                                        Background="Transparent"
+                                        IsVisible="{TemplateBinding IsShellChromeVisible}">
+                                    <ContentPresenter Content="{TemplateBinding Title}" TextElement.FontSize="24" TextElement.FontWeight="Bold" VerticalAlignment="Center"/>
+                                </Border>
+                                
+                                <!-- 主视图内容投射器 (添加了平滑切页动画) -->
+                                <Border Grid.Row="1" ClipToBounds="True">
+                                    <TransitioningContentControl Content="{TemplateBinding Content}">
+                                        <TransitioningContentControl.PageTransition>
+                                            <CrossFade Duration="0:0:0.25" />
+                                        </TransitioningContentControl.PageTransition>
+                                    </TransitioningContentControl>
+                                </Border>
+                            </Grid>
+                        </SplitView.Content>
+                    </SplitView>
+                    
+                    <!-- ============================================== -->
+                    <!-- Dialog Overlay (遮罩层与弹窗容器)                  -->
+                    <!-- ============================================== -->
+                    <Border Name="PART_DialogOverlay"
+                            Background="Transparent"
+                            Opacity="0"
+                            IsHitTestVisible="False"
+                            ZIndex="1000">
+                        <Border.Transitions>
+                            <Transitions>
+                                <DoubleTransition Property="Opacity" Duration="0:0:0.2" />
+                            </Transitions>
+                        </Border.Transitions>
+                        
+                        <!-- 对弹窗实体进行缩放滑入动画 -->
+                        <Grid>
+                            <lumina:LuminaBackdropBlur BlurRadius="10"
+                                                       HorizontalAlignment="Stretch"
+                                                       VerticalAlignment="Stretch" />
+                            <Border Background="{DynamicResource LuminaOverlayScrimBrush}"
+                                    IsHitTestVisible="False" />
+
+                            <Border Name="PART_DialogContainer">
+                                <Border.Transitions>
+                                    <Transitions>
+                                        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25" Easing="CubicEaseOut" />
+                                    </Transitions>
+                                </Border.Transitions>
+                                <ContentPresenter Content="{TemplateBinding DialogContent}"
+                                                  Margin="16"
+                                                  HorizontalAlignment="Stretch"
+                                                  VerticalAlignment="Center" />
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <!-- ============================================== -->
+                    <!-- BottomSheet Overlay (底部抽屉遮罩)                  -->
+                    <!-- ============================================== -->
+                    <Border Name="PART_BottomSheetOverlay"
+                            Background="Transparent"
+                            Opacity="0"
+                            IsHitTestVisible="False"
+                            ZIndex="1500">
+                        <Border.Transitions>
+                            <Transitions>
+                                <DoubleTransition Property="Opacity" Duration="0:0:0.2" />
+                            </Transitions>
+                        </Border.Transitions>
+                        
+                        <!-- 底部容器，默认向下平移 100% 藏在屏幕外 -->
+                        <Grid>
+                            <lumina:LuminaBackdropBlur BlurRadius="10"
+                                                       HorizontalAlignment="Stretch"
+                                                       VerticalAlignment="Stretch" />
+                            <Border Background="{DynamicResource LuminaOverlayScrimBrush}"
+                                    IsHitTestVisible="False" />
+
+                            <Border Name="PART_BottomSheetContainer"
+                                    VerticalAlignment="Bottom"
+                                    HorizontalAlignment="Stretch">
+                                <ContentPresenter Content="{TemplateBinding BottomSheetContent}" />
+                            </Border>
+                        </Grid>
+                    </Border>
+                    
+                    <!-- ============================================== -->
+                    <!-- Toast Overlay (全局底部通知)                       -->
+                    <!-- ============================================== -->
+                    <Border ZIndex="2000" HorizontalAlignment="Center" VerticalAlignment="Bottom" IsHitTestVisible="False">
+                        <ContentPresenter Name="PART_ToastPresenter" />
+                    </Border>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+
+        <!-- ============================================== -->
+        <!-- 响应式与动画控制逻辑                               -->
+        <!-- ============================================== -->
+
+        <!-- 默认桌面模式：侧边栏是嵌入主布局的 (推挤主内容) -->
+        <Style Selector="^ /template/ SplitView#PART_SplitView">
+            <Setter Property="DisplayMode" Value="Inline" />
+        </Style>
+
+        <Style Selector="^.WindowGlass">
+            <Setter Property="Background" Value="{DynamicResource LuminaWindowGlassBackgroundBrush}" />
+            <Setter Property="PaneBackground" Value="{DynamicResource LuminaWindowGlassPaneBrush}" />
+        </Style>
+
+        <!-- 移动/竖屏模式：激活伪类 :mobile，侧边栏变为浮动抽屉 (覆盖主内容) -->
+        <Style Selector="^:mobile /template/ SplitView#PART_SplitView">
+            <Setter Property="DisplayMode" Value="Overlay" />
+        </Style>
+        
+        <!-- Dialog 打开时的动画状态 -->
+        <Style Selector="^[IsDialogOpen=True] /template/ Border#PART_DialogOverlay">
+            <Setter Property="Opacity" Value="1" />
+            <Setter Property="IsHitTestVisible" Value="True" />
+        </Style>
+        <!-- Dialog 关闭时的卡片缩放偏移 -->
+        <Style Selector="^[IsDialogOpen=False] /template/ Border#PART_DialogContainer">
+            <Setter Property="RenderTransform" Value="scale(0.95) translateY(10px)" />
+        </Style>
+        <!-- Dialog 打开时的卡片正常位置 -->
+        <Style Selector="^[IsDialogOpen=True] /template/ Border#PART_DialogContainer">
+            <Setter Property="RenderTransform" Value="scale(1) translateY(0px)" />
+        </Style>
+
+        <!-- BottomSheet 打开时的动画状态 -->
+        <Style Selector="^[IsBottomSheetOpen=True] /template/ Border#PART_BottomSheetOverlay">
+            <Setter Property="Opacity" Value="1" />
+            <Setter Property="IsHitTestVisible" Value="True" />
+        </Style>
+
+            <!-- 回到原本位置 -->
+
+    </ControlTheme>
+
+</ResourceDictionary>

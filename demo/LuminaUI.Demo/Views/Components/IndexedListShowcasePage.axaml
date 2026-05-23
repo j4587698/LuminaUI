@@ -1,0 +1,110 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.IndexedListShowcasePage"
+             x:DataType="vm:IndexedListShowcaseViewModel">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24"
+                    Width="{Binding #PageScroll.Bounds.Width}"
+                    HorizontalAlignment="Stretch"
+                    Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0241}" />
+                <TextBlock Classes="Body"
+                           Text="{DynamicResource Sandbox.Text.0242}" />
+            </StackPanel>
+
+            <lumina:LuminaCard MaxWidth="720" HorizontalAlignment="Stretch">
+                <StackPanel Spacing="16">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0243}" />
+                    <lumina:LuminaIndexedList Height="420">
+                        <lumina:LuminaIndexedSection Header="{DynamicResource Sandbox.Text.1117}">
+                            <lumina:LuminaListItem Header="{DynamicResource Sandbox.Text.1180}" Description="{DynamicResource Sandbox.Text.0244}" />
+                            <lumina:LuminaListItem Header="{DynamicResource Sandbox.Text.1181}" Description="{DynamicResource Sandbox.Text.0245}" />
+                        </lumina:LuminaIndexedSection>
+                        <lumina:LuminaIndexedSection Header="{DynamicResource Sandbox.Text.1182}">
+                            <lumina:LuminaListItem Header="{DynamicResource Sandbox.Text.1183}" Description="{DynamicResource Sandbox.Text.0246}" />
+                            <lumina:LuminaListItem Header="{DynamicResource Sandbox.Text.1184}" Description="{DynamicResource Sandbox.Text.0247}" />
+                        </lumina:LuminaIndexedSection>
+                        <lumina:LuminaIndexedSection Header="{DynamicResource Sandbox.Text.1185}">
+                            <lumina:LuminaListItem Header="{DynamicResource Sandbox.Text.1186}" Description="{DynamicResource Sandbox.Text.0248}" />
+                            <lumina:LuminaListItem Header="{DynamicResource Sandbox.Text.1187}" Description="{DynamicResource Sandbox.Text.0249}" />
+                        </lumina:LuminaIndexedSection>
+                        <lumina:LuminaIndexedSection Header="{DynamicResource Sandbox.Text.1188}">
+                            <lumina:LuminaListItem Header="{DynamicResource Sandbox.Text.1189}" Description="{DynamicResource Sandbox.Text.0250}" />
+                            <lumina:LuminaListItem Header="{DynamicResource Sandbox.Text.1190}" Description="{DynamicResource Sandbox.Text.0251}" />
+                        </lumina:LuminaIndexedSection>
+                        <lumina:LuminaIndexedSection Header="{DynamicResource Sandbox.Text.1191}">
+                            <lumina:LuminaListItem Header="{DynamicResource Sandbox.Text.1192}" Description="{DynamicResource Sandbox.Text.0252}" />
+                            <lumina:LuminaListItem Header="{DynamicResource Sandbox.Text.1193}" Description="{DynamicResource Sandbox.Text.0253}" />
+                        </lumina:LuminaIndexedSection>
+                        <lumina:LuminaIndexedSection Header="{DynamicResource Sandbox.Text.1194}">
+                            <lumina:LuminaListItem Header="{DynamicResource Sandbox.Text.1195}" Description="{DynamicResource Sandbox.Text.0254}" />
+                            <lumina:LuminaListItem Header="{DynamicResource Sandbox.Text.1196}" Description="{DynamicResource Sandbox.Text.0255}" />
+                        </lumina:LuminaIndexedSection>
+                        <lumina:LuminaIndexedSection Header="{DynamicResource Sandbox.Text.1197}">
+                            <lumina:LuminaListItem Header="{DynamicResource Sandbox.Text.1198}" Description="{DynamicResource Sandbox.Text.0256}" />
+                            <lumina:LuminaListItem Header="{DynamicResource Sandbox.Text.1199}" Description="{DynamicResource Sandbox.Text.0257}" />
+                        </lumina:LuminaIndexedSection>
+                    </lumina:LuminaIndexedList>
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard MaxWidth="720" HorizontalAlignment="Stretch">
+                <StackPanel Spacing="16">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1200}" />
+                    <TextBlock Text="{DynamicResource Sandbox.Text.0792}" Foreground="{DynamicResource LuminaTextMutedBrush}" FontSize="12" Margin="0,-8,0,0" TextWrapping="Wrap"/>
+                    <lumina:LuminaIndexedList Height="380">
+                        <lumina:LuminaIndexedSection Header="{DynamicResource Sandbox.Text.1201}" Key="★">
+                            <lumina:LuminaListItem Header="{DynamicResource Sandbox.Text.1202}" Description="{DynamicResource Sandbox.Text.1203}" />
+                            <lumina:LuminaListItem Header="{DynamicResource Sandbox.Text.1204}" Description="{DynamicResource Sandbox.Text.1205}" />
+                        </lumina:LuminaIndexedSection>
+                        <lumina:LuminaIndexedSection Header="{DynamicResource Sandbox.Text.1206}" Key="C">
+                            <lumina:LuminaListItem Header="{DynamicResource Sandbox.Text.1207}" Description="{DynamicResource Sandbox.Text.1208}" />
+                            <lumina:LuminaListItem Header="{DynamicResource Sandbox.Text.1209}" Description="{DynamicResource Sandbox.Text.1210}" />
+                        </lumina:LuminaIndexedSection>
+                        <lumina:LuminaIndexedSection Header="{DynamicResource Sandbox.Text.1211}" Key="L">
+                            <lumina:LuminaListItem Header="{DynamicResource Sandbox.Text.1212}" Description="{DynamicResource Sandbox.Text.1213}" />
+                            <lumina:LuminaListItem Header="{DynamicResource Sandbox.Text.1214}" Description="{DynamicResource Sandbox.Text.1215}" />
+                        </lumina:LuminaIndexedSection>
+                        <lumina:LuminaIndexedSection Header="{DynamicResource Sandbox.Text.1216}" Key="W">
+                            <lumina:LuminaListItem Header="{DynamicResource Sandbox.Text.1217}" Description="{DynamicResource Sandbox.Text.1218}" />
+                            <lumina:LuminaListItem Header="{DynamicResource Sandbox.Text.1219}" Description="{DynamicResource Sandbox.Text.1220}" />
+                        </lumina:LuminaIndexedSection>
+                        <lumina:LuminaIndexedSection Header="{DynamicResource Sandbox.Text.1221}" Key="Z">
+                            <lumina:LuminaListItem Header="{DynamicResource Sandbox.Text.1222}" Description="{DynamicResource Sandbox.Text.1223}" />
+                            <lumina:LuminaListItem Header="{DynamicResource Sandbox.Text.1224}" Description="{DynamicResource Sandbox.Text.1225}" />
+                        </lumina:LuminaIndexedSection>
+                    </lumina:LuminaIndexedList>
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard MaxWidth="720" HorizontalAlignment="Stretch">
+                <StackPanel Spacing="16">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0805}" />
+                    <TextBlock Text="{DynamicResource Sandbox.Text.0787}" Foreground="{DynamicResource LuminaTextMutedBrush}" FontSize="12" Margin="0,-8,0,0" TextWrapping="Wrap"/>
+                    <lumina:LuminaIndexedList Name="PART_DynamicList"
+                                              Height="420"
+                                              ItemsSource="{Binding DynamicContactSections}">
+                        <lumina:LuminaIndexedList.ItemTemplate>
+                            <DataTemplate x:DataType="vm:IndexedSectionViewModel">
+                                <lumina:LuminaIndexedSection Key="{Binding Key}"
+                                                             Header="{Binding Header}"
+                                                             ItemsSource="{Binding Items}">
+                                    <lumina:LuminaIndexedSection.ItemTemplate>
+                                        <DataTemplate x:DataType="vm:ListItemViewModel">
+                                            <lumina:LuminaListItem Header="{Binding Header}"
+                                                                   Description="{Binding Description}" />
+                                        </DataTemplate>
+                                    </lumina:LuminaIndexedSection.ItemTemplate>
+                                </lumina:LuminaIndexedSection>
+                            </DataTemplate>
+                        </lumina:LuminaIndexedList.ItemTemplate>
+                    </lumina:LuminaIndexedList>
+                </StackPanel>
+            </lumina:LuminaCard>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

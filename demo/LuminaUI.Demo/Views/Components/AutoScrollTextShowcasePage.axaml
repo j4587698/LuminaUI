@@ -1,0 +1,69 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             x:Class="LuminaUI.Demo.Views.AutoScrollTextShowcasePage">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24"
+                    Width="{Binding #PageScroll.Bounds.Width}"
+                    HorizontalAlignment="Stretch"
+                    Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0179}" />
+                <TextBlock Classes="Body"
+                           Text="{DynamicResource Sandbox.Text.0181}" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="280"
+                                          MaxItemWidth="520"
+                                          HorizontalSpacing="16"
+                                          VerticalSpacing="16">
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0182}" />
+                        <Border Padding="14"
+                                Background="{DynamicResource LuminaHoverBackgroundBrush}"
+                                BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
+                                BorderThickness="1"
+                                CornerRadius="10">
+                            <lumina:LuminaAutoScrollText Classes="Pill"
+                                                         Text="{DynamicResource Sandbox.Text.0183}"
+                                                         Speed="46"
+                                                         Gap="56"
+                                                         RepeatDelay="0:0:1" />
+                        </Border>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0184}" />
+                        <Border Padding="14"
+                                Background="{DynamicResource LuminaSurfaceBrush}"
+                                BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
+                                BorderThickness="1"
+                                CornerRadius="10">
+                            <lumina:LuminaAutoScrollText Text="{DynamicResource Sandbox.Text.0185}"
+                                                         Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                        </Border>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0186}" />
+                        <Border Padding="14"
+                                Background="{DynamicResource LuminaStateHoverBrush}"
+                                BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
+                                BorderThickness="1"
+                                CornerRadius="10">
+                            <lumina:LuminaAutoScrollText Classes="Muted"
+                                                         Text="{DynamicResource Sandbox.Text.0187}"
+                                                         Speed="32" />
+                        </Border>
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

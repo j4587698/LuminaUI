@@ -1,0 +1,307 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.ColorsShowcasePage"
+             x:DataType="vm:ColorsShowcaseViewModel">
+
+    <UserControl.Styles>
+        <Style Selector="TextBlock.TokenTableTitle">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="TextBlock.TokenTableDescription">
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextMutedBrush}" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <Style Selector="Border.TokenTableHeader">
+            <Setter Property="MinHeight" Value="42" />
+            <Setter Property="Padding" Value="16,0" />
+            <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
+            <Setter Property="BorderThickness" Value="0,1,0,1" />
+        </Style>
+
+        <Style Selector="Border.TokenTableRow">
+            <Setter Property="MinHeight" Value="54" />
+            <Setter Property="Padding" Value="16,0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderSubtleBrush}" />
+            <Setter Property="BorderThickness" Value="0,0,0,1" />
+        </Style>
+
+        <Style Selector="Border.TokenTableRow:pointerover">
+            <Setter Property="Background" Value="{DynamicResource LuminaStateHoverBrush}" />
+        </Style>
+
+        <Style Selector="TextBlock.TokenHeader">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextMutedBrush}" />
+        </Style>
+
+        <Style Selector="TextBlock.TokenName">
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+            <Setter Property="TextWrapping" Value="NoWrap" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        </Style>
+
+        <Style Selector="TextBlock.TokenUsage">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+            <Setter Property="TextWrapping" Value="NoWrap" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        </Style>
+
+        <Style Selector="SelectableTextBlock.TokenValue">
+            <Setter Property="FontFamily" Value="Consolas" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+            <Setter Property="TextWrapping" Value="NoWrap" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        </Style>
+
+        <Style Selector="SelectableTextBlock.TokenLongValue">
+            <Setter Property="FontFamily" Value="Consolas" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+            <Setter Property="TextWrapping" Value="NoWrap" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        </Style>
+
+        <Style Selector="Button.TokenResourceButton">
+            <Setter Property="MinHeight" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="ClipToBounds" Value="True" />
+        </Style>
+
+        <Style Selector="TextBlock.TokenResourceKey">
+            <Setter Property="FontFamily" Value="Consolas" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+            <Setter Property="TextWrapping" Value="NoWrap" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        </Style>
+
+        <Style Selector="Button.TokenResourceButton:pointerover">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="Button.TokenResourceButton:pressed">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="RenderTransform" Value="scale(1)" />
+        </Style>
+    </UserControl.Styles>
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24"
+                    Width="{Binding #PageScroll.Bounds.Width}"
+                    HorizontalAlignment="Stretch"
+                    Margin="0,28,0,40">
+
+            <StackPanel Spacing="8">
+                <TextBlock Text="{Binding Title}"
+                           Classes="Display" />
+                <TextBlock Text="{Binding Subtitle}"
+                           Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                           TextWrapping="Wrap" />
+                <TextBlock Text="{Binding CopyStatus}"
+                           IsVisible="{Binding HasCopyStatus}"
+                           FontSize="12"
+                           Foreground="{DynamicResource LuminaSuccessBrush}" />
+            </StackPanel>
+
+            <ItemsControl ItemsSource="{Binding ColorGroups}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Spacing="18" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="vm:ColorTokenGroup">
+                        <lumina:LuminaCard Padding="0">
+                            <StackPanel>
+                                <StackPanel Margin="20,18,20,14" Spacing="4">
+                                    <TextBlock Text="{Binding Title}"
+                                               Classes="TokenTableTitle" />
+                                    <TextBlock Text="{Binding Description}"
+                                               Classes="TokenTableDescription" />
+                                </StackPanel>
+
+                                <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                              VerticalScrollBarVisibility="Disabled">
+                                    <StackPanel MinWidth="1160">
+                                        <Border Classes="TokenTableHeader">
+                                            <Grid ColumnDefinitions="64,180,320,116,116,92,180"
+                                                  ColumnSpacing="12"
+                                                  VerticalAlignment="Center">
+                                                <TextBlock Grid.Column="0" Text="Preview" Classes="TokenHeader NoSandboxTextLocalization" />
+                                                <TextBlock Grid.Column="1" Text="Token" Classes="TokenHeader NoSandboxTextLocalization" />
+                                                <TextBlock Grid.Column="2" Text="Key" Classes="TokenHeader NoSandboxTextLocalization" />
+                                                <TextBlock Grid.Column="3" Text="Light" Classes="TokenHeader NoSandboxTextLocalization" />
+                                                <TextBlock Grid.Column="4" Text="Dark" Classes="TokenHeader NoSandboxTextLocalization" />
+                                                <TextBlock Grid.Column="5" Text="Opacity" Classes="TokenHeader NoSandboxTextLocalization" />
+                                                <TextBlock Grid.Column="6" Text="Usage" Classes="TokenHeader NoSandboxTextLocalization" />
+                                            </Grid>
+                                        </Border>
+
+                                        <ItemsControl ItemsSource="{Binding Rows}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate x:DataType="vm:ColorTokenRow">
+                                                    <Border Classes="TokenTableRow">
+                                                        <Grid ColumnDefinitions="64,180,320,116,116,92,180"
+                                                              ColumnSpacing="12"
+                                                              VerticalAlignment="Center">
+                                                            <StackPanel Grid.Column="0"
+                                                                        Orientation="Horizontal"
+                                                                        Spacing="4"
+                                                                        VerticalAlignment="Center">
+                                                                <Border Width="24"
+                                                                        Height="24"
+                                                                        CornerRadius="6"
+                                                                        Background="{Binding LightBrush}"
+                                                                        BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                                                                        BorderThickness="1" />
+                                                                <Border Width="24"
+                                                                        Height="24"
+                                                                        CornerRadius="6"
+                                                                        Background="{Binding DarkBrush}"
+                                                                        BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                                                                        BorderThickness="1" />
+                                                            </StackPanel>
+                                                            <TextBlock Grid.Column="1"
+                                                                       Text="{Binding Name}"
+                                                                       Classes="TokenName NoSandboxTextLocalization"
+                                                                       ToolTip.Tip="{Binding Name}"
+                                                                       VerticalAlignment="Center" />
+                                                            <Button Grid.Column="2"
+                                                                    Classes="TokenResourceButton"
+                                                                    Command="{Binding CopyResourceCommand}"
+                                                                    CommandParameter="{Binding ResourceKey}"
+                                                                    ToolTip.Tip="{Binding ResourceKey}"
+                                                                    VerticalAlignment="Center">
+                                                                <TextBlock Classes="TokenResourceKey"
+                                                                           Classes.NoSandboxTextLocalization="True"
+                                                                           Text="{Binding ResourceKey}" />
+                                                            </Button>
+                                                            <SelectableTextBlock Grid.Column="3"
+                                                                                 Text="{Binding LightHex}"
+                                                                                 Classes="TokenValue"
+                                                                                 ToolTip.Tip="{Binding LightHex}"
+                                                                                 VerticalAlignment="Center" />
+                                                            <SelectableTextBlock Grid.Column="4"
+                                                                                 Text="{Binding DarkHex}"
+                                                                                 Classes="TokenValue"
+                                                                                 ToolTip.Tip="{Binding DarkHex}"
+                                                                                 VerticalAlignment="Center" />
+                                                            <SelectableTextBlock Grid.Column="5"
+                                                                                 Text="{Binding OpacityText}"
+                                                                                 Classes="TokenValue"
+                                                                                 ToolTip.Tip="{Binding OpacityText}"
+                                                                                 VerticalAlignment="Center" />
+                                                            <TextBlock Grid.Column="6"
+                                                                       Text="{Binding Usage}"
+                                                                       Classes="TokenUsage"
+                                                                       ToolTip.Tip="{Binding Usage}"
+                                                                       VerticalAlignment="Center" />
+                                                        </Grid>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </StackPanel>
+                        </lumina:LuminaCard>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <lumina:LuminaCard Padding="0">
+                <StackPanel>
+                    <StackPanel Margin="20,18,20,14" Spacing="4">
+                        <TextBlock Text="{Binding ShadowTitle}"
+                                   Classes="TokenTableTitle" />
+                        <TextBlock Text="{Binding ShadowDescription}"
+                                   Classes="TokenTableDescription" />
+                    </StackPanel>
+
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                  VerticalScrollBarVisibility="Disabled">
+                        <StackPanel MinWidth="1160">
+                            <Border Classes="TokenTableHeader">
+                                <Grid ColumnDefinitions="180,280,260,260,148"
+                                      ColumnSpacing="12"
+                                      VerticalAlignment="Center">
+                                    <TextBlock Grid.Column="0" Text="Shadow" Classes="TokenHeader NoSandboxTextLocalization" />
+                                    <TextBlock Grid.Column="1" Text="Key" Classes="TokenHeader NoSandboxTextLocalization" />
+                                    <TextBlock Grid.Column="2" Text="Light value" Classes="TokenHeader NoSandboxTextLocalization" />
+                                    <TextBlock Grid.Column="3" Text="Dark value" Classes="TokenHeader NoSandboxTextLocalization" />
+                                    <TextBlock Grid.Column="4" Text="Usage" Classes="TokenHeader NoSandboxTextLocalization" />
+                                </Grid>
+                            </Border>
+
+                            <ItemsControl ItemsSource="{Binding ShadowRows}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate x:DataType="vm:ShadowTokenRow">
+                                        <Border Classes="TokenTableRow">
+                                            <Grid ColumnDefinitions="180,280,260,260,148"
+                                                  ColumnSpacing="12"
+                                                  VerticalAlignment="Center">
+                                                <TextBlock Grid.Column="0"
+                                                           Text="{Binding Name}"
+                                                           Classes="TokenName NoSandboxTextLocalization"
+                                                           ToolTip.Tip="{Binding Name}"
+                                                           VerticalAlignment="Center" />
+                                                <Button Grid.Column="1"
+                                                        Classes="TokenResourceButton"
+                                                        Command="{Binding CopyResourceCommand}"
+                                                        CommandParameter="{Binding ResourceKey}"
+                                                        ToolTip.Tip="{Binding ResourceKey}"
+                                                        VerticalAlignment="Center">
+                                                    <TextBlock Classes="TokenResourceKey"
+                                                               Classes.NoSandboxTextLocalization="True"
+                                                               Text="{Binding ResourceKey}" />
+                                                </Button>
+                                                <SelectableTextBlock Grid.Column="2"
+                                                                     Text="{Binding LightValue}"
+                                                                     Classes="TokenLongValue"
+                                                                     ToolTip.Tip="{Binding LightValue}"
+                                                                     VerticalAlignment="Center" />
+                                                <SelectableTextBlock Grid.Column="3"
+                                                                     Text="{Binding DarkValue}"
+                                                                     Classes="TokenLongValue"
+                                                                     ToolTip.Tip="{Binding DarkValue}"
+                                                                     VerticalAlignment="Center" />
+                                                <TextBlock Grid.Column="4"
+                                                           Text="{Binding Usage}"
+                                                           Classes="TokenUsage"
+                                                           ToolTip.Tip="{Binding Usage}"
+                                                           VerticalAlignment="Center" />
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </ScrollViewer>
+                </StackPanel>
+            </lumina:LuminaCard>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

@@ -1,0 +1,11 @@
+<Solution>
+  <Project Path="src/LuminaUI/LuminaUI.csproj" />
+  <Project Path="src/LuminaUI.ColorPicker/LuminaUI.ColorPicker.csproj" />
+  <Project Path="src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj" />
+  <Project Path="src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj" />
+  <Project Path="demo/LuminaUI.Demo/LuminaUI.Demo.csproj" />
+  <Project Path="demo/LuminaUI.Demo.Desktop/LuminaUI.Demo.Desktop.csproj" />
+  <Project Path="demo/LuminaUI.Demo.Browser/LuminaUI.Demo.Browser.csproj" />
+  <Project Path="demo/LuminaUI.Demo.Android/LuminaUI.Demo.Android.csproj" />
+  <Project Path="demo/LuminaUI.Demo.iOS/LuminaUI.Demo.iOS.csproj" />
+</Solution>

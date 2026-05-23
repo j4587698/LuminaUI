@@ -1,0 +1,54 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dg="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls.DataGrid"
+        x:Class="LuminaUI.DataGrid.LuminaDataGridTheme">
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceInclude x:Key="Light" Source="avares://LuminaUI.DataGrid/Themes/Light.axaml" />
+                <ResourceInclude x:Key="Dark" Source="avares://LuminaUI.DataGrid/Themes/Dark.axaml" />
+            </ResourceDictionary.ThemeDictionaries>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://LuminaUI.DataGrid/Themes/Shared.axaml" />
+                <ResourceInclude Source="avares://LuminaUI.DataGrid/Themes/Controls.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+
+    <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
+
+    <Style Selector="dg|DataGrid">
+        <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="RowBackground" Value="{DynamicResource DataGridRowBackground}" />
+        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource DataGridLineBrush}" />
+        <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource DataGridLineBrush}" />
+        <Setter Property="GridLinesVisibility" Value="Horizontal" />
+        <Setter Property="ColumnHeaderHeight" Value="40" />
+        <Setter Property="RowHeight" Value="38" />
+        <Setter Property="CanUserSortColumns" Value="True" />
+        <Setter Property="CanUserResizeColumns" Value="True" />
+        <Setter Property="CanUserReorderColumns" Value="True" />
+        <Setter Property="CellTheme" Value="{StaticResource {x:Type dg:DataGridCell}}" />
+        <Setter Property="ColumnHeaderTheme" Value="{StaticResource {x:Type dg:DataGridColumnHeader}}" />
+        <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+    </Style>
+
+    <Style Selector="dg|DataGrid.Inset">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="#00FFFFFF" />
+    </Style>
+
+    <Style Selector="dg|DataGridRow:pointerover">
+        <Setter Property="Background" Value="{DynamicResource DataGridRowPointeroverBackground}" />
+    </Style>
+
+    <Style Selector="dg|DataGridRow:selected">
+        <Setter Property="Background" Value="{DynamicResource DataGridRowSelectedBackground}" />
+    </Style>
+</Styles>

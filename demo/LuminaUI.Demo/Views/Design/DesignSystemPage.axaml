@@ -1,0 +1,114 @@
+<lumina:LuminaPage xmlns="https://github.com/avaloniaui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+                   xmlns:vm="using:LuminaUI.Demo.ViewModels"
+                   x:Class="LuminaUI.Demo.Views.DesignSystemPage"
+                   x:DataType="vm:DesignSystemPageViewModel"
+                   NavigationKey="NavDesignSystem"
+                   PageState="{Binding PageState}"
+                   ShellTitle="{DynamicResource Sandbox.Nav.DesignSystem}"
+                   ShellSubtitle="LuminaPage">
+
+    <lumina:LuminaPage.TopCommandBar>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+            <Button Content="{DynamicResource Sandbox.Text.0843}" Classes="Ghost" Command="{Binding SetPageStateCommand}" CommandParameter="Normal" />
+            <Button Content="{DynamicResource Sandbox.Text.0651}" Classes="Ghost" Command="{Binding SetPageStateCommand}" CommandParameter="Loading" />
+            <Button Content="{DynamicResource Sandbox.Text.0808}" Classes="Ghost" Command="{Binding SetPageStateCommand}" CommandParameter="Empty" />
+            <Button Content="{DynamicResource Sandbox.Text.0810}" Classes="Ghost" Command="{Binding SetPageStateCommand}" CommandParameter="Error" />
+        </StackPanel>
+    </lumina:LuminaPage.TopCommandBar>
+
+    <Panel>
+        <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Spacing="24" HorizontalAlignment="Stretch" Margin="0,12,0,24">
+
+                <StackPanel Spacing="12">
+                    <TextBlock Text="LuminaUI Design System"
+                               FontSize="32"
+                               FontWeight="Black"
+                               Foreground="{DynamicResource LuminaTextForegroundBrush}"
+                               TextWrapping="Wrap" />
+                    <Button Content="{DynamicResource Sandbox.Text.0510}"
+                            Classes="Outline"
+                            Command="{Binding ToggleThemeCommand}"
+                            HorizontalAlignment="Left" />
+                </StackPanel>
+
+                <StackPanel Spacing="16">
+                    <TextBlock Text="{DynamicResource Sandbox.Text.0511}" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource LuminaTextForegroundBrush}" />
+                    <TextBlock Text="{DynamicResource Sandbox.Text.0512}" Foreground="{DynamicResource LuminaTextMutedBrush}" Margin="0,-8,0,0" />
+
+                    <lumina:LuminaResponsivePanel MinItemWidth="140" MaxItemWidth="220" HorizontalSpacing="12" VerticalSpacing="12" Margin="0,4,0,0">
+                        <lumina:LuminaCard Padding="14">
+                            <StackPanel Spacing="8" HorizontalAlignment="Center">
+                                <Border Width="40" Height="40" CornerRadius="20" Background="{DynamicResource LuminaPrimaryBrush}" />
+                                <TextBlock Text="{DynamicResource Sandbox.Text.0190}" FontWeight="SemiBold" HorizontalAlignment="Center" Foreground="{DynamicResource LuminaTextForegroundBrush}" />
+                            </StackPanel>
+                        </lumina:LuminaCard>
+                        <lumina:LuminaCard Padding="14">
+                            <StackPanel Spacing="8" HorizontalAlignment="Center">
+                                <Border Width="40" Height="40" CornerRadius="20" Background="{DynamicResource LuminaSuccessBrush}" />
+                                <TextBlock Text="{DynamicResource Sandbox.Text.0191}" FontWeight="SemiBold" HorizontalAlignment="Center" Foreground="{DynamicResource LuminaTextForegroundBrush}" />
+                            </StackPanel>
+                        </lumina:LuminaCard>
+                        <lumina:LuminaCard Padding="14">
+                            <StackPanel Spacing="8" HorizontalAlignment="Center">
+                                <Border Width="40" Height="40" CornerRadius="20" Background="{DynamicResource LuminaWarningBrush}" />
+                                <TextBlock Text="{DynamicResource Sandbox.Text.0192}" FontWeight="SemiBold" HorizontalAlignment="Center" Foreground="{DynamicResource LuminaTextForegroundBrush}" />
+                            </StackPanel>
+                        </lumina:LuminaCard>
+                        <lumina:LuminaCard Padding="14">
+                            <StackPanel Spacing="8" HorizontalAlignment="Center">
+                                <Border Width="40" Height="40" CornerRadius="20" Background="{DynamicResource LuminaDangerBrush}" />
+                                <TextBlock Text="{DynamicResource Sandbox.Text.0193}" FontWeight="SemiBold" HorizontalAlignment="Center" Foreground="{DynamicResource LuminaTextForegroundBrush}" />
+                            </StackPanel>
+                        </lumina:LuminaCard>
+                    </lumina:LuminaResponsivePanel>
+                </StackPanel>
+
+                <StackPanel Spacing="16">
+                    <TextBlock Text="{DynamicResource Sandbox.Text.0513}" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource LuminaTextForegroundBrush}" />
+                    <lumina:LuminaCard>
+                        <StackPanel Spacing="12">
+                            <TextBlock Text="{DynamicResource Sandbox.Text.0514}" FontSize="36" FontWeight="Black" Foreground="{DynamicResource LuminaTextForegroundBrush}" TextWrapping="Wrap" />
+                            <TextBlock Text="{DynamicResource Sandbox.Text.0515}" FontSize="28" FontWeight="Bold" Foreground="{DynamicResource LuminaTextForegroundBrush}" TextWrapping="Wrap" />
+                            <TextBlock Text="{DynamicResource Sandbox.Text.0516}" FontSize="20" FontWeight="SemiBold" Foreground="{DynamicResource LuminaTextForegroundBrush}" TextWrapping="Wrap" />
+                            <TextBlock Text="{DynamicResource Sandbox.Text.0517}" FontSize="14" Foreground="{DynamicResource LuminaTextForegroundBrush}" TextWrapping="Wrap" />
+                            <TextBlock Text="{DynamicResource Sandbox.Text.0518}" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
+                        </StackPanel>
+                    </lumina:LuminaCard>
+                </StackPanel>
+
+                <StackPanel Spacing="16">
+                    <TextBlock Text="{DynamicResource Sandbox.Text.1296}" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource LuminaTextForegroundBrush}" />
+                    <TextBlock Text="{DynamicResource Sandbox.Text.0520}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" Margin="0,-8,0,0" />
+
+                    <lumina:LuminaResponsivePanel MinItemWidth="170" MaxItemWidth="260" HorizontalSpacing="12" VerticalSpacing="12" Margin="0,4,0,0">
+                        <lumina:LuminaCard MinHeight="120">
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="{DynamicResource Sandbox.Text.0521}" FontWeight="Bold" Foreground="{DynamicResource LuminaTextForegroundBrush}" />
+                                <TextBlock Text="{DynamicResource Sandbox.Text.0522}" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
+                            </StackPanel>
+                        </lumina:LuminaCard>
+
+                        <lumina:LuminaCard MinHeight="120" IsElevated="True">
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="{DynamicResource Sandbox.Text.0523}" FontWeight="Bold" Foreground="{DynamicResource LuminaTextForegroundBrush}" />
+                                <TextBlock Text="{DynamicResource Sandbox.Text.0524}" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
+                            </StackPanel>
+                        </lumina:LuminaCard>
+
+                        <lumina:LuminaCard MinHeight="120"
+                                           Classes="Glass">
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="{DynamicResource Sandbox.Text.0525}" FontWeight="Bold" Foreground="{DynamicResource LuminaTextForegroundBrush}" />
+                                <TextBlock Text="{DynamicResource Sandbox.Text.0526}" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
+                            </StackPanel>
+                        </lumina:LuminaCard>
+                    </lumina:LuminaResponsivePanel>
+                </StackPanel>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Panel>
+</lumina:LuminaPage>

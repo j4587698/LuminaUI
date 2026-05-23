@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>LuminaUI.Demo</RootNamespace>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" />
+    <PackageReference Include="Avalonia.Themes.Fluent" />
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\LuminaUI\LuminaUI.csproj" />
+    <ProjectReference Include="..\..\src\LuminaUI.ColorPicker\LuminaUI.ColorPicker.csproj" />
+    <ProjectReference Include="..\..\src\LuminaUI.DataGrid\LuminaUI.DataGrid.csproj" />
+    <ProjectReference Include="..\..\src\LuminaUI.TreeDataGrid\LuminaUI.TreeDataGrid.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets/**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Views/**/*.axaml" />
+    <EmbeddedResource Include="Views/**/*.axaml.cs" />
+    <EmbeddedResource Include="ViewModels/**/*.cs" />
+  </ItemGroup>
+</Project>

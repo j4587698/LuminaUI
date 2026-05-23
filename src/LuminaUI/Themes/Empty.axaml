@@ -1,0 +1,78 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:lumina="using:LuminaUI.Controls">
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaEmpty}" TargetType="lumina:LuminaEmpty">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaEmpty">
+                <Border Background="#00FFFFFF"
+                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                    <Panel>
+                        <ContentPresenter Name="PART_CustomContent"
+                                          Content="{TemplateBinding CustomContent}"
+                                          ContentTemplate="{TemplateBinding CustomContentTemplate}"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          IsVisible="{TemplateBinding HasCustomContent}" />
+
+                        <StackPanel Name="PART_DefaultLayout"
+                                    Spacing="12"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    IsVisible="{Binding !$parent[lumina:LuminaEmpty].HasCustomContent}">
+                            <Panel Width="64"
+                                   Height="64"
+                                   HorizontalAlignment="Center"
+                                   IsVisible="{TemplateBinding ShowIcon}">
+                                <ContentPresenter Content="{TemplateBinding Icon}"
+                                                  ContentTemplate="{TemplateBinding IconTemplate}"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  IsVisible="{Binding $parent[lumina:LuminaEmpty].Icon, Converter={x:Static ObjectConverters.IsNotNull}}" />
+
+                                <Viewbox Width="48"
+                                         Height="48"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"
+                                         IsVisible="{Binding $parent[lumina:LuminaEmpty].Icon, Converter={x:Static ObjectConverters.IsNull}}">
+                                    <Canvas Width="24" Height="24">
+                                        <Path Fill="{DynamicResource LuminaTextMutedBrush}"
+                                              Data="M20 6H16V4C16 2.9 15.1 2 14 2H10C8.9 2 8 2.9 8 4V6H4C2.9 6 2 6.9 2 8V19C2 20.1 2.9 21 4 21H20C21.1 21 22 20.1 22 19V8C22 6.9 21.1 6 20 6ZM10 4H14V6H10V4ZM20 19H4V8H20V19ZM12 12C10.9 12 10 11.1 10 10H8C8 12.2 9.8 14 12 14C14.2 14 16 12.2 16 10H14C14 11.1 13.1 12 12 12Z" />
+                                    </Canvas>
+                                </Viewbox>
+                            </Panel>
+
+                            <TextBlock Text="{TemplateBinding DisplayTitle}"
+                                       FontSize="14"
+                                       FontWeight="DemiBold"
+                                       Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                                       HorizontalAlignment="Center"
+                                       TextWrapping="Wrap" />
+
+                            <TextBlock Text="{TemplateBinding Description}"
+                                       IsVisible="{TemplateBinding HasDescription}"
+                                       FontSize="13"
+                                       Foreground="{DynamicResource LuminaTextTertiaryBrush}"
+                                       HorizontalAlignment="Center"
+                                       TextWrapping="Wrap"
+                                       MaxWidth="280" />
+
+                            <ContentPresenter Content="{TemplateBinding Action}"
+                                              ContentTemplate="{TemplateBinding ActionTemplate}"
+                                              IsVisible="{TemplateBinding HasAction}"
+                                              HorizontalAlignment="Center"
+                                              Margin="0,4,0,0" />
+                        </StackPanel>
+                    </Panel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^.Compact /template/ StackPanel#PART_DefaultLayout">
+            <Setter Property="Spacing" Value="8" />
+        </Style>
+    </ControlTheme>
+</ResourceDictionary>

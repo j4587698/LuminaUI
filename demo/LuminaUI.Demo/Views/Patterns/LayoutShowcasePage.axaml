@@ -1,0 +1,56 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             x:Class="LuminaUI.Demo.Views.LayoutShowcasePage">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0569}" />
+                <TextBlock Text="{DynamicResource Sandbox.Text.0570}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="280" MaxItemWidth="460" HorizontalSpacing="16" VerticalSpacing="16">
+            <lumina:LuminaCard>
+                <StackPanel Spacing="16">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1303}" />
+                    <Grid ColumnDefinitions="180,4,*" Height="180">
+                        <Border Grid.Column="0" Background="{DynamicResource LuminaSurfaceBrush}" BorderBrush="{DynamicResource LuminaBorderBrush}" BorderThickness="1" CornerRadius="8" Padding="12">
+                            <TextBlock Text="{DynamicResource Sandbox.Text.0571}" Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                        </Border>
+                        <GridSplitter Grid.Column="1" ResizeDirection="Columns" />
+                        <Border Grid.Column="2" Background="{DynamicResource LuminaHoverBackgroundBrush}" BorderBrush="{DynamicResource LuminaBorderBrush}" BorderThickness="1" CornerRadius="8" Padding="12" Margin="12,0,0,0">
+                            <TextBlock Text="{DynamicResource Sandbox.Text.0572}" Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                        </Border>
+                    </Grid>
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard>
+                <StackPanel Spacing="16">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1304}" />
+                    <TextBlock Text="{DynamicResource Sandbox.Text.0573}" Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                    <Separator />
+                    <TextBlock Text="{DynamicResource Sandbox.Text.0574}" Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard>
+                <StackPanel Spacing="16">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1302}" />
+                    <ScrollViewer Height="140" BorderBrush="{DynamicResource LuminaBorderBrush}" BorderThickness="1" Padding="12">
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="{DynamicResource Sandbox.Text.0501}" Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                            <TextBlock Text="{DynamicResource Sandbox.Text.0502}" Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                            <TextBlock Text="{DynamicResource Sandbox.Text.0503}" Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                            <TextBlock Text="{DynamicResource Sandbox.Text.0504}" Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                            <TextBlock Text="{DynamicResource Sandbox.Text.0505}" Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                            <TextBlock Text="{DynamicResource Sandbox.Text.0506}" Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                        </StackPanel>
+                    </ScrollViewer>
+                </StackPanel>
+            </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

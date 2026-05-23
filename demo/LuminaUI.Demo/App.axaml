@@ -1,0 +1,18 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI;assembly=LuminaUI"
+             xmlns:colorPicker="clr-namespace:LuminaUI.ColorPicker;assembly=LuminaUI.ColorPicker"
+             xmlns:dataGrid="clr-namespace:LuminaUI.DataGrid;assembly=LuminaUI.DataGrid"
+             xmlns:treeDataGrid="clr-namespace:LuminaUI.TreeDataGrid;assembly=LuminaUI.TreeDataGrid"
+             x:Class="LuminaUI.Demo.App"
+             RequestedThemeVariant="Default">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.Styles>
+        <FluentTheme />
+        <lumina:LuminaTheme />
+        <colorPicker:LuminaColorPickerTheme />
+        <dataGrid:LuminaDataGridTheme />
+        <treeDataGrid:LuminaTreeDataGridTheme />
+    </Application.Styles>
+</Application>

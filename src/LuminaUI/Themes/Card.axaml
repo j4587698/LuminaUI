@@ -1,0 +1,192 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaCard}" TargetType="lumina:LuminaCard">
+        <Setter Property="Padding" Value="16" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderBrush}" />
+        <Setter Property="GlassTintBrush" Value="{DynamicResource LuminaCardGlassTintBrush}" />
+        <Setter Property="GlassEdgeBrush" Value="{DynamicResource LuminaCardGlassEdgeBrush}" />
+        
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid Name="PART_SurfaceLayer"
+                      ClipToBounds="False"
+                      RenderTransformOrigin="50%,50%">
+                    <Border Name="PART_BackdropBlurClip"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            ClipToBounds="False"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            IsVisible="False"
+                            IsHitTestVisible="False">
+                        <lumina:LuminaBackdropBlur BlurRadius="{TemplateBinding BackdropBlurRadius}"
+                                                   CornerRadius="{TemplateBinding CornerRadius}"
+                                                   HorizontalAlignment="Stretch"
+                                                   VerticalAlignment="Stretch" />
+                    </Border>
+
+                    <Border Name="PART_GlassTintLayer"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Background="{TemplateBinding GlassTintBrush}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            IsVisible="False"
+                            IsHitTestVisible="False" />
+
+                    <Border Name="PART_GlassEdgeLayer"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            BorderBrush="{TemplateBinding GlassEdgeBrush}"
+                            BorderThickness="1.5"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            IsVisible="False"
+                            IsHitTestVisible="False" />
+
+                    <Border Name="PART_RootBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            ClipToBounds="False">
+                    
+                        <Border.Transitions>
+                            <Transitions>
+                                <BrushTransition Property="Background" Duration="0:0:0.2"/>
+                                <BrushTransition Property="BorderBrush" Duration="0:0:0.2"/>
+                            </Transitions>
+                        </Border.Transitions>
+
+                        <Border Name="PART_ContentClip"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                ClipToBounds="True">
+                            <ContentPresenter Name="PART_ContentPresenter"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              Padding="{TemplateBinding Padding}"
+                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </Border>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^">
+            <Style Selector="^ /template/ Grid#PART_SurfaceLayer">
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="RenderTransform" Value="translateY(0px)" />
+            </Style>
+        </Style>
+
+        <Style Selector="^[IsElevated=True]">
+            <Setter Property="Background" Value="{DynamicResource LuminaSurfaceElevatedBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaCardElevatedBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style Selector="^[IsElevated=True] /template/ Border#PART_RootBorder">
+            <Setter Property="BoxShadow" Value="{DynamicResource LuminaCardShadowElevated}" />
+        </Style>
+        <Style Selector="^[IsElevated=True] /template/ Grid#PART_SurfaceLayer">
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="RenderTransform" Value="translateY(0px)" />
+        </Style>
+
+        <Style Selector="^.Elevated">
+            <Setter Property="Background" Value="{DynamicResource LuminaCardElevatedBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaCardElevatedBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style Selector="^.Elevated /template/ Border#PART_RootBorder">
+            <Setter Property="BoxShadow" Value="{DynamicResource LuminaCardShadowElevated}" />
+        </Style>
+        <Style Selector="^.Elevated /template/ Grid#PART_SurfaceLayer">
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="RenderTransform" Value="translateY(0px)" />
+        </Style>
+
+        <Style Selector="^.Glass">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaCardGlassBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1.5" />
+            <Style Selector="^ /template/ Grid#PART_SurfaceLayer">
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="RenderTransform" Value="translateY(0px)" />
+            </Style>
+            <Style Selector="^ /template/ Border#PART_BackdropBlurClip">
+                <Setter Property="IsVisible" Value="True" />
+            </Style>
+            <Style Selector="^ /template/ Border#PART_GlassTintLayer">
+                <Setter Property="IsVisible" Value="True" />
+            </Style>
+            <Style Selector="^ /template/ Border#PART_GlassEdgeLayer">
+                <Setter Property="IsVisible" Value="True" />
+            </Style>
+            <Style Selector="^ /template/ Border#PART_RootBorder">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BoxShadow" Value="0 0 0 0 #00000000" />
+            </Style>
+        </Style>
+
+        <Style Selector="^.Interactive:pointerover /template/ Border#PART_RootBorder">
+            <Setter Property="BoxShadow" Value="{DynamicResource LuminaCardShadowFloating}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaCardElevatedBorderBrush}" />
+        </Style>
+        <Style Selector="^.Interactive:pointerover /template/ Grid#PART_SurfaceLayer">
+            <Setter Property="RenderTransform" Value="translateY(0px)" />
+        </Style>
+        <Style Selector="^.Interactive /template/ Grid#PART_SurfaceLayer">
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="RenderTransform" Value="translateY(0px)" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.15" />
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="^.Interactive /template/ Border#PART_RootBorder">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.15" />
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.15" />
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="^.Glass.Interactive:pointerover /template/ Border#PART_RootBorder">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BoxShadow" Value="0 0 0 0 #00000000" />
+        </Style>
+        <Style Selector="^.Glass.Interactive /template/ Grid#PART_SurfaceLayer">
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="RenderTransform" Value="translateY(0px)" />
+        </Style>
+
+        <Style Selector="^.Primary">
+            <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="^.Success">
+            <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaSuccessBrush}" />
+        </Style>
+
+        <Style Selector="^.Warning">
+            <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaWarningBrush}" />
+        </Style>
+
+        <Style Selector="^.Danger">
+            <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaDangerBrush}" />
+        </Style>
+
+    </ControlTheme>
+
+</ResourceDictionary>

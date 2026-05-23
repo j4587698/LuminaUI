@@ -1,0 +1,99 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.CascaderShowcasePage"
+             x:DataType="vm:CascaderShowcaseViewModel">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.1134}" />
+                <TextBlock Text="{DynamicResource Sandbox.Text.1135}"
+                           Foreground="{DynamicResource LuminaTextMutedBrush}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="320" MaxItemWidth="640" HorizontalSpacing="16" VerticalSpacing="16">
+                 <lumina:LuminaCard>
+                     <StackPanel Spacing="16">
+                         <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1136}" />
+                          <lumina:LuminaCascader ItemsSource="{Binding RegionData}"
+                                                 SelectedValue="{Binding SelectedRegion}"
+                                                 Watermark="{DynamicResource Sandbox.Text.1137}"
+                                                 PanelWidth="150" />
+                         <TextBlock Text="{Binding SelectedRegion, StringFormat='Selected: {0}'}"
+                                    Classes="Helper" />
+                     </StackPanel>
+                 </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1138}" />
+                        <TextBlock Text="{DynamicResource Sandbox.Text.1139}" Classes="Caption" TextWrapping="Wrap" />
+                        <lumina:LuminaCascader ItemsSource="{Binding RegionData}"
+                                               SelectedValue="{Binding SelectedIntermediateRegion}"
+                                               Watermark="{DynamicResource Sandbox.Text.1140}"
+                                               CanSelectIntermediateNodes="True"
+                                               PanelWidth="150" />
+                        <TextBlock Text="{Binding SelectedIntermediateRegion, StringFormat='Selected: {0}'}"
+                                   Classes="Helper" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1141}" />
+                        <lumina:LuminaCascader ItemsSource="{Binding CategoryData}"
+                                               SelectedValue="{Binding SelectedCategory}"
+                                               Watermark="{DynamicResource Sandbox.Text.1142}"
+                                               Separator=" > " />
+                        <TextBlock Text="{Binding SelectedCategory, StringFormat='Selected: {0}'}"
+                                   Classes="Helper" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1143}" />
+                         <lumina:LuminaCascader ItemsSource="{Binding LazyRegionData}"
+                                                SelectedValue="{Binding SelectedLazyRegion}"
+                                                Watermark="{DynamicResource Sandbox.Text.1144}"
+                                                CanSelectIntermediateNodes="True"
+                                                LoadChildrenAsync="{Binding LoadLazyChildrenAsync}"
+                                                PanelWidth="150" />
+                         <TextBlock Text="{Binding SelectedLazyRegion, StringFormat='Selected: {0}'}"
+                                     Classes="Helper" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1145}" />
+                        <lumina:LuminaCascader ItemsSource="{Binding LongListData}"
+                                               SelectedValue="{Binding SelectedLongList}"
+                                               Watermark="{DynamicResource Sandbox.Text.1146}"
+                                               PanelWidth="210"
+                                               MaxDropDownHeight="220" />
+                        <TextBlock Text="{Binding SelectedLongList, StringFormat='Selected: {0}'}"
+                                   Classes="Helper" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0119}" />
+                        <lumina:LuminaCascader ItemsSource="{Binding RegionData}"
+                                               SelectedValue="{Binding SelectedSheetRegion}"
+                                               Watermark="{DynamicResource Sandbox.Text.1147}"
+                                               PanelWidth="150"
+                                               CanSelectIntermediateNodes="True"
+                                               lumina:LuminaOptions.PopupType="Sheet" />
+                        <TextBlock Text="{Binding SelectedSheetRegion, StringFormat='Selected: {0}'}"
+                                   Classes="Helper" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

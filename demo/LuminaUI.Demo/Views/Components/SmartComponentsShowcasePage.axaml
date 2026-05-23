@@ -1,0 +1,109 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             x:Class="LuminaUI.Demo.Views.SmartComponentsShowcasePage">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24"
+                    Width="{Binding #PageScroll.Bounds.Width}"
+                    HorizontalAlignment="Stretch"
+                    Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="Smart Components" />
+                <TextBlock Classes="Body"
+                           Text="Reusable interaction components for overflow text, alphabetical indexes, and linked category scrolling." />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="300"
+                                          MaxItemWidth="620"
+                                          HorizontalSpacing="16"
+                                          VerticalSpacing="16">
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="Auto scroll text" />
+                        <Border Padding="14"
+                                Background="{DynamicResource LuminaHoverBackgroundBrush}"
+                                BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
+                                BorderThickness="1"
+                                CornerRadius="10">
+                            <lumina:LuminaAutoScrollText Classes="Pill"
+                                                         Text="Flash sale: grilled eel rice set, truffle fries, jasmine sparkling tea, and seasonal cake are available until 21:30."
+                            Speed="46" />
+                        </Border>
+                        <Border Padding="14"
+                                Background="{DynamicResource LuminaSurfaceBrush}"
+                                BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
+                                BorderThickness="1"
+                                CornerRadius="10">
+                            <lumina:LuminaAutoScrollText Text="Short names stay still."
+                                                         Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                        </Border>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="Alphabet index list" />
+                        <lumina:LuminaIndexedList Height="360">
+                            <lumina:LuminaIndexedSection Header="A">
+                                <lumina:LuminaListItem Header="Alicia Chen" Description="Product designer" />
+                                <lumina:LuminaListItem Header="Austin Reed" Description="Frontend engineer" />
+                            </lumina:LuminaIndexedSection>
+                            <lumina:LuminaIndexedSection Header="B">
+                                <lumina:LuminaListItem Header="Bella Stone" Description="Operations lead" />
+                                <lumina:LuminaListItem Header="Benson Lee" Description="Motion designer" />
+                            </lumina:LuminaIndexedSection>
+                            <lumina:LuminaIndexedSection Header="C">
+                                <lumina:LuminaListItem Header="Carmen Xu" Description="Data analyst" />
+                                <lumina:LuminaListItem Header="Colin Baker" Description="Support specialist" />
+                            </lumina:LuminaIndexedSection>
+                            <lumina:LuminaIndexedSection Header="D">
+                                <lumina:LuminaListItem Header="Daphne Ray" Description="Research manager" />
+                                <lumina:LuminaListItem Header="Derek Huang" Description="Platform engineer" />
+                            </lumina:LuminaIndexedSection>
+                            <lumina:LuminaIndexedSection Header="M">
+                                <lumina:LuminaListItem Header="Mina Park" Description="Brand strategist" />
+                                <lumina:LuminaListItem Header="Morgan Wells" Description="QA engineer" />
+                            </lumina:LuminaIndexedSection>
+                            <lumina:LuminaIndexedSection Header="S">
+                                <lumina:LuminaListItem Header="Sofia Young" Description="Design systems" />
+                                <lumina:LuminaListItem Header="Simon White" Description="Technical writer" />
+                            </lumina:LuminaIndexedSection>
+                            <lumina:LuminaIndexedSection Header="Z">
+                                <lumina:LuminaListItem Header="Zara Liu" Description="Mobile engineer" />
+                                <lumina:LuminaListItem Header="Zed Cooper" Description="Account manager" />
+                            </lumina:LuminaIndexedSection>
+                        </lumina:LuminaIndexedList>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="Linked category list" />
+                        <lumina:LuminaLinkedCategoryList Height="420">
+                            <lumina:LuminaLinkedCategorySection Header="Popular">
+                                <lumina:LuminaListItem Icon="B" Header="Signature beef bowl" Description="Slow cooked beef, soft egg, house sauce." Value="$12" />
+                                <lumina:LuminaListItem Icon="C" Header="Crispy chicken rice" Description="Chicken thigh, pickled cucumber, chili mayo." Value="$10" />
+                            </lumina:LuminaLinkedCategorySection>
+
+                            <lumina:LuminaLinkedCategorySection Header="Noodles">
+                                <lumina:LuminaListItem Icon="R" Header="Tonkotsu ramen" Description="Pork broth, chashu, bamboo shoots." Value="$13" />
+                                <lumina:LuminaListItem Icon="N" Header="Cold sesame noodles" Description="Sesame dressing, cucumber, scallion." Value="$9" />
+                            </lumina:LuminaLinkedCategorySection>
+
+                            <lumina:LuminaLinkedCategorySection Header="Snacks">
+                                <lumina:LuminaListItem Icon="F" Header="Truffle fries" Description="Parmesan, parsley, black truffle oil." Value="$7" />
+                                <lumina:LuminaListItem Icon="G" Header="Gyoza" Description="Pan fried pork dumplings, vinegar soy." Value="$8" />
+                            </lumina:LuminaLinkedCategorySection>
+
+                            <lumina:LuminaLinkedCategorySection Header="Drinks">
+                                <lumina:LuminaListItem Icon="T" Header="Jasmine sparkling tea" Description="Cold brewed tea with citrus soda." Value="$5" />
+                                <lumina:LuminaListItem Icon="Y" Header="Yuzu lemonade" Description="Yuzu peel, lemon, light syrup." Value="$5" />
+                            </lumina:LuminaLinkedCategorySection>
+                        </lumina:LuminaLinkedCategoryList>
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

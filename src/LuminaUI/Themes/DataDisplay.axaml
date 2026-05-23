@@ -1,0 +1,286 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:lumina="using:LuminaUI.Controls">
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaDescriptions}" TargetType="lumina:LuminaDescriptions">
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaDescriptions">
+                <ItemsPresenter ItemsPanel="{TemplateBinding ItemsPanel}" />
+            </ControlTemplate>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <ItemsPanelTemplate>
+                <StackPanel />
+            </ItemsPanelTemplate>
+        </Setter>
+
+        <Style Selector="^[Orientation=Horizontal]">
+            <Setter Property="ItemsPanel">
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </Setter>
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaDescriptionsItem}" TargetType="lumina:LuminaDescriptionsItem">
+        <Setter Property="Margin" Value="0,0,24,12" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaDescriptionsItem">
+                <Border Name="PART_RowBorder"
+                        BorderBrush="{DynamicResource LuminaDividerBrush}"
+                        BorderThickness="0"
+                        Padding="0">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                        <ContentControl Name="PART_Label"
+                                        Grid.Column="0"
+                                        MinWidth="0"
+                                        Width="{TemplateBinding LabelWidth}"
+                                        Content="{TemplateBinding Label}"
+                                        ContentTemplate="{TemplateBinding LabelTemplate}"
+                                        VerticalAlignment="Center"
+                                        TextElement.Foreground="{DynamicResource LuminaTextTertiaryBrush}"
+                                        TextElement.FontWeight="DemiBold">
+                            <ContentControl.DataTemplates>
+                                <DataTemplate DataType="x:String">
+                                    <TextBlock Text="{Binding}" TextWrapping="Wrap" />
+                                </DataTemplate>
+                            </ContentControl.DataTemplates>
+                        </ContentControl>
+
+                        <ContentControl Name="PART_Content"
+                                        Grid.Column="1"
+                                        Content="{TemplateBinding Content}"
+                                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                                        VerticalAlignment="Center"
+                                        HorizontalContentAlignment="Stretch"
+                                        TextElement.Foreground="{DynamicResource LuminaTextPrimaryBrush}">
+                            <ContentControl.DataTemplates>
+                                <DataTemplate DataType="x:String">
+                                    <TextBlock Text="{Binding}" TextWrapping="Wrap" />
+                                </DataTemplate>
+                            </ContentControl.DataTemplates>
+                        </ContentControl>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^[LabelPosition=Top]">
+            <Setter Property="Template">
+                <ControlTemplate TargetType="lumina:LuminaDescriptionsItem">
+                    <Border Name="PART_RowBorder"
+                            BorderBrush="{DynamicResource LuminaDividerBrush}"
+                            BorderThickness="0"
+                            Padding="0">
+                        <StackPanel Spacing="4">
+                            <ContentControl Name="PART_Label"
+                                            Width="{TemplateBinding LabelWidth}"
+                                            Content="{TemplateBinding Label}"
+                                            ContentTemplate="{TemplateBinding LabelTemplate}"
+                                            TextElement.Foreground="{DynamicResource LuminaTextTertiaryBrush}"
+                                            TextElement.FontSize="12"
+                                            TextElement.FontWeight="DemiBold">
+                                <ContentControl.DataTemplates>
+                                    <DataTemplate DataType="x:String">
+                                        <TextBlock Text="{Binding}" TextWrapping="Wrap" />
+                                    </DataTemplate>
+                                </ContentControl.DataTemplates>
+                            </ContentControl>
+
+                            <ContentControl Name="PART_Content"
+                                            Content="{TemplateBinding Content}"
+                                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                                            HorizontalContentAlignment="Stretch"
+                                            TextElement.Foreground="{DynamicResource LuminaTextPrimaryBrush}"
+                                            TextElement.FontWeight="DemiBold">
+                                <ContentControl.DataTemplates>
+                                    <DataTemplate DataType="x:String">
+                                        <TextBlock Text="{Binding}" TextWrapping="Wrap" />
+                                    </DataTemplate>
+                                </ContentControl.DataTemplates>
+                            </ContentControl>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="^[ShowBorderLines=True]">
+            <Setter Property="Margin" Value="0" />
+        </Style>
+
+        <Style Selector="^[ShowBorderLines=True] /template/ Border#PART_RowBorder">
+            <Setter Property="BorderThickness" Value="0,0,0,1" />
+            <Setter Property="Padding" Value="0,9" />
+        </Style>
+
+        <Style Selector="^[ItemAlignment=Center] /template/ ContentControl#PART_Label">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="TextBlock.TextAlignment" Value="Right" />
+        </Style>
+
+        <Style Selector="^[ItemAlignment=Justify] /template/ ContentControl#PART_Content">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+
+        <Style Selector="^.Small">
+            <Setter Property="Margin" Value="0,0,18,8" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+
+        <Style Selector="^.Large">
+            <Setter Property="Margin" Value="0,0,32,18" />
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaProperties}" TargetType="lumina:LuminaProperties">
+        <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaProperties">
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        ClipToBounds="True">
+                    <ItemsPresenter ItemsPanel="{TemplateBinding ItemsPanel}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <ItemsPanelTemplate>
+                <StackPanel />
+            </ItemsPanelTemplate>
+        </Setter>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaPropertyItem}" TargetType="lumina:LuminaPropertyItem">
+        <Setter Property="MinHeight" Value="34" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaPropertyItem">
+                <Border Name="PART_RowBorder"
+                        Background="#00FFFFFF"
+                        BorderBrush="{DynamicResource LuminaDividerBrush}"
+                        BorderThickness="0,0,0,1">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Border Name="PART_NameCell"
+                                Width="{TemplateBinding LabelWidth}"
+                                Padding="10,7"
+                                Background="{DynamicResource LuminaHoverBackgroundBrush}"
+                                BorderBrush="{DynamicResource LuminaDividerBrush}"
+                                BorderThickness="0,0,1,0">
+                            <ContentControl Content="{TemplateBinding PropertyName}"
+                                            ContentTemplate="{TemplateBinding PropertyNameTemplate}"
+                                            VerticalAlignment="Center"
+                                            TextElement.Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                                            TextElement.FontWeight="DemiBold">
+                                <ContentControl.DataTemplates>
+                                    <DataTemplate DataType="x:String">
+                                        <TextBlock Text="{Binding}" TextWrapping="Wrap" />
+                                    </DataTemplate>
+                                </ContentControl.DataTemplates>
+                            </ContentControl>
+                        </Border>
+
+                        <Border Grid.Column="1"
+                                Padding="10,5"
+                                MinWidth="0">
+                            <ContentControl Content="{TemplateBinding Content}"
+                                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                                            HorizontalContentAlignment="Stretch"
+                                            VerticalContentAlignment="Center"
+                                            TextElement.Foreground="{DynamicResource LuminaTextPrimaryBrush}">
+                                <ContentControl.DataTemplates>
+                                    <DataTemplate DataType="x:String">
+                                        <TextBlock Text="{Binding}"
+                                                   TextWrapping="Wrap"
+                                                   VerticalAlignment="Center" />
+                                    </DataTemplate>
+                                </ContentControl.DataTemplates>
+                            </ContentControl>
+                        </Border>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:pointerover /template/ Border#PART_RowBorder">
+            <Setter Property="Background" Value="{DynamicResource LuminaStateHoverBrush}" />
+        </Style>
+
+        <Style Selector="^[ShowBorderLines=False] /template/ Border#PART_RowBorder">
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+
+        <Style Selector="^[ShowBorderLines=False] /template/ Border#PART_NameCell">
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+
+        <Style Selector="^.Compact">
+            <Setter Property="MinHeight" Value="28" />
+        </Style>
+
+        <Style Selector="^.Modified /template/ Border#PART_NameCell">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBgBrush}" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaRatingItem}" TargetType="lumina:LuminaRatingItem">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaWarningBrush}" />
+        <Setter Property="Background" Value="{DynamicResource LuminaBorderStrongBrush}" />
+        <Setter Property="Margin" Value="0,0,4,0" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaRatingItem">
+                <Grid Width="{TemplateBinding Size}"
+                      Height="{TemplateBinding Size}"
+                      RenderTransformOrigin="50%,50%">
+                    <TextBlock Text="{TemplateBinding Character}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Foreground="{TemplateBinding Background}"
+                               FontSize="{TemplateBinding Size}" />
+
+                    <Border Name="PART_SelectedClip"
+                            Width="{TemplateBinding SelectedWidth}"
+                            HorizontalAlignment="Left"
+                            ClipToBounds="True">
+                        <TextBlock Text="{TemplateBinding Character}"
+                                   Width="{TemplateBinding Size}"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   FontSize="{TemplateBinding Size}" />
+                    </Border>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:pointerover">
+            <Setter Property="RenderTransform" Value="scale(1.08)" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaRating}" TargetType="lumina:LuminaRating">
+        <Setter Property="Foreground" Value="{DynamicResource LuminaWarningBrush}" />
+        <Setter Property="Size" Value="24" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaRating">
+                <StackPanel Name="PART_ItemsHost" Orientation="Horizontal" />
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^.Small">
+            <Setter Property="Size" Value="18" />
+        </Style>
+
+        <Style Selector="^.Large">
+            <Setter Property="Size" Value="32" />
+        </Style>
+    </ControlTheme>
+
+</ResourceDictionary>

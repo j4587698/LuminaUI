@@ -1,0 +1,3951 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Sandbox.Text.0001" xml:space="preserve">
+    <value>Glass card</value>
+  </data>
+  <data name="Sandbox.Text.0002" xml:space="preserve">
+    <value>Transparent surface with backdrop blur and readable tint.</value>
+  </data>
+  <data name="Sandbox.Text.0003" xml:space="preserve">
+    <value>Glass surfaces</value>
+  </data>
+  <data name="Sandbox.Text.0004" xml:space="preserve">
+    <value>Glass cards use LuminaBackdropBlur with a light readable tint.</value>
+  </data>
+  <data name="Sandbox.Text.0005" xml:space="preserve">
+    <value>Glass</value>
+  </data>
+  <data name="Sandbox.Text.0006" xml:space="preserve">
+    <value>Backdrop blur with a stable edge treatment.</value>
+  </data>
+  <data name="Sandbox.Text.0007" xml:space="preserve">
+    <value>Dense content</value>
+  </data>
+  <data name="Sandbox.Text.0008" xml:space="preserve">
+    <value>The tint stays light so the blurred background remains visible.</value>
+  </data>
+  <data name="Sandbox.Text.0009" xml:space="preserve">
+    <value>Pseudo</value>
+  </data>
+  <data name="Sandbox.Text.0010" xml:space="preserve">
+    <value>Stable tint and edge treatment. No backdrop capture.</value>
+  </data>
+  <data name="Sandbox.Text.0011" xml:space="preserve">
+    <value>Acrylic</value>
+  </data>
+  <data name="Sandbox.Text.0012" xml:space="preserve">
+    <value>Uses native acrylic material with a lighter tint.</value>
+  </data>
+  <data name="Sandbox.Text.0013" xml:space="preserve">
+    <value>Elevated pseudo</value>
+  </data>
+  <data name="Sandbox.Text.0014" xml:space="preserve">
+    <value>The same glass family with stronger separation for floating content.</value>
+  </data>
+  <data name="Sandbox.Text.0015" xml:space="preserve">
+    <value>Checking card glass...</value>
+  </data>
+  <data name="Sandbox.Text.0016" xml:space="preserve">
+    <value>Card glass: acrylic material.</value>
+  </data>
+  <data name="Sandbox.Text.0017" xml:space="preserve">
+    <value>Card glass: pseudo fallback.</value>
+  </data>
+  <data name="Sandbox.Text.0018" xml:space="preserve">
+    <value>Card glass: backdrop blur.</value>
+  </data>
+  <data name="Sandbox.Text.0019" xml:space="preserve">
+    <value>Window glass active: {0}</value>
+  </data>
+  <data name="Sandbox.Text.0020" xml:space="preserve">
+    <value>Window glass fallback: {0}</value>
+  </data>
+  <data name="Sandbox.Text.0021" xml:space="preserve">
+    <value>Glass surface</value>
+  </data>
+  <data name="Sandbox.Text.0022" xml:space="preserve">
+    <value>Transparent surface with a readable tint and a stable edge.</value>
+  </data>
+  <data name="Sandbox.Text.0023" xml:space="preserve">
+    <value>Card glass: tint-only fallback. No local backdrop capture.</value>
+  </data>
+  <data name="Sandbox.Text.0024" xml:space="preserve">
+    <value>Glass variants</value>
+  </data>
+  <data name="Sandbox.Text.0025" xml:space="preserve">
+    <value>Glass cards avoid local backdrop capture by default. Use tint for stable surfaces, or Acrylic when the platform supports it.</value>
+  </data>
+  <data name="Sandbox.Text.0026" xml:space="preserve">
+    <value>Tint glass</value>
+  </data>
+  <data name="Sandbox.Text.0027" xml:space="preserve">
+    <value>The default fallback. It has no backdrop capture and stays stable in lists and scroll views.</value>
+  </data>
+  <data name="Sandbox.Text.0028" xml:space="preserve">
+    <value>Acrylic</value>
+  </data>
+  <data name="Sandbox.Text.0029" xml:space="preserve">
+    <value>Uses Avalonia's acrylic material where available, with the same tint and edge treatment.</value>
+  </data>
+  <data name="Sandbox.Text.0030" xml:space="preserve">
+    <value>Elevated glass</value>
+  </data>
+  <data name="Sandbox.Text.0031" xml:space="preserve">
+    <value>The same material family with stronger separation for overlays and floating content.</value>
+  </data>
+  <data name="Sandbox.Text.0032" xml:space="preserve">
+    <value>Avatar &amp; Badge</value>
+  </data>
+  <data name="Sandbox.Text.0033" xml:space="preserve">
+    <value>Identity visuals, counters, dots, and status badges.</value>
+  </data>
+  <data name="Sandbox.Text.0034" xml:space="preserve">
+    <value>Avatar supports initials, custom content, status badge, and size classes.</value>
+  </data>
+  <data name="Sandbox.Text.0035" xml:space="preserve">
+    <value>Reviews</value>
+  </data>
+  <data name="Sandbox.Text.0036" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="Sandbox.Text.0037" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Sandbox.Text.0038" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="Sandbox.Text.0039" xml:space="preserve">
+    <value>Corner placement</value>
+  </data>
+  <data name="Sandbox.Text.0040" xml:space="preserve">
+    <value>Standalone badges</value>
+  </data>
+  <data name="Sandbox.Text.0041" xml:space="preserve">
+    <value>Icon buttons</value>
+  </data>
+  <data name="Sandbox.Text.0042" xml:space="preserve">
+    <value>Buttons with leading, trailing, top, bottom, or icon-only content.</value>
+  </data>
+  <data name="Sandbox.Text.0043" xml:space="preserve">
+    <value>Icon-only</value>
+  </data>
+  <data name="Sandbox.Text.0044" xml:space="preserve">
+    <value>Placement</value>
+  </data>
+  <data name="Sandbox.Text.0045" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="Sandbox.Text.0046" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Sandbox.Text.0047" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Sandbox.Text.0048" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Sandbox.Text.0049" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="Sandbox.Text.0050" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="Sandbox.Text.0051" xml:space="preserve">
+    <value>Right</value>
+  </data>
+  <data name="Sandbox.Text.0052" xml:space="preserve">
+    <value>Top</value>
+  </data>
+  <data name="Sandbox.Text.0053" xml:space="preserve">
+    <value>Bottom</value>
+  </data>
+  <data name="Sandbox.Text.0054" xml:space="preserve">
+    <value>No action yet</value>
+  </data>
+  <data name="Sandbox.Text.0055" xml:space="preserve">
+    <value>GroupBox</value>
+  </data>
+  <data name="Sandbox.Text.0056" xml:space="preserve">
+    <value>Grouped content with a header, description, and optional trailing actions.</value>
+  </data>
+  <data name="Sandbox.Text.0057" xml:space="preserve">
+    <value>WinForms-style group boxes with the title sitting on the border and content held by the frame.</value>
+  </data>
+  <data name="Sandbox.Text.0058" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="Sandbox.Text.0059" xml:space="preserve">
+    <value>Async image loading with base64 data, web URLs, and memory or disk cache.</value>
+  </data>
+  <data name="Sandbox.Text.0060" xml:space="preserve">
+    <value>Web image with cache</value>
+  </data>
+  <data name="Sandbox.Text.0061" xml:space="preserve">
+    <value>Downloading image</value>
+  </data>
+  <data name="Sandbox.Text.0062" xml:space="preserve">
+    <value>Base64 image</value>
+  </data>
+  <data name="Sandbox.Text.0063" xml:space="preserve">
+    <value>The Source property accepts data:image/*;base64 strings and plain base64 payloads.</value>
+  </data>
+  <data name="Sandbox.Text.0064" xml:space="preserve">
+    <value>Avares resource</value>
+  </data>
+  <data name="Sandbox.Text.0065" xml:space="preserve">
+    <value>Custom HttpClient only</value>
+  </data>
+  <data name="Sandbox.Text.0066" xml:space="preserve">
+    <value>Using custom HttpClient</value>
+  </data>
+  <data name="Sandbox.Text.0067" xml:space="preserve">
+    <value>Only HttpClient is replaced; the default Lumina cache is still used.</value>
+  </data>
+  <data name="Sandbox.Text.0068" xml:space="preserve">
+    <value>Custom cache only</value>
+  </data>
+  <data name="Sandbox.Text.0069" xml:space="preserve">
+    <value>Using custom cache</value>
+  </data>
+  <data name="Sandbox.Text.0070" xml:space="preserve">
+    <value>Only ILuminaImageCache is replaced; the default shared HttpClient is still used.</value>
+  </data>
+  <data name="Sandbox.Text.0071" xml:space="preserve">
+    <value>Circle crop</value>
+  </data>
+  <data name="Sandbox.Text.0072" xml:space="preserve">
+    <value>Use the same component for avatar-like images when URL loading and cache are needed.</value>
+  </data>
+  <data name="Sandbox.Text.0073" xml:space="preserve">
+    <value>Default error template</value>
+  </data>
+  <data name="Sandbox.Text.0074" xml:space="preserve">
+    <value>Image requires authorization</value>
+  </data>
+  <data name="Sandbox.Text.0075" xml:space="preserve">
+    <value>ErrorText, ErrorBackground, and ErrorForeground customize the default failed-load surface.</value>
+  </data>
+  <data name="Sandbox.Text.0076" xml:space="preserve">
+    <value>Custom error content</value>
+  </data>
+  <data name="Sandbox.Text.0077" xml:space="preserve">
+    <value>ErrorContent replaces the whole default error template.</value>
+  </data>
+  <data name="Sandbox.Text.0078" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="Sandbox.Text.0079" xml:space="preserve">
+    <value>Use it when several controls belong to the same setting area.</value>
+  </data>
+  <data name="Sandbox.Text.0080" xml:space="preserve">
+    <value>The title cuts into the top border while helper copy stays inside the frame.</value>
+  </data>
+  <data name="Sandbox.Text.0081" xml:space="preserve">
+    <value>Display name</value>
+  </data>
+  <data name="Sandbox.Text.0082" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Sandbox.Text.0083" xml:space="preserve">
+    <value>Receive weekly summaries</value>
+  </data>
+  <data name="Sandbox.Text.0084" xml:space="preserve">
+    <value>Workspace</value>
+  </data>
+  <data name="Sandbox.Text.0085" xml:space="preserve">
+    <value>Actions stay in the group header and do not disturb the content layout.</value>
+  </data>
+  <data name="Sandbox.Text.0086" xml:space="preserve">
+    <value>Actions can sit on the upper-right border when the group needs compact commands.</value>
+  </data>
+  <data name="Sandbox.Text.0087" xml:space="preserve">
+    <value>Production</value>
+  </data>
+  <data name="Sandbox.Text.0088" xml:space="preserve">
+    <value>Staging</value>
+  </data>
+  <data name="Sandbox.Text.0089" xml:space="preserve">
+    <value>Local</value>
+  </data>
+  <data name="Sandbox.Text.0090" xml:space="preserve">
+    <value>A quiet boundary for dense forms or pages that already have a strong surface.</value>
+  </data>
+  <data name="Sandbox.Text.0091" xml:space="preserve">
+    <value>A quiet border for dense forms or pages that already have a clear surface.</value>
+  </data>
+  <data name="Sandbox.Text.0092" xml:space="preserve">
+    <value>Usage reports</value>
+  </data>
+  <data name="Sandbox.Text.0093" xml:space="preserve">
+    <value>Filled</value>
+  </data>
+  <data name="Sandbox.Text.0094" xml:space="preserve">
+    <value>A stronger surface for dashboards, sheets, and floating panels.</value>
+  </data>
+  <data name="Sandbox.Text.0095" xml:space="preserve">
+    <value>The filled state only strengthens the frame interior without changing the group-box structure.</value>
+  </data>
+  <data name="Sandbox.Text.0096" xml:space="preserve">
+    <value>Current plan</value>
+  </data>
+  <data name="Sandbox.Text.0097" xml:space="preserve">
+    <value>Pro</value>
+  </data>
+  <data name="Sandbox.Text.0098" xml:space="preserve">
+    <value>Glow</value>
+  </data>
+  <data name="Sandbox.Text.0099" xml:space="preserve">
+    <value>Glow is useful for focused regions or configuration areas that need emphasis.</value>
+  </data>
+  <data name="Sandbox.Text.0100" xml:space="preserve">
+    <value>Use compact density inside tool panes and narrow side panels.</value>
+  </data>
+  <data name="Sandbox.Text.0101" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="Sandbox.Text.0102" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="Sandbox.Text.0103" xml:space="preserve">
+    <value>Header can be any content, not just plain text.</value>
+  </data>
+  <data name="Sandbox.Text.0104" xml:space="preserve">
+    <value>Custom header</value>
+  </data>
+  <data name="Sandbox.Text.0105" xml:space="preserve">
+    <value>This group uses composed header content and still keeps the same spacing.</value>
+  </data>
+  <data name="Sandbox.Text.0106" xml:space="preserve">
+    <value>Open details</value>
+  </data>
+  <data name="Sandbox.Text.0107" xml:space="preserve">
+    <value>ButtonGroup</value>
+  </data>
+  <data name="Sandbox.Text.0108" xml:space="preserve">
+    <value>Segmented actions that expose SelectedIndex for MVVM binding.</value>
+  </data>
+  <data name="Sandbox.Text.0109" xml:space="preserve">
+    <value>Equal action group</value>
+  </data>
+  <data name="Sandbox.Text.0110" xml:space="preserve">
+    <value>Compact density selected</value>
+  </data>
+  <data name="Sandbox.Text.0111" xml:space="preserve">
+    <value>Comfortable density selected</value>
+  </data>
+  <data name="Sandbox.Text.0112" xml:space="preserve">
+    <value>Expanded density selected</value>
+  </data>
+  <data name="Sandbox.Text.0113" xml:space="preserve">
+    <value>Daily billing selected</value>
+  </data>
+  <data name="Sandbox.Text.0114" xml:space="preserve">
+    <value>Weekly billing selected</value>
+  </data>
+  <data name="Sandbox.Text.0115" xml:space="preserve">
+    <value>Monthly billing selected</value>
+  </data>
+  <data name="Sandbox.Text.0116" xml:space="preserve">
+    <value>DateRangePicker</value>
+  </data>
+  <data name="Sandbox.Text.0117" xml:space="preserve">
+    <value>Two-way date range selection with custom date format and adaptive picker mode.</value>
+  </data>
+  <data name="Sandbox.Text.0118" xml:space="preserve">
+    <value>Dropdown mode</value>
+  </data>
+  <data name="Sandbox.Text.0119" xml:space="preserve">
+    <value>Sheet mode</value>
+  </data>
+  <data name="Sandbox.Text.0120" xml:space="preserve">
+    <value>This week</value>
+  </data>
+  <data name="Sandbox.Text.0121" xml:space="preserve">
+    <value>Next month</value>
+  </data>
+  <data name="Sandbox.Text.0122" xml:space="preserve">
+    <value>No date range selected</value>
+  </data>
+  <data name="Sandbox.Text.0123" xml:space="preserve">
+    <value>Use PopupType to keep mobile behavior aligned with other pickers.</value>
+  </data>
+  <data name="Sandbox.Text.0124" xml:space="preserve">
+    <value>InputOTP</value>
+  </data>
+  <data name="Sandbox.Text.0125" xml:space="preserve">
+    <value>One-time passcode input with paste distribution, arrow navigation, and completion command.</value>
+  </data>
+  <data name="Sandbox.Text.0126" xml:space="preserve">
+    <value>Verification code</value>
+  </data>
+  <data name="Sandbox.Text.0127" xml:space="preserve">
+    <value>Masked payment code</value>
+  </data>
+  <data name="Sandbox.Text.0128" xml:space="preserve">
+    <value>Waiting for input</value>
+  </data>
+  <data name="Sandbox.Text.0129" xml:space="preserve">
+    <value>Set IsMasked for payment or security codes.</value>
+  </data>
+  <data name="Sandbox.Text.0130" xml:space="preserve">
+    <value>Pagination</value>
+  </data>
+  <data name="Sandbox.Text.0131" xml:space="preserve">
+    <value>Page navigation with edge buttons, compact mode, and MVVM page changes.</value>
+  </data>
+  <data name="Sandbox.Text.0132" xml:space="preserve">
+    <value>Default pagination</value>
+  </data>
+  <data name="Sandbox.Text.0133" xml:space="preserve">
+    <value>Compact pagination</value>
+  </data>
+  <data name="Sandbox.Text.0134" xml:space="preserve">
+    <value>Current page: 4</value>
+  </data>
+  <data name="Sandbox.Text.0135" xml:space="preserve">
+    <value>Hide edge buttons and page text for dense toolbars.</value>
+  </data>
+  <data name="Sandbox.Text.0136" xml:space="preserve">
+    <value>RangeSlider</value>
+  </data>
+  <data name="Sandbox.Text.0137" xml:space="preserve">
+    <value>Two-thumb range input for filtering values with MVVM lower and upper bindings.</value>
+  </data>
+  <data name="Sandbox.Text.0138" xml:space="preserve">
+    <value>Price range</value>
+  </data>
+  <data name="Sandbox.Text.0139" xml:space="preserve">
+    <value>Score range</value>
+  </data>
+  <data name="Sandbox.Text.0140" xml:space="preserve">
+    <value>Preset</value>
+  </data>
+  <data name="Sandbox.Text.0141" xml:space="preserve">
+    <value>Range command is waiting</value>
+  </data>
+  <data name="Sandbox.Text.0142" xml:space="preserve">
+    <value>Density</value>
+  </data>
+  <data name="Sandbox.Text.0143" xml:space="preserve">
+    <value>Small and large classes keep track and thumb sizes consistent with the rest of the theme.</value>
+  </data>
+  <data name="Sandbox.Text.0144" xml:space="preserve">
+    <value>Semi-circle progress</value>
+  </data>
+  <data name="Sandbox.Text.0145" xml:space="preserve">
+    <value>Use the default percentage label or place custom content in the center.</value>
+  </data>
+  <data name="Sandbox.Text.0146" xml:space="preserve">
+    <value>Use one slider to control multiple semi-circle progress bars with the same 0-100 value.</value>
+  </data>
+  <data name="Sandbox.Text.0147" xml:space="preserve">
+    <value>Linked progress</value>
+  </data>
+  <data name="Sandbox.Text.0148" xml:space="preserve">
+    <value>Use one value to control every determinate Slider and ProgressBar on this page.</value>
+  </data>
+  <data name="Sandbox.Text.0149" xml:space="preserve">
+    <value>Storage</value>
+  </data>
+  <data name="Sandbox.Text.0150" xml:space="preserve">
+    <value>Nickname</value>
+  </data>
+  <data name="Sandbox.Text.0151" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Sandbox.Text.0152" xml:space="preserve">
+    <value>Command, dropdown, spinner, pager, autocomplete, and refresh primitives.</value>
+  </data>
+  <data name="Sandbox.Text.0153" xml:space="preserve">
+    <value>Search component</value>
+  </data>
+  <data name="Sandbox.Text.0154" xml:space="preserve">
+    <value>View options</value>
+  </data>
+  <data name="Sandbox.Text.0155" xml:space="preserve">
+    <value>Compact</value>
+  </data>
+  <data name="Sandbox.Text.0156" xml:space="preserve">
+    <value>Comfortable</value>
+  </data>
+  <data name="Sandbox.Text.0157" xml:space="preserve">
+    <value>Expanded</value>
+  </data>
+  <data name="Sandbox.Text.0158" xml:space="preserve">
+    <value>More actions</value>
+  </data>
+  <data name="Sandbox.Text.0159" xml:space="preserve">
+    <value>Quick action</value>
+  </data>
+  <data name="Sandbox.Text.0160" xml:space="preserve">
+    <value>Run check</value>
+  </data>
+  <data name="Sandbox.Text.0161" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="Sandbox.Text.0162" xml:space="preserve">
+    <value>Export CSV</value>
+  </data>
+  <data name="Sandbox.Text.0163" xml:space="preserve">
+    <value>Export JSON</value>
+  </data>
+  <data name="Sandbox.Text.0164" xml:space="preserve">
+    <value>Export PDF</value>
+  </data>
+  <data name="Sandbox.Text.0165" xml:space="preserve">
+    <value>Sync</value>
+  </data>
+  <data name="Sandbox.Text.0166" xml:space="preserve">
+    <value>Sync now</value>
+  </data>
+  <data name="Sandbox.Text.0167" xml:space="preserve">
+    <value>Schedule sync</value>
+  </data>
+  <data name="Sandbox.Text.0168" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Sandbox.Text.0169" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Sandbox.Text.0170" xml:space="preserve">
+    <value>Pin</value>
+  </data>
+  <data name="Sandbox.Text.0171" xml:space="preserve">
+    <value>Archive</value>
+  </data>
+  <data name="Sandbox.Text.0172" xml:space="preserve">
+    <value>Use PopupType to keep confirmations mobile-friendly without changing commands.</value>
+  </data>
+  <data name="Sandbox.Text.0173" xml:space="preserve">
+    <value>Reset settings?</value>
+  </data>
+  <data name="Sandbox.Text.0174" xml:space="preserve">
+    <value>The confirmation is rendered in the current shell sheet. Commands and close behavior stay the same.</value>
+  </data>
+  <data name="Sandbox.Text.0175" xml:space="preserve">
+    <value>Open sheet confirm</value>
+  </data>
+  <data name="Sandbox.Text.0176" xml:space="preserve">
+    <value>Pull-capable scroll content</value>
+  </data>
+  <data name="Sandbox.Text.0177" xml:space="preserve">
+    <value>Desktop uses normal scrolling; touch surfaces can trigger refresh gestures.</value>
+  </data>
+  <data name="Sandbox.Text.0178" xml:space="preserve">
+    <value>Updated 10:30</value>
+  </data>
+  <data name="Sandbox.Text.0179" xml:space="preserve">
+    <value>Auto Scroll Text</value>
+  </data>
+  <data name="Sandbox.Text.0180" xml:space="preserve">
+    <value>Auto scroll text</value>
+  </data>
+  <data name="Sandbox.Text.0181" xml:space="preserve">
+    <value>Single line text that only starts marquee scrolling when the content overflows its viewport.</value>
+  </data>
+  <data name="Sandbox.Text.0182" xml:space="preserve">
+    <value>Overflow state</value>
+  </data>
+  <data name="Sandbox.Text.0183" xml:space="preserve">
+    <value>Flash sale: grilled eel rice set, truffle fries, jasmine sparkling tea, and seasonal cake are available until 21:30.</value>
+  </data>
+  <data name="Sandbox.Text.0184" xml:space="preserve">
+    <value>Static state</value>
+  </data>
+  <data name="Sandbox.Text.0185" xml:space="preserve">
+    <value>Short names stay still.</value>
+  </data>
+  <data name="Sandbox.Text.0186" xml:space="preserve">
+    <value>Muted style</value>
+  </data>
+  <data name="Sandbox.Text.0187" xml:space="preserve">
+    <value>Long metadata can scroll without forcing the surrounding row to stretch beyond its layout.</value>
+  </data>
+  <data name="Sandbox.Text.0188" xml:space="preserve">
+    <value>Buttons</value>
+  </data>
+  <data name="Sandbox.Text.0189" xml:space="preserve">
+    <value>Button, ToggleButton, and RepeatButton states.</value>
+  </data>
+  <data name="Sandbox.Text.0190" xml:space="preserve">
+    <value>Primary</value>
+  </data>
+  <data name="Sandbox.Text.0191" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="Sandbox.Text.0192" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="Sandbox.Text.0193" xml:space="preserve">
+    <value>Danger</value>
+  </data>
+  <data name="Sandbox.Text.0194" xml:space="preserve">
+    <value>Outline</value>
+  </data>
+  <data name="Sandbox.Text.0195" xml:space="preserve">
+    <value>Ghost</value>
+  </data>
+  <data name="Sandbox.Text.0196" xml:space="preserve">
+    <value>Small</value>
+  </data>
+  <data name="Sandbox.Text.0197" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="Sandbox.Text.0198" xml:space="preserve">
+    <value>Large</value>
+  </data>
+  <data name="Sandbox.Text.0199" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="Sandbox.Text.0200" xml:space="preserve">
+    <value>Unselected</value>
+  </data>
+  <data name="Sandbox.Text.0201" xml:space="preserve">
+    <value>Selected</value>
+  </data>
+  <data name="Sandbox.Text.0202" xml:space="preserve">
+    <value>Ghost toggle</value>
+  </data>
+  <data name="Sandbox.Text.0203" xml:space="preserve">
+    <value>Hold action</value>
+  </data>
+  <data name="Sandbox.Text.0204" xml:space="preserve">
+    <value>Cards</value>
+  </data>
+  <data name="Sandbox.Text.0205" xml:space="preserve">
+    <value>Unified surfaces, subtle elevation, semantic borders, and readable glass.</value>
+  </data>
+  <data name="Sandbox.Text.0206" xml:space="preserve">
+    <value>The base card uses the same neutral surface across the library.</value>
+  </data>
+  <data name="Sandbox.Text.0207" xml:space="preserve">
+    <value>Elevated</value>
+  </data>
+  <data name="Sandbox.Text.0208" xml:space="preserve">
+    <value>Elevation now changes shadow and edge strength without turning into a separate gray card.</value>
+  </data>
+  <data name="Sandbox.Text.0209" xml:space="preserve">
+    <value>Primary action</value>
+  </data>
+  <data name="Sandbox.Text.0210" xml:space="preserve">
+    <value>Interactive</value>
+  </data>
+  <data name="Sandbox.Text.0211" xml:space="preserve">
+    <value>Hover keeps the card in the same material family and only adds a light state change.</value>
+  </data>
+  <data name="Sandbox.Text.0212" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="Sandbox.Text.0213" xml:space="preserve">
+    <value>Semantic</value>
+  </data>
+  <data name="Sandbox.Text.0214" xml:space="preserve">
+    <value>State cards use a colored border instead of a full tinted surface.</value>
+  </data>
+  <data name="Sandbox.Text.0215" xml:space="preserve">
+    <value>Selected or highlighted.</value>
+  </data>
+  <data name="Sandbox.Text.0216" xml:space="preserve">
+    <value>Healthy completion state.</value>
+  </data>
+  <data name="Sandbox.Text.0217" xml:space="preserve">
+    <value>Configuration needs review.</value>
+  </data>
+  <data name="Sandbox.Text.0218" xml:space="preserve">
+    <value>Blocked or destructive state.</value>
+  </data>
+  <data name="Sandbox.Text.0219" xml:space="preserve">
+    <value>Glass over color</value>
+  </data>
+  <data name="Sandbox.Text.0220" xml:space="preserve">
+    <value>Checking window glass...</value>
+  </data>
+  <data name="Sandbox.Text.0221" xml:space="preserve">
+    <value>Composite glass content</value>
+  </data>
+  <data name="Sandbox.Text.0222" xml:space="preserve">
+    <value>Controls inside a glass card keep the same spacing and interaction states as solid cards.</value>
+  </data>
+  <data name="Sandbox.Text.0223" xml:space="preserve">
+    <value>Card title</value>
+  </data>
+  <data name="Sandbox.Text.0224" xml:space="preserve">
+    <value>Default density</value>
+  </data>
+  <data name="Sandbox.Text.0225" xml:space="preserve">
+    <value>Compact density</value>
+  </data>
+  <data name="Sandbox.Text.0226" xml:space="preserve">
+    <value>Pinned</value>
+  </data>
+  <data name="Sandbox.Text.0227" xml:space="preserve">
+    <value>Live updates</value>
+  </data>
+  <data name="Sandbox.Text.0228" xml:space="preserve">
+    <value>Collections</value>
+  </data>
+  <data name="Sandbox.Text.0229" xml:space="preserve">
+    <value>ListBox, TreeView, and ItemsControl examples.</value>
+  </data>
+  <data name="Sandbox.Text.0230" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="Sandbox.Text.0231" xml:space="preserve">
+    <value>Activity</value>
+  </data>
+  <data name="Sandbox.Text.0232" xml:space="preserve">
+    <value>Deployments</value>
+  </data>
+  <data name="Sandbox.Text.0233" xml:space="preserve">
+    <value>Billing</value>
+  </data>
+  <data name="Sandbox.Text.0234" xml:space="preserve">
+    <value>Disabled item</value>
+  </data>
+  <data name="Sandbox.Text.0235" xml:space="preserve">
+    <value>Design tokens</value>
+  </data>
+  <data name="Sandbox.Text.0236" xml:space="preserve">
+    <value>Colors</value>
+  </data>
+  <data name="Sandbox.Text.0237" xml:space="preserve">
+    <value>Typography</value>
+  </data>
+  <data name="Sandbox.Text.0238" xml:space="preserve">
+    <value>Spacing</value>
+  </data>
+  <data name="Sandbox.Text.0239" xml:space="preserve">
+    <value>Components</value>
+  </data>
+  <data name="Sandbox.Text.0240" xml:space="preserve">
+    <value>Inputs</value>
+  </data>
+  <data name="Sandbox.Text.0241" xml:space="preserve">
+    <value>Indexed List</value>
+  </data>
+  <data name="Sandbox.Text.0242" xml:space="preserve">
+    <value>Grouped list with a right-side index. Clicking a key jumps to the matching section, and scrolling updates the active key.</value>
+  </data>
+  <data name="Sandbox.Text.0243" xml:space="preserve">
+    <value>Alphabet index</value>
+  </data>
+  <data name="Sandbox.Text.0244" xml:space="preserve">
+    <value>Product designer</value>
+  </data>
+  <data name="Sandbox.Text.0245" xml:space="preserve">
+    <value>Frontend engineer</value>
+  </data>
+  <data name="Sandbox.Text.0246" xml:space="preserve">
+    <value>Operations lead</value>
+  </data>
+  <data name="Sandbox.Text.0247" xml:space="preserve">
+    <value>Motion designer</value>
+  </data>
+  <data name="Sandbox.Text.0248" xml:space="preserve">
+    <value>Data analyst</value>
+  </data>
+  <data name="Sandbox.Text.0249" xml:space="preserve">
+    <value>Support specialist</value>
+  </data>
+  <data name="Sandbox.Text.0250" xml:space="preserve">
+    <value>Research manager</value>
+  </data>
+  <data name="Sandbox.Text.0251" xml:space="preserve">
+    <value>Platform engineer</value>
+  </data>
+  <data name="Sandbox.Text.0252" xml:space="preserve">
+    <value>Brand strategist</value>
+  </data>
+  <data name="Sandbox.Text.0253" xml:space="preserve">
+    <value>QA engineer</value>
+  </data>
+  <data name="Sandbox.Text.0254" xml:space="preserve">
+    <value>Design systems</value>
+  </data>
+  <data name="Sandbox.Text.0255" xml:space="preserve">
+    <value>Technical writer</value>
+  </data>
+  <data name="Sandbox.Text.0256" xml:space="preserve">
+    <value>Mobile engineer</value>
+  </data>
+  <data name="Sandbox.Text.0257" xml:space="preserve">
+    <value>Account manager</value>
+  </data>
+  <data name="Sandbox.Text.0258" xml:space="preserve">
+    <value>ä¸­æ–‡é€šè®¯å½• (Pinyin &amp; Custom Keys)</value>
+  </data>
+  <data name="Sandbox.Text.0259" xml:space="preserve">
+    <value>Chinese address book (Pinyin &amp; Custom Keys)</value>
+  </data>
+  <data name="Sandbox.Text.0260" xml:space="preserve">
+    <value>By leveraging the 'Key' property, you can display full Chinese section headers while keeping the right-side index bar neat (e.g. A-Z or â˜…).</value>
+  </data>
+  <data name="Sandbox.Text.0261" xml:space="preserve">
+    <value>Starred friends</value>
+  </data>
+  <data name="Sandbox.Text.0262" xml:space="preserve">
+    <value>æ˜Ÿæ ‡æœ‹å‹</value>
+  </data>
+  <data name="Sandbox.Text.0263" xml:space="preserve">
+    <value>Zhang San (BOSS)</value>
+  </data>
+  <data name="Sandbox.Text.0264" xml:space="preserve">
+    <value>å¼ ä¸‰ (BOSS)</value>
+  </data>
+  <data name="Sandbox.Text.0265" xml:space="preserve">
+    <value>Chairman</value>
+  </data>
+  <data name="Sandbox.Text.0266" xml:space="preserve">
+    <value>è‘£äº‹é•¿</value>
+  </data>
+  <data name="Sandbox.Text.0267" xml:space="preserve">
+    <value>Li Si</value>
+  </data>
+  <data name="Sandbox.Text.0268" xml:space="preserve">
+    <value>æŽå››</value>
+  </data>
+  <data name="Sandbox.Text.0269" xml:space="preserve">
+    <value>Core architect</value>
+  </data>
+  <data name="Sandbox.Text.0270" xml:space="preserve">
+    <value>æ ¸å¿ƒæž¶æž„å¸ˆ</value>
+  </data>
+  <data name="Sandbox.Text.0271" xml:space="preserve">
+    <value>C - Finance</value>
+  </data>
+  <data name="Sandbox.Text.0272" xml:space="preserve">
+    <value>C - è´¢åŠ¡éƒ¨</value>
+  </data>
+  <data name="Sandbox.Text.0273" xml:space="preserve">
+    <value>Chen</value>
+  </data>
+  <data name="Sandbox.Text.0274" xml:space="preserve">
+    <value>é™ˆæ€»</value>
+  </data>
+  <data name="Sandbox.Text.0275" xml:space="preserve">
+    <value>Cashier</value>
+  </data>
+  <data name="Sandbox.Text.0276" xml:space="preserve">
+    <value>å‡ºçº³</value>
+  </data>
+  <data name="Sandbox.Text.0277" xml:space="preserve">
+    <value>Cao</value>
+  </data>
+  <data name="Sandbox.Text.0278" xml:space="preserve">
+    <value>æ›¹ä¼šè®¡</value>
+  </data>
+  <data name="Sandbox.Text.0279" xml:space="preserve">
+    <value>L - R&amp;D</value>
+  </data>
+  <data name="Sandbox.Text.0280" xml:space="preserve">
+    <value>L - ç ”å‘éƒ¨</value>
+  </data>
+  <data name="Sandbox.Text.0281" xml:space="preserve">
+    <value>Li Lei</value>
+  </data>
+  <data name="Sandbox.Text.0282" xml:space="preserve">
+    <value>æŽé›·</value>
+  </data>
+  <data name="Sandbox.Text.0283" xml:space="preserve">
+    <value>Backend engineer</value>
+  </data>
+  <data name="Sandbox.Text.0284" xml:space="preserve">
+    <value>åŽç«¯å·¥ç¨‹å¸ˆ</value>
+  </data>
+  <data name="Sandbox.Text.0285" xml:space="preserve">
+    <value>Liu Mei</value>
+  </data>
+  <data name="Sandbox.Text.0286" xml:space="preserve">
+    <value>åˆ˜æ¢…</value>
+  </data>
+  <data name="Sandbox.Text.0287" xml:space="preserve">
+    <value>Test engineer</value>
+  </data>
+  <data name="Sandbox.Text.0288" xml:space="preserve">
+    <value>W - Marketing</value>
+  </data>
+  <data name="Sandbox.Text.0289" xml:space="preserve">
+    <value>W - å¸‚åœºéƒ¨</value>
+  </data>
+  <data name="Sandbox.Text.0290" xml:space="preserve">
+    <value>Wang Jianguo</value>
+  </data>
+  <data name="Sandbox.Text.0291" xml:space="preserve">
+    <value>çŽ‹å»ºå›½</value>
+  </data>
+  <data name="Sandbox.Text.0292" xml:space="preserve">
+    <value>Marketing director</value>
+  </data>
+  <data name="Sandbox.Text.0293" xml:space="preserve">
+    <value>å¸‚åœºæ€»ç›‘</value>
+  </data>
+  <data name="Sandbox.Text.0294" xml:space="preserve">
+    <value>Wu Fang</value>
+  </data>
+  <data name="Sandbox.Text.0295" xml:space="preserve">
+    <value>å´èŠ³</value>
+  </data>
+  <data name="Sandbox.Text.0296" xml:space="preserve">
+    <value>PR media</value>
+  </data>
+  <data name="Sandbox.Text.0297" xml:space="preserve">
+    <value>å…¬å…³åª’ä»‹</value>
+  </data>
+  <data name="Sandbox.Text.0298" xml:space="preserve">
+    <value>Z - Administration</value>
+  </data>
+  <data name="Sandbox.Text.0299" xml:space="preserve">
+    <value>Z - è¡Œæ”¿éƒ¨</value>
+  </data>
+  <data name="Sandbox.Text.0300" xml:space="preserve">
+    <value>Zhao Yun</value>
+  </data>
+  <data name="Sandbox.Text.0301" xml:space="preserve">
+    <value>èµµäº‘</value>
+  </data>
+  <data name="Sandbox.Text.0302" xml:space="preserve">
+    <value>Administration manager</value>
+  </data>
+  <data name="Sandbox.Text.0303" xml:space="preserve">
+    <value>è¡Œæ”¿ä¸»ç®¡</value>
+  </data>
+  <data name="Sandbox.Text.0304" xml:space="preserve">
+    <value>Zheng Qian</value>
+  </data>
+  <data name="Sandbox.Text.0305" xml:space="preserve">
+    <value>éƒ‘é’±</value>
+  </data>
+  <data name="Sandbox.Text.0306" xml:space="preserve">
+    <value>Receptionist</value>
+  </data>
+  <data name="Sandbox.Text.0307" xml:space="preserve">
+    <value>å‰å°æŽ¥å¾…</value>
+  </data>
+  <data name="Sandbox.Text.0308" xml:space="preserve">
+    <value>Dynamic Data Auto-Grouping (LoadFlatData)</value>
+  </data>
+  <data name="Sandbox.Text.0309" xml:space="preserve">
+    <value>Inject a massive flat list (e.g. from an API). LuminaUI automatically parses your callbacks to generate sections, groups, and the right-side index bar.</value>
+  </data>
+  <data name="Sandbox.Text.0310" xml:space="preserve">
+    <value>Linked Category List</value>
+  </data>
+  <data name="Sandbox.Text.0311" xml:space="preserve">
+    <value>Linked category list</value>
+  </data>
+  <data name="Sandbox.Text.0312" xml:space="preserve">
+    <value>Smart Components</value>
+  </data>
+  <data name="Sandbox.Text.0313" xml:space="preserve">
+    <value>Reusable interaction components for overflow text, alphabetical indexes, and linked category scrolling.</value>
+  </data>
+  <data name="Sandbox.Text.0314" xml:space="preserve">
+    <value>Alphabet index list</value>
+  </data>
+  <data name="Sandbox.Text.0315" xml:space="preserve">
+    <value>Ordering-style linked navigation. Left categories jump the right list, and right-side scrolling keeps the selected category in sync.</value>
+  </data>
+  <data name="Sandbox.Text.0316" xml:space="preserve">
+    <value>Menu categories</value>
+  </data>
+  <data name="Sandbox.Text.0317" xml:space="preserve">
+    <value>Popular</value>
+  </data>
+  <data name="Sandbox.Text.0318" xml:space="preserve">
+    <value>Signature beef bowl</value>
+  </data>
+  <data name="Sandbox.Text.0319" xml:space="preserve">
+    <value>Slow cooked beef, soft egg, house sauce.</value>
+  </data>
+  <data name="Sandbox.Text.0320" xml:space="preserve">
+    <value>Crispy chicken rice</value>
+  </data>
+  <data name="Sandbox.Text.0321" xml:space="preserve">
+    <value>Chicken thigh, pickled cucumber, chili mayo.</value>
+  </data>
+  <data name="Sandbox.Text.0322" xml:space="preserve">
+    <value>Noodles</value>
+  </data>
+  <data name="Sandbox.Text.0323" xml:space="preserve">
+    <value>Tonkotsu ramen</value>
+  </data>
+  <data name="Sandbox.Text.0324" xml:space="preserve">
+    <value>Pork broth, chashu, bamboo shoots.</value>
+  </data>
+  <data name="Sandbox.Text.0325" xml:space="preserve">
+    <value>Cold sesame noodles</value>
+  </data>
+  <data name="Sandbox.Text.0326" xml:space="preserve">
+    <value>Sesame dressing, cucumber, scallion.</value>
+  </data>
+  <data name="Sandbox.Text.0327" xml:space="preserve">
+    <value>Snacks</value>
+  </data>
+  <data name="Sandbox.Text.0328" xml:space="preserve">
+    <value>Truffle fries</value>
+  </data>
+  <data name="Sandbox.Text.0329" xml:space="preserve">
+    <value>Parmesan, parsley, black truffle oil.</value>
+  </data>
+  <data name="Sandbox.Text.0330" xml:space="preserve">
+    <value>Gyoza</value>
+  </data>
+  <data name="Sandbox.Text.0331" xml:space="preserve">
+    <value>Pan fried pork dumplings, vinegar soy.</value>
+  </data>
+  <data name="Sandbox.Text.0332" xml:space="preserve">
+    <value>Drinks</value>
+  </data>
+  <data name="Sandbox.Text.0333" xml:space="preserve">
+    <value>Jasmine sparkling tea</value>
+  </data>
+  <data name="Sandbox.Text.0334" xml:space="preserve">
+    <value>Cold brewed tea with citrus soda.</value>
+  </data>
+  <data name="Sandbox.Text.0335" xml:space="preserve">
+    <value>Yuzu lemonade</value>
+  </data>
+  <data name="Sandbox.Text.0336" xml:space="preserve">
+    <value>Yuzu peel, lemon, light syrup.</value>
+  </data>
+  <data name="Sandbox.Text.0337" xml:space="preserve">
+    <value>Navigation &amp; Containers</value>
+  </data>
+  <data name="Sandbox.Text.0338" xml:space="preserve">
+    <value>Native navigation pages, content containers, carousel, transitioning content, and notification surfaces.</value>
+  </data>
+  <data name="Sandbox.Text.0339" xml:space="preserve">
+    <value>Service status</value>
+  </data>
+  <data name="Sandbox.Text.0340" xml:space="preserve">
+    <value>API healthy</value>
+  </data>
+  <data name="Sandbox.Text.0341" xml:space="preserve">
+    <value>Sync completed</value>
+  </data>
+  <data name="Sandbox.Text.0342" xml:space="preserve">
+    <value>Billing check pending</value>
+  </data>
+  <data name="Sandbox.Text.0343" xml:space="preserve">
+    <value>Design</value>
+  </data>
+  <data name="Sandbox.Text.0344" xml:space="preserve">
+    <value>Build</value>
+  </data>
+  <data name="Sandbox.Text.0345" xml:space="preserve">
+    <value>Verify</value>
+  </data>
+  <data name="Sandbox.Text.0346" xml:space="preserve">
+    <value>Release</value>
+  </data>
+  <data name="Sandbox.Text.0347" xml:space="preserve">
+    <value>Pane</value>
+  </data>
+  <data name="Sandbox.Text.0348" xml:space="preserve">
+    <value>Inbox</value>
+  </data>
+  <data name="Sandbox.Text.0349" xml:space="preserve">
+    <value>Compact inline layout</value>
+  </data>
+  <data name="Sandbox.Text.0350" xml:space="preserve">
+    <value>The pane can stay readable on desktop and collapse to the compact strip on narrow layouts.</value>
+  </data>
+  <data name="Sandbox.Text.0351" xml:space="preserve">
+    <value>Project</value>
+  </data>
+  <data name="Sandbox.Text.0352" xml:space="preserve">
+    <value>Navigation root</value>
+  </data>
+  <data name="Sandbox.Text.0353" xml:space="preserve">
+    <value>Open detail</value>
+  </data>
+  <data name="Sandbox.Text.0354" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Sandbox.Text.0355" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="Sandbox.Text.0356" xml:space="preserve">
+    <value>Team</value>
+  </data>
+  <data name="Sandbox.Text.0357" xml:space="preserve">
+    <value>Drawer content</value>
+  </data>
+  <data name="Sandbox.Text.0358" xml:space="preserve">
+    <value>DrawerPage is the native sidebar pattern for app-level navigation.</value>
+  </data>
+  <data name="Sandbox.Text.0359" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="Sandbox.Text.0360" xml:space="preserve">
+    <value>Top</value>
+  </data>
+  <data name="Sandbox.Text.0361" xml:space="preserve">
+    <value>Bottom</value>
+  </data>
+  <data name="Sandbox.Text.0362" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Sandbox.Text.0363" xml:space="preserve">
+    <value>Home page content</value>
+  </data>
+  <data name="Sandbox.Text.0364" xml:space="preserve">
+    <value>Search page content</value>
+  </data>
+  <data name="Sandbox.Text.0365" xml:space="preserve">
+    <value>Profile page content</value>
+  </data>
+  <data name="Sandbox.Text.0366" xml:space="preserve">
+    <value>Carousel</value>
+  </data>
+  <data name="Sandbox.Text.0367" xml:space="preserve">
+    <value>Auto play</value>
+  </data>
+  <data name="Sandbox.Text.0368" xml:space="preserve">
+    <value>Release dashboard</value>
+  </data>
+  <data name="Sandbox.Text.0369" xml:space="preserve">
+    <value>Track build health, review queue, and component coverage in one compact surface.</value>
+  </data>
+  <data name="Sandbox.Text.0370" xml:space="preserve">
+    <value>Component audit</value>
+  </data>
+  <data name="Sandbox.Text.0371" xml:space="preserve">
+    <value>Navigation, overlays, pickers, and action controls now have dedicated examples.</value>
+  </data>
+  <data name="Sandbox.Text.0372" xml:space="preserve">
+    <value>Responsive preview</value>
+  </data>
+  <data name="Sandbox.Text.0373" xml:space="preserve">
+    <value>The carousel scales with the card and keeps controls anchored inside the component.</value>
+  </data>
+  <data name="Sandbox.Text.0374" xml:space="preserve">
+    <value>Updated content surface</value>
+  </data>
+  <data name="Sandbox.Text.0375" xml:space="preserve">
+    <value>Notification cards</value>
+  </data>
+  <data name="Sandbox.Text.0376" xml:space="preserve">
+    <value>Notification duration</value>
+  </data>
+  <data name="Sandbox.Text.0377" xml:space="preserve">
+    <value>Notification position</value>
+  </data>
+  <data name="Sandbox.Text.0378" xml:space="preserve">
+    <value>Top left</value>
+  </data>
+  <data name="Sandbox.Text.0379" xml:space="preserve">
+    <value>Top right</value>
+  </data>
+  <data name="Sandbox.Text.0380" xml:space="preserve">
+    <value>Bottom left</value>
+  </data>
+  <data name="Sandbox.Text.0381" xml:space="preserve">
+    <value>Bottom right</value>
+  </data>
+  <data name="Sandbox.Text.0382" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="Sandbox.Text.0383" xml:space="preserve">
+    <value>Expander</value>
+  </data>
+  <data name="Sandbox.Text.0384" xml:space="preserve">
+    <value>Expandable disclosure panels for progressive settings and advanced content.</value>
+  </data>
+  <data name="Sandbox.Text.0385" xml:space="preserve">
+    <value>Basic</value>
+  </data>
+  <data name="Sandbox.Text.0386" xml:space="preserve">
+    <value>Connection settings</value>
+  </data>
+  <data name="Sandbox.Text.0387" xml:space="preserve">
+    <value>Host</value>
+  </data>
+  <data name="Sandbox.Text.0388" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="Sandbox.Text.0389" xml:space="preserve">
+    <value>Advanced limits</value>
+  </data>
+  <data name="Sandbox.Text.0390" xml:space="preserve">
+    <value>Compact groups</value>
+  </data>
+  <data name="Sandbox.Text.0391" xml:space="preserve">
+    <value>Filters</value>
+  </data>
+  <data name="Sandbox.Text.0392" xml:space="preserve">
+    <value>Only active</value>
+  </data>
+  <data name="Sandbox.Text.0393" xml:space="preserve">
+    <value>Include archived</value>
+  </data>
+  <data name="Sandbox.Text.0394" xml:space="preserve">
+    <value>Export options</value>
+  </data>
+  <data name="Sandbox.Text.0395" xml:space="preserve">
+    <value>TabControl</value>
+  </data>
+  <data name="Sandbox.Text.0396" xml:space="preserve">
+    <value>Full content tabs with line, browser, pill, vertical, bottom, and mobile bottom navigation variants.</value>
+  </data>
+  <data name="Sandbox.Text.0397" xml:space="preserve">
+    <value>Default line tabs keep the selected page close to the content.</value>
+  </data>
+  <data name="Sandbox.Text.0398" xml:space="preserve">
+    <value>Use this variant for ordinary document or settings sections.</value>
+  </data>
+  <data name="Sandbox.Text.0399" xml:space="preserve">
+    <value>Project content sits in a bordered surface connected to browser-style tabs.</value>
+  </data>
+  <data name="Sandbox.Text.0400" xml:space="preserve">
+    <value>The selected tab blends into the content surface below.</value>
+  </data>
+  <data name="Sandbox.Text.0401" xml:space="preserve">
+    <value>Useful for editors, consoles, and dashboard panes.</value>
+  </data>
+  <data name="Sandbox.Text.0402" xml:space="preserve">
+    <value>Daily metrics</value>
+  </data>
+  <data name="Sandbox.Text.0403" xml:space="preserve">
+    <value>Weekly metrics</value>
+  </data>
+  <data name="Sandbox.Text.0404" xml:space="preserve">
+    <value>Monthly metrics</value>
+  </data>
+  <data name="Sandbox.Text.0405" xml:space="preserve">
+    <value>Bottom tabs</value>
+  </data>
+  <data name="Sandbox.Text.0406" xml:space="preserve">
+    <value>Bottom placement moves the indicator above the tab labels.</value>
+  </data>
+  <data name="Sandbox.Text.0407" xml:space="preserve">
+    <value>Timeline</value>
+  </data>
+  <data name="Sandbox.Text.0408" xml:space="preserve">
+    <value>Timeline content</value>
+  </data>
+  <data name="Sandbox.Text.0409" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="Sandbox.Text.0410" xml:space="preserve">
+    <value>Files content</value>
+  </data>
+  <data name="Sandbox.Text.0411" xml:space="preserve">
+    <value>Profile settings</value>
+  </data>
+  <data name="Sandbox.Text.0412" xml:space="preserve">
+    <value>Security settings</value>
+  </data>
+  <data name="Sandbox.Text.0413" xml:space="preserve">
+    <value>Billing settings</value>
+  </data>
+  <data name="Sandbox.Text.0414" xml:space="preserve">
+    <value>Vertical TabControl keeps the tab list and selected content in one native control.</value>
+  </data>
+  <data name="Sandbox.Text.0415" xml:space="preserve">
+    <value>Mobile bottom navigation</value>
+  </data>
+  <data name="Sandbox.Text.0416" xml:space="preserve">
+    <value>Mobile layout keeps content above the tab bar.</value>
+  </data>
+  <data name="Sandbox.Text.0417" xml:space="preserve">
+    <value>Search content</value>
+  </data>
+  <data name="Sandbox.Text.0418" xml:space="preserve">
+    <value>Inbox content</value>
+  </data>
+  <data name="Sandbox.Text.0419" xml:space="preserve">
+    <value>Profile content</value>
+  </data>
+  <data name="Sandbox.Text.0420" xml:space="preserve">
+    <value>TabStrip</value>
+  </data>
+  <data name="Sandbox.Text.0421" xml:space="preserve">
+    <value>Standalone TabStrip variants for line tabs, browser tabs, segmented pills, vertical navigation, and compact tool surfaces.</value>
+  </data>
+  <data name="Sandbox.Text.0422" xml:space="preserve">
+    <value>Line</value>
+  </data>
+  <data name="Sandbox.Text.0423" xml:space="preserve">
+    <value>Usage</value>
+  </data>
+  <data name="Sandbox.Text.0424" xml:space="preserve">
+    <value>Default underline style for simple content sections.</value>
+  </data>
+  <data name="Sandbox.Text.0425" xml:space="preserve">
+    <value>Chrome</value>
+  </data>
+  <data name="Sandbox.Text.0426" xml:space="preserve">
+    <value>Build logs</value>
+  </data>
+  <data name="Sandbox.Text.0427" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="Sandbox.Text.0428" xml:space="preserve">
+    <value>Browser-style tabs connect visually to the panel underneath.</value>
+  </data>
+  <data name="Sandbox.Text.0429" xml:space="preserve">
+    <value>Pills</value>
+  </data>
+  <data name="Sandbox.Text.0430" xml:space="preserve">
+    <value>Daily</value>
+  </data>
+  <data name="Sandbox.Text.0431" xml:space="preserve">
+    <value>Weekly</value>
+  </data>
+  <data name="Sandbox.Text.0432" xml:space="preserve">
+    <value>Monthly</value>
+  </data>
+  <data name="Sandbox.Text.0433" xml:space="preserve">
+    <value>Pills work well as segmented mode switches.</value>
+  </data>
+  <data name="Sandbox.Text.0434" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Sandbox.Text.0435" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="Sandbox.Text.0436" xml:space="preserve">
+    <value>Archived</value>
+  </data>
+  <data name="Sandbox.Text.0437" xml:space="preserve">
+    <value>Compact tabs fit dense toolbars and data panels.</value>
+  </data>
+  <data name="Sandbox.Text.0438" xml:space="preserve">
+    <value>Content area above, tab selector below.</value>
+  </data>
+  <data name="Sandbox.Text.0439" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="Sandbox.Text.0440" xml:space="preserve">
+    <value>Vertical</value>
+  </data>
+  <data name="Sandbox.Text.0441" xml:space="preserve">
+    <value>Security</value>
+  </data>
+  <data name="Sandbox.Text.0442" xml:space="preserve">
+    <value>Settings panel</value>
+  </data>
+  <data name="Sandbox.Text.0443" xml:space="preserve">
+    <value>Vertical tabs suit preference pages and side-by-side editors.</value>
+  </data>
+  <data name="Sandbox.Text.0444" xml:space="preserve">
+    <value>Rich content</value>
+  </data>
+  <data name="Sandbox.Text.0445" xml:space="preserve">
+    <value>Stable</value>
+  </data>
+  <data name="Sandbox.Text.0446" xml:space="preserve">
+    <value>Running</value>
+  </data>
+  <data name="Sandbox.Text.0447" xml:space="preserve">
+    <value>Queued</value>
+  </data>
+  <data name="Sandbox.Text.0448" xml:space="preserve">
+    <value>TabStripItem content can be composed with icons, counters, or status marks.</value>
+  </data>
+  <data name="Sandbox.Text.0449" xml:space="preserve">
+    <value>Mobile</value>
+  </data>
+  <data name="Sandbox.Text.0450" xml:space="preserve">
+    <value>Mobile style stacks the icon above the label and lets items divide the available width.</value>
+  </data>
+  <data name="Sandbox.Text.0451" xml:space="preserve">
+    <value>Text Inputs</value>
+  </data>
+  <data name="Sandbox.Text.0452" xml:space="preserve">
+    <value>TextBox, PasswordBox, and NumericUpDown examples.</value>
+  </data>
+  <data name="Sandbox.Text.0453" xml:space="preserve">
+    <value>Single line value</value>
+  </data>
+  <data name="Sandbox.Text.0454" xml:space="preserve">
+    <value>Read-only value</value>
+  </data>
+  <data name="Sandbox.Text.0455" xml:space="preserve">
+    <value>Multiline note</value>
+  </data>
+  <data name="Sandbox.Text.0456" xml:space="preserve">
+    <value>Disabled field</value>
+  </data>
+  <data name="Sandbox.Text.0457" xml:space="preserve">
+    <value>InputGroup</value>
+  </data>
+  <data name="Sandbox.Text.0458" xml:space="preserve">
+    <value>workspace</value>
+  </data>
+  <data name="Sandbox.Text.0459" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="Sandbox.Text.0460" xml:space="preserve">
+    <value>Ticket</value>
+  </data>
+  <data name="Sandbox.Text.0461" xml:space="preserve">
+    <value>Search keyword</value>
+  </data>
+  <data name="Sandbox.Text.0462" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Sandbox.Text.0463" xml:space="preserve">
+    <value>Disabled password</value>
+  </data>
+  <data name="Sandbox.Text.0464" xml:space="preserve">
+    <value>Selection</value>
+  </data>
+  <data name="Sandbox.Text.0465" xml:space="preserve">
+    <value>CheckBox, RadioButton, and ToggleSwitch states.</value>
+  </data>
+  <data name="Sandbox.Text.0466" xml:space="preserve">
+    <value>Unchecked</value>
+  </data>
+  <data name="Sandbox.Text.0467" xml:space="preserve">
+    <value>Checked</value>
+  </data>
+  <data name="Sandbox.Text.0468" xml:space="preserve">
+    <value>Indeterminate</value>
+  </data>
+  <data name="Sandbox.Text.0469" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="Sandbox.Text.0470" xml:space="preserve">
+    <value>Background sync</value>
+  </data>
+  <data name="Sandbox.Text.0471" xml:space="preserve">
+    <value>Disabled switch</value>
+  </data>
+  <data name="Sandbox.Text.0472" xml:space="preserve">
+    <value>Range &amp; Progress</value>
+  </data>
+  <data name="Sandbox.Text.0473" xml:space="preserve">
+    <value>Slider and ProgressBar states.</value>
+  </data>
+  <data name="Sandbox.Text.0474" xml:space="preserve">
+    <value>Slider, playback slider, and ProgressBar states.</value>
+  </data>
+  <data name="Sandbox.Text.0475" xml:space="preserve">
+    <value>Playback slider</value>
+  </data>
+  <data name="Sandbox.Text.0476" xml:space="preserve">
+    <value>Click anywhere on the track to seek, drag the thumb, and show buffered progress behind the current position.</value>
+  </data>
+  <data name="Sandbox.Text.0477" xml:space="preserve">
+    <value>Foundation</value>
+  </data>
+  <data name="Sandbox.Text.0478" xml:space="preserve">
+    <value>Text, surface, label, link, validation, icon, and scrolling primitives.</value>
+  </data>
+  <data name="Sandbox.Text.0479" xml:space="preserve">
+    <value>Title text</value>
+  </data>
+  <data name="Sandbox.Text.0480" xml:space="preserve">
+    <value>Label text</value>
+  </data>
+  <data name="Sandbox.Text.0481" xml:space="preserve">
+    <value>Body copy wraps naturally and uses the secondary text color for lower visual noise in dense screens.</value>
+  </data>
+  <data name="Sandbox.Text.0482" xml:space="preserve">
+    <value>Caption text for helper copy and metadata.</value>
+  </data>
+  <data name="Sandbox.Text.0483" xml:space="preserve">
+    <value>Marked</value>
+  </data>
+  <data name="Sandbox.Text.0484" xml:space="preserve">
+    <value>Underline</value>
+  </data>
+  <data name="Sandbox.Text.0485" xml:space="preserve">
+    <value>Strikethrough</value>
+  </data>
+  <data name="Sandbox.Text.0486" xml:space="preserve">
+    <value>Muted</value>
+  </data>
+  <data name="Sandbox.Text.0487" xml:space="preserve">
+    <value>Secondary</value>
+  </data>
+  <data name="Sandbox.Text.0488" xml:space="preserve">
+    <value>Neutral</value>
+  </data>
+  <data name="Sandbox.Text.0489" xml:space="preserve">
+    <value>Border Surfaces</value>
+  </data>
+  <data name="Sandbox.Text.0490" xml:space="preserve">
+    <value>Surface</value>
+  </data>
+  <data name="Sandbox.Text.0491" xml:space="preserve">
+    <value>Default panel.</value>
+  </data>
+  <data name="Sandbox.Text.0492" xml:space="preserve">
+    <value>Raised panel.</value>
+  </data>
+  <data name="Sandbox.Text.0493" xml:space="preserve">
+    <value>Subtle</value>
+  </data>
+  <data name="Sandbox.Text.0494" xml:space="preserve">
+    <value>Quiet panel.</value>
+  </data>
+  <data name="Sandbox.Text.0495" xml:space="preserve">
+    <value>Tinted glass.</value>
+  </data>
+  <data name="Sandbox.Text.0496" xml:space="preserve">
+    <value>Primary link</value>
+  </data>
+  <data name="Sandbox.Text.0497" xml:space="preserve">
+    <value>Subtle underline link</value>
+  </data>
+  <data name="Sandbox.Text.0498" xml:space="preserve">
+    <value>Button-like link</value>
+  </data>
+  <data name="Sandbox.Text.0499" xml:space="preserve">
+    <value>Email already exists.</value>
+  </data>
+  <data name="Sandbox.Text.0500" xml:space="preserve">
+    <value>Use a unique address before saving.</value>
+  </data>
+  <data name="Sandbox.Text.0501" xml:space="preserve">
+    <value>Scrollable row 1</value>
+  </data>
+  <data name="Sandbox.Text.0502" xml:space="preserve">
+    <value>Scrollable row 2</value>
+  </data>
+  <data name="Sandbox.Text.0503" xml:space="preserve">
+    <value>Scrollable row 3</value>
+  </data>
+  <data name="Sandbox.Text.0504" xml:space="preserve">
+    <value>Scrollable row 4</value>
+  </data>
+  <data name="Sandbox.Text.0505" xml:space="preserve">
+    <value>Scrollable row 5</value>
+  </data>
+  <data name="Sandbox.Text.0506" xml:space="preserve">
+    <value>Scrollable row 6</value>
+  </data>
+  <data name="Sandbox.Text.0507" xml:space="preserve">
+    <value>Scrollable row 7</value>
+  </data>
+  <data name="Sandbox.Text.0508" xml:space="preserve">
+    <value>Scrollable row 8</value>
+  </data>
+  <data name="Sandbox.Text.0509" xml:space="preserve">
+    <value>LuminaUI Design System</value>
+  </data>
+  <data name="Sandbox.Text.0510" xml:space="preserve">
+    <value>Toggle Theme</value>
+  </data>
+  <data name="Sandbox.Text.0511" xml:space="preserve">
+    <value>1. Semantic Colors</value>
+  </data>
+  <data name="Sandbox.Text.0512" xml:space="preserve">
+    <value>Consistent, accessible, and vibrant semantic tokens.</value>
+  </data>
+  <data name="Sandbox.Text.0513" xml:space="preserve">
+    <value>2. Typography</value>
+  </data>
+  <data name="Sandbox.Text.0514" xml:space="preserve">
+    <value>Heading 1 (36px, Black)</value>
+  </data>
+  <data name="Sandbox.Text.0515" xml:space="preserve">
+    <value>Heading 2 (28px, Bold)</value>
+  </data>
+  <data name="Sandbox.Text.0516" xml:space="preserve">
+    <value>Heading 3 (20px, SemiBold)</value>
+  </data>
+  <data name="Sandbox.Text.0517" xml:space="preserve">
+    <value>Body Text (14px, Regular). LuminaUI uses high contrast text for readability without pure black or pure white.</value>
+  </data>
+  <data name="Sandbox.Text.0518" xml:space="preserve">
+    <value>Muted Text (12px). Used for captions, placeholders, and secondary information.</value>
+  </data>
+  <data name="Sandbox.Text.0519" xml:space="preserve">
+    <value>3. Surfaces &amp; Elevation</value>
+  </data>
+  <data name="Sandbox.Text.0520" xml:space="preserve">
+    <value>A single surface family with subtle borders, shadows, and glass.</value>
+  </data>
+  <data name="Sandbox.Text.0521" xml:space="preserve">
+    <value>Level 1: Solid</value>
+  </data>
+  <data name="Sandbox.Text.0522" xml:space="preserve">
+    <value>Flat neutral surface with a one-pixel outline.</value>
+  </data>
+  <data name="Sandbox.Text.0523" xml:space="preserve">
+    <value>Level 2: Elevated</value>
+  </data>
+  <data name="Sandbox.Text.0524" xml:space="preserve">
+    <value>The same family, with stronger depth instead of a separate gray fill.</value>
+  </data>
+  <data name="Sandbox.Text.0525" xml:space="preserve">
+    <value>Level 3: Glass</value>
+  </data>
+  <data name="Sandbox.Text.0526" xml:space="preserve">
+    <value>Blurred translucent material with a readable tint over flat backgrounds.</value>
+  </data>
+  <data name="Sandbox.Text.0527" xml:space="preserve">
+    <value>ðŸŽ¨ Enterprise Token System</value>
+  </data>
+  <data name="Sandbox.Text.0528" xml:space="preserve">
+    <value>LuminaUI relies on a strictly defined set of semantic color tokens, mirroring the granularity of enterprise systems. By mapping UI elements to these logical tokens instead of hardcoded hex values, your application achieves flawless 0-cost Dark/Light mode switching.</value>
+  </data>
+  <data name="Sandbox.Text.0529" xml:space="preserve">
+    <value>1. App Backgrounds &amp; Surfaces</value>
+  </data>
+  <data name="Sandbox.Text.0530" xml:space="preserve">
+    <value>Level 0: App Base</value>
+  </data>
+  <data name="Sandbox.Text.0531" xml:space="preserve">
+    <value>Level 1: Cards</value>
+  </data>
+  <data name="Sandbox.Text.0532" xml:space="preserve">
+    <value>Level 3: Dropdowns</value>
+  </data>
+  <data name="Sandbox.Text.0533" xml:space="preserve">
+    <value>Disabled Surfaces</value>
+  </data>
+  <data name="Sandbox.Text.0534" xml:space="preserve">
+    <value>2. Text Hierarchy</value>
+  </data>
+  <data name="Sandbox.Text.0535" xml:space="preserve">
+    <value>Titles &amp; Headings</value>
+  </data>
+  <data name="Sandbox.Text.0536" xml:space="preserve">
+    <value>Body Text</value>
+  </data>
+  <data name="Sandbox.Text.0537" xml:space="preserve">
+    <value>Muted / Meta</value>
+  </data>
+  <data name="Sandbox.Text.0538" xml:space="preserve">
+    <value>Disabled Text</value>
+  </data>
+  <data name="Sandbox.Text.0539" xml:space="preserve">
+    <value>3. Border Hierarchy</value>
+  </data>
+  <data name="Sandbox.Text.0540" xml:space="preserve">
+    <value>Dividers / Faint lines</value>
+  </data>
+  <data name="Sandbox.Text.0541" xml:space="preserve">
+    <value>Component Outlines</value>
+  </data>
+  <data name="Sandbox.Text.0542" xml:space="preserve">
+    <value>Hovered Inputs</value>
+  </data>
+  <data name="Sandbox.Text.0543" xml:space="preserve">
+    <value>Disabled Components</value>
+  </data>
+  <data name="Sandbox.Text.0544" xml:space="preserve">
+    <value>4. Semantic: Brand &amp; Feedback</value>
+  </data>
+  <data name="Sandbox.Text.0545" xml:space="preserve">
+    <value>Pale Background</value>
+  </data>
+  <data name="Sandbox.Text.0546" xml:space="preserve">
+    <value>Extended Palette (For Charts, Badges &amp; Themes)</value>
+  </data>
+  <data name="Sandbox.Text.0547" xml:space="preserve">
+    <value>Interactive &amp; Compositing</value>
+  </data>
+  <data name="Sandbox.Text.0548" xml:space="preserve">
+    <value>Token</value>
+  </data>
+  <data name="Sandbox.Text.0549" xml:space="preserve">
+    <value>Resource</value>
+  </data>
+  <data name="Sandbox.Text.0550" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="Sandbox.Text.0551" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="Sandbox.Text.0552" xml:space="preserve">
+    <value>Opacity</value>
+  </data>
+  <data name="Sandbox.Text.0553" xml:space="preserve">
+    <value>Shadow</value>
+  </data>
+  <data name="Sandbox.Text.0554" xml:space="preserve">
+    <value>Light value</value>
+  </data>
+  <data name="Sandbox.Text.0555" xml:space="preserve">
+    <value>Dark value</value>
+  </data>
+  <data name="Sandbox.Text.0556" xml:space="preserve">
+    <value>Copy resource name</value>
+  </data>
+  <data name="Sandbox.Text.0557" xml:space="preserve">
+    <value>Copied {0}</value>
+  </data>
+  <data name="Sandbox.Text.0558" xml:space="preserve">
+    <value>Background</value>
+  </data>
+  <data name="Sandbox.Text.0559" xml:space="preserve">
+    <value>Blue</value>
+  </data>
+  <data name="Sandbox.Text.0560" xml:space="preserve">
+    <value>Indigo</value>
+  </data>
+  <data name="Sandbox.Text.0561" xml:space="preserve">
+    <value>Violet</value>
+  </data>
+  <data name="Sandbox.Text.0562" xml:space="preserve">
+    <value>Teal</value>
+  </data>
+  <data name="Sandbox.Text.0563" xml:space="preserve">
+    <value>Cyan</value>
+  </data>
+  <data name="Sandbox.Text.0564" xml:space="preserve">
+    <value>Emerald</value>
+  </data>
+  <data name="Sandbox.Text.0565" xml:space="preserve">
+    <value>Rose</value>
+  </data>
+  <data name="Sandbox.Text.0566" xml:space="preserve">
+    <value>Purple</value>
+  </data>
+  <data name="Sandbox.Text.0567" xml:space="preserve">
+    <value>Pink</value>
+  </data>
+  <data name="Sandbox.Text.0568" xml:space="preserve">
+    <value>Orange</value>
+  </data>
+  <data name="Sandbox.Text.0569" xml:space="preserve">
+    <value>Layout Helpers</value>
+  </data>
+  <data name="Sandbox.Text.0570" xml:space="preserve">
+    <value>GridSplitter, Separator, and ScrollViewer examples.</value>
+  </data>
+  <data name="Sandbox.Text.0571" xml:space="preserve">
+    <value>Resizable pane</value>
+  </data>
+  <data name="Sandbox.Text.0572" xml:space="preserve">
+    <value>Content pane</value>
+  </data>
+  <data name="Sandbox.Text.0573" xml:space="preserve">
+    <value>Top content</value>
+  </data>
+  <data name="Sandbox.Text.0574" xml:space="preserve">
+    <value>Bottom content</value>
+  </data>
+  <data name="Sandbox.Text.0575" xml:space="preserve">
+    <value>Menus &amp; Flyouts</value>
+  </data>
+  <data name="Sandbox.Text.0576" xml:space="preserve">
+    <value>Menu, ContextMenu, Flyout, and ToolTip examples.</value>
+  </data>
+  <data name="Sandbox.Text.0577" xml:space="preserve">
+    <value>_File</value>
+  </data>
+  <data name="Sandbox.Text.0578" xml:space="preserve">
+    <value>_Edit</value>
+  </data>
+  <data name="Sandbox.Text.0579" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="Sandbox.Text.0580" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="Sandbox.Text.0581" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="Sandbox.Text.0582" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+  <data name="Sandbox.Text.0583" xml:space="preserve">
+    <value>Open flyout</value>
+  </data>
+  <data name="Sandbox.Text.0584" xml:space="preserve">
+    <value>Publish changes</value>
+  </data>
+  <data name="Sandbox.Text.0585" xml:space="preserve">
+    <value>Flyout content can contain any native controls.</value>
+  </data>
+  <data name="Sandbox.Text.0586" xml:space="preserve">
+    <value>Publish</value>
+  </data>
+  <data name="Sandbox.Text.0587" xml:space="preserve">
+    <value>Menu flyout</value>
+  </data>
+  <data name="Sandbox.Text.0588" xml:space="preserve">
+    <value>Duplicate</value>
+  </data>
+  <data name="Sandbox.Text.0589" xml:space="preserve">
+    <value>Hover tooltip</value>
+  </data>
+  <data name="Sandbox.Text.0590" xml:space="preserve">
+    <value>Tooltip content uses Lumina popup styling.</value>
+  </data>
+  <data name="Sandbox.Text.0591" xml:space="preserve">
+    <value>Right-click this surface</value>
+  </data>
+  <data name="Sandbox.Text.0592" xml:space="preserve">
+    <value>Overlays</value>
+  </data>
+  <data name="Sandbox.Text.0593" xml:space="preserve">
+    <value>Dialog and toast examples for LuminaShell, including AXAML component content.</value>
+  </data>
+  <data name="Sandbox.Text.0594" xml:space="preserve">
+    <value>Inline AXAML dialog</value>
+  </data>
+  <data name="Sandbox.Text.0595" xml:space="preserve">
+    <value>Release summary</value>
+  </data>
+  <data name="Sandbox.Text.0596" xml:space="preserve">
+    <value>This dialog is declared directly inside OverlaysShowcasePage.axaml. C# only assigns it to the shell.</value>
+  </data>
+  <data name="Sandbox.Text.0597" xml:space="preserve">
+    <value>Design tokens compiled</value>
+  </data>
+  <data name="Sandbox.Text.0598" xml:space="preserve">
+    <value>Overlay samples added</value>
+  </data>
+  <data name="Sandbox.Text.0599" xml:space="preserve">
+    <value>Dialog content remains reusable</value>
+  </data>
+  <data name="Sandbox.Text.0600" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Sandbox.Text.0601" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Sandbox.Text.0602" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="Sandbox.Text.0603" xml:space="preserve">
+    <value>Dialog</value>
+  </data>
+  <data name="Sandbox.Text.0604" xml:space="preserve">
+    <value>Dialog content can be a reusable AXAML component, or a dialog declared in this page.</value>
+  </data>
+  <data name="Sandbox.Text.0605" xml:space="preserve">
+    <value>Open component</value>
+  </data>
+  <data name="Sandbox.Text.0606" xml:space="preserve">
+    <value>Open page AXAML</value>
+  </data>
+  <data name="Sandbox.Text.0607" xml:space="preserve">
+    <value>Toast</value>
+  </data>
+  <data name="Sandbox.Text.0608" xml:space="preserve">
+    <value>Toast is hosted by the same shell overlay layer and supports compact status feedback.</value>
+  </data>
+  <data name="Sandbox.Text.0609" xml:space="preserve">
+    <value>BottomSheet</value>
+  </data>
+  <data name="Sandbox.Text.0610" xml:space="preserve">
+    <value>Bottom sheets provide mobile-friendly action menus with physical swipe-to-dismiss.</value>
+  </data>
+  <data name="Sandbox.Text.0611" xml:space="preserve">
+    <value>Open bottom sheet</value>
+  </data>
+  <data name="Sandbox.Text.0612" xml:space="preserve">
+    <value>Reusable component</value>
+  </data>
+  <data name="Sandbox.Text.0613" xml:space="preserve">
+    <value>The dialog body below is a UserControl from DeleteProjectDialogContent.axaml.</value>
+  </data>
+  <data name="Sandbox.Text.0614" xml:space="preserve">
+    <value>Component dialog</value>
+  </data>
+  <data name="Sandbox.Text.0615" xml:space="preserve">
+    <value>Saved</value>
+  </data>
+  <data name="Sandbox.Text.0616" xml:space="preserve">
+    <value>The local draft was updated.</value>
+  </data>
+  <data name="Sandbox.Text.0617" xml:space="preserve">
+    <value>Published</value>
+  </data>
+  <data name="Sandbox.Text.0618" xml:space="preserve">
+    <value>The component package is ready.</value>
+  </data>
+  <data name="Sandbox.Text.0619" xml:space="preserve">
+    <value>Review needed</value>
+  </data>
+  <data name="Sandbox.Text.0620" xml:space="preserve">
+    <value>Two tokens use fallback colors.</value>
+  </data>
+  <data name="Sandbox.Text.0621" xml:space="preserve">
+    <value>Build failed</value>
+  </data>
+  <data name="Sandbox.Text.0622" xml:space="preserve">
+    <value>Resolve the missing resource key.</value>
+  </data>
+  <data name="Sandbox.Text.0623" xml:space="preserve">
+    <value>Delete project</value>
+  </data>
+  <data name="Sandbox.Text.0624" xml:space="preserve">
+    <value>This component is a normal UserControl declared in AXAML. The dialog host only receives it as content.</value>
+  </data>
+  <data name="Sandbox.Text.0625" xml:space="preserve">
+    <value>Aurora dashboard</value>
+  </data>
+  <data name="Sandbox.Text.0626" xml:space="preserve">
+    <value>12 screens, 4 shared tokens</value>
+  </data>
+  <data name="Sandbox.Text.0627" xml:space="preserve">
+    <value>Mobile Action Menu</value>
+  </data>
+  <data name="Sandbox.Text.0628" xml:space="preserve">
+    <value>Share to friends</value>
+  </data>
+  <data name="Sandbox.Text.0629" xml:space="preserve">
+    <value>Copy link</value>
+  </data>
+  <data name="Sandbox.Text.0630" xml:space="preserve">
+    <value>Delete item</value>
+  </data>
+  <data name="Sandbox.Text.0631" xml:space="preserve">
+    <value>Selected: {0}</value>
+  </data>
+  <data name="Sandbox.Text.0632" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Sandbox.Text.0633" xml:space="preserve">
+    <value>You are on the Detail Page!</value>
+  </data>
+  <data name="Sandbox.Text.0634" xml:space="preserve">
+    <value>Use the button to return to the previous sandbox page.</value>
+  </data>
+  <data name="Sandbox.Text.0635" xml:space="preserve">
+    <value>Go Back</value>
+  </data>
+  <data name="Sandbox.Text.0636" xml:space="preserve">
+    <value>Simulate Action</value>
+  </data>
+  <data name="Sandbox.Text.0637" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Sandbox.Text.0638" xml:space="preserve">
+    <value>Project detail</value>
+  </data>
+  <data name="Sandbox.Text.0639" xml:space="preserve">
+    <value>Detail page</value>
+  </data>
+  <data name="Sandbox.Text.0640" xml:space="preserve">
+    <value>This page was pushed onto the NavigationPage stack.</value>
+  </data>
+  <data name="Sandbox.Text.0641" xml:space="preserve">
+    <value>System message</value>
+  </data>
+  <data name="Sandbox.Text.0642" xml:space="preserve">
+    <value>Background sync completed.</value>
+  </data>
+  <data name="Sandbox.Text.0643" xml:space="preserve">
+    <value>The workspace settings were saved.</value>
+  </data>
+  <data name="Sandbox.Text.0644" xml:space="preserve">
+    <value>Attention</value>
+  </data>
+  <data name="Sandbox.Text.0645" xml:space="preserve">
+    <value>The next sync needs confirmation.</value>
+  </data>
+  <data name="Sandbox.Text.0646" xml:space="preserve">
+    <value>Loading button</value>
+  </data>
+  <data name="Sandbox.Text.0647" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Sandbox.Text.0648" xml:space="preserve">
+    <value>Submitting</value>
+  </data>
+  <data name="Sandbox.Text.0649" xml:space="preserve">
+    <value>Save changes</value>
+  </data>
+  <data name="Sandbox.Text.0650" xml:space="preserve">
+    <value>Hamburger menu</value>
+  </data>
+  <data name="Sandbox.Text.0651" xml:space="preserve">
+    <value>Loading</value>
+  </data>
+  <data name="Sandbox.Text.0652" xml:space="preserve">
+    <value>Standalone indicators, loading overlays, and disabled containers.</value>
+  </data>
+  <data name="Sandbox.Text.0653" xml:space="preserve">
+    <value>Standalone loading</value>
+  </data>
+  <data name="Sandbox.Text.0654" xml:space="preserve">
+    <value>Ring</value>
+  </data>
+  <data name="Sandbox.Text.0655" xml:space="preserve">
+    <value>Bar</value>
+  </data>
+  <data name="Sandbox.Text.0656" xml:space="preserve">
+    <value>Large</value>
+  </data>
+  <data name="Sandbox.Text.0657" xml:space="preserve">
+    <value>Loading container</value>
+  </data>
+  <data name="Sandbox.Text.0658" xml:space="preserve">
+    <value>Syncing members</value>
+  </data>
+  <data name="Sandbox.Text.0659" xml:space="preserve">
+    <value>Team workspace</value>
+  </data>
+  <data name="Sandbox.Text.0660" xml:space="preserve">
+    <value>Members, roles, and audit state remain visible under the loading mask.</value>
+  </data>
+  <data name="Sandbox.Text.0661" xml:space="preserve">
+    <value>Toggle loading</value>
+  </data>
+  <data name="Sandbox.Text.0662" xml:space="preserve">
+    <value>Disable container</value>
+  </data>
+  <data name="Sandbox.Text.0663" xml:space="preserve">
+    <value>This section is disabled by the container.</value>
+  </data>
+  <data name="Sandbox.Text.0664" xml:space="preserve">
+    <value>Project name</value>
+  </data>
+  <data name="Sandbox.Text.0665" xml:space="preserve">
+    <value>Lumina dashboard</value>
+  </data>
+  <data name="Sandbox.Text.0666" xml:space="preserve">
+    <value>Save project</value>
+  </data>
+  <data name="Sandbox.Text.0667" xml:space="preserve">
+    <value>Toggle disabled</value>
+  </data>
+  <data name="Sandbox.Text.0668" xml:space="preserve">
+    <value>Vertical event streams with status markers, time text, and alternate placement.</value>
+  </data>
+  <data name="Sandbox.Text.0669" xml:space="preserve">
+    <value>ItemsSource timeline</value>
+  </data>
+  <data name="Sandbox.Text.0670" xml:space="preserve">
+    <value>Alternate timeline</value>
+  </data>
+  <data name="Sandbox.Text.0671" xml:space="preserve">
+    <value>Centered time</value>
+  </data>
+  <data name="Sandbox.Text.0672" xml:space="preserve">
+    <value>Draft</value>
+  </data>
+  <data name="Sandbox.Text.0673" xml:space="preserve">
+    <value>Prepare proposal details.</value>
+  </data>
+  <data name="Sandbox.Text.0674" xml:space="preserve">
+    <value>Approval</value>
+  </data>
+  <data name="Sandbox.Text.0675" xml:space="preserve">
+    <value>Waiting for finance approval.</value>
+  </data>
+  <data name="Sandbox.Text.0676" xml:space="preserve">
+    <value>Deploy</value>
+  </data>
+  <data name="Sandbox.Text.0677" xml:space="preserve">
+    <value>Schedule production rollout.</value>
+  </data>
+  <data name="Sandbox.Text.0678" xml:space="preserve">
+    <value>Archive completed request.</value>
+  </data>
+  <data name="Sandbox.Text.0679" xml:space="preserve">
+    <value>Order paid</value>
+  </data>
+  <data name="Sandbox.Text.0680" xml:space="preserve">
+    <value>Payment completed by the customer.</value>
+  </data>
+  <data name="Sandbox.Text.0681" xml:space="preserve">
+    <value>Kitchen accepted</value>
+  </data>
+  <data name="Sandbox.Text.0682" xml:space="preserve">
+    <value>The merchant accepted the order.</value>
+  </data>
+  <data name="Sandbox.Text.0683" xml:space="preserve">
+    <value>Delivery</value>
+  </data>
+  <data name="Sandbox.Text.0684" xml:space="preserve">
+    <value>Courier is heading to the destination.</value>
+  </data>
+  <data name="Sandbox.Text.0685" xml:space="preserve">
+    <value>Standard pagination</value>
+  </data>
+  <data name="Sandbox.Text.0686" xml:space="preserve">
+    <value>ColorPicker</value>
+  </data>
+  <data name="Sandbox.Text.0687" xml:space="preserve">
+    <value>Optional color picking module with ColorPicker and ColorView themes.</value>
+  </data>
+  <data name="Sandbox.Text.0688" xml:space="preserve">
+    <value>Picker button</value>
+  </data>
+  <data name="Sandbox.Text.0689" xml:space="preserve">
+    <value>Two-way color binding updates this preview immediately.</value>
+  </data>
+  <data name="Sandbox.Text.0690" xml:space="preserve">
+    <value>ColorView</value>
+  </data>
+  <data name="Sandbox.Text.0691" xml:space="preserve">
+    <value>Feature switches</value>
+  </data>
+  <data name="Sandbox.Text.0692" xml:space="preserve">
+    <value>Alpha slider</value>
+  </data>
+  <data name="Sandbox.Text.0693" xml:space="preserve">
+    <value>Palette tab</value>
+  </data>
+  <data name="Sandbox.Text.0694" xml:space="preserve">
+    <value>Component tab</value>
+  </data>
+  <data name="Sandbox.Text.0695" xml:space="preserve">
+    <value>Spectrum tab</value>
+  </data>
+  <data name="Sandbox.Text.0696" xml:space="preserve">
+    <value>Preview row</value>
+  </data>
+  <data name="Sandbox.Text.0697" xml:space="preserve">
+    <value>Hex input</value>
+  </data>
+  <data name="Sandbox.Text.0698" xml:space="preserve">
+    <value>DataGrid</value>
+  </data>
+  <data name="Sandbox.Text.0699" xml:space="preserve">
+    <value>Optional table module for editable, sortable, and resizable tabular data.</value>
+  </data>
+  <data name="Sandbox.Text.0700" xml:space="preserve">
+    <value>Editable table</value>
+  </data>
+  <data name="Sandbox.Text.0701" xml:space="preserve">
+    <value>Text, checkbox, and template columns stay inside the same Lumina table surface.</value>
+  </data>
+  <data name="Sandbox.Text.0702" xml:space="preserve">
+    <value>Add row</value>
+  </data>
+  <data name="Sandbox.Text.0703" xml:space="preserve">
+    <value>Inset table</value>
+  </data>
+  <data name="Sandbox.Text.0704" xml:space="preserve">
+    <value>Progress</value>
+  </data>
+  <data name="Sandbox.Text.0705" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="Sandbox.Text.0706" xml:space="preserve">
+    <value>TreeDataGrid</value>
+  </data>
+  <data name="Sandbox.Text.0707" xml:space="preserve">
+    <value>Optional hierarchical table module with flat and tree-shaped data sources.</value>
+  </data>
+  <data name="Sandbox.Text.0708" xml:space="preserve">
+    <value>Hierarchical source</value>
+  </data>
+  <data name="Sandbox.Text.0709" xml:space="preserve">
+    <value>Flat source</value>
+  </data>
+  <data name="Sandbox.Text.0710" xml:space="preserve">
+    <value>Kind</value>
+  </data>
+  <data name="Sandbox.Text.0711" xml:space="preserve">
+    <value>TFM</value>
+  </data>
+  <data name="Sandbox.Text.0712" xml:space="preserve">
+    <value>Loaded</value>
+  </data>
+  <data name="Sandbox.Text.0713" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Sandbox.Text.0714" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Sandbox.Text.0715" xml:space="preserve">
+    <value>Area</value>
+  </data>
+  <data name="Sandbox.Text.0716" xml:space="preserve">
+    <value>Breadcrumb</value>
+  </data>
+  <data name="Sandbox.Text.0717" xml:space="preserve">
+    <value>Navigation paths with icons, separators, and MVVM commands.</value>
+  </data>
+  <data name="Sandbox.Text.0718" xml:space="preserve">
+    <value>Static items</value>
+  </data>
+  <data name="Sandbox.Text.0719" xml:space="preserve">
+    <value>ItemsSource</value>
+  </data>
+  <data name="Sandbox.Text.0720" xml:space="preserve">
+    <value>Custom item template</value>
+  </data>
+  <data name="Sandbox.Text.0721" xml:space="preserve">
+    <value>No breadcrumb item selected</value>
+  </data>
+  <data name="Sandbox.Text.0722" xml:space="preserve">
+    <value>Selected: Workspace</value>
+  </data>
+  <data name="Sandbox.Text.0723" xml:space="preserve">
+    <value>Selected: Products</value>
+  </data>
+  <data name="Sandbox.Text.0724" xml:space="preserve">
+    <value>Selected: LuminaUI</value>
+  </data>
+  <data name="Sandbox.Text.0725" xml:space="preserve">
+    <value>Selected: Release</value>
+  </data>
+  <data name="Sandbox.Text.0726" xml:space="preserve">
+    <value>Descriptions</value>
+  </data>
+  <data name="Sandbox.Text.0727" xml:space="preserve">
+    <value>Readable key-value groups for details, summaries, and metadata.</value>
+  </data>
+  <data name="Sandbox.Text.0728" xml:space="preserve">
+    <value>Left labels</value>
+  </data>
+  <data name="Sandbox.Text.0729" xml:space="preserve">
+    <value>Top labels</value>
+  </data>
+  <data name="Sandbox.Text.0730" xml:space="preserve">
+    <value>Inline declaration</value>
+  </data>
+  <data name="Sandbox.Text.0731" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Sandbox.Text.0732" xml:space="preserve">
+    <value>Platform</value>
+  </data>
+  <data name="Sandbox.Text.0733" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="Sandbox.Text.0734" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Sandbox.Text.0735" xml:space="preserve">
+    <value>Updated</value>
+  </data>
+  <data name="Sandbox.Text.0736" xml:space="preserve">
+    <value>Tokens</value>
+  </data>
+  <data name="Sandbox.Text.0737" xml:space="preserve">
+    <value>Themes</value>
+  </data>
+  <data name="Sandbox.Text.0738" xml:space="preserve">
+    <value>Coverage</value>
+  </data>
+  <data name="Sandbox.Text.0739" xml:space="preserve">
+    <value>Environment</value>
+  </data>
+  <data name="Sandbox.Text.0740" xml:space="preserve">
+    <value>PopConfirm</value>
+  </data>
+  <data name="Sandbox.Text.0741" xml:space="preserve">
+    <value>Inline confirmation popup for destructive or important actions.</value>
+  </data>
+  <data name="Sandbox.Text.0742" xml:space="preserve">
+    <value>Destructive action</value>
+  </data>
+  <data name="Sandbox.Text.0743" xml:space="preserve">
+    <value>Delete release?</value>
+  </data>
+  <data name="Sandbox.Text.0744" xml:space="preserve">
+    <value>This action removes the selected release draft.</value>
+  </data>
+  <data name="Sandbox.Text.0745" xml:space="preserve">
+    <value>This action removes the selected release draft and every pending publish task that belongs to it. Please confirm only after checking the package owner.</value>
+  </data>
+  <data name="Sandbox.Text.0746" xml:space="preserve">
+    <value>Waiting for confirmation</value>
+  </data>
+  <data name="Sandbox.Text.0747" xml:space="preserve">
+    <value>Custom labels</value>
+  </data>
+  <data name="Sandbox.Text.0748" xml:space="preserve">
+    <value>Publish changes?</value>
+  </data>
+  <data name="Sandbox.Text.0749" xml:space="preserve">
+    <value>The current package will be visible to all consumers.</value>
+  </data>
+  <data name="Sandbox.Text.0750" xml:space="preserve">
+    <value>Review later</value>
+  </data>
+  <data name="Sandbox.Text.0751" xml:space="preserve">
+    <value>Custom content</value>
+  </data>
+  <data name="Sandbox.Text.0752" xml:space="preserve">
+    <value>Archive workspace</value>
+  </data>
+  <data name="Sandbox.Text.0753" xml:space="preserve">
+    <value>The workspace remains recoverable for 30 days.</value>
+  </data>
+  <data name="Sandbox.Text.0754" xml:space="preserve">
+    <value>Owner approval is still required.</value>
+  </data>
+  <data name="Sandbox.Text.0755" xml:space="preserve">
+    <value>Rating</value>
+  </data>
+  <data name="Sandbox.Text.0756" xml:space="preserve">
+    <value>Selectable rating input with half values, clear behavior, and read-only display.</value>
+  </data>
+  <data name="Sandbox.Text.0757" xml:space="preserve">
+    <value>Half rating</value>
+  </data>
+  <data name="Sandbox.Text.0758" xml:space="preserve">
+    <value>Read only</value>
+  </data>
+  <data name="Sandbox.Text.0759" xml:space="preserve">
+    <value>Compact scale</value>
+  </data>
+  <data name="Sandbox.Text.0760" xml:space="preserve">
+    <value>2 items, ready in 8 minutes</value>
+  </data>
+  <data name="Sandbox.Text.0761" xml:space="preserve">
+    <value>3. Surfaces &amp; Elevation</value>
+  </data>
+  <data name="Sandbox.Text.0762" xml:space="preserve">
+    <value>A button that opens a drop-down menu.</value>
+  </data>
+  <data name="Sandbox.Text.0763" xml:space="preserve">
+    <value>A button with a primary action and a dropdown for secondary actions.</value>
+  </data>
+  <data name="Sandbox.Text.0764" xml:space="preserve">
+    <value>A container that enables hierarchical navigation.</value>
+  </data>
+  <data name="Sandbox.Text.0765" xml:space="preserve">
+    <value>A container that provides a header for its content.</value>
+  </data>
+  <data name="Sandbox.Text.0766" xml:space="preserve">
+    <value>A container with a sliding drawer.</value>
+  </data>
+  <data name="Sandbox.Text.0767" xml:space="preserve">
+    <value>A container with two views: a pane for navigation and a content area.</value>
+  </data>
+  <data name="Sandbox.Text.0768" xml:space="preserve">
+    <value>A content control that applies a transition when its content changes.</value>
+  </data>
+  <data name="Sandbox.Text.0769" xml:space="preserve">
+    <value>A control that presents a collection of items, one at a time.</value>
+  </data>
+  <data name="Sandbox.Text.0770" xml:space="preserve">
+    <value>A control that presents a collection of items.</value>
+  </data>
+  <data name="Sandbox.Text.0771" xml:space="preserve">
+    <value>A control that provides suggestions as the user types.</value>
+  </data>
+  <data name="Sandbox.Text.0772" xml:space="preserve">
+    <value>A page that allows users to switch between different views using tabs.</value>
+  </data>
+  <data name="Sandbox.Text.0773" xml:space="preserve">
+    <value>A toolbar for application-level commands.</value>
+  </data>
+  <data name="Sandbox.Text.0774" xml:space="preserve">
+    <value>Active in release planning and design review.</value>
+  </data>
+  <data name="Sandbox.Text.0775" xml:space="preserve">
+    <value>Add tags</value>
+  </data>
+  <data name="Sandbox.Text.0776" xml:space="preserve">
+    <value>Animated panel</value>
+  </data>
+  <data name="Sandbox.Text.0777" xml:space="preserve">
+    <value>Animated reveal</value>
+  </data>
+  <data name="Sandbox.Text.0778" xml:space="preserve">
+    <value>AOT-safe helper APIs for layout motion, size changes, opacity changes, and concise C# animations.</value>
+  </data>
+  <data name="Sandbox.Text.0779" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="Sandbox.Text.0780" xml:space="preserve">
+    <value>Auto skeleton</value>
+  </data>
+  <data name="Sandbox.Text.0781" xml:space="preserve">
+    <value>Avalonia 12 refresh</value>
+  </data>
+  <data name="Sandbox.Text.0782" xml:space="preserve">
+    <value>Avatar &amp; Badge</value>
+  </data>
+  <data name="Sandbox.Text.0783" xml:space="preserve">
+    <value>Back easing</value>
+  </data>
+  <data name="Sandbox.Text.0784" xml:space="preserve">
+    <value>BACKGROUND</value>
+  </data>
+  <data name="Sandbox.Text.0785" xml:space="preserve">
+    <value>Banners</value>
+  </data>
+  <data name="Sandbox.Text.0786" xml:space="preserve">
+    <value>Bind Rotation from the ViewModel for angle changes without code-behind.</value>
+  </data>
+  <data name="Sandbox.Text.0787" xml:space="preserve">
+    <value>Bind section view models and item templates directly. The index bar is still generated by LuminaIndexedList.</value>
+  </data>
+  <data name="Sandbox.Text.0788" xml:space="preserve">
+    <value>Bind TranslateX/Y and Scale from the ViewModel for obvious transform animations.</value>
+  </data>
+  <data name="Sandbox.Text.0789" xml:space="preserve">
+    <value>Blur background</value>
+  </data>
+  <data name="Sandbox.Text.0790" xml:space="preserve">
+    <value>BLUR SAMPLE</value>
+  </data>
+  <data name="Sandbox.Text.0791" xml:space="preserve">
+    <value>Borderless rows</value>
+  </data>
+  <data name="Sandbox.Text.0792" xml:space="preserve">
+    <value>By leveraging the 'Key' property, you can display full Chinese section headers while keeping the right-side index bar neat (e.g. A-Z or ★).</value>
+  </data>
+  <data name="Sandbox.Text.0793" xml:space="preserve">
+    <value>Changes were applied without leaving the page.</value>
+  </data>
+  <data name="Sandbox.Text.0794" xml:space="preserve">
+    <value>Close button</value>
+  </data>
+  <data name="Sandbox.Text.0795" xml:space="preserve">
+    <value>Controls for selecting multiple items.</value>
+  </data>
+  <data name="Sandbox.Text.0796" xml:space="preserve">
+    <value>Courier assigned</value>
+  </data>
+  <data name="Sandbox.Text.0797" xml:space="preserve">
+    <value>Custom list skeleton</value>
+  </data>
+  <data name="Sandbox.Text.0798" xml:space="preserve">
+    <value>Custom palette</value>
+  </data>
+  <data name="Sandbox.Text.0799" xml:space="preserve">
+    <value>Danger zone</value>
+  </data>
+  <data name="Sandbox.Text.0800" xml:space="preserve">
+    <value>Desktop and mobile both use TopView + Shell; this page hides shell chrome only.</value>
+  </data>
+  <data name="Sandbox.Text.0801" xml:space="preserve">
+    <value>Desktop can wrap the same root view with LuminaWindow. Mobile can use the root view directly as the first visual.</value>
+  </data>
+  <data name="Sandbox.Text.0802" xml:space="preserve">
+    <value>Dialog, toast and sheet examples for shell scope and top-view full-page scope.</value>
+  </data>
+  <data name="Sandbox.Text.0803" xml:space="preserve">
+    <value>Disabled motion</value>
+  </data>
+  <data name="Sandbox.Text.0804" xml:space="preserve">
+    <value>Dots</value>
+  </data>
+  <data name="Sandbox.Text.0805" xml:space="preserve">
+    <value>Dynamic Data (MVVM ItemsSource)</value>
+  </data>
+  <data name="Sandbox.Text.0806" xml:space="preserve">
+    <value>East Asia</value>
+  </data>
+  <data name="Sandbox.Text.0807" xml:space="preserve">
+    <value>Editable inspector</value>
+  </data>
+  <data name="Sandbox.Text.0808" xml:space="preserve">
+    <value>Empty</value>
+  </data>
+  <data name="Sandbox.Text.0809" xml:space="preserve">
+    <value>Entry, show/hide and disabled feedback are attached properties.</value>
+  </data>
+  <data name="Sandbox.Text.0810" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Sandbox.Text.0811" xml:space="preserve">
+    <value>Fade in</value>
+  </data>
+  <data name="Sandbox.Text.0812" xml:space="preserve">
+    <value>Fade, visibility and disabled</value>
+  </data>
+  <data name="Sandbox.Text.0813" xml:space="preserve">
+    <value>Filter by assignee, label, or status</value>
+  </data>
+  <data name="Sandbox.Text.0814" xml:space="preserve">
+    <value>Flyout</value>
+  </data>
+  <data name="Sandbox.Text.0815" xml:space="preserve">
+    <value>Forgot password</value>
+  </data>
+  <data name="Sandbox.Text.0816" xml:space="preserve">
+    <value>Form layout</value>
+  </data>
+  <data name="Sandbox.Text.0817" xml:space="preserve">
+    <value>Form layouts for organizing inputs.</value>
+  </data>
+  <data name="Sandbox.Text.0818" xml:space="preserve">
+    <value>Helpers &amp; Motion</value>
+  </data>
+  <data name="Sandbox.Text.0819" xml:space="preserve">
+    <value>Hover and press scale</value>
+  </data>
+  <data name="Sandbox.Text.0820" xml:space="preserve">
+    <value>Hover me</value>
+  </data>
+  <data name="Sandbox.Text.0821" xml:space="preserve">
+    <value>Hover or press</value>
+  </data>
+  <data name="Sandbox.Text.0822" xml:space="preserve">
+    <value>Icon content</value>
+  </data>
+  <data name="Sandbox.Text.0823" xml:space="preserve">
+    <value>Input control for tags and close button.</value>
+  </data>
+  <data name="Sandbox.Text.0824" xml:space="preserve">
+    <value>Label</value>
+  </data>
+  <data name="Sandbox.Text.0825" xml:space="preserve">
+    <value>Labels</value>
+  </data>
+  <data name="Sandbox.Text.0826" xml:space="preserve">
+    <value>Loading and skeleton</value>
+  </data>
+  <data name="Sandbox.Text.0827" xml:space="preserve">
+    <value>Loading and skeleton states.</value>
+  </data>
+  <data name="Sandbox.Text.0828" xml:space="preserve">
+    <value>Loading Container</value>
+  </data>
+  <data name="Sandbox.Text.0829" xml:space="preserve">
+    <value>Loading overlay</value>
+  </data>
+  <data name="Sandbox.Text.0830" xml:space="preserve">
+    <value>Lumina Admin</value>
+  </data>
+  <data name="Sandbox.Text.0831" xml:space="preserve">
+    <value>LUMINA GLASS</value>
+  </data>
+  <data name="Sandbox.Text.0832" xml:space="preserve">
+    <value>Members</value>
+  </data>
+  <data name="Sandbox.Text.0833" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="Sandbox.Text.0834" xml:space="preserve">
+    <value>Menus &amp; Flyouts</value>
+  </data>
+  <data name="Sandbox.Text.0835" xml:space="preserve">
+    <value>Mobile opens the picker in a bottom sheet with preview, tabs, and stacked actions.</value>
+  </data>
+  <data name="Sandbox.Text.0836" xml:space="preserve">
+    <value>Mobile root</value>
+  </data>
+  <data name="Sandbox.Text.0837" xml:space="preserve">
+    <value>Mobile shell title area</value>
+  </data>
+  <data name="Sandbox.Text.0838" xml:space="preserve">
+    <value>Move</value>
+  </data>
+  <data name="Sandbox.Text.0839" xml:space="preserve">
+    <value>Move and scale</value>
+  </data>
+  <data name="Sandbox.Text.0840" xml:space="preserve">
+    <value>Multi select</value>
+  </data>
+  <data name="Sandbox.Text.0841" xml:space="preserve">
+    <value>Multi Select</value>
+  </data>
+  <data name="Sandbox.Text.0842" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Sandbox.Text.0843" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="Sandbox.Text.0844" xml:space="preserve">
+    <value>Opacity and layout helpers can be combined for small state changes.</value>
+  </data>
+  <data name="Sandbox.Text.0845" xml:space="preserve">
+    <value>Open profile</value>
+  </data>
+  <data name="Sandbox.Text.0846" xml:space="preserve">
+    <value>Open top sheet</value>
+  </data>
+  <data name="Sandbox.Text.0847" xml:space="preserve">
+    <value>Open top view</value>
+  </data>
+  <data name="Sandbox.Text.0848" xml:space="preserve">
+    <value>Optional</value>
+  </data>
+  <data name="Sandbox.Text.0849" xml:space="preserve">
+    <value>Orders</value>
+  </data>
+  <data name="Sandbox.Text.0850" xml:space="preserve">
+    <value>Owns component QA, accessibility checks, and release notes.</value>
+  </data>
+  <data name="Sandbox.Text.0851" xml:space="preserve">
+    <value>Password TextBox</value>
+  </data>
+  <data name="Sandbox.Text.0852" xml:space="preserve">
+    <value>Persistent guidance and messages.</value>
+  </data>
+  <data name="Sandbox.Text.0853" xml:space="preserve">
+    <value>Phone shell preview</value>
+  </data>
+  <data name="Sandbox.Text.0854" xml:space="preserve">
+    <value>Pickup order</value>
+  </data>
+  <data name="Sandbox.Text.0855" xml:space="preserve">
+    <value>Pill and Search</value>
+  </data>
+  <data name="Sandbox.Text.0856" xml:space="preserve">
+    <value>Pointer feedback is available without handlers or page code-behind.</value>
+  </data>
+  <data name="Sandbox.Text.0857" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="Sandbox.Text.0858" xml:space="preserve">
+    <value>Product team</value>
+  </data>
+  <data name="Sandbox.Text.0859" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="Sandbox.Text.0860" xml:space="preserve">
+    <value>Range &amp; Progress</value>
+  </data>
+  <data name="Sandbox.Text.0861" xml:space="preserve">
+    <value>Readonly rows</value>
+  </data>
+  <data name="Sandbox.Text.0862" xml:space="preserve">
+    <value>Recommended root structure</value>
+  </data>
+  <data name="Sandbox.Text.0863" xml:space="preserve">
+    <value>Release name</value>
+  </data>
+  <data name="Sandbox.Text.0864" xml:space="preserve">
+    <value>Remember this device</value>
+  </data>
+  <data name="Sandbox.Text.0865" xml:space="preserve">
+    <value>Reorder columns</value>
+  </data>
+  <data name="Sandbox.Text.0866" xml:space="preserve">
+    <value>Reset selection</value>
+  </data>
+  <data name="Sandbox.Text.0867" xml:space="preserve">
+    <value>Resize columns</value>
+  </data>
+  <data name="Sandbox.Text.0868" xml:space="preserve">
+    <value>Reusable backdrop blur surface. Card.Glass uses the same blur renderer underneath.</value>
+  </data>
+  <data name="Sandbox.Text.0869" xml:space="preserve">
+    <value>Rotate</value>
+  </data>
+  <data name="Sandbox.Text.0870" xml:space="preserve">
+    <value>Rotation</value>
+  </data>
+  <data name="Sandbox.Text.0871" xml:space="preserve">
+    <value>Rounded command input</value>
+  </data>
+  <data name="Sandbox.Text.0872" xml:space="preserve">
+    <value>Scale</value>
+  </data>
+  <data name="Sandbox.Text.0873" xml:space="preserve">
+    <value>Search components</value>
+  </data>
+  <data name="Sandbox.Text.0874" xml:space="preserve">
+    <value>Search files, symbols, or commands</value>
+  </data>
+  <data name="Sandbox.Text.0875" xml:space="preserve">
+    <value>Select members</value>
+  </data>
+  <data name="Sandbox.Text.0876" xml:space="preserve">
+    <value>Select priority</value>
+  </data>
+  <data name="Sandbox.Text.0877" xml:space="preserve">
+    <value>Set ColorPicker.Palette with LuminaColorPalette.</value>
+  </data>
+  <data name="Sandbox.Text.0878" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
+  <data name="Sandbox.Text.0879" xml:space="preserve">
+    <value>Sign in to the sandbox</value>
+  </data>
+  <data name="Sandbox.Text.0880" xml:space="preserve">
+    <value>Size and opacity</value>
+  </data>
+  <data name="Sandbox.Text.0881" xml:space="preserve">
+    <value>Some settings will take effect after restart.</value>
+  </data>
+  <data name="Sandbox.Text.0882" xml:space="preserve">
+    <value>Spring</value>
+  </data>
+  <data name="Sandbox.Text.0883" xml:space="preserve">
+    <value>Spring and squish</value>
+  </data>
+  <data name="Sandbox.Text.0884" xml:space="preserve">
+    <value>Spring hide</value>
+  </data>
+  <data name="Sandbox.Text.0885" xml:space="preserve">
+    <value>Spring/back easing and pointer-driven squish are available without page handlers.</value>
+  </data>
+  <data name="Sandbox.Text.0886" xml:space="preserve">
+    <value>Squish hover</value>
+  </data>
+  <data name="Sandbox.Text.0887" xml:space="preserve">
+    <value>Stable content</value>
+  </data>
+  <data name="Sandbox.Text.0888" xml:space="preserve">
+    <value>Status content can be hidden without leaving empty gaps.</value>
+  </data>
+  <data name="Sandbox.Text.0889" xml:space="preserve">
+    <value>Surfaces used to display notifications to the user.</value>
+  </data>
+  <data name="Sandbox.Text.0890" xml:space="preserve">
+    <value>Tag input</value>
+  </data>
+  <data name="Sandbox.Text.0891" xml:space="preserve">
+    <value>Tag Input</value>
+  </data>
+  <data name="Sandbox.Text.0892" xml:space="preserve">
+    <value>Tags without remove buttons</value>
+  </data>
+  <data name="Sandbox.Text.0893" xml:space="preserve">
+    <value>Target</value>
+  </data>
+  <data name="Sandbox.Text.0894" xml:space="preserve">
+    <value>Tasks</value>
+  </data>
+  <data name="Sandbox.Text.0895" xml:space="preserve">
+    <value>The helper stays in C# because it targets concrete controls; for MVVM state changes prefer LuminaMotion attached properties.</value>
+  </data>
+  <data name="Sandbox.Text.0896" xml:space="preserve">
+    <value>The same two-column template can be used without grid lines when embedded inside dense cards.</value>
+  </data>
+  <data name="Sandbox.Text.0897" xml:space="preserve">
+    <value>The ViewModel changes plain properties; LuminaMotion animates the visual transition.</value>
+  </data>
+  <data name="Sandbox.Text.0898" xml:space="preserve">
+    <value>Toggle enabled</value>
+  </data>
+  <data name="Sandbox.Text.0899" xml:space="preserve">
+    <value>Toggle opacity</value>
+  </data>
+  <data name="Sandbox.Text.0913" xml:space="preserve">
+    <value>Color Tokens</value>
+  </data>
+  <data name="Sandbox.Text.0914" xml:space="preserve">
+    <value>token tables for surfaces, text, borders, semantic colors, interaction states, and shadows. Each row compares light and dark values so design decisions are easier to audit.</value>
+  </data>
+  <data name="Sandbox.Text.0915" xml:space="preserve">
+    <value>Elevation Shadows</value>
+  </data>
+  <data name="Sandbox.Text.0916" xml:space="preserve">
+    <value>BoxShadow tokens are listed separately because they describe depth rather than color.</value>
+  </data>
+  <data name="Sandbox.Text.0917" xml:space="preserve">
+    <value>App Surfaces</value>
+  </data>
+  <data name="Sandbox.Text.0918" xml:space="preserve">
+    <value>Base layers used by the shell, pages, cards, popups, and disabled surfaces.</value>
+  </data>
+  <data name="Sandbox.Text.0919" xml:space="preserve">
+    <value>Text Hierarchy</value>
+  </data>
+  <data name="Sandbox.Text.0920" xml:space="preserve">
+    <value>Readable text tokens ordered by emphasis.</value>
+  </data>
+  <data name="Sandbox.Text.0921" xml:space="preserve">
+    <value>Borders And Dividers</value>
+  </data>
+  <data name="Sandbox.Text.0922" xml:space="preserve">
+    <value>Border strength tokens for quiet dividers, default outlines, and hover/focus emphasis.</value>
+  </data>
+  <data name="Sandbox.Text.0923" xml:space="preserve">
+    <value>Semantic Colors</value>
+  </data>
+  <data name="Sandbox.Text.0924" xml:space="preserve">
+    <value>Action and feedback colors with base, hover, pressed, foreground, and background variants.</value>
+  </data>
+  <data name="Sandbox.Text.0925" xml:space="preserve">
+    <value>Extended Palette</value>
+  </data>
+  <data name="Sandbox.Text.0926" xml:space="preserve">
+    <value>Supporting colors for charts, tags, illustrations, and optional theme accents.</value>
+  </data>
+  <data name="Sandbox.Text.0927" xml:space="preserve">
+    <value>Interaction And Glass</value>
+  </data>
+  <data name="Sandbox.Text.0928" xml:space="preserve">
+    <value>State overlays, window glass, and card glass tokens used by composited surfaces.</value>
+  </data>
+  <data name="Sandbox.Text.0929" xml:space="preserve">
+    <value>hex alpha</value>
+  </data>
+  <data name="Sandbox.Text.0930" xml:space="preserve">
+    <value>mixed</value>
+  </data>
+  <data name="Sandbox.Text.0931" xml:space="preserve">
+    <value>85% / 78%</value>
+  </data>
+  <data name="Sandbox.Text.0932" xml:space="preserve">
+    <value>50% / 58%</value>
+  </data>
+  <data name="Sandbox.Text.0933" xml:space="preserve">
+    <value>Base surface depth.</value>
+  </data>
+  <data name="Sandbox.Text.0934" xml:space="preserve">
+    <value>Raised cards and elevated borders.</value>
+  </data>
+  <data name="Sandbox.Text.0935" xml:space="preserve">
+    <value>Pointer hover, floating surfaces, and stronger popups.</value>
+  </data>
+  <data name="Sandbox.Text.0936" xml:space="preserve">
+    <value>Application base.</value>
+  </data>
+  <data name="Sandbox.Text.0937" xml:space="preserve">
+    <value>Sidebar and navigation shell.</value>
+  </data>
+  <data name="Sandbox.Text.0938" xml:space="preserve">
+    <value>Items placed inside navigation panes.</value>
+  </data>
+  <data name="Sandbox.Text.0939" xml:space="preserve">
+    <value>Selected navigation item background.</value>
+  </data>
+  <data name="Sandbox.Text.0940" xml:space="preserve">
+    <value>Default cards and content panels.</value>
+  </data>
+  <data name="Sandbox.Text.0941" xml:space="preserve">
+    <value>Raised cards and hover surfaces.</value>
+  </data>
+  <data name="Sandbox.Text.0942" xml:space="preserve">
+    <value>Menus, flyouts, dialogs, and popups.</value>
+  </data>
+  <data name="Sandbox.Text.0943" xml:space="preserve">
+    <value>Disabled controls and inactive surfaces.</value>
+  </data>
+  <data name="Sandbox.Text.0944" xml:space="preserve">
+    <value>Headings and primary labels.</value>
+  </data>
+  <data name="Sandbox.Text.0945" xml:space="preserve">
+    <value>Body text and regular content.</value>
+  </data>
+  <data name="Sandbox.Text.0946" xml:space="preserve">
+    <value>Metadata, hints, and captions.</value>
+  </data>
+  <data name="Sandbox.Text.0947" xml:space="preserve">
+    <value>Disabled or unavailable text.</value>
+  </data>
+  <data name="Sandbox.Text.0948" xml:space="preserve">
+    <value>Compatibility foreground alias.</value>
+  </data>
+  <data name="Sandbox.Text.0949" xml:space="preserve">
+    <value>Compatibility muted alias.</value>
+  </data>
+  <data name="Sandbox.Text.0950" xml:space="preserve">
+    <value>Quiet separators and low-emphasis dividers.</value>
+  </data>
+  <data name="Sandbox.Text.0951" xml:space="preserve">
+    <value>Default component outlines.</value>
+  </data>
+  <data name="Sandbox.Text.0952" xml:space="preserve">
+    <value>Hover, focus, and elevated edges.</value>
+  </data>
+  <data name="Sandbox.Text.0953" xml:space="preserve">
+    <value>Disabled component outlines.</value>
+  </data>
+  <data name="Sandbox.Text.0954" xml:space="preserve">
+    <value>Compatibility border alias.</value>
+  </data>
+  <data name="Sandbox.Text.0955" xml:space="preserve">
+    <value>Compatibility divider alias.</value>
+  </data>
+  <data name="Sandbox.Text.0956" xml:space="preserve">
+    <value>Primary actions and brand accents.</value>
+  </data>
+  <data name="Sandbox.Text.0957" xml:space="preserve">
+    <value>Hover state for primary actions.</value>
+  </data>
+  <data name="Sandbox.Text.0958" xml:space="preserve">
+    <value>Pressed state for primary actions.</value>
+  </data>
+  <data name="Sandbox.Text.0959" xml:space="preserve">
+    <value>Text and icon color on primary surfaces.</value>
+  </data>
+  <data name="Sandbox.Text.0960" xml:space="preserve">
+    <value>Subtle selected or highlighted background.</value>
+  </data>
+  <data name="Sandbox.Text.0961" xml:space="preserve">
+    <value>Success actions and healthy states.</value>
+  </data>
+  <data name="Sandbox.Text.0962" xml:space="preserve">
+    <value>Hover state for success actions.</value>
+  </data>
+  <data name="Sandbox.Text.0963" xml:space="preserve">
+    <value>Subtle success background.</value>
+  </data>
+  <data name="Sandbox.Text.0964" xml:space="preserve">
+    <value>Warnings and review-needed states.</value>
+  </data>
+  <data name="Sandbox.Text.0965" xml:space="preserve">
+    <value>Hover state for warning actions.</value>
+  </data>
+  <data name="Sandbox.Text.0966" xml:space="preserve">
+    <value>Subtle warning background.</value>
+  </data>
+  <data name="Sandbox.Text.0967" xml:space="preserve">
+    <value>Errors and destructive actions.</value>
+  </data>
+  <data name="Sandbox.Text.0968" xml:space="preserve">
+    <value>Hover state for destructive actions.</value>
+  </data>
+  <data name="Sandbox.Text.0969" xml:space="preserve">
+    <value>Subtle danger background.</value>
+  </data>
+  <data name="Sandbox.Text.0970" xml:space="preserve">
+    <value>Data visualization and status accents.</value>
+  </data>
+  <data name="Sandbox.Text.0971" xml:space="preserve">
+    <value>Secondary data and cool highlights.</value>
+  </data>
+  <data name="Sandbox.Text.0972" xml:space="preserve">
+    <value>Navigation, product, and integration accents.</value>
+  </data>
+  <data name="Sandbox.Text.0973" xml:space="preserve">
+    <value>Creative or AI-related accents.</value>
+  </data>
+  <data name="Sandbox.Text.0974" xml:space="preserve">
+    <value>Decorative and expressive accents.</value>
+  </data>
+  <data name="Sandbox.Text.0975" xml:space="preserve">
+    <value>Warm data points and attention accents.</value>
+  </data>
+  <data name="Sandbox.Text.0976" xml:space="preserve">
+    <value>General hover background.</value>
+  </data>
+  <data name="Sandbox.Text.0977" xml:space="preserve">
+    <value>Hover background for ghost controls.</value>
+  </data>
+  <data name="Sandbox.Text.0978" xml:space="preserve">
+    <value>Transparent hover overlay.</value>
+  </data>
+  <data name="Sandbox.Text.0979" xml:space="preserve">
+    <value>Transparent pressed overlay.</value>
+  </data>
+  <data name="Sandbox.Text.0980" xml:space="preserve">
+    <value>Window-level glass background.</value>
+  </data>
+  <data name="Sandbox.Text.0981" xml:space="preserve">
+    <value>Window glass pane tint.</value>
+  </data>
+  <data name="Sandbox.Text.0982" xml:space="preserve">
+    <value>Readable fallback glass tint.</value>
+  </data>
+  <data name="Sandbox.Text.0983" xml:space="preserve">
+    <value>Glass edge border.</value>
+  </data>
+  <data name="Sandbox.Text.0984" xml:space="preserve">
+    <value>Glass background layer.</value>
+  </data>
+  <data name="Sandbox.Text.0985" xml:space="preserve">
+    <value>Acrylic overlay layer.</value>
+  </data>
+  <data name="Sandbox.Text.0986" xml:space="preserve">
+    <value>Glass readability tint.</value>
+  </data>
+  <data name="Sandbox.Text.0987" xml:space="preserve">
+    <value>Bright glass edge.</value>
+  </data>
+  <data name="Sandbox.Text.0988" xml:space="preserve">
+    <value>Top view dialog</value>
+  </data>
+  <data name="Sandbox.Text.0989" xml:space="preserve">
+    <value>⌂</value>
+  </data>
+  <data name="Sandbox.Text.0990" xml:space="preserve">
+    <value>◫</value>
+  </data>
+  <data name="Sandbox.Text.0991" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="Sandbox.Text.0992" xml:space="preserve">
+    <value>●</value>
+  </data>
+  <data name="Sandbox.Text.0993" xml:space="preserve">
+    <value>LuminaUI</value>
+  </data>
+  <data name="Sandbox.Text.0994" xml:space="preserve">
+    <value>◆</value>
+  </data>
+  <data name="Sandbox.Text.0995" xml:space="preserve">
+    <value>LUM-1201</value>
+  </data>
+  <data name="Sandbox.Text.0996" xml:space="preserve">
+    <value>LUM-1202</value>
+  </data>
+  <data name="Sandbox.Text.0997" xml:space="preserve">
+    <value>Desktop shell</value>
+  </data>
+  <data name="Sandbox.Text.0998" xml:space="preserve">
+    <value>LUM-1203</value>
+  </data>
+  <data name="Sandbox.Text.0999" xml:space="preserve">
+    <value>Mobile settings</value>
+  </data>
+  <data name="Sandbox.Text.1000" xml:space="preserve">
+    <value>LUM-1204</value>
+  </data>
+  <data name="Sandbox.Text.1001" xml:space="preserve">
+    <value>Picker sheets</value>
+  </data>
+  <data name="Sandbox.Text.1002" xml:space="preserve">
+    <value>LUM-1205</value>
+  </data>
+  <data name="Sandbox.Text.1003" xml:space="preserve">
+    <value>Overlay layer</value>
+  </data>
+  <data name="Sandbox.Text.1004" xml:space="preserve">
+    <value>LUM-1206</value>
+  </data>
+  <data name="Sandbox.Text.1005" xml:space="preserve">
+    <value>Table modules</value>
+  </data>
+  <data name="Sandbox.Text.1006" xml:space="preserve">
+    <value>12.0 preview</value>
+  </data>
+  <data name="Sandbox.Text.1007" xml:space="preserve">
+    <value>Desktop / Mobile / Browser</value>
+  </data>
+  <data name="Sandbox.Text.1008" xml:space="preserve">
+    <value>Design system team</value>
+  </data>
+  <data name="Sandbox.Text.1009" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Sandbox.Text.1010" xml:space="preserve">
+    <value>2026-05-11</value>
+  </data>
+  <data name="Sandbox.Text.1011" xml:space="preserve">
+    <value>64</value>
+  </data>
+  <data name="Sandbox.Text.1012" xml:space="preserve">
+    <value>128</value>
+  </data>
+  <data name="Sandbox.Text.1013" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="Sandbox.Text.1014" xml:space="preserve">
+    <value>AOT ready</value>
+  </data>
+  <data name="Sandbox.Text.1015" xml:space="preserve">
+    <value>Alice</value>
+  </data>
+  <data name="Sandbox.Text.1016" xml:space="preserve">
+    <value>alice@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1017" xml:space="preserve">
+    <value>Aiden</value>
+  </data>
+  <data name="Sandbox.Text.1018" xml:space="preserve">
+    <value>aiden@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1019" xml:space="preserve">
+    <value>Bob</value>
+  </data>
+  <data name="Sandbox.Text.1020" xml:space="preserve">
+    <value>bob@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1021" xml:space="preserve">
+    <value>Charlie</value>
+  </data>
+  <data name="Sandbox.Text.1022" xml:space="preserve">
+    <value>charlie@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1023" xml:space="preserve">
+    <value>David</value>
+  </data>
+  <data name="Sandbox.Text.1024" xml:space="preserve">
+    <value>david@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1025" xml:space="preserve">
+    <value>Eva</value>
+  </data>
+  <data name="Sandbox.Text.1026" xml:space="preserve">
+    <value>eva@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1027" xml:space="preserve">
+    <value>Frank</value>
+  </data>
+  <data name="Sandbox.Text.1028" xml:space="preserve">
+    <value>frank@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1029" xml:space="preserve">
+    <value>Grace</value>
+  </data>
+  <data name="Sandbox.Text.1030" xml:space="preserve">
+    <value>grace@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1031" xml:space="preserve">
+    <value>Henry</value>
+  </data>
+  <data name="Sandbox.Text.1032" xml:space="preserve">
+    <value>henry@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1033" xml:space="preserve">
+    <value>Ivy</value>
+  </data>
+  <data name="Sandbox.Text.1034" xml:space="preserve">
+    <value>ivy@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1035" xml:space="preserve">
+    <value>Jack</value>
+  </data>
+  <data name="Sandbox.Text.1036" xml:space="preserve">
+    <value>jack@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1037" xml:space="preserve">
+    <value>Kevin</value>
+  </data>
+  <data name="Sandbox.Text.1038" xml:space="preserve">
+    <value>kevin@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1039" xml:space="preserve">
+    <value>Lily</value>
+  </data>
+  <data name="Sandbox.Text.1040" xml:space="preserve">
+    <value>lily@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1041" xml:space="preserve">
+    <value>Mia</value>
+  </data>
+  <data name="Sandbox.Text.1042" xml:space="preserve">
+    <value>mina@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1043" xml:space="preserve">
+    <value>Nancy</value>
+  </data>
+  <data name="Sandbox.Text.1044" xml:space="preserve">
+    <value>nancy@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1045" xml:space="preserve">
+    <value>Oliver</value>
+  </data>
+  <data name="Sandbox.Text.1046" xml:space="preserve">
+    <value>oliver@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1047" xml:space="preserve">
+    <value>Paul</value>
+  </data>
+  <data name="Sandbox.Text.1048" xml:space="preserve">
+    <value>paul@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1049" xml:space="preserve">
+    <value>Queen</value>
+  </data>
+  <data name="Sandbox.Text.1050" xml:space="preserve">
+    <value>queen@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1051" xml:space="preserve">
+    <value>rose@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1052" xml:space="preserve">
+    <value>Sam</value>
+  </data>
+  <data name="Sandbox.Text.1053" xml:space="preserve">
+    <value>sam@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1054" xml:space="preserve">
+    <value>Tom</value>
+  </data>
+  <data name="Sandbox.Text.1055" xml:space="preserve">
+    <value>tom@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1056" xml:space="preserve">
+    <value>Ursula</value>
+  </data>
+  <data name="Sandbox.Text.1057" xml:space="preserve">
+    <value>ursula@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1058" xml:space="preserve">
+    <value>Victor</value>
+  </data>
+  <data name="Sandbox.Text.1059" xml:space="preserve">
+    <value>victor@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1060" xml:space="preserve">
+    <value>Wendy</value>
+  </data>
+  <data name="Sandbox.Text.1061" xml:space="preserve">
+    <value>wendy@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1062" xml:space="preserve">
+    <value>Xavier</value>
+  </data>
+  <data name="Sandbox.Text.1063" xml:space="preserve">
+    <value>xavier@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1064" xml:space="preserve">
+    <value>Yvonne</value>
+  </data>
+  <data name="Sandbox.Text.1065" xml:space="preserve">
+    <value>yvonne@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1066" xml:space="preserve">
+    <value>Zack</value>
+  </data>
+  <data name="Sandbox.Text.1067" xml:space="preserve">
+    <value>zack@example.com</value>
+  </data>
+  <data name="Sandbox.Text.1068" xml:space="preserve">
+    <value>Assembly</value>
+  </data>
+  <data name="Sandbox.Text.1069" xml:space="preserve">
+    <value>LuminaUI.Demo</value>
+  </data>
+  <data name="Sandbox.Text.1070" xml:space="preserve">
+    <value>Namespace</value>
+  </data>
+  <data name="Sandbox.Text.1071" xml:space="preserve">
+    <value>LuminaUI.Demo.Views.Components</value>
+  </data>
+  <data name="Sandbox.Text.1072" xml:space="preserve">
+    <value>AOT</value>
+  </data>
+  <data name="Sandbox.Text.1073" xml:space="preserve">
+    <value>Uses compiled bindings and avoids reflection-only row generation.</value>
+  </data>
+  <data name="Sandbox.Text.1074" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="Sandbox.Text.1075" xml:space="preserve">
+    <value>Long string values are wrapped by the LuminaProperties string template without changing global Label behavior.</value>
+  </data>
+  <data name="Sandbox.Text.1076" xml:space="preserve">
+    <value>Create account</value>
+  </data>
+  <data name="Sandbox.Text.1077" xml:space="preserve">
+    <value>Fill in your details.</value>
+  </data>
+  <data name="Sandbox.Text.1078" xml:space="preserve">
+    <value>Verify email</value>
+  </data>
+  <data name="Sandbox.Text.1079" xml:space="preserve">
+    <value>Check your inbox for the code.</value>
+  </data>
+  <data name="Sandbox.Text.1080" xml:space="preserve">
+    <value>Set up workspace</value>
+  </data>
+  <data name="Sandbox.Text.1081" xml:space="preserve">
+    <value>Customize your environment.</value>
+  </data>
+  <data name="Sandbox.Text.1082" xml:space="preserve">
+    <value>Invite team</value>
+  </data>
+  <data name="Sandbox.Text.1083" xml:space="preserve">
+    <value>Add collaborators to your project.</value>
+  </data>
+  <data name="Sandbox.Text.1084" xml:space="preserve">
+    <value>Upload file</value>
+  </data>
+  <data name="Sandbox.Text.1085" xml:space="preserve">
+    <value>Select a file to upload.</value>
+  </data>
+  <data name="Sandbox.Text.1086" xml:space="preserve">
+    <value>Validate data</value>
+  </data>
+  <data name="Sandbox.Text.1087" xml:space="preserve">
+    <value>Checking file integrity.</value>
+  </data>
+  <data name="Sandbox.Text.1088" xml:space="preserve">
+    <value>Process</value>
+  </data>
+  <data name="Sandbox.Text.1089" xml:space="preserve">
+    <value>Apply changes to the system.</value>
+  </data>
+  <data name="Sandbox.Text.1090" xml:space="preserve">
+    <value>Complete</value>
+  </data>
+  <data name="Sandbox.Text.1091" xml:space="preserve">
+    <value>Review and confirm.</value>
+  </data>
+  <data name="Sandbox.Text.1092" xml:space="preserve">
+    <value>Create request</value>
+  </data>
+  <data name="Sandbox.Text.1093" xml:space="preserve">
+    <value>The customer submitted an enterprise onboarding request.</value>
+  </data>
+  <data name="Sandbox.Text.1094" xml:space="preserve">
+    <value>Review contract</value>
+  </data>
+  <data name="Sandbox.Text.1095" xml:space="preserve">
+    <value>Legal review is still in progress.</value>
+  </data>
+  <data name="Sandbox.Text.1096" xml:space="preserve">
+    <value>Provision workspace</value>
+  </data>
+  <data name="Sandbox.Text.1097" xml:space="preserve">
+    <value>A workspace will be created after approval.</value>
+  </data>
+  <data name="Sandbox.Text.1098" xml:space="preserve">
+    <value>Invite members</value>
+  </data>
+  <data name="Sandbox.Text.1099" xml:space="preserve">
+    <value>Send initial administrator invitations.</value>
+  </data>
+  <data name="Sandbox.Text.1100" xml:space="preserve">
+    <value>Core</value>
+  </data>
+  <data name="Sandbox.Text.1101" xml:space="preserve">
+    <value>LuminaUI.ColorPicker</value>
+  </data>
+  <data name="Sandbox.Text.1102" xml:space="preserve">
+    <value>LuminaUI.DataGrid</value>
+  </data>
+  <data name="Sandbox.Text.1103" xml:space="preserve">
+    <value>LuminaUI.TreeDataGrid</value>
+  </data>
+  <data name="Sandbox.Text.1104" xml:space="preserve">
+    <value>Sandbox</value>
+  </data>
+  <data name="Sandbox.Text.1105" xml:space="preserve">
+    <value>src</value>
+  </data>
+  <data name="Sandbox.Text.1106" xml:space="preserve">
+    <value>Folder</value>
+  </data>
+  <data name="Sandbox.Text.1107" xml:space="preserve">
+    <value>demo</value>
+  </data>
+  <data name="Sandbox.Text.1108" xml:space="preserve">
+    <value>LuminaUI.Demo.Desktop</value>
+  </data>
+  <data name="Sandbox.Text.1109" xml:space="preserve">
+    <value>LuminaUI.Demo.Browser</value>
+  </data>
+  <data name="Sandbox.Text.1110" xml:space="preserve">
+    <value>AutoCompleteBox</value>
+  </data>
+  <data name="Sandbox.Text.1111" xml:space="preserve">
+    <value>States and templates</value>
+  </data>
+  <data name="Sandbox.Text.1112" xml:space="preserve">
+    <value>Cannot search</value>
+  </data>
+  <data name="Sandbox.Text.1113" xml:space="preserve">
+    <value>Custom ItemTemplate</value>
+  </data>
+  <data name="Sandbox.Text.1114" xml:space="preserve">
+    <value>Search with template</value>
+  </data>
+  <data name="Sandbox.Text.1115" xml:space="preserve">
+    <value>Avatar &amp;amp; Badge</value>
+  </data>
+  <data name="Sandbox.Text.1116" xml:space="preserve">
+    <value>Avatar</value>
+  </data>
+  <data name="Sandbox.Text.1117" xml:space="preserve">
+    <value>A</value>
+  </data>
+  <data name="Sandbox.Text.1118" xml:space="preserve">
+    <value>Badge</value>
+  </data>
+  <data name="Sandbox.Text.1119" xml:space="preserve">
+    <value>VIP</value>
+  </data>
+  <data name="Sandbox.Text.1120" xml:space="preserve">
+    <value>NEW</value>
+  </data>
+  <data name="Sandbox.Text.1121" xml:space="preserve">
+    <value>SYNC</value>
+  </data>
+  <data name="Sandbox.Text.1122" xml:space="preserve">
+    <value>Use page-level banners for persistent guidance.</value>
+  </data>
+  <data name="Sandbox.Text.1123" xml:space="preserve">
+    <value>Use inline warnings before destructive actions.</value>
+  </data>
+  <data name="Sandbox.Text.1124" xml:space="preserve">
+    <value>2026</value>
+  </data>
+  <data name="Sandbox.Text.1125" xml:space="preserve">
+    <value>May</value>
+  </data>
+  <data name="Sandbox.Text.1126" xml:space="preserve">
+    <value>Button</value>
+  </data>
+  <data name="Sandbox.Text.1127" xml:space="preserve">
+    <value>ToggleButton</value>
+  </data>
+  <data name="Sandbox.Text.1128" xml:space="preserve">
+    <value>RepeatButton</value>
+  </data>
+  <data name="Sandbox.Text.1129" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="Sandbox.Text.1130" xml:space="preserve">
+    <value>+</value>
+  </data>
+  <data name="Sandbox.Text.1131" xml:space="preserve">
+    <value>0123456789</value>
+  </data>
+  <data name="Sandbox.Text.1132" xml:space="preserve">
+    <value>98%</value>
+  </data>
+  <data name="Sandbox.Text.1133" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="Sandbox.Text.1134" xml:space="preserve">
+    <value>Cascader</value>
+  </data>
+  <data name="Sandbox.Text.1135" xml:space="preserve">
+    <value>Hierarchical selection through cascading dropdown panels.</value>
+  </data>
+  <data name="Sandbox.Text.1136" xml:space="preserve">
+    <value>Region selector</value>
+  </data>
+  <data name="Sandbox.Text.1137" xml:space="preserve">
+    <value>Select region</value>
+  </data>
+  <data name="Sandbox.Text.1138" xml:space="preserve">
+    <value>Intermediate selection</value>
+  </data>
+  <data name="Sandbox.Text.1139" xml:space="preserve">
+    <value>Hover expands children; click a parent to select it and close.</value>
+  </data>
+  <data name="Sandbox.Text.1140" xml:space="preserve">
+    <value>Select province/city/district</value>
+  </data>
+  <data name="Sandbox.Text.1141" xml:space="preserve">
+    <value>Category selector</value>
+  </data>
+  <data name="Sandbox.Text.1142" xml:space="preserve">
+    <value>Select category</value>
+  </data>
+  <data name="Sandbox.Text.1143" xml:space="preserve">
+    <value>Lazy loading</value>
+  </data>
+  <data name="Sandbox.Text.1144" xml:space="preserve">
+    <value>Hover to load</value>
+  </data>
+  <data name="Sandbox.Text.1145" xml:space="preserve">
+    <value>Long lists</value>
+  </data>
+  <data name="Sandbox.Text.1146" xml:space="preserve">
+    <value>50 groups / 30 items</value>
+  </data>
+  <data name="Sandbox.Text.1147" xml:space="preserve">
+    <value>Open as sheet</value>
+  </data>
+  <data name="Sandbox.Text.1148" xml:space="preserve">
+    <value>ListBox</value>
+  </data>
+  <data name="Sandbox.Text.1149" xml:space="preserve">
+    <value>TreeView</value>
+  </data>
+  <data name="Sandbox.Text.1150" xml:space="preserve">
+    <value>ItemsControl</value>
+  </data>
+  <data name="Sandbox.Text.1151" xml:space="preserve">
+    <value>CommandBar</value>
+  </data>
+  <data name="Sandbox.Text.1152" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Sandbox.Text.1153" xml:space="preserve">
+    <value>DrawerPage</value>
+  </data>
+  <data name="Sandbox.Text.1154" xml:space="preserve">
+    <value>DropDownButton</value>
+  </data>
+  <data name="Sandbox.Text.1155" xml:space="preserve">
+    <value>Themes and sizes</value>
+  </data>
+  <data name="Sandbox.Text.1156" xml:space="preserve">
+    <value>Action 1</value>
+  </data>
+  <data name="Sandbox.Text.1157" xml:space="preserve">
+    <value>Empty state placeholder for when there is no data to display.</value>
+  </data>
+  <data name="Sandbox.Text.1158" xml:space="preserve">
+    <value>Default empty state</value>
+  </data>
+  <data name="Sandbox.Text.1159" xml:space="preserve">
+    <value>With description</value>
+  </data>
+  <data name="Sandbox.Text.1160" xml:space="preserve">
+    <value>No results found</value>
+  </data>
+  <data name="Sandbox.Text.1161" xml:space="preserve">
+    <value>Try adjusting your search or filter to find what you're looking for.</value>
+  </data>
+  <data name="Sandbox.Text.1162" xml:space="preserve">
+    <value>With action button</value>
+  </data>
+  <data name="Sandbox.Text.1163" xml:space="preserve">
+    <value>No projects yet</value>
+  </data>
+  <data name="Sandbox.Text.1164" xml:space="preserve">
+    <value>Create your first project to get started.</value>
+  </data>
+  <data name="Sandbox.Text.1165" xml:space="preserve">
+    <value>Create project</value>
+  </data>
+  <data name="Sandbox.Text.1166" xml:space="preserve">
+    <value>Compact style</value>
+  </data>
+  <data name="Sandbox.Text.1167" xml:space="preserve">
+    <value>No items</value>
+  </data>
+  <data name="Sandbox.Text.1168" xml:space="preserve">
+    <value>Nothing to show here.</value>
+  </data>
+  <data name="Sandbox.Text.1169" xml:space="preserve">
+    <value>?</value>
+  </data>
+  <data name="Sandbox.Text.1170" xml:space="preserve">
+    <value>Custom empty state</value>
+  </data>
+  <data name="Sandbox.Text.1171" xml:space="preserve">
+    <value>You can replace the entire layout with custom content.</value>
+  </data>
+  <data name="Sandbox.Text.1172" xml:space="preserve">
+    <value>Form</value>
+  </data>
+  <data name="Sandbox.Text.1173" xml:space="preserve">
+    <value>Type and press Enter</value>
+  </data>
+  <data name="Sandbox.Text.1174" xml:space="preserve">
+    <value>Top label layout</value>
+  </data>
+  <data name="Sandbox.Text.1175" xml:space="preserve">
+    <value>admin@lumina.dev</value>
+  </data>
+  <data name="Sandbox.Text.1176" xml:space="preserve">
+    <value>https://</value>
+  </data>
+  <data name="Sandbox.Text.1177" xml:space="preserve">
+    <value>lumina-cloud</value>
+  </data>
+  <data name="Sandbox.Text.1178" xml:space="preserve">
+    <value>.dev</value>
+  </data>
+  <data name="Sandbox.Text.1179" xml:space="preserve">
+    <value>HeaderedContentControl</value>
+  </data>
+  <data name="Sandbox.Text.1180" xml:space="preserve">
+    <value>Alicia Chen</value>
+  </data>
+  <data name="Sandbox.Text.1181" xml:space="preserve">
+    <value>Austin Reed</value>
+  </data>
+  <data name="Sandbox.Text.1182" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="Sandbox.Text.1183" xml:space="preserve">
+    <value>Bella Stone</value>
+  </data>
+  <data name="Sandbox.Text.1184" xml:space="preserve">
+    <value>Benson Lee</value>
+  </data>
+  <data name="Sandbox.Text.1185" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="Sandbox.Text.1186" xml:space="preserve">
+    <value>Carmen Xu</value>
+  </data>
+  <data name="Sandbox.Text.1187" xml:space="preserve">
+    <value>Colin Baker</value>
+  </data>
+  <data name="Sandbox.Text.1188" xml:space="preserve">
+    <value>D</value>
+  </data>
+  <data name="Sandbox.Text.1189" xml:space="preserve">
+    <value>Daphne Ray</value>
+  </data>
+  <data name="Sandbox.Text.1190" xml:space="preserve">
+    <value>Derek Huang</value>
+  </data>
+  <data name="Sandbox.Text.1191" xml:space="preserve">
+    <value>M</value>
+  </data>
+  <data name="Sandbox.Text.1192" xml:space="preserve">
+    <value>Mina Park</value>
+  </data>
+  <data name="Sandbox.Text.1193" xml:space="preserve">
+    <value>Morgan Wells</value>
+  </data>
+  <data name="Sandbox.Text.1194" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="Sandbox.Text.1195" xml:space="preserve">
+    <value>Sofia Young</value>
+  </data>
+  <data name="Sandbox.Text.1196" xml:space="preserve">
+    <value>Simon White</value>
+  </data>
+  <data name="Sandbox.Text.1197" xml:space="preserve">
+    <value>Z</value>
+  </data>
+  <data name="Sandbox.Text.1198" xml:space="preserve">
+    <value>Zara Liu</value>
+  </data>
+  <data name="Sandbox.Text.1199" xml:space="preserve">
+    <value>Zed Cooper</value>
+  </data>
+  <data name="Sandbox.Text.1200" xml:space="preserve">
+    <value>中文通讯录 (Pinyin &amp;amp; Custom Keys)</value>
+  </data>
+  <data name="Sandbox.Text.1201" xml:space="preserve">
+    <value>星标朋友</value>
+  </data>
+  <data name="Sandbox.Text.1202" xml:space="preserve">
+    <value>张三 (BOSS)</value>
+  </data>
+  <data name="Sandbox.Text.1203" xml:space="preserve">
+    <value>董事长</value>
+  </data>
+  <data name="Sandbox.Text.1204" xml:space="preserve">
+    <value>李四</value>
+  </data>
+  <data name="Sandbox.Text.1205" xml:space="preserve">
+    <value>核心架构师</value>
+  </data>
+  <data name="Sandbox.Text.1206" xml:space="preserve">
+    <value>C - 财务部</value>
+  </data>
+  <data name="Sandbox.Text.1207" xml:space="preserve">
+    <value>陈总</value>
+  </data>
+  <data name="Sandbox.Text.1208" xml:space="preserve">
+    <value>CFO</value>
+  </data>
+  <data name="Sandbox.Text.1209" xml:space="preserve">
+    <value>曹会计</value>
+  </data>
+  <data name="Sandbox.Text.1210" xml:space="preserve">
+    <value>出纳</value>
+  </data>
+  <data name="Sandbox.Text.1211" xml:space="preserve">
+    <value>L - 研发部</value>
+  </data>
+  <data name="Sandbox.Text.1212" xml:space="preserve">
+    <value>李雷</value>
+  </data>
+  <data name="Sandbox.Text.1213" xml:space="preserve">
+    <value>后端工程师</value>
+  </data>
+  <data name="Sandbox.Text.1214" xml:space="preserve">
+    <value>刘梅</value>
+  </data>
+  <data name="Sandbox.Text.1215" xml:space="preserve">
+    <value>测试工程师</value>
+  </data>
+  <data name="Sandbox.Text.1216" xml:space="preserve">
+    <value>W - 市场部</value>
+  </data>
+  <data name="Sandbox.Text.1217" xml:space="preserve">
+    <value>王建国</value>
+  </data>
+  <data name="Sandbox.Text.1218" xml:space="preserve">
+    <value>市场总监</value>
+  </data>
+  <data name="Sandbox.Text.1219" xml:space="preserve">
+    <value>吴芳</value>
+  </data>
+  <data name="Sandbox.Text.1220" xml:space="preserve">
+    <value>公关媒介</value>
+  </data>
+  <data name="Sandbox.Text.1221" xml:space="preserve">
+    <value>Z - 行政部</value>
+  </data>
+  <data name="Sandbox.Text.1222" xml:space="preserve">
+    <value>赵云</value>
+  </data>
+  <data name="Sandbox.Text.1223" xml:space="preserve">
+    <value>行政主管</value>
+  </data>
+  <data name="Sandbox.Text.1224" xml:space="preserve">
+    <value>郑钱</value>
+  </data>
+  <data name="Sandbox.Text.1225" xml:space="preserve">
+    <value>前台接待</value>
+  </data>
+  <data name="Sandbox.Text.1226" xml:space="preserve">
+    <value>Sizes</value>
+  </data>
+  <data name="Sandbox.Text.1227" xml:space="preserve">
+    <value>1234</value>
+  </data>
+  <data name="Sandbox.Text.1228" xml:space="preserve">
+    <value>123456</value>
+  </data>
+  <data name="Sandbox.Text.1229" xml:space="preserve">
+    <value>Ava Chen</value>
+  </data>
+  <data name="Sandbox.Text.1230" xml:space="preserve">
+    <value>Mia Johnson</value>
+  </data>
+  <data name="Sandbox.Text.1231" xml:space="preserve">
+    <value>U</value>
+  </data>
+  <data name="Sandbox.Text.1232" xml:space="preserve">
+    <value>Cannot select</value>
+  </data>
+  <data name="Sandbox.Text.1233" xml:space="preserve">
+    <value>NavigationPage</value>
+  </data>
+  <data name="Sandbox.Text.1234" xml:space="preserve">
+    <value>Complex</value>
+  </data>
+  <data name="Sandbox.Text.1235" xml:space="preserve">
+    <value>Go to</value>
+  </data>
+  <data name="Sandbox.Text.1236" xml:space="preserve">
+    <value>page</value>
+  </data>
+  <data name="Sandbox.Text.1237" xml:space="preserve">
+    <value>Two-column property rows for editor panels, inspectors, and compact settings surfaces.</value>
+  </data>
+  <data name="Sandbox.Text.1238" xml:space="preserve">
+    <value>Range &amp;amp; Progress</value>
+  </data>
+  <data name="Sandbox.Text.1239" xml:space="preserve">
+    <value>/</value>
+  </data>
+  <data name="Sandbox.Text.1240" xml:space="preserve">
+    <value>0:00</value>
+  </data>
+  <data name="Sandbox.Text.1241" xml:space="preserve">
+    <value>Slider</value>
+  </data>
+  <data name="Sandbox.Text.1242" xml:space="preserve">
+    <value>ProgressBar</value>
+  </data>
+  <data name="Sandbox.Text.1243" xml:space="preserve">
+    <value>CheckBox</value>
+  </data>
+  <data name="Sandbox.Text.1244" xml:space="preserve">
+    <value>RadioButton</value>
+  </data>
+  <data name="Sandbox.Text.1245" xml:space="preserve">
+    <value>ToggleSwitch</value>
+  </data>
+  <data name="Sandbox.Text.1246" xml:space="preserve">
+    <value>SplitButton</value>
+  </data>
+  <data name="Sandbox.Text.1247" xml:space="preserve">
+    <value>SplitView</value>
+  </data>
+  <data name="Sandbox.Text.1248" xml:space="preserve">
+    <value>Steps</value>
+  </data>
+  <data name="Sandbox.Text.1249" xml:space="preserve">
+    <value>Guide users through a multi-step process with progress indication.</value>
+  </data>
+  <data name="Sandbox.Text.1250" xml:space="preserve">
+    <value>Basic steps</value>
+  </data>
+  <data name="Sandbox.Text.1251" xml:space="preserve">
+    <value>Finished</value>
+  </data>
+  <data name="Sandbox.Text.1252" xml:space="preserve">
+    <value>This step is completed.</value>
+  </data>
+  <data name="Sandbox.Text.1253" xml:space="preserve">
+    <value>This step is also completed.</value>
+  </data>
+  <data name="Sandbox.Text.1254" xml:space="preserve">
+    <value>In progress</value>
+  </data>
+  <data name="Sandbox.Text.1255" xml:space="preserve">
+    <value>This step is currently active.</value>
+  </data>
+  <data name="Sandbox.Text.1256" xml:space="preserve">
+    <value>Waiting</value>
+  </data>
+  <data name="Sandbox.Text.1257" xml:space="preserve">
+    <value>This step is waiting.</value>
+  </data>
+  <data name="Sandbox.Text.1258" xml:space="preserve">
+    <value>MVVM binding</value>
+  </data>
+  <data name="Sandbox.Text.1259" xml:space="preserve">
+    <value>With error state</value>
+  </data>
+  <data name="Sandbox.Text.1260" xml:space="preserve">
+    <value>Small size</value>
+  </data>
+  <data name="Sandbox.Text.1261" xml:space="preserve">
+    <value>Step 1</value>
+  </data>
+  <data name="Sandbox.Text.1262" xml:space="preserve">
+    <value>Step 2</value>
+  </data>
+  <data name="Sandbox.Text.1263" xml:space="preserve">
+    <value>Step 3</value>
+  </data>
+  <data name="Sandbox.Text.1264" xml:space="preserve">
+    <value>Step 4</value>
+  </data>
+  <data name="Sandbox.Text.1265" xml:space="preserve">
+    <value>Vertical direction</value>
+  </data>
+  <data name="Sandbox.Text.1266" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Sandbox.Text.1267" xml:space="preserve">
+    <value>Enter your credentials to sign in.</value>
+  </data>
+  <data name="Sandbox.Text.1268" xml:space="preserve">
+    <value>Verification</value>
+  </data>
+  <data name="Sandbox.Text.1269" xml:space="preserve">
+    <value>Complete the security verification.</value>
+  </data>
+  <data name="Sandbox.Text.1270" xml:space="preserve">
+    <value>You're all set!</value>
+  </data>
+  <data name="Sandbox.Text.1271" xml:space="preserve">
+    <value>Choose plan</value>
+  </data>
+  <data name="Sandbox.Text.1272" xml:space="preserve">
+    <value>Select your subscription tier.</value>
+  </data>
+  <data name="Sandbox.Text.1273" xml:space="preserve">
+    <value>Payment</value>
+  </data>
+  <data name="Sandbox.Text.1274" xml:space="preserve">
+    <value>Enter billing information.</value>
+  </data>
+  <data name="Sandbox.Text.1275" xml:space="preserve">
+    <value>Review your order details.</value>
+  </data>
+  <data name="Sandbox.Text.1276" xml:space="preserve">
+    <value>Order placed successfully.</value>
+  </data>
+  <data name="Sandbox.Text.1277" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="Sandbox.Text.1278" xml:space="preserve">
+    <value>TabbedPage</value>
+  </data>
+  <data name="Sandbox.Text.1279" xml:space="preserve">
+    <value>api.lumina.dev</value>
+  </data>
+  <data name="Sandbox.Text.1280" xml:space="preserve">
+    <value>us-east</value>
+  </data>
+  <data name="Sandbox.Text.1281" xml:space="preserve">
+    <value>CSV</value>
+  </data>
+  <data name="Sandbox.Text.1282" xml:space="preserve">
+    <value>JSON</value>
+  </data>
+  <data name="Sandbox.Text.1283" xml:space="preserve">
+    <value>PDF</value>
+  </data>
+  <data name="Sandbox.Text.1284" xml:space="preserve">
+    <value>States and limits</value>
+  </data>
+  <data name="Sandbox.Text.1285" xml:space="preserve">
+    <value>Maximum 3 tags</value>
+  </data>
+  <data name="Sandbox.Text.1286" xml:space="preserve">
+    <value>Max 3 tags allowed</value>
+  </data>
+  <data name="Sandbox.Text.1287" xml:space="preserve">
+    <value>TextBox</value>
+  </data>
+  <data name="Sandbox.Text.1288" xml:space="preserve">
+    <value>Ctrl K</value>
+  </data>
+  <data name="Sandbox.Text.1289" xml:space="preserve">
+    <value>.com</value>
+  </data>
+  <data name="Sandbox.Text.1290" xml:space="preserve">
+    <value>.io</value>
+  </data>
+  <data name="Sandbox.Text.1291" xml:space="preserve">
+    <value>$</value>
+  </data>
+  <data name="Sandbox.Text.1292" xml:space="preserve">
+    <value>USD</value>
+  </data>
+  <data name="Sandbox.Text.1293" xml:space="preserve">
+    <value>lumina</value>
+  </data>
+  <data name="Sandbox.Text.1294" xml:space="preserve">
+    <value>NumericUpDown</value>
+  </data>
+  <data name="Sandbox.Text.1295" xml:space="preserve">
+    <value>TransitioningContentControl</value>
+  </data>
+  <data name="Sandbox.Text.1296" xml:space="preserve">
+    <value>3. Surfaces &amp;amp; Elevation</value>
+  </data>
+  <data name="Sandbox.Text.1297" xml:space="preserve">
+    <value>TextBlock</value>
+  </data>
+  <data name="Sandbox.Text.1298" xml:space="preserve">
+    <value>HyperlinkButton</value>
+  </data>
+  <data name="Sandbox.Text.1299" xml:space="preserve">
+    <value>SelectableTextBlock</value>
+  </data>
+  <data name="Sandbox.Text.1300" xml:space="preserve">
+    <value>DataValidationErrors</value>
+  </data>
+  <data name="Sandbox.Text.1301" xml:space="preserve">
+    <value>PathIcon</value>
+  </data>
+  <data name="Sandbox.Text.1302" xml:space="preserve">
+    <value>ScrollViewer</value>
+  </data>
+  <data name="Sandbox.Text.1303" xml:space="preserve">
+    <value>GridSplitter</value>
+  </data>
+  <data name="Sandbox.Text.1304" xml:space="preserve">
+    <value>Separator</value>
+  </data>
+  <data name="Sandbox.Text.1305" xml:space="preserve">
+    <value>Menus &amp;amp; Flyouts</value>
+  </data>
+  <data name="Sandbox.Text.1306" xml:space="preserve">
+    <value>ContextMenu</value>
+  </data>
+  <data name="Sandbox.Text.1307" xml:space="preserve">
+    <value>TopView, Shell, login, and mobile composition.</value>
+  </data>
+  <data name="Sandbox.Text.1308" xml:space="preserve">
+    <value>Use one TopView at the visual root, then put Shell inside it. Login and startup pages are routed by Shell and hide shell chrome.</value>
+  </data>
+  <data name="Sandbox.Text.1309" xml:space="preserve">
+    <value>$18</value>
+  </data>
+  <data name="Sandbox.Text.1310" xml:space="preserve">
+    <value>$32</value>
+  </data>
+  <data name="Sandbox.Text.1311" xml:space="preserve">
+    <value>Me</value>
+  </data>
+  <data name="Sandbox.Text.1312" xml:space="preserve">
+    <value>&amp;lt;lumina:LuminaTopView&amp;gt;&amp;#x0a;  &amp;lt;lumina:LuminaShell x:Name=&amp;quot;AppShell&amp;quot;&amp;gt;&amp;#x0a;    &amp;lt;!-- pages, routes, menu, overlays --&amp;gt;&amp;#x0a;  &amp;lt;/lumina:LuminaShell&amp;gt;&amp;#x0a;&amp;lt;/lumina:LuminaTopView&amp;gt;</value>
+  </data>
+  <data name="Sandbox.Text.1313" xml:space="preserve">
+    <value>Helpers &amp;amp; Motion</value>
+  </data>
+  <data name="Sandbox.Text.1314" xml:space="preserve">
+    <value>Card</value>
+  </data>
+  <data name="Sandbox.Text.1315" xml:space="preserve">
+    <value>lumina:LuminaMotion.HoverScale=&amp;quot;1.08&amp;quot;  lumina:LuminaMotion.PressedScale=&amp;quot;0.94&amp;quot;</value>
+  </data>
+  <data name="Sandbox.Text.1316" xml:space="preserve">
+    <value>Visible</value>
+  </data>
+  <data name="Sandbox.Text.1317" xml:space="preserve">
+    <value>Toggle visible</value>
+  </data>
+  <data name="Sandbox.Text.1318" xml:space="preserve">
+    <value>Toggle spring</value>
+  </data>
+  <data name="Sandbox.Text.1319" xml:space="preserve">
+    <value>Toggle size</value>
+  </data>
+  <data name="Sandbox.Text.1320" xml:space="preserve">
+    <value>C# animation helper</value>
+  </data>
+  <data name="Sandbox.Text.1321" xml:space="preserve">
+    <value>Use the fluent helper for explicit one-off animations from component code.</value>
+  </data>
+  <data name="Sandbox.Text.1322" xml:space="preserve">
+    <value>Top view</value>
+  </data>
+  <data name="Sandbox.Text.1323" xml:space="preserve">
+    <value>AXAML</value>
+  </data>
+  <data name="Sandbox.Text.1324" xml:space="preserve">
+    <value>C#</value>
+  </data>
+  <data name="Sandbox.Text.1325" xml:space="preserve">
+    <value>ViewModel</value>
+  </data>
+</root>

@@ -1,0 +1,841 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="using:Avalonia.Controls.Converters"
+                    xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
+
+    <converters:CornerRadiusFilterConverter x:Key="LuminaSplitButtonLeftCornerRadiusFilter"
+                                            Filter="TopLeft,BottomLeft" />
+    <converters:CornerRadiusFilterConverter x:Key="LuminaSplitButtonRightCornerRadiusFilter"
+                                            Filter="TopRight,BottomRight" />
+
+    <ControlTheme x:Key="{x:Type AutoCompleteBox}" TargetType="AutoCompleteBox" BasedOn="{StaticResource {x:Type AutoCompleteBox}}">
+        <Setter Property="MinHeight" Value="36" />
+        <Setter Property="Padding" Value="12,6" />
+        <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="MaxDropDownHeight" Value="240" />
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type DropDownButton}" TargetType="DropDownButton">
+        <Setter Property="MinHeight" Value="36" />
+        <Setter Property="Padding" Value="14,8" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="DropDownButton">
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <DockPanel HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                               HorizontalSpacing="8">
+                        <PathIcon Name="DropDownGlyph"
+                                  DockPanel.Dock="Right"
+                                  Width="12"
+                                  Height="12"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Data="M7,9 L12,14 L17,9"
+                                  Foreground="{TemplateBinding Foreground}"
+                                  IsHitTestVisible="False" />
+                        <ContentPresenter Name="PART_ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          RecognizesAccessKey="True"
+                                          Foreground="{TemplateBinding Foreground}"
+                                          TextElement.Foreground="{TemplateBinding Foreground}" />
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:pointerover">
+            <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryHoverBrush}" />
+        </Style>
+
+        <Style Selector="^:pressed">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBgBrush}" />
+        </Style>
+
+        <Style Selector="^.Small">
+            <Setter Property="Padding" Value="10,4" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Height" Value="28" />
+            <Setter Property="MinHeight" Value="28" />
+        </Style>
+
+        <Style Selector="^.Large">
+            <Setter Property="Padding" Value="24,12" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Height" Value="48" />
+            <Setter Property="MinHeight" Value="48" />
+        </Style>
+
+        <Style Selector="^.Icon">
+            <Setter Property="Width" Value="52" />
+            <Setter Property="Height" Value="36" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+
+        <Style Selector="^.Small.Icon">
+            <Setter Property="Width" Value="44" />
+            <Setter Property="Height" Value="28" />
+            <Setter Property="CornerRadius" Value="6" />
+        </Style>
+
+        <Style Selector="^.Large.Icon">
+            <Setter Property="Width" Value="64" />
+            <Setter Property="Height" Value="48" />
+            <Setter Property="CornerRadius" Value="10" />
+        </Style>
+
+        <Style Selector="^.Outline">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
+        </Style>
+
+        <Style Selector="^.Ghost">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
+        </Style>
+
+        <Style Selector="^.Primary">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaPrimaryForegroundBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="^.Danger">
+            <Setter Property="Background" Value="{DynamicResource LuminaDangerBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaDangerForegroundBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="^.Success">
+            <Setter Property="Background" Value="{DynamicResource LuminaSuccessBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaSuccessForegroundBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="^.Warning">
+            <Setter Property="Background" Value="{DynamicResource LuminaWarningBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaWarningForegroundBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="^.Outline.Primary">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="^.Outline.Success">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaSuccessBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaSuccessBrush}" />
+        </Style>
+
+        <Style Selector="^.Outline.Warning">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaWarningBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaWarningBrush}" />
+        </Style>
+
+        <Style Selector="^.Outline.Danger">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaDangerBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaDangerBrush}" />
+        </Style>
+
+        <Style Selector="^.Outline:pointerover">
+            <Setter Property="Background" Value="{DynamicResource LuminaStateHoverBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderBrush}" />
+        </Style>
+
+        <Style Selector="^.Outline:pressed">
+            <Setter Property="Background" Value="{DynamicResource LuminaStatePressedBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderBrush}" />
+        </Style>
+
+        <Style Selector="^.Ghost:pointerover">
+            <Setter Property="Background" Value="{DynamicResource LuminaStateHoverBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="^.Ghost:pressed">
+            <Setter Property="Background" Value="{DynamicResource LuminaStatePressedBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="^.Primary:pointerover">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryHoverBrush}" />
+        </Style>
+
+        <Style Selector="^.Primary:pressed">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryPressedBrush}" />
+        </Style>
+
+        <Style Selector="^.Danger:pointerover">
+            <Setter Property="Background" Value="{DynamicResource LuminaDangerHoverBrush}" />
+        </Style>
+
+        <Style Selector="^.Danger:pressed">
+            <Setter Property="Background" Value="{DynamicResource LuminaDangerHoverBrush}" />
+        </Style>
+
+        <Style Selector="^.Success:pointerover">
+            <Setter Property="Background" Value="{DynamicResource LuminaSuccessHoverBrush}" />
+        </Style>
+
+        <Style Selector="^.Success:pressed">
+            <Setter Property="Background" Value="{DynamicResource LuminaSuccessHoverBrush}" />
+        </Style>
+
+        <Style Selector="^.Warning:pointerover">
+            <Setter Property="Background" Value="{DynamicResource LuminaWarningHoverBrush}" />
+        </Style>
+
+        <Style Selector="^.Warning:pressed">
+            <Setter Property="Background" Value="{DynamicResource LuminaWarningHoverBrush}" />
+        </Style>
+
+        <Style Selector="^.Outline.Primary:pointerover">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBgBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="^.Outline.Success:pointerover">
+            <Setter Property="Background" Value="{DynamicResource LuminaSuccessBgBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaSuccessBrush}" />
+        </Style>
+
+        <Style Selector="^.Outline.Warning:pointerover">
+            <Setter Property="Background" Value="{DynamicResource LuminaWarningBgBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaWarningBrush}" />
+        </Style>
+
+        <Style Selector="^.Outline.Danger:pointerover">
+            <Setter Property="Background" Value="{DynamicResource LuminaDangerBgBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaDangerBrush}" />
+        </Style>
+
+        <Style Selector="^[(lumina|LuminaOptions.PopupType)=Sheet]">
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="LuminaSplitButtonElement" TargetType="Button">
+        <Setter Property="Padding" Value="14,8" />
+        <Setter Property="MinWidth" Value="0" />
+        <Setter Property="MinHeight" Value="36" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="Button">
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <ContentPresenter Name="PART_ContentPresenter"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      RecognizesAccessKey="True"
+                                      TextElement.Foreground="{TemplateBinding Foreground}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:pointerover">
+            <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
+        </Style>
+
+        <Style Selector="^:pressed">
+            <Setter Property="Background" Value="{DynamicResource LuminaStatePressedBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
+        </Style>
+
+        <Style Selector="^:disabled">
+            <Setter Property="Opacity" Value="0.5" />
+        </Style>
+
+        <Style Selector="^[(lumina|LuminaOptions.PopupType)=Sheet]">
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type SplitButton}" TargetType="SplitButton">
+        <Setter Property="MinHeight" Value="36" />
+        <Setter Property="Padding" Value="14,8" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="SplitButton">
+                <Grid ColumnDefinitions="*,Auto">
+                    <Button Name="PART_PrimaryButton"
+                            Grid.Column="0"
+                            MinHeight="{TemplateBinding MinHeight}"
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="1,1,0,1"
+                            Command="{TemplateBinding Command}"
+                            CommandParameter="{TemplateBinding CommandParameter}"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            CornerRadius="{TemplateBinding CornerRadius, Converter={StaticResource LuminaSplitButtonLeftCornerRadiusFilter}}"
+                            FontFamily="{TemplateBinding FontFamily}"
+                            FontSize="{TemplateBinding FontSize}"
+                            FontWeight="{TemplateBinding FontWeight}"
+                            Foreground="{TemplateBinding Foreground}"
+                            Theme="{StaticResource LuminaSplitButtonElement}" />
+
+                    <Button Name="PART_SecondaryButton"
+                            Grid.Column="1"
+                            Width="{TemplateBinding MinHeight}"
+                            MinHeight="{TemplateBinding MinHeight}"
+                            Padding="0"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="0,1,1,1"
+                            CornerRadius="{TemplateBinding CornerRadius, Converter={StaticResource LuminaSplitButtonRightCornerRadiusFilter}}"
+                            Foreground="{TemplateBinding Foreground}"
+                            Theme="{StaticResource LuminaSplitButtonElement}">
+                        <PathIcon Width="12"
+                                  Height="12"
+                                  Data="M7,9 L12,14 L17,9"
+                                  Foreground="{Binding $parent[Button].Foreground}" />
+                    </Button>
+
+                    <Border Grid.Column="1"
+                            Width="1"
+                            Height="18"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Background="{DynamicResource LuminaDividerBrush}" />
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:flyout-open /template/ Button#PART_SecondaryButton">
+            <Setter Property="Background" Value="{DynamicResource LuminaStatePressedBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
+        </Style>
+
+        <Style Selector="^:disabled">
+            <Setter Property="Opacity" Value="0.5" />
+        </Style>
+
+        <Style Selector="^.Small">
+            <Setter Property="Padding" Value="10,4" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Height" Value="28" />
+            <Setter Property="MinHeight" Value="28" />
+        </Style>
+
+        <Style Selector="^.Large">
+            <Setter Property="Padding" Value="24,12" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Height" Value="48" />
+            <Setter Property="MinHeight" Value="48" />
+        </Style>
+
+        <Style Selector="^.Icon">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="MinWidth" Value="64" />
+            <Setter Property="Height" Value="36" />
+        </Style>
+
+        <Style Selector="^.Small.Icon">
+            <Setter Property="MinWidth" Value="52" />
+            <Setter Property="Height" Value="28" />
+            <Setter Property="CornerRadius" Value="6" />
+        </Style>
+
+        <Style Selector="^.Large.Icon">
+            <Setter Property="MinWidth" Value="88" />
+            <Setter Property="Height" Value="48" />
+            <Setter Property="CornerRadius" Value="10" />
+        </Style>
+
+        <Style Selector="^.Outline">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
+        </Style>
+
+        <Style Selector="^.Ghost">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
+        </Style>
+
+        <Style Selector="^.Primary">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaPrimaryForegroundBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="^.Danger">
+            <Setter Property="Background" Value="{DynamicResource LuminaDangerBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaDangerForegroundBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="^.Success">
+            <Setter Property="Background" Value="{DynamicResource LuminaSuccessBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaSuccessForegroundBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="^.Warning">
+            <Setter Property="Background" Value="{DynamicResource LuminaWarningBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaWarningForegroundBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="^.Outline.Primary">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="^.Outline.Success">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaSuccessBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaSuccessBrush}" />
+        </Style>
+
+        <Style Selector="^.Outline.Warning">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaWarningBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaWarningBrush}" />
+        </Style>
+
+        <Style Selector="^.Outline.Danger">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaDangerBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaDangerBrush}" />
+        </Style>
+
+        <Style Selector="^.Outline:pointerover /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource LuminaStateHoverBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderBrush}" />
+        </Style>
+
+        <Style Selector="^.Outline:pressed /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource LuminaStatePressedBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderBrush}" />
+        </Style>
+
+        <Style Selector="^.Ghost:pointerover /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource LuminaStateHoverBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="^.Ghost:pressed /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource LuminaStatePressedBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="^.Primary:pointerover /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryHoverBrush}" />
+        </Style>
+
+        <Style Selector="^.Primary:pressed /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryPressedBrush}" />
+        </Style>
+
+        <Style Selector="^.Danger:pointerover /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource LuminaDangerHoverBrush}" />
+        </Style>
+
+        <Style Selector="^.Danger:pressed /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource LuminaDangerHoverBrush}" />
+        </Style>
+
+        <Style Selector="^.Success:pointerover /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource LuminaSuccessHoverBrush}" />
+        </Style>
+
+        <Style Selector="^.Success:pressed /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource LuminaSuccessHoverBrush}" />
+        </Style>
+
+        <Style Selector="^.Warning:pointerover /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource LuminaWarningHoverBrush}" />
+        </Style>
+
+        <Style Selector="^.Warning:pressed /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource LuminaWarningHoverBrush}" />
+        </Style>
+
+        <Style Selector="^.Outline.Primary:pointerover /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBgBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="^.Outline.Success:pointerover /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource LuminaSuccessBgBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaSuccessBrush}" />
+        </Style>
+
+        <Style Selector="^.Outline.Warning:pointerover /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource LuminaWarningBgBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaWarningBrush}" />
+        </Style>
+
+        <Style Selector="^.Outline.Danger:pointerover /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource LuminaDangerBgBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaDangerBrush}" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type ToggleSplitButton}" TargetType="ToggleSplitButton" BasedOn="{StaticResource {x:Type SplitButton}}">
+        <Style Selector="^:checked /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBgBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryHoverBrush}" />
+        </Style>
+
+        <Style Selector="^:checked:flyout-open /template/ Button#PART_SecondaryButton">
+            <Setter Property="Background" Value="{DynamicResource LuminaStatePressedBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type ButtonSpinner}" TargetType="ButtonSpinner" BasedOn="{StaticResource {x:Type ButtonSpinner}}">
+        <Setter Property="MinHeight" Value="36" />
+        <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="6" />
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type CommandBar}" TargetType="CommandBar">
+        <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Padding" Value="4" />
+        <Setter Property="MinHeight" Value="52" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="CommandBar">
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        MinHeight="{TemplateBinding MinHeight}"
+                        Padding="{TemplateBinding Padding}">
+                    <Panel>
+                        <DockPanel KeyboardNavigation.TabNavigation="Cycle">
+                            <CommandBarButton Name="PART_OverflowButton"
+                                              DockPanel.Dock="Right"
+                                              IsCompact="True"
+                                              IsVisible="{TemplateBinding IsOverflowButtonVisible}">
+                                <CommandBarButton.Icon>
+                                    <PathIcon Width="16"
+                                              Height="16"
+                                              Data="M5,12 A2,2 0 1,0 5,12.01 Z M12,12 A2,2 0 1,0 12,12.01 Z M19,12 A2,2 0 1,0 19,12.01 Z" />
+                                </CommandBarButton.Icon>
+                            </CommandBarButton>
+
+                            <ContentPresenter Name="PART_ContentPresenter"
+                                              DockPanel.Dock="Left"
+                                              Content="{TemplateBinding Content}"
+                                              VerticalAlignment="Center" />
+
+                            <ItemsControl Name="PART_PrimaryCommands"
+                                          ItemsSource="{Binding VisiblePrimaryCommands, RelativeSource={RelativeSource TemplatedParent}}"
+                                          HorizontalAlignment="Right"
+                                          VerticalAlignment="Stretch"
+                                          ClipToBounds="True">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" Spacing="2" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </DockPanel>
+
+                        <Popup Name="PART_OverflowPopup"
+                               IsOpen="{TemplateBinding IsOpen, Mode=TwoWay}"
+                               PlacementTarget="{Binding #PART_OverflowButton}"
+                               Placement="Bottom"
+                               IsLightDismissEnabled="True"
+                               WindowManagerAddShadowHint="False">
+                            <Border MinWidth="144"
+                                    MaxWidth="240"
+                                    MaxHeight="360"
+                                    Margin="0,8,0,0"
+                                    Padding="4"
+                                    Background="{DynamicResource LuminaPopoverBrush}"
+                                    BorderBrush="{DynamicResource LuminaBorderBrush}"
+                                    BorderThickness="1"
+                                    BoxShadow="{DynamicResource LuminaShadowPopup}"
+                                    CornerRadius="8">
+                                <ItemsControl Name="PART_OverflowPresenter"
+                                              ItemsSource="{Binding OverflowItems, RelativeSource={RelativeSource TemplatedParent}}"
+                                              HorizontalAlignment="Stretch">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                            </Border>
+                        </Popup>
+                    </Panel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^ /template/ CommandBarButton#PART_OverflowButton">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="^ /template/ CommandBarButton#PART_OverflowButton:pointerover">
+            <Setter Property="Background" Value="{DynamicResource LuminaStateHoverBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="^ /template/ CommandBarButton#PART_OverflowButton:pressed">
+            <Setter Property="Background" Value="{DynamicResource LuminaStatePressedBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="^[IsOpen=True] /template/ CommandBarButton#PART_OverflowButton">
+            <Setter Property="Background" Value="{DynamicResource LuminaStatePressedBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="^[(lumina|LuminaOptions.PopupType)=Sheet] /template/ CommandBarButton#PART_OverflowButton">
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type CommandBarButton}" TargetType="CommandBarButton" BasedOn="{StaticResource {x:Type CommandBarButton}}">
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="6" />
+
+        <Style Selector="^:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+            <Setter Property="Background" Value="{DynamicResource LuminaStateHoverBrush}" />
+        </Style>
+
+        <Style Selector="^:pressed">
+            <Setter Property="Background" Value="{DynamicResource LuminaStatePressedBrush}" />
+        </Style>
+
+        <Style Selector="^ /template/ Border#PART_Border">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="^ /template/ ContentPresenter#PART_IconPresenter">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+        </Style>
+
+        <Style Selector="^ /template/ TextBlock#PART_Label">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+        </Style>
+
+        <Style Selector="^:pointerover /template/ Border#PART_Border">
+            <Setter Property="Background" Value="{DynamicResource LuminaStateHoverBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="^:pointerover /template/ ContentPresenter#PART_IconPresenter">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="^:pointerover /template/ TextBlock#PART_Label">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="^[IsInOverflow=True]">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Width" Value="{x:Static x:Double.NaN}" />
+            <Setter Property="MinWidth" Value="136" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="MinHeight" Value="34" />
+            <Setter Property="Padding" Value="10,8" />
+            <Style Selector="^ /template/ StackPanel#PART_LayoutRoot">
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="Spacing" Value="8" />
+            </Style>
+            <Style Selector="^ /template/ ContentPresenter#PART_IconPresenter">
+                <Setter Property="Width" Value="20" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+            <Style Selector="^ /template/ TextBlock#PART_Label">
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="TextAlignment" Value="Left" />
+            </Style>
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type CommandBarToggleButton}" TargetType="CommandBarToggleButton" BasedOn="{StaticResource {x:Type CommandBarToggleButton}}">
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="6" />
+
+        <Style Selector="^:checked">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBgBrush}" />
+        </Style>
+
+        <Style Selector="^:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+            <Setter Property="Background" Value="{DynamicResource LuminaStateHoverBrush}" />
+        </Style>
+
+        <Style Selector="^ /template/ Border#PART_Border">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="^ /template/ ContentPresenter#PART_IconPresenter">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+        </Style>
+
+        <Style Selector="^ /template/ TextBlock#PART_Label">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+        </Style>
+
+        <Style Selector="^:checked /template/ Border#PART_Border">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBgBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="^:checked /template/ ContentPresenter#PART_IconPresenter">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="^:checked /template/ TextBlock#PART_Label">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="^:pointerover /template/ Border#PART_Border">
+            <Setter Property="Background" Value="{DynamicResource LuminaStateHoverBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="^:pointerover /template/ ContentPresenter#PART_IconPresenter">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="^:pointerover /template/ TextBlock#PART_Label">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="^[IsInOverflow=True]">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Width" Value="{x:Static x:Double.NaN}" />
+            <Setter Property="MinWidth" Value="136" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="MinHeight" Value="34" />
+            <Setter Property="Padding" Value="10,8" />
+            <Style Selector="^ /template/ StackPanel#PART_LayoutRoot">
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="Spacing" Value="8" />
+            </Style>
+            <Style Selector="^ /template/ ContentPresenter#PART_IconPresenter">
+                <Setter Property="Width" Value="20" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+            <Style Selector="^ /template/ TextBlock#PART_Label">
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="TextAlignment" Value="Left" />
+            </Style>
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type CommandBarSeparator}" TargetType="CommandBarSeparator" BasedOn="{StaticResource {x:Type CommandBarSeparator}}">
+        <Setter Property="Background" Value="{DynamicResource LuminaDividerBrush}" />
+        <Setter Property="Margin" Value="6,4" />
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type PipsPager}" TargetType="PipsPager" BasedOn="{StaticResource {x:Type PipsPager}}">
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type RefreshContainer}" TargetType="RefreshContainer" BasedOn="{StaticResource {x:Type RefreshContainer}}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaPrimaryBrush}" />
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type RefreshVisualizer}" TargetType="RefreshVisualizer" BasedOn="{StaticResource {x:Type RefreshVisualizer}}">
+        <Setter Property="Foreground" Value="{DynamicResource LuminaPrimaryBrush}" />
+        <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+    </ControlTheme>
+
+</ResourceDictionary>

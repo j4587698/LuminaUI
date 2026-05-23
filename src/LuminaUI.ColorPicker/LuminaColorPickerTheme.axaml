@@ -1,0 +1,8 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="LuminaUI.ColorPicker.LuminaColorPickerTheme">
+  <StyleInclude Source="avares://Avalonia.Controls.ColorPicker/Themes/Fluent/Fluent.xaml" />
+  <StyleInclude Source="avares://LuminaUI.ColorPicker/Themes/Shared.axaml" />
+  <StyleInclude Source="avares://LuminaUI.ColorPicker/Themes/Light.axaml" />
+  <StyleInclude Source="avares://LuminaUI.ColorPicker/Themes/Dark.axaml" />
+</Styles>

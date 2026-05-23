@@ -1,0 +1,126 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
+
+    <!-- LuminaDialog Theme (Ultra Modern, No Gray, Big Shadow, Deep Black) -->
+    <ControlTheme x:Key="{x:Type lumina:LuminaDialog}" TargetType="lumina:LuminaDialog">
+        <Setter Property="MaxWidth" Value="480" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <!-- 弹窗主体卡片：极客纯黑底色，微金属边框，巨大悬浮阴影 -->
+                <Border Name="PART_DialogRoot"
+                        Background="{DynamicResource LuminaSurfaceBrush}"
+                        BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="16"
+                        MaxWidth="{TemplateBinding MaxWidth}"
+                        HorizontalAlignment="Stretch"
+                        BoxShadow="{DynamicResource LuminaShadowPopup}">
+                    
+                    <StackPanel Margin="24">
+                        <!-- 头部标题区 (去除了陈旧的分割线) -->
+                        <TextBlock Text="{TemplateBinding Title}" 
+                                   FontSize="20" 
+                                   FontWeight="SemiBold" 
+                                   Foreground="{DynamicResource LuminaTextPrimaryBrush}" 
+                                   Margin="0,0,0,16" />
+                        
+                        <!-- 身体内容区 -->
+                        <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" />
+                    </StackPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+    </ControlTheme>
+
+    <!-- LuminaToast Theme (Clean Pill Shape) -->
+    <ControlTheme x:Key="{x:Type lumina:LuminaToast}" TargetType="lumina:LuminaToast">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <!-- 悬浮通知卡片 -->
+                <Border Name="PART_Root"
+                        Background="{DynamicResource LuminaSurfaceBrush}"
+                        BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                        BorderThickness="1"
+                        Padding="16,12"
+                        Margin="0,0,0,32"
+                        CornerRadius="12"
+                        MinWidth="280"
+                        MaxWidth="420"
+                        BoxShadow="{DynamicResource LuminaShadowNotification}">
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <!-- 左侧色彩点缀更加现代 -->
+                        <Border Name="PART_Accent"
+                                Width="8"
+                                Height="8"
+                                CornerRadius="4"
+                                Background="{DynamicResource LuminaPrimaryBrush}"
+                                VerticalAlignment="Center" />
+                        <!-- 通知文本 -->
+                        <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" Foreground="{DynamicResource LuminaTextPrimaryBrush}" FontWeight="Medium" FontSize="14" />
+                    </StackPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^.Success /template/ Border#PART_Root">
+            <Setter Property="Background" Value="{DynamicResource LuminaSuccessBgBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaSuccessBrush}" />
+        </Style>
+        <Style Selector="^.Success /template/ Border#PART_Accent">
+            <Setter Property="Background" Value="{DynamicResource LuminaSuccessBrush}" />
+        </Style>
+
+        <Style Selector="^.Warning /template/ Border#PART_Root">
+            <Setter Property="Background" Value="{DynamicResource LuminaWarningBgBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaWarningBrush}" />
+        </Style>
+        <Style Selector="^.Warning /template/ Border#PART_Accent">
+            <Setter Property="Background" Value="{DynamicResource LuminaWarningBrush}" />
+        </Style>
+
+        <Style Selector="^.Danger /template/ Border#PART_Root">
+            <Setter Property="Background" Value="{DynamicResource LuminaDangerBgBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaDangerBrush}" />
+        </Style>
+        <Style Selector="^.Danger /template/ Border#PART_Accent">
+            <Setter Property="Background" Value="{DynamicResource LuminaDangerBrush}" />
+        </Style>
+    </ControlTheme>
+
+    <!-- LuminaBottomSheet Theme -->
+    <ControlTheme x:Key="{x:Type lumina:LuminaBottomSheet}" TargetType="lumina:LuminaBottomSheet">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <!-- 移动端底边无间隙，上边大圆角，极深投影 -->
+                <Panel ClipToBounds="False">
+                    <Border Background="{DynamicResource LuminaSurfaceBrush}"
+                            BorderThickness="0"
+                            CornerRadius="24,24,0,0"
+                            BoxShadow="0 -4 20 #4D000000" />
+                    <Border Background="{DynamicResource LuminaSurfaceBrush}"
+                            BorderThickness="0"
+                            CornerRadius="24,24,0,0"
+                            ClipToBounds="True">
+                    <StackPanel>
+                        <!-- 拖拽胶囊 (Drag Handle) -->
+                        <Border Name="PART_DragHandle" 
+                                Background="Transparent" 
+                                Height="32" 
+                                HorizontalAlignment="Stretch"
+                                Cursor="SizeAll">
+                            <Border Width="36" Height="4" CornerRadius="2" Background="{DynamicResource LuminaBorderStrongBrush}" VerticalAlignment="Center" />
+                        </Border>
+                        
+                        <!-- 身体内容区 -->
+                        <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Padding="24,0,24,24" />
+                    </StackPanel>
+                    </Border>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+</ResourceDictionary>

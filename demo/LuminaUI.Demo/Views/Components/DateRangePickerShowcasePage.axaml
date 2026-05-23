@@ -1,0 +1,44 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.DateRangePickerShowcasePage"
+             x:DataType="vm:DateRangePickerShowcaseViewModel">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0116}" />
+                <TextBlock Text="{DynamicResource Sandbox.Text.0117}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="300" MaxItemWidth="560" HorizontalSpacing="16" VerticalSpacing="16">
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0118}" />
+                        <lumina:LuminaDateRangePicker StartDate="{Binding StartDate}"
+                                                      EndDate="{Binding EndDate}"
+                                                      DateFormat="{Binding DateFormat}"
+                                                      PopupType="Dropdown" />
+                        <TextBlock Text="{Binding SelectedRangeText}" Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                        <WrapPanel>
+                            <Button Content="{DynamicResource Sandbox.Text.0120}" Command="{Binding SelectThisWeekCommand}" Classes="Outline" Margin="0,0,8,8" />
+                            <Button Content="{DynamicResource Sandbox.Text.0121}" Command="{Binding SelectNextMonthCommand}" Classes="Outline" Margin="0,0,8,8" />
+                        </WrapPanel>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0119}" />
+                        <lumina:LuminaDateRangePicker StartDate="{Binding StartDate}"
+                                                      EndDate="{Binding EndDate}"
+                                                      DateFormat="MMM d, yyyy"
+                                                      PopupType="Sheet" />
+                        <TextBlock Text="{DynamicResource Sandbox.Text.0123}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

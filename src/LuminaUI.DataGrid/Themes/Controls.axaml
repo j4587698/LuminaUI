@@ -1,0 +1,58 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:dg="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls.DataGrid">
+    <ControlTheme x:Key="DataGridCellTextBlockTheme" TargetType="TextBlock">
+        <Setter Property="Margin" Value="{DynamicResource DataGridCellTextBlockDefaultMargin}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+    </ControlTheme>
+
+    <ControlTheme x:Key="DataGridCellTextBoxTheme" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="MinHeight" Value="20" />
+        <Style Selector="^ /template/ Border#PART_ContentPresenterBorder">
+            <Setter Property="MinHeight" Value="20" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type dg:DataGridCell}" TargetType="dg:DataGridCell" BasedOn="{StaticResource {x:Type dg:DataGridCell}}">
+        <Setter Property="Background" Value="{DynamicResource DataGridCellBackground}" />
+        <Setter Property="BorderBrush" Value="#00FFFFFF" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="12,0" />
+        <Setter Property="MinHeight" Value="{DynamicResource DataGridCellMinHeight}" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Focusable" Value="False" />
+
+        <Style Selector="^:current">
+            <Setter Property="BorderBrush" Value="{DynamicResource DataGridCellCurrentBorderBrush}" />
+        </Style>
+
+        <Style Selector="^:focus">
+            <Setter Property="BorderBrush" Value="{DynamicResource DataGridCellFocusBorderBrush}" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type dg:DataGridColumnHeader}" TargetType="dg:DataGridColumnHeader" BasedOn="{StaticResource {x:Type dg:DataGridColumnHeader}}">
+        <Setter Property="Foreground" Value="{DynamicResource DataGridColumnHeaderForeground}" />
+        <Setter Property="Background" Value="{DynamicResource DataGridColumnHeaderBackground}" />
+        <Setter Property="Padding" Value="{DynamicResource DataGridColumnHeaderPadding}" />
+        <Setter Property="MinHeight" Value="{DynamicResource DataGridColumnHeaderMinHeight}" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="SeparatorBrush" Value="{DynamicResource DataGridLineBrush}" />
+
+        <Style Selector="^:pointerover">
+            <Setter Property="Background" Value="{DynamicResource DataGridColumnHeaderPointeroverBackground}" />
+        </Style>
+
+        <Style Selector="^:pressed">
+            <Setter Property="Background" Value="{DynamicResource DataGridColumnHeaderPressedBackground}" />
+        </Style>
+    </ControlTheme>
+</ResourceDictionary>

@@ -1,0 +1,92 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaImage}" TargetType="lumina:LuminaImage">
+        <Setter Property="Stretch" Value="UniformToFill" />
+        <Setter Property="StretchDirection" Value="Both" />
+        <Setter Property="LoadingBackground" Value="{DynamicResource LuminaStateHoverBrush}" />
+        <Setter Property="LoadingForeground" Value="{DynamicResource LuminaTextMutedBrush}" />
+        <Setter Property="ErrorBackground" Value="{DynamicResource LuminaDangerBgBrush}" />
+        <Setter Property="ErrorForeground" Value="{DynamicResource LuminaDangerBrush}" />
+
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaImage">
+                <Border Name="PART_Root"
+                        Background="{DynamicResource LuminaStateHoverBrush}"
+                        BorderBrush="Transparent"
+                        BorderThickness="0"
+                        CornerRadius="0"
+                        ClipToBounds="True">
+                    <Grid>
+                        <Image Name="PART_Image"
+                               Source="{TemplateBinding ImageSource}"
+                               Stretch="{TemplateBinding Stretch}"
+                               StretchDirection="{TemplateBinding StretchDirection}"
+                               IsVisible="{TemplateBinding HasImage}" />
+
+                        <ContentPresenter Content="{TemplateBinding PlaceholderContent}"
+                                          ContentTemplate="{TemplateBinding PlaceholderContentTemplate}"
+                                          IsVisible="{TemplateBinding ShowPlaceholderContent}"
+                                          HorizontalContentAlignment="Stretch"
+                                          VerticalContentAlignment="Stretch" />
+
+                        <Border Background="{TemplateBinding LoadingBackground}"
+                                IsVisible="{TemplateBinding ShowDefaultLoading}">
+                            <StackPanel Spacing="8"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                                <ProgressBar Width="96"
+                                             Height="4"
+                                             IsIndeterminate="True" />
+                                <TextBlock Text="{TemplateBinding DisplayLoadingText}"
+                                           FontSize="12"
+                                           Foreground="{TemplateBinding LoadingForeground}" />
+                            </StackPanel>
+                        </Border>
+
+                        <Border Background="{TemplateBinding ErrorBackground}"
+                                IsVisible="{TemplateBinding ShowDefaultError}">
+                            <StackPanel Spacing="8"
+                                        Margin="16"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                                <PathIcon Width="24"
+                                          Height="24"
+                                          Data="M12,2 L22,20 H2 Z M12,8 V13 M12,16 V17"
+                                          Foreground="{TemplateBinding ErrorForeground}" />
+                                <TextBlock Text="{TemplateBinding DisplayErrorText}"
+                                           FontSize="12"
+                                           FontWeight="SemiBold"
+                                           TextWrapping="Wrap"
+                                           TextAlignment="Center"
+                                           Foreground="{TemplateBinding ErrorForeground}" />
+                            </StackPanel>
+                        </Border>
+
+                        <ContentPresenter Content="{TemplateBinding ErrorContent}"
+                                          ContentTemplate="{TemplateBinding ErrorContentTemplate}"
+                                          IsVisible="{TemplateBinding ShowErrorContent}"
+                                          HorizontalContentAlignment="Stretch"
+                                          VerticalContentAlignment="Stretch" />
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^.Framed /template/ Border#PART_Root">
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+        </Style>
+
+        <Style Selector="^.Circle /template/ Border#PART_Root">
+            <Setter Property="CornerRadius" Value="999" />
+        </Style>
+
+        <Style Selector="^.Contain">
+            <Setter Property="Stretch" Value="Uniform" />
+        </Style>
+    </ControlTheme>
+
+</ResourceDictionary>

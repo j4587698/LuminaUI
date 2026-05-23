@@ -1,0 +1,204 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.LocalizationResourcesShowcasePage"
+             x:DataType="vm:LocalizationResourcesShowcaseViewModel"
+             Classes="NoSandboxTextLocalization">
+
+    <UserControl.Styles>
+        <Style Selector="TextBlock.ResourceTableTitle">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="Border.ResourceTableHeader">
+            <Setter Property="MinHeight" Value="42" />
+            <Setter Property="Padding" Value="16,0" />
+            <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
+            <Setter Property="BorderThickness" Value="0,1,0,1" />
+        </Style>
+
+        <Style Selector="Border.ResourceTableRow">
+            <Setter Property="MinHeight" Value="58" />
+            <Setter Property="Padding" Value="16,0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderSubtleBrush}" />
+            <Setter Property="BorderThickness" Value="0,0,0,1" />
+        </Style>
+
+        <Style Selector="Border.ResourceTableRow:pointerover">
+            <Setter Property="Background" Value="{DynamicResource LuminaStateHoverBrush}" />
+        </Style>
+
+        <Style Selector="TextBlock.ResourceHeader">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextMutedBrush}" />
+        </Style>
+
+        <Style Selector="TextBlock.ResourceValue">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+            <Setter Property="TextWrapping" Value="NoWrap" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        </Style>
+
+        <Style Selector="Button.ResourceKeyButton">
+            <Setter Property="MinHeight" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="ClipToBounds" Value="True" />
+        </Style>
+
+        <Style Selector="TextBlock.ResourceKeyText">
+            <Setter Property="FontFamily" Value="Consolas" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+            <Setter Property="TextWrapping" Value="NoWrap" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        </Style>
+
+        <Style Selector="Button.ResourceKeyButton:pointerover">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="Button.ResourceKeyButton:pressed">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="RenderTransform" Value="scale(1)" />
+        </Style>
+    </UserControl.Styles>
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24"
+                    Width="{Binding #PageScroll.Bounds.Width}"
+                    HorizontalAlignment="Stretch"
+                    Margin="0,28,0,40">
+
+            <StackPanel Spacing="8">
+                <TextBlock Text="{Binding Title}"
+                           Classes="Display" />
+                <TextBlock Text="{Binding Subtitle}"
+                           Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                           TextWrapping="Wrap" />
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <TextBlock Text="{Binding KeyCountText}"
+                               FontWeight="SemiBold"
+                               Foreground="{DynamicResource LuminaTextPrimaryBrush}" />
+                    <TextBlock Text="{Binding CopyStatus}"
+                               IsVisible="{Binding HasCopyStatus}"
+                               Foreground="{DynamicResource LuminaSuccessBrush}" />
+                </StackPanel>
+            </StackPanel>
+
+            <lumina:LuminaCard Padding="0">
+                <StackPanel>
+                    <StackPanel Margin="20,18,20,14" Spacing="4">
+                        <TextBlock Text="{Binding OverrideSnippetTitle}"
+                                   Classes="ResourceTableTitle" />
+                        <TextBlock Text="{Binding OverrideSnippetDescription}"
+                                   Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <Border Margin="20,0,20,20"
+                            Padding="16"
+                            CornerRadius="8"
+                            Background="{DynamicResource LuminaHoverBackgroundBrush}"
+                            BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                            BorderThickness="1">
+                        <SelectableTextBlock Text="{Binding OverrideSnippet}"
+                                             FontFamily="Consolas"
+                                             FontSize="12"
+                                             Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                                             TextWrapping="Wrap" />
+                    </Border>
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard Padding="0">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                              VerticalScrollBarVisibility="Disabled">
+                    <StackPanel MinWidth="1380">
+                        <Border Classes="ResourceTableHeader">
+                            <Grid ColumnDefinitions="100,300,260,260,260,96"
+                                  ColumnSpacing="14"
+                                  VerticalAlignment="Center">
+                                <TextBlock Grid.Column="0" Text="{Binding GroupHeader}" Classes="ResourceHeader" />
+                                <TextBlock Grid.Column="1" Text="{Binding KeyHeader}" Classes="ResourceHeader" />
+                                <TextBlock Grid.Column="2" Text="{Binding EnglishHeader}" Classes="ResourceHeader" />
+                                <TextBlock Grid.Column="3" Text="{Binding ChineseHeader}" Classes="ResourceHeader" />
+                                <TextBlock Grid.Column="4" Text="{Binding CurrentHeader}" Classes="ResourceHeader" />
+                                <TextBlock Grid.Column="5" Text="{Binding StatusHeader}" Classes="ResourceHeader" />
+                            </Grid>
+                        </Border>
+
+                        <ItemsControl ItemsSource="{Binding Rows}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="vm:LocalizationResourceRow">
+                                    <Border Classes="ResourceTableRow">
+                                        <Grid ColumnDefinitions="100,300,260,260,260,96"
+                                              ColumnSpacing="14"
+                                              VerticalAlignment="Center">
+                                            <TextBlock Grid.Column="0"
+                                                       Text="{Binding Group}"
+                                                       Classes="ResourceValue"
+                                                       ToolTip.Tip="{Binding Group}"
+                                                       VerticalAlignment="Center" />
+                                            <Button Grid.Column="1"
+                                                    Classes="ResourceKeyButton"
+                                                    Command="{Binding CopyKeyCommand}"
+                                                    CommandParameter="{Binding Key}"
+                                                    ToolTip.Tip="{Binding Key}"
+                                                    VerticalAlignment="Center">
+                                                <TextBlock Classes="ResourceKeyText"
+                                                           Text="{Binding Key}" />
+                                            </Button>
+                                            <TextBlock Grid.Column="2"
+                                                       Text="{Binding EnglishValue}"
+                                                       Classes="ResourceValue"
+                                                       ToolTip.Tip="{Binding EnglishValue}"
+                                                       VerticalAlignment="Center" />
+                                            <TextBlock Grid.Column="3"
+                                                       Text="{Binding ChineseValue}"
+                                                       Classes="ResourceValue"
+                                                       ToolTip.Tip="{Binding ChineseValue}"
+                                                       VerticalAlignment="Center" />
+                                            <TextBlock Grid.Column="4"
+                                                       Text="{Binding EffectiveValue}"
+                                                       Classes="ResourceValue"
+                                                       ToolTip.Tip="{Binding EffectiveValue}"
+                                                       VerticalAlignment="Center" />
+                                            <Border Grid.Column="5"
+                                                    Padding="8,3"
+                                                    CornerRadius="10"
+                                                    Background="{DynamicResource LuminaPrimaryBgBrush}"
+                                                    IsVisible="{Binding IsOverridden}"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Left">
+                                                <TextBlock Text="{Binding OverrideStatus}"
+                                                           FontSize="11"
+                                                           FontWeight="SemiBold"
+                                                           Foreground="{DynamicResource LuminaPrimaryBrush}" />
+                                            </Border>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ScrollViewer>
+            </lumina:LuminaCard>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

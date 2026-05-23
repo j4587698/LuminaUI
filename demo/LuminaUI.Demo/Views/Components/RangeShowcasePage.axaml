@@ -1,0 +1,149 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.RangeShowcasePage"
+             x:DataType="vm:RangeShowcaseViewModel">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24"
+                    Width="{Binding #PageScroll.Bounds.Width}"
+                    HorizontalAlignment="Stretch"
+                    Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.1238}" />
+                <TextBlock Text="{DynamicResource Sandbox.Text.0474}"
+                           Foreground="{DynamicResource LuminaTextMutedBrush}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaCard>
+                <StackPanel Spacing="18">
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+                        <StackPanel Grid.Column="0" Spacing="4">
+                            <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0475}" />
+                            <TextBlock Text="{DynamicResource Sandbox.Text.0476}"
+                                       Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1"
+                                    Orientation="Horizontal"
+                                    Spacing="4"
+                                    VerticalAlignment="Center">
+                            <TextBlock Text="{Binding PositionText}"
+                                       FontWeight="Bold"
+                                       Foreground="{DynamicResource LuminaTextForegroundBrush}" />
+                            <TextBlock Text="{DynamicResource Sandbox.Text.1239}"
+                                       Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                            <TextBlock Text="{Binding DurationText}"
+                                       Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                        </StackPanel>
+                    </Grid>
+
+                    <lumina:LuminaPlaybackSlider Minimum="0"
+                                                 Maximum="{Binding DurationSeconds}"
+                                                 Value="{Binding PlaybackPosition, Mode=TwoWay}"
+                                                 BufferedValue="{Binding BufferedPosition}" />
+
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+                        <TextBlock Grid.Column="0"
+                                   Text="{DynamicResource Sandbox.Text.1240}"
+                                   FontSize="12"
+                                   Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                        <TextBlock Grid.Column="2"
+                                   Text="{Binding DurationText}"
+                                   FontSize="12"
+                                   Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                    </Grid>
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard>
+                <StackPanel Spacing="18">
+                    <StackPanel Spacing="4">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0147}" />
+                        <TextBlock Text="{DynamicResource Sandbox.Text.0148}"
+                                   Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+                        <Slider Grid.Column="0"
+                                Minimum="0"
+                                Maximum="100"
+                                Value="{Binding SharedProgress, Mode=TwoWay}" />
+                        <TextBlock Grid.Column="1"
+                                   MinWidth="48"
+                                   VerticalAlignment="Center"
+                                   FontWeight="SemiBold"
+                                   Text="{Binding SharedProgressText}"
+                                   TextAlignment="Right" />
+                    </Grid>
+
+                    <lumina:LuminaResponsivePanel MinItemWidth="180"
+                                                  MaxItemWidth="320"
+                                                  HorizontalSpacing="16"
+                                                  VerticalSpacing="16">
+                        <lumina:LuminaSemiCircleProgressBar Minimum="0"
+                                                            Maximum="100"
+                                                            Value="{Binding SharedProgress}" />
+
+                        <lumina:LuminaSemiCircleProgressBar Classes="Large"
+                                                            Minimum="0"
+                                                            Maximum="100"
+                                                            Value="{Binding SharedProgress}"
+                                                            ProgressBrush="{DynamicResource LuminaSuccessBrush}">
+                            <StackPanel HorizontalAlignment="Center" Spacing="2">
+                                <TextBlock Text="{Binding SharedProgressText}"
+                                           HorizontalAlignment="Center"
+                                           FontSize="24"
+                                           FontWeight="SemiBold"
+                                           Foreground="{DynamicResource LuminaTextForegroundBrush}" />
+                                <TextBlock Text="{DynamicResource Sandbox.Text.0149}"
+                                           HorizontalAlignment="Center"
+                                           FontSize="12"
+                                           Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                            </StackPanel>
+                        </lumina:LuminaSemiCircleProgressBar>
+
+                        <lumina:LuminaSemiCircleProgressBar Classes="Compact"
+                                                            Minimum="0"
+                                                            Maximum="100"
+                                                            Value="{Binding SharedProgress}"
+                                                            ProgressBrush="{DynamicResource LuminaWarningBrush}" />
+                    </lumina:LuminaResponsivePanel>
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="280"
+                                          MaxItemWidth="460"
+                                          HorizontalSpacing="16"
+                                          VerticalSpacing="16">
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="18">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1241}" />
+                        <Slider Minimum="0" Maximum="100" Value="{Binding SharedProgress, Mode=TwoWay}" />
+                        <Slider Minimum="0"
+                                Maximum="100"
+                                Value="{Binding SharedProgress, Mode=TwoWay}"
+                                TickFrequency="10"
+                                IsSnapToTickEnabled="True" />
+                        <Slider Minimum="0"
+                                Maximum="100"
+                                Value="{Binding SharedProgress}"
+                                IsEnabled="False" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="18">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1242}" />
+                        <ProgressBar Minimum="0" Maximum="100" Value="{Binding SharedProgress}" />
+                        <ProgressBar Minimum="0" Maximum="100" Value="{Binding SharedProgress}" />
+                        <ProgressBar IsIndeterminate="True" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

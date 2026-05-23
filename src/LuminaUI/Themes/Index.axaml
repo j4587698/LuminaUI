@@ -1,0 +1,39 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceInclude x:Key="Light" Source="avares://LuminaUI/Themes/Light.axaml" />
+        <ResourceInclude x:Key="Dark" Source="avares://LuminaUI/Themes/Dark.axaml" />
+    </ResourceDictionary.ThemeDictionaries>
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceInclude Source="avares://LuminaUI/Themes/Foundation.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/Loading.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/Button.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/HamburgerButton.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/ActionControls.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/Card.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/BlurBackground.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/GroupBox.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/Image.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/TitleBar.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/TopView.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/Shell.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/Navigation.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/Page.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/NavigationContainers.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/TabStrip.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/TabControl.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/Carousel.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/Breadcrumb.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/DataDisplay.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/Inputs.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/Calendar.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/Selection.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/BusinessControls.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/NativeControls.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/InteractionPatterns.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/CompositeControls.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/SystemOverlays.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/Overlays.axaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

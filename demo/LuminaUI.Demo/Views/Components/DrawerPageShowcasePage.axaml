@@ -1,0 +1,77 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:controls="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.DrawerPageShowcasePage"
+             x:DataType="vm:DrawerPageShowcaseViewModel">
+    <ScrollViewer Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.1153}" />
+                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0766}" TextWrapping="Wrap" />
+            </StackPanel>
+            <lumina:LuminaResponsivePanel MinItemWidth="300" MaxItemWidth="640" HorizontalSpacing="16" VerticalSpacing="16">
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                            <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1153}" />
+                            <ToggleButton Grid.Column="1"
+                                          Classes="Small Outline"
+                                          Content="{DynamicResource Sandbox.Text.0212}"
+                                          IsChecked="{Binding IsDrawerOpen, Mode=TwoWay}" />
+                        </Grid>
+                        <WrapPanel>
+                            <Button Classes="Ghost Small"
+                                    Content="{DynamicResource Sandbox.Text.0359}"
+                                    Margin="0,0,8,8"
+                                    Command="{Binding SetDrawerPlacementCommand}"
+                                    CommandParameter="{x:Static controls:DrawerPlacement.Left}" />
+                            <Button Classes="Ghost Small"
+                                    Content="{DynamicResource Sandbox.Text.0051}"
+                                    Margin="0,0,8,8"
+                                    Command="{Binding SetDrawerPlacementCommand}"
+                                    CommandParameter="{x:Static controls:DrawerPlacement.Right}" />
+                            <Button Classes="Ghost Small"
+                                    Content="{DynamicResource Sandbox.Text.0360}"
+                                    Margin="0,0,8,8"
+                                    Command="{Binding SetDrawerPlacementCommand}"
+                                    CommandParameter="{x:Static controls:DrawerPlacement.Top}" />
+                            <Button Classes="Ghost Small"
+                                    Content="{DynamicResource Sandbox.Text.0361}"
+                                    Margin="0,0,8,8"
+                                    Command="{Binding SetDrawerPlacementCommand}"
+                                    CommandParameter="{x:Static controls:DrawerPlacement.Bottom}" />
+                        </WrapPanel>
+                        <Border Height="260"
+                                BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                ClipToBounds="True">
+                            <DrawerPage Header="{DynamicResource Sandbox.Text.0084}"
+                                        IsOpen="{Binding IsDrawerOpen, Mode=TwoWay}"
+                                        DisplayMode="Overlay"
+                                        DrawerPlacement="{Binding DrawerPlacement}"
+                                        DrawerLength="170"
+                                        CompactDrawerLength="48">
+                                <DrawerPage.Drawer>
+                                    <StackPanel Spacing="6" Margin="8">
+                                        <Button Classes="Ghost" Content="{DynamicResource Sandbox.Text.0354}" HorizontalAlignment="Stretch" />
+                                        <Button Classes="Ghost" Content="{DynamicResource Sandbox.Text.0355}" HorizontalAlignment="Stretch" />
+                                        <Button Classes="Ghost" Content="{DynamicResource Sandbox.Text.0356}" HorizontalAlignment="Stretch" />
+                                    </StackPanel>
+                                </DrawerPage.Drawer>
+                                <StackPanel Margin="16,64,16,16" Spacing="10">
+                                    <TextBlock Classes="Label" Text="{DynamicResource Sandbox.Text.0357}" />
+                                    <TextBlock Classes="Helper"
+                                               Text="{DynamicResource Sandbox.Text.0358}"
+                                               TextWrapping="Wrap" />
+                                </StackPanel>
+                            </DrawerPage>
+                        </Border>
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

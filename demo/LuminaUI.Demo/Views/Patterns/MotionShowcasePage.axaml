@@ -1,0 +1,502 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.MotionShowcasePage"
+             x:DataType="vm:MotionShowcaseViewModel">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24"
+                    Width="{Binding #PageScroll.Bounds.Width}"
+                    HorizontalAlignment="Stretch"
+                    Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.1313}" />
+                <TextBlock Text="{DynamicResource Sandbox.Text.0778}"
+                           Foreground="{DynamicResource LuminaTextMutedBrush}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="320"
+                                          MaxItemWidth="560"
+                                          HorizontalSpacing="16"
+                                          VerticalSpacing="16">
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <StackPanel Spacing="4">
+                            <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0839}" />
+                            <TextBlock Classes="Caption"
+                                       Text="{DynamicResource Sandbox.Text.0788}" />
+                        </StackPanel>
+
+                        <Border Height="190"
+                                Padding="14"
+                                CornerRadius="12"
+                                ClipToBounds="True"
+                                Background="{DynamicResource LuminaHoverBackgroundBrush}"
+                                BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
+                                BorderThickness="1">
+                            <Canvas>
+                                <Border Canvas.Left="16"
+                                        Canvas.Top="48"
+                                        Width="112"
+                                        Height="78"
+                                        Padding="14"
+                                        CornerRadius="12"
+                                        Background="{DynamicResource LuminaPrimaryBrush}"
+                                        lumina:LuminaMotion.TranslateX="{Binding MoveX}"
+                                        lumina:LuminaMotion.Scale="{Binding PreviewScale}"
+                                        lumina:LuminaMotion.Duration="360">
+                                    <StackPanel Spacing="5"
+                                                VerticalAlignment="Center">
+                                        <TextBlock Text="{DynamicResource Sandbox.Text.0893}"
+                                                   Foreground="{DynamicResource LuminaPrimaryForegroundBrush}"
+                                                   FontWeight="SemiBold" />
+                                        <TextBlock Text="{Binding MotionStatusText}"
+                                                   Foreground="{DynamicResource LuminaPrimaryForegroundBrush}"
+                                                   Opacity="0.78" />
+                                    </StackPanel>
+                                </Border>
+                            </Canvas>
+                        </Border>
+
+                        <WrapPanel>
+                            <Button Content="{DynamicResource Sandbox.Text.0838}"
+                                    Margin="0,0,8,8"
+                                    Command="{Binding ToggleMoveCommand}" />
+                            <Button Content="{DynamicResource Sandbox.Text.0872}"
+                                    Classes="Outline"
+                                    Margin="0,0,8,8"
+                                    Command="{Binding ToggleScaleCommand}" />
+                            <Button Content="{DynamicResource Sandbox.Text.0101}"
+                                    Classes="Ghost"
+                                    Margin="0,0,8,8"
+                                    Command="{Binding ResetCommand}" />
+                        </WrapPanel>
+
+                        <Border Padding="12"
+                                CornerRadius="8"
+                                Background="{DynamicResource LuminaHoverBackgroundBrush}">
+                            <TextBlock FontFamily="Consolas, Cascadia Mono"
+                                       FontSize="12"
+                                       Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                                       TextWrapping="Wrap"
+                                       xml:space="preserve">lumina:LuminaMotion.TranslateX="{Binding MoveX}"
+lumina:LuminaMotion.Scale="{Binding PreviewScale}"
+lumina:LuminaMotion.Duration="360"</TextBlock>
+                        </Border>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <StackPanel Spacing="4">
+                            <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0870}" />
+                            <TextBlock Classes="Caption"
+                                       Text="{DynamicResource Sandbox.Text.0786}" />
+                        </StackPanel>
+
+                        <Border Height="190"
+                                Padding="14"
+                                CornerRadius="12"
+                                ClipToBounds="True"
+                                Background="{DynamicResource LuminaHoverBackgroundBrush}"
+                                BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
+                                BorderThickness="1">
+                            <Grid>
+                                <Border Width="124"
+                                        Height="88"
+                                        Padding="14"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        CornerRadius="14"
+                                        Background="{DynamicResource LuminaInfoBgBrush}"
+                                        BorderBrush="{DynamicResource LuminaInfoBrush}"
+                                        BorderThickness="1"
+                                        lumina:LuminaMotion.Rotation="{Binding RotationAngle}"
+                                        lumina:LuminaMotion.Easing="BackOut"
+                                        lumina:LuminaMotion.Duration="420">
+                                    <Grid>
+                                        <Border Width="18"
+                                                Height="18"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Top"
+                                                CornerRadius="9"
+                                                Background="{DynamicResource LuminaInfoBrush}" />
+                                        <StackPanel Spacing="5"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center">
+                                            <TextBlock Text="{DynamicResource Sandbox.Text.0869}"
+                                                       TextAlignment="Center"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource LuminaInfoBrush}" />
+                                            <TextBlock Text="{Binding RotationStatusText}"
+                                                       TextAlignment="Center"
+                                                       Classes="Caption" />
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <WrapPanel>
+                            <Button Content="{DynamicResource Sandbox.Text.0869}"
+                                    Margin="0,0,8,8"
+                                    Command="{Binding ToggleRotationCommand}" />
+                            <Button Content="{DynamicResource Sandbox.Text.0101}"
+                                    Classes="Ghost"
+                                    Margin="0,0,8,8"
+                                    Command="{Binding ResetCommand}" />
+                        </WrapPanel>
+
+                        <Border Padding="12"
+                                CornerRadius="8"
+                                Background="{DynamicResource LuminaHoverBackgroundBrush}">
+                            <TextBlock FontFamily="Consolas, Cascadia Mono"
+                                       FontSize="12"
+                                       Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                                       TextWrapping="Wrap"
+                                       xml:space="preserve">lumina:LuminaMotion.Rotation="{Binding RotationAngle}"
+lumina:LuminaMotion.Easing="BackOut"
+lumina:LuminaMotion.Duration="420"</TextBlock>
+                        </Border>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                            <StackPanel Grid.Column="0" Spacing="4">
+                                <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0819}" />
+                                <TextBlock Classes="Caption"
+                                           Text="{DynamicResource Sandbox.Text.0856}" />
+                            </StackPanel>
+                        </Grid>
+
+                        <WrapPanel>
+                            <Button Content="{DynamicResource Sandbox.Text.0820}"
+                                    Margin="0,0,10,10"
+                                    Padding="18,10"
+                                    lumina:LuminaMotion.HoverScale="1.08"
+                                    lumina:LuminaMotion.PressedScale="0.94"
+                                    lumina:LuminaMotion.Duration="180" />
+                            <Border Width="132"
+                                    Height="84"
+                                    Margin="0,0,10,10"
+                                    Padding="12"
+                                    Cursor="Hand"
+                                    CornerRadius="10"
+                                    Background="{DynamicResource LuminaSuccessBgBrush}"
+                                    BorderBrush="{DynamicResource LuminaSuccessBrush}"
+                                    BorderThickness="1"
+                                    lumina:LuminaMotion.HoverScale="1.14"
+                                    lumina:LuminaMotion.PressedScale="0.92"
+                                    lumina:LuminaMotion.Duration="180">
+                                <StackPanel Spacing="6">
+                                    <TextBlock Text="{DynamicResource Sandbox.Text.1314}"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource LuminaSuccessBrush}" />
+                                    <TextBlock Text="{DynamicResource Sandbox.Text.0821}"
+                                               Classes="Caption" />
+                                </StackPanel>
+                            </Border>
+                        </WrapPanel>
+
+                        <Border Padding="12"
+                                CornerRadius="8"
+                                Background="{DynamicResource LuminaHoverBackgroundBrush}">
+                            <TextBlock Text="{DynamicResource Sandbox.Text.1315}"
+                                       FontFamily="Consolas, Cascadia Mono"
+                                       FontSize="12"
+                                       TextWrapping="Wrap"
+                                       Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                        </Border>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <StackPanel Spacing="4">
+                            <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0812}" />
+                            <TextBlock Classes="Caption"
+                                       Text="{DynamicResource Sandbox.Text.0809}" />
+                        </StackPanel>
+
+                        <WrapPanel>
+                            <Border Width="150"
+                                    Height="82"
+                                    Margin="0,0,10,10"
+                                    Padding="12"
+                                    CornerRadius="10"
+                                    Background="{DynamicResource LuminaPrimarySoftBrush}"
+                                    BorderBrush="{DynamicResource LuminaPrimaryBrush}"
+                                    BorderThickness="1"
+                                    lumina:LuminaMotion.FadeIn="True"
+                                    lumina:LuminaMotion.FadeInScale="0.82"
+                                    lumina:LuminaMotion.Easing="BackOut"
+                                    lumina:LuminaMotion.Duration="520">
+                                <StackPanel Spacing="5">
+                                    <TextBlock Text="{DynamicResource Sandbox.Text.0811}"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource LuminaPrimaryBrush}" />
+                                    <TextBlock Text="{DynamicResource Sandbox.Text.0783}"
+                                               Classes="Caption" />
+                                </StackPanel>
+                            </Border>
+
+                            <Border Width="150"
+                                    Height="82"
+                                    Margin="0,0,10,10"
+                                    Padding="12"
+                                    CornerRadius="10"
+                                    Background="{DynamicResource LuminaWarningBgBrush}"
+                                    BorderBrush="{DynamicResource LuminaWarningBrush}"
+                                    BorderThickness="1"
+                                    lumina:LuminaMotion.Visible="{Binding ShowMotionPanel}"
+                                    lumina:LuminaMotion.HiddenScale="0.75"
+                                    lumina:LuminaMotion.Easing="SpringSoft"
+                                    lumina:LuminaMotion.Duration="420">
+                                <StackPanel Spacing="5">
+                                    <TextBlock Text="{DynamicResource Sandbox.Text.1316}"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource LuminaWarningBrush}" />
+                                    <TextBlock Text="{DynamicResource Sandbox.Text.0884}"
+                                               Classes="Caption" />
+                                </StackPanel>
+                            </Border>
+
+                            <Button Content="{DynamicResource Sandbox.Text.0803}"
+                                    Width="150"
+                                    Height="82"
+                                    Margin="0,0,10,10"
+                                    IsEnabled="{Binding IsMotionControlEnabled}"
+                                    lumina:LuminaMotion.DisabledOpacity="0.45"
+                                    lumina:LuminaMotion.DisabledScale="0.92"
+                                    lumina:LuminaMotion.Duration="260" />
+                        </WrapPanel>
+
+                        <WrapPanel>
+                            <Button Content="{DynamicResource Sandbox.Text.1317}"
+                                    Margin="0,0,8,8"
+                                    Command="{Binding ToggleMotionPanelCommand}" />
+                            <Button Content="{DynamicResource Sandbox.Text.0898}"
+                                    Classes="Outline"
+                                    Margin="0,0,8,8"
+                                    Command="{Binding ToggleMotionEnabledCommand}" />
+                        </WrapPanel>
+
+                        <Border Padding="12"
+                                CornerRadius="8"
+                                Background="{DynamicResource LuminaHoverBackgroundBrush}">
+                            <TextBlock FontFamily="Consolas, Cascadia Mono"
+                                       FontSize="12"
+                                       Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                                       TextWrapping="Wrap"
+                                       xml:space="preserve">lumina:LuminaMotion.FadeIn="True"
+lumina:LuminaMotion.Visible="{Binding ShowMotionPanel}"
+lumina:LuminaMotion.DisabledOpacity="0.45"</TextBlock>
+                        </Border>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <StackPanel Spacing="4">
+                            <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0883}" />
+                            <TextBlock Classes="Caption"
+                                       Text="{DynamicResource Sandbox.Text.0885}" />
+                        </StackPanel>
+
+                        <Border Height="168"
+                                Padding="14"
+                                CornerRadius="12"
+                                ClipToBounds="True"
+                                Background="{DynamicResource LuminaHoverBackgroundBrush}">
+                            <Canvas>
+                                <Border Canvas.Left="18"
+                                        Canvas.Top="42"
+                                        Width="122"
+                                        Height="78"
+                                        Padding="12"
+                                        CornerRadius="12"
+                                        Background="{DynamicResource LuminaInfoBgBrush}"
+                                        BorderBrush="{DynamicResource LuminaInfoBrush}"
+                                        BorderThickness="1"
+                                        lumina:LuminaMotion.TranslateX="{Binding SpringMoveX}"
+                                        lumina:LuminaMotion.Easing="SpringSnappy"
+                                        lumina:LuminaMotion.Duration="700">
+                                    <TextBlock Text="{DynamicResource Sandbox.Text.0882}"
+                                               VerticalAlignment="Center"
+                                               TextAlignment="Center"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource LuminaInfoBrush}" />
+                                </Border>
+                            </Canvas>
+                        </Border>
+
+                        <WrapPanel>
+                            <Button Content="{DynamicResource Sandbox.Text.1318}"
+                                    Margin="0,0,10,10"
+                                    Command="{Binding ToggleSpringMoveCommand}" />
+                            <Border Width="156"
+                                    Height="74"
+                                    Margin="0,0,10,10"
+                                    Padding="12"
+                                    Cursor="Hand"
+                                    CornerRadius="10"
+                                    Background="{DynamicResource LuminaSuccessBgBrush}"
+                                    BorderBrush="{DynamicResource LuminaSuccessBrush}"
+                                    BorderThickness="1"
+                                    lumina:LuminaMotion.Squish="True"
+                                    lumina:LuminaMotion.SquishIntensity="1.35"
+                                    lumina:LuminaMotion.SquishDepth="1.2">
+                                <TextBlock Text="{DynamicResource Sandbox.Text.0886}"
+                                           VerticalAlignment="Center"
+                                           TextAlignment="Center"
+                                           FontWeight="SemiBold"
+                                           Foreground="{DynamicResource LuminaSuccessBrush}" />
+                            </Border>
+                        </WrapPanel>
+
+                        <Border Padding="12"
+                                CornerRadius="8"
+                                Background="{DynamicResource LuminaHoverBackgroundBrush}">
+                            <TextBlock FontFamily="Consolas, Cascadia Mono"
+                                       FontSize="12"
+                                       Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                                       TextWrapping="Wrap"
+                                       xml:space="preserve">lumina:LuminaMotion.Easing="SpringSnappy"
+lumina:LuminaMotion.Squish="True"
+lumina:LuminaMotion.SquishIntensity="1.35"</TextBlock>
+                        </Border>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                            <StackPanel Grid.Column="0" Spacing="4">
+                                <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0880}" />
+                                <TextBlock Classes="Caption"
+                                           Text="{DynamicResource Sandbox.Text.0897}" />
+                            </StackPanel>
+                            <Button Grid.Column="1"
+                                    Content="{DynamicResource Sandbox.Text.0101}"
+                                    Classes="Outline"
+                                    Command="{Binding ResetCommand}" />
+                        </Grid>
+
+                        <Border Width="{Binding PreviewWidth}"
+                                Height="{Binding PreviewHeight}"
+                                Opacity="{Binding PreviewOpacity}"
+                                Padding="14"
+                                HorizontalAlignment="Left"
+                                CornerRadius="12"
+                                Background="{DynamicResource LuminaPrimaryBrush}"
+                                lumina:LuminaMotion.AnimateSize="True"
+                                lumina:LuminaMotion.AnimateOpacity="True"
+                                lumina:LuminaMotion.Duration="320">
+                            <StackPanel Spacing="6" VerticalAlignment="Center">
+                                <TextBlock Text="{DynamicResource Sandbox.Text.0776}"
+                                           FontWeight="SemiBold"
+                                           Foreground="{DynamicResource LuminaPrimaryForegroundBrush}" />
+                                <TextBlock Text="{Binding SizeStatusText}"
+                                           TextWrapping="Wrap"
+                                           Foreground="{DynamicResource LuminaPrimaryForegroundBrush}"
+                                           Opacity="0.78" />
+                            </StackPanel>
+                        </Border>
+
+                        <WrapPanel>
+                            <Button Content="{DynamicResource Sandbox.Text.1319}"
+                                    Margin="0,0,8,8"
+                                    Command="{Binding ToggleSizeCommand}" />
+                            <Button Content="{DynamicResource Sandbox.Text.0899}"
+                                    Classes="Outline"
+                                    Margin="0,0,8,8"
+                                    Command="{Binding ToggleOpacityCommand}" />
+                        </WrapPanel>
+
+                        <Border Padding="12"
+                                CornerRadius="8"
+                                Background="{DynamicResource LuminaHoverBackgroundBrush}">
+                            <TextBlock FontFamily="Consolas, Cascadia Mono"
+                                       FontSize="12"
+                                       Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                                       TextWrapping="Wrap"
+                                       xml:space="preserve">lumina:LuminaMotion.AnimateSize="True"
+lumina:LuminaMotion.AnimateOpacity="True"
+lumina:LuminaMotion.Duration="320"</TextBlock>
+                        </Border>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                            <StackPanel Grid.Column="0" Spacing="4">
+                                <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0777}" />
+                                <TextBlock Classes="Caption"
+                                           Text="{DynamicResource Sandbox.Text.0844}" />
+                            </StackPanel>
+                            <ToggleSwitch Grid.Column="1"
+                                          Content="{DynamicResource Sandbox.Text.0734}"
+                                          IsChecked="{Binding ShowStatus, Mode=TwoWay}" />
+                        </Grid>
+
+                        <StackPanel Spacing="10">
+                            <Border Padding="12"
+                                    CornerRadius="10"
+                                    Background="{DynamicResource LuminaSurfaceBrush}"
+                                    BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
+                                    BorderThickness="1"
+                                    lumina:LuminaMotion.AnimateLayout="True">
+                                <TextBlock Text="{DynamicResource Sandbox.Text.0887}"
+                                           Foreground="{DynamicResource LuminaTextPrimaryBrush}"
+                                           FontWeight="SemiBold" />
+                            </Border>
+                            <Border Padding="12"
+                                    CornerRadius="10"
+                                    Background="{DynamicResource LuminaSuccessBgBrush}"
+                                    lumina:LuminaMotion.Visible="{Binding ShowStatus}"
+                                    lumina:LuminaMotion.HiddenScale="0.92"
+                                    lumina:LuminaMotion.AnimateLayout="True"
+                                    lumina:LuminaMotion.AnimateOpacity="True">
+                                <TextBlock Text="{DynamicResource Sandbox.Text.0888}"
+                                           Foreground="{DynamicResource LuminaSuccessBrush}"
+                                           TextWrapping="Wrap" />
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1320}" />
+                        <TextBlock Classes="Caption"
+                                   Text="{DynamicResource Sandbox.Text.1321}" />
+                        <Border Padding="14"
+                                CornerRadius="8"
+                                Background="{DynamicResource LuminaHoverBackgroundBrush}">
+                            <TextBlock FontFamily="Consolas, Cascadia Mono"
+                                       FontSize="12"
+                                       Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                                       TextWrapping="Wrap"
+                                       xml:space="preserve">await target.AnimateTranslateAsync(180, 0);
+await target.AnimateScaleAsync(1.16);
+await target.AnimateRotateAsync(135);
+
+await target.Animate(Border.WidthProperty)
+    .From(112)
+    .To(260)
+    .WithDuration(TimeSpan.FromMilliseconds(240))
+    .RunAsync();</TextBlock>
+                        </Border>
+                        <TextBlock Classes="Caption"
+                                   Text="{DynamicResource Sandbox.Text.0895}" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

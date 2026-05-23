@@ -1,0 +1,177 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.ImageShowcasePage"
+             x:DataType="vm:ImageShowcaseViewModel">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0058}" />
+                <TextBlock Text="{DynamicResource Sandbox.Text.0059}"
+                           Foreground="{DynamicResource LuminaTextMutedBrush}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="280"
+                                         MaxItemWidth="520"
+                                         HorizontalSpacing="16"
+                                         VerticalSpacing="16">
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="12">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0060}" />
+                        <lumina:LuminaImage x:Name="WebImage"
+                                            Height="190"
+                                            Source="{Binding WebImageUrl}"
+                                            ImageCacheMode="MemoryAndDisk"
+                                            CacheDuration="7.00:00:00"
+                                            Classes="Framed">
+                            <lumina:LuminaImage.PlaceholderContent>
+                                <Grid Background="{DynamicResource LuminaStateHoverBrush}">
+                                    <StackPanel Spacing="8"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+                                        <ProgressBar Width="96" Height="4" IsIndeterminate="True" />
+                                        <TextBlock Text="{DynamicResource Sandbox.Text.0061}"
+                                                   FontSize="12"
+                                                   Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                                    </StackPanel>
+                                </Grid>
+                            </lumina:LuminaImage.PlaceholderContent>
+                        </lumina:LuminaImage>
+                        <TextBlock Text="{Binding #WebImage.Status, StringFormat='Status: {0}'}"
+                                   Classes="Helper" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="12">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0062}" />
+                        <lumina:LuminaImage x:Name="Base64Image"
+                                            Height="190"
+                                            Source="{Binding Base64ImageData}"
+                                            ImageCacheMode="None"
+                                            Classes="Framed Contain" />
+                        <TextBlock Text="{Binding #Base64Image.Status, StringFormat='Status: {0}'}"
+                                   Classes="Helper" />
+                        <TextBlock Text="{DynamicResource Sandbox.Text.0063}"
+                                   Classes="Helper" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="12">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0064}" />
+                        <lumina:LuminaImage x:Name="AvaresImage"
+                                            Height="190"
+                                            Source="{Binding AvaresImageUrl}"
+                                            ImageCacheMode="None"
+                                            Stretch="Uniform"
+                                            Classes="Framed Contain" />
+                        <TextBlock Text="{Binding #AvaresImage.Status, StringFormat='Status: {0}'}"
+                                   Classes="Helper" />
+                        <TextBlock Text="{Binding AvaresImageUrl}"
+                                   Classes="Helper"
+                                   TextTrimming="CharacterEllipsis" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="12">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0065}" />
+                        <lumina:LuminaImage x:Name="CustomHttpClientImage"
+                                            Height="190"
+                                            Source="{Binding CustomHttpClientImageUrl}"
+                                            Loader="{Binding AuthorizedHttpClientLoader}"
+                                            ImageCacheMode="MemoryAndDisk"
+                                            CacheDuration="00:10:00"
+                                            LoadingText="{DynamicResource Sandbox.Text.0066}"
+                                            Classes="Framed" />
+                        <TextBlock Text="{Binding #CustomHttpClientImage.Status, StringFormat='Status: {0}'}"
+                                   Classes="Helper" />
+                        <TextBlock Text="{DynamicResource Sandbox.Text.0067}"
+                                   Classes="Helper" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="12">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0068}" />
+                        <lumina:LuminaImage x:Name="CustomCacheImage"
+                                            Height="190"
+                                            Source="{Binding CustomCacheImageUrl}"
+                                            Loader="{Binding CustomCacheLoader}"
+                                            ImageCacheMode="Memory"
+                                            CacheDuration="00:10:00"
+                                            LoadingText="{DynamicResource Sandbox.Text.0069}"
+                                            Classes="Framed" />
+                        <TextBlock Text="{Binding #CustomCacheImage.Status, StringFormat='Status: {0}'}"
+                                   Classes="Helper" />
+                        <TextBlock Text="{DynamicResource Sandbox.Text.0070}"
+                                   Classes="Helper" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="12">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0071}" />
+                        <lumina:LuminaImage Width="128"
+                                            Height="128"
+                                            Source="{Binding CachedAvatarUrl}"
+                                            ImageCacheMode="MemoryAndDisk"
+                                            Classes="Circle Framed"
+                                            HorizontalAlignment="Left" />
+                        <TextBlock Text="{DynamicResource Sandbox.Text.0072}"
+                                   Classes="Helper" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="12">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0073}" />
+                        <lumina:LuminaImage Height="190"
+                                            Source="{Binding BrokenImageUrl}"
+                                            ImageCacheMode="None"
+                                            ErrorText="{DynamicResource Sandbox.Text.0074}"
+                                            ErrorBackground="{DynamicResource LuminaWarningBgBrush}"
+                                            ErrorForeground="{DynamicResource LuminaWarningBrush}"
+                                            Classes="Framed" />
+                        <TextBlock Text="{DynamicResource Sandbox.Text.0075}"
+                                   Classes="Helper" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="12">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0076}" />
+                        <lumina:LuminaImage Height="190"
+                                            Source="{Binding BrokenImageUrl}"
+                                            ImageCacheMode="None"
+                                            Classes="Framed">
+                            <lumina:LuminaImage.ErrorContent>
+                                <Grid Background="{DynamicResource LuminaDangerBgBrush}">
+                                    <StackPanel Spacing="8"
+                                                Margin="16"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+                                        <PathIcon Width="26"
+                                                  Height="26"
+                                                  Data="M6,6 L18,18 M18,6 L6,18"
+                                                  Foreground="{DynamicResource LuminaDangerBrush}"
+                                                  HorizontalAlignment="Center" />
+                                        <TextBlock Text="{DynamicResource Sandbox.Text.0076}"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="{DynamicResource LuminaDangerBrush}" />
+                                    </StackPanel>
+                                </Grid>
+                            </lumina:LuminaImage.ErrorContent>
+                        </lumina:LuminaImage>
+                        <TextBlock Text="{DynamicResource Sandbox.Text.0077}"
+                                   Classes="Helper" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

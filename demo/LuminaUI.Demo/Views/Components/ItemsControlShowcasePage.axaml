@@ -1,0 +1,31 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             x:Class="LuminaUI.Demo.Views.ItemsControlShowcasePage">
+    <ScrollViewer Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.1150}" />
+                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0770}" TextWrapping="Wrap" />
+            </StackPanel>
+            <lumina:LuminaResponsivePanel MinItemWidth="300" MaxItemWidth="640" HorizontalSpacing="16" VerticalSpacing="16">
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1150}" />
+                        <ItemsControl Classes="Surface">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <lumina:LuminaTag Classes="Primary">Design</lumina:LuminaTag>
+                            <lumina:LuminaTag>Build</lumina:LuminaTag>
+                            <lumina:LuminaTag>Verify</lumina:LuminaTag>
+                            <lumina:LuminaTag>Release</lumina:LuminaTag>
+                        </ItemsControl>
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

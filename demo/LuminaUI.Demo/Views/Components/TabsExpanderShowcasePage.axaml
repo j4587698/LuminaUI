@@ -1,0 +1,55 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             x:Class="LuminaUI.Demo.Views.TabsExpanderShowcasePage">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0383}" />
+                <TextBlock Text="{DynamicResource Sandbox.Text.0384}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="280" MaxItemWidth="460" HorizontalSpacing="16" VerticalSpacing="16">
+            <lumina:LuminaCard>
+                <StackPanel Spacing="12">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0385}" />
+                    <Expander Header="{DynamicResource Sandbox.Text.0386}" IsExpanded="True">
+                        <StackPanel Spacing="12" Margin="0,12,0,0">
+                            <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0387}" Text="{DynamicResource Sandbox.Text.1279}" />
+                            <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0388}" Text="{DynamicResource Sandbox.Text.1280}" />
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="{DynamicResource Sandbox.Text.0389}">
+                        <StackPanel Spacing="12" Margin="0,12,0,0">
+                            <NumericUpDown Minimum="1" Maximum="20" Value="8" />
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard>
+                <StackPanel Spacing="12">
+                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0390}" />
+                    <Expander Header="{DynamicResource Sandbox.Text.0391}">
+                        <StackPanel Spacing="10" Margin="0,12,0,0">
+                            <CheckBox Content="{DynamicResource Sandbox.Text.0392}" IsChecked="True" />
+                            <CheckBox Content="{DynamicResource Sandbox.Text.0393}" />
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="{DynamicResource Sandbox.Text.0394}" IsExpanded="True">
+                        <StackPanel Spacing="10" Margin="0,12,0,0">
+                            <ComboBox SelectedIndex="0">
+                                <ComboBoxItem Content="{DynamicResource Sandbox.Text.1281}" />
+                                <ComboBoxItem Content="{DynamicResource Sandbox.Text.1282}" />
+                                <ComboBoxItem Content="{DynamicResource Sandbox.Text.1283}" />
+                            </ComboBox>
+                            <Button Classes="Primary Small" Content="{DynamicResource Sandbox.Text.0161}" HorizontalAlignment="Left" />
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+            </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

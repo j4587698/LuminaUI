@@ -1,0 +1,61 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:DataType="vm:AutoCompleteBoxShowcaseViewModel"
+             x:Class="LuminaUI.Demo.Views.AutoCompleteBoxShowcasePage">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24"
+                    Width="{Binding #PageScroll.Bounds.Width}"
+                    HorizontalAlignment="Stretch"
+                    Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.1110}" />
+                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0771}" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="280"
+                                          MaxItemWidth="500"
+                                          HorizontalSpacing="16"
+                                          VerticalSpacing="16">
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1110}" />
+                        <AutoCompleteBox x:Name="ComponentSearch"
+                                         PlaceholderText="{DynamicResource Sandbox.Text.0153}"
+                                         ItemsSource="{Binding Components}"
+                                         MinimumPrefixLength="0"
+                                         FilterMode="Contains" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1111}" />
+                        
+                        <TextBlock Text="{DynamicResource Sandbox.Text.0199}" Classes="Label" />
+                        <AutoCompleteBox PlaceholderText="{DynamicResource Sandbox.Text.1112}"
+                                         ItemsSource="{Binding Components}"
+                                         IsEnabled="False" />
+                                         
+                        <TextBlock Text="{DynamicResource Sandbox.Text.1113}" Classes="Label" Margin="0,8,0,0" />
+                        <AutoCompleteBox PlaceholderText="{DynamicResource Sandbox.Text.1114}"
+                                         ItemsSource="{Binding Components}"
+                                         MinimumPrefixLength="0"
+                                         FilterMode="Contains">
+                            <AutoCompleteBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Spacing="8" Margin="4,0">
+                                        <PathIcon Data="M19,13H5V11H19V13Z" Width="12" Height="12" Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                                        <TextBlock Text="{Binding}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </AutoCompleteBox.ItemTemplate>
+                        </AutoCompleteBox>
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

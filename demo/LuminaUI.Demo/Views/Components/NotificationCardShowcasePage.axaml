@@ -1,0 +1,91 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:notifications="clr-namespace:Avalonia.Controls.Notifications;assembly=Avalonia.Controls"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.NotificationCardShowcasePage"
+             x:DataType="vm:NotificationCardShowcaseViewModel">
+    <ScrollViewer Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0375}" />
+                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0889}" TextWrapping="Wrap" />
+            </StackPanel>
+            <lumina:LuminaResponsivePanel MinItemWidth="300" MaxItemWidth="640" HorizontalSpacing="16" VerticalSpacing="16">
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0375}" />
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                            <TextBlock Classes="Label" Text="{DynamicResource Sandbox.Text.0376}" />
+                            <TextBlock Grid.Column="1"
+                                       Classes="Helper"
+                                       Text="{Binding NotificationDurationText}"
+                                       VerticalAlignment="Center" />
+                        </Grid>
+                        <Slider Minimum="0.5"
+                                Maximum="10"
+                                TickFrequency="0.5"
+                                IsSnapToTickEnabled="True"
+                                Value="{Binding NotificationDurationSeconds, Mode=TwoWay}" />
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                            <TextBlock Classes="Label" Text="{DynamicResource Sandbox.Text.0377}" />
+                            <TextBlock Grid.Column="1"
+                                       Classes="Helper"
+                                       Text="{Binding NotificationPositionText}"
+                                       VerticalAlignment="Center" />
+                        </Grid>
+                        <WrapPanel>
+                            <Button Classes="Ghost Small"
+                                    Content="{DynamicResource Sandbox.Text.0378}"
+                                    Margin="0,0,8,8"
+                                    Command="{Binding SetNotificationPositionCommand}"
+                                    CommandParameter="{x:Static notifications:NotificationPosition.TopLeft}" />
+                            <Button Classes="Ghost Small"
+                                    Content="{DynamicResource Sandbox.Text.0379}"
+                                    Margin="0,0,8,8"
+                                    Command="{Binding SetNotificationPositionCommand}"
+                                    CommandParameter="{x:Static notifications:NotificationPosition.TopRight}" />
+                            <Button Classes="Ghost Small"
+                                    Content="{DynamicResource Sandbox.Text.0380}"
+                                    Margin="0,0,8,8"
+                                    Command="{Binding SetNotificationPositionCommand}"
+                                    CommandParameter="{x:Static notifications:NotificationPosition.BottomLeft}" />
+                            <Button Classes="Ghost Small"
+                                    Content="{DynamicResource Sandbox.Text.0381}"
+                                    Margin="0,0,8,8"
+                                    Command="{Binding SetNotificationPositionCommand}"
+                                    CommandParameter="{x:Static notifications:NotificationPosition.BottomRight}" />
+                        </WrapPanel>
+                        <WrapPanel>
+                            <Button x:Name="ShowInfoNotificationButton"
+                                    Classes="Outline"
+                                    Content="{DynamicResource Sandbox.Text.0382}"
+                                    Margin="0,0,10,10"
+                                    Command="{Binding ShowInfoNotificationCommand}" />
+                            <Button x:Name="ShowSuccessNotificationButton"
+                                    Classes="Outline Success"
+                                    Content="{DynamicResource Sandbox.Text.0191}"
+                                    Margin="0,0,10,10"
+                                    Command="{Binding ShowSuccessNotificationCommand}" />
+                            <Button x:Name="ShowWarningNotificationButton"
+                                    Classes="Outline Warning"
+                                    Content="{DynamicResource Sandbox.Text.0192}"
+                                    Margin="0,0,10,10"
+                                    Command="{Binding ShowWarningNotificationCommand}" />
+                            <Button x:Name="ShowErrorNotificationButton"
+                                    Classes="Outline Error"
+                                    Content="{DynamicResource Sandbox.Text.0810}"
+                                    Margin="0,0,10,10"
+                                    Command="{Binding ShowErrorNotificationCommand}" />
+                            <Button x:Name="ShowComplexNotificationButton"
+                                    Classes="Outline"
+                                    Content="{DynamicResource Sandbox.Text.1234}"
+                                    Margin="0,0,10,10"
+                                    Command="{Binding ShowComplexNotificationCommand}" />
+                        </WrapPanel>
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>

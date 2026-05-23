@@ -1,0 +1,256 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.BusinessControlsShowcasePage"
+             x:DataType="vm:BusinessControlsShowcaseViewModel">
+
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24"
+                    Width="{Binding #PageScroll.Bounds.Width}"
+                    HorizontalAlignment="Stretch"
+                    Margin="0,36,0,40">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="Business Controls" />
+                <TextBlock Text="Form, multi select, tag input, banner, loading container, and skeleton states."
+                           Foreground="{DynamicResource LuminaTextMutedBrush}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="320"
+                                          MaxItemWidth="620"
+                                          HorizontalSpacing="16"
+                                          VerticalSpacing="16">
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="Form layout" />
+                        <lumina:LuminaForm LabelPosition="Left" LabelWidth="120">
+                            <TextBox lumina:LuminaForm.Label="Project"
+                                     lumina:LuminaForm.IsRequired="True"
+                                     Text="Lumina UI" />
+                            <lumina:LuminaMultiSelect lumina:LuminaForm.Label="Members"
+                                                      Watermark="Select members"
+                                                      ItemsSource="{Binding TeamMembers}"
+                                                      SelectedItems="{Binding SelectedMembers}" />
+                            <lumina:LuminaTagInput lumina:LuminaForm.Label="Labels"
+                                                   Watermark="Type and press Enter"
+                                                   AllowDuplicates="False"
+                                                   Tags="{Binding Labels}"
+                                                   TagAddedCommand="{Binding TagAddedCommand}"
+                                                   TagRemovedCommand="{Binding TagRemovedCommand}" />
+                            <Button lumina:LuminaForm.NoLabel="True"
+                                    Content="Submit"
+                                    Classes="Primary"
+                                    Command="{Binding SubmitFormCommand}"
+                                    HorizontalAlignment="Left" />
+                        </lumina:LuminaForm>
+                        <Separator />
+                        <TextBlock Classes="Label" Text="Top label layout" />
+                        <lumina:LuminaForm LabelPosition="Top">
+                            <TextBox lumina:LuminaForm.Label="Release name"
+                                     Text="Avalonia 12 refresh" />
+                            <lumina:LuminaMultiSelect lumina:LuminaForm.Label="Priority"
+                                                      Watermark="Select priority"
+                                                      ItemsSource="{Binding Priorities}"
+                                                      SelectedItems="{Binding SelectedPriorities}" />
+                        </lumina:LuminaForm>
+                        <TextBlock Text="{Binding StatusText}" Classes="Caption" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="Multi select" />
+                        <lumina:LuminaMultiSelect Watermark="Select priority"
+                                                  lumina:LuminaOptions.PopupType="Sheet"
+                                                  CanClearSelection="False"
+                                                  ItemsSource="{Binding Priorities}"
+                                                  SelectedItems="{Binding SelectedPriorities}" />
+                        <lumina:LuminaTagInput Watermark="Tags without remove buttons"
+                                               CanRemoveTags="False"
+                                               CanInput="False"
+                                               Tags="{Binding LockedLabels}" />
+                        <WrapPanel>
+                            <Button Content="Reset members"
+                                    Classes="Outline"
+                                    Margin="0,0,8,8"
+                                    Command="{Binding ResetSelectionCommand}" />
+                            <Button Content="Add tags"
+                                    Classes="Outline"
+                                    Margin="0,0,8,8"
+                                    Command="{Binding AddDefaultTagsCommand}" />
+                        </WrapPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="10"
+                                    VerticalAlignment="Center">
+                            <TextBlock Text="Close button"
+                                       VerticalAlignment="Center"
+                                       Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                            <lumina:LuminaCloseButton Command="{Binding RunCloseButtonCommand}"
+                                                      ToolTip.Tip="Close" />
+                        </StackPanel>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="12">
+                        <TextBlock Classes="SectionTitle" Text="Banners" />
+                        <lumina:LuminaBanner Header="Information"
+                                             Content="Use page-level banners for persistent guidance."
+                                             CanClose="True" />
+                        <lumina:LuminaBanner Type="Success"
+                                             Header="Saved"
+                                             Content="Changes were applied without leaving the page." />
+                        <lumina:LuminaBanner Type="Warning"
+                                             Header="Review needed"
+                                             Content="Some settings will take effect after restart." />
+                        <lumina:LuminaBanner Type="Danger"
+                                             Header="Danger zone"
+                                             Content="Use inline warnings before destructive actions." />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="Loading and skeleton" />
+                        <TextBlock Classes="Label" Text="Loading overlay" />
+                        <lumina:LuminaLoadingContainer IsLoading="{Binding IsLoading}"
+                                                       LoadingMessage="Loading members">
+                            <Border Classes="Subtle" Padding="16">
+                                <StackPanel Spacing="12">
+                                    <StackPanel Orientation="Horizontal"
+                                                Spacing="12"
+                                                VerticalAlignment="Center">
+                                        <Border Width="40"
+                                                Height="40"
+                                                CornerRadius="20"
+                                                Background="{DynamicResource LuminaPrimaryBgBrush}">
+                                            <TextBlock Text="A"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       FontWeight="Bold"
+                                                       Foreground="{DynamicResource LuminaPrimaryBrush}" />
+                                        </Border>
+                                        <StackPanel Spacing="3">
+                                            <TextBlock Text="Ava Chen"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource LuminaTextPrimaryBrush}" />
+                                            <TextBlock Text="Product designer"
+                                                       Classes="Caption" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <TextBlock Text="Active in release planning and design review."
+                                               TextWrapping="Wrap"
+                                               Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                                </StackPanel>
+                            </Border>
+                        </lumina:LuminaLoadingContainer>
+
+                        <Separator />
+                        <TextBlock Classes="Label" Text="Auto skeleton" />
+                        <lumina:LuminaSkeletonContainer IsLoading="{Binding IsLoading}"
+                                                        Mode="Auto">
+                            <Border Classes="Subtle" Padding="16">
+                                <StackPanel Spacing="12">
+                                    <StackPanel Orientation="Horizontal"
+                                                Spacing="12"
+                                                VerticalAlignment="Center">
+                                        <Border Width="44"
+                                                Height="44"
+                                                CornerRadius="22"
+                                                lumina:Skeleton.Shape="Circle"
+                                                Background="{DynamicResource LuminaPrimaryBgBrush}">
+                                            <TextBlock Text="M"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       FontWeight="Bold"
+                                                       Foreground="{DynamicResource LuminaPrimaryBrush}" />
+                                        </Border>
+                                        <StackPanel Spacing="3">
+                                            <TextBlock Text="Mia Johnson"
+                                                       FontWeight="SemiBold"
+                                                       lumina:Skeleton.Shape="Title"
+                                                       lumina:Skeleton.Width="180"
+                                                       Foreground="{DynamicResource LuminaTextPrimaryBrush}" />
+                                            <TextBlock Text="Frontend engineer"
+                                                       lumina:Skeleton.Width="140"
+                                                       Classes="Caption" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <TextBlock Text="Owns component QA, accessibility checks, and release notes."
+                                               lumina:Skeleton.Width="340"
+                                               TextWrapping="Wrap"
+                                               Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                                    <Button Content="Open profile"
+                                            Classes="Outline"
+                                            lumina:Skeleton.Width="112"
+                                            HorizontalAlignment="Left" />
+                                </StackPanel>
+                            </Border>
+                        </lumina:LuminaSkeletonContainer>
+
+                        <TextBlock Classes="Label" Text="Custom list skeleton" />
+                        <lumina:LuminaSkeletonContainer IsLoading="{Binding IsLoading}"
+                                                        Mode="Auto"
+                                                        PlaceholderCount="3">
+                            <ListBox ItemsSource="{Binding TeamMembers}"
+                                     lumina:Skeleton.Shape="Custom"
+                                     lumina:Skeleton.PlaceholderCount="3">
+                                <lumina:Skeleton.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnDefinitions="Auto,*"
+                                              ColumnSpacing="12"
+                                              Margin="0,4">
+                                            <lumina:LuminaSkeleton Classes="Circle"
+                                                                   Width="36"
+                                                                   Height="36" />
+                                            <StackPanel Grid.Column="1"
+                                                        Spacing="7"
+                                                        VerticalAlignment="Center">
+                                                <lumina:LuminaSkeleton Classes="Title"
+                                                                       Width="150" />
+                                                <lumina:LuminaSkeleton Classes="Text"
+                                                                       Width="230" />
+                                            </StackPanel>
+                                        </Grid>
+                                    </DataTemplate>
+                                </lumina:Skeleton.ItemTemplate>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate x:DataType="x:String">
+                                        <Grid ColumnDefinitions="Auto,*"
+                                              ColumnSpacing="12"
+                                              Margin="0,4">
+                                            <Border Width="36"
+                                                    Height="36"
+                                                    CornerRadius="18"
+                                                    Background="{DynamicResource LuminaPrimaryBgBrush}">
+                                                <TextBlock Text="U"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"
+                                                           FontWeight="Bold"
+                                                           Foreground="{DynamicResource LuminaPrimaryBrush}" />
+                                            </Border>
+                                            <StackPanel Grid.Column="1"
+                                                        Spacing="2"
+                                                        VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding}"
+                                                           Foreground="{DynamicResource LuminaTextPrimaryBrush}" />
+                                                <TextBlock Text="Product team"
+                                                           Classes="Caption" />
+                                            </StackPanel>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </lumina:LuminaSkeletonContainer>
+
+                        <Button Content="Toggle loading"
+                                Classes="Outline"
+                                Command="{Binding ToggleLoadingCommand}"
+                                HorizontalAlignment="Left" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</ContentPage>
