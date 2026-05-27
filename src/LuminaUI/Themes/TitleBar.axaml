@@ -52,7 +52,7 @@
                     <ContentPresenter Grid.Column="0"
                                       Content="{TemplateBinding LeftContent}"
                                       VerticalAlignment="Center"
-                                      Margin="16,0,16,0"
+                                      Margin="{TemplateBinding LeftContentMargin}"
                                       chrome:WindowDecorationProperties.ElementRole="User" />
                     
                     <!-- 中间内容槽 (通常放居中标题) -->

@@ -5,6 +5,7 @@
              xmlns:dataGrid="clr-namespace:LuminaUI.DataGrid;assembly=LuminaUI.DataGrid"
              xmlns:treeDataGrid="clr-namespace:LuminaUI.TreeDataGrid;assembly=LuminaUI.TreeDataGrid"
              x:Class="LuminaUI.Demo.App"
+             Name="LuminaUI Demo"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 

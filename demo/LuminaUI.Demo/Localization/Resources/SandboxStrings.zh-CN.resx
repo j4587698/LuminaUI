@@ -120,6 +120,9 @@
   <data name="Sandbox.Nav.ItemsControl" xml:space="preserve">
     <value>项目控件</value>
   </data>
+  <data name="Sandbox.Nav.VirtualizingWrapView" xml:space="preserve">
+    <value>虚拟化流布局</value>
+  </data>
   <data name="Sandbox.Nav.SplitView" xml:space="preserve">
     <value>拆分视图</value>
   </data>

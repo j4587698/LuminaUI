@@ -120,6 +120,9 @@
   <data name="Sandbox.Nav.ItemsControl" xml:space="preserve">
     <value>ItemsControl</value>
   </data>
+  <data name="Sandbox.Nav.VirtualizingWrapView" xml:space="preserve">
+    <value>VirtualizingWrapView</value>
+  </data>
   <data name="Sandbox.Nav.SplitView" xml:space="preserve">
     <value>SplitView</value>
   </data>

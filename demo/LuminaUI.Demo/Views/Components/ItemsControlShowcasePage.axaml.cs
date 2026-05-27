@@ -7,7 +7,7 @@ public partial class ItemsControlShowcasePage : ContentPage
 {
     public ItemsControlShowcasePage()
     {
-        DataContext = new StaticShowcaseViewModel();
+        DataContext = new ItemsControlShowcaseViewModel();
         InitializeComponent();
     }
 }

@@ -115,6 +115,8 @@ internal static class SandboxLocalization
 
 	public const string NavItemsControl = "Sandbox.Nav.ItemsControl";
 
+	public const string NavVirtualizingWrapView = "Sandbox.Nav.VirtualizingWrapView";
+
 	public const string NavSplitView = "Sandbox.Nav.SplitView";
 
 	public const string NavNavigationPage = "Sandbox.Nav.NavigationPage";

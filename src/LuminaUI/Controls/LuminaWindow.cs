@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using Avalonia;
 using Avalonia.Controls;
@@ -26,6 +27,8 @@ public class LuminaWindow : Window
 	private const string SolidBackgroundResourceKey = "LuminaBackgroundBrush";
 
 	private const string GlassBackgroundResourceKey = "LuminaWindowGlassBackgroundBrush";
+
+	private const string AvaloniaDefaultApplicationName = "Avalonia Application";
 
 	private readonly Grid _rootSurface;
 
@@ -84,6 +87,8 @@ public class LuminaWindow : Window
 	public static readonly StyledProperty<bool> IsNativeSystemButtonAreaOnLeftProperty = AvaloniaProperty.Register<LuminaWindow, bool>("IsNativeSystemButtonAreaOnLeft", defaultValue: false);
 
 	public static readonly StyledProperty<bool> ApplyWindowChromeDefaultsProperty = AvaloniaProperty.Register<LuminaWindow, bool>("ApplyWindowChromeDefaults", defaultValue: true);
+
+	public static readonly StyledProperty<bool> UseApplicationNameAsDefaultTitleProperty = AvaloniaProperty.Register<LuminaWindow, bool>("UseApplicationNameAsDefaultTitle", defaultValue: true);
 
 	public static readonly StyledProperty<IBrush?> ContentBackgroundProperty = AvaloniaProperty.Register<LuminaWindow, IBrush?>("ContentBackground");
 
@@ -343,6 +348,18 @@ public class LuminaWindow : Window
 		}
 	}
 
+	public bool UseApplicationNameAsDefaultTitle
+	{
+		get
+		{
+			return GetValue(UseApplicationNameAsDefaultTitleProperty);
+		}
+		set
+		{
+			SetValue(UseApplicationNameAsDefaultTitleProperty, value);
+		}
+	}
+
 	public IBrush? ContentBackground
 	{
 		get
@@ -419,6 +436,7 @@ public class LuminaWindow : Window
 		};
 		base.Opened += delegate
 		{
+			ApplyDefaultTitle();
 			UpdateWindowMaterial();
 		};
 		base.Loaded += delegate
@@ -434,6 +452,7 @@ public class LuminaWindow : Window
 		_hideTitleBarTimer.Tick += OnHideTitleBarTimerTick;
 		_showTitleBarTimer.Tick += OnShowTitleBarTimerTick;
 		ApplyChromeDefaults();
+		ApplyDefaultTitle();
 		SyncChromeSlots();
 		UpdateWindowMaterial();
 		SetWindowContent(_rootSurface);
@@ -514,6 +533,10 @@ public class LuminaWindow : Window
 		{
 			ApplyChromeDefaults();
 		}
+		else if (change.Property == UseApplicationNameAsDefaultTitleProperty)
+		{
+			ApplyDefaultTitle();
+		}
 		else if (change.Property.Name == "ActualTransparencyLevel" || change.Property.Name == "ActualThemeVariant")
 		{
 			UpdateWindowMaterial();
@@ -560,7 +583,12 @@ public class LuminaWindow : Window
 
 	private Thickness GetEffectiveLeftContentMargin()
 	{
-		return IsNativeSystemButtonAreaOnLeft ? new Thickness(NativeSystemButtonReservedWidth + 16.0, 0.0, 16.0, 0.0) : new Thickness(16.0, 0.0, 16.0, 0.0);
+		return IsNativeSystemButtonAreaOnLeft ? new Thickness(GetEffectiveNativeSystemButtonReservedWidth() + 16.0, 0.0, 16.0, 0.0) : new Thickness(16.0, 0.0, 16.0, 0.0);
+	}
+
+	private double GetEffectiveNativeSystemButtonReservedWidth()
+	{
+		return Math.Max(Math.Max(0.0, NativeSystemButtonReservedWidth), Math.Max(0.0, base.WindowDecorationMargin.Left));
 	}
 
 	private void SyncChromeLayout()
@@ -670,6 +698,42 @@ public class LuminaWindow : Window
 			base.Background = Brushes.Transparent;
 			base.WindowDecorations = ((WindowChromeMode == LuminaWindowChromeMode.Extended) ? GetExtendedWindowDecorations() : WindowDecorations.None);
 		}
+	}
+
+	private void ApplyDefaultTitle()
+	{
+		if (!UseApplicationNameAsDefaultTitle || !ShouldReplaceDefaultTitle(base.Title))
+		{
+			return;
+		}
+
+		var applicationName = ResolveApplicationDisplayName();
+		if (!string.IsNullOrWhiteSpace(applicationName))
+		{
+			base.Title = applicationName;
+		}
+	}
+
+	private static bool ShouldReplaceDefaultTitle(string? title)
+	{
+		return string.IsNullOrWhiteSpace(title) || string.Equals(title, AvaloniaDefaultApplicationName, StringComparison.OrdinalIgnoreCase);
+	}
+
+	private static string? ResolveApplicationDisplayName()
+	{
+		var applicationName = Application.Current?.Name;
+		if (!ShouldReplaceDefaultTitle(applicationName))
+		{
+			return applicationName;
+		}
+
+		var entryAssemblyName = Assembly.GetEntryAssembly()?.GetName().Name;
+		if (!string.IsNullOrWhiteSpace(entryAssemblyName))
+		{
+			return entryAssemblyName;
+		}
+
+		return Application.Current?.GetType().Assembly.GetName().Name;
 	}
 
 	private bool UsesLuminaSystemButtons()

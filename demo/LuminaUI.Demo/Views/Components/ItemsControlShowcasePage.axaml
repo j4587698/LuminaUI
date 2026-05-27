@@ -1,17 +1,20 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
-             x:Class="LuminaUI.Demo.Views.ItemsControlShowcasePage">
-    <ScrollViewer Margin="16" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.ItemsControlShowcasePage"
+             x:DataType="vm:ItemsControlShowcaseViewModel">
+    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
             <StackPanel Spacing="4">
                 <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.1150}" />
                 <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0770}" TextWrapping="Wrap" />
             </StackPanel>
-            <lumina:LuminaResponsivePanel MinItemWidth="300" MaxItemWidth="640" HorizontalSpacing="16" VerticalSpacing="16">
+
+            <lumina:LuminaResponsivePanel MinItemWidth="300" MaxItemWidth="680" HorizontalSpacing="16" VerticalSpacing="16">
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1150}" />
+                        <TextBlock Classes="SectionTitle" Text="ItemsControl + WrapPanel" />
                         <ItemsControl Classes="Surface">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -23,6 +26,125 @@
                             <lumina:LuminaTag>Verify</lumina:LuminaTag>
                             <lumina:LuminaTag>Release</lumina:LuminaTag>
                         </ItemsControl>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+                            <StackPanel Spacing="4">
+                                <TextBlock Classes="SectionTitle" Text="LuminaVirtualizingWrapView" />
+                                <TextBlock Text="Wrap" Classes="Helper" />
+                            </StackPanel>
+                            <Button Grid.Column="1"
+                                    Classes="Small Outline"
+                                    Content="Add"
+                                    Command="{Binding AddCardsCommand}" />
+                            <Button Grid.Column="2"
+                                    Classes="Small Ghost"
+                                    Content="Reset"
+                                    Command="{Binding ResetCardsCommand}" />
+                        </Grid>
+
+                        <Border Height="300"
+                                ClipToBounds="True"
+                                BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="8">
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+                                <lumina:LuminaVirtualizingWrapView ItemsSource="{Binding CompactCards}"
+                                                                   LayoutMode="Wrap"
+                                                                   MinItemWidth="132"
+                                                                   MaxItemWidth="180"
+                                                                   EstimatedItemHeight="92"
+                                                                   HorizontalSpacing="10"
+                                                                   VerticalSpacing="10"
+                                                                   Margin="12">
+                                    <lumina:LuminaVirtualizingWrapView.ItemTemplate>
+                                        <DataTemplate x:DataType="vm:VirtualFlowCardViewModel">
+                                            <Border Height="{Binding ContentHeight}"
+                                                    Padding="12"
+                                                    Background="{DynamicResource LuminaSurfaceBrush}"
+                                                    BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
+                                                    BorderThickness="1"
+                                                    CornerRadius="8">
+                                                <Grid RowDefinitions="Auto,*,Auto">
+                                                    <TextBlock Text="{Binding Title}"
+                                                               FontWeight="SemiBold"
+                                                               Foreground="{DynamicResource LuminaTextPrimaryBrush}" />
+                                                    <TextBlock Grid.Row="1"
+                                                               Text="{Binding Summary}"
+                                                               TextWrapping="Wrap"
+                                                               Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                                               Margin="0,8,0,0" />
+                                                    <TextBlock Grid.Row="2"
+                                                               Text="{Binding Status}"
+                                                               Classes="Caption"
+                                                               Foreground="{DynamicResource LuminaPrimaryBrush}" />
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </lumina:LuminaVirtualizingWrapView.ItemTemplate>
+                                </lumina:LuminaVirtualizingWrapView>
+                            </ScrollViewer>
+                        </Border>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <StackPanel Spacing="4">
+                            <TextBlock Classes="SectionTitle" Text="LuminaVirtualizingWrapView" />
+                            <TextBlock Text="Masonry" Classes="Helper" />
+                        </StackPanel>
+
+                        <Border Height="420"
+                                ClipToBounds="True"
+                                BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="8">
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+                                <lumina:LuminaVirtualizingWrapView ItemsSource="{Binding MasonryCards}"
+                                                                   LayoutMode="Masonry"
+                                                                   MinItemWidth="180"
+                                                                   EstimatedItemHeight="174"
+                                                                   HorizontalSpacing="12"
+                                                                   VerticalSpacing="12"
+                                                                   Margin="12">
+                                    <lumina:LuminaVirtualizingWrapView.ItemTemplate>
+                                        <DataTemplate x:DataType="vm:VirtualFlowCardViewModel">
+                                            <Border MinHeight="{Binding ContentHeight}"
+                                                    Padding="14"
+                                                    Background="{DynamicResource LuminaSurfaceBrush}"
+                                                    BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
+                                                    BorderThickness="1"
+                                                    CornerRadius="8">
+                                                <StackPanel Spacing="10">
+                                                    <Border Height="5"
+                                                            CornerRadius="3"
+                                                            Background="{DynamicResource LuminaPrimaryBrush}" />
+                                                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                                        <TextBlock Text="{Binding Title}"
+                                                                   FontWeight="SemiBold"
+                                                                   Foreground="{DynamicResource LuminaTextPrimaryBrush}" />
+                                                        <TextBlock Grid.Column="1"
+                                                                   Text="{Binding Status}"
+                                                                   Classes="Caption"
+                                                                   Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                                                    </Grid>
+                                                    <TextBlock Text="{Binding Summary}"
+                                                               TextWrapping="Wrap"
+                                                               Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                                                    <ProgressBar Minimum="0"
+                                                                 Maximum="100"
+                                                                 Value="{Binding ContentHeight}" />
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </lumina:LuminaVirtualizingWrapView.ItemTemplate>
+                                </lumina:LuminaVirtualizingWrapView>
+                            </ScrollViewer>
+                        </Border>
                     </StackPanel>
                 </lumina:LuminaCard>
             </lumina:LuminaResponsivePanel>

@@ -69,6 +69,7 @@
                         <lumina:LuminaNavigationItem Name="NavLayoutGroup" Header="{DynamicResource Sandbox.Nav.LayoutGroup}" Icon="LY">
                             <lumina:LuminaNavigationItem Name="NavHeaderedContentControl" Classes="Child" Header="{DynamicResource Sandbox.Nav.HeaderedContentControl}" Icon="HC" />
                             <lumina:LuminaNavigationItem Name="NavItemsControl" Classes="Child" Header="{DynamicResource Sandbox.Nav.ItemsControl}" Icon="IC" />
+                            <lumina:LuminaNavigationItem Name="NavVirtualizingWrapView" Classes="Child" Header="{DynamicResource Sandbox.Nav.VirtualizingWrapView}" Icon="VW" />
                             <lumina:LuminaNavigationItem Name="NavSplitView" Classes="Child" Header="{DynamicResource Sandbox.Nav.SplitView}" Icon="SV" />
                             <lumina:LuminaNavigationItem Name="NavNavigationPage" Classes="Child" Header="{DynamicResource Sandbox.Nav.NavigationPage}" Icon="NP" />
                             <lumina:LuminaNavigationItem Name="NavDrawerPage" Classes="Child" Header="{DynamicResource Sandbox.Nav.DrawerPage}" Icon="DP" />
