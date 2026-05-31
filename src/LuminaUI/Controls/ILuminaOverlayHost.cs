@@ -4,19 +4,19 @@ namespace LuminaUI.Controls;
 
 public interface ILuminaOverlayHost
 {
-	TimeSpan ToastDuration { get; }
+    TimeSpan ToastDuration { get; }
 
-	void ShowToast(object? content);
+    void ShowToast(object? content);
 
-	void ShowToast(object? content, TimeSpan duration);
+    void ShowToast(object? content, TimeSpan duration);
 
-	void ClearToast();
+    void ClearToast();
 
-	void ShowDialog(object? content);
+    void ShowDialog(object? content);
 
-	void CloseDialog();
+    void CloseDialog();
 
-	void ShowBottomSheet(object? content);
+    void ShowBottomSheet(object? content);
 
-	void CloseBottomSheet();
+    void CloseBottomSheet();
 }

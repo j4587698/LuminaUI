@@ -2,8 +2,8 @@ namespace LuminaUI.Controls;
 
 public enum LuminaImageStatus
 {
-	Idle,
-	Loading,
-	Loaded,
-	Failed
+    Idle,
+    Loading,
+    Loaded,
+    Failed
 }

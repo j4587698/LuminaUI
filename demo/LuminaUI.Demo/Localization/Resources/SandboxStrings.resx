@@ -123,6 +123,21 @@
   <data name="Sandbox.Nav.VirtualizingWrapView" xml:space="preserve">
     <value>VirtualizingWrapView</value>
   </data>
+  <data name="Sandbox.VirtualFlow.Body" xml:space="preserve">
+    <value>Virtualized wrap and masonry layouts that only realize the items inside the viewport.</value>
+  </data>
+  <data name="Sandbox.VirtualFlow.Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Sandbox.VirtualFlow.Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="Sandbox.VirtualFlow.WrapMode" xml:space="preserve">
+    <value>Wrap</value>
+  </data>
+  <data name="Sandbox.VirtualFlow.MasonryMode" xml:space="preserve">
+    <value>Masonry</value>
+  </data>
   <data name="Sandbox.Nav.SplitView" xml:space="preserve">
     <value>SplitView</value>
   </data>

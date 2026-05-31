@@ -4,7 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace LuminaUI.Demo.ViewModels;
 
-public partial class ItemsControlShowcaseViewModel : ObservableObject
+public partial class VirtualizingWrapViewShowcaseViewModel : ObservableObject
 {
     private int _nextCardIndex = 49;
 
@@ -12,7 +12,7 @@ public partial class ItemsControlShowcaseViewModel : ObservableObject
 
     public ObservableCollection<VirtualFlowCardViewModel> MasonryCards { get; } = [];
 
-    public ItemsControlShowcaseViewModel()
+    public VirtualizingWrapViewShowcaseViewModel()
     {
         for (var index = 1; index <= 48; index++)
         {

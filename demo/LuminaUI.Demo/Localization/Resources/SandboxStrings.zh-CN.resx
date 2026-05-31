@@ -123,6 +123,21 @@
   <data name="Sandbox.Nav.VirtualizingWrapView" xml:space="preserve">
     <value>虚拟化流布局</value>
   </data>
+  <data name="Sandbox.VirtualFlow.Body" xml:space="preserve">
+    <value>仅实例化视口内条目的虚拟化流式与瀑布流布局。</value>
+  </data>
+  <data name="Sandbox.VirtualFlow.Add" xml:space="preserve">
+    <value>添加</value>
+  </data>
+  <data name="Sandbox.VirtualFlow.Reset" xml:space="preserve">
+    <value>重置</value>
+  </data>
+  <data name="Sandbox.VirtualFlow.WrapMode" xml:space="preserve">
+    <value>流式</value>
+  </data>
+  <data name="Sandbox.VirtualFlow.MasonryMode" xml:space="preserve">
+    <value>瀑布流</value>
+  </data>
   <data name="Sandbox.Nav.SplitView" xml:space="preserve">
     <value>拆分视图</value>
   </data>

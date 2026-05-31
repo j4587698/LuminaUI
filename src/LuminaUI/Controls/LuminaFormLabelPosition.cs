@@ -2,6 +2,6 @@ namespace LuminaUI.Controls;
 
 public enum LuminaFormLabelPosition
 {
-	Top,
-	Left
+    Top,
+    Left
 }

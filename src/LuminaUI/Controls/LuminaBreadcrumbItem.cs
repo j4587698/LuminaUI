@@ -7,115 +7,79 @@ using Avalonia.Input;
 
 namespace LuminaUI.Controls;
 
-[PseudoClasses(new string[] { ":last" })]
+[PseudoClasses(":last")]
 public class LuminaBreadcrumbItem : ContentControl
 {
-	public const string PC_Last = ":last";
+    public const string PC_Last = ":last";
 
-	public static readonly StyledProperty<object?> SeparatorProperty = AvaloniaProperty.Register<LuminaBreadcrumbItem, object?>("Separator");
+    public static readonly StyledProperty<object?> SeparatorProperty = AvaloniaProperty.Register<LuminaBreadcrumbItem, object?>(nameof(Separator));
 
-	public static readonly StyledProperty<object?> IconProperty = AvaloniaProperty.Register<LuminaBreadcrumbItem, object?>("Icon");
+    public static readonly StyledProperty<object?> IconProperty = AvaloniaProperty.Register<LuminaBreadcrumbItem, object?>(nameof(Icon));
 
-	public static readonly StyledProperty<IDataTemplate?> IconTemplateProperty = AvaloniaProperty.Register<LuminaBreadcrumbItem, IDataTemplate?>("IconTemplate");
+    public static readonly StyledProperty<IDataTemplate?> IconTemplateProperty = AvaloniaProperty.Register<LuminaBreadcrumbItem, IDataTemplate?>(nameof(IconTemplate));
 
-	public static readonly StyledProperty<ICommand?> CommandProperty = AvaloniaProperty.Register<LuminaBreadcrumbItem, ICommand?>("Command");
+    public static readonly StyledProperty<ICommand?> CommandProperty = AvaloniaProperty.Register<LuminaBreadcrumbItem, ICommand?>(nameof(Command));
 
-	public static readonly StyledProperty<object?> CommandParameterProperty = AvaloniaProperty.Register<LuminaBreadcrumbItem, object?>("CommandParameter");
+    public static readonly StyledProperty<object?> CommandParameterProperty = AvaloniaProperty.Register<LuminaBreadcrumbItem, object?>(nameof(CommandParameter));
 
-	public static readonly StyledProperty<bool> IsReadOnlyProperty = AvaloniaProperty.Register<LuminaBreadcrumbItem, bool>("IsReadOnly", defaultValue: false);
+    public static readonly StyledProperty<bool> IsReadOnlyProperty = AvaloniaProperty.Register<LuminaBreadcrumbItem, bool>(nameof(IsReadOnly), defaultValue: false);
 
-	public object? Separator
-	{
-		get
-		{
-			return GetValue(SeparatorProperty);
-		}
-		set
-		{
-			SetValue(SeparatorProperty, value);
-		}
-	}
+    public object? Separator
+    {
+        get => GetValue(SeparatorProperty);
+        set => SetValue(SeparatorProperty, value);
+    }
 
-	public object? Icon
-	{
-		get
-		{
-			return GetValue(IconProperty);
-		}
-		set
-		{
-			SetValue(IconProperty, value);
-		}
-	}
+    public object? Icon
+    {
+        get => GetValue(IconProperty);
+        set => SetValue(IconProperty, value);
+    }
 
-	public IDataTemplate? IconTemplate
-	{
-		get
-		{
-			return GetValue(IconTemplateProperty);
-		}
-		set
-		{
-			SetValue(IconTemplateProperty, value);
-		}
-	}
+    public IDataTemplate? IconTemplate
+    {
+        get => GetValue(IconTemplateProperty);
+        set => SetValue(IconTemplateProperty, value);
+    }
 
-	public ICommand? Command
-	{
-		get
-		{
-			return GetValue(CommandProperty);
-		}
-		set
-		{
-			SetValue(CommandProperty, value);
-		}
-	}
+    public ICommand? Command
+    {
+        get => GetValue(CommandProperty);
+        set => SetValue(CommandProperty, value);
+    }
 
-	public object? CommandParameter
-	{
-		get
-		{
-			return GetValue(CommandParameterProperty);
-		}
-		set
-		{
-			SetValue(CommandParameterProperty, value);
-		}
-	}
+    public object? CommandParameter
+    {
+        get => GetValue(CommandParameterProperty);
+        set => SetValue(CommandParameterProperty, value);
+    }
 
-	public bool IsReadOnly
-	{
-		get
-		{
-			return GetValue(IsReadOnlyProperty);
-		}
-		set
-		{
-			SetValue(IsReadOnlyProperty, value);
-		}
-	}
+    public bool IsReadOnly
+    {
+        get => GetValue(IsReadOnlyProperty);
+        set => SetValue(IsReadOnlyProperty, value);
+    }
 
-	protected override void OnPointerReleased(PointerReleasedEventArgs e)
-	{
-		base.OnPointerReleased(e);
-		if (!IsReadOnly && Command != null && Command.CanExecute(CommandParameter))
-		{
-			Command.Execute(CommandParameter);
-			e.Handled = true;
-		}
-	}
+    protected override void OnPointerReleased(PointerReleasedEventArgs e)
+    {
+        base.OnPointerReleased(e);
+        if (!IsReadOnly && Command != null && Command.CanExecute(CommandParameter))
+        {
+            Command.Execute(CommandParameter);
+            e.Handled = true;
+        }
+    }
 
-	internal void SetIsLast(bool isLast)
-	{
-		base.PseudoClasses.Set(":last", isLast);
-	}
+    internal void SetIsLast(bool isLast)
+    {
+        PseudoClasses.Set(":last", isLast);
+    }
 
-	internal void SetIfUnset<T>(AvaloniaProperty<T> property, T value)
-	{
-		if (!IsSet(property))
-		{
-			SetCurrentValue(property, value);
-		}
-	}
+    internal void SetIfUnset<T>(AvaloniaProperty<T> property, T value)
+    {
+        if (!IsSet(property))
+        {
+            SetCurrentValue(property, value);
+        }
+    }
 }

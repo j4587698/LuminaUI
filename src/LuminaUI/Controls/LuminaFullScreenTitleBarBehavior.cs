@@ -2,7 +2,7 @@ namespace LuminaUI.Controls;
 
 public enum LuminaFullScreenTitleBarBehavior
 {
-	Hidden,
-	Visible,
-	AutoHide
+    Hidden,
+    Visible,
+    AutoHide
 }

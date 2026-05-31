@@ -8,4 +8,5 @@
   <Project Path="demo/LuminaUI.Demo.Browser/LuminaUI.Demo.Browser.csproj" />
   <Project Path="demo/LuminaUI.Demo.Android/LuminaUI.Demo.Android.csproj" />
   <Project Path="demo/LuminaUI.Demo.iOS/LuminaUI.Demo.iOS.csproj" />
+  <Project Path="tools/LuminaUI.Mcp/LuminaUI.Mcp.csproj" />
 </Solution>

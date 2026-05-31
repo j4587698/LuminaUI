@@ -4,11 +4,11 @@ namespace LuminaUI.Controls;
 
 public class LuminaSettingsSwitchOption : LuminaSettingsOption
 {
-	protected override Type StyleKeyOverride => typeof(LuminaSettingsOption);
+    protected override Type StyleKeyOverride => typeof(LuminaSettingsOption);
 
-	public LuminaSettingsSwitchOption()
-	{
-		base.Kind = LuminaSettingsOptionKind.Switch;
-		base.ShowChevron = false;
-	}
+    public LuminaSettingsSwitchOption()
+    {
+        Kind = LuminaSettingsOptionKind.Switch;
+        ShowChevron = false;
+    }
 }

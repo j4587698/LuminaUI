@@ -21,6 +21,7 @@ project.assets.json
 !.vscode/extensions.json
 !.vscode/tasks.json
 !.vscode/launch.json
+!.vscode/mcp.json
 *.suo
 *.user
 *.userosscache

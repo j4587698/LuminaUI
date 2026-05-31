@@ -6,17 +6,12 @@ namespace LuminaUI.Controls;
 
 public class LuminaColorButton : Button
 {
-	public static readonly StyledProperty<IBrush?> SwatchBrushProperty = AvaloniaProperty.Register<LuminaColorButton, IBrush?>("SwatchBrush");
+    public static readonly StyledProperty<IBrush?> SwatchBrushProperty =
+        AvaloniaProperty.Register<LuminaColorButton, IBrush?>(nameof(SwatchBrush));
 
-	public IBrush? SwatchBrush
-	{
-		get
-		{
-			return GetValue(SwatchBrushProperty);
-		}
-		set
-		{
-			SetValue(SwatchBrushProperty, value);
-		}
-	}
+    public IBrush? SwatchBrush
+    {
+        get => GetValue(SwatchBrushProperty);
+        set => SetValue(SwatchBrushProperty, value);
+    }
 }

@@ -38,14 +38,27 @@
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
                         <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0184}" />
-                        <Border Padding="14"
-                                Background="{DynamicResource LuminaSurfaceBrush}"
-                                BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
-                                BorderThickness="1"
-                                CornerRadius="10">
-                            <lumina:LuminaAutoScrollText Text="{DynamicResource Sandbox.Text.0185}"
-                                                         Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
-                        </Border>
+                        <StackPanel Spacing="10">
+                            <Border Padding="14"
+                                    Background="{DynamicResource LuminaSurfaceBrush}"
+                                    BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="10">
+                                <lumina:LuminaAutoScrollText Text="{DynamicResource Sandbox.Text.0185}"
+                                                             IdleTextAlignment="Center"
+                                                             Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                            </Border>
+
+                            <Border Padding="14"
+                                    Background="{DynamicResource LuminaHoverBackgroundBrush}"
+                                    BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="10">
+                                <lumina:LuminaAutoScrollText Text="{DynamicResource Sandbox.Text.0185}"
+                                                             IdleTextAlignment="Right"
+                                                             Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                            </Border>
+                        </StackPanel>
                     </StackPanel>
                 </lumina:LuminaCard>
 

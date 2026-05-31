@@ -5,31 +5,21 @@ namespace LuminaUI.Controls;
 
 public class LuminaSettingItem : ContentControl
 {
-	public static readonly StyledProperty<string?> HeaderProperty = AvaloniaProperty.Register<LuminaSettingItem, string?>("Header");
+    public static readonly StyledProperty<string?> HeaderProperty =
+        AvaloniaProperty.Register<LuminaSettingItem, string?>(nameof(Header));
 
-	public static readonly StyledProperty<string?> DescriptionProperty = AvaloniaProperty.Register<LuminaSettingItem, string?>("Description");
+    public static readonly StyledProperty<string?> DescriptionProperty =
+        AvaloniaProperty.Register<LuminaSettingItem, string?>(nameof(Description));
 
-	public string? Header
-	{
-		get
-		{
-			return GetValue(HeaderProperty);
-		}
-		set
-		{
-			SetValue(HeaderProperty, value);
-		}
-	}
+    public string? Header
+    {
+        get => GetValue(HeaderProperty);
+        set => SetValue(HeaderProperty, value);
+    }
 
-	public string? Description
-	{
-		get
-		{
-			return GetValue(DescriptionProperty);
-		}
-		set
-		{
-			SetValue(DescriptionProperty, value);
-		}
-	}
+    public string? Description
+    {
+        get => GetValue(DescriptionProperty);
+        set => SetValue(DescriptionProperty, value);
+    }
 }

@@ -4,30 +4,25 @@ namespace LuminaUI.Controls;
 
 public class LuminaSettingsSelectOptionItem : AvaloniaObject
 {
-	public static readonly StyledProperty<bool> IsSelectedProperty = AvaloniaProperty.Register<LuminaSettingsSelectOptionItem, bool>("IsSelected", defaultValue: false);
+    public static readonly StyledProperty<bool> IsSelectedProperty =
+        AvaloniaProperty.Register<LuminaSettingsSelectOptionItem, bool>(nameof(IsSelected), defaultValue: false);
 
-	public int Index { get; }
+    public LuminaSettingsSelectOptionItem(int index, object? item, string text)
+    {
+        Index = index;
+        Item = item;
+        Text = text;
+    }
 
-	public object? Item { get; }
+    public int Index { get; }
 
-	public string Text { get; }
+    public object? Item { get; }
 
-	public bool IsSelected
-	{
-		get
-		{
-			return GetValue(IsSelectedProperty);
-		}
-		set
-		{
-			SetValue(IsSelectedProperty, value);
-		}
-	}
+    public string Text { get; }
 
-	public LuminaSettingsSelectOptionItem(int index, object? item, string text)
-	{
-		Index = index;
-		Item = item;
-		Text = text;
-	}
+    public bool IsSelected
+    {
+        get => GetValue(IsSelectedProperty);
+        set => SetValue(IsSelectedProperty, value);
+    }
 }

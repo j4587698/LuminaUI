@@ -2,7 +2,7 @@ namespace LuminaUI.Controls;
 
 public enum LuminaMotionEasingIntensity
 {
-	Soft,
-	Normal,
-	Strong
+    Soft,
+    Normal,
+    Strong
 }

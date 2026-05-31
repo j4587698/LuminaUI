@@ -14,6 +14,7 @@ public partial class MainWindow : LuminaWindow
     {
         InitializeComponent();
         UpdateWindowTitle();
+        RebuildPlatformMenu();
         UpdateThemeButtonState();
 
         LuminaLocalization.LanguageChanged += OnLanguageChanged;
@@ -41,6 +42,63 @@ public partial class MainWindow : LuminaWindow
     private void OnLanguageChanged(object? sender, EventArgs e)
     {
         UpdateWindowTitle();
+        RebuildPlatformMenu();
+    }
+
+    private void RebuildPlatformMenu()
+    {
+        PlatformMenu.NativeMenu = CreatePlatformMenu();
+    }
+
+    private NativeMenu CreatePlatformMenu()
+    {
+        return new NativeMenu
+        {
+            Items =
+            {
+                CreateNativeMenuGroup(
+                    SandboxLocalization.MenuFile,
+                    CreateNativeMenuItem(SandboxLocalization.MenuNewWindow, "NewWindow"),
+                    CreateNativeMenuItem(SandboxLocalization.MenuOpenSandbox, "OpenSandbox"),
+                    new NativeMenuItemSeparator(),
+                    CreateNativeMenuItem(SandboxLocalization.MenuClose, "CloseWindow")),
+                CreateNativeMenuGroup(
+                    SandboxLocalization.MenuView,
+                    CreateNativeMenuItem(SandboxLocalization.MenuToggleSidebar, "ToggleSidebar"),
+                    CreateNativeMenuItem(SandboxLocalization.MenuComponents, "OpenComponents"),
+                    CreateNativeMenuItem(SandboxLocalization.MenuSettings, "OpenSettings")),
+                CreateNativeMenuGroup(
+                    SandboxLocalization.MenuHelp,
+                    CreateNativeMenuItem(SandboxLocalization.MenuDocumentation, "OpenDocumentation"),
+                    CreateNativeMenuItem(SandboxLocalization.MenuAbout, "OpenAbout"))
+            }
+        };
+    }
+
+    private static NativeMenuItem CreateNativeMenuGroup(string headerKey, params NativeMenuItemBase[] items)
+    {
+        var menu = new NativeMenu();
+        foreach (var item in items)
+        {
+            menu.Items.Add(item);
+        }
+
+        return new NativeMenuItem
+        {
+            Header = LuminaLocalization.Get(headerKey),
+            Menu = menu
+        };
+    }
+
+    private NativeMenuItem CreateNativeMenuItem(string headerKey, string action)
+    {
+        var item = new NativeMenuItem
+        {
+            Header = LuminaLocalization.Get(headerKey),
+            CommandParameter = action
+        };
+        item.Click += PlatformNativeMenuItem_OnClick;
+        return item;
     }
 
     private void PlatformNativeMenuItem_OnClick(object? sender, EventArgs e)

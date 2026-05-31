@@ -53,13 +53,13 @@
         </Style>
 
         <Style Selector="^:pointerover /template/ Border#PART_BorderElement">
-            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryHoverBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
             <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
         </Style>
 
         <Style Selector="^:focus /template/ Border#PART_BorderElement">
-            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryBrush}" />
-            <Setter Property="BoxShadow" Value="0 0 0 3 #332563EB" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderStrongBrush}" />
+            <Setter Property="BoxShadow" Value="0 0 0 0 #00000000" />
         </Style>
     </ControlTheme>
 
@@ -74,13 +74,13 @@
         <Setter Property="BorderThickness" Value="1" />
 
         <Style Selector="^:pointerover /template/ Border#Background">
-            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryHoverBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
             <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
         </Style>
 
         <Style Selector="^:focus /template/ Border#Background">
-            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryBrush}" />
-            <Setter Property="BoxShadow" Value="0 0 0 3 #332563EB" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderStrongBrush}" />
+            <Setter Property="BoxShadow" Value="0 0 0 0 #00000000" />
         </Style>
 
         <Style Selector="^[(lumina|LuminaOptions.PopupType)=Sheet]">
@@ -160,6 +160,15 @@
 
         <Style Selector="^.LuminaInputGroupSingle">
             <Setter Property="CornerRadius" Value="6" />
+        </Style>
+
+        <Style Selector="^:pointerover">
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
+            <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
+        </Style>
+
+        <Style Selector="^:focus-within">
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderStrongBrush}" />
         </Style>
     </ControlTheme>
 
@@ -381,11 +390,11 @@
 
         <Style Selector="^:pointerover /template/ Button#PART_SurfaceButton">
             <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryHoverBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
         </Style>
 
         <Style Selector="^:focus-within /template/ Button#PART_SurfaceButton">
-            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderStrongBrush}" />
         </Style>
 
         <Style Selector="^:disabled">
@@ -496,11 +505,11 @@
 
         <Style Selector="^:pointerover /template/ Button#PART_FlyoutButton">
             <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryHoverBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
         </Style>
 
         <Style Selector="^:focus-within /template/ Button#PART_FlyoutButton">
-            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderStrongBrush}" />
         </Style>
 
         <Style Selector="^:hasnodate /template/ TextBlock">
@@ -667,11 +676,11 @@
 
         <Style Selector="^:pointerover /template/ Button#PART_FlyoutButton">
             <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryHoverBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
         </Style>
 
         <Style Selector="^:focus-within /template/ Button#PART_FlyoutButton">
-            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderStrongBrush}" />
         </Style>
 
         <Style Selector="^:hasnotime /template/ TextBlock">

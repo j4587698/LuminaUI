@@ -6,5 +6,5 @@ namespace LuminaUI.Services;
 
 public interface ILuminaImageLoader
 {
-	Task<IImage?> LoadAsync(object? source, LuminaImageLoadOptions options, CancellationToken cancellationToken);
+    Task<IImage?> LoadAsync(object? source, LuminaImageLoadOptions options, CancellationToken cancellationToken);
 }

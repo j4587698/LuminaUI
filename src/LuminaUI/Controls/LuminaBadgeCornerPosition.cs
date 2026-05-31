@@ -2,8 +2,8 @@ namespace LuminaUI.Controls;
 
 public enum LuminaBadgeCornerPosition
 {
-	TopRight,
-	TopLeft,
-	BottomRight,
-	BottomLeft
+    TopRight,
+    TopLeft,
+    BottomRight,
+    BottomLeft
 }

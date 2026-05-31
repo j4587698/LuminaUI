@@ -5,6 +5,6 @@ namespace LuminaUI.Controls;
 [Flags]
 public enum LuminaPopConfirmTriggerMode
 {
-	Click = 1,
-	Focus = 2
+    Click = 1,
+    Focus = 2
 }

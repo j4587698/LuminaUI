@@ -4,39 +4,29 @@ namespace LuminaUI.Controls;
 
 public class LuminaMultiSelectOption : AvaloniaObject
 {
-	public static readonly StyledProperty<object?> ItemProperty = AvaloniaProperty.Register<LuminaMultiSelectOption, object?>("Item");
+    public static readonly StyledProperty<object?> ItemProperty =
+        AvaloniaProperty.Register<LuminaMultiSelectOption, object?>(nameof(Item));
 
-	public static readonly StyledProperty<bool> IsSelectedProperty = AvaloniaProperty.Register<LuminaMultiSelectOption, bool>("IsSelected", defaultValue: false);
+    public static readonly StyledProperty<bool> IsSelectedProperty =
+        AvaloniaProperty.Register<LuminaMultiSelectOption, bool>(nameof(IsSelected), defaultValue: false);
 
-	public object? Item
-	{
-		get
-		{
-			return GetValue(ItemProperty);
-		}
-		set
-		{
-			SetValue(ItemProperty, value);
-		}
-	}
+    public LuminaMultiSelectOption(object? item, bool isSelected)
+    {
+        Item = item;
+        IsSelected = isSelected;
+    }
 
-	public bool IsSelected
-	{
-		get
-		{
-			return GetValue(IsSelectedProperty);
-		}
-		set
-		{
-			SetValue(IsSelectedProperty, value);
-		}
-	}
+    public object? Item
+    {
+        get => GetValue(ItemProperty);
+        set => SetValue(ItemProperty, value);
+    }
 
-	public string DisplayText => Item?.ToString() ?? string.Empty;
+    public bool IsSelected
+    {
+        get => GetValue(IsSelectedProperty);
+        set => SetValue(IsSelectedProperty, value);
+    }
 
-	public LuminaMultiSelectOption(object? item, bool isSelected)
-	{
-		Item = item;
-		IsSelected = isSelected;
-	}
+    public string DisplayText => Item?.ToString() ?? string.Empty;
 }

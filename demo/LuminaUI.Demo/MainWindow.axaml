@@ -29,49 +29,7 @@
             </StackPanel>
             <lumina:LuminaPlatformMenu Name="PlatformMenu"
                                        NativeMenuMode="Auto"
-                                       HideVisualMenuWhenNative="True">
-                <lumina:LuminaPlatformMenu.NativeMenu>
-                    <NativeMenu>
-                        <NativeMenuItem Header="File">
-                            <NativeMenu>
-                                <NativeMenuItem Header="New Window"
-                                                CommandParameter="NewWindow"
-                                                Click="PlatformNativeMenuItem_OnClick" />
-                                <NativeMenuItem Header="Open Sandbox"
-                                                CommandParameter="OpenSandbox"
-                                                Click="PlatformNativeMenuItem_OnClick" />
-                                <NativeMenuItemSeparator Header="-" />
-                                <NativeMenuItem Header="Close"
-                                                CommandParameter="CloseWindow"
-                                                Click="PlatformNativeMenuItem_OnClick" />
-                            </NativeMenu>
-                        </NativeMenuItem>
-                        <NativeMenuItem Header="View">
-                            <NativeMenu>
-                                <NativeMenuItem Header="Toggle Sidebar"
-                                                CommandParameter="ToggleSidebar"
-                                                Click="PlatformNativeMenuItem_OnClick" />
-                                <NativeMenuItem Header="Components"
-                                                CommandParameter="OpenComponents"
-                                                Click="PlatformNativeMenuItem_OnClick" />
-                                <NativeMenuItem Header="Settings"
-                                                CommandParameter="OpenSettings"
-                                                Click="PlatformNativeMenuItem_OnClick" />
-                            </NativeMenu>
-                        </NativeMenuItem>
-                        <NativeMenuItem Header="Help">
-                            <NativeMenu>
-                                <NativeMenuItem Header="Documentation"
-                                                CommandParameter="OpenDocumentation"
-                                                Click="PlatformNativeMenuItem_OnClick" />
-                                <NativeMenuItem Header="About"
-                                                CommandParameter="OpenAbout"
-                                                Click="PlatformNativeMenuItem_OnClick" />
-                            </NativeMenu>
-                        </NativeMenuItem>
-                    </NativeMenu>
-                </lumina:LuminaPlatformMenu.NativeMenu>
-            </lumina:LuminaPlatformMenu>
+                                       HideVisualMenuWhenNative="True" />
         </StackPanel>
     </lumina:LuminaWindow.TitleBarLeftContent>
 
