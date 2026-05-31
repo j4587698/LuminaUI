@@ -1,0 +1,13 @@
+**/bin/
+**/obj/
+**/.git/
+**/.vs/
+**/.idea/
+**/node_modules/
+**/TestResults/
+**/BenchmarkDotNet.Artifacts/
+*.apk
+*.aab
+*.ipa
+*.msix
+*.msixbundle

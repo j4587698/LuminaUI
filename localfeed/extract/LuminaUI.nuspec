@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>LuminaUI</id>
+    <version>0.3.0</version>
+    <authors>LuminaUI Contributors</authors>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <readme>README.md</readme>
+    <description>A modern Avalonia UI control library and theme package.</description>
+    <tags>Avalonia UI Controls Theme LuminaUI</tags>
+    <repository type="git" commit="3a9358047e62ca189c9e7fa05f769bfe66e16849" />
+    <dependencies>
+      <group targetFramework="net8.0">
+        <dependency id="Avalonia" version="12.0.1" exclude="Build,Analyzers" />
+        <dependency id="Avalonia.Skia" version="12.0.1" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net9.0">
+        <dependency id="Avalonia" version="12.0.1" exclude="Build,Analyzers" />
+        <dependency id="Avalonia.Skia" version="12.0.1" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net10.0">
+        <dependency id="Avalonia" version="12.0.1" exclude="Build,Analyzers" />
+        <dependency id="Avalonia.Skia" version="12.0.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

@@ -6,6 +6,7 @@ using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Shapes;
 using Avalonia.Controls.Templates;
+using Avalonia.Layout;
 using Avalonia.Media;
 
 namespace LuminaUI.Controls;
@@ -192,7 +193,7 @@ public class LuminaButtonPresenter : ContentControl
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
-        if (change.Property == IconProperty || change.Property == ContentControl.ContentProperty || change.Property == IconForegroundProperty || change.Property == SyncIconForegroundProperty || change.Property == IconPlacementProperty || change.Property == IconSizeProperty || change.Property == IconSpacingProperty || change.Property == IsLoadingProperty || change.Property == TemplatedControl.ForegroundProperty)
+        if (change.Property == IconProperty || change.Property == ContentControl.ContentProperty || change.Property == IconForegroundProperty || change.Property == SyncIconForegroundProperty || change.Property == IconPlacementProperty || change.Property == IconSizeProperty || change.Property == IconSpacingProperty || change.Property == IsLoadingProperty || change.Property == TemplatedControl.ForegroundProperty || change.Property == ContentControl.HorizontalContentAlignmentProperty || change.Property == ContentControl.VerticalContentAlignmentProperty)
         {
             UpdateState();
         }
@@ -289,27 +290,28 @@ public class LuminaButtonPresenter : ContentControl
         _iconPresenter.Height = iconSize;
         _loadingPresenter.Width = iconSize;
         _loadingPresenter.Height = iconSize;
+        bool stretchContentH = HorizontalContentAlignment == HorizontalAlignment.Stretch;
+        bool stretchContentV = VerticalContentAlignment == VerticalAlignment.Stretch;
+        GridLength contentColumnWidth = stretchContentH ? new GridLength(1.0, GridUnitType.Star) : GridLength.Auto;
+        GridLength contentRowHeight = stretchContentV ? new GridLength(1.0, GridUnitType.Star) : GridLength.Auto;
         _layoutRoot.ColumnDefinitions.Clear();
         _layoutRoot.RowDefinitions.Clear();
         if (isHorizontal)
         {
             _layoutRoot.RowDefinitions.Add(new RowDefinition
             {
-                Height = GridLength.Auto
+                Height = contentRowHeight
             });
-            _layoutRoot.ColumnDefinitions.Add(new ColumnDefinition
-            {
-                Width = GridLength.Auto
-            });
-            if (hasBoth)
+            int iconColumn = (hasBoth && !isIconFirst) ? 1 : 0;
+            int contentColumn = (hasBoth && isIconFirst) ? 1 : 0;
+            int columnCount = hasBoth ? 2 : 1;
+            for (int i = 0; i < columnCount; i++)
             {
                 _layoutRoot.ColumnDefinitions.Add(new ColumnDefinition
                 {
-                    Width = GridLength.Auto
+                    Width = (i == contentColumn) ? contentColumnWidth : GridLength.Auto
                 });
             }
-            int iconColumn = (hasBoth && !isIconFirst) ? 1 : 0;
-            int contentColumn = (hasBoth && isIconFirst) ? 1 : 0;
             MoveElement(_iconPresenter, 0, iconColumn);
             MoveElement(_loadingPresenter, 0, iconColumn);
             MoveElement(_contentPresenter, 0, contentColumn);
@@ -322,21 +324,18 @@ public class LuminaButtonPresenter : ContentControl
         {
             _layoutRoot.ColumnDefinitions.Add(new ColumnDefinition
             {
-                Width = GridLength.Auto
+                Width = contentColumnWidth
             });
-            _layoutRoot.RowDefinitions.Add(new RowDefinition
-            {
-                Height = GridLength.Auto
-            });
-            if (hasBoth)
+            int iconRow = (hasBoth && !isIconFirst) ? 1 : 0;
+            int contentRow = (hasBoth && isIconFirst) ? 1 : 0;
+            int rowCount = hasBoth ? 2 : 1;
+            for (int i = 0; i < rowCount; i++)
             {
                 _layoutRoot.RowDefinitions.Add(new RowDefinition
                 {
-                    Height = GridLength.Auto
+                    Height = (i == contentRow) ? contentRowHeight : GridLength.Auto
                 });
             }
-            int iconRow = (hasBoth && !isIconFirst) ? 1 : 0;
-            int contentRow = (hasBoth && isIconFirst) ? 1 : 0;
             MoveElement(_iconPresenter, iconRow, 0);
             MoveElement(_loadingPresenter, iconRow, 0);
             MoveElement(_contentPresenter, contentRow, 0);

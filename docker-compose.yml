@@ -1,0 +1,25 @@
+services:
+  lumina-mcp:
+    build:
+      context: .
+      dockerfile: tools/LuminaUI.Mcp/Dockerfile
+    ports:
+      - "3001:3001"
+    volumes:
+      - mcp-data:/app/data
+    environment:
+      - Catalog__Port=3001
+      - Catalog__AutoIndexOnEmpty=${MCP_AUTO_INDEX_ON_EMPTY:-false}
+      - Catalog__DefaultRef=${MCP_DEFAULT_REF:-}
+      - Admin__Username=admin
+      - Admin__Password=${MCP_ADMIN_PASSWORD:-luminaui}
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3001/healthz || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+
+volumes:
+  mcp-data:

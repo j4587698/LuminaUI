@@ -6,8 +6,8 @@
         <Setter Property="Template">
             <ControlTemplate TargetType="lumina:LuminaButtonPresenter">
                 <Grid Name="PART_LayoutRoot"
-                      HorizontalAlignment="Center"
-                      VerticalAlignment="Center">
+                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                     <ContentPresenter Name="PART_IconPresenter"
                                       Content="{TemplateBinding Icon}"
                                       ContentTemplate="{TemplateBinding IconTemplate}"
@@ -37,8 +37,10 @@
                                       Content="{TemplateBinding Content}"
                                       ContentTemplate="{TemplateBinding ContentTemplate}"
                                       IsVisible="{TemplateBinding HasContent}"
-                                      HorizontalAlignment="Center"
-                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                       RecognizesAccessKey="True"
                                       TextElement.Foreground="{TemplateBinding Foreground}" />
                 </Grid>
@@ -75,23 +77,22 @@
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{TemplateBinding CornerRadius}"
                         Padding="{TemplateBinding Padding}">
-                    <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                        <lumina:LuminaButtonPresenter Content="{TemplateBinding Content}"
-                                                       ContentTemplate="{TemplateBinding ContentTemplate}"
-                                                       Foreground="{TemplateBinding Foreground}"
-                                                       Icon="{Binding (lumina:LuminaButton.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-                                                       IconTemplate="{Binding (lumina:LuminaButton.IconTemplate), RelativeSource={RelativeSource TemplatedParent}}"
-                                                       IconForeground="{Binding (lumina:LuminaButton.IconForeground), RelativeSource={RelativeSource TemplatedParent}}"
-                                                       SyncIconForeground="{Binding (lumina:LuminaButton.SyncIconForeground), RelativeSource={RelativeSource TemplatedParent}}"
-                                                       IconPlacement="{Binding (lumina:LuminaButton.IconPlacement), RelativeSource={RelativeSource TemplatedParent}}"
-                                                       IconSize="{Binding (lumina:LuminaButton.IconSize), RelativeSource={RelativeSource TemplatedParent}}"
-                                                       IconSpacing="{Binding (lumina:LuminaButton.IconSpacing), RelativeSource={RelativeSource TemplatedParent}}"
-                                                       IsLoading="{Binding (lumina:LuminaButton.IsLoading), RelativeSource={RelativeSource TemplatedParent}}"
-                                                       LoadingKind="{Binding (lumina:LuminaButton.LoadingKind), RelativeSource={RelativeSource TemplatedParent}}"
-                                                       HorizontalAlignment="Center"
-                                                       VerticalAlignment="Center" />
-                    </Grid>
+                    <lumina:LuminaButtonPresenter Content="{TemplateBinding Content}"
+                                                   ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                   Foreground="{TemplateBinding Foreground}"
+                                                   Icon="{Binding (lumina:LuminaButton.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+                                                   IconTemplate="{Binding (lumina:LuminaButton.IconTemplate), RelativeSource={RelativeSource TemplatedParent}}"
+                                                   IconForeground="{Binding (lumina:LuminaButton.IconForeground), RelativeSource={RelativeSource TemplatedParent}}"
+                                                   SyncIconForeground="{Binding (lumina:LuminaButton.SyncIconForeground), RelativeSource={RelativeSource TemplatedParent}}"
+                                                   IconPlacement="{Binding (lumina:LuminaButton.IconPlacement), RelativeSource={RelativeSource TemplatedParent}}"
+                                                   IconSize="{Binding (lumina:LuminaButton.IconSize), RelativeSource={RelativeSource TemplatedParent}}"
+                                                   IconSpacing="{Binding (lumina:LuminaButton.IconSpacing), RelativeSource={RelativeSource TemplatedParent}}"
+                                                   IsLoading="{Binding (lumina:LuminaButton.IsLoading), RelativeSource={RelativeSource TemplatedParent}}"
+                                                   LoadingKind="{Binding (lumina:LuminaButton.LoadingKind), RelativeSource={RelativeSource TemplatedParent}}"
+                                                   HorizontalAlignment="Stretch"
+                                                   VerticalAlignment="Stretch"
+                                                   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                   VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
                 </Border>
             </ControlTemplate>
         </Setter>
