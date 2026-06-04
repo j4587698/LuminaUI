@@ -67,4 +67,7 @@
   <data name="Lumina.Common.No" xml:space="preserve">
     <value>否</value>
   </data>
+  <data name="Lumina.Menu.About" xml:space="preserve">
+    <value>关于 {0}</value>
+  </data>
 </root>

@@ -4,10 +4,12 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Input;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Threading;
+using LuminaUI.Localization;
 
 namespace LuminaUI.Controls;
 
@@ -323,6 +325,7 @@ public class LuminaWindow : Window
         SyncChromeSlots();
         UpdateWindowMaterial();
         SetWindowContent(_rootSurface);
+        SetupDefaultNativeMenu();
     }
 
     public void RefreshWindowMaterial()
@@ -767,5 +770,112 @@ public class LuminaWindow : Window
             }
         }
         base.OnClosing(e);
+    }
+
+    private static bool s_appMenuInitialized;
+    private static NativeMenuItem? s_aboutMenuItem;
+
+    private void SetupDefaultNativeMenu()
+    {
+        if (!OperatingSystem.IsMacOS() || Application.Current is null || s_appMenuInitialized)
+        {
+            return;
+        }
+
+        s_appMenuInitialized = true;
+
+        // On macOS the "About" entry belongs to the application menu (the bold app-name
+        // menu), which is an application-level menu rather than a per-window one. Avalonia
+        // automatically appends the standard Hide/Services/Quit items after the entries
+        // provided here. See AvaloniaNativeMenuExporter.CreateDefaultAppMenu for reference.
+        s_aboutMenuItem = new NativeMenuItem();
+        UpdateDefaultAboutHeader(null, EventArgs.Empty);
+        s_aboutMenuItem.Click += OnSharedAboutRequested;
+        LuminaLocalization.LanguageChanged += UpdateDefaultAboutHeader;
+
+        var appMenu = new NativeMenu();
+        appMenu.Add(s_aboutMenuItem);
+        NativeMenu.SetMenu(Application.Current, appMenu);
+    }
+
+    private static void UpdateDefaultAboutHeader(object? sender, EventArgs e)
+    {
+        if (s_aboutMenuItem != null)
+        {
+            s_aboutMenuItem.Header = string.Format(
+                LuminaLocalization.Get(LuminaLocalizationKeys.MenuAbout),
+                ResolveApplicationDisplayName() ?? "Application");
+        }
+    }
+
+    private static void OnSharedAboutRequested(object? sender, EventArgs e)
+    {
+        ResolveActiveLuminaWindow()?.ShowDefaultAboutDialog();
+    }
+
+    private static LuminaWindow? ResolveActiveLuminaWindow()
+    {
+        if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            foreach (var window in desktop.Windows)
+            {
+                if (window.IsActive && window is LuminaWindow active)
+                {
+                    return active;
+                }
+            }
+
+            if (desktop.MainWindow is LuminaWindow main)
+            {
+                return main;
+            }
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Creates the UI content for the default About dialog.
+    /// Override this method to provide a custom UI layout instead of the default text.
+    /// </summary>
+    protected virtual object? CreateDefaultAboutDialogContent()
+    {
+        var appName = ResolveApplicationDisplayName() ?? "Application";
+        var stack = new StackPanel { Spacing = 8, Margin = new Thickness(16) };
+
+        stack.Children.Add(new TextBlock
+        {
+            Text = appName,
+            FontSize = 20,
+            FontWeight = FontWeight.Bold
+        });
+
+        stack.Children.Add(new TextBlock
+        {
+            Text = "Based on LuminaUI Framework",
+            TextWrapping = TextWrapping.Wrap
+        });
+
+        return stack;
+    }
+
+    /// <summary>
+    /// Shows the default About dialog for this window. Override to provide a completely custom dialog,
+    /// or override <see cref="CreateDefaultAboutDialogContent"/> to only customize its content.
+    /// </summary>
+    protected virtual void ShowDefaultAboutDialog()
+    {
+        var appName = ResolveApplicationDisplayName() ?? "Application";
+
+        var dialog = new LuminaWindowDialog
+        {
+            Title = string.Format(LuminaLocalization.Get(LuminaLocalizationKeys.MenuAbout), appName),
+            Content = CreateDefaultAboutDialogContent(),
+            Buttons = LuminaDialogButtons.Ok,
+            SizeToContent = SizeToContent.WidthAndHeight,
+            WindowStartupLocation = WindowStartupLocation.CenterOwner
+        };
+
+        _ = dialog.ShowDialog<LuminaDialogResult>(this);
     }
 }

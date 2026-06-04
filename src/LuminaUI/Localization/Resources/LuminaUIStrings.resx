@@ -63,4 +63,7 @@
   <data name="Lumina.Common.No" xml:space="preserve">
     <value>No</value>
   </data>
+  <data name="Lumina.Menu.About" xml:space="preserve">
+    <value>About {0}</value>
+  </data>
 </root>

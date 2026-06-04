@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
 using Avalonia.Interactivity;
@@ -51,6 +52,11 @@ public partial class MainWindow : LuminaWindow
             LuminaMessageBoxIcon.Question);
 
         return result == LuminaDialogResult.Yes;
+    }
+
+    protected override object? CreateDefaultAboutDialogContent()
+    {
+        return new LuminaUI.Demo.Views.Popups.AboutDialogView();
     }
 
     private void OnLanguageChanged(object? sender, EventArgs e)
