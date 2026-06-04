@@ -3,7 +3,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="300"
-             x:Class="LuminaUI.Demo.Views.Popups.AboutDialogView">
+             x:Class="LuminaUI.Demo.Views.Popups.AboutDialogView"
+             x:Name="Root">
              
     <StackPanel Spacing="16" Margin="24" MinWidth="320">
         <!-- Brand logo -->
@@ -25,7 +26,7 @@
 
         <!-- Version Info -->
         <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
-            <TextBlock Text="Version 1.0.0" Opacity="0.6" />
+            <TextBlock Text="{Binding AppVersion, ElementName=Root}" Opacity="0.6" />
             <TextBlock Text="•" Opacity="0.4" />
             <TextBlock Text="Avalonia 12" Opacity="0.6" />
         </StackPanel>

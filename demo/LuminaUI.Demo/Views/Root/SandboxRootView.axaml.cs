@@ -112,29 +112,10 @@ public partial class SandboxRootView : UserControl
 
     public void ShowAboutDialog()
     {
-        var content = new StackPanel
-        {
-            Spacing = 8,
-            MaxWidth = 360
-        };
-
-        content.Children.Add(new TextBlock
-        {
-            Text = LuminaLocalization.Get(SandboxLocalization.AppTitle),
-            FontSize = 20,
-            FontWeight = FontWeight.Bold
-        });
-
-        content.Children.Add(new TextBlock
-        {
-            Text = LuminaLocalization.Get(SandboxLocalization.MenuActionAboutMessage),
-            TextWrapping = TextWrapping.Wrap
-        });
-
         RootTopView.ShowDialog(new LuminaDialog
         {
             Title = LuminaLocalization.Get(SandboxLocalization.MenuAbout),
-            Content = content
+            Content = new LuminaUI.Demo.Views.Popups.AboutDialogView()
         });
     }
 
