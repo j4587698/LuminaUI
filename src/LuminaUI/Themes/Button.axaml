@@ -128,6 +128,7 @@
             <Setter Property="CornerRadius" Value="5" />
             <Setter Property="Height" Value="28" />
             <Setter Property="MinHeight" Value="28" />
+            <Setter Property="(lumina:LuminaButton.IconSize)" Value="14" />
         </Style>
         
         <Style Selector="^.Large">
@@ -136,6 +137,7 @@
             <Setter Property="CornerRadius" Value="8" />
             <Setter Property="Height" Value="48" />
             <Setter Property="MinHeight" Value="48" />
+            <Setter Property="(lumina:LuminaButton.IconSize)" Value="20" />
         </Style>
 
         <Style Selector="^.Icon">
@@ -149,6 +151,7 @@
             <Setter Property="Height" Value="28" />
             <Setter Property="FontSize" Value="12" />
             <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="(lumina:LuminaButton.IconSize)" Value="14" />
         </Style>
 
         <Style Selector="^.Large.Icon">
@@ -156,6 +159,7 @@
             <Setter Property="Height" Value="48" />
             <Setter Property="FontSize" Value="16" />
             <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="(lumina:LuminaButton.IconSize)" Value="20" />
         </Style>
 
         <Style Selector="^.LuminaInputGroupItem">

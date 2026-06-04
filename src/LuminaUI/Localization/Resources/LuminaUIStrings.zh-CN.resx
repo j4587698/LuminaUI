@@ -61,4 +61,10 @@
   <data name="Lumina.Picker.TimeSummaryFormat12Hour" xml:space="preserve"><value>tt h:mm</value></data>
   <data name="Lumina.Picker.TimeSummaryFormat12HourSeconds" xml:space="preserve"><value>tt h:mm:ss</value></data>
   <data name="Lumina.Picker.Year" xml:space="preserve"><value>年</value></data>
+  <data name="Lumina.Common.Yes" xml:space="preserve">
+    <value>是</value>
+  </data>
+  <data name="Lumina.Common.No" xml:space="preserve">
+    <value>否</value>
+  </data>
 </root>

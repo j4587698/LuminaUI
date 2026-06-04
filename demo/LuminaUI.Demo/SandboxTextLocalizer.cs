@@ -14,7 +14,7 @@ internal static class SandboxTextLocalizer
 {
 	private static readonly Lazy<Dictionary<string, string>> Lookup = new Lazy<Dictionary<string, string>>(CreateLookup);
 
-	private static readonly string[] TextKeys = new string[1325]
+	private static readonly string[] TextKeys = new string[1364]
 	{
 		"Sandbox.Text.0001", "Sandbox.Text.0002", "Sandbox.Text.0003", "Sandbox.Text.0004", "Sandbox.Text.0005", "Sandbox.Text.0006", "Sandbox.Text.0007", "Sandbox.Text.0008", "Sandbox.Text.0009", "Sandbox.Text.0010",
 		"Sandbox.Text.0011", "Sandbox.Text.0012", "Sandbox.Text.0013", "Sandbox.Text.0014", "Sandbox.Text.0015", "Sandbox.Text.0016", "Sandbox.Text.0017", "Sandbox.Text.0018", "Sandbox.Text.0019", "Sandbox.Text.0020",
@@ -148,7 +148,11 @@ internal static class SandboxTextLocalizer
 		"Sandbox.Text.1291", "Sandbox.Text.1292", "Sandbox.Text.1293", "Sandbox.Text.1294", "Sandbox.Text.1295", "Sandbox.Text.1296", "Sandbox.Text.1297", "Sandbox.Text.1298", "Sandbox.Text.1299", "Sandbox.Text.1300",
 		"Sandbox.Text.1301", "Sandbox.Text.1302", "Sandbox.Text.1303", "Sandbox.Text.1304", "Sandbox.Text.1305", "Sandbox.Text.1306", "Sandbox.Text.1307", "Sandbox.Text.1308", "Sandbox.Text.1309", "Sandbox.Text.1310",
 		"Sandbox.Text.1311", "Sandbox.Text.1312", "Sandbox.Text.1313", "Sandbox.Text.1314", "Sandbox.Text.1315", "Sandbox.Text.1316", "Sandbox.Text.1317", "Sandbox.Text.1318", "Sandbox.Text.1319", "Sandbox.Text.1320",
-		"Sandbox.Text.1321", "Sandbox.Text.1322", "Sandbox.Text.1323", "Sandbox.Text.1324", "Sandbox.Text.1325"
+		"Sandbox.Text.1321", "Sandbox.Text.1322", "Sandbox.Text.1323", "Sandbox.Text.1324", "Sandbox.Text.1325",
+		"Sandbox.Text.1326", "Sandbox.Text.1327", "Sandbox.Text.1328", "Sandbox.Text.1329", "Sandbox.Text.1330", "Sandbox.Text.1331", "Sandbox.Text.1332", "Sandbox.Text.1333", "Sandbox.Text.1334", "Sandbox.Text.1335", 
+		"Sandbox.Text.1336", "Sandbox.Text.1337", "Sandbox.Text.1338", "Sandbox.Text.1339", "Sandbox.Text.1340", "Sandbox.Text.1341", "Sandbox.Text.1342", "Sandbox.Text.1343", "Sandbox.Text.1344", "Sandbox.Text.1345", 
+		"Sandbox.Text.1346", "Sandbox.Text.1347", "Sandbox.Text.1348", "Sandbox.Text.1349", "Sandbox.Text.1350", "Sandbox.Text.1351", "Sandbox.Text.1352", "Sandbox.Text.1353", "Sandbox.Text.1354", "Sandbox.Text.1355", 
+		"Sandbox.Text.1356", "Sandbox.Text.1357", "Sandbox.Text.1358", "Sandbox.Text.1359", "Sandbox.Text.1360", "Sandbox.Text.1361", "Sandbox.Text.1362", "Sandbox.Text.1363", "Sandbox.Text.1364"
 	};
 
 	public static void Apply(object? root)

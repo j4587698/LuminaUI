@@ -124,6 +124,7 @@
                         <lumina:LuminaNavigationItem Name="NavPatternsGroup" Header="{DynamicResource Sandbox.Nav.Patterns}" Icon="PT">
                             <lumina:LuminaNavigationItem Name="NavMenus" Classes="Child" Header="{DynamicResource Sandbox.Nav.Menus}" Icon="MN" />
                             <lumina:LuminaNavigationItem Name="NavOverlays" Classes="Child" Header="{DynamicResource Sandbox.Nav.Overlays}" Icon="OV" />
+                            <lumina:LuminaNavigationItem Name="NavWindowDialogs" Classes="Child" Header="{DynamicResource Sandbox.Nav.WindowDialogs}" Icon="WD" />
                             <lumina:LuminaNavigationItem Name="NavLayout" Classes="Child" Header="{DynamicResource Sandbox.Nav.Layout}" Icon="LY" />
                             <lumina:LuminaNavigationItem Name="NavMotion" Classes="Child" Header="{DynamicResource Sandbox.Text.1313}" Icon="HM" />
                             <lumina:LuminaNavigationItem Name="NavMobileRoot" Classes="Child" Header="{DynamicResource Sandbox.Text.0836}" Icon="MO" />

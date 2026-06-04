@@ -703,13 +703,23 @@ public class LuminaWindow : Window
             Size layoutSize = Bounds.Size;
             double width = (layoutSize.Width > 0.0) ? layoutSize.Width : ClientSize.Width;
             double height = (layoutSize.Height > 0.0) ? layoutSize.Height : ClientSize.Height;
-            if (width > 0.0)
+            
+            if (width > 0.0 && SizeToContent != SizeToContent.Width && SizeToContent != SizeToContent.WidthAndHeight)
             {
                 _rootSurface.Width = width;
             }
-            if (height > 0.0)
+            else
+            {
+                _rootSurface.Width = double.NaN;
+            }
+            
+            if (height > 0.0 && SizeToContent != SizeToContent.Height && SizeToContent != SizeToContent.WidthAndHeight)
             {
                 _rootSurface.Height = height;
+            }
+            else
+            {
+                _rootSurface.Height = double.NaN;
             }
         }
     }

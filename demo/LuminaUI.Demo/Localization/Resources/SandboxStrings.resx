@@ -234,6 +234,9 @@
   <data name="Sandbox.Nav.Overlays" xml:space="preserve">
     <value>Overlays</value>
   </data>
+  <data name="Sandbox.Nav.WindowDialogs" xml:space="preserve">
+    <value>Window Dialogs</value>
+  </data>
   <data name="Sandbox.Nav.Layout" xml:space="preserve">
     <value>Layout Helpers</value>
   </data>

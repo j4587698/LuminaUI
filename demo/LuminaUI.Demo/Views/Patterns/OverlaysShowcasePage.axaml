@@ -95,6 +95,11 @@
                       Classes="Outline"
                       Margin="0,0,10,10"
                       Command="{Binding OpenTopDialogCommand}"/>
+              <Button Name="OpenWindowDialogButton"
+                      Content="PC Native Dialog"
+                      Classes="Outline"
+                      Margin="0,0,10,10"
+                      Command="{Binding OpenWindowDialogCommand}"/>
             </WrapPanel>
           </StackPanel>
         </lumina:LuminaCard>

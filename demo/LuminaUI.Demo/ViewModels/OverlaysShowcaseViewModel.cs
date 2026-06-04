@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Threading;
@@ -69,7 +70,37 @@ public partial class OverlaysShowcaseViewModel : ObservableObject
             Content = content
         };
         SandboxTextLocalizer.Apply(dialog);
+        SandboxTextLocalizer.Apply(dialog);
         topView.ShowDialog(dialog);
+    }
+
+    [RelayCommand]
+    private async Task OpenWindowDialog()
+    {
+        var window = TopLevel.GetTopLevel(_owner) as Window;
+        if (window == null) return;
+        
+        var dialog = new LuminaWindowDialog
+        {
+            Title = "PC Native Window Dialog",
+            ConfirmButtonText = "Confirm Action",
+            ConfirmButtonTheme = "Danger",
+            CancelButtonText = "Cancel",
+            ShowFooter = true,
+            SizeToContent = SizeToContent.WidthAndHeight,
+            WindowStartupLocation = WindowStartupLocation.CenterOwner
+        };
+        
+        var content = new StackPanel { Margin = new Avalonia.Thickness(24) };
+        content.Children.Add(new TextBlock 
+        { 
+            Text = "This is a real OS window dialog, you can drag it out of the main window.",
+            FontSize = 16
+        });
+        
+        dialog.Content = content;
+        
+        await dialog.ShowDialog<bool>(window);
     }
 
     [RelayCommand]

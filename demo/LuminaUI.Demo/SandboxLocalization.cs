@@ -181,6 +181,8 @@ internal static class SandboxLocalization
 
 	public const string NavOverlays = "Sandbox.Nav.Overlays";
 
+	public const string NavWindowDialogs = "Sandbox.Nav.WindowDialogs";
+
 	public const string NavLayout = "Sandbox.Nav.Layout";
 
 	public const string NavLogin = "Sandbox.Nav.Login";

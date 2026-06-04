@@ -3948,4 +3948,121 @@
   <data name="Sandbox.Text.1325" xml:space="preserve">
     <value>ViewModel</value>
   </data>
+  <data name="Sandbox.Text.1326" xml:space="preserve">
+    <value>Window Dialogs</value>
+  </data>
+  <data name="Sandbox.Text.1327" xml:space="preserve">
+    <value>Native OS-level modal windows with customizable buttons, ideal for traditional desktop applications requiring deep user attention.</value>
+  </data>
+  <data name="Sandbox.Text.1328" xml:space="preserve">
+    <value>Standard MessageBox</value>
+  </data>
+  <data name="Sandbox.Text.1329" xml:space="preserve">
+    <value>Pre-configured button groups (OkCancel, YesNo) triggered via a single line of C# code.</value>
+  </data>
+  <data name="Sandbox.Text.1330" xml:space="preserve">
+    <value>Show OkCancel</value>
+  </data>
+  <data name="Sandbox.Text.1331" xml:space="preserve">
+    <value>Show YesNo</value>
+  </data>
+  <data name="Sandbox.Text.1332" xml:space="preserve">
+    <value>Show Danger Action</value>
+  </data>
+  <data name="Sandbox.Text.1333" xml:space="preserve">
+    <value>Form Input &amp; Select</value>
+  </data>
+  <data name="Sandbox.Text.1334" xml:space="preserve">
+    <value>Embed any XAML content inside the dialog, like inputs, comboboxes or complex forms.</value>
+  </data>
+  <data name="Sandbox.Text.1335" xml:space="preserve">
+    <value>Select Options Dialog</value>
+  </data>
+  <data name="Sandbox.Text.1336" xml:space="preserve">
+    <value>Data Entry Form</value>
+  </data>
+  <data name="Sandbox.Text.1337" xml:space="preserve">
+    <value>Custom Footer Layouts</value>
+  </data>
+  <data name="Sandbox.Text.1338" xml:space="preserve">
+    <value>Override the footer with completely custom templates or hide it completely.</value>
+  </data>
+  <data name="Sandbox.Text.1339" xml:space="preserve">
+    <value>Custom Footer Template</value>
+  </data>
+  <data name="Sandbox.Text.1340" xml:space="preserve">
+    <value>No Footer (ShowFooter=False)</value>
+  </data>
+  <data name="Sandbox.Text.1341" xml:space="preserve">
+    <value>Save Changes</value>
+  </data>
+  <data name="Sandbox.Text.1342" xml:space="preserve">
+    <value>Do you want to save the changes before closing this document?</value>
+  </data>
+  <data name="Sandbox.Text.1343" xml:space="preserve">
+    <value>Result</value>
+  </data>
+  <data name="Sandbox.Text.1344" xml:space="preserve">
+    <value>Network Request</value>
+  </data>
+  <data name="Sandbox.Text.1345" xml:space="preserve">
+    <value>This action requires connecting to the internet. Continue?</value>
+  </data>
+  <data name="Sandbox.Text.1346" xml:space="preserve">
+    <value>Delete Repository</value>
+  </data>
+  <data name="Sandbox.Text.1347" xml:space="preserve">
+    <value>Are you sure you want to permanently delete this repository? This action cannot be undone.</value>
+  </data>
+  <data name="Sandbox.Text.1348" xml:space="preserve">
+    <value>Select Option</value>
+  </data>
+  <data name="Sandbox.Text.1349" xml:space="preserve">
+    <value>Please select an environment to deploy to:</value>
+  </data>
+  <data name="Sandbox.Text.1350" xml:space="preserve">
+    <value>Selected</value>
+  </data>
+  <data name="Sandbox.Text.1351" xml:space="preserve">
+    <value>Deployment Cancelled</value>
+  </data>
+  <data name="Sandbox.Text.1352" xml:space="preserve">
+    <value>New User Profile</value>
+  </data>
+  <data name="Sandbox.Text.1353" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="Sandbox.Text.1354" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="Sandbox.Text.1355" xml:space="preserve">
+    <value>Enter username</value>
+  </data>
+  <data name="Sandbox.Text.1356" xml:space="preserve">
+    <value>Email Address</value>
+  </data>
+  <data name="Sandbox.Text.1357" xml:space="preserve">
+    <value>Enter email</value>
+  </data>
+  <data name="Sandbox.Text.1358" xml:space="preserve">
+    <value>Form Result</value>
+  </data>
+  <data name="Sandbox.Text.1359" xml:space="preserve">
+    <value>This dialog uses a completely custom footer element provided via the Footer property.</value>
+  </data>
+  <data name="Sandbox.Text.1360" xml:space="preserve">
+    <value>I Understand</value>
+  </data>
+  <data name="Sandbox.Text.1361" xml:space="preserve">
+    <value>No Footer</value>
+  </data>
+  <data name="Sandbox.Text.1362" xml:space="preserve">
+    <value>This dialog has ShowFooter=False. You can build your own buttons inside the content area.</value>
+  </data>
+  <data name="Sandbox.Text.1363" xml:space="preserve">
+    <value>Close Window</value>
+  </data>
+  <data name="Sandbox.Text.1364" xml:space="preserve">
+    <value>Show YesNoCancel</value>
+  </data>
 </root>

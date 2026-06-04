@@ -1,0 +1,85 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.WindowDialogShowcasePage"
+             x:DataType="vm:WindowDialogShowcaseViewModel">
+
+  <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+    <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" Margin="0,0,0,24">
+      
+      <!-- Header -->
+      <StackPanel Spacing="8" MaxWidth="760">
+        <TextBlock Text="Window Dialogs" Classes="Display"/>
+        <TextBlock Text="Native OS-level modal windows with customizable buttons, ideal for traditional desktop applications requiring deep user attention."
+                   Classes="Body" Foreground="{DynamicResource LuminaTextSecondaryBrush}" TextWrapping="Wrap"/>
+      </StackPanel>
+
+      <lumina:LuminaResponsivePanel MinItemWidth="280" MaxItemWidth="520" HorizontalSpacing="16" VerticalSpacing="16">
+        
+        <!-- Standard Message Boxes -->
+        <lumina:LuminaCard Padding="18" Classes="Glass">
+          <StackPanel Spacing="16">
+            <StackPanel Spacing="6">
+              <TextBlock Text="Standard MessageBox" FontSize="20" FontWeight="SemiBold"/>
+              <TextBlock Text="Pre-configured button groups (OkCancel, YesNo) triggered via a single line of C# code."
+                         Foreground="{DynamicResource LuminaTextSecondaryBrush}" TextWrapping="Wrap"/>
+            </StackPanel>
+
+            <WrapPanel>
+              <Button Content="Show OkCancel" Classes="Outline" Margin="0,0,10,10"
+                      Command="{Binding ShowOkCancelCommand}"/>
+              <Button Content="Show YesNo" Classes="Outline" Margin="0,0,10,10"
+                      Command="{Binding ShowYesNoCommand}"/>
+              <Button Content="Show YesNoCancel" Classes="Outline" Margin="0,0,10,10"
+                      Command="{Binding ShowYesNoCancelCommand}"/>
+              <Button Content="Show Danger Action" Classes="Outline Danger" Margin="0,0,10,10"
+                      Command="{Binding ShowDangerCommand}"/>
+            </WrapPanel>
+            
+            <TextBlock Text="{Binding MessageBoxResultText}" Foreground="{DynamicResource LuminaTextSecondaryBrush}"/>
+          </StackPanel>
+        </lumina:LuminaCard>
+
+        <!-- Custom Content / Form Input -->
+        <lumina:LuminaCard Padding="18" Classes="Glass">
+          <StackPanel Spacing="16">
+            <StackPanel Spacing="6">
+              <TextBlock Text="Form Input &amp; Select" FontSize="20" FontWeight="SemiBold"/>
+              <TextBlock Text="Embed any XAML content inside the dialog, like inputs, comboboxes or complex forms."
+                         Foreground="{DynamicResource LuminaTextSecondaryBrush}" TextWrapping="Wrap"/>
+            </StackPanel>
+
+            <WrapPanel>
+              <Button Content="Select Options Dialog" Classes="Outline" Margin="0,0,10,10"
+                      Command="{Binding ShowSelectDialogCommand}"/>
+              <Button Content="Data Entry Form" Classes="Primary" Margin="0,0,10,10"
+                      Command="{Binding ShowFormDialogCommand}"/>
+            </WrapPanel>
+            
+            <TextBlock Text="{Binding CustomResultText}" Foreground="{DynamicResource LuminaTextSecondaryBrush}"/>
+          </StackPanel>
+        </lumina:LuminaCard>
+
+        <!-- Fully Custom Footer & No Footer -->
+        <lumina:LuminaCard Padding="18" Classes="Glass">
+          <StackPanel Spacing="16">
+            <StackPanel Spacing="6">
+              <TextBlock Text="Custom Footer Layouts" FontSize="20" FontWeight="SemiBold"/>
+              <TextBlock Text="Override the footer with completely custom templates or hide it completely."
+                         Foreground="{DynamicResource LuminaTextSecondaryBrush}" TextWrapping="Wrap"/>
+            </StackPanel>
+
+            <WrapPanel>
+              <Button Content="Custom Footer Template" Classes="Outline" Margin="0,0,10,10"
+                      Command="{Binding ShowCustomFooterCommand}"/>
+              <Button Content="No Footer (ShowFooter=False)" Classes="Outline" Margin="0,0,10,10"
+                      Command="{Binding ShowNoFooterCommand}"/>
+            </WrapPanel>
+          </StackPanel>
+        </lumina:LuminaCard>
+
+      </lumina:LuminaResponsivePanel>
+    </StackPanel>
+  </ScrollViewer>
+</ContentPage>

@@ -75,6 +75,7 @@ public partial class SandboxRootView : UserControl
         "NavTabsExpanders",
         "NavMenus",
         "NavOverlays",
+        "NavWindowDialogs",
         "NavLayout",
         "NavMotion",
         "NavMobileRoot",
@@ -256,6 +257,7 @@ public partial class SandboxRootView : UserControl
 
             "NavMenus" => new MenuFlyoutShowcasePage(),
             "NavOverlays" => new OverlaysShowcasePage(),
+            "NavWindowDialogs" => new WindowDialogShowcasePage(),
             "NavLayout" => new LayoutShowcasePage(),
             "NavMotion" => new MotionShowcasePage(),
             "NavMobileRoot" => new MobileRootShowcasePage(),
@@ -332,6 +334,7 @@ public partial class SandboxRootView : UserControl
 
             "NavMenus" => Source("Patterns/MenuFlyoutShowcasePage", StaticShowcaseViewModel),
             "NavOverlays" => Source("Patterns/OverlaysShowcasePage", "OverlaysShowcaseViewModel"),
+            "NavWindowDialogs" => Source("Popups/WindowDialogShowcasePage", "WindowDialogShowcaseViewModel"),
             "NavLayout" => Source("Patterns/LayoutShowcasePage", StaticShowcaseViewModel),
             "NavMotion" => Source("Patterns/MotionShowcasePage", "MotionShowcaseViewModel"),
             "NavMobileRoot" => Source("Patterns/MobileRootShowcasePage", StaticShowcaseViewModel),

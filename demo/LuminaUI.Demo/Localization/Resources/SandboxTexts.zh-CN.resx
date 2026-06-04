@@ -3948,4 +3948,121 @@
   <data name="Sandbox.Text.1325" xml:space="preserve">
     <value>视图模型</value>
   </data>
+  <data name="Sandbox.Text.1326" xml:space="preserve">
+    <value>窗口弹窗</value>
+  </data>
+  <data name="Sandbox.Text.1327" xml:space="preserve">
+    <value>原生系统级模态窗口，可自定义按钮，非常适合需要用户深度关注的传统桌面应用程序。</value>
+  </data>
+  <data name="Sandbox.Text.1328" xml:space="preserve">
+    <value>标准消息框</value>
+  </data>
+  <data name="Sandbox.Text.1329" xml:space="preserve">
+    <value>只需一行C#代码即可触发预配置的按钮组（确定/取消，是/否）。</value>
+  </data>
+  <data name="Sandbox.Text.1330" xml:space="preserve">
+    <value>显示确认/取消</value>
+  </data>
+  <data name="Sandbox.Text.1331" xml:space="preserve">
+    <value>显示是/否</value>
+  </data>
+  <data name="Sandbox.Text.1332" xml:space="preserve">
+    <value>显示危险操作</value>
+  </data>
+  <data name="Sandbox.Text.1333" xml:space="preserve">
+    <value>表单输入与选择</value>
+  </data>
+  <data name="Sandbox.Text.1334" xml:space="preserve">
+    <value>在对话框中嵌入任何XAML内容，如输入框、下拉框或复杂的表单。</value>
+  </data>
+  <data name="Sandbox.Text.1335" xml:space="preserve">
+    <value>选择选项弹窗</value>
+  </data>
+  <data name="Sandbox.Text.1336" xml:space="preserve">
+    <value>数据录入表单</value>
+  </data>
+  <data name="Sandbox.Text.1337" xml:space="preserve">
+    <value>自定义底部布局</value>
+  </data>
+  <data name="Sandbox.Text.1338" xml:space="preserve">
+    <value>使用完全自定义的模板覆盖底部区域，或完全隐藏它。</value>
+  </data>
+  <data name="Sandbox.Text.1339" xml:space="preserve">
+    <value>自定义底部模板</value>
+  </data>
+  <data name="Sandbox.Text.1340" xml:space="preserve">
+    <value>无底部区域 (ShowFooter=False)</value>
+  </data>
+  <data name="Sandbox.Text.1341" xml:space="preserve">
+    <value>保存更改</value>
+  </data>
+  <data name="Sandbox.Text.1342" xml:space="preserve">
+    <value>您要在关闭此文档之前保存更改吗？</value>
+  </data>
+  <data name="Sandbox.Text.1343" xml:space="preserve">
+    <value>结果</value>
+  </data>
+  <data name="Sandbox.Text.1344" xml:space="preserve">
+    <value>网络请求</value>
+  </data>
+  <data name="Sandbox.Text.1345" xml:space="preserve">
+    <value>此操作需要连接到互联网。继续吗？</value>
+  </data>
+  <data name="Sandbox.Text.1346" xml:space="preserve">
+    <value>删除仓库</value>
+  </data>
+  <data name="Sandbox.Text.1347" xml:space="preserve">
+    <value>您确定要永久删除此仓库吗？此操作无法撤销。</value>
+  </data>
+  <data name="Sandbox.Text.1348" xml:space="preserve">
+    <value>选择选项</value>
+  </data>
+  <data name="Sandbox.Text.1349" xml:space="preserve">
+    <value>请选择要部署的环境：</value>
+  </data>
+  <data name="Sandbox.Text.1350" xml:space="preserve">
+    <value>已选</value>
+  </data>
+  <data name="Sandbox.Text.1351" xml:space="preserve">
+    <value>部署已取消</value>
+  </data>
+  <data name="Sandbox.Text.1352" xml:space="preserve">
+    <value>新用户档案</value>
+  </data>
+  <data name="Sandbox.Text.1353" xml:space="preserve">
+    <value>创建</value>
+  </data>
+  <data name="Sandbox.Text.1354" xml:space="preserve">
+    <value>用户名</value>
+  </data>
+  <data name="Sandbox.Text.1355" xml:space="preserve">
+    <value>输入用户名</value>
+  </data>
+  <data name="Sandbox.Text.1356" xml:space="preserve">
+    <value>电子邮件地址</value>
+  </data>
+  <data name="Sandbox.Text.1357" xml:space="preserve">
+    <value>输入电子邮件</value>
+  </data>
+  <data name="Sandbox.Text.1358" xml:space="preserve">
+    <value>表单结果</value>
+  </data>
+  <data name="Sandbox.Text.1359" xml:space="preserve">
+    <value>此弹窗使用通过 Footer 属性提供的完全自定义的底部元素。</value>
+  </data>
+  <data name="Sandbox.Text.1360" xml:space="preserve">
+    <value>我明白了</value>
+  </data>
+  <data name="Sandbox.Text.1361" xml:space="preserve">
+    <value>无底部区域</value>
+  </data>
+  <data name="Sandbox.Text.1362" xml:space="preserve">
+    <value>此弹窗的 ShowFooter=False。您可以在内容区域内构建自己的按钮。</value>
+  </data>
+  <data name="Sandbox.Text.1363" xml:space="preserve">
+    <value>关闭窗口</value>
+  </data>
+  <data name="Sandbox.Text.1364" xml:space="preserve">
+    <value>显示是/否/取消</value>
+  </data>
 </root>

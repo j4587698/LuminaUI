@@ -14,6 +14,10 @@ public static class LuminaLocalizationKeys
 
     public const string CommonDone = "Lumina.Common.Done";
 
+    public const string CommonYes = "Lumina.Common.Yes";
+
+    public const string CommonNo = "Lumina.Common.No";
+
     public const string ActionMenuTitle = "Lumina.ActionMenu.Title";
 
     public const string PageLoading = "Lumina.Page.Loading";
