@@ -1,3 +1,5 @@
+using System;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
 using Avalonia.Interactivity;
@@ -37,6 +39,18 @@ public partial class MainWindow : LuminaWindow
         LuminaThemeManager.ThemeModeChanged -= OnThemeModeChanged;
         ActualThemeVariantChanged -= OnActualThemeVariantChanged;
         base.OnClosed(e);
+    }
+
+    protected override async Task<bool> CanClose()
+    {
+        var result = await LuminaWindowMessageBox.ShowAsync(
+            this,
+            SandboxTextLocalizer.Localize("Confirm Exit"),
+            SandboxTextLocalizer.Localize("Are you sure you want to exit the application?"),
+            LuminaDialogButtons.YesNo,
+            LuminaMessageBoxIcon.Question);
+
+        return result == LuminaDialogResult.Yes;
     }
 
     private void OnLanguageChanged(object? sender, EventArgs e)

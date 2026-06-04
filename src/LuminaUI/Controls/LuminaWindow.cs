@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using Avalonia;
@@ -45,6 +46,8 @@ public class LuminaWindow : Window
     private bool _fullScreenTitleBarVisible;
 
     private bool _settingInternalContent;
+
+    private bool _canClose;
 
     public static readonly StyledProperty<object?> TitleBarLeftContentProperty = AvaloniaProperty.Register<LuminaWindow, object?>(nameof(TitleBarLeftContent));
 
@@ -735,5 +738,34 @@ public class LuminaWindow : Window
         {
             _settingInternalContent = false;
         }
+    }
+
+    /// <summary>
+    /// Determines whether the window can close.
+    /// Override this method to show a confirmation dialog asynchronously before closing.
+    /// </summary>
+    /// <returns>A task that resolves to true if the window can close; otherwise, false.</returns>
+    protected virtual async Task<bool> CanClose()
+    {
+        return await Task.FromResult(true);
+    }
+
+    /// <summary>
+    /// Handles the window closing event and allows asynchronous cancellation.
+    /// </summary>
+    /// <param name="e">The event arguments for the closing event.</param>
+    protected override async void OnClosing(WindowClosingEventArgs e)
+    {
+        if (!_canClose)
+        {
+            e.Cancel = true;
+            _canClose = await CanClose();
+            if (_canClose)
+            {
+                Close();
+                return;
+            }
+        }
+        base.OnClosing(e);
     }
 }
