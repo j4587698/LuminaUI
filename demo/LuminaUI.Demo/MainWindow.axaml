@@ -13,12 +13,13 @@
                      ExtendedSystemButtonMode="Auto"
                      UseWindowGlass="True"
                      ShowPinButton="True"
-                     ShowFullScreenButton="True">
+                     ShowFullScreenButton="True"
+                     Icon="avares://LuminaUI.Demo/Assets/logo.png">
 
     <lumina:LuminaWindow.TitleBarLeftContent>
         <StackPanel Orientation="Horizontal" Spacing="12">
             <StackPanel x:Name="TitleBarBrand" Orientation="Horizontal" Spacing="12">
-                <Border Width="16" Height="16" CornerRadius="4" Background="{DynamicResource LuminaPrimaryBrush}" />
+                <Image Source="avares://LuminaUI.Demo/Assets/logo.png" Width="16" Height="16" />
                 <TextBlock Text="LUMINA APP"
                            FontSize="11"
                            FontWeight="Bold"

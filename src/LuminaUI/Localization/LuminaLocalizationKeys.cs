@@ -20,6 +20,16 @@ public static class LuminaLocalizationKeys
 
     public const string MenuAbout = "Lumina.Menu.About";
 
+    public const string MenuServices = "Lumina.Menu.Services";
+
+    public const string MenuHide = "Lumina.Menu.Hide";
+
+    public const string MenuHideOthers = "Lumina.Menu.HideOthers";
+
+    public const string MenuShowAll = "Lumina.Menu.ShowAll";
+
+    public const string MenuQuit = "Lumina.Menu.Quit";
+
     public const string ActionMenuTitle = "Lumina.ActionMenu.Title";
 
     public const string PageLoading = "Lumina.Page.Loading";

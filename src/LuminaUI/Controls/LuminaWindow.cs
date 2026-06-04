@@ -325,7 +325,6 @@ public class LuminaWindow : Window
         SyncChromeSlots();
         UpdateWindowMaterial();
         SetWindowContent(_rootSurface);
-        SetupDefaultNativeMenu();
     }
 
     public void RefreshWindowMaterial()
@@ -775,7 +774,17 @@ public class LuminaWindow : Window
     private static bool s_appMenuInitialized;
     private static NativeMenuItem? s_aboutMenuItem;
 
-    private void SetupDefaultNativeMenu()
+    /// <summary>
+    /// Installs the default macOS application menu (the bold app-name menu that holds the
+    /// "About" entry). This MUST be called during application startup, before the native
+    /// menu exporter runs its initial layout — i.e. from <see cref="Application.Initialize"/>
+    /// (after <c>AvaloniaXamlLoader.Load</c>). Calling it later (for example from
+    /// <see cref="Application.OnFrameworkInitializationCompleted"/> or a window constructor)
+    /// has no effect, because Avalonia's application-level menu exporter only reads the menu
+    /// once during setup and does not observe later changes to the application menu.
+    /// The call is a no-op on non-macOS platforms and is safe to call multiple times.
+    /// </summary>
+    public static void InstallDefaultApplicationMenu()
     {
         if (!OperatingSystem.IsMacOS() || Application.Current is null || s_appMenuInitialized)
         {
@@ -789,23 +798,111 @@ public class LuminaWindow : Window
         // automatically appends the standard Hide/Services/Quit items after the entries
         // provided here. See AvaloniaNativeMenuExporter.CreateDefaultAppMenu for reference.
         s_aboutMenuItem = new NativeMenuItem();
-        UpdateDefaultAboutHeader(null, EventArgs.Empty);
         s_aboutMenuItem.Click += OnSharedAboutRequested;
-        LuminaLocalization.LanguageChanged += UpdateDefaultAboutHeader;
+        LuminaLocalization.LanguageChanged += OnMenuLanguageChanged;
 
         var appMenu = new NativeMenu();
         appMenu.Add(s_aboutMenuItem);
+
+        // Avalonia's exporter calls PopulateStandardOSXMenuItems on *this* very menu instance,
+        // adding the standard Hide/Hide Others/Show All/Services/Quit items (hard-coded in
+        // English) directly into appMenu.Items after we hand it over. By observing the
+        // collection we can localize those items' headers in place without disabling Avalonia's
+        // default behaviour (so their click handlers keep working) and without any native code.
+        if (appMenu.Items is System.Collections.Specialized.INotifyCollectionChanged observableItems)
+        {
+            observableItems.CollectionChanged += OnAppMenuItemsChanged;
+        }
         NativeMenu.SetMenu(Application.Current, appMenu);
+
+        RefreshLocalizedMenuHeaders();
     }
 
-    private static void UpdateDefaultAboutHeader(object? sender, EventArgs e)
+    // Maps a standard application-menu item to the localization key used for its header, and
+    // whether the header embeds the application display name (e.g. "Hide {App}").
+    private static readonly System.Collections.Generic.List<(NativeMenuItem Item, string Key, bool WithAppName)> s_localizedMenuItems = new();
+
+    private static void OnAppMenuItemsChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+    {
+        if (e.OldItems != null)
+        {
+            foreach (var oldItem in e.OldItems)
+            {
+                if (oldItem is NativeMenuItem removed)
+                {
+                    s_localizedMenuItems.RemoveAll(entry => ReferenceEquals(entry.Item, removed));
+                }
+            }
+        }
+
+        if (e.NewItems != null)
+        {
+            foreach (var newItem in e.NewItems)
+            {
+                if (newItem is NativeMenuItem added)
+                {
+                    TryRegisterStandardMenuItem(added);
+                }
+            }
+        }
+    }
+
+    // Identifies the standard items Avalonia injects (by their hard-coded English headers) and
+    // records the matching localization key so the header can be (re)localized now and whenever
+    // the language changes.
+    private static void TryRegisterStandardMenuItem(NativeMenuItem item)
+    {
+        if (ReferenceEquals(item, s_aboutMenuItem) ||
+            s_localizedMenuItems.Exists(entry => ReferenceEquals(entry.Item, item)))
+        {
+            return;
+        }
+
+        var header = item.Header;
+        if (string.IsNullOrEmpty(header))
+        {
+            return;
+        }
+
+        // Order matters: "Hide Others" must be matched before the "Hide " prefix.
+        (string Key, bool WithAppName)? match = header switch
+        {
+            _ when header.StartsWith("Hide Others", StringComparison.Ordinal) => (LuminaLocalizationKeys.MenuHideOthers, false),
+            _ when header.StartsWith("Show All", StringComparison.Ordinal) => (LuminaLocalizationKeys.MenuShowAll, false),
+            _ when header.StartsWith("Services", StringComparison.Ordinal) => (LuminaLocalizationKeys.MenuServices, false),
+            _ when header.StartsWith("Hide", StringComparison.Ordinal) => (LuminaLocalizationKeys.MenuHide, true),
+            _ when header.StartsWith("Quit", StringComparison.Ordinal) => (LuminaLocalizationKeys.MenuQuit, true),
+            _ => null
+        };
+
+        if (match is { } m)
+        {
+            s_localizedMenuItems.Add((item, m.Key, m.WithAppName));
+            ApplyLocalizedHeader(item, m.Key, m.WithAppName);
+        }
+    }
+
+    private static void OnMenuLanguageChanged(object? sender, EventArgs e) => RefreshLocalizedMenuHeaders();
+
+    private static void RefreshLocalizedMenuHeaders()
     {
         if (s_aboutMenuItem != null)
         {
-            s_aboutMenuItem.Header = string.Format(
-                LuminaLocalization.Get(LuminaLocalizationKeys.MenuAbout),
-                ResolveApplicationDisplayName() ?? "Application");
+            ApplyLocalizedHeader(s_aboutMenuItem, LuminaLocalizationKeys.MenuAbout, withAppName: true);
         }
+
+        foreach (var (item, key, withAppName) in s_localizedMenuItems)
+        {
+            ApplyLocalizedHeader(item, key, withAppName);
+        }
+    }
+
+    private static void ApplyLocalizedHeader(NativeMenuItem item, string key, bool withAppName)
+    {
+        var text = LuminaLocalization.Get(key);
+        item.Header = withAppName
+            ? string.Format(text, ResolveApplicationDisplayName() ?? "Application")
+            : text;
     }
 
     private static void OnSharedAboutRequested(object? sender, EventArgs e)
