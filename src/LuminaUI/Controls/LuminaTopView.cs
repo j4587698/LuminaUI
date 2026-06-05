@@ -57,6 +57,10 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
 
     public static readonly StyledProperty<TimeSpan> ToastDurationProperty = AvaloniaProperty.Register<LuminaTopView, TimeSpan>(nameof(ToastDuration), TimeSpan.FromSeconds(3));
 
+    public static readonly StyledProperty<Thickness> SafeAreaPaddingProperty = AvaloniaProperty.Register<LuminaTopView, Thickness>(nameof(SafeAreaPadding));
+
+    public static readonly StyledProperty<bool> ApplySafeAreaPaddingProperty = AvaloniaProperty.Register<LuminaTopView, bool>(nameof(ApplySafeAreaPadding), defaultValue: true);
+
     public ICommand CloseDialogCommand { get; }
 
     public ICommand CloseBottomSheetCommand { get; }
@@ -111,6 +115,18 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
     {
         get => GetValue(ToastDurationProperty);
         set => SetValue(ToastDurationProperty, value);
+    }
+
+    public Thickness SafeAreaPadding
+    {
+        get => GetValue(SafeAreaPaddingProperty);
+        private set => SetValue(SafeAreaPaddingProperty, value);
+    }
+
+    public bool ApplySafeAreaPadding
+    {
+        get => GetValue(ApplySafeAreaPaddingProperty);
+        set => SetValue(ApplySafeAreaPaddingProperty, value);
     }
 
     public LuminaTopView()
@@ -229,14 +245,33 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
         IsBottomSheetOpen = false;
     }
 
+    private Avalonia.Controls.Platform.IInsetsManager? _insetsManager;
+
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
         RegisterAttachedTopView();
+
+        var topLevel = TopLevel.GetTopLevel(this);
+        if (topLevel != null)
+        {
+            _insetsManager = topLevel.InsetsManager;
+            if (_insetsManager != null)
+            {
+                _insetsManager.SafeAreaChanged += OnSafeAreaChanged;
+                UpdateSafeAreaPadding(_insetsManager.SafeAreaPadding);
+            }
+        }
     }
 
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
+        if (_insetsManager != null)
+        {
+            _insetsManager.SafeAreaChanged -= OnSafeAreaChanged;
+            _insetsManager = null;
+        }
+
         CancelToastHide();
         CancelBottomSheetContentClear();
         DetachOverlayHandlers();
@@ -318,6 +353,20 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
     private static int GetVisualDepth(Control control)
     {
         return control.GetVisualAncestors().Count();
+    }
+
+    private void OnSafeAreaChanged(object? sender, Avalonia.Controls.Platform.SafeAreaChangedArgs e)
+    {
+        UpdateSafeAreaPadding(e.SafeAreaPadding);
+    }
+
+    private void UpdateSafeAreaPadding(Thickness safeAreaPadding)
+    {
+        SafeAreaPadding = safeAreaPadding;
+        if (ApplySafeAreaPadding)
+        {
+            Padding = safeAreaPadding;
+        }
     }
 
     private void OnDialogOverlayPointerPressed(object? sender, PointerPressedEventArgs e)
