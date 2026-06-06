@@ -158,27 +158,30 @@ public sealed class ValueFormatter
         if (type is not null)
             json["type"] = type;
 
-        json["value"] = value switch
-        {
-            null => null,
-            bool boolean => boolean,
-            byte number => number,
-            sbyte number => number,
-            short number => number,
-            ushort number => number,
-            int number => number,
-            uint number => number,
-            long number => number,
-            ulong number => number,
-            float number => number,
-            double number => number,
-            decimal number => number,
-            string text => text,
-            _ => value.ToString()
-        };
+        json["value"] = FormatValue(value);
 
         return json;
     }
+
+    private static JsonNode? FormatValue(object? value) =>
+        value switch
+        {
+            null => null,
+            bool boolean => JsonValue.Create(boolean),
+            byte number => JsonValue.Create(number),
+            sbyte number => JsonValue.Create(number),
+            short number => JsonValue.Create(number),
+            ushort number => JsonValue.Create(number),
+            int number => JsonValue.Create(number),
+            uint number => JsonValue.Create(number),
+            long number => JsonValue.Create(number),
+            ulong number => JsonValue.Create(number),
+            float number => float.IsFinite(number) ? JsonValue.Create(number) : null,
+            double number => double.IsFinite(number) ? JsonValue.Create(number) : null,
+            decimal number => JsonValue.Create(number),
+            string text => JsonValue.Create(text),
+            _ => JsonValue.Create(value.ToString())
+        };
 }
 
 public sealed record ValueFormatOptions

@@ -7,21 +7,23 @@ public static class DiagnosticJson
 {
     public static JsonSerializerOptions Options { get; } = new(DiagnosticJsonContext.Default.Options)
     {
-        TypeInfoResolver = DiagnosticJsonContext.Default
+        MaxDepth = 256
     };
 
+    private static DiagnosticJsonContext Context { get; } = new(Options);
+
     public static string SerializeRequest(DiagnosticRequest request) =>
-        JsonSerializer.Serialize(request, DiagnosticJsonContext.Default.DiagnosticRequest);
+        JsonSerializer.Serialize(request, Context.DiagnosticRequest);
 
     public static string SerializeResponse(DiagnosticResponse response) =>
-        JsonSerializer.Serialize(response, DiagnosticJsonContext.Default.DiagnosticResponse);
+        JsonSerializer.Serialize(response, Context.DiagnosticResponse);
 
     public static DiagnosticRequest DeserializeRequest(string json) =>
-        JsonSerializer.Deserialize(json, DiagnosticJsonContext.Default.DiagnosticRequest)
+        JsonSerializer.Deserialize(json, Context.DiagnosticRequest)
         ?? throw new JsonException("Diagnostic request JSON produced a null value.");
 
     public static DiagnosticResponse DeserializeResponse(string json) =>
-        JsonSerializer.Deserialize(json, DiagnosticJsonContext.Default.DiagnosticResponse)
+        JsonSerializer.Deserialize(json, Context.DiagnosticResponse)
         ?? throw new JsonException("Diagnostic response JSON produced a null value.");
 
     public static bool TryDeserializeRequest(

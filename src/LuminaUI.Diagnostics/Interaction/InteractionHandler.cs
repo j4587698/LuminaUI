@@ -4,6 +4,9 @@ using System.Text.Json.Nodes;
 using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.Interactivity;
+using Avalonia.Threading;
 using LuminaUI.Diagnostics.Controls;
 using LuminaUI.Diagnostics.Dispatch;
 using LuminaUI.Diagnostics.Inspection;
@@ -91,7 +94,7 @@ public sealed class InteractionHandler : IDiagnosticToolHandler
         {
             InteractionKind.Click => Task.FromResult(Click(request)),
             InteractionKind.SetProperty => Task.FromResult(SetProperty(request)),
-            InteractionKind.InputText => Task.FromResult(InputText(request)),
+            InteractionKind.InputText => InputTextAsync(request, cancellationToken),
             InteractionKind.InvokeCommand => Task.FromResult(InvokeCommand(request)),
             InteractionKind.WaitForProperty => WaitForPropertyAsync(request, cancellationToken),
             _ => Task.FromResult(
@@ -107,8 +110,18 @@ public sealed class InteractionHandler : IDiagnosticToolHandler
         if (!lookup.Success)
             return lookup.Response!;
 
-        if (lookup.Control is Button { Command: { } command } button)
+        var control = lookup.Control!;
+        control.Focus();
+
+        if (control is Button button)
         {
+            if (button.Command is null)
+            {
+                button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                return Ok(request, "clickRaised");
+            }
+
+            var command = button.Command;
             var parameter = button.CommandParameter;
             if (!command.CanExecute(parameter))
             {
@@ -122,10 +135,23 @@ public sealed class InteractionHandler : IDiagnosticToolHandler
             return Ok(request, "commandExecuted");
         }
 
-        return DiagnosticResponse.Fail(
-            request.Id,
-            DiagnosticErrorCode.UnsupportedOperation,
-            "Only command-backed Button clicks are currently supported.");
+        if (TryToggleExpandableControl(control, out var expanded))
+        {
+            return Ok(request, expanded ? "expanded" : "collapsed");
+        }
+
+        var commandResponse = TryExecuteCommand(request, control);
+        if (commandResponse is not null)
+        {
+            return commandResponse;
+        }
+
+        if (TryRaiseStaticRoutedEvent(control, "InvokedEvent"))
+        {
+            return Ok(request, "invokedRaised");
+        }
+
+        return Ok(request, "focused");
     }
 
     private DiagnosticResponse SetProperty(DiagnosticRequest request)
@@ -165,7 +191,9 @@ public sealed class InteractionHandler : IDiagnosticToolHandler
         return Ok(request, "propertySet");
     }
 
-    private DiagnosticResponse InputText(DiagnosticRequest request)
+    private async Task<DiagnosticResponse> InputTextAsync(
+        DiagnosticRequest request,
+        CancellationToken cancellationToken)
     {
         var lookup = ResolveRequiredControl(request);
         if (!lookup.Success)
@@ -173,25 +201,46 @@ public sealed class InteractionHandler : IDiagnosticToolHandler
 
         var text = InspectionRequestHelpers.GetString(request.Parameters, "text") ?? "";
         var pressEnter = InspectionRequestHelpers.GetBool(request.Parameters, "pressEnter");
-        var textBox = lookup.Control as TextBox
-            ?? AvaloniaControlResolver.EnumerateControls(lookup.Control!).OfType<TextBox>().FirstOrDefault();
+        var textBox = lookup.Control as TextBox;
+        if (textBox is not null && !IsEditableTextBox(textBox))
+        {
+            return DiagnosticResponse.Fail(
+                request.Id,
+                DiagnosticErrorCode.UnsupportedOperation,
+                "Target TextBox is not editable.");
+        }
+
+        textBox ??= AvaloniaControlResolver.EnumerateControls(lookup.Control!)
+            .OfType<TextBox>()
+            .FirstOrDefault(IsEditableTextBox);
 
         if (textBox is null)
         {
             return DiagnosticResponse.Fail(
                 request.Id,
                 DiagnosticErrorCode.UnsupportedOperation,
-                "Target control is not a TextBox and does not contain a TextBox.");
+                "Target control is not a TextBox and does not contain an editable TextBox.");
         }
 
+        textBox.Focus();
         textBox.Text = text;
+
+        var enterPressed = false;
+        if (pressEnter)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            await Dispatcher.UIThread.InvokeAsync(() => RaiseReturnKey(textBox), DispatcherPriority.Background);
+            cancellationToken.ThrowIfCancellationRequested();
+            enterPressed = true;
+        }
+
         return DiagnosticResponse.Ok(
             request.Id,
             new JsonObject
             {
                 ["status"] = "textSet",
                 ["pressEnterRequested"] = pressEnter,
-                ["enterPressed"] = false
+                ["enterPressed"] = enterPressed
             });
     }
 
@@ -328,6 +377,96 @@ public sealed class InteractionHandler : IDiagnosticToolHandler
         return dataContextProperty?.GetIndexParameters().Length == 0
             ? dataContextProperty.GetValue(dataContext)
             : null;
+    }
+
+    private static DiagnosticResponse? TryExecuteCommand(
+        DiagnosticRequest request,
+        Control control)
+    {
+        var command = control.GetType()
+            .GetProperty("Command", BindingFlags.Instance | BindingFlags.Public)
+            ?.GetValue(control) as ICommand;
+        if (command is null)
+        {
+            return null;
+        }
+
+        var parameter = control.GetType()
+            .GetProperty("CommandParameter", BindingFlags.Instance | BindingFlags.Public)
+            ?.GetValue(control);
+        if (!command.CanExecute(parameter))
+        {
+            return DiagnosticResponse.Fail(
+                request.Id,
+                DiagnosticErrorCode.UnsupportedOperation,
+                "Control command cannot execute.");
+        }
+
+        command.Execute(parameter);
+        return Ok(request, "commandExecuted");
+    }
+
+    private static bool TryToggleExpandableControl(
+        Control control,
+        out bool expanded)
+    {
+        expanded = false;
+
+        var isExpandedProperty = control.GetType()
+            .GetProperty("IsExpanded", BindingFlags.Instance | BindingFlags.Public);
+        if (isExpandedProperty is not { PropertyType: { } propertyType } || propertyType != typeof(bool) || !isExpandedProperty.CanWrite)
+        {
+            return false;
+        }
+
+        var hasNavigationChildren = control.GetType()
+            .GetMethod("HasNavigationChildren", BindingFlags.Instance | BindingFlags.Public)
+            ?.Invoke(control, null) as bool?;
+        if (hasNavigationChildren != true)
+        {
+            return false;
+        }
+
+        expanded = !((bool?)isExpandedProperty.GetValue(control) ?? false);
+        isExpandedProperty.SetValue(control, expanded);
+        return true;
+    }
+
+    private static bool TryRaiseStaticRoutedEvent(
+        Control control,
+        string fieldName)
+    {
+        var routedEvent = control.GetType()
+            .GetField(fieldName, BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy)
+            ?.GetValue(null) as RoutedEvent;
+        if (routedEvent is null)
+        {
+            return false;
+        }
+
+        control.RaiseEvent(new RoutedEventArgs(routedEvent, control));
+        return true;
+    }
+
+    private static bool IsEditableTextBox(TextBox textBox) =>
+        textBox.IsVisible && textBox.IsEnabled && !textBox.IsReadOnly;
+
+    private static void RaiseReturnKey(TextBox textBox)
+    {
+        textBox.RaiseEvent(new KeyEventArgs
+        {
+            RoutedEvent = InputElement.KeyDownEvent,
+            Source = textBox,
+            Key = Key.Return,
+            KeyModifiers = KeyModifiers.None
+        });
+        textBox.RaiseEvent(new KeyEventArgs
+        {
+            RoutedEvent = InputElement.KeyUpEvent,
+            Source = textBox,
+            Key = Key.Return,
+            KeyModifiers = KeyModifiers.None
+        });
     }
 
     private static DiagnosticResponse Ok(

@@ -133,11 +133,14 @@ public sealed class VisualNodeSerializer
     private static JsonObject FormatRect(Rect bounds) =>
         new()
         {
-            ["x"] = bounds.X,
-            ["y"] = bounds.Y,
-            ["width"] = bounds.Width,
-            ["height"] = bounds.Height
+            ["x"] = FormatDouble(bounds.X),
+            ["y"] = FormatDouble(bounds.Y),
+            ["width"] = FormatDouble(bounds.Width),
+            ["height"] = FormatDouble(bounds.Height)
         };
+
+    private static JsonNode? FormatDouble(double value) =>
+        double.IsFinite(value) ? JsonValue.Create(value) : null;
 
     private static int NormalizeMaxDepth(int maxDepth) =>
         Math.Clamp(maxDepth, 0, 50);

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Text.Json.Nodes;
 using Avalonia;
 using Avalonia.Controls;
@@ -101,35 +102,28 @@ public sealed class ScrollDiagnosticsHandler : IDiagnosticToolHandler
         if (!lookup.Success)
             return lookup.Response!;
 
-        var itemsControl = FindItemsControl(lookup.Control!);
-        if (itemsControl is null)
+        var snapshot = CreateScrollableItemsSnapshot(lookup.Control!);
+        if (snapshot is null)
         {
             return DiagnosticResponse.Fail(
                 request.Id,
                 DiagnosticErrorCode.UnsupportedOperation,
-                "Target control is not an ItemsControl and does not contain an ItemsControl.");
+                "Target control is not an ItemsControl, DataGrid, TreeDataGrid, and does not contain a supported items control.");
         }
-
-        var scrollViewer = FindScrollViewer(itemsControl);
-        var containers = SerializeRealizedContainers(itemsControl);
-        var virtualizingPanel = AvaloniaControlResolver
-            .EnumerateControls(itemsControl)
-            .OfType<VirtualizingStackPanel>()
-            .FirstOrDefault();
 
         return DiagnosticResponse.Ok(
             request.Id,
             new JsonObject
             {
-                ["itemCount"] = itemsControl.ItemCount,
-                ["realizedContainerCount"] = containers.Count,
-                ["realizedContainers"] = containers,
+                ["itemCount"] = snapshot.ItemCount,
+                ["realizedContainerCount"] = snapshot.RealizedContainers.Count,
+                ["realizedContainers"] = snapshot.RealizedContainers,
                 ["virtualization"] = new JsonObject
                 {
-                    ["isVirtualizing"] = virtualizingPanel is not null,
-                    ["panelType"] = virtualizingPanel?.GetType().FullName
+                    ["isVirtualizing"] = snapshot.IsVirtualizing,
+                    ["panelType"] = snapshot.PanelType
                 },
-                ["scrollState"] = scrollViewer is null ? null : _serializer.Serialize(scrollViewer)
+                ["scrollState"] = snapshot.ScrollViewer is null ? null : _serializer.Serialize(snapshot.ScrollViewer)
             });
     }
 
@@ -385,6 +379,59 @@ public sealed class ScrollDiagnosticsHandler : IDiagnosticToolHandler
         return AvaloniaControlResolver.EnumerateControls(control).OfType<ItemsControl>().FirstOrDefault();
     }
 
+    private static ScrollableItemsSnapshot? CreateScrollableItemsSnapshot(Control control)
+    {
+        if (FindItemsControl(control) is { } itemsControl)
+        {
+            var scrollViewer = FindScrollViewer(itemsControl);
+            var containers = SerializeRealizedContainers(itemsControl);
+            var virtualizingPanel = AvaloniaControlResolver
+                .EnumerateControls(itemsControl)
+                .OfType<VirtualizingStackPanel>()
+                .FirstOrDefault();
+            var isCustomVirtualizing = IsVirtualizingType(itemsControl);
+
+            return new ScrollableItemsSnapshot(
+                itemsControl.ItemCount,
+                containers,
+                scrollViewer,
+                virtualizingPanel is not null || isCustomVirtualizing,
+                virtualizingPanel?.GetType().FullName ?? (isCustomVirtualizing ? itemsControl.GetType().FullName : null));
+        }
+
+        if (FindControlByFullName(control, "Avalonia.Controls.DataGrid") is { } dataGrid)
+        {
+            var itemCount = CountItems(
+                GetPublicPropertyValue(dataGrid, "ItemsSource")
+                ?? GetPublicPropertyValue(dataGrid, "Items"));
+            var containers = SerializeRealizedRows(dataGrid, "Avalonia.Controls.DataGridRow", "Index");
+            var rowsPresenter = FindControlByTypeName(dataGrid, "DataGridRowsPresenter");
+
+            return new ScrollableItemsSnapshot(
+                itemCount,
+                containers,
+                FindScrollViewer(dataGrid),
+                containers.Count < itemCount,
+                rowsPresenter?.GetType().FullName);
+        }
+
+        if (FindControlByFullName(control, "Avalonia.Controls.TreeDataGrid") is { } treeDataGrid)
+        {
+            var itemCount = CountItems(GetPublicPropertyValue(treeDataGrid, "Rows"));
+            var containers = SerializeRealizedRows(treeDataGrid, "Avalonia.Controls.Primitives.TreeDataGridRow", "RowIndex");
+            var rowsPresenter = FindControlByTypeName(treeDataGrid, "TreeDataGridRowsPresenter");
+
+            return new ScrollableItemsSnapshot(
+                itemCount,
+                containers,
+                FindScrollViewer(treeDataGrid),
+                containers.Count < itemCount,
+                rowsPresenter?.GetType().FullName);
+        }
+
+        return null;
+    }
+
     private static JsonArray SerializeRealizedContainers(ItemsControl itemsControl)
     {
         var containers = new JsonArray();
@@ -401,17 +448,103 @@ public sealed class ScrollDiagnosticsHandler : IDiagnosticToolHandler
                     ["index"] = index,
                     ["type"] = container.GetType().FullName,
                     ["name"] = container.Name,
-                    ["bounds"] = new JsonObject
-                    {
-                        ["x"] = container.Bounds.X,
-                        ["y"] = container.Bounds.Y,
-                        ["width"] = container.Bounds.Width,
-                        ["height"] = container.Bounds.Height
-                    }
+                    ["bounds"] = FormatRect(container.Bounds)
                 });
         }
 
         return containers;
+    }
+
+    private static JsonArray SerializeRealizedRows(
+        Control root,
+        string rowFullName,
+        string indexPropertyName)
+    {
+        var containers = new JsonArray();
+        foreach (var row in AvaloniaControlResolver
+                     .EnumerateControls(root)
+                     .Where(control => string.Equals(control.GetType().FullName, rowFullName, StringComparison.Ordinal))
+                     .Take(10_000))
+        {
+            containers.Add(
+                new JsonObject
+                {
+                    ["index"] = GetIntPublicPropertyValue(row, indexPropertyName) ?? containers.Count,
+                    ["type"] = row.GetType().FullName,
+                    ["name"] = row.Name,
+                    ["bounds"] = FormatRect(row.Bounds)
+                });
+        }
+
+        return containers;
+    }
+
+    private static JsonObject FormatRect(Rect bounds) =>
+        new()
+        {
+            ["x"] = FormatDouble(bounds.X),
+            ["y"] = FormatDouble(bounds.Y),
+            ["width"] = FormatDouble(bounds.Width),
+            ["height"] = FormatDouble(bounds.Height)
+        };
+
+    private static JsonNode? FormatDouble(double value) =>
+        double.IsFinite(value) ? JsonValue.Create(value) : null;
+
+    private static Control? FindControlByFullName(
+        Control control,
+        string fullName)
+    {
+        if (string.Equals(control.GetType().FullName, fullName, StringComparison.Ordinal))
+            return control;
+
+        return AvaloniaControlResolver
+            .EnumerateControls(control)
+            .FirstOrDefault(child => string.Equals(child.GetType().FullName, fullName, StringComparison.Ordinal));
+    }
+
+    private static Control? FindControlByTypeName(
+        Control control,
+        string typeName) =>
+        AvaloniaControlResolver
+            .EnumerateControls(control)
+            .FirstOrDefault(child => string.Equals(child.GetType().Name, typeName, StringComparison.Ordinal));
+
+    private static bool IsVirtualizingType(Control control) =>
+        control.GetType().Name.Contains("Virtualizing", StringComparison.Ordinal);
+
+    private static object? GetPublicPropertyValue(
+        object instance,
+        string propertyName) =>
+        instance.GetType().GetProperty(propertyName)?.GetValue(instance);
+
+    private static int? GetIntPublicPropertyValue(
+        object instance,
+        string propertyName) =>
+        GetPublicPropertyValue(instance, propertyName) is int value ? value : null;
+
+    private static int CountItems(object? value)
+    {
+        if (value is null)
+            return 0;
+
+        if (value is ICollection collection)
+            return collection.Count;
+
+        var countProperty = value.GetType().GetProperty("Count");
+        if (countProperty?.GetValue(value) is int count)
+            return count;
+
+        if (value is not IEnumerable enumerable)
+            return 0;
+
+        var result = 0;
+        foreach (var _ in enumerable)
+        {
+            result++;
+        }
+
+        return result;
     }
 
     private static bool HasParameter(
@@ -436,4 +569,11 @@ public sealed class ScrollDiagnosticsHandler : IDiagnosticToolHandler
         public static ScrollOperationResult Failed(DiagnosticResponse response) =>
             new(Success: false, Name: "", response);
     }
+
+    private sealed record ScrollableItemsSnapshot(
+        int ItemCount,
+        JsonArray RealizedContainers,
+        ScrollViewer? ScrollViewer,
+        bool IsVirtualizing,
+        string? PanelType);
 }
