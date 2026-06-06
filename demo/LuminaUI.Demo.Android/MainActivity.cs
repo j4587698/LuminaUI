@@ -6,6 +6,7 @@ namespace LuminaUI.Demo.Android;
 
 [Activity(
     Label = "LuminaUI Demo",
+    Theme = "@style/LuminaUI.Theme",
     MainLauncher = true,
     LaunchMode = LaunchMode.SingleTop,
     ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.UiMode)]

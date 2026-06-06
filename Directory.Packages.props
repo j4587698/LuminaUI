@@ -1,7 +1,6 @@
 <Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-
     <AvaloniaVersion>12.0.1</AvaloniaVersion>
     <AvaloniaControlsVersion>12.0.0</AvaloniaControlsVersion>
     <TreeDataGridAvaloniaVersion>12.0.0</TreeDataGridAvaloniaVersion>
@@ -9,8 +8,8 @@
     <DiagnosticsSupportVersion>2.2.1</DiagnosticsSupportVersion>
     <SkiaSharpVersion>3.119.3-preview.1.1</SkiaSharpVersion>
     <AndroidXSplashScreenVersion>1.2.0.2</AndroidXSplashScreenVersion>
+    <AndroidXAppCompatVersion>1.7.0.3</AndroidXAppCompatVersion>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageVersion Include="Avalonia" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Android" Version="$(AvaloniaVersion)" />
@@ -28,5 +27,6 @@
     <PackageVersion Include="SkiaSharp" Version="$(SkiaSharpVersion)" />
     <PackageVersion Include="SkiaSharp.NativeAssets.WebAssembly" Version="$(SkiaSharpVersion)" />
     <PackageVersion Include="Xamarin.AndroidX.Core.SplashScreen" Version="$(AndroidXSplashScreenVersion)" />
+    <PackageVersion Include="Xamarin.AndroidX.AppCompat" Version="1.7.1.3" />
   </ItemGroup>
 </Project>
