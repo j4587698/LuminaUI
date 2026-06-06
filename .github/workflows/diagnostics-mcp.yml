@@ -132,6 +132,8 @@ jobs:
       - nuget
     if: needs.prepare.outputs.should_release == 'true'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout
@@ -185,7 +187,7 @@ jobs:
 
       - name: Create GitHub Release
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.GH_RELEASE_TOKEN || github.token }}
           TAG_NAME: ${{ needs.prepare.outputs.tag_name }}
           DIAGNOSTICS_VERSION: ${{ needs.prepare.outputs.diagnostics_version }}
           DIAGNOSTICS_MCP_VERSION: ${{ needs.prepare.outputs.diagnostics_mcp_version }}

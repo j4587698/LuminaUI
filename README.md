@@ -176,8 +176,9 @@ NuGet publishing and GitHub Releases are split by version domain:
 - `LuminaUI Diagnostics MCP`: publishes `LuminaUI.Diagnostics.Abstractions`, `LuminaUI.Diagnostics`, and `LuminaUI.Diagnostics.Mcp` from `LuminaUIDiagnosticsVersion` and `LuminaUIDiagnosticsMcpVersion`.
 
 1. Set the repository secret `NUGET_API_KEY` to a NuGet.org API key.
-2. Update the matching version property in `Directory.Build.props`, `Directory.Build.Diagnostics.props`, or `Directory.Build.Mcp.props` for the packages included in the release.
-3. Push the change to `master` or `main`.
+2. Optional: set `GH_RELEASE_TOKEN` to a GitHub token with `Contents: Read and write` if the default Actions `GITHUB_TOKEN` cannot create releases in this repository.
+3. Update the matching version property in `Directory.Build.props`, `Directory.Build.Diagnostics.props`, or `Directory.Build.Mcp.props` for the packages included in the release.
+4. Push the change to `master` or `main`.
 
 ```bash
 git add Directory.Build.props Directory.Build.Diagnostics.props Directory.Build.Mcp.props

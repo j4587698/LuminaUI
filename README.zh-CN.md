@@ -176,8 +176,9 @@ NuGet 发布和 GitHub Release 按版本域拆分：
 - `LuminaUI Diagnostics MCP`：根据 `LuminaUIDiagnosticsVersion` 和 `LuminaUIDiagnosticsMcpVersion` 发布 `LuminaUI.Diagnostics.Abstractions`、`LuminaUI.Diagnostics` 和 `LuminaUI.Diagnostics.Mcp`。
 
 1. 在仓库 Secret 中配置 `NUGET_API_KEY`，值为 NuGet.org API key。
-2. 按本次发布涉及的包，更新 `Directory.Build.props`、`Directory.Build.Diagnostics.props` 或 `Directory.Build.Mcp.props` 中对应的版本属性。
-3. 将改动推送到 `master` 或 `main`。
+2. 可选：如果仓库默认的 Actions `GITHUB_TOKEN` 无法创建 Release，在仓库 Secret 中配置 `GH_RELEASE_TOKEN`，权限需要包含 `Contents: Read and write`。
+3. 按本次发布涉及的包，更新 `Directory.Build.props`、`Directory.Build.Diagnostics.props` 或 `Directory.Build.Mcp.props` 中对应的版本属性。
+4. 将改动推送到 `master` 或 `main`。
 
 ```bash
 git add Directory.Build.props Directory.Build.Diagnostics.props Directory.Build.Mcp.props
