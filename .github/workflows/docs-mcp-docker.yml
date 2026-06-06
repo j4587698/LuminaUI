@@ -66,6 +66,9 @@ jobs:
                 $oldVersion = [string]$oldProps.Project.PropertyGroup.LuminaDocsMcpVersion
                 $versionChanged = $oldVersion -ne $version
                 Write-Host "Previous LuminaDocsMcpVersion: '$oldVersion'. Current: '$version'."
+              } else {
+                $global:LASTEXITCODE = 0
+                Write-Host "Directory.Build.Mcp.props did not exist in the previous revision. Treating current version as changed."
               }
             }
           }
