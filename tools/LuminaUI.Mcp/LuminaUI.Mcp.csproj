@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
+    <Version>$(LuminaDocsMcpVersion)</Version>
+    <PackageVersion>$(LuminaDocsMcpVersion)</PackageVersion>
+    <AssemblyVersion>$(LuminaDocsMcpAssemblyVersion)</AssemblyVersion>
+    <FileVersion>$(LuminaDocsMcpAssemblyVersion)</FileVersion>
+    <InformationalVersion>$(LuminaDocsMcpVersion)</InformationalVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>LuminaUI.Mcp</RootNamespace>
@@ -11,8 +16,23 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" />
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.0" />
-    <PackageReference Include="ModelContextProtocol.AspNetCore" Version="1.3.0" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.8" />
+    <PackageReference Include="ModelContextProtocol.AspNetCore" Version="1.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>LuminaUIVersion</_Parameter1>
+      <_Parameter2>$(LuminaUIVersion)</_Parameter2>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>LuminaUIDiagnosticsVersion</_Parameter1>
+      <_Parameter2>$(LuminaUIDiagnosticsVersion)</_Parameter2>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>LuminaUIDiagnosticsMcpVersion</_Parameter1>
+      <_Parameter2>$(LuminaUIDiagnosticsMcpVersion)</_Parameter2>
+    </AssemblyAttribute>
   </ItemGroup>
 
   <ItemGroup>

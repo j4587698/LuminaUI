@@ -1,0 +1,156 @@
+name: LuminaUI Docs MCP Docker
+
+on:
+  push:
+    branches:
+      - master
+      - main
+    paths:
+      - "Directory.Build.Mcp.props"
+      - "Directory.Build.Diagnostics.props"
+      - "Directory.Build.props"
+      - "Directory.Packages.props"
+      - "tools/LuminaUI.Mcp/**"
+      - ".github/workflows/docs-mcp-docker.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  DOCKER_IMAGE: ${{ vars.DOCKERHUB_REPOSITORY || format('{0}/luminaui-mcp', secrets.DOCKERHUB_USERNAME) }}
+
+jobs:
+  prepare:
+    name: Prepare docs MCP Docker release
+    runs-on: ubuntu-latest
+
+    outputs:
+      should_publish: ${{ steps.prepare.outputs.should_publish }}
+      docs_mcp_version: ${{ steps.prepare.outputs.docs_mcp_version }}
+      tag_name: ${{ steps.prepare.outputs.tag_name }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve docs MCP version
+        id: prepare
+        shell: pwsh
+        run: |
+          [xml]$props = Get-Content -LiteralPath "Directory.Build.Mcp.props"
+          $version = [string]$props.Project.PropertyGroup.LuminaDocsMcpVersion
+
+          if ([string]::IsNullOrWhiteSpace($version)) {
+            throw "LuminaDocsMcpVersion is missing in Directory.Build.Mcp.props."
+          }
+
+          $parsedVersion = $null
+          if (-not [Version]::TryParse($version, [ref]$parsedVersion)) {
+            throw "LuminaDocsMcpVersion must be a stable numeric SemVer version such as 0.1.0. Current value: '$version'."
+          }
+
+          $tagName = "docs-mcp-v$version"
+          $existingTag = git tag --list $tagName
+          $versionChanged = $true
+          $dockerImage = "${{ env.DOCKER_IMAGE }}"
+
+          if ($env:GITHUB_EVENT_NAME -eq "push") {
+            $before = "${{ github.event.before }}"
+            if (-not [string]::IsNullOrWhiteSpace($before) -and $before -notmatch "^0+$") {
+              $oldText = git show "$before`:Directory.Build.Mcp.props" 2>$null
+              if ($LASTEXITCODE -eq 0 -and $oldText) {
+                [xml]$oldProps = ($oldText -join "`n")
+                $oldVersion = [string]$oldProps.Project.PropertyGroup.LuminaDocsMcpVersion
+                $versionChanged = $oldVersion -ne $version
+                Write-Host "Previous LuminaDocsMcpVersion: '$oldVersion'. Current: '$version'."
+              }
+            }
+          }
+
+          "docs_mcp_version=$version" >> $env:GITHUB_OUTPUT
+          "tag_name=$tagName" >> $env:GITHUB_OUTPUT
+
+          if ([string]::IsNullOrWhiteSpace($dockerImage) -or $dockerImage.StartsWith("/")) {
+            throw "Docker image name is empty. Set DOCKERHUB_USERNAME secret or DOCKERHUB_REPOSITORY repository variable."
+          }
+
+          if (-not [string]::IsNullOrWhiteSpace($existingTag)) {
+            Write-Host "Tag '$tagName' already exists. Nothing to publish."
+            "should_publish=false" >> $env:GITHUB_OUTPUT
+            exit 0
+          }
+
+          if ($env:GITHUB_EVENT_NAME -eq "push" -and -not $versionChanged) {
+            Write-Host "LuminaDocsMcpVersion did not change. Nothing to publish."
+            "should_publish=false" >> $env:GITHUB_OUTPUT
+            exit 0
+          }
+
+          Write-Host "Preparing Docker publish for LuminaUI Docs MCP '$version'."
+          "should_publish=true" >> $env:GITHUB_OUTPUT
+
+  docker:
+    name: Build and push docs MCP Docker image
+    needs: prepare
+    if: needs.prepare.outputs.should_publish == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: tools/LuminaUI.Mcp/Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ${{ env.DOCKER_IMAGE }}:${{ needs.prepare.outputs.docs_mcp_version }}
+            ${{ env.DOCKER_IMAGE }}:latest
+          labels: |
+            org.opencontainers.image.title=LuminaUI Docs MCP
+            org.opencontainers.image.description=LuminaUI documentation MCP server
+            org.opencontainers.image.version=${{ needs.prepare.outputs.docs_mcp_version }}
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  tag:
+    name: Tag docs MCP Docker release
+    needs:
+      - prepare
+      - docker
+    if: needs.prepare.outputs.should_publish == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create release tag
+        env:
+          TAG_NAME: ${{ needs.prepare.outputs.tag_name }}
+        shell: bash
+        run: |
+          git tag "$TAG_NAME" "$GITHUB_SHA"
+          git push origin "$TAG_NAME"

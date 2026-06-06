@@ -18,5 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LuminaUI.Demo\LuminaUI.Demo.csproj" />
+    <ProjectReference Include="..\..\src\LuminaUI.Diagnostics\LuminaUI.Diagnostics.csproj" />
   </ItemGroup>
 </Project>

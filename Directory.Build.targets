@@ -3,6 +3,12 @@
     <None Include="$(MSBuildThisFileDirectory)README.md"
           Pack="true"
           PackagePath="/"
-          Visible="false" />
+          Visible="false"
+          Condition="!Exists('$(MSBuildProjectDirectory)\README.md')" />
+    <None Include="$(MSBuildProjectDirectory)\README.md"
+          Pack="true"
+          PackagePath="/"
+          Visible="false"
+          Condition="Exists('$(MSBuildProjectDirectory)\README.md')" />
   </ItemGroup>
 </Project>

@@ -4,7 +4,7 @@
 
 LuminaUI is an Avalonia 12 component library for desktop, browser, and mobile-style application shells. It provides a shared visual system, reusable controls, navigation primitives, overlays, localization support, and optional themed integrations for ColorPicker, DataGrid, and TreeDataGrid.
 
-The NuGet packages target `.NET 8`, `.NET 9`, and `.NET 10`. Demo hosts remain on `.NET 10`. The current Avalonia version is `12.0.1`.
+The NuGet packages target `.NET 8`, `.NET 9`, and `.NET 10`. Demo hosts remain on `.NET 10`. The current Avalonia version is `12.0.4`.
 
 ## Packages
 
@@ -14,6 +14,9 @@ The NuGet packages target `.NET 8`, `.NET 9`, and `.NET 10`. Demo hosts remain o
 | `LuminaUI.ColorPicker` | Lumina theme integration for Avalonia ColorPicker and ColorView. |
 | `LuminaUI.DataGrid` | Lumina theme integration for Avalonia DataGrid. |
 | `LuminaUI.TreeDataGrid` | Lumina theme integration for TreeDataGrid.Avalonia. |
+| `LuminaUI.Diagnostics.Abstractions` | Shared protocol contracts for LuminaUI diagnostics packages and tools. |
+| `LuminaUI.Diagnostics` | Application-side named-pipe diagnostics host for Avalonia apps. |
+| `LuminaUI.Diagnostics.Mcp` | Dotnet tool package for the live diagnostics MCP stdio server. |
 
 ## Features
 
@@ -68,6 +71,9 @@ src/
   LuminaUI.ColorPicker/  Optional ColorPicker theme package.
   LuminaUI.DataGrid/     Optional DataGrid theme package.
   LuminaUI.TreeDataGrid/ Optional TreeDataGrid theme package.
+  LuminaUI.Diagnostics.Abstractions/
+                          Shared diagnostics protocol contracts.
+  LuminaUI.Diagnostics/  Application-side diagnostics host.
 
 demo/
   LuminaUI.Demo/         Shared demo views and view models.
@@ -75,9 +81,55 @@ demo/
   LuminaUI.Demo.Browser/ Browser host.
   LuminaUI.Demo.Android/ Android host.
   LuminaUI.Demo.iOS/     iOS host.
+
+tools/
+  LuminaUI.Mcp/          Documentation MCP server for component knowledge.
+  LuminaUI.Diagnostics.Mcp/
+                          Live app diagnostics MCP stdio server.
 ```
 
-MCP diagnostics are intentionally enabled only in `demo/LuminaUI.Demo.Desktop`.
+The documentation MCP server (`tools/LuminaUI.Mcp`) remains the single documentation and component-knowledge entry point. The diagnostics MCP tool (`tools/LuminaUI.Diagnostics.Mcp`) is separate and only connects to running Avalonia applications that opt in with `LuminaUI.Diagnostics`.
+
+## Versioning
+
+The repository uses separate version domains so tool packages are not forced to follow the main control library release cadence:
+
+- `LuminaUIVersion`: main controls and optional themed control packages.
+- `LuminaUIDiagnosticsVersion`: diagnostics protocol contracts and application-side host.
+- `LuminaUIDiagnosticsMcpVersion`: live diagnostics MCP dotnet tool.
+- `LuminaDocsMcpVersion`: documentation MCP server.
+
+`LuminaUIVersion` lives in `Directory.Build.props`. Diagnostics versions live in `Directory.Build.Diagnostics.props`. The documentation MCP version lives in `Directory.Build.Mcp.props`.
+
+Only bump the version for the package whose public API, protocol, or behavior changed. Main control library changes do not require synchronized MCP tool version bumps.
+
+## Diagnostics MCP
+
+Application-side setup:
+
+```csharp
+using Avalonia;
+using LuminaUI.Diagnostics;
+
+public static AppBuilder BuildAvaloniaApp() =>
+    AppBuilder.Configure<App>()
+        .UsePlatformDetect()
+        .UseLuminaUIDiagnostics();
+```
+
+The diagnostics host listens on a deterministic pipe name:
+
+```text
+lumina-ui-diagnostics-{pid}
+```
+
+The dotnet tool package exposes the stdio MCP server command:
+
+```bash
+lumina-ui-diagnostics-mcp
+```
+
+The documentation MCP server remains HTTP-based at `http://localhost:3001/mcp`.
 
 ## Build and Run
 
@@ -111,23 +163,29 @@ dotnet pack src/LuminaUI/LuminaUI.csproj -c Release
 dotnet pack src/LuminaUI.ColorPicker/LuminaUI.ColorPicker.csproj -c Release
 dotnet pack src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj -c Release
 dotnet pack src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj -c Release
+dotnet pack src/LuminaUI.Diagnostics.Abstractions/LuminaUI.Diagnostics.Abstractions.csproj -c Release
+dotnet pack src/LuminaUI.Diagnostics/LuminaUI.Diagnostics.csproj -c Release
+dotnet pack tools/LuminaUI.Diagnostics.Mcp/LuminaUI.Diagnostics.Mcp.csproj -c Release
 ```
 
 ## Release
 
-NuGet publishing and GitHub Releases are handled by the `LuminaUI` GitHub Actions workflow.
+NuGet publishing and GitHub Releases are split by version domain:
+
+- `LuminaUI`: publishes the main control packages from `LuminaUIVersion`.
+- `LuminaUI Diagnostics MCP`: publishes `LuminaUI.Diagnostics.Abstractions`, `LuminaUI.Diagnostics`, and `LuminaUI.Diagnostics.Mcp` from `LuminaUIDiagnosticsVersion` and `LuminaUIDiagnosticsMcpVersion`.
 
 1. Set the repository secret `NUGET_API_KEY` to a NuGet.org API key.
-2. Update `LuminaUIVersion` in `Directory.Build.props` to a higher stable version.
+2. Update the matching version property in `Directory.Build.props`, `Directory.Build.Diagnostics.props`, or `Directory.Build.Mcp.props` for the packages included in the release.
 3. Push the change to `master` or `main`.
 
 ```bash
-git add Directory.Build.props
+git add Directory.Build.props Directory.Build.Diagnostics.props Directory.Build.Mcp.props
 git commit -m "Release 0.1.0"
 git push origin master
 ```
 
-If the matching tag does not already exist, the workflow builds the packable projects, publishes `.nupkg` and `.snupkg` files to NuGet, builds the Desktop, Browser, Android, and iOS simulator demo release assets, creates the `v<version>` tag, and publishes a GitHub Release named `LuminaUI <version>`.
+If the matching tag does not already exist, the selected workflow builds the relevant packable projects, publishes `.nupkg` and `.snupkg` files to NuGet, creates a release tag, and publishes a GitHub Release. The main workflow also builds the Desktop, Browser, Android, and iOS simulator demo release assets.
 
 Release notes are generated by GitHub from merged PRs and commits. The first release starts at `0.1.0`.
 
