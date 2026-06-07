@@ -11,10 +11,24 @@
 ```csharp
 using LuminaUI.Diagnostics;
 
-AppBuilder.Configure<App>()
-    .UsePlatformDetect()
-    .UseLuminaUIDiagnostics();
+public static AppBuilder BuildAvaloniaApp()
+    => AppBuilder.Configure<App>()
+        .UsePlatformDetect()
+#if DEBUG
+        .UseLuminaUIDiagnostics()
+#endif
+        ;
 ```
+
+建议默认把 diagnostics 限制在 `#if DEBUG` 下，除非这是明确的内部诊断构建。同时把包引用也限制为 Debug 条件，避免 Release publish 输出包含 diagnostics 包：
+
+```xml
+<ItemGroup Condition="'$(Configuration)' == 'Debug'">
+  <PackageReference Include="LuminaUI.Diagnostics" Version="<resolved-version>" />
+</ItemGroup>
+```
+
+如果先执行了 `dotnet add package LuminaUI.Diagnostics`，保留它生成的版本号，把这条 `PackageReference` 移到带 `Condition` 的 `ItemGroup` 里。
 
 默认命名管道格式：
 
@@ -26,7 +40,7 @@ lumina-ui-diagnostics-{pid}
 
 ```powershell
 dotnet tool install --global LuminaUI.Diagnostics.Mcp
-lumina-ui-diagnostics-mcp
+lumina-mcp
 ```
 
 本仓库开发时也可以直接运行项目：

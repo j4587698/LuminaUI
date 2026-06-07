@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Text.Json;
 using LuminaUI.Mcp.Models;
+using ModelContextProtocol.Protocol;
 using ModelContextProtocol.Server;
 
 namespace LuminaUI.Mcp.Tools;
@@ -17,9 +18,9 @@ public sealed class LuminaMcpTools
         _store = store;
     }
 
-    [McpServerTool]
+    [McpServerTool(UseStructuredContent = true, OutputSchemaType = typeof(Dictionary<string, object?>))]
     [Description("Search LuminaUI components, enums, examples, and design tokens by natural language query. Returns matching items ranked by relevance.")]
-    public string lumina_search(
+    public CallToolResult lumina_search(
         [Description("Search query, e.g. 'button loading', 'pagination', 'color picker', 'card elevation'")] string query,
         [Description("Limit results per category (default 5)")] int limit = 5)
     {
@@ -42,10 +43,10 @@ public sealed class LuminaMcpTools
             results["tokens"] = tokens.Select(t => new { t.Name, t.Category, t.LightValue, t.DarkValue });
 
         if (results.Count == 0)
-            return $"No results found for '{query}'. Try broader terms like 'button', 'card', 'input', 'navigation', 'loading', 'dialog'.";
+            return Message($"No results found for '{query}'. Try broader terms like 'button', 'card', 'input', 'navigation', 'loading', 'dialog'.");
 
         var matchCount = components.Count + enums.Count + examples.Count + tokens.Count;
-        return ToJson(new
+        return ToToolResult(new
         {
             summary = $"Found {matchCount} LuminaUI catalog matches for '{query}'.",
             query,
@@ -53,15 +54,16 @@ public sealed class LuminaMcpTools
         });
     }
 
-    [McpServerTool]
+    [McpServerTool(UseStructuredContent = true, OutputSchemaType = typeof(Dictionary<string, object?>))]
     [Description("List all LuminaUI components, optionally filtered by category. Categories: Action, DataEntry, DataDisplay, Feedback, Navigation, Layout, Animation, Effect, Utility, General.")]
-    public string lumina_list_components(
-        [Description("Optional category filter")] string? category = null,
+    public CallToolResult lumina_list_components(
+        [Description("Optional category filter")] string category = "",
         [Description("Max results (default 50)")] int limit = 50)
     {
-        var components = _store.ListComponents(category, limit);
+        var normalizedCategory = NormalizeOptional(category);
+        var components = _store.ListComponents(normalizedCategory, limit);
         if (components.Count == 0)
-            return $"No components found{(category is not null ? $" in category '{category}'" : "")}.";
+            return Message($"No components found{(normalizedCategory is not null ? $" in category '{normalizedCategory}'" : "")}.");
 
         var result = components.Select(c => new
         {
@@ -72,16 +74,16 @@ public sealed class LuminaMcpTools
             StyleClasses = c.StyleClasses.Count
         });
 
-        return ToJson(new
+        return ToToolResult(new
         {
-            summary = $"Found {components.Count} LuminaUI components{(category is not null ? $" in category '{category}'" : "")}.",
+            summary = $"Found {components.Count} LuminaUI components{(normalizedCategory is not null ? $" in category '{normalizedCategory}'" : "")}.",
             components = result
         });
     }
 
-    [McpServerTool]
+    [McpServerTool(UseStructuredContent = true, OutputSchemaType = typeof(Dictionary<string, object?>))]
     [Description("Get detailed information about a specific LuminaUI component, including its properties, style classes, and usage hints.")]
-    public string lumina_get_component(
+    public CallToolResult lumina_get_component(
         [Description("Component name, e.g. 'LuminaCard', 'LuminaButton', 'LuminaPagination'")] string name)
     {
         var component = _store.GetComponent(name);
@@ -91,8 +93,8 @@ public sealed class LuminaMcpTools
             var all = _store.ListComponents(limit: 500);
             var similar = all.Where(c => c.Name.Contains(name, StringComparison.OrdinalIgnoreCase)).Take(5).ToList();
             if (similar.Count > 0)
-                return $"Component '{name}' not found. Did you mean: {string.Join(", ", similar.Select(c => c.Name))}?";
-            return $"Component '{name}' not found. Use lumina_list_components to see all available components.";
+                return Message($"Component '{name}' not found. Did you mean: {string.Join(", ", similar.Select(c => c.Name))}?");
+            return Message($"Component '{name}' not found. Use lumina_list_components to see all available components.");
         }
 
         var result = new
@@ -122,16 +124,16 @@ public sealed class LuminaMcpTools
             Usage = BuildUsageGuide(component)
         };
 
-        return ToJson(new
+        return ToToolResult(new
         {
             summary = $"Component '{component.Name}' with {component.Properties.Count} properties and {component.StyleClasses.Count} style classes.",
             component = result
         });
     }
 
-    [McpServerTool]
+    [McpServerTool(UseStructuredContent = true, OutputSchemaType = typeof(Dictionary<string, object?>))]
     [Description("Get the showcase example code for a LuminaUI component. Returns AXAML, code-behind, and ViewModel source code.")]
-    public string lumina_get_example(
+    public CallToolResult lumina_get_example(
         [Description("Component name or showcase page name, e.g. 'LuminaCard', 'ButtonShowcasePage', 'Pagination'")] string name)
     {
         // Try direct component name lookup
@@ -164,7 +166,7 @@ public sealed class LuminaMcpTools
 
             if (component is not null)
             {
-                return ToJson(new
+                return ToToolResult(new
                 {
                     summary = $"No showcase source found for '{name}'. Returning component usage guidance instead.",
                     example = new
@@ -177,7 +179,7 @@ public sealed class LuminaMcpTools
                 });
             }
 
-            return $"No example found for '{name}'. Use lumina_search to find available examples.";
+            return Message($"No example found for '{name}'. Use lumina_search to find available examples.");
         }
 
         var result = new
@@ -190,67 +192,71 @@ public sealed class LuminaMcpTools
             Note = "Source code may be truncated. Use the full showcase page as reference."
         };
 
-        return ToJson(new
+        return ToToolResult(new
         {
             summary = $"Example for '{example.ComponentName}' from {example.ShowcasePage}.",
             example = result
         });
     }
 
-    [McpServerTool]
+    [McpServerTool(UseStructuredContent = true, OutputSchemaType = typeof(Dictionary<string, object?>))]
     [Description("Get LuminaUI design tokens (colors, brushes, shadows, typography, spacing). Useful for theming and styling.")]
-    public string lumina_get_tokens(
-        [Description("Optional category filter: Color, Brush, Shadow, Typography, Size, Shape, Spacing, Surface, Border, Primary, Semantic, Other")] string? category = null,
-        [Description("Optional search query within tokens")] string? query = null)
+    public CallToolResult lumina_get_tokens(
+        [Description("Optional category filter: Color, Brush, Shadow, Typography, Size, Shape, Spacing, Surface, Border, Primary, Semantic, Other")] string category = "",
+        [Description("Optional search query within tokens")] string query = "")
     {
-        if (query is not null)
+        var normalizedQuery = NormalizeOptional(query);
+        var normalizedCategory = NormalizeOptional(category);
+
+        if (normalizedQuery is not null)
         {
-            var searchResults = _store.SearchTokens(query, 50);
+            var searchResults = _store.SearchTokens(normalizedQuery, 50);
             if (searchResults.Count == 0)
-                return $"No tokens found matching '{query}'.";
-            return ToJson(new
+                return Message($"No tokens found matching '{normalizedQuery}'.");
+            return ToToolResult(new
             {
-                summary = $"Found {searchResults.Count} LuminaUI design tokens matching '{query}'.",
+                summary = $"Found {searchResults.Count} LuminaUI design tokens matching '{normalizedQuery}'.",
                 tokens = searchResults
             });
         }
 
-        if (category is not null)
+        if (normalizedCategory is not null)
         {
-            var tokens = _store.GetTokensByCategory(category);
+            var tokens = _store.GetTokensByCategory(normalizedCategory);
             if (tokens.Count == 0)
-                return $"No tokens found in category '{category}'.";
-            return ToJson(new
+                return Message($"No tokens found in category '{normalizedCategory}'.");
+            return ToToolResult(new
             {
-                summary = $"Found {tokens.Count} LuminaUI design tokens in category '{category}'.",
+                summary = $"Found {tokens.Count} LuminaUI design tokens in category '{normalizedCategory}'.",
                 tokens
             });
         }
 
         var allTokens = _store.GetAllTokens();
         if (allTokens.Count == 0)
-            return "No design tokens indexed. The catalog may need to be rebuilt.";
+            return Message("No design tokens indexed. The catalog may need to be rebuilt.");
 
         var grouped = allTokens.GroupBy(t => t.Category)
             .ToDictionary(g => g.Key, g => g.Select(t => new { t.Name, t.LightValue, t.DarkValue, t.Description }));
 
-        return ToJson(new
+        return ToToolResult(new
         {
             summary = $"Found {allTokens.Count} LuminaUI design tokens grouped by category.",
             tokensByCategory = grouped
         });
     }
 
-    [McpServerTool]
+    [McpServerTool(UseStructuredContent = true, OutputSchemaType = typeof(Dictionary<string, object?>))]
     [Description("Get installation and setup instructions for LuminaUI packages, including application-side Diagnostics setup.")]
-    public string lumina_get_installation(
-        [Description("Optional: specific package to install. Options: 'LuminaUI', 'LuminaUI.ColorPicker', 'LuminaUI.DataGrid', 'LuminaUI.TreeDataGrid', 'LuminaUI.Diagnostics'")] string? package = null)
+    public CallToolResult lumina_get_installation(
+        [Description("Optional: specific package to install. Options: 'LuminaUI', 'LuminaUI.ColorPicker', 'LuminaUI.DataGrid', 'LuminaUI.TreeDataGrid', 'LuminaUI.Diagnostics'")] string package = "")
     {
         if (IsDiagnosticsPackage(package))
             return lumina_get_diagnostics_setup();
 
         var version = ResolveLuminaPackageVersion();
-        var packageName = string.IsNullOrWhiteSpace(package) ? "LuminaUI" : package.Trim();
+        var normalizedPackage = NormalizeOptional(package);
+        var packageName = normalizedPackage ?? "LuminaUI";
 
         var result = new
         {
@@ -316,21 +322,22 @@ public sealed class LuminaMcpTools
             CatalogVersion = version
         };
 
-        return ToJson(new
+        return ToToolResult(new
         {
-            summary = $"LuminaUI installation instructions for {package ?? "the core package"}.",
+            summary = $"LuminaUI installation instructions for {normalizedPackage ?? "the core package"}.",
             installation = result
         });
     }
 
-    [McpServerTool]
+    [McpServerTool(UseStructuredContent = true, OutputSchemaType = typeof(Dictionary<string, object?>))]
     [Description("Explain how an AI agent should install LuminaUI.Diagnostics into a target Avalonia application.")]
-    public string lumina_get_diagnostics_setup(
-        [Description("Optional target project path or name. Use this to make commands concrete for the user's app project.")] string? project = null)
+    public CallToolResult lumina_get_diagnostics_setup(
+        [Description("Optional target project path or name. Use this to make commands concrete for the user's app project.")] string project = "")
     {
-        var projectArgument = string.IsNullOrWhiteSpace(project)
+        var normalizedProject = NormalizeOptional(project);
+        var projectArgument = normalizedProject is null
             ? "<path-to-app.csproj>"
-            : project.Trim();
+            : normalizedProject;
         var diagnosticsVersion = PackageVersionCatalog.DiagnosticsVersion;
         var diagnosticsMcpVersion = PackageVersionCatalog.DiagnosticsMcpVersion;
 
@@ -360,13 +367,24 @@ public sealed class LuminaMcpTools
             InstallPackage = new
             {
                 NuGet = PackageVersionCatalog.AddPackageCommand(projectArgument, "LuminaUI.Diagnostics"),
-                RepositoryProjectReference = "When developing inside the LuminaUI repository, reference src/LuminaUI.Diagnostics/LuminaUI.Diagnostics.csproj instead of a NuGet package."
+                ConditionalPackageReference = """
+                    <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+                      <PackageReference Include="LuminaUI.Diagnostics" Version="<resolved-version>" />
+                    </ItemGroup>
+                    """,
+                RepositoryProjectReference = """
+                    <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+                      <ProjectReference Include="src/LuminaUI.Diagnostics/LuminaUI.Diagnostics.csproj" />
+                    </ItemGroup>
+                    """,
+                ReleasePublishPolicy = "Keep the LuminaUI.Diagnostics package or project reference Debug-only so Release publish output does not include the diagnostics package.",
+                DotnetAddPackageNote = "If dotnet add package is used first, keep the generated Version value and move that PackageReference into the conditional Debug ItemGroup."
             },
             PreinstalledTool = new
             {
                 Package = "LuminaUI.Diagnostics.Mcp",
-                Command = "lumina-ui-diagnostics-mcp",
-                InstallCommand = PackageVersionCatalog.DotnetToolInstallCommand("LuminaUI.Diagnostics.Mcp", "lumina-ui-diagnostics-mcp"),
+                Command = "lumina-mcp",
+                InstallCommand = PackageVersionCatalog.DotnetToolInstallCommand("LuminaUI.Diagnostics.Mcp", "lumina-mcp"),
                 Note = "This tool belongs in the AI/client environment, not in the target app project."
             },
             ProgramCsPatch = new
@@ -380,19 +398,30 @@ public sealed class LuminaMcpTools
                             .UseHarfBuzz()
                             .WithInterFont()
                             .LogToTrace()
-                            .UseLuminaUIDiagnostics();
+                    #if DEBUG
+                            .UseLuminaUIDiagnostics()
+                    #endif
+                            ;
                     """,
-                Placement = "Call UseLuminaUIDiagnostics() on the AppBuilder chain before StartWithClassicDesktopLifetime(args)."
+                Placement = "Call UseLuminaUIDiagnostics() on the AppBuilder before StartWithClassicDesktopLifetime(args), but keep it behind #if DEBUG by default.",
+                DebugScope = "Recommended default: enable LuminaUI.Diagnostics only in DEBUG builds. Do not expose the diagnostics pipe in Release unless the app is an explicit internal diagnostic build.",
+                ReleasePackageScope = "The target app csproj should also make the LuminaUI.Diagnostics PackageReference or ProjectReference Debug-only so Release publish does not include the diagnostics package."
             },
             OptionalConfiguration = new
             {
                 Example = """
-                    .UseLuminaUIDiagnostics(options =>
-                    {
-                        options.DiagnosticsPipeName = "my-app-diagnostics";
-                        options.DefaultTimeoutMs = 30000;
-                        options.StartImmediately = true;
-                    });
+                    public static AppBuilder BuildAvaloniaApp()
+                        => AppBuilder.Configure<App>()
+                            .UsePlatformDetect()
+                    #if DEBUG
+                            .UseLuminaUIDiagnostics(options =>
+                            {
+                                options.DiagnosticsPipeName = "my-app-diagnostics";
+                                options.DefaultTimeoutMs = 30000;
+                                options.StartImmediately = true;
+                            })
+                    #endif
+                            ;
                     """,
                 DefaultPipe = "lumina-ui-diagnostics-{pid}",
                 Recommendation = "Keep the default pipe name unless the client needs a stable custom pipe."
@@ -408,22 +437,24 @@ public sealed class LuminaMcpTools
             {
                 "Installing LuminaUI.Diagnostics.Mcp into the target app instead of installing only LuminaUI.Diagnostics.",
                 "Adding the package but forgetting UseLuminaUIDiagnostics() in Program.cs.",
+                "Enabling UseLuminaUIDiagnostics() unconditionally in Release builds instead of guarding it with #if DEBUG.",
+                "Leaving LuminaUI.Diagnostics as an unconditional PackageReference, causing Release publish output to include diagnostics assemblies.",
                 "Trying to inspect an app before it has started its Avalonia desktop lifetime.",
                 "Using diagnostics MCP for documentation questions. Use LuminaUI.Mcp for components, examples, tokens, and installation guidance."
             }
         };
 
-        return ToJson(new
+        return ToToolResult(new
         {
             summary = "Application-side LuminaUI.Diagnostics setup instructions for AI-assisted installation.",
             diagnosticsSetup = result
         });
     }
 
-    [McpServerTool]
+    [McpServerTool(UseStructuredContent = true, OutputSchemaType = typeof(Dictionary<string, object?>))]
     [Description("List and explain LuminaUI MCP tools, including when to use the documentation MCP and when to use the diagnostics MCP.")]
-    public string lumina_list_mcp_tools(
-        [Description("Optional area filter: all, docs, diagnostics, diagnostics-setup, components, examples, tokens, installation, status.")] string? area = "all")
+    public CallToolResult lumina_list_mcp_tools(
+        [Description("Optional area filter: all, docs, diagnostics, diagnostics-setup, components, examples, tokens, installation, status.")] string area = "all")
     {
         var normalizedArea = NormalizeArea(area);
         var includeDocs = normalizedArea is "all" or "docs" or "diagnostics" or "diagnostics-setup" or "components" or "examples" or "tokens" or "installation" or "status";
@@ -448,31 +479,32 @@ public sealed class LuminaMcpTools
         {
             sections["diagnosticsMcp"] = new
             {
-                name = "LuminaUI.Diagnostics.Mcp",
-                transport = "stdio dotnet tool",
-                command = "lumina-ui-diagnostics-mcp",
-                purpose = "连接已启用 LuminaUI.Diagnostics 的运行中 Avalonia 应用，做窗口、控件树、属性、绑定错误、截图和基础交互检查。",
-                scope = "live app diagnostics。它不负责组件文档和安装说明。",
-                appSetup = new
-                {
-                    package = "LuminaUI.Diagnostics",
-                    appBuilder = "AppBuilder.Configure<App>().UsePlatformDetect().UseLuminaUIDiagnostics();",
-                    defaultPipe = "lumina-ui-diagnostics-{pid}"
-                },
-                tools = DiagnosticsToolGuide
+                    name = "LuminaUI.Diagnostics.Mcp",
+                    transport = "stdio dotnet tool",
+                    command = "lumina-mcp",
+                    purpose = "连接已启用 LuminaUI.Diagnostics 的运行中 Avalonia 应用，做窗口、控件树、属性、绑定错误、截图和基础交互检查。",
+                    scope = "live app diagnostics。它不负责组件文档和安装说明。",
+                    appSetup = new
+                    {
+                        package = "LuminaUI.Diagnostics",
+                        appBuilder = "Enable with builder.UseLuminaUIDiagnostics(), guarded by #if DEBUG by default.",
+                        projectReference = "Keep the LuminaUI.Diagnostics PackageReference or ProjectReference inside an ItemGroup Condition=\"'$(Configuration)' == 'Debug'\" so Release publish excludes it.",
+                        defaultPipe = "lumina-ui-diagnostics-{pid}"
+                    },
+                    tools = DiagnosticsToolGuide
             };
         }
 
         if (sections.Count == 0)
         {
-            return ToJson(new
+            return ToToolResult(new
             {
                 summary = $"Unknown area '{area}'. Use all, docs, diagnostics, components, examples, tokens, installation, or status.",
                 availableAreas = new[] { "all", "docs", "diagnostics", "diagnostics-setup", "components", "examples", "tokens", "installation", "status" }
             });
         }
 
-        return ToJson(new
+        return ToToolResult(new
         {
             summary = "LuminaUI MCP tool guide. Use lumina_find_mcp when you want a task-specific recommendation.",
             area = normalizedArea,
@@ -480,14 +512,14 @@ public sealed class LuminaMcpTools
         });
     }
 
-    [McpServerTool]
+    [McpServerTool(UseStructuredContent = true, OutputSchemaType = typeof(Dictionary<string, object?>))]
     [Description("Recommend the right LuminaUI MCP endpoint and tool sequence for a user task.")]
-    public string lumina_find_mcp(
+    public CallToolResult lumina_find_mcp(
         [Description("Describe the task, e.g. 'find button example', 'inspect live window visual tree', 'why binding failed', 'which token controls border color'.")] string task,
         [Description("Include a suggested step-by-step tool workflow.")] bool includeWorkflow = true)
     {
         if (string.IsNullOrWhiteSpace(task))
-            return "Task is required. Describe what you want to do with LuminaUI or a running Avalonia app.";
+            return Message("Task is required. Describe what you want to do with LuminaUI or a running Avalonia app.");
 
         var normalizedTask = task.Trim();
         var docsScore = Score(normalizedTask, DocumentationKeywords);
@@ -548,7 +580,7 @@ public sealed class LuminaMcpTools
             ? BuildWorkflow(recommendation)
             : Array.Empty<string>();
 
-        return ToJson(new
+        return ToToolResult(new
         {
             summary = $"Recommended LuminaUI MCP route for: {normalizedTask}",
             recommendation,
@@ -564,7 +596,7 @@ public sealed class LuminaMcpTools
                 diagnostics = new
                 {
                     name = "LuminaUI.Diagnostics.Mcp",
-                    command = "lumina-ui-diagnostics-mcp",
+                    command = "lumina-mcp",
                     useWhen = "需要检查运行中的 Avalonia 应用、窗口、控件树、属性、绑定错误、截图或交互。"
                 }
             },
@@ -573,15 +605,15 @@ public sealed class LuminaMcpTools
         });
     }
 
-    [McpServerTool]
+    [McpServerTool(UseStructuredContent = true, OutputSchemaType = typeof(Dictionary<string, object?>))]
     [Description("Get the current catalog status including version, generation time, and counts.")]
-    public string lumina_catalog_status()
+    public CallToolResult lumina_catalog_status()
     {
         var version = _store.CurrentVersion;
         if (version is null)
-            return "Catalog not initialized. POST /admin/reindex to build the catalog.";
+            return Message("Catalog not initialized. POST /admin/reindex to build the catalog.");
 
-        return ToJson(new
+        return ToToolResult(new
         {
             summary = $"LuminaUI catalog is ready with {version.ComponentCount} components.",
             version.LibraryVersion,
@@ -592,9 +624,39 @@ public sealed class LuminaMcpTools
         });
     }
 
-    private static string ToJson(object value)
+    private static CallToolResult ToToolResult(object value)
     {
-        return JsonSerializer.Serialize(value, JsonOptions);
+        var structuredContent = JsonSerializer.SerializeToElement(value, JsonOptions);
+
+        return new CallToolResult
+        {
+            Content = new List<ContentBlock>
+            {
+                new TextContentBlock { Text = GetSummaryText(structuredContent) }
+            },
+            StructuredContent = structuredContent
+        };
+    }
+
+    private static CallToolResult Message(string message)
+    {
+        return ToToolResult(new
+        {
+            summary = message,
+            status = "message"
+        });
+    }
+
+    private static string GetSummaryText(JsonElement value)
+    {
+        if (value.ValueKind == JsonValueKind.Object
+            && value.TryGetProperty("summary", out var summary)
+            && summary.ValueKind == JsonValueKind.String)
+        {
+            return summary.GetString() ?? "LuminaUI MCP structured result.";
+        }
+
+        return "LuminaUI MCP structured result.";
     }
 
     private static string? TruncateSource(string? source, int maxLength)
@@ -827,7 +889,12 @@ public sealed class LuminaMcpTools
             ],
             ["lumina_get_component", "lumina_get_example"]);
 
-    private static string NormalizeArea(string? area) =>
+    private static string? NormalizeOptional(string value) =>
+        string.IsNullOrWhiteSpace(value)
+            ? null
+            : value.Trim();
+
+    private static string NormalizeArea(string area) =>
         string.IsNullOrWhiteSpace(area)
             ? "all"
             : area.Trim().ToLowerInvariant();
@@ -860,12 +927,12 @@ public sealed class LuminaMcpTools
         return score;
     }
 
-    private static bool IsDiagnosticsPackage(string? package)
+    private static bool IsDiagnosticsPackage(string package)
     {
-        if (string.IsNullOrWhiteSpace(package))
+        var normalizedPackage = NormalizeOptional(package);
+        if (normalizedPackage is null)
             return false;
 
-        var normalizedPackage = package.Trim();
         return normalizedPackage.Equals("LuminaUI.Diagnostics", StringComparison.OrdinalIgnoreCase)
             || normalizedPackage.Equals("Diagnostics", StringComparison.OrdinalIgnoreCase)
             || normalizedPackage.Equals("diagnostics", StringComparison.OrdinalIgnoreCase);
@@ -881,22 +948,22 @@ public sealed class LuminaMcpTools
             "diagnostics-setup" =>
             [
                 "Call lumina_get_diagnostics_setup to get the exact app-side installation steps.",
-                "Edit the target app project: add the LuminaUI.Diagnostics package or project reference.",
-                "Edit Program.cs: add using LuminaUI.Diagnostics and call UseLuminaUIDiagnostics() on the AppBuilder chain.",
+                "Edit the target app project: add the LuminaUI.Diagnostics package or project reference inside a Debug-only ItemGroup.",
+                "Edit Program.cs: add using LuminaUI.Diagnostics and call UseLuminaUIDiagnostics() on the AppBuilder behind #if DEBUG.",
                 "Build and run the target app.",
                 "Use the preinstalled LuminaUI.Diagnostics.Mcp tool to call discover_apps and list_windows."
             ],
             "both" =>
             [
                 "先用 LuminaUI.Mcp 查询组件或示例，明确应该如何写 XAML、使用哪些属性和 token。",
-                "再启动目标 Avalonia 应用，并确保 AppBuilder 调用了 UseLuminaUIDiagnostics()。",
+                "再启动目标 Avalonia 应用，并确保 AppBuilder 在 #if DEBUG 下调用了 UseLuminaUIDiagnostics()。",
                 "用 LuminaUI.Diagnostics.Mcp 的 discover_apps/list_windows 定位进程和窗口。",
                 "用 find_control/get_visual_tree/get_control_properties 对照文档结果检查运行时状态。"
             ],
             "diagnostics" =>
             [
-                "确认目标应用引用 LuminaUI.Diagnostics 并启用了 UseLuminaUIDiagnostics()。",
-                "启动 lumina-ui-diagnostics-mcp。",
+                "确认目标应用引用 LuminaUI.Diagnostics，并在 Debug 构建中通过 #if DEBUG 启用了 UseLuminaUIDiagnostics()。",
+                "启动 lumina-mcp。",
                 "调用 discover_apps 或直接传 pid/pipe。",
                 "按问题类型调用 list_windows、get_visual_tree、find_control、get_control_properties、get_binding_errors 或 take_screenshot。"
             ],

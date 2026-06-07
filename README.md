@@ -111,11 +111,24 @@ Application-side setup:
 using Avalonia;
 using LuminaUI.Diagnostics;
 
-public static AppBuilder BuildAvaloniaApp() =>
-    AppBuilder.Configure<App>()
+public static AppBuilder BuildAvaloniaApp()
+    => AppBuilder.Configure<App>()
         .UsePlatformDetect()
-        .UseLuminaUIDiagnostics();
+#if DEBUG
+        .UseLuminaUIDiagnostics()
+#endif
+        ;
 ```
+
+Keep diagnostics behind `#if DEBUG` unless the app is an internal diagnostic build. Also make the package reference Debug-only so release publish output does not include the diagnostics package:
+
+```xml
+<ItemGroup Condition="'$(Configuration)' == 'Debug'">
+  <PackageReference Include="LuminaUI.Diagnostics" Version="<resolved-version>" />
+</ItemGroup>
+```
+
+If `dotnet add package LuminaUI.Diagnostics` was used first, keep the generated version and move that `PackageReference` into the conditional `ItemGroup`.
 
 The diagnostics host listens on a deterministic pipe name:
 
@@ -126,7 +139,7 @@ lumina-ui-diagnostics-{pid}
 The dotnet tool package exposes the stdio MCP server command:
 
 ```bash
-lumina-ui-diagnostics-mcp
+lumina-mcp
 ```
 
 The documentation MCP server remains HTTP-based at `http://localhost:3001/mcp`.

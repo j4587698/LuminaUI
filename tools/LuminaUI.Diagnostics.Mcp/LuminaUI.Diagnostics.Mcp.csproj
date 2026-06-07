@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
     <PackAsTool>true</PackAsTool>
-    <ToolCommandName>lumina-ui-diagnostics-mcp</ToolCommandName>
+    <ToolCommandName>lumina-mcp</ToolCommandName>
     <PackageId>LuminaUI.Diagnostics.Mcp</PackageId>
     <Version>$(LuminaUIDiagnosticsMcpVersion)</Version>
     <PackageVersion>$(LuminaUIDiagnosticsMcpVersion)</PackageVersion>
