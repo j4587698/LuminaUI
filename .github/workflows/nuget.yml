@@ -9,7 +9,10 @@ on:
       - "Directory.Build.props"
       - "Directory.Build.targets"
       - "Directory.Packages.props"
-      - "src/**"
+      - "src/LuminaUI/**"
+      - "src/LuminaUI.ColorPicker/**"
+      - "src/LuminaUI.DataGrid/**"
+      - "src/LuminaUI.TreeDataGrid/**"
       - "demo/**"
       - "README.md"
       - "README.zh-CN.md"
@@ -264,6 +267,8 @@ jobs:
       - demo-android
     if: needs.prepare.outputs.should_release == 'true'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout
@@ -317,7 +322,7 @@ jobs:
 
       - name: Create GitHub Release
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.GH_RELEASE_TOKEN || github.token }}
           TAG_NAME: ${{ needs.prepare.outputs.tag_name }}
           PACKAGE_VERSION: ${{ needs.prepare.outputs.package_version }}
         shell: bash

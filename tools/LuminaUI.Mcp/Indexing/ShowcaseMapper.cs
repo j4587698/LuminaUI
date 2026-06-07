@@ -1,4 +1,5 @@
 using LuminaUI.Mcp.Models;
+using System.Text.RegularExpressions;
 
 namespace LuminaUI.Mcp.Indexing;
 
@@ -61,6 +62,8 @@ public sealed class ShowcaseMapper
         ["Overlays"] = ("Patterns/OverlaysShowcasePage", "OverlaysShowcaseViewModel", ["LuminaDialog", "LuminaToast", "LuminaBottomSheet"]),
         ["Motion"] = ("Patterns/MotionShowcasePage", "MotionShowcaseViewModel", ["LuminaMotion"]),
         ["Settings"] = ("Settings/SettingsPage", "SettingsPageViewModel", ["LuminaSettingsCard", "LuminaSettingItem"]),
+        ["MainWindow"] = ("../MainWindow", null, ["LuminaWindow"]),
+        ["RootTopView"] = ("Root/SandboxRootView", null, ["LuminaTopView"]),
     };
 
     public List<ExampleInfo> BuildExamples(string demoViewsPath)
@@ -86,27 +89,12 @@ public sealed class ShowcaseMapper
 
             var pageName = Path.GetFileNameWithoutExtension(axamlFile);
 
-            if (componentNames.Length > 0)
+            var mappedComponentNames = BuildComponentNames(pageName, componentNames, axamlSource, csSource, vmSource);
+            foreach (var compName in mappedComponentNames)
             {
-                foreach (var compName in componentNames)
-                {
-                    examples.Add(new ExampleInfo
-                    {
-                        ComponentName = compName,
-                        ShowcasePage = pageName,
-                        AxamlSource = axamlSource,
-                        CodeBehindSource = csSource,
-                        ViewModelSource = vmSource
-                    });
-                }
-            }
-            else
-            {
-                // Map by page name convention: ButtonShowcasePage -> Button
-                var inferredName = pageName.Replace("ShowcasePage", "");
                 examples.Add(new ExampleInfo
                 {
-                    ComponentName = inferredName,
+                    ComponentName = compName,
                     ShowcasePage = pageName,
                     AxamlSource = axamlSource,
                     CodeBehindSource = csSource,
@@ -174,17 +162,74 @@ public sealed class ShowcaseMapper
             if (axamlSource is null)
                 continue;
 
-            examples.Add(new ExampleInfo
+            var csSource = SafeReadFile($"{axamlFile}.cs");
+            var vmSource = viewModelFile is not null ? SafeReadFile(viewModelFile) : null;
+            foreach (var componentName in BuildComponentNames(pageName, [], axamlSource, csSource, vmSource))
             {
-                ComponentName = InferComponentName(pageName),
-                ShowcasePage = pageName,
-                AxamlSource = axamlSource,
-                CodeBehindSource = SafeReadFile($"{axamlFile}.cs"),
-                ViewModelSource = viewModelFile is not null ? SafeReadFile(viewModelFile) : null
-            });
+                examples.Add(new ExampleInfo
+                {
+                    ComponentName = componentName,
+                    ShowcasePage = pageName,
+                    AxamlSource = axamlSource,
+                    CodeBehindSource = csSource,
+                    ViewModelSource = vmSource
+                });
+            }
         }
 
         return examples;
+    }
+
+    private static List<string> BuildComponentNames(string pageName, string[] explicitNames, string axamlSource, params string?[] codeSources)
+    {
+        var names = new SortedSet<string>(StringComparer.Ordinal);
+
+        foreach (var componentName in explicitNames)
+        {
+            if (!string.IsNullOrWhiteSpace(componentName))
+                names.Add(componentName);
+        }
+
+        foreach (var componentName in ExtractReferencedLuminaTypes(axamlSource))
+            names.Add(componentName);
+
+        foreach (var codeSource in codeSources)
+        {
+            if (codeSource is null)
+                continue;
+
+            foreach (var componentName in ExtractReferencedLuminaSymbols(codeSource))
+                names.Add(componentName);
+        }
+
+        if (names.Count == 0)
+            names.Add(InferComponentName(pageName));
+
+        return names.ToList();
+    }
+
+    private static IEnumerable<string> ExtractReferencedLuminaTypes(string axamlSource)
+    {
+        foreach (Match match in Regex.Matches(axamlSource, @"(?:</?|\s)[A-Za-z_][\w.]*:(Lumina\w+)(?=[\s>/\.])"))
+        {
+            if (match.Groups[1].Success)
+                yield return match.Groups[1].Value;
+        }
+    }
+
+    private static IEnumerable<string> ExtractReferencedLuminaSymbols(string source)
+    {
+        foreach (Match match in Regex.Matches(source, @"\bLumina\w+\b"))
+        {
+            if (!match.Success)
+                continue;
+
+            var name = match.Value;
+            if (name is "LuminaUI")
+                continue;
+
+            yield return name;
+        }
     }
 
     private static string? FindViewModelFile(string demoViewsPath, string pageName)

@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <LuminaDocsMcpVersion>0.1.2</LuminaDocsMcpVersion>
+
+    <LuminaDocsMcpAssemblyVersion>0.1.2.0</LuminaDocsMcpAssemblyVersion>
+  </PropertyGroup>
+</Project>

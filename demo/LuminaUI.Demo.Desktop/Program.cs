@@ -1,5 +1,8 @@
 using System;
 using Avalonia;
+#if DEBUG
+using LuminaUI.Diagnostics;
+#endif
 using LuminaUI.Demo;
 
 namespace LuminaUI.Demo.Desktop;
@@ -29,5 +32,10 @@ internal static class Program
             .WithDeveloperTools()
 #endif
             .WithInterFont()
-            .LogToTrace();
+            .LogToTrace()
+#if DEBUG
+            .UseLuminaUIDiagnostics();
+#else
+            ;
+#endif
 }

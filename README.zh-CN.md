@@ -4,7 +4,7 @@
 
 LuminaUI 是一套面向 Avalonia 12 的组件库，覆盖桌面、浏览器和移动端风格的应用壳层。它提供统一的视觉体系、可复用控件、导航基础设施、覆盖层、本地化支持，以及 ColorPicker、DataGrid、TreeDataGrid 的可选主题集成。
 
-NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NET 10`。Avalonia 版本为 `12.0.1`。
+NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NET 10`。Avalonia 版本为 `12.0.4`。
 
 ## 包结构
 
@@ -14,6 +14,9 @@ NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NE
 | `LuminaUI.ColorPicker` | Avalonia ColorPicker 和 ColorView 的 Lumina 主题集成。 |
 | `LuminaUI.DataGrid` | Avalonia DataGrid 的 Lumina 主题集成。 |
 | `LuminaUI.TreeDataGrid` | TreeDataGrid.Avalonia 的 Lumina 主题集成。 |
+| `LuminaUI.Diagnostics.Abstractions` | LuminaUI diagnostics 包和工具共享的协议契约。 |
+| `LuminaUI.Diagnostics` | Avalonia 应用侧命名管道 diagnostics host。 |
+| `LuminaUI.Diagnostics.Mcp` | live diagnostics MCP stdio server 的 dotnet tool 包。 |
 
 ## 功能概览
 
@@ -68,6 +71,9 @@ src/
   LuminaUI.ColorPicker/  可选 ColorPicker 主题包。
   LuminaUI.DataGrid/     可选 DataGrid 主题包。
   LuminaUI.TreeDataGrid/ 可选 TreeDataGrid 主题包。
+  LuminaUI.Diagnostics.Abstractions/
+                          共享 diagnostics 协议契约。
+  LuminaUI.Diagnostics/  应用侧 diagnostics host。
 
 demo/
   LuminaUI.Demo/         共享 Demo 视图和 ViewModel。
@@ -75,9 +81,68 @@ demo/
   LuminaUI.Demo.Browser/ 浏览器宿主。
   LuminaUI.Demo.Android/ Android 宿主。
   LuminaUI.Demo.iOS/     iOS 宿主。
+
+tools/
+  LuminaUI.Mcp/          组件知识和文档 MCP 服务。
+  LuminaUI.Diagnostics.Mcp/
+                          live app diagnostics MCP stdio 服务。
 ```
 
-MCP diagnostics 只在 `demo/LuminaUI.Demo.Desktop` 中启用。
+文档 MCP 服务（`tools/LuminaUI.Mcp`）保留为唯一的文档和组件知识入口。diagnostics MCP 工具（`tools/LuminaUI.Diagnostics.Mcp`）独立存在，只连接已通过 `LuminaUI.Diagnostics` opt-in 的运行中 Avalonia 应用。
+
+## 版本策略
+
+仓库内使用独立版本域，避免工具包被主控件库的发布节奏绑住：
+
+- `LuminaUIVersion`：主控件包和可选控件主题包。
+- `LuminaUIDiagnosticsVersion`：diagnostics 协议契约和应用侧 host。
+- `LuminaUIDiagnosticsMcpVersion`：live diagnostics MCP dotnet tool。
+- `LuminaDocsMcpVersion`：文档 MCP 服务。
+
+`LuminaUIVersion` 位于 `Directory.Build.props`。Diagnostics 版本位于 `Directory.Build.Diagnostics.props`。文档 MCP 版本位于 `Directory.Build.Mcp.props`。
+
+只有对应包的公开 API、协议或行为发生变化时才需要升级对应版本。仅主控件库改动时，不需要同步升级 MCP 工具版本。
+
+## Diagnostics MCP
+
+应用侧接入：
+
+```csharp
+using Avalonia;
+using LuminaUI.Diagnostics;
+
+public static AppBuilder BuildAvaloniaApp()
+    => AppBuilder.Configure<App>()
+        .UsePlatformDetect()
+#if DEBUG
+        .UseLuminaUIDiagnostics()
+#endif
+        ;
+```
+
+建议默认把 diagnostics 限制在 `#if DEBUG` 下，除非这是明确的内部诊断构建。同时把包引用也限制为 Debug 条件，避免 Release publish 输出包含 diagnostics 包：
+
+```xml
+<ItemGroup Condition="'$(Configuration)' == 'Debug'">
+  <PackageReference Include="LuminaUI.Diagnostics" Version="<resolved-version>" />
+</ItemGroup>
+```
+
+如果先执行了 `dotnet add package LuminaUI.Diagnostics`，保留它生成的版本号，把这条 `PackageReference` 移到带 `Condition` 的 `ItemGroup` 里。
+
+diagnostics host 使用确定性的命名管道：
+
+```text
+lumina-ui-diagnostics-{pid}
+```
+
+dotnet tool 包提供 stdio MCP server 命令：
+
+```bash
+lumina-mcp
+```
+
+文档 MCP 仍通过 HTTP 暴露在 `http://localhost:3001/mcp`。
 
 ## 构建与运行
 
@@ -111,23 +176,30 @@ dotnet pack src/LuminaUI/LuminaUI.csproj -c Release
 dotnet pack src/LuminaUI.ColorPicker/LuminaUI.ColorPicker.csproj -c Release
 dotnet pack src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj -c Release
 dotnet pack src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj -c Release
+dotnet pack src/LuminaUI.Diagnostics.Abstractions/LuminaUI.Diagnostics.Abstractions.csproj -c Release
+dotnet pack src/LuminaUI.Diagnostics/LuminaUI.Diagnostics.csproj -c Release
+dotnet pack tools/LuminaUI.Diagnostics.Mcp/LuminaUI.Diagnostics.Mcp.csproj -c Release
 ```
 
 ## 发布
 
-NuGet 发布和 GitHub Release 由名为 `LuminaUI` 的 GitHub Actions workflow 处理。
+NuGet 发布和 GitHub Release 按版本域拆分：
+
+- `LuminaUI`：根据 `LuminaUIVersion` 发布主控件包。
+- `LuminaUI Diagnostics MCP`：根据 `LuminaUIDiagnosticsVersion` 和 `LuminaUIDiagnosticsMcpVersion` 发布 `LuminaUI.Diagnostics.Abstractions`、`LuminaUI.Diagnostics` 和 `LuminaUI.Diagnostics.Mcp`。
 
 1. 在仓库 Secret 中配置 `NUGET_API_KEY`，值为 NuGet.org API key。
-2. 将 `Directory.Build.props` 中的 `LuminaUIVersion` 更新为更高的稳定版本。
-3. 将改动推送到 `master` 或 `main`。
+2. 可选：如果仓库默认的 Actions `GITHUB_TOKEN` 无法创建 Release，在仓库 Secret 中配置 `GH_RELEASE_TOKEN`，权限需要包含 `Contents: Read and write`。
+3. 按本次发布涉及的包，更新 `Directory.Build.props`、`Directory.Build.Diagnostics.props` 或 `Directory.Build.Mcp.props` 中对应的版本属性。
+4. 将改动推送到 `master` 或 `main`。
 
 ```bash
-git add Directory.Build.props
+git add Directory.Build.props Directory.Build.Diagnostics.props Directory.Build.Mcp.props
 git commit -m "Release 0.1.0"
 git push origin master
 ```
 
-如果匹配的 tag 尚不存在，workflow 会构建可打包项目，将 `.nupkg` 和 `.snupkg` 发布到 NuGet，构建 Desktop、Browser、Android 和 iOS simulator Demo 发布产物，创建 `v<version>` tag，并发布名为 `LuminaUI <version>` 的 GitHub Release。
+如果匹配的 tag 尚不存在，对应 workflow 会构建相关可打包项目，将 `.nupkg` 和 `.snupkg` 发布到 NuGet，创建 release tag，并发布 GitHub Release。主 workflow 还会构建 Desktop、Browser、Android 和 iOS simulator Demo 发布产物。
 
 Release notes 由 GitHub 根据合并的 PR 和 commit 自动生成。首个版本从 `0.1.0` 开始。
 
