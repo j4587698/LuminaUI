@@ -9,7 +9,7 @@ public sealed class InspectionTools
 {
     [McpServerTool(Name = LuminaDiagnosticsToolNames.ListWindows, ReadOnly = true, Destructive = false),
      Description("List windows in the target LuminaUI.Diagnostics-enabled Avalonia application.")]
-    public static Task<DiagnosticResponse> ListWindows(
+    public static Task<string> ListWindows(
         ToolForwarder forwarder,
         [Description("Target process ID. When provided, LuminaUI.Diagnostics uses the default pipe name lumina-ui-diagnostics-{pid}.")] int? pid = null,
         [Description("Explicit LuminaUI.Diagnostics pipe name. Takes precedence over pid.")] string? pipe = null,
@@ -25,7 +25,7 @@ public sealed class InspectionTools
 
     [McpServerTool(Name = LuminaDiagnosticsToolNames.GetVisualTree, ReadOnly = true, Destructive = false),
      Description("Get a bounded visual tree for a target window or control.")]
-    public static Task<DiagnosticResponse> GetVisualTree(
+    public static Task<string> GetVisualTree(
         ToolForwarder forwarder,
         [Description("Window index from list_windows.")] int windowIndex = 0,
         [Description("Optional control identifier such as #Name, TypeName, or TypeName[index].")] string? controlId = null,
@@ -47,7 +47,7 @@ public sealed class InspectionTools
 
     [McpServerTool(Name = LuminaDiagnosticsToolNames.GetLogicalTree, ReadOnly = true, Destructive = false),
      Description("Get a bounded logical tree for a target window or control.")]
-    public static Task<DiagnosticResponse> GetLogicalTree(
+    public static Task<string> GetLogicalTree(
         ToolForwarder forwarder,
         [Description("Window index from list_windows.")] int windowIndex = 0,
         [Description("Optional control identifier such as #Name, TypeName, or TypeName[index].")] string? controlId = null,
@@ -69,7 +69,7 @@ public sealed class InspectionTools
 
     [McpServerTool(Name = LuminaDiagnosticsToolNames.FindControl, ReadOnly = true, Destructive = false),
      Description("Search controls by name, type, or displayed text across target windows.")]
-    public static Task<DiagnosticResponse> FindControl(
+    public static Task<string> FindControl(
         ToolForwarder forwarder,
         [Description("Name filter.")] string? name = null,
         [Description("Type name filter, such as Button or TextBox.")] string? typeName = null,
@@ -93,7 +93,7 @@ public sealed class InspectionTools
 
     [McpServerTool(Name = LuminaDiagnosticsToolNames.GetFocusedElement, ReadOnly = true, Destructive = false),
      Description("Get the currently focused element in the target application.")]
-    public static Task<DiagnosticResponse> GetFocusedElement(
+    public static Task<string> GetFocusedElement(
         ToolForwarder forwarder,
         [Description("Target process ID.")] int? pid = null,
         [Description("Explicit LuminaUI.Diagnostics pipe name. Takes precedence over pid.")] string? pipe = null,

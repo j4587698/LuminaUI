@@ -213,6 +213,7 @@ public sealed class InteractionHandler : IDiagnosticToolHandler
         textBox ??= AvaloniaControlResolver.EnumerateControls(lookup.Control!)
             .OfType<TextBox>()
             .FirstOrDefault(IsEditableTextBox);
+        textBox ??= FindEditableTextBoxInMatchingType(request, lookup);
 
         if (textBox is null)
         {
@@ -450,6 +451,50 @@ public sealed class InteractionHandler : IDiagnosticToolHandler
 
     private static bool IsEditableTextBox(TextBox textBox) =>
         textBox.IsVisible && textBox.IsEnabled && !textBox.IsReadOnly;
+
+    private TextBox? FindEditableTextBoxInMatchingType(
+        DiagnosticRequest request,
+        ControlLookup lookup)
+    {
+        var controlId = InspectionRequestHelpers.GetString(request.Parameters, "controlId");
+        if (!ControlIdentifierParser.TryParse(controlId, out var identifier, out _)
+            || identifier.Kind != ControlIdentifierKind.Type)
+        {
+            return null;
+        }
+
+        var roots = _getRoots();
+        if (lookup.RootIndex < 0 || lookup.RootIndex >= roots.Count)
+        {
+            return null;
+        }
+
+        foreach (var control in AvaloniaControlResolver.EnumerateControls(roots[lookup.RootIndex]))
+        {
+            if (!IsTypeMatch(control, identifier.Value))
+                continue;
+
+            var textBox = control as TextBox
+                ?? AvaloniaControlResolver.EnumerateControls(control)
+                    .OfType<TextBox>()
+                    .FirstOrDefault(IsEditableTextBox);
+            if (textBox is not null && IsEditableTextBox(textBox))
+            {
+                return textBox;
+            }
+        }
+
+        return null;
+    }
+
+    private static bool IsTypeMatch(
+        Control control,
+        string typeName)
+    {
+        var type = control.GetType();
+        return string.Equals(type.Name, typeName, StringComparison.Ordinal)
+            || string.Equals(type.FullName, typeName, StringComparison.Ordinal);
+    }
 
     private static void RaiseReturnKey(TextBox textBox)
     {

@@ -9,7 +9,7 @@ public sealed class ScrollTools
 {
     [McpServerTool(Name = LuminaDiagnosticsToolNames.Scroll, ReadOnly = false, Destructive = false),
      Description("Read or change ScrollViewer state near a target control.")]
-    public static Task<DiagnosticResponse> Scroll(
+    public static Task<string> Scroll(
         ToolForwarder forwarder,
         [Description("Optional ScrollViewer or nearby control identifier.")] string? controlId = null,
         [Description("Absolute horizontal offset.")] double? x = null,
@@ -43,7 +43,7 @@ public sealed class ScrollTools
 
     [McpServerTool(Name = LuminaDiagnosticsToolNames.GetScrollableItems, ReadOnly = true, Destructive = false),
      Description("Get virtualization and scroll diagnostics for an ItemsControl.")]
-    public static Task<DiagnosticResponse> GetScrollableItems(
+    public static Task<string> GetScrollableItems(
         ToolForwarder forwarder,
         [Description("ItemsControl identifier, or a parent containing one.")] string controlId,
         [Description("Target process ID.")] int? pid = null,

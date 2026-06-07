@@ -45,12 +45,23 @@ public sealed class ControlSearchHandler : IDiagnosticToolHandler
         var roots = _getRoots();
         for (var rootIndex = 0; rootIndex < roots.Count && results.Count < maxResults; rootIndex++)
         {
-            foreach (var control in AvaloniaControlResolver.EnumerateControls(roots[rootIndex]))
+            var controls = AvaloniaControlResolver.EnumerateControls(roots[rootIndex]).ToArray();
+            var nameCounts = controls
+                .Where(control => !string.IsNullOrWhiteSpace(control.Name))
+                .GroupBy(control => control.Name!, StringComparer.Ordinal)
+                .ToDictionary(group => group.Key, group => group.Count(), StringComparer.Ordinal);
+            var typeIndexes = new Dictionary<string, int>(StringComparer.Ordinal);
+
+            foreach (var control in controls)
             {
+                var controlTypeName = control.GetType().Name;
+                var typeIndex = typeIndexes.GetValueOrDefault(controlTypeName);
+                typeIndexes[controlTypeName] = typeIndex + 1;
+
                 if (!Matches(control, name, typeName, text))
                     continue;
 
-                results.Add(CreateResult(control, rootIndex));
+                results.Add(CreateResult(control, rootIndex, typeIndex, nameCounts));
                 if (results.Count >= maxResults)
                     break;
             }
@@ -94,11 +105,13 @@ public sealed class ControlSearchHandler : IDiagnosticToolHandler
 
     private static JsonObject CreateResult(
         Control control,
-        int rootIndex) =>
+        int rootIndex,
+        int typeIndex,
+        IReadOnlyDictionary<string, int> nameCounts) =>
         new()
         {
             ["rootIndex"] = rootIndex,
-            ["controlId"] = CreateControlId(control),
+            ["controlId"] = CreateControlId(control, typeIndex, nameCounts),
             ["type"] = control.GetType().Name,
             ["fullType"] = control.GetType().FullName,
             ["name"] = control.Name,
@@ -108,10 +121,20 @@ public sealed class ControlSearchHandler : IDiagnosticToolHandler
             ["isEnabled"] = control.IsEnabled
         };
 
-    private static string CreateControlId(Control control) =>
-        string.IsNullOrWhiteSpace(control.Name)
-            ? control.GetType().Name
-            : $"#{control.Name}";
+    private static string CreateControlId(
+        Control control,
+        int typeIndex,
+        IReadOnlyDictionary<string, int> nameCounts)
+    {
+        if (!string.IsNullOrWhiteSpace(control.Name)
+            && nameCounts.TryGetValue(control.Name, out var count)
+            && count == 1)
+        {
+            return $"#{control.Name}";
+        }
+
+        return $"{control.GetType().Name}[{typeIndex}]";
+    }
 
     internal static string? GetDisplayText(Control control) =>
         control switch
@@ -125,9 +148,12 @@ public sealed class ControlSearchHandler : IDiagnosticToolHandler
     private static JsonObject FormatRect(Rect bounds) =>
         new()
         {
-            ["x"] = bounds.X,
-            ["y"] = bounds.Y,
-            ["width"] = bounds.Width,
-            ["height"] = bounds.Height
+            ["x"] = FormatDouble(bounds.X),
+            ["y"] = FormatDouble(bounds.Y),
+            ["width"] = FormatDouble(bounds.Width),
+            ["height"] = FormatDouble(bounds.Height)
         };
+
+    private static JsonNode? FormatDouble(double value) =>
+        double.IsFinite(value) ? JsonValue.Create(value) : null;
 }

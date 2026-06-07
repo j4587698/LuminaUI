@@ -21,7 +21,7 @@ public sealed class ToolForwarder
         _sendAsync = sendAsync ?? throw new ArgumentNullException(nameof(sendAsync));
     }
 
-    public async Task<DiagnosticResponse> ForwardAsync(
+    public async Task<string> ForwardAsync(
         string toolName,
         JsonObject parameters,
         int? pid,
@@ -31,21 +31,21 @@ public sealed class ToolForwarder
     {
         if (string.IsNullOrWhiteSpace(toolName))
         {
-            return DiagnosticResponse.Fail(
+            return DiagnosticJson.SerializeResponse(DiagnosticResponse.Fail(
                 Guid.NewGuid().ToString("N"),
                 DiagnosticErrorCode.InvalidRequest,
-                "Tool name is required.");
+                "Tool name is required."));
         }
 
         var target = TargetResolver.Resolve(new TargetOptions(pid, pipe, timeoutMs));
         var requestId = Guid.NewGuid().ToString("N");
         if (!target.Success)
         {
-            return DiagnosticResponse.Fail(
+            return DiagnosticJson.SerializeResponse(DiagnosticResponse.Fail(
                 requestId,
                 target.Error!.Code,
                 target.Error.Message,
-                target.Error.Details);
+                target.Error.Details));
         }
 
         var request = new DiagnosticRequest(
@@ -54,7 +54,8 @@ public sealed class ToolForwarder
             parameters,
             target.TimeoutMs);
 
-        return await _sendAsync(target.DiagnosticsPipeName!, request, cancellationToken).ConfigureAwait(false);
+        var response = await _sendAsync(target.DiagnosticsPipeName!, request, cancellationToken).ConfigureAwait(false);
+        return DiagnosticJson.SerializeResponse(response);
     }
 
     public static JsonObject Parameters(params (string Name, object? Value)[] values)

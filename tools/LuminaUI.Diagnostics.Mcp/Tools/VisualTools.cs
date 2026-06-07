@@ -9,7 +9,7 @@ public sealed class VisualTools
 {
     [McpServerTool(Name = LuminaDiagnosticsToolNames.TakeScreenshot, ReadOnly = true, Destructive = false),
      Description("Capture a PNG screenshot of a target window or control.")]
-    public static Task<DiagnosticResponse> TakeScreenshot(
+    public static Task<string> TakeScreenshot(
         ToolForwarder forwarder,
         [Description("Window index from list_windows.")] int windowIndex = 0,
         [Description("Optional control identifier to capture instead of the whole window.")] string? controlId = null,

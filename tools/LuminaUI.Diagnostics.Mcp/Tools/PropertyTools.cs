@@ -9,7 +9,7 @@ public sealed class PropertyTools
 {
     [McpServerTool(Name = LuminaDiagnosticsToolNames.GetControlProperties, ReadOnly = true, Destructive = false),
      Description("Get Avalonia and selected CLR properties for a target control.")]
-    public static Task<DiagnosticResponse> GetControlProperties(
+    public static Task<string> GetControlProperties(
         ToolForwarder forwarder,
         [Description("Control identifier such as #Name, TypeName, or TypeName[index].")] string controlId,
         [Description("Optional property names to filter the response.")] string[]? propertyNames = null,
@@ -29,7 +29,7 @@ public sealed class PropertyTools
 
     [McpServerTool(Name = LuminaDiagnosticsToolNames.GetDataContext, ReadOnly = true, Destructive = false),
      Description("Get DataContext type and public property summaries for a target control.")]
-    public static Task<DiagnosticResponse> GetDataContext(
+    public static Task<string> GetDataContext(
         ToolForwarder forwarder,
         [Description("Optional control identifier. If omitted, diagnostics host uses the main window.")] string? controlId = null,
         [Description("Optional collection property to expand.")] string? expandProperty = null,
@@ -51,7 +51,7 @@ public sealed class PropertyTools
 
     [McpServerTool(Name = LuminaDiagnosticsToolNames.GetBindingErrors, ReadOnly = true, Destructive = false),
      Description("Get binding errors captured by the target diagnostics host.")]
-    public static Task<DiagnosticResponse> GetBindingErrors(
+    public static Task<string> GetBindingErrors(
         ToolForwarder forwarder,
         [Description("Target process ID.")] int? pid = null,
         [Description("Explicit LuminaUI.Diagnostics pipe name. Takes precedence over pid.")] string? pipe = null,
@@ -67,7 +67,7 @@ public sealed class PropertyTools
 
     [McpServerTool(Name = LuminaDiagnosticsToolNames.GetAppliedStyles, ReadOnly = true, Destructive = false),
      Description("Get style classes, pseudo-classes, and style setter summaries for a target control.")]
-    public static Task<DiagnosticResponse> GetAppliedStyles(
+    public static Task<string> GetAppliedStyles(
         ToolForwarder forwarder,
         [Description("Control identifier such as #Name, TypeName, or TypeName[index].")] string controlId,
         [Description("Target process ID.")] int? pid = null,
@@ -84,7 +84,7 @@ public sealed class PropertyTools
 
     [McpServerTool(Name = LuminaDiagnosticsToolNames.GetResources, ReadOnly = true, Destructive = false),
      Description("Get application or control resource summaries from the target diagnostics host.")]
-    public static Task<DiagnosticResponse> GetResources(
+    public static Task<string> GetResources(
         ToolForwarder forwarder,
         [Description("Optional control identifier. If omitted, returns application resources.")] string? controlId = null,
         [Description("Target process ID.")] int? pid = null,

@@ -9,7 +9,7 @@ public sealed class InteractionTools
 {
     [McpServerTool(Name = LuminaDiagnosticsToolNames.ClickControl, ReadOnly = false, Destructive = false),
      Description("Click or command-invoke a target control.")]
-    public static Task<DiagnosticResponse> ClickControl(
+    public static Task<string> ClickControl(
         ToolForwarder forwarder,
         [Description("Control identifier such as #Name, TypeName, or TypeName[index].")] string controlId,
         [Description("Target process ID.")] int? pid = null,
@@ -26,7 +26,7 @@ public sealed class InteractionTools
 
     [McpServerTool(Name = LuminaDiagnosticsToolNames.SetProperty, ReadOnly = false, Destructive = false),
      Description("Set a supported Avalonia property on a target control.")]
-    public static Task<DiagnosticResponse> SetProperty(
+    public static Task<string> SetProperty(
         ToolForwarder forwarder,
         [Description("Control identifier such as #Name, TypeName, or TypeName[index].")] string controlId,
         [Description("Property name to set.")] string propertyName,
@@ -48,7 +48,7 @@ public sealed class InteractionTools
 
     [McpServerTool(Name = LuminaDiagnosticsToolNames.InputText, ReadOnly = false, Destructive = false),
      Description("Set text on a TextBox target or the first TextBox child inside a target control.")]
-    public static Task<DiagnosticResponse> InputText(
+    public static Task<string> InputText(
         ToolForwarder forwarder,
         [Description("Control identifier for a TextBox or parent containing a TextBox.")] string controlId,
         [Description("Text to input.")] string text,
@@ -70,7 +70,7 @@ public sealed class InteractionTools
 
     [McpServerTool(Name = LuminaDiagnosticsToolNames.InvokeCommand, ReadOnly = false, Destructive = false),
      Description("Invoke an ICommand exposed by the target control DataContext.")]
-    public static Task<DiagnosticResponse> InvokeCommand(
+    public static Task<string> InvokeCommand(
         ToolForwarder forwarder,
         [Description("Control identifier whose DataContext contains the command.")] string controlId,
         [Description("ICommand property name on the DataContext.")] string commandName,
@@ -92,7 +92,7 @@ public sealed class InteractionTools
 
     [McpServerTool(Name = LuminaDiagnosticsToolNames.WaitForProperty, ReadOnly = false, Destructive = false),
      Description("Poll a control, Avalonia property, CLR property, or DataContext property until it reaches an expected value.")]
-    public static Task<DiagnosticResponse> WaitForProperty(
+    public static Task<string> WaitForProperty(
         ToolForwarder forwarder,
         [Description("Property name to watch.")] string propertyName,
         [Description("Expected value as a string.")] string expectedValue,
