@@ -89,8 +89,6 @@ public partial class SandboxRootView : UserControl
         InitializeComponent();
         RegisterRoutes();
 
-        LuminaLocalization.LanguageChanged += OnLanguageChanged;
-        DetachedFromVisualTree += (_, _) => LuminaLocalization.LanguageChanged -= OnLanguageChanged;
         Loaded += OnLoaded;
     }
 
@@ -121,8 +119,6 @@ public partial class SandboxRootView : UserControl
 
     private void OnLoaded(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        SandboxTextLocalizer.Apply(TopLevel.GetTopLevel(this) as object ?? this);
-
         var insetsManager = TopLevel.GetTopLevel(this)?.InsetsManager;
         if (insetsManager != null)
         {
@@ -155,28 +151,7 @@ public partial class SandboxRootView : UserControl
             ? page
             : new ShowcaseReferencePage(page, sourceInfo);
 
-        routePage.Loaded += (_, _) => SandboxTextLocalizer.Apply(routePage);
         return routePage;
-    }
-
-    private void OnLanguageChanged(object? sender, EventArgs e)
-    {
-        SandboxTextLocalizer.Apply(TopLevel.GetTopLevel(this) as object ?? this);
-
-        foreach (var page in AppShell.CachedRouteContents)
-        {
-            SandboxTextLocalizer.Apply(page);
-        }
-
-        if (AppShell.DialogContent is { } dialogContent)
-        {
-            SandboxTextLocalizer.Apply(dialogContent);
-        }
-
-        if (RootTopView.DialogContent is { } topDialogContent)
-        {
-            SandboxTextLocalizer.Apply(topDialogContent);
-        }
     }
 
     private Control CreatePage(string navigationName)

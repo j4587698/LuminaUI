@@ -1,5 +1,6 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.FormShowcasePage"
@@ -11,8 +12,8 @@
                     HorizontalAlignment="Stretch"
                     Margin="0,36,0,40">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.1172}" />
-                <TextBlock Text="{DynamicResource Sandbox.Text.0817}"
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.1172}" />
+                <TextBlock Text="{l10n:Loc Sandbox.Text.0817}"
                            Foreground="{DynamicResource LuminaTextMutedBrush}"
                            TextWrapping="Wrap" />
             </StackPanel>
@@ -23,34 +24,34 @@
                                           VerticalSpacing="16">
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0816}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0816}" />
                         <lumina:LuminaForm LabelPosition="Left" LabelWidth="120">
                             <TextBox lumina:LuminaForm.Label="Project"
                                      lumina:LuminaForm.IsRequired="True"
                                      Text="Lumina UI" />
                             <lumina:LuminaMultiSelect lumina:LuminaForm.Label="Members"
-                                                      Watermark="{DynamicResource Sandbox.Text.0875}"
+                                                      Watermark="{l10n:Loc Sandbox.Text.0875}"
                                                       ItemsSource="{Binding TeamMembers}"
                                                       SelectedItems="{Binding SelectedMembers}" />
                             <lumina:LuminaTagInput lumina:LuminaForm.Label="Labels"
-                                                   Watermark="{DynamicResource Sandbox.Text.1173}"
+                                                   Watermark="{l10n:Loc Sandbox.Text.1173}"
                                                    AllowDuplicates="False"
                                                    Tags="{Binding Labels}"
                                                    TagAddedCommand="{Binding TagAddedCommand}"
                                                    TagRemovedCommand="{Binding TagRemovedCommand}" />
                             <Button lumina:LuminaForm.NoLabel="True"
-                                    Content="{DynamicResource Sandbox.Text.0647}"
+                                    Content="{l10n:Loc Sandbox.Text.0647}"
                                     Classes="Primary"
                                     Command="{Binding SubmitFormCommand}"
                                     HorizontalAlignment="Left" />
                         </lumina:LuminaForm>
                         <Separator />
-                        <TextBlock Classes="Label" Text="{DynamicResource Sandbox.Text.1174}" />
+                        <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Text.1174}" />
                         <lumina:LuminaForm LabelPosition="Top">
                             <TextBox lumina:LuminaForm.Label="Release name"
-                                     Text="{DynamicResource Sandbox.Text.0781}" />
+                                     Text="{l10n:Loc Sandbox.Text.0781}" />
                             <lumina:LuminaMultiSelect lumina:LuminaForm.Label="Priority"
-                                                      Watermark="{DynamicResource Sandbox.Text.0876}"
+                                                      Watermark="{l10n:Loc Sandbox.Text.0876}"
                                                       ItemsSource="{Binding Priorities}"
                                                       SelectedItems="{Binding SelectedPriorities}" />
                         </lumina:LuminaForm>

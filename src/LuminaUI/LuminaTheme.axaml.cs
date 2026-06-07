@@ -1,15 +1,14 @@
 using Avalonia.Markup.Xaml;
 using Avalonia.Styling;
 using LuminaUI.Controls;
-using System;
 
 namespace LuminaUI;
 
 public class LuminaTheme : Styles
 {
-    public LuminaTheme(IServiceProvider? sp = null)
+    public LuminaTheme()
     {
-        AvaloniaXamlLoader.Load(sp, this);
+        AvaloniaXamlLoader.Load(this);
 
         // The theme is instantiated while the application's XAML is being loaded
         // (Application.Initialize), which is the only window during which an application-level

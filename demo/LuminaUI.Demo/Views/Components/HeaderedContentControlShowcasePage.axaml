@@ -1,25 +1,26 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              x:Class="LuminaUI.Demo.Views.HeaderedContentControlShowcasePage">
     <ScrollViewer Margin="16" HorizontalScrollBarVisibility="Disabled">
         <StackPanel Spacing="24" HorizontalAlignment="Stretch" Margin="0,36,0,40">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.1179}" />
-                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0765}" TextWrapping="Wrap" />
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.1179}" />
+                <TextBlock Classes="Body" Text="{l10n:Loc Sandbox.Text.0765}" TextWrapping="Wrap" />
             </StackPanel>
             <lumina:LuminaResponsivePanel MinItemWidth="300" MaxItemWidth="640" HorizontalSpacing="16" VerticalSpacing="16">
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1179}" />
-                        <HeaderedContentControl Header="{DynamicResource Sandbox.Text.0339}">
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1179}" />
+                        <HeaderedContentControl Header="{l10n:Loc Sandbox.Text.0339}">
                             <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="8">
                                 <Border Width="8" Height="8" CornerRadius="4" Background="{DynamicResource LuminaSuccessBrush}" />
-                                <TextBlock Grid.Column="1" Text="{DynamicResource Sandbox.Text.0340}" />
+                                <TextBlock Grid.Column="1" Text="{l10n:Loc Sandbox.Text.0340}" />
                                 <Border Grid.Row="1" Width="8" Height="8" CornerRadius="4" Background="{DynamicResource LuminaPrimaryBrush}" />
-                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{DynamicResource Sandbox.Text.0341}" />
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{l10n:Loc Sandbox.Text.0341}" />
                                 <Border Grid.Row="2" Width="8" Height="8" CornerRadius="4" Background="{DynamicResource LuminaWarningBrush}" />
-                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{DynamicResource Sandbox.Text.0342}" />
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{l10n:Loc Sandbox.Text.0342}" />
                             </Grid>
                         </HeaderedContentControl>
                     </StackPanel>

@@ -507,4 +507,40 @@
   <data name="Sandbox.Nav.CommandBar" xml:space="preserve">
     <value>CommandBar</value>
   </data>
+  <data name="Sandbox.Window.ConfirmExitTitle" xml:space="preserve">
+    <value>Confirm Exit</value>
+  </data>
+  <data name="Sandbox.Window.ConfirmExitMessage" xml:space="preserve">
+    <value>Are you sure you want to exit the application?</value>
+  </data>
+  <data name="Sandbox.WindowDialogs.Environment.Development" xml:space="preserve">
+    <value>Development</value>
+  </data>
+  <data name="Sandbox.WindowDialogs.Environment.Staging" xml:space="preserve">
+    <value>Staging</value>
+  </data>
+  <data name="Sandbox.WindowDialogs.Environment.Production" xml:space="preserve">
+    <value>Production</value>
+  </data>
+  <data name="Sandbox.Overlays.NativeWindowDialog.Title" xml:space="preserve">
+    <value>PC Native Window Dialog</value>
+  </data>
+  <data name="Sandbox.Overlays.NativeWindowDialog.Confirm" xml:space="preserve">
+    <value>Confirm Action</value>
+  </data>
+  <data name="Sandbox.Overlays.NativeWindowDialog.Description" xml:space="preserve">
+    <value>This is a real OS window dialog, you can drag it out of the main window.</value>
+  </data>
+  <data name="Sandbox.Overlays.TopViewToastMessage" xml:space="preserve">
+    <value>This toast is hosted by LuminaTopView.</value>
+  </data>
+  <data name="Sandbox.Notifications.SyncFailed" xml:space="preserve">
+    <value>Failed to sync the workspace.</value>
+  </data>
+  <data name="Sandbox.Notifications.SystemUpdate.Title" xml:space="preserve">
+    <value>System Update Available</value>
+  </data>
+  <data name="Sandbox.Notifications.SystemUpdate.Message" xml:space="preserve">
+    <value>A new version of the workspace is available for download. This update includes several bug fixes and performance improvements.</value>
+  </data>
 </root>

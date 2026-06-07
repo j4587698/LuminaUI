@@ -1,32 +1,33 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              x:Class="LuminaUI.Demo.Views.TextInputShowcasePage">
 
     <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
         <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0451}" />
-                <TextBlock Text="{DynamicResource Sandbox.Text.0452}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.0451}" />
+                <TextBlock Text="{l10n:Loc Sandbox.Text.0452}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
             </StackPanel>
 
             <lumina:LuminaCard>
                 <StackPanel Spacing="16">
-                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1287}" />
-                    <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0453}" />
-                    <TextBox Text="{DynamicResource Sandbox.Text.0454}" IsReadOnly="True" />
-                    <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0455}" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="96" />
-                    <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0456}" IsEnabled="False" />
+                    <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1287}" />
+                    <TextBox PlaceholderText="{l10n:Loc Sandbox.Text.0453}" />
+                    <TextBox Text="{l10n:Loc Sandbox.Text.0454}" IsReadOnly="True" />
+                    <TextBox PlaceholderText="{l10n:Loc Sandbox.Text.0455}" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="96" />
+                    <TextBox PlaceholderText="{l10n:Loc Sandbox.Text.0456}" IsEnabled="False" />
                 </StackPanel>
             </lumina:LuminaCard>
 
             <lumina:LuminaCard>
                 <StackPanel Spacing="16">
-                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0855}" />
+                    <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0855}" />
                     <TextBox Classes="Pill"
-                             PlaceholderText="{DynamicResource Sandbox.Text.0871}" />
+                             PlaceholderText="{l10n:Loc Sandbox.Text.0871}" />
                     <TextBox Classes="Pill Search"
-                             PlaceholderText="{DynamicResource Sandbox.Text.0874}">
+                             PlaceholderText="{l10n:Loc Sandbox.Text.0874}">
                         <TextBox.InnerLeftContent>
                             <Grid Width="32" Height="32">
                                 <Viewbox Width="14" Height="14" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -44,7 +45,7 @@
                                     Padding="6,2"
                                     Margin="8,0,8,0"
                                     Background="{DynamicResource LuminaStateHoverBrush}">
-                                <TextBlock Text="{DynamicResource Sandbox.Text.1288}"
+                                <TextBlock Text="{l10n:Loc Sandbox.Text.1288}"
                                            FontSize="11"
                                            Foreground="{DynamicResource LuminaTextMutedBrush}" />
                             </Border>
@@ -52,7 +53,7 @@
                     </TextBox>
                     <TextBox Classes="Pill Search"
                              Text="LuminaPlatformMenu"
-                             PlaceholderText="{DynamicResource Sandbox.Text.0873}">
+                             PlaceholderText="{l10n:Loc Sandbox.Text.0873}">
                         <TextBox.InnerLeftContent>
                             <Grid Width="32" Height="32">
                                 <Viewbox Width="14" Height="14" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -84,7 +85,7 @@
                         </TextBox.InnerRightContent>
                     </TextBox>
                     <TextBox Classes="Pill Search"
-                             PlaceholderText="{DynamicResource Sandbox.Text.0813}">
+                             PlaceholderText="{l10n:Loc Sandbox.Text.0813}">
                         <TextBox.InnerLeftContent>
                             <Grid Width="32" Height="32">
                                 <Viewbox Width="14" Height="14" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -95,7 +96,7 @@
                             </Grid>
                         </TextBox.InnerLeftContent>
                         <TextBox.InnerRightContent>
-                            <TextBlock Text="{DynamicResource Sandbox.Text.0848}"
+                            <TextBlock Text="{l10n:Loc Sandbox.Text.0848}"
                                        Margin="8,0,8,0"
                                        FontSize="12"
                                        Foreground="{DynamicResource LuminaTextMutedBrush}"
@@ -107,49 +108,49 @@
 
             <lumina:LuminaCard>
                 <StackPanel Spacing="16">
-                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0457}" />
+                    <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0457}" />
                     <lumina:LuminaInputGroup>
-                        <lumina:LuminaInputGroupAddon Content="{DynamicResource Sandbox.Text.1176}" />
-                        <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0458}" />
+                        <lumina:LuminaInputGroupAddon Content="{l10n:Loc Sandbox.Text.1176}" />
+                        <TextBox PlaceholderText="{l10n:Loc Sandbox.Text.0458}" />
                         <ComboBox SelectedIndex="0">
-                            <ComboBoxItem Content="{DynamicResource Sandbox.Text.1289}" />
-                            <ComboBoxItem Content="{DynamicResource Sandbox.Text.1178}" />
-                            <ComboBoxItem Content="{DynamicResource Sandbox.Text.1290}" />
+                            <ComboBoxItem Content="{l10n:Loc Sandbox.Text.1289}" />
+                            <ComboBoxItem Content="{l10n:Loc Sandbox.Text.1178}" />
+                            <ComboBoxItem Content="{l10n:Loc Sandbox.Text.1290}" />
                         </ComboBox>
                     </lumina:LuminaInputGroup>
 
                     <lumina:LuminaInputGroup>
-                        <lumina:LuminaInputGroupAddon Content="{DynamicResource Sandbox.Text.1291}" />
+                        <lumina:LuminaInputGroupAddon Content="{l10n:Loc Sandbox.Text.1291}" />
                         <NumericUpDown Minimum="0"
                                        Maximum="9999"
                                        Value="128"
                                        FormatString="0.00" />
-                        <lumina:LuminaInputGroupAddon Content="{DynamicResource Sandbox.Text.1292}" />
+                        <lumina:LuminaInputGroupAddon Content="{l10n:Loc Sandbox.Text.1292}" />
                     </lumina:LuminaInputGroup>
 
                     <lumina:LuminaInputGroup>
                         <ComboBox SelectedIndex="0">
-                            <ComboBoxItem Content="{DynamicResource Sandbox.Text.0351}" />
-                            <ComboBoxItem Content="{DynamicResource Sandbox.Text.0459}" />
-                            <ComboBoxItem Content="{DynamicResource Sandbox.Text.0460}" />
+                            <ComboBoxItem Content="{l10n:Loc Sandbox.Text.0351}" />
+                            <ComboBoxItem Content="{l10n:Loc Sandbox.Text.0459}" />
+                            <ComboBoxItem Content="{l10n:Loc Sandbox.Text.0460}" />
                         </ComboBox>
-                        <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0461}" />
-                        <Button Classes="Outline" Content="{DynamicResource Sandbox.Text.0046}" />
+                        <TextBox PlaceholderText="{l10n:Loc Sandbox.Text.0461}" />
+                        <Button Classes="Outline" Content="{l10n:Loc Sandbox.Text.0046}" />
                     </lumina:LuminaInputGroup>
                 </StackPanel>
             </lumina:LuminaCard>
 
             <lumina:LuminaCard>
                 <StackPanel Spacing="16">
-                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0851}" />
-                    <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0462}" Text="{DynamicResource Sandbox.Text.1293}" PasswordChar="*" />
-                    <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0463}" PasswordChar="*" IsEnabled="False" />
+                    <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0851}" />
+                    <TextBox PlaceholderText="{l10n:Loc Sandbox.Text.0462}" Text="{l10n:Loc Sandbox.Text.1293}" PasswordChar="*" />
+                    <TextBox PlaceholderText="{l10n:Loc Sandbox.Text.0463}" PasswordChar="*" IsEnabled="False" />
                 </StackPanel>
             </lumina:LuminaCard>
 
             <lumina:LuminaCard>
                 <StackPanel Spacing="16">
-                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1294}" />
+                    <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1294}" />
                     <lumina:LuminaResponsivePanel MinItemWidth="160" HorizontalSpacing="12" VerticalSpacing="12">
                         <NumericUpDown Minimum="0" Maximum="100" Increment="1" Value="42" />
                         <NumericUpDown Minimum="-10" Maximum="10" Increment="0.5" Value="2.5" />

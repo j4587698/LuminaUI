@@ -231,7 +231,9 @@ public partial class ColorsShowcaseViewModel : ObservableObject
 
     private static string Text(string english, string chineseSimplified)
     {
-        return SandboxTextLocalizer.Localize(english);
+        return LuminaLocalization.CurrentCulture.TwoLetterISOLanguageName.Equals("zh", StringComparison.OrdinalIgnoreCase)
+            ? chineseSimplified
+            : english;
     }
 
     private static string TranslateUsage(string usage)

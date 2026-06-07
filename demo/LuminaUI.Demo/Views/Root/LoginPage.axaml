@@ -1,5 +1,6 @@
 <lumina:LuminaPage xmlns="https://github.com/avaloniaui"
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
                    xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
                    xmlns:vm="using:LuminaUI.Demo.ViewModels"
                    x:Class="LuminaUI.Demo.Views.LoginPage"
@@ -27,13 +28,13 @@
                                        Foreground="{DynamicResource LuminaTextForegroundBrush}"
                                        VerticalAlignment="Center" />
                         </StackPanel>
-                        <TextBlock Text="{DynamicResource Sandbox.Text.0879}"
+                        <TextBlock Text="{l10n:Loc Sandbox.Text.0879}"
                                    FontSize="13"
                                    Foreground="{DynamicResource LuminaTextMutedBrush}" />
                     </StackPanel>
 
                     <StackPanel Spacing="10">
-                        <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0082}"
+                        <TextBox PlaceholderText="{l10n:Loc Sandbox.Text.0082}"
                                  Text="{Binding Email}"
                                  HorizontalContentAlignment="Left"
                                  VerticalContentAlignment="Center">
@@ -50,7 +51,7 @@
                                 </Grid>
                             </TextBox.InnerLeftContent>
                         </TextBox>
-                        <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0462}"
+                        <TextBox PlaceholderText="{l10n:Loc Sandbox.Text.0462}"
                                  Text="{Binding Password}"
                                  PasswordChar="*"
                                  HorizontalContentAlignment="Left"
@@ -71,15 +72,15 @@
                     </StackPanel>
 
                     <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
-                        <CheckBox Content="{DynamicResource Sandbox.Text.0864}"
+                        <CheckBox Content="{l10n:Loc Sandbox.Text.0864}"
                                   IsChecked="{Binding RememberMe}"
                                   VerticalAlignment="Center" />
                         <Button Grid.Column="1"
-                                Content="{DynamicResource Sandbox.Text.0815}"
+                                Content="{l10n:Loc Sandbox.Text.0815}"
                                 Classes="Ghost Small" />
                     </Grid>
 
-                    <Button Content="{DynamicResource Sandbox.Text.0878}"
+                    <Button Content="{l10n:Loc Sandbox.Text.0878}"
                             Classes="Primary"
                             HorizontalAlignment="Stretch"
                             Command="{Binding LoginCommand}" />
@@ -88,7 +89,7 @@
         </Grid>
 
         <TextBlock Grid.Row="1"
-                   Text="{DynamicResource Sandbox.Text.0800}"
+                   Text="{l10n:Loc Sandbox.Text.0800}"
                    TextWrapping="Wrap"
                    TextAlignment="Center"
                    Foreground="{DynamicResource LuminaTextMutedBrush}"

@@ -507,4 +507,40 @@
   <data name="Sandbox.Nav.CommandBar" xml:space="preserve">
     <value>命令栏</value>
   </data>
+  <data name="Sandbox.Window.ConfirmExitTitle" xml:space="preserve">
+    <value>确认退出</value>
+  </data>
+  <data name="Sandbox.Window.ConfirmExitMessage" xml:space="preserve">
+    <value>确定要退出应用程序吗？</value>
+  </data>
+  <data name="Sandbox.WindowDialogs.Environment.Development" xml:space="preserve">
+    <value>开发</value>
+  </data>
+  <data name="Sandbox.WindowDialogs.Environment.Staging" xml:space="preserve">
+    <value>预发布</value>
+  </data>
+  <data name="Sandbox.WindowDialogs.Environment.Production" xml:space="preserve">
+    <value>生产</value>
+  </data>
+  <data name="Sandbox.Overlays.NativeWindowDialog.Title" xml:space="preserve">
+    <value>PC 原生窗口对话框</value>
+  </data>
+  <data name="Sandbox.Overlays.NativeWindowDialog.Confirm" xml:space="preserve">
+    <value>确认操作</value>
+  </data>
+  <data name="Sandbox.Overlays.NativeWindowDialog.Description" xml:space="preserve">
+    <value>这是一个真正的系统窗口对话框，可以拖出主窗口。</value>
+  </data>
+  <data name="Sandbox.Overlays.TopViewToastMessage" xml:space="preserve">
+    <value>此提示由 LuminaTopView 承载。</value>
+  </data>
+  <data name="Sandbox.Notifications.SyncFailed" xml:space="preserve">
+    <value>工作区同步失败。</value>
+  </data>
+  <data name="Sandbox.Notifications.SystemUpdate.Title" xml:space="preserve">
+    <value>系统更新可用</value>
+  </data>
+  <data name="Sandbox.Notifications.SystemUpdate.Message" xml:space="preserve">
+    <value>工作区有新版本可供下载。本次更新包含多个 bug 修复和性能改进。</value>
+  </data>
 </root>

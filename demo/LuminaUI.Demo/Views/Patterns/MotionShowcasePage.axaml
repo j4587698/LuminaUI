@@ -1,5 +1,6 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.MotionShowcasePage"
@@ -11,8 +12,8 @@
                     HorizontalAlignment="Stretch"
                     Margin="0,36,0,40">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.1313}" />
-                <TextBlock Text="{DynamicResource Sandbox.Text.0778}"
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.1313}" />
+                <TextBlock Text="{l10n:Loc Sandbox.Text.0778}"
                            Foreground="{DynamicResource LuminaTextMutedBrush}"
                            TextWrapping="Wrap" />
             </StackPanel>
@@ -24,9 +25,9 @@
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
                         <StackPanel Spacing="4">
-                            <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0839}" />
+                            <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0839}" />
                             <TextBlock Classes="Caption"
-                                       Text="{DynamicResource Sandbox.Text.0788}" />
+                                       Text="{l10n:Loc Sandbox.Text.0788}" />
                         </StackPanel>
 
                         <Border Height="190"
@@ -49,7 +50,7 @@
                                         lumina:LuminaMotion.Duration="360">
                                     <StackPanel Spacing="5"
                                                 VerticalAlignment="Center">
-                                        <TextBlock Text="{DynamicResource Sandbox.Text.0893}"
+                                        <TextBlock Text="{l10n:Loc Sandbox.Text.0893}"
                                                    Foreground="{DynamicResource LuminaPrimaryForegroundBrush}"
                                                    FontWeight="SemiBold" />
                                         <TextBlock Text="{Binding MotionStatusText}"
@@ -61,14 +62,14 @@
                         </Border>
 
                         <WrapPanel>
-                            <Button Content="{DynamicResource Sandbox.Text.0838}"
+                            <Button Content="{l10n:Loc Sandbox.Text.0838}"
                                     Margin="0,0,8,8"
                                     Command="{Binding ToggleMoveCommand}" />
-                            <Button Content="{DynamicResource Sandbox.Text.0872}"
+                            <Button Content="{l10n:Loc Sandbox.Text.0872}"
                                     Classes="Outline"
                                     Margin="0,0,8,8"
                                     Command="{Binding ToggleScaleCommand}" />
-                            <Button Content="{DynamicResource Sandbox.Text.0101}"
+                            <Button Content="{l10n:Loc Sandbox.Text.0101}"
                                     Classes="Ghost"
                                     Margin="0,0,8,8"
                                     Command="{Binding ResetCommand}" />
@@ -91,9 +92,9 @@ lumina:LuminaMotion.Duration="360"</TextBlock>
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
                         <StackPanel Spacing="4">
-                            <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0870}" />
+                            <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0870}" />
                             <TextBlock Classes="Caption"
-                                       Text="{DynamicResource Sandbox.Text.0786}" />
+                                       Text="{l10n:Loc Sandbox.Text.0786}" />
                         </StackPanel>
 
                         <Border Height="190"
@@ -126,7 +127,7 @@ lumina:LuminaMotion.Duration="360"</TextBlock>
                                         <StackPanel Spacing="5"
                                                     HorizontalAlignment="Center"
                                                     VerticalAlignment="Center">
-                                            <TextBlock Text="{DynamicResource Sandbox.Text.0869}"
+                                            <TextBlock Text="{l10n:Loc Sandbox.Text.0869}"
                                                        TextAlignment="Center"
                                                        FontWeight="SemiBold"
                                                        Foreground="{DynamicResource LuminaInfoBrush}" />
@@ -140,10 +141,10 @@ lumina:LuminaMotion.Duration="360"</TextBlock>
                         </Border>
 
                         <WrapPanel>
-                            <Button Content="{DynamicResource Sandbox.Text.0869}"
+                            <Button Content="{l10n:Loc Sandbox.Text.0869}"
                                     Margin="0,0,8,8"
                                     Command="{Binding ToggleRotationCommand}" />
-                            <Button Content="{DynamicResource Sandbox.Text.0101}"
+                            <Button Content="{l10n:Loc Sandbox.Text.0101}"
                                     Classes="Ghost"
                                     Margin="0,0,8,8"
                                     Command="{Binding ResetCommand}" />
@@ -167,14 +168,14 @@ lumina:LuminaMotion.Duration="420"</TextBlock>
                     <StackPanel Spacing="16">
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
                             <StackPanel Grid.Column="0" Spacing="4">
-                                <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0819}" />
+                                <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0819}" />
                                 <TextBlock Classes="Caption"
-                                           Text="{DynamicResource Sandbox.Text.0856}" />
+                                           Text="{l10n:Loc Sandbox.Text.0856}" />
                             </StackPanel>
                         </Grid>
 
                         <WrapPanel>
-                            <Button Content="{DynamicResource Sandbox.Text.0820}"
+                            <Button Content="{l10n:Loc Sandbox.Text.0820}"
                                     Margin="0,0,10,10"
                                     Padding="18,10"
                                     lumina:LuminaMotion.HoverScale="1.08"
@@ -193,10 +194,10 @@ lumina:LuminaMotion.Duration="420"</TextBlock>
                                     lumina:LuminaMotion.PressedScale="0.92"
                                     lumina:LuminaMotion.Duration="180">
                                 <StackPanel Spacing="6">
-                                    <TextBlock Text="{DynamicResource Sandbox.Text.1314}"
+                                    <TextBlock Text="{l10n:Loc Sandbox.Text.1314}"
                                                FontWeight="SemiBold"
                                                Foreground="{DynamicResource LuminaSuccessBrush}" />
-                                    <TextBlock Text="{DynamicResource Sandbox.Text.0821}"
+                                    <TextBlock Text="{l10n:Loc Sandbox.Text.0821}"
                                                Classes="Caption" />
                                 </StackPanel>
                             </Border>
@@ -205,7 +206,7 @@ lumina:LuminaMotion.Duration="420"</TextBlock>
                         <Border Padding="12"
                                 CornerRadius="8"
                                 Background="{DynamicResource LuminaHoverBackgroundBrush}">
-                            <TextBlock Text="{DynamicResource Sandbox.Text.1315}"
+                            <TextBlock Text="{l10n:Loc Sandbox.Text.1315}"
                                        FontFamily="Consolas, Cascadia Mono"
                                        FontSize="12"
                                        TextWrapping="Wrap"
@@ -217,9 +218,9 @@ lumina:LuminaMotion.Duration="420"</TextBlock>
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
                         <StackPanel Spacing="4">
-                            <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0812}" />
+                            <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0812}" />
                             <TextBlock Classes="Caption"
-                                       Text="{DynamicResource Sandbox.Text.0809}" />
+                                       Text="{l10n:Loc Sandbox.Text.0809}" />
                         </StackPanel>
 
                         <WrapPanel>
@@ -236,10 +237,10 @@ lumina:LuminaMotion.Duration="420"</TextBlock>
                                     lumina:LuminaMotion.Easing="BackOut"
                                     lumina:LuminaMotion.Duration="520">
                                 <StackPanel Spacing="5">
-                                    <TextBlock Text="{DynamicResource Sandbox.Text.0811}"
+                                    <TextBlock Text="{l10n:Loc Sandbox.Text.0811}"
                                                FontWeight="SemiBold"
                                                Foreground="{DynamicResource LuminaPrimaryBrush}" />
-                                    <TextBlock Text="{DynamicResource Sandbox.Text.0783}"
+                                    <TextBlock Text="{l10n:Loc Sandbox.Text.0783}"
                                                Classes="Caption" />
                                 </StackPanel>
                             </Border>
@@ -257,15 +258,15 @@ lumina:LuminaMotion.Duration="420"</TextBlock>
                                     lumina:LuminaMotion.Easing="SpringSoft"
                                     lumina:LuminaMotion.Duration="420">
                                 <StackPanel Spacing="5">
-                                    <TextBlock Text="{DynamicResource Sandbox.Text.1316}"
+                                    <TextBlock Text="{l10n:Loc Sandbox.Text.1316}"
                                                FontWeight="SemiBold"
                                                Foreground="{DynamicResource LuminaWarningBrush}" />
-                                    <TextBlock Text="{DynamicResource Sandbox.Text.0884}"
+                                    <TextBlock Text="{l10n:Loc Sandbox.Text.0884}"
                                                Classes="Caption" />
                                 </StackPanel>
                             </Border>
 
-                            <Button Content="{DynamicResource Sandbox.Text.0803}"
+                            <Button Content="{l10n:Loc Sandbox.Text.0803}"
                                     Width="150"
                                     Height="82"
                                     Margin="0,0,10,10"
@@ -276,10 +277,10 @@ lumina:LuminaMotion.Duration="420"</TextBlock>
                         </WrapPanel>
 
                         <WrapPanel>
-                            <Button Content="{DynamicResource Sandbox.Text.1317}"
+                            <Button Content="{l10n:Loc Sandbox.Text.1317}"
                                     Margin="0,0,8,8"
                                     Command="{Binding ToggleMotionPanelCommand}" />
-                            <Button Content="{DynamicResource Sandbox.Text.0898}"
+                            <Button Content="{l10n:Loc Sandbox.Text.0898}"
                                     Classes="Outline"
                                     Margin="0,0,8,8"
                                     Command="{Binding ToggleMotionEnabledCommand}" />
@@ -302,9 +303,9 @@ lumina:LuminaMotion.DisabledOpacity="0.45"</TextBlock>
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
                         <StackPanel Spacing="4">
-                            <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0883}" />
+                            <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0883}" />
                             <TextBlock Classes="Caption"
-                                       Text="{DynamicResource Sandbox.Text.0885}" />
+                                       Text="{l10n:Loc Sandbox.Text.0885}" />
                         </StackPanel>
 
                         <Border Height="168"
@@ -325,7 +326,7 @@ lumina:LuminaMotion.DisabledOpacity="0.45"</TextBlock>
                                         lumina:LuminaMotion.TranslateX="{Binding SpringMoveX}"
                                         lumina:LuminaMotion.Easing="SpringSnappy"
                                         lumina:LuminaMotion.Duration="700">
-                                    <TextBlock Text="{DynamicResource Sandbox.Text.0882}"
+                                    <TextBlock Text="{l10n:Loc Sandbox.Text.0882}"
                                                VerticalAlignment="Center"
                                                TextAlignment="Center"
                                                FontWeight="SemiBold"
@@ -335,7 +336,7 @@ lumina:LuminaMotion.DisabledOpacity="0.45"</TextBlock>
                         </Border>
 
                         <WrapPanel>
-                            <Button Content="{DynamicResource Sandbox.Text.1318}"
+                            <Button Content="{l10n:Loc Sandbox.Text.1318}"
                                     Margin="0,0,10,10"
                                     Command="{Binding ToggleSpringMoveCommand}" />
                             <Border Width="156"
@@ -350,7 +351,7 @@ lumina:LuminaMotion.DisabledOpacity="0.45"</TextBlock>
                                     lumina:LuminaMotion.Squish="True"
                                     lumina:LuminaMotion.SquishIntensity="1.35"
                                     lumina:LuminaMotion.SquishDepth="1.2">
-                                <TextBlock Text="{DynamicResource Sandbox.Text.0886}"
+                                <TextBlock Text="{l10n:Loc Sandbox.Text.0886}"
                                            VerticalAlignment="Center"
                                            TextAlignment="Center"
                                            FontWeight="SemiBold"
@@ -376,12 +377,12 @@ lumina:LuminaMotion.SquishIntensity="1.35"</TextBlock>
                     <StackPanel Spacing="16">
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
                             <StackPanel Grid.Column="0" Spacing="4">
-                                <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0880}" />
+                                <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0880}" />
                                 <TextBlock Classes="Caption"
-                                           Text="{DynamicResource Sandbox.Text.0897}" />
+                                           Text="{l10n:Loc Sandbox.Text.0897}" />
                             </StackPanel>
                             <Button Grid.Column="1"
-                                    Content="{DynamicResource Sandbox.Text.0101}"
+                                    Content="{l10n:Loc Sandbox.Text.0101}"
                                     Classes="Outline"
                                     Command="{Binding ResetCommand}" />
                         </Grid>
@@ -397,7 +398,7 @@ lumina:LuminaMotion.SquishIntensity="1.35"</TextBlock>
                                 lumina:LuminaMotion.AnimateOpacity="True"
                                 lumina:LuminaMotion.Duration="320">
                             <StackPanel Spacing="6" VerticalAlignment="Center">
-                                <TextBlock Text="{DynamicResource Sandbox.Text.0776}"
+                                <TextBlock Text="{l10n:Loc Sandbox.Text.0776}"
                                            FontWeight="SemiBold"
                                            Foreground="{DynamicResource LuminaPrimaryForegroundBrush}" />
                                 <TextBlock Text="{Binding SizeStatusText}"
@@ -408,10 +409,10 @@ lumina:LuminaMotion.SquishIntensity="1.35"</TextBlock>
                         </Border>
 
                         <WrapPanel>
-                            <Button Content="{DynamicResource Sandbox.Text.1319}"
+                            <Button Content="{l10n:Loc Sandbox.Text.1319}"
                                     Margin="0,0,8,8"
                                     Command="{Binding ToggleSizeCommand}" />
-                            <Button Content="{DynamicResource Sandbox.Text.0899}"
+                            <Button Content="{l10n:Loc Sandbox.Text.0899}"
                                     Classes="Outline"
                                     Margin="0,0,8,8"
                                     Command="{Binding ToggleOpacityCommand}" />
@@ -435,12 +436,12 @@ lumina:LuminaMotion.Duration="320"</TextBlock>
                     <StackPanel Spacing="16">
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
                             <StackPanel Grid.Column="0" Spacing="4">
-                                <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0777}" />
+                                <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0777}" />
                                 <TextBlock Classes="Caption"
-                                           Text="{DynamicResource Sandbox.Text.0844}" />
+                                           Text="{l10n:Loc Sandbox.Text.0844}" />
                             </StackPanel>
                             <ToggleSwitch Grid.Column="1"
-                                          Content="{DynamicResource Sandbox.Text.0734}"
+                                          Content="{l10n:Loc Sandbox.Text.0734}"
                                           IsChecked="{Binding ShowStatus, Mode=TwoWay}" />
                         </Grid>
 
@@ -451,7 +452,7 @@ lumina:LuminaMotion.Duration="320"</TextBlock>
                                     BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
                                     BorderThickness="1"
                                     lumina:LuminaMotion.AnimateLayout="True">
-                                <TextBlock Text="{DynamicResource Sandbox.Text.0887}"
+                                <TextBlock Text="{l10n:Loc Sandbox.Text.0887}"
                                            Foreground="{DynamicResource LuminaTextPrimaryBrush}"
                                            FontWeight="SemiBold" />
                             </Border>
@@ -462,7 +463,7 @@ lumina:LuminaMotion.Duration="320"</TextBlock>
                                     lumina:LuminaMotion.HiddenScale="0.92"
                                     lumina:LuminaMotion.AnimateLayout="True"
                                     lumina:LuminaMotion.AnimateOpacity="True">
-                                <TextBlock Text="{DynamicResource Sandbox.Text.0888}"
+                                <TextBlock Text="{l10n:Loc Sandbox.Text.0888}"
                                            Foreground="{DynamicResource LuminaSuccessBrush}"
                                            TextWrapping="Wrap" />
                             </Border>
@@ -472,9 +473,9 @@ lumina:LuminaMotion.Duration="320"</TextBlock>
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1320}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1320}" />
                         <TextBlock Classes="Caption"
-                                   Text="{DynamicResource Sandbox.Text.1321}" />
+                                   Text="{l10n:Loc Sandbox.Text.1321}" />
                         <Border Padding="14"
                                 CornerRadius="8"
                                 Background="{DynamicResource LuminaHoverBackgroundBrush}">
@@ -493,7 +494,7 @@ await target.Animate(Border.WidthProperty)
     .RunAsync();</TextBlock>
                         </Border>
                         <TextBlock Classes="Caption"
-                                   Text="{DynamicResource Sandbox.Text.0895}" />
+                                   Text="{l10n:Loc Sandbox.Text.0895}" />
                     </StackPanel>
                 </lumina:LuminaCard>
             </lumina:LuminaResponsivePanel>

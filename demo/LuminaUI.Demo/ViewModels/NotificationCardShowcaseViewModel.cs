@@ -2,6 +2,7 @@ using System;
 using Avalonia.Controls.Notifications;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using LuminaUI.Localization;
 
 namespace LuminaUI.Demo.ViewModels;
 
@@ -13,7 +14,7 @@ public partial class NotificationCardShowcaseViewModel : ObservableObject
     private NotificationPosition _notificationPosition = NotificationPosition.TopRight;
 
     [ObservableProperty]
-    private string _notificationPositionText = SandboxTextLocalizer.Localize("Top right");
+    private string _notificationPositionText = T("Sandbox.Text.0379");
 
     [ObservableProperty]
     private double _notificationDurationSeconds = 3;
@@ -39,39 +40,42 @@ public partial class NotificationCardShowcaseViewModel : ObservableObject
     [RelayCommand]
     private void ShowInfoNotification()
     {
-        ShowNotification("System message", "Background sync completed.", NotificationType.Information);
+        ShowNotification(T("Sandbox.Text.0641"), T("Sandbox.Text.0642"), NotificationType.Information);
     }
 
     [RelayCommand]
     private void ShowSuccessNotification()
     {
-        ShowNotification("Saved", "The workspace settings were saved.", NotificationType.Success);
+        ShowNotification(T("Sandbox.Text.0615"), T("Sandbox.Text.0643"), NotificationType.Success);
     }
 
     [RelayCommand]
     private void ShowWarningNotification()
     {
-        ShowNotification("Attention", "The next sync needs confirmation.", NotificationType.Warning);
+        ShowNotification(T("Sandbox.Text.0644"), T("Sandbox.Text.0645"), NotificationType.Warning);
     }
 
     [RelayCommand]
     private void ShowErrorNotification()
     {
-        ShowNotification("Error", "Failed to sync the workspace.", NotificationType.Error);
+        ShowNotification(T("Sandbox.Text.0810"), T(SandboxLocalization.NotificationsSyncFailed), NotificationType.Error);
     }
 
     [RelayCommand]
     private void ShowComplexNotification()
     {
-        ShowNotification("System Update Available", "A new version of the workspace is available for download. This update includes several bug fixes and performance improvements.", NotificationType.Information);
+        ShowNotification(
+            T(SandboxLocalization.NotificationsSystemUpdateTitle),
+            T(SandboxLocalization.NotificationsSystemUpdateMessage),
+            NotificationType.Information);
     }
 
     private void ShowNotification(string title, string message, NotificationType type)
     {
         var duration = TimeSpan.FromSeconds(Math.Clamp(NotificationDurationSeconds, 0.5, 30));
         _notificationCenter.Show(
-            SandboxTextLocalizer.Localize(title),
-            SandboxTextLocalizer.Localize(message),
+            title,
+            message,
             type,
             duration);
     }
@@ -83,13 +87,18 @@ public partial class NotificationCardShowcaseViewModel : ObservableObject
 
     partial void OnNotificationPositionChanged(NotificationPosition value)
     {
-        var text = value switch
+        var key = value switch
         {
-            NotificationPosition.TopLeft => "Top left",
-            NotificationPosition.BottomLeft => "Bottom left",
-            NotificationPosition.BottomRight => "Bottom right",
-            _ => "Top right"
+            NotificationPosition.TopLeft => "Sandbox.Text.0378",
+            NotificationPosition.BottomLeft => "Sandbox.Text.0380",
+            NotificationPosition.BottomRight => "Sandbox.Text.0381",
+            _ => "Sandbox.Text.0379"
         };
-        NotificationPositionText = SandboxTextLocalizer.Localize(text);
+        NotificationPositionText = T(key);
+    }
+
+    private static string T(string key)
+    {
+        return LuminaLocalization.Get(key);
     }
 }

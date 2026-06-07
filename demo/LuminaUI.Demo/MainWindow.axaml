@@ -1,9 +1,10 @@
 <lumina:LuminaWindow xmlns="https://github.com/avaloniaui"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
                      xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
                      xmlns:views="using:LuminaUI.Demo.Views"
                      x:Class="LuminaUI.Demo.MainWindow"
-                     Title="{DynamicResource Sandbox.App.Title}"
+                     Title="{l10n:Loc Sandbox.App.Title}"
                      Width="900"
                      Height="720"
                      MinWidth="360"
@@ -39,11 +40,11 @@
                 Theme="{StaticResource LuminaTitleBarButton}"
                 Width="40"
                 Height="40"
-                ToolTip.Tip="{DynamicResource Sandbox.Settings.ThemeMode}">
+                ToolTip.Tip="{l10n:Loc Sandbox.Settings.ThemeMode}">
             <Button.Flyout>
                 <MenuFlyout>
                     <MenuItem Name="TitleBarThemeSystemMenuItem"
-                              Header="{DynamicResource Sandbox.Settings.ThemeMode.System}"
+                              Header="{l10n:Loc Sandbox.Settings.ThemeMode.System}"
                               Click="ThemeModeSystemMenuItem_OnClick">
                         <MenuItem.Icon>
                             <Path Width="16"
@@ -56,7 +57,7 @@
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Name="TitleBarThemeLightMenuItem"
-                              Header="{DynamicResource Sandbox.Settings.ThemeMode.Light}"
+                              Header="{l10n:Loc Sandbox.Settings.ThemeMode.Light}"
                               Click="ThemeModeLightMenuItem_OnClick">
                         <MenuItem.Icon>
                             <Path Width="16"
@@ -69,7 +70,7 @@
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Name="TitleBarThemeDarkMenuItem"
-                              Header="{DynamicResource Sandbox.Settings.ThemeMode.Dark}"
+                              Header="{l10n:Loc Sandbox.Settings.ThemeMode.Dark}"
                               Click="ThemeModeDarkMenuItem_OnClick">
                         <MenuItem.Icon>
                             <Path Width="16"

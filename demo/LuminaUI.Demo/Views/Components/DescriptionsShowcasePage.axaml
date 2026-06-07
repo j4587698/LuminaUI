@@ -1,5 +1,6 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.DescriptionsShowcasePage"
@@ -8,8 +9,8 @@
     <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
         <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0726}" />
-                <TextBlock Text="{DynamicResource Sandbox.Text.0727}"
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.0726}" />
+                <TextBlock Text="{l10n:Loc Sandbox.Text.0727}"
                            Foreground="{DynamicResource LuminaTextMutedBrush}"
                            TextWrapping="Wrap" />
             </StackPanel>
@@ -17,7 +18,7 @@
             <lumina:LuminaResponsivePanel MinItemWidth="340" MaxItemWidth="720" HorizontalSpacing="16" VerticalSpacing="16">
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0728}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0728}" />
                         <lumina:LuminaDescriptions ItemsSource="{Binding ProjectDetails}"
                                                     LabelMemberBinding="{Binding Label}"
                                                     DisplayMemberBinding="{Binding Value}"
@@ -29,7 +30,7 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0729}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0729}" />
                         <lumina:LuminaDescriptions ItemsSource="{Binding Metrics}"
                                                     Orientation="Horizontal"
                                                     LabelPosition="Top"
@@ -40,11 +41,11 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0730}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0730}" />
                         <lumina:LuminaDescriptions LabelWidth="96" ShowBorderLines="True">
-                            <lumina:LuminaDescriptionsItem Label="Environment" Content="{DynamicResource Sandbox.Text.0087}" />
-                            <lumina:LuminaDescriptionsItem Label="Region" Content="{DynamicResource Sandbox.Text.0806}" />
-                            <lumina:LuminaDescriptionsItem Label="Owner" Content="{DynamicResource Sandbox.Text.0732}" />
+                            <lumina:LuminaDescriptionsItem Label="Environment" Content="{l10n:Loc Sandbox.Text.0087}" />
+                            <lumina:LuminaDescriptionsItem Label="Region" Content="{l10n:Loc Sandbox.Text.0806}" />
+                            <lumina:LuminaDescriptionsItem Label="Owner" Content="{l10n:Loc Sandbox.Text.0732}" />
                         </lumina:LuminaDescriptions>
                     </StackPanel>
                 </lumina:LuminaCard>

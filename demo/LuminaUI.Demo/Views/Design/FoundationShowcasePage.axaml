@@ -1,5 +1,6 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.FoundationShowcasePage"
@@ -11,8 +12,8 @@
                     HorizontalAlignment="Stretch"
                     Margin="0,36,0,40">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0477}" />
-                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0478}" />
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.0477}" />
+                <TextBlock Classes="Body" Text="{l10n:Loc Sandbox.Text.0478}" />
             </StackPanel>
 
             <lumina:LuminaResponsivePanel MinItemWidth="280"
@@ -21,23 +22,23 @@
                                           VerticalSpacing="16">
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1297}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1297}" />
                         <StackPanel Spacing="10">
-                            <TextBlock Classes="Title" Text="{DynamicResource Sandbox.Text.0479}" />
-                            <TextBlock Classes="Label" Text="{DynamicResource Sandbox.Text.0480}" />
-                            <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0481}" />
-                            <TextBlock Classes="Caption" Text="{DynamicResource Sandbox.Text.0482}" />
+                            <TextBlock Classes="Title" Text="{l10n:Loc Sandbox.Text.0479}" />
+                            <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Text.0480}" />
+                            <TextBlock Classes="Body" Text="{l10n:Loc Sandbox.Text.0481}" />
+                            <TextBlock Classes="Caption" Text="{l10n:Loc Sandbox.Text.0482}" />
                             <WrapPanel>
                                 <TextBlock Classes="Code" Text="LuminaTheme" Margin="0,0,8,8" />
-                                <TextBlock Classes="Mark" Text="{DynamicResource Sandbox.Text.0483}" Margin="0,0,8,8" />
-                                <TextBlock Classes="Underline" Text="{DynamicResource Sandbox.Text.0484}" Margin="0,0,8,8" />
-                                <TextBlock Classes="Strikethrough" Text="{DynamicResource Sandbox.Text.0485}" Margin="0,0,8,8" />
+                                <TextBlock Classes="Mark" Text="{l10n:Loc Sandbox.Text.0483}" Margin="0,0,8,8" />
+                                <TextBlock Classes="Underline" Text="{l10n:Loc Sandbox.Text.0484}" Margin="0,0,8,8" />
+                                <TextBlock Classes="Strikethrough" Text="{l10n:Loc Sandbox.Text.0485}" Margin="0,0,8,8" />
                             </WrapPanel>
                             <WrapPanel>
-                                <TextBlock Classes="Success" Text="{DynamicResource Sandbox.Text.0191}" Margin="0,0,12,8" />
-                                <TextBlock Classes="Warning" Text="{DynamicResource Sandbox.Text.0192}" Margin="0,0,12,8" />
-                                <TextBlock Classes="Danger" Text="{DynamicResource Sandbox.Text.0193}" Margin="0,0,12,8" />
-                                <TextBlock Classes="Muted" Text="{DynamicResource Sandbox.Text.0486}" Margin="0,0,12,8" />
+                                <TextBlock Classes="Success" Text="{l10n:Loc Sandbox.Text.0191}" Margin="0,0,12,8" />
+                                <TextBlock Classes="Warning" Text="{l10n:Loc Sandbox.Text.0192}" Margin="0,0,12,8" />
+                                <TextBlock Classes="Danger" Text="{l10n:Loc Sandbox.Text.0193}" Margin="0,0,12,8" />
+                                <TextBlock Classes="Muted" Text="{l10n:Loc Sandbox.Text.0486}" Margin="0,0,12,8" />
                             </WrapPanel>
                         </StackPanel>
                     </StackPanel>
@@ -45,20 +46,20 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0824}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0824}" />
                         <StackPanel Spacing="12">
                             <WrapPanel>
-                                <Label Content="{DynamicResource Sandbox.Text.0197}" Margin="0,0,10,10" />
-                                <Label Classes="Secondary" Content="{DynamicResource Sandbox.Text.0487}" Margin="0,0,10,10" />
-                                <Label Classes="Muted" Content="{DynamicResource Sandbox.Text.0486}" Margin="0,0,10,10" />
-                                <Label Classes="Danger" Content="{DynamicResource Sandbox.Text.0193}" Margin="0,0,10,10" />
+                                <Label Content="{l10n:Loc Sandbox.Text.0197}" Margin="0,0,10,10" />
+                                <Label Classes="Secondary" Content="{l10n:Loc Sandbox.Text.0487}" Margin="0,0,10,10" />
+                                <Label Classes="Muted" Content="{l10n:Loc Sandbox.Text.0486}" Margin="0,0,10,10" />
+                                <Label Classes="Danger" Content="{l10n:Loc Sandbox.Text.0193}" Margin="0,0,10,10" />
                             </WrapPanel>
                             <WrapPanel>
-                                <Label Classes="Tag" Content="{DynamicResource Sandbox.Text.0488}" Margin="0,0,8,8" />
-                                <Label Classes="Tag Primary" Content="{DynamicResource Sandbox.Text.0190}" Margin="0,0,8,8" />
-                                <Label Classes="Tag Success" Content="{DynamicResource Sandbox.Text.0191}" Margin="0,0,8,8" />
-                                <Label Classes="Tag Warning" Content="{DynamicResource Sandbox.Text.0192}" Margin="0,0,8,8" />
-                                <Label Classes="Tag Danger" Content="{DynamicResource Sandbox.Text.0193}" Margin="0,0,8,8" />
+                                <Label Classes="Tag" Content="{l10n:Loc Sandbox.Text.0488}" Margin="0,0,8,8" />
+                                <Label Classes="Tag Primary" Content="{l10n:Loc Sandbox.Text.0190}" Margin="0,0,8,8" />
+                                <Label Classes="Tag Success" Content="{l10n:Loc Sandbox.Text.0191}" Margin="0,0,8,8" />
+                                <Label Classes="Tag Warning" Content="{l10n:Loc Sandbox.Text.0192}" Margin="0,0,8,8" />
+                                <Label Classes="Tag Danger" Content="{l10n:Loc Sandbox.Text.0193}" Margin="0,0,8,8" />
                             </WrapPanel>
                         </StackPanel>
                     </StackPanel>
@@ -66,33 +67,33 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0489}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0489}" />
                         <lumina:LuminaResponsivePanel MinItemWidth="140"
                                                       MaxItemWidth="220"
                                                       HorizontalSpacing="10"
                                                       VerticalSpacing="10">
                             <Border Classes="Surface" Padding="12">
                                 <StackPanel Spacing="4">
-                                    <TextBlock Classes="Label" Text="{DynamicResource Sandbox.Text.0490}" />
-                                    <TextBlock Classes="Caption" Text="{DynamicResource Sandbox.Text.0491}" />
+                                    <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Text.0490}" />
+                                    <TextBlock Classes="Caption" Text="{l10n:Loc Sandbox.Text.0491}" />
                                 </StackPanel>
                             </Border>
                             <Border Classes="Elevated" Padding="12">
                                 <StackPanel Spacing="4">
-                                    <TextBlock Classes="Label" Text="{DynamicResource Sandbox.Text.0207}" />
-                                    <TextBlock Classes="Caption" Text="{DynamicResource Sandbox.Text.0492}" />
+                                    <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Text.0207}" />
+                                    <TextBlock Classes="Caption" Text="{l10n:Loc Sandbox.Text.0492}" />
                                 </StackPanel>
                             </Border>
                             <Border Classes="Subtle" Padding="12">
                                 <StackPanel Spacing="4">
-                                    <TextBlock Classes="Label" Text="{DynamicResource Sandbox.Text.0493}" />
-                                    <TextBlock Classes="Caption" Text="{DynamicResource Sandbox.Text.0494}" />
+                                    <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Text.0493}" />
+                                    <TextBlock Classes="Caption" Text="{l10n:Loc Sandbox.Text.0494}" />
                                 </StackPanel>
                             </Border>
                             <Border Classes="Glass" Padding="12">
                                 <StackPanel Spacing="4">
-                                    <TextBlock Classes="Label" Text="{DynamicResource Sandbox.Text.0005}" />
-                                    <TextBlock Classes="Caption" Text="{DynamicResource Sandbox.Text.0495}" />
+                                    <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Text.0005}" />
+                                    <TextBlock Classes="Caption" Text="{l10n:Loc Sandbox.Text.0495}" />
                                 </StackPanel>
                             </Border>
                         </lumina:LuminaResponsivePanel>
@@ -101,18 +102,18 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1298}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1298}" />
                         <StackPanel Spacing="10" HorizontalAlignment="Left">
-                            <HyperlinkButton Content="{DynamicResource Sandbox.Text.0496}" NavigateUri="https://example.com" />
-                            <HyperlinkButton Classes="Subtle Underline" Content="{DynamicResource Sandbox.Text.0497}" NavigateUri="https://example.com" />
-                            <HyperlinkButton Classes="ButtonLike" Content="{DynamicResource Sandbox.Text.0498}" NavigateUri="https://example.com" />
+                            <HyperlinkButton Content="{l10n:Loc Sandbox.Text.0496}" NavigateUri="https://example.com" />
+                            <HyperlinkButton Classes="Subtle Underline" Content="{l10n:Loc Sandbox.Text.0497}" NavigateUri="https://example.com" />
+                            <HyperlinkButton Classes="ButtonLike" Content="{l10n:Loc Sandbox.Text.0498}" NavigateUri="https://example.com" />
                         </StackPanel>
                     </StackPanel>
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1299}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1299}" />
                         <SelectableTextBlock Classes="Code"
                                              TextWrapping="Wrap"
                                              Text="var card = new LuminaCard { Classes = { &quot;Glass&quot; } };" />
@@ -121,7 +122,7 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1300}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1300}" />
                         <TextBox x:Name="InvalidField"
                                  Text="{Binding InvalidEmail}"
                                  DataValidationErrors.Errors="{Binding InvalidEmailErrors}" />
@@ -130,7 +131,7 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1301}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1301}" />
                         <WrapPanel>
                             <Border Classes="Subtle" Width="44" Height="44" Padding="12" Margin="0,0,10,10">
                                 <PathIcon Width="20" Height="20" Data="M3,12 L9,18 L21,6" Foreground="{DynamicResource LuminaSuccessBrush}" />
@@ -147,21 +148,21 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1302}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1302}" />
                         <ScrollViewer Height="150"
                                       BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
                                       BorderThickness="1"
                                       Padding="12"
                                       VerticalScrollBarVisibility="Auto">
                             <StackPanel Spacing="8">
-                                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0501}" />
-                                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0502}" />
-                                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0503}" />
-                                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0504}" />
-                                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0505}" />
-                                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0506}" />
-                                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0507}" />
-                                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0508}" />
+                                <TextBlock Classes="Body" Text="{l10n:Loc Sandbox.Text.0501}" />
+                                <TextBlock Classes="Body" Text="{l10n:Loc Sandbox.Text.0502}" />
+                                <TextBlock Classes="Body" Text="{l10n:Loc Sandbox.Text.0503}" />
+                                <TextBlock Classes="Body" Text="{l10n:Loc Sandbox.Text.0504}" />
+                                <TextBlock Classes="Body" Text="{l10n:Loc Sandbox.Text.0505}" />
+                                <TextBlock Classes="Body" Text="{l10n:Loc Sandbox.Text.0506}" />
+                                <TextBlock Classes="Body" Text="{l10n:Loc Sandbox.Text.0507}" />
+                                <TextBlock Classes="Body" Text="{l10n:Loc Sandbox.Text.0508}" />
                             </StackPanel>
                         </ScrollViewer>
                     </StackPanel>

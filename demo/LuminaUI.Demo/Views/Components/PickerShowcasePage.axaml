@@ -1,50 +1,51 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              x:Class="LuminaUI.Demo.Views.PickerShowcasePage">
 
     <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
         <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Picker.Title}" />
-                <TextBlock Text="{DynamicResource Sandbox.Picker.Description}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Picker.Title}" />
+                <TextBlock Text="{l10n:Loc Sandbox.Picker.Description}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
             </StackPanel>
 
             <lumina:LuminaResponsivePanel MinItemWidth="280" MaxItemWidth="460" HorizontalSpacing="16" VerticalSpacing="16">
             <lumina:LuminaCard>
                 <StackPanel Spacing="16">
-                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Picker.ComboAdaptive}" />
+                    <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Picker.ComboAdaptive}" />
                     
-                    <TextBlock Text="{DynamicResource Sandbox.Picker.ModeDropdown}" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}"/>
+                    <TextBlock Text="{l10n:Loc Sandbox.Picker.ModeDropdown}" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}"/>
                     <ComboBox SelectedIndex="0" HorizontalAlignment="Stretch" lumina:LuminaOptions.PopupType="Dropdown">
-                        <ComboBoxItem Content="{DynamicResource Sandbox.Picker.Item1}" />
-                        <ComboBoxItem Content="{DynamicResource Sandbox.Picker.Item2}" />
-                        <ComboBoxItem Content="{DynamicResource Sandbox.Picker.Item3}" />
+                        <ComboBoxItem Content="{l10n:Loc Sandbox.Picker.Item1}" />
+                        <ComboBoxItem Content="{l10n:Loc Sandbox.Picker.Item2}" />
+                        <ComboBoxItem Content="{l10n:Loc Sandbox.Picker.Item3}" />
                     </ComboBox>
                     
-                    <TextBlock Text="{DynamicResource Sandbox.Picker.ModeSheet}" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}" Margin="0,8,0,0"/>
+                    <TextBlock Text="{l10n:Loc Sandbox.Picker.ModeSheet}" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}" Margin="0,8,0,0"/>
                     <ComboBox SelectedIndex="0" HorizontalAlignment="Stretch" lumina:LuminaOptions.PopupType="Sheet">
-                        <ComboBoxItem Content="{DynamicResource Sandbox.Picker.Item1}" />
-                        <ComboBoxItem Content="{DynamicResource Sandbox.Picker.Item2}" />
-                        <ComboBoxItem Content="{DynamicResource Sandbox.Picker.Item3}" />
+                        <ComboBoxItem Content="{l10n:Loc Sandbox.Picker.Item1}" />
+                        <ComboBoxItem Content="{l10n:Loc Sandbox.Picker.Item2}" />
+                        <ComboBoxItem Content="{l10n:Loc Sandbox.Picker.Item3}" />
                     </ComboBox>
                 </StackPanel>
             </lumina:LuminaCard>
 
             <lumina:LuminaCard>
                 <StackPanel Spacing="16">
-                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Picker.DateTimeAdaptive}" />
+                    <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Picker.DateTimeAdaptive}" />
                     
-                    <TextBlock Text="{DynamicResource Sandbox.Picker.ModeDropdown}" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}"/>
+                    <TextBlock Text="{l10n:Loc Sandbox.Picker.ModeDropdown}" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}"/>
                     <lumina:LuminaResponsivePanel MinItemWidth="160" HorizontalSpacing="12" VerticalSpacing="12">
                         <lumina:LuminaDatePicker DateFormat="yyyy-MM-dd" lumina:LuminaOptions.PopupType="Dropdown" />
                         <lumina:LuminaTimePicker TimeFormat="HH:mm:ss" lumina:LuminaOptions.PopupType="Dropdown" />
-                        <CalendarDatePicker PlaceholderText="{DynamicResource Sandbox.Picker.CalendarDate}"
+                        <CalendarDatePicker PlaceholderText="{l10n:Loc Sandbox.Picker.CalendarDate}"
                                             lumina:LuminaOptions.DateFormat="yyyy/MM/dd"
                                             lumina:LuminaOptions.PopupType="Dropdown" />
                     </lumina:LuminaResponsivePanel>
                     
-                    <TextBlock Text="{DynamicResource Sandbox.Picker.ModeSheet}" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}" Margin="0,8,0,0"/>
+                    <TextBlock Text="{l10n:Loc Sandbox.Picker.ModeSheet}" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}" Margin="0,8,0,0"/>
                     <lumina:LuminaResponsivePanel MinItemWidth="160" HorizontalSpacing="12" VerticalSpacing="12">
                         <lumina:LuminaDatePicker DateFormat="dd/MM/yyyy" lumina:LuminaOptions.PopupType="Sheet" />
                         <lumina:LuminaTimePicker TimeFormat="HH:mm" lumina:LuminaOptions.PopupType="Sheet" />

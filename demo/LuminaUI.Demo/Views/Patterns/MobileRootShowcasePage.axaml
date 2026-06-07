@@ -1,14 +1,15 @@
 <lumina:LuminaPage xmlns="https://github.com/avaloniaui"
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
                    xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
                    x:Class="LuminaUI.Demo.Views.MobileRootShowcasePage"
-                   ShellTitle="{DynamicResource Sandbox.Text.0836}"
-                   ShellSubtitle="{DynamicResource Sandbox.Text.1307}">
+                   ShellTitle="{l10n:Loc Sandbox.Text.0836}"
+                   ShellSubtitle="{l10n:Loc Sandbox.Text.1307}">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled">
         <StackPanel Spacing="20">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0836}" />
-                <TextBlock Text="{DynamicResource Sandbox.Text.1308}"
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.0836}" />
+                <TextBlock Text="{l10n:Loc Sandbox.Text.1308}"
                            Foreground="{DynamicResource LuminaTextMutedBrush}"
                            TextWrapping="Wrap" />
             </StackPanel>
@@ -19,7 +20,7 @@
                                           VerticalSpacing="16">
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0853}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0853}" />
                         <Border Width="340"
                                 Height="640"
                                 MaxWidth="520"
@@ -40,32 +41,32 @@
                                         VerticalAlignment="Center" />
 
                                 <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
-                                    <Button Classes="Ghost Icon" Content="{DynamicResource Sandbox.Text.1191}" />
+                                    <Button Classes="Ghost Icon" Content="{l10n:Loc Sandbox.Text.1191}" />
                                     <StackPanel Grid.Column="1" Spacing="2">
-                                        <TextBlock Text="{DynamicResource Sandbox.Text.0849}"
+                                        <TextBlock Text="{l10n:Loc Sandbox.Text.0849}"
                                                    FontSize="20"
                                                    FontWeight="Bold"
                                                    Foreground="{DynamicResource LuminaTextForegroundBrush}" />
-                                        <TextBlock Text="{DynamicResource Sandbox.Text.0837}"
+                                        <TextBlock Text="{l10n:Loc Sandbox.Text.0837}"
                                                    FontSize="12"
                                                    Foreground="{DynamicResource LuminaTextMutedBrush}" />
                                     </StackPanel>
-                                    <Button Grid.Column="2" Classes="Ghost Icon" Content="{DynamicResource Sandbox.Text.1130}" />
+                                    <Button Grid.Column="2" Classes="Ghost Icon" Content="{l10n:Loc Sandbox.Text.1130}" />
                                 </Grid>
 
                                 <StackPanel Grid.Row="2" Spacing="12">
                                     <lumina:LuminaCard Padding="14" Classes="Interactive">
                                         <Grid ColumnDefinitions="*,Auto">
                                             <StackPanel Spacing="4">
-                                                <TextBlock Text="{DynamicResource Sandbox.Text.0854}"
+                                                <TextBlock Text="{l10n:Loc Sandbox.Text.0854}"
                                                            FontWeight="SemiBold"
                                                            Foreground="{DynamicResource LuminaTextForegroundBrush}" />
-                                                <TextBlock Text="{DynamicResource Sandbox.Text.0760}"
+                                                <TextBlock Text="{l10n:Loc Sandbox.Text.0760}"
                                                            FontSize="12"
                                                            Foreground="{DynamicResource LuminaTextMutedBrush}" />
                                             </StackPanel>
                                             <TextBlock Grid.Column="1"
-                                                       Text="{DynamicResource Sandbox.Text.1309}"
+                                                       Text="{l10n:Loc Sandbox.Text.1309}"
                                                        FontWeight="Bold"
                                                        Foreground="{DynamicResource LuminaPrimaryBrush}"
                                                        VerticalAlignment="Center" />
@@ -74,15 +75,15 @@
                                     <lumina:LuminaCard Padding="14" Classes="Interactive">
                                         <Grid ColumnDefinitions="*,Auto">
                                             <StackPanel Spacing="4">
-                                                <TextBlock Text="{DynamicResource Sandbox.Text.0683}"
+                                                <TextBlock Text="{l10n:Loc Sandbox.Text.0683}"
                                                            FontWeight="SemiBold"
                                                            Foreground="{DynamicResource LuminaTextForegroundBrush}" />
-                                                <TextBlock Text="{DynamicResource Sandbox.Text.0796}"
+                                                <TextBlock Text="{l10n:Loc Sandbox.Text.0796}"
                                                            FontSize="12"
                                                            Foreground="{DynamicResource LuminaTextMutedBrush}" />
                                             </StackPanel>
                                             <TextBlock Grid.Column="1"
-                                                       Text="{DynamicResource Sandbox.Text.1310}"
+                                                       Text="{l10n:Loc Sandbox.Text.1310}"
                                                        FontWeight="Bold"
                                                        Foreground="{DynamicResource LuminaPrimaryBrush}"
                                                        VerticalAlignment="Center" />
@@ -95,9 +96,9 @@
                                         CornerRadius="18"
                                         Background="{DynamicResource LuminaNavigationPaneItemBrush}">
                                     <Grid ColumnDefinitions="*,*,*" ColumnSpacing="6">
-                                        <Button Content="{DynamicResource Sandbox.Text.0354}" Classes="Primary Small" />
-                                        <Button Grid.Column="1" Content="{DynamicResource Sandbox.Text.0894}" Classes="Ghost Small" />
-                                        <Button Grid.Column="2" Content="{DynamicResource Sandbox.Text.1311}" Classes="Ghost Small" />
+                                        <Button Content="{l10n:Loc Sandbox.Text.0354}" Classes="Primary Small" />
+                                        <Button Grid.Column="1" Content="{l10n:Loc Sandbox.Text.0894}" Classes="Ghost Small" />
+                                        <Button Grid.Column="2" Content="{l10n:Loc Sandbox.Text.1311}" Classes="Ghost Small" />
                                     </Grid>
                                 </Border>
                             </Grid>
@@ -107,7 +108,7 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="14">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0862}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0862}" />
                         <Border Padding="14"
                                 CornerRadius="8"
                                 Background="{DynamicResource LuminaSurfaceBrush}"
@@ -117,9 +118,9 @@
                                        FontSize="12"
                                        TextWrapping="Wrap"
                                        Foreground="{DynamicResource LuminaTextSecondaryBrush}"
-                                       Text="{DynamicResource Sandbox.Text.1312}" />
+                                       Text="{l10n:Loc Sandbox.Text.1312}" />
                         </Border>
-                        <TextBlock Text="{DynamicResource Sandbox.Text.0801}"
+                        <TextBlock Text="{l10n:Loc Sandbox.Text.0801}"
                                    Foreground="{DynamicResource LuminaTextMutedBrush}"
                                    TextWrapping="Wrap" />
                     </StackPanel>

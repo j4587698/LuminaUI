@@ -1,18 +1,19 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              xmlns:views="clr-namespace:LuminaUI.Demo.Views"
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.OverlaysShowcasePage"
              x:DataType="vm:OverlaysShowcaseViewModel">
   <ContentPage.Resources>
-    <lumina:LuminaDialog x:Key="InlineStatusDialog" Title="{DynamicResource Sandbox.Text.0594}">
+    <lumina:LuminaDialog x:Key="InlineStatusDialog" Title="{l10n:Loc Sandbox.Text.0594}">
       <StackPanel Spacing="16" MinWidth="320" MaxWidth="440">
         <StackPanel Spacing="6">
-          <TextBlock Text="{DynamicResource Sandbox.Text.0595}"
+          <TextBlock Text="{l10n:Loc Sandbox.Text.0595}"
                      FontSize="18"
                      FontWeight="SemiBold"/>
-          <TextBlock Text="{DynamicResource Sandbox.Text.0596}"
+          <TextBlock Text="{l10n:Loc Sandbox.Text.0596}"
                      TextWrapping="Wrap"
                      Foreground="{DynamicResource LuminaTextSecondaryBrush}"/>
         </StackPanel>
@@ -22,30 +23,30 @@
                   Height="8"
                   CornerRadius="4"
                   Background="{DynamicResource LuminaSuccessBrush}"/>
-          <TextBlock Grid.Column="1" Text="{DynamicResource Sandbox.Text.0597}"/>
+          <TextBlock Grid.Column="1" Text="{l10n:Loc Sandbox.Text.0597}"/>
 
           <Border Grid.Row="1"
                   Width="8"
                   Height="8"
                   CornerRadius="4"
                   Background="{DynamicResource LuminaPrimaryBrush}"/>
-          <TextBlock Grid.Row="1" Grid.Column="1" Text="{DynamicResource Sandbox.Text.0598}"/>
+          <TextBlock Grid.Row="1" Grid.Column="1" Text="{l10n:Loc Sandbox.Text.0598}"/>
 
           <Border Grid.Row="2"
                   Width="8"
                   Height="8"
                   CornerRadius="4"
                   Background="{DynamicResource LuminaWarningBrush}"/>
-          <TextBlock Grid.Row="2" Grid.Column="1" Text="{DynamicResource Sandbox.Text.0599}"/>
+          <TextBlock Grid.Row="2" Grid.Column="1" Text="{l10n:Loc Sandbox.Text.0599}"/>
         </Grid>
 
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Right"
                     Spacing="10">
-          <Button Content="{DynamicResource Sandbox.Text.0600}"
+          <Button Content="{l10n:Loc Sandbox.Text.0600}"
                   Classes="Outline"
                   Command="{Binding CloseDialogCommand}"/>
-          <Button Content="{DynamicResource Sandbox.Text.0602}"
+          <Button Content="{l10n:Loc Sandbox.Text.0602}"
                   Classes="Primary"
                   Command="{Binding CloseDialogCommand}"/>
         </StackPanel>
@@ -58,9 +59,9 @@
                 Width="{Binding #PageScroll.Bounds.Width}"
                 Margin="0,0,0,24">
       <StackPanel Spacing="8" MaxWidth="760">
-        <TextBlock Text="{DynamicResource Sandbox.Text.0592}"
+        <TextBlock Text="{l10n:Loc Sandbox.Text.0592}"
                    Classes="Display"/>
-        <TextBlock Text="{DynamicResource Sandbox.Text.0802}"
+        <TextBlock Text="{l10n:Loc Sandbox.Text.0802}"
                    Classes="Body"
                    Foreground="{DynamicResource LuminaTextSecondaryBrush}"
                    TextWrapping="Wrap"/>
@@ -70,28 +71,28 @@
         <lumina:LuminaCard Padding="18" Classes="Glass">
           <StackPanel Spacing="16">
             <StackPanel Spacing="6">
-              <TextBlock Text="{DynamicResource Sandbox.Text.0603}"
+              <TextBlock Text="{l10n:Loc Sandbox.Text.0603}"
                          FontSize="20"
                          FontWeight="SemiBold"/>
-              <TextBlock Text="{DynamicResource Sandbox.Text.0604}"
+              <TextBlock Text="{l10n:Loc Sandbox.Text.0604}"
                          Foreground="{DynamicResource LuminaTextSecondaryBrush}"
                          TextWrapping="Wrap"/>
             </StackPanel>
 
             <WrapPanel>
               <Button Name="OpenComponentDialogButton"
-                      Content="{DynamicResource Sandbox.Text.0605}"
+                      Content="{l10n:Loc Sandbox.Text.0605}"
                       Classes="Primary"
                       Margin="0,0,10,10"
                       Command="{Binding OpenComponentDialogCommand}"/>
               <Button Name="OpenInlineDialogButton"
-                      Content="{DynamicResource Sandbox.Text.0606}"
+                      Content="{l10n:Loc Sandbox.Text.0606}"
                       Classes="Outline"
                       Margin="0,0,10,10"
                       Command="{Binding OpenInlineDialogCommand}"
                       CommandParameter="{StaticResource InlineStatusDialog}"/>
               <Button Name="OpenTopDialogButton"
-                      Content="{DynamicResource Sandbox.Text.0847}"
+                      Content="{l10n:Loc Sandbox.Text.0847}"
                       Classes="Outline"
                       Margin="0,0,10,10"
                       Command="{Binding OpenTopDialogCommand}"/>
@@ -107,45 +108,45 @@
         <lumina:LuminaCard Padding="18" Classes="Glass">
           <StackPanel Spacing="16">
             <StackPanel Spacing="6">
-              <TextBlock Text="{DynamicResource Sandbox.Text.0607}"
+              <TextBlock Text="{l10n:Loc Sandbox.Text.0607}"
                          FontSize="20"
                          FontWeight="SemiBold"/>
-              <TextBlock Text="{DynamicResource Sandbox.Text.0608}"
+              <TextBlock Text="{l10n:Loc Sandbox.Text.0608}"
                          Foreground="{DynamicResource LuminaTextSecondaryBrush}"
                          TextWrapping="Wrap"/>
             </StackPanel>
 
             <WrapPanel>
               <Button Name="ShowNeutralToastButton"
-                      Content="{DynamicResource Sandbox.Text.0488}"
+                      Content="{l10n:Loc Sandbox.Text.0488}"
                       Classes="Outline"
                       MinWidth="96"
                       Margin="0,0,10,10"
                       Command="{Binding ShowToastCommand}"
                       CommandParameter="Neutral"/>
               <Button Name="ShowSuccessToastButton"
-                      Content="{DynamicResource Sandbox.Text.0191}"
+                      Content="{l10n:Loc Sandbox.Text.0191}"
                       Classes="Outline Success"
                       MinWidth="96"
                       Margin="0,0,10,10"
                       Command="{Binding ShowToastCommand}"
                       CommandParameter="Success"/>
               <Button Name="ShowWarningToastButton"
-                      Content="{DynamicResource Sandbox.Text.0192}"
+                      Content="{l10n:Loc Sandbox.Text.0192}"
                       Classes="Outline Warning"
                       MinWidth="96"
                       Margin="0,0,10,10"
                       Command="{Binding ShowToastCommand}"
                       CommandParameter="Warning"/>
               <Button Name="ShowDangerToastButton"
-                      Content="{DynamicResource Sandbox.Text.0193}"
+                      Content="{l10n:Loc Sandbox.Text.0193}"
                       Classes="Outline Danger"
                       MinWidth="96"
                       Margin="0,0,10,10"
                       Command="{Binding ShowToastCommand}"
                       CommandParameter="Danger"/>
               <Button Name="ShowTopToastButton"
-                      Content="{DynamicResource Sandbox.Text.1322}"
+                      Content="{l10n:Loc Sandbox.Text.1322}"
                       Classes="Outline"
                       MinWidth="96"
                       Margin="0,0,10,10"
@@ -158,22 +159,22 @@
         <lumina:LuminaCard Padding="18" Classes="Glass">
           <StackPanel Spacing="16">
             <StackPanel Spacing="6">
-              <TextBlock Text="{DynamicResource Sandbox.Text.0609}"
+              <TextBlock Text="{l10n:Loc Sandbox.Text.0609}"
                          FontSize="20"
                          FontWeight="SemiBold"/>
-              <TextBlock Text="{DynamicResource Sandbox.Text.0610}"
+              <TextBlock Text="{l10n:Loc Sandbox.Text.0610}"
                          Foreground="{DynamicResource LuminaTextSecondaryBrush}"
                          TextWrapping="Wrap"/>
             </StackPanel>
 
             <WrapPanel>
               <Button Name="OpenBottomSheetButton"
-                      Content="{DynamicResource Sandbox.Text.0611}"
+                      Content="{l10n:Loc Sandbox.Text.0611}"
                       Classes="Outline"
                       Margin="0,0,10,10"
                       Command="{Binding OpenBottomSheetCommand}"/>
               <Button Name="OpenTopBottomSheetButton"
-                      Content="{DynamicResource Sandbox.Text.0846}"
+                      Content="{l10n:Loc Sandbox.Text.0846}"
                       Classes="Outline"
                       Margin="0,0,10,10"
                       Command="{Binding OpenTopBottomSheetCommand}"/>
@@ -184,10 +185,10 @@
         <lumina:LuminaCard Padding="18" Classes="Glass Subtle">
           <StackPanel Spacing="14">
             <StackPanel Spacing="6">
-              <TextBlock Text="{DynamicResource Sandbox.Text.0612}"
+              <TextBlock Text="{l10n:Loc Sandbox.Text.0612}"
                          FontSize="20"
                          FontWeight="SemiBold"/>
-              <TextBlock Text="{DynamicResource Sandbox.Text.0613}"
+              <TextBlock Text="{l10n:Loc Sandbox.Text.0613}"
                          Foreground="{DynamicResource LuminaTextSecondaryBrush}"
                          TextWrapping="Wrap"/>
             </StackPanel>

@@ -1,5 +1,6 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.CarouselShowcasePage"
@@ -7,15 +8,15 @@
     <ScrollViewer Margin="16" HorizontalScrollBarVisibility="Disabled">
         <StackPanel Spacing="24" HorizontalAlignment="Stretch" Margin="0,36,0,40">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0366}" />
-                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0769}" TextWrapping="Wrap" />
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.0366}" />
+                <TextBlock Classes="Body" Text="{l10n:Loc Sandbox.Text.0769}" TextWrapping="Wrap" />
             </StackPanel>
             <lumina:LuminaResponsivePanel MinItemWidth="300" MaxItemWidth="640" HorizontalSpacing="16" VerticalSpacing="16">
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0366}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0366}" />
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
-                            <CheckBox Content="{DynamicResource Sandbox.Text.0367}"
+                            <CheckBox Content="{l10n:Loc Sandbox.Text.0367}"
                                       IsChecked="{Binding IsCarouselAutoPlayEnabled, Mode=TwoWay}" />
                             <TextBlock Grid.Column="1"
                                        Classes="Helper"
@@ -37,8 +38,8 @@
                             <Border Padding="24" Background="#EAF5FF">
                                 <Grid ColumnDefinitions="*,Auto" RowDefinitions="*,Auto">
                                     <StackPanel Spacing="8" VerticalAlignment="Center">
-                                        <TextBlock FontSize="22" FontWeight="SemiBold" Foreground="#122033" Text="{DynamicResource Sandbox.Text.0368}" />
-                                        <TextBlock TextWrapping="Wrap" Foreground="#526173" Text="{DynamicResource Sandbox.Text.0369}" />
+                                        <TextBlock FontSize="22" FontWeight="SemiBold" Foreground="#122033" Text="{l10n:Loc Sandbox.Text.0368}" />
+                                        <TextBlock TextWrapping="Wrap" Foreground="#526173" Text="{l10n:Loc Sandbox.Text.0369}" />
                                     </StackPanel>
                                     <Border Grid.Column="1"
                                             Width="86"
@@ -52,15 +53,15 @@
                                                    FontSize="24"
                                                    FontWeight="Bold"
                                                    Foreground="#1677FF"
-                                                   Text="{DynamicResource Sandbox.Text.1132}" />
+                                                   Text="{l10n:Loc Sandbox.Text.1132}" />
                                     </Border>
                                 </Grid>
                             </Border>
                             <Border Padding="24" Background="#F7F4FF">
                                 <Grid ColumnDefinitions="*,Auto">
                                     <StackPanel Spacing="8" VerticalAlignment="Center">
-                                        <TextBlock FontSize="22" FontWeight="SemiBold" Foreground="#211A36" Text="{DynamicResource Sandbox.Text.0370}" />
-                                        <TextBlock TextWrapping="Wrap" Foreground="#615873" Text="{DynamicResource Sandbox.Text.0371}" />
+                                        <TextBlock FontSize="22" FontWeight="SemiBold" Foreground="#211A36" Text="{l10n:Loc Sandbox.Text.0370}" />
+                                        <TextBlock TextWrapping="Wrap" Foreground="#615873" Text="{l10n:Loc Sandbox.Text.0371}" />
                                     </StackPanel>
                                     <Border Grid.Column="1"
                                             Width="86"
@@ -81,8 +82,8 @@
                             <Border Padding="24" Background="#FFF7E8">
                                 <Grid ColumnDefinitions="*,Auto">
                                     <StackPanel Spacing="8" VerticalAlignment="Center">
-                                        <TextBlock FontSize="22" FontWeight="SemiBold" Foreground="#33240F" Text="{DynamicResource Sandbox.Text.0372}" />
-                                        <TextBlock TextWrapping="Wrap" Foreground="#765C33" Text="{DynamicResource Sandbox.Text.0373}" />
+                                        <TextBlock FontSize="22" FontWeight="SemiBold" Foreground="#33240F" Text="{l10n:Loc Sandbox.Text.0372}" />
+                                        <TextBlock TextWrapping="Wrap" Foreground="#765C33" Text="{l10n:Loc Sandbox.Text.0373}" />
                                     </StackPanel>
                                     <Border Grid.Column="1"
                                             Width="86"
@@ -96,7 +97,7 @@
                                                    FontSize="26"
                                                    FontWeight="Bold"
                                                    Foreground="#D98200"
-                                                   Text="{DynamicResource Sandbox.Text.1133}" />
+                                                   Text="{l10n:Loc Sandbox.Text.1133}" />
                                     </Border>
                                 </Grid>
                             </Border>

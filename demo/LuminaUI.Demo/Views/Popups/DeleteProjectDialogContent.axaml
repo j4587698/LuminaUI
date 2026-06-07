@@ -1,14 +1,15 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.DeleteProjectDialogContent"
              x:DataType="vm:DeleteProjectDialogContentViewModel">
   <StackPanel Spacing="16" MinWidth="320" MaxWidth="440">
     <StackPanel Spacing="6">
-      <TextBlock Text="{DynamicResource Sandbox.Text.0623}"
+      <TextBlock Text="{l10n:Loc Sandbox.Text.0623}"
                  FontSize="18"
                  FontWeight="SemiBold"/>
-      <TextBlock Text="{DynamicResource Sandbox.Text.0624}"
+      <TextBlock Text="{l10n:Loc Sandbox.Text.0624}"
                  TextWrapping="Wrap"
                  Foreground="{DynamicResource LuminaTextSecondaryBrush}"/>
     </StackPanel>
@@ -24,17 +25,17 @@
                 Height="36"
                 CornerRadius="10"
                 Background="{DynamicResource LuminaPrimaryBgBrush}">
-          <TextBlock Text="{DynamicResource Sandbox.Text.1117}"
+          <TextBlock Text="{l10n:Loc Sandbox.Text.1117}"
                      HorizontalAlignment="Center"
                      VerticalAlignment="Center"
                      FontWeight="SemiBold"/>
         </Border>
         <TextBlock Grid.Column="1"
-                   Text="{DynamicResource Sandbox.Text.0625}"
+                   Text="{l10n:Loc Sandbox.Text.0625}"
                    FontWeight="SemiBold"/>
         <TextBlock Grid.Row="1"
                    Grid.Column="1"
-                   Text="{DynamicResource Sandbox.Text.0626}"
+                   Text="{l10n:Loc Sandbox.Text.0626}"
                    Foreground="{DynamicResource LuminaTextSecondaryBrush}"/>
       </Grid>
     </Border>
@@ -42,10 +43,10 @@
     <StackPanel Orientation="Horizontal"
                 HorizontalAlignment="Right"
                 Spacing="10">
-      <Button Content="{DynamicResource Sandbox.Text.0601}"
+      <Button Content="{l10n:Loc Sandbox.Text.0601}"
               Classes="Outline"
               Command="{Binding CloseCommand}"/>
-      <Button Content="{DynamicResource Sandbox.Text.0047}"
+      <Button Content="{l10n:Loc Sandbox.Text.0047}"
               Classes="Primary"
               Command="{Binding CloseCommand}"/>
     </StackPanel>

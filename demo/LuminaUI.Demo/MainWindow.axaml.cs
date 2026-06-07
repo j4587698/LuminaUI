@@ -16,7 +16,6 @@ public partial class MainWindow : LuminaWindow
     public MainWindow()
     {
         InitializeComponent();
-        UpdateWindowTitle();
         RebuildPlatformMenu();
         UpdateThemeButtonState();
 
@@ -44,10 +43,10 @@ public partial class MainWindow : LuminaWindow
 
     protected override async Task<bool> CanClose()
     {
-        var result = await LuminaWindowMessageBox.ShowAsync(
+        var result = await LuminaWindowMessageBox.ShowLocalizedAsync(
             this,
-            SandboxTextLocalizer.Localize("Confirm Exit"),
-            SandboxTextLocalizer.Localize("Are you sure you want to exit the application?"),
+            SandboxLocalization.WindowConfirmExitTitle,
+            SandboxLocalization.WindowConfirmExitMessage,
             LuminaDialogButtons.YesNo,
             LuminaMessageBoxIcon.Question);
 
@@ -61,7 +60,6 @@ public partial class MainWindow : LuminaWindow
 
     private void OnLanguageChanged(object? sender, EventArgs e)
     {
-        UpdateWindowTitle();
         RebuildPlatformMenu();
     }
 
@@ -202,11 +200,6 @@ public partial class MainWindow : LuminaWindow
             LuminaLocalization.Get(SandboxLocalization.MenuToggleSidebar),
             LuminaLocalization.Get(messageKey),
             NotificationType.Information);
-    }
-
-    private void UpdateWindowTitle()
-    {
-        Title = LuminaLocalization.Get(SandboxLocalization.AppTitle);
     }
 
     private void SetThemeMode(LuminaThemeMode themeMode)

@@ -1,5 +1,6 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              x:Class="LuminaUI.Demo.Views.TabControlShowcasePage">
 
@@ -9,9 +10,9 @@
                     HorizontalAlignment="Stretch"
                     Margin="0,36,0,40">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0395}" />
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.0395}" />
                 <TextBlock Classes="Body"
-                           Text="{DynamicResource Sandbox.Text.0396}"
+                           Text="{l10n:Loc Sandbox.Text.0396}"
                            TextWrapping="Wrap" />
             </StackPanel>
 
@@ -21,39 +22,39 @@
                                           VerticalSpacing="16">
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0422}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0422}" />
                         <TabControl SelectedIndex="0">
-                            <TabItem Header="{DynamicResource Sandbox.Text.0230}">
+                            <TabItem Header="{l10n:Loc Sandbox.Text.0230}">
                                 <StackPanel Spacing="8">
-                                    <TextBlock Classes="Label" Text="{DynamicResource Sandbox.Text.0230}" />
-                                    <TextBlock Classes="Helper" Text="{DynamicResource Sandbox.Text.0397}" />
+                                    <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Text.0230}" />
+                                    <TextBlock Classes="Helper" Text="{l10n:Loc Sandbox.Text.0397}" />
                                 </StackPanel>
                             </TabItem>
-                            <TabItem Header="{DynamicResource Sandbox.Text.0231}">
+                            <TabItem Header="{l10n:Loc Sandbox.Text.0231}">
                                 <StackPanel Spacing="8">
-                                    <TextBlock Classes="Label" Text="{DynamicResource Sandbox.Text.0231}" />
-                                    <TextBlock Classes="Helper" Text="{DynamicResource Sandbox.Text.0398}" />
+                                    <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Text.0231}" />
+                                    <TextBlock Classes="Helper" Text="{l10n:Loc Sandbox.Text.0398}" />
                                 </StackPanel>
                             </TabItem>
-                            <TabItem Header="{DynamicResource Sandbox.Text.0199}" IsEnabled="False" />
+                            <TabItem Header="{l10n:Loc Sandbox.Text.0199}" IsEnabled="False" />
                         </TabControl>
                     </StackPanel>
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0425}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0425}" />
                         <TabControl Classes="Chrome" SelectedIndex="1">
-                            <TabItem Header="{DynamicResource Sandbox.Text.0351}">
-                                <TextBlock Text="{DynamicResource Sandbox.Text.0399}"
+                            <TabItem Header="{l10n:Loc Sandbox.Text.0351}">
+                                <TextBlock Text="{l10n:Loc Sandbox.Text.0399}"
                                            TextWrapping="Wrap" />
                             </TabItem>
-                            <TabItem Header="{DynamicResource Sandbox.Text.0426}">
-                                <TextBlock Text="{DynamicResource Sandbox.Text.0400}"
+                            <TabItem Header="{l10n:Loc Sandbox.Text.0426}">
+                                <TextBlock Text="{l10n:Loc Sandbox.Text.0400}"
                                            TextWrapping="Wrap" />
                             </TabItem>
-                            <TabItem Header="{DynamicResource Sandbox.Text.0427}">
-                                <TextBlock Text="{DynamicResource Sandbox.Text.0401}"
+                            <TabItem Header="{l10n:Loc Sandbox.Text.0427}">
+                                <TextBlock Text="{l10n:Loc Sandbox.Text.0401}"
                                            TextWrapping="Wrap" />
                             </TabItem>
                         </TabControl>
@@ -62,16 +63,16 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0429}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0429}" />
                         <TabControl Classes="Pills" SelectedIndex="2">
-                            <TabItem Header="{DynamicResource Sandbox.Text.0430}">
-                                <TextBlock Text="{DynamicResource Sandbox.Text.0402}" />
+                            <TabItem Header="{l10n:Loc Sandbox.Text.0430}">
+                                <TextBlock Text="{l10n:Loc Sandbox.Text.0402}" />
                             </TabItem>
-                            <TabItem Header="{DynamicResource Sandbox.Text.0431}">
-                                <TextBlock Text="{DynamicResource Sandbox.Text.0403}" />
+                            <TabItem Header="{l10n:Loc Sandbox.Text.0431}">
+                                <TextBlock Text="{l10n:Loc Sandbox.Text.0403}" />
                             </TabItem>
-                            <TabItem Header="{DynamicResource Sandbox.Text.0432}">
-                                <TextBlock Text="{DynamicResource Sandbox.Text.0404}" />
+                            <TabItem Header="{l10n:Loc Sandbox.Text.0432}">
+                                <TextBlock Text="{l10n:Loc Sandbox.Text.0404}" />
                             </TabItem>
                         </TabControl>
                     </StackPanel>
@@ -79,19 +80,19 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0361}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0361}" />
                         <TabControl TabStripPlacement="Bottom" SelectedIndex="0">
-                            <TabItem Header="{DynamicResource Sandbox.Text.0439}">
+                            <TabItem Header="{l10n:Loc Sandbox.Text.0439}">
                                 <StackPanel Spacing="8">
-                                    <TextBlock Classes="Label" Text="{DynamicResource Sandbox.Text.0405}" />
-                                    <TextBlock Classes="Helper" Text="{DynamicResource Sandbox.Text.0406}" />
+                                    <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Text.0405}" />
+                                    <TextBlock Classes="Helper" Text="{l10n:Loc Sandbox.Text.0406}" />
                                 </StackPanel>
                             </TabItem>
-                            <TabItem Header="{DynamicResource Sandbox.Text.0407}">
-                                <TextBlock Text="{DynamicResource Sandbox.Text.0408}" />
+                            <TabItem Header="{l10n:Loc Sandbox.Text.0407}">
+                                <TextBlock Text="{l10n:Loc Sandbox.Text.0408}" />
                             </TabItem>
-                            <TabItem Header="{DynamicResource Sandbox.Text.0409}">
-                                <TextBlock Text="{DynamicResource Sandbox.Text.0410}" />
+                            <TabItem Header="{l10n:Loc Sandbox.Text.0409}">
+                                <TextBlock Text="{l10n:Loc Sandbox.Text.0410}" />
                             </TabItem>
                         </TabControl>
                     </StackPanel>
@@ -99,41 +100,41 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0440}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0440}" />
                         <TabControl Classes="Vertical"
                                     TabStripPlacement="Left"
                                     SelectedIndex="1">
-                            <TabItem Header="{DynamicResource Sandbox.Text.0362}">
+                            <TabItem Header="{l10n:Loc Sandbox.Text.0362}">
                                 <Border Padding="16"
                                         Background="{DynamicResource LuminaHoverBackgroundBrush}"
                                         CornerRadius="8">
-                                    <TextBlock Text="{DynamicResource Sandbox.Text.0411}" TextWrapping="Wrap" />
+                                    <TextBlock Text="{l10n:Loc Sandbox.Text.0411}" TextWrapping="Wrap" />
                                 </Border>
                             </TabItem>
-                            <TabItem Header="{DynamicResource Sandbox.Text.0441}">
+                            <TabItem Header="{l10n:Loc Sandbox.Text.0441}">
                                 <Border Padding="16"
                                         Background="{DynamicResource LuminaHoverBackgroundBrush}"
                                         CornerRadius="8">
-                                    <TextBlock Text="{DynamicResource Sandbox.Text.0412}" TextWrapping="Wrap" />
+                                    <TextBlock Text="{l10n:Loc Sandbox.Text.0412}" TextWrapping="Wrap" />
                                 </Border>
                             </TabItem>
-                            <TabItem Header="{DynamicResource Sandbox.Text.0233}">
+                            <TabItem Header="{l10n:Loc Sandbox.Text.0233}">
                                 <Border Padding="16"
                                         Background="{DynamicResource LuminaHoverBackgroundBrush}"
                                         CornerRadius="8">
-                                    <TextBlock Text="{DynamicResource Sandbox.Text.0413}" TextWrapping="Wrap" />
+                                    <TextBlock Text="{l10n:Loc Sandbox.Text.0413}" TextWrapping="Wrap" />
                                 </Border>
                             </TabItem>
                         </TabControl>
                         <TextBlock Classes="Helper"
-                                   Text="{DynamicResource Sandbox.Text.0414}"
+                                   Text="{l10n:Loc Sandbox.Text.0414}"
                                    TextWrapping="Wrap" />
                     </StackPanel>
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0415}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0415}" />
                         <Border MaxWidth="360"
                                 HorizontalAlignment="Center"
                                 BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
@@ -143,32 +144,32 @@
                             <TabControl Classes="Mobile"
                                         TabStripPlacement="Bottom"
                                         SelectedIndex="0">
-                                <TabItem Header="{DynamicResource Sandbox.Text.0354}">
+                                <TabItem Header="{l10n:Loc Sandbox.Text.0354}">
                                     <TabItem.Icon>
                                         <PathIcon Width="16" Height="16" Data="M4,11 L12,4 L20,11 L20,20 L14,20 L14,14 L10,14 L10,20 L4,20 Z" />
                                     </TabItem.Icon>
                                     <StackPanel Spacing="8">
-                                        <TextBlock Classes="Label" Text="{DynamicResource Sandbox.Text.0354}" />
-                                        <TextBlock Classes="Helper" Text="{DynamicResource Sandbox.Text.0416}" />
+                                        <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Text.0354}" />
+                                        <TextBlock Classes="Helper" Text="{l10n:Loc Sandbox.Text.0416}" />
                                     </StackPanel>
                                 </TabItem>
-                                <TabItem Header="{DynamicResource Sandbox.Text.0046}">
+                                <TabItem Header="{l10n:Loc Sandbox.Text.0046}">
                                     <TabItem.Icon>
                                         <PathIcon Width="16" Height="16" Data="M10,4 A6,6 0 1,0 10,16 A6,6 0 1,0 10,4 M15,15 L20,20" />
                                     </TabItem.Icon>
-                                    <TextBlock Text="{DynamicResource Sandbox.Text.0417}" />
+                                    <TextBlock Text="{l10n:Loc Sandbox.Text.0417}" />
                                 </TabItem>
-                                <TabItem Header="{DynamicResource Sandbox.Text.0348}">
+                                <TabItem Header="{l10n:Loc Sandbox.Text.0348}">
                                     <TabItem.Icon>
                                         <PathIcon Width="16" Height="16" Data="M4,6 L20,6 L20,18 L4,18 Z M4,12 L9,12 L11,15 L13,15 L15,12 L20,12" />
                                     </TabItem.Icon>
-                                    <TextBlock Text="{DynamicResource Sandbox.Text.0418}" />
+                                    <TextBlock Text="{l10n:Loc Sandbox.Text.0418}" />
                                 </TabItem>
-                                <TabItem Header="{DynamicResource Sandbox.Text.0362}">
+                                <TabItem Header="{l10n:Loc Sandbox.Text.0362}">
                                     <TabItem.Icon>
                                         <PathIcon Width="16" Height="16" Data="M12,5 A4,4 0 1,0 12,13 A4,4 0 1,0 12,5 M5,21 A7,5 0 0,1 19,21" />
                                     </TabItem.Icon>
-                                    <TextBlock Text="{DynamicResource Sandbox.Text.0419}" />
+                                    <TextBlock Text="{l10n:Loc Sandbox.Text.0419}" />
                                 </TabItem>
                             </TabControl>
                         </Border>

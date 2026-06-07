@@ -1,22 +1,23 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              x:Class="LuminaUI.Demo.Views.SplitViewShowcasePage">
     <ScrollViewer Margin="16" HorizontalScrollBarVisibility="Disabled">
         <StackPanel Spacing="24" HorizontalAlignment="Stretch" Margin="0,36,0,40">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.1247}" />
-                <TextBlock Classes="Body" Text="{DynamicResource Sandbox.Text.0767}" TextWrapping="Wrap" />
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.1247}" />
+                <TextBlock Classes="Body" Text="{l10n:Loc Sandbox.Text.0767}" TextWrapping="Wrap" />
             </StackPanel>
             <lumina:LuminaResponsivePanel MinItemWidth="300" MaxItemWidth="640" HorizontalSpacing="16" VerticalSpacing="16">
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
-                            <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1247}" />
+                            <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1247}" />
                             <ToggleButton x:Name="SplitPaneToggle"
                                           Grid.Column="1"
                                           Classes="Small Outline"
-                                          Content="{DynamicResource Sandbox.Text.0347}"
+                                          Content="{l10n:Loc Sandbox.Text.0347}"
                                           IsChecked="{Binding #DemoSplitView.IsPaneOpen, Mode=TwoWay}" />
                         </Grid>
                         <SplitView x:Name="DemoSplitView"
@@ -27,9 +28,9 @@
                                    CompactPaneLength="48">
                             <SplitView.Pane>
                                 <StackPanel Spacing="6" Margin="8">
-                                    <Button Classes="Ghost" Content="{DynamicResource Sandbox.Text.0348}" HorizontalAlignment="Stretch" />
-                                    <Button Classes="Ghost" Content="{DynamicResource Sandbox.Text.0171}" HorizontalAlignment="Stretch" />
-                                    <Button Classes="Ghost" Content="{DynamicResource Sandbox.Text.0048}" HorizontalAlignment="Stretch" />
+                                    <Button Classes="Ghost" Content="{l10n:Loc Sandbox.Text.0348}" HorizontalAlignment="Stretch" />
+                                    <Button Classes="Ghost" Content="{l10n:Loc Sandbox.Text.0171}" HorizontalAlignment="Stretch" />
+                                    <Button Classes="Ghost" Content="{l10n:Loc Sandbox.Text.0048}" HorizontalAlignment="Stretch" />
                                 </StackPanel>
                             </SplitView.Pane>
                             <Border Padding="14"
@@ -38,9 +39,9 @@
                                     BorderThickness="1"
                                     CornerRadius="8">
                                 <StackPanel Spacing="8">
-                                    <TextBlock Classes="Label" Text="{DynamicResource Sandbox.Text.0349}" />
+                                    <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Text.0349}" />
                                     <TextBlock Classes="Helper"
-                                               Text="{DynamicResource Sandbox.Text.0350}"
+                                               Text="{l10n:Loc Sandbox.Text.0350}"
                                                TextWrapping="Wrap" />
                                 </StackPanel>
                             </Border>
