@@ -123,6 +123,13 @@ public partial class SandboxRootView : UserControl
     {
         SandboxTextLocalizer.Apply(TopLevel.GetTopLevel(this) as object ?? this);
 
+        var insetsManager = TopLevel.GetTopLevel(this)?.InsetsManager;
+        if (insetsManager != null)
+        {
+            insetsManager.DisplayEdgeToEdgePreference = true;
+            insetsManager.IsSystemBarVisible = false;
+        }
+
         if (_hasNavigated)
         {
             return;
