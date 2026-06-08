@@ -5,6 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using LuminaUI.Localization;
 
 namespace LuminaUI.Demo.ViewModels;
 
@@ -89,19 +90,19 @@ public partial class NavigationContainersShowcaseViewModel : ObservableObject
     [RelayCommand]
     private void ShowInfoNotification()
     {
-        ShowNotification("System message", "Background sync completed.", NotificationType.Information);
+        ShowNotification("Sandbox.Text.0641", "Sandbox.Text.0642", NotificationType.Information);
     }
 
     [RelayCommand]
     private void ShowSuccessNotification()
     {
-        ShowNotification("Saved", "The workspace settings were saved.", NotificationType.Success);
+        ShowNotification("Sandbox.Text.0615", "Sandbox.Text.0643", NotificationType.Success);
     }
 
     [RelayCommand]
     private void ShowWarningNotification()
     {
-        ShowNotification("Attention", "The next sync needs confirmation.", NotificationType.Warning);
+        ShowNotification("Sandbox.Text.0644", "Sandbox.Text.0645", NotificationType.Warning);
     }
 
     private ContentPage CreateNavigationDetailPage(NavigationPage navigationPage)
@@ -109,7 +110,7 @@ public partial class NavigationContainersShowcaseViewModel : ObservableObject
         var popButton = new Button
         {
             Classes = { "Outline", "Small" },
-            Content = SandboxTextLocalizer.Localize("Back"),
+            Content = T("Sandbox.Text.0637"),
             HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Left,
             Command = PopNavigationCommand,
             CommandParameter = navigationPage
@@ -117,7 +118,7 @@ public partial class NavigationContainersShowcaseViewModel : ObservableObject
 
         var detailPage = new ContentPage
         {
-            Header = SandboxTextLocalizer.Localize("Project detail"),
+            Header = T("Sandbox.Text.0638"),
             Content = new StackPanel
             {
                 Margin = new Thickness(16, 68, 16, 16),
@@ -127,29 +128,27 @@ public partial class NavigationContainersShowcaseViewModel : ObservableObject
                     new TextBlock
                     {
                         Classes = { "Label" },
-                        Text = SandboxTextLocalizer.Localize("Detail page")
+                        Text = T("Sandbox.Text.0639")
                     },
                     new TextBlock
                     {
                         Classes = { "Helper" },
-                        Text = SandboxTextLocalizer.Localize("This page was pushed onto the NavigationPage stack."),
+                        Text = T("Sandbox.Text.0640"),
                         TextWrapping = Avalonia.Media.TextWrapping.Wrap
                     },
                     popButton
                 }
             }
         };
-
-        SandboxTextLocalizer.Apply(detailPage);
         return detailPage;
     }
 
-    private void ShowNotification(string title, string message, NotificationType type)
+    private void ShowNotification(string titleKey, string messageKey, NotificationType type)
     {
         var duration = TimeSpan.FromSeconds(Math.Clamp(NotificationDurationSeconds, 0.5, 30));
         _notificationCenter.Show(
-            SandboxTextLocalizer.Localize(title),
-            SandboxTextLocalizer.Localize(message),
+            T(titleKey),
+            T(messageKey),
             type,
             duration);
     }
@@ -177,13 +176,18 @@ public partial class NavigationContainersShowcaseViewModel : ObservableObject
 
     private static string FormatNotificationPosition(NotificationPosition position)
     {
-        var text = position switch
+        var key = position switch
         {
-            NotificationPosition.TopLeft => "Top left",
-            NotificationPosition.BottomLeft => "Bottom left",
-            NotificationPosition.BottomRight => "Bottom right",
-            _ => "Top right"
+            NotificationPosition.TopLeft => "Sandbox.Text.0378",
+            NotificationPosition.BottomLeft => "Sandbox.Text.0380",
+            NotificationPosition.BottomRight => "Sandbox.Text.0381",
+            _ => "Sandbox.Text.0379"
         };
-        return SandboxTextLocalizer.Localize(text);
+        return T(key);
+    }
+
+    private static string T(string key)
+    {
+        return LuminaLocalization.Get(key);
     }
 }

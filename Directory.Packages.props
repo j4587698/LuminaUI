@@ -2,17 +2,17 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 
-    <AvaloniaVersion>12.0.4</AvaloniaVersion>
+    <AvaloniaVersion>12.0.1</AvaloniaVersion>
     <AvaloniaControlsVersion>12.0.0</AvaloniaControlsVersion>
     <TreeDataGridAvaloniaVersion>12.0.0</TreeDataGridAvaloniaVersion>
     <CommunityToolkitMvvmVersion>8.4.2</CommunityToolkitMvvmVersion>
-    <DiagnosticsSupportVersion>2.2.1</DiagnosticsSupportVersion>
-    <SkiaSharpVersion>3.119.3-preview.1.1</SkiaSharpVersion>
+    <DiagnosticsSupportVersion>2.2.2</DiagnosticsSupportVersion>
+    <SkiaSharpVersion>3.119.4</SkiaSharpVersion>
     <AndroidXSplashScreenVersion>1.2.0.2</AndroidXSplashScreenVersion>
+    <AndroidXAppCompatVersion>1.7.1.3</AndroidXAppCompatVersion>
     <MicrosoftExtensionsHostingVersion>10.0.8</MicrosoftExtensionsHostingVersion>
     <ModelContextProtocolVersion>1.4.0</ModelContextProtocolVersion>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageVersion Include="Avalonia" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Android" Version="$(AvaloniaVersion)" />
@@ -30,6 +30,7 @@
     <PackageVersion Include="SkiaSharp" Version="$(SkiaSharpVersion)" />
     <PackageVersion Include="SkiaSharp.NativeAssets.WebAssembly" Version="$(SkiaSharpVersion)" />
     <PackageVersion Include="Xamarin.AndroidX.Core.SplashScreen" Version="$(AndroidXSplashScreenVersion)" />
+    <PackageVersion Include="Xamarin.AndroidX.AppCompat" Version="$(AndroidXAppCompatVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="$(MicrosoftExtensionsHostingVersion)" />
     <PackageVersion Include="ModelContextProtocol" Version="$(ModelContextProtocolVersion)" />
   </ItemGroup>

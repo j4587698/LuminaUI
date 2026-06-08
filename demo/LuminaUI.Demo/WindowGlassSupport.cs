@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using LuminaUI.Localization;
 
 namespace LuminaUI.Demo;
 
@@ -12,13 +13,13 @@ internal static class WindowGlassSupport
 
     public static string GetCardStatus(WindowTransparencyLevel actualTransparencyLevel)
     {
-        return SandboxTextLocalizer.Localize("Card glass: backdrop blur.");
+        return LuminaLocalization.Get("Sandbox.Text.0018");
     }
 
     public static string GetWindowStatus(WindowTransparencyLevel actualTransparencyLevel)
     {
         return SupportsHardwareBlur(actualTransparencyLevel)
-            ? SandboxTextLocalizer.Format("Window glass active: {0}", "窗口玻璃已启用：{0}", actualTransparencyLevel)
-            : SandboxTextLocalizer.Format("Window glass fallback: {0}", "窗口玻璃回退：{0}", actualTransparencyLevel);
+            ? LuminaLocalization.Format(SandboxLocalization.WindowGlassActiveFormat, actualTransparencyLevel)
+            : LuminaLocalization.Format(SandboxLocalization.WindowGlassFallbackFormat, actualTransparencyLevel);
     }
 }

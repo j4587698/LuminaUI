@@ -32,8 +32,7 @@
                             <Border Background="{DynamicResource LuminaOverlayScrimBrush}"
                                     IsHitTestVisible="False" />
 
-                            <Border Name="PART_DialogContainer"
-                                    Padding="{TemplateBinding SafeAreaPadding}">
+                            <Border Name="PART_DialogContainer">
                                 <Border.Transitions>
                                     <Transitions>
                                         <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25" Easing="CubicEaseOut" />
@@ -66,7 +65,6 @@
                                     IsHitTestVisible="False" />
 
                             <Border Name="PART_BottomSheetContainer"
-                                    Padding="{TemplateBinding SafeAreaPadding}"
                                     VerticalAlignment="Bottom"
                                     HorizontalAlignment="Stretch">
                                 <ContentPresenter Content="{TemplateBinding BottomSheetContent}" />
@@ -75,7 +73,6 @@
                     </Border>
 
                     <Border ZIndex="2000"
-                            Padding="{TemplateBinding SafeAreaPadding}"
                             Margin="16"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Bottom"

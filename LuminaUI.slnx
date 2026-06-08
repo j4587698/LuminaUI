@@ -8,7 +8,9 @@
   <Project Path="demo/LuminaUI.Demo/LuminaUI.Demo.csproj" />
   <Project Path="demo/LuminaUI.Demo.Desktop/LuminaUI.Demo.Desktop.csproj" />
   <Project Path="demo/LuminaUI.Demo.Browser/LuminaUI.Demo.Browser.csproj" />
-  <Project Path="demo/LuminaUI.Demo.Android/LuminaUI.Demo.Android.csproj" />
+  <Project Path="demo/LuminaUI.Demo.Android/LuminaUI.Demo.Android.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
   <Project Path="demo/LuminaUI.Demo.iOS/LuminaUI.Demo.iOS.csproj" />
   <Project Path="tools/LuminaUI.Mcp/LuminaUI.Mcp.csproj" />
   <Project Path="tools/LuminaUI.Diagnostics.Mcp/LuminaUI.Diagnostics.Mcp.csproj" />

@@ -1,5 +1,6 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.CardShowcasePage"
@@ -17,9 +18,9 @@
                     Margin="0,28,0,40">
 
             <StackPanel Spacing="6">
-                <TextBlock Text="{DynamicResource Sandbox.Text.0204}"
+                <TextBlock Text="{l10n:Loc Sandbox.Text.0204}"
                            Classes="Display" />
-                <TextBlock Text="{DynamicResource Sandbox.Text.0205}"
+                <TextBlock Text="{l10n:Loc Sandbox.Text.0205}"
                            Foreground="{DynamicResource LuminaTextMutedBrush}"
                            TextWrapping="Wrap" />
             </StackPanel>
@@ -27,8 +28,8 @@
             <lumina:LuminaResponsivePanel MinItemWidth="240" MaxItemWidth="360" HorizontalSpacing="16" VerticalSpacing="16">
                 <lumina:LuminaCard MinHeight="148">
                     <StackPanel Spacing="10">
-                        <TextBlock Text="{DynamicResource Sandbox.Text.0197}" Classes="SectionTitle" />
-                        <TextBlock Text="{DynamicResource Sandbox.Text.0206}"
+                        <TextBlock Text="{l10n:Loc Sandbox.Text.0197}" Classes="SectionTitle" />
+                        <TextBlock Text="{l10n:Loc Sandbox.Text.0206}"
                                    Foreground="{DynamicResource LuminaTextMutedBrush}"
                                    TextWrapping="Wrap" />
                         <Border Height="36"
@@ -39,11 +40,11 @@
 
                 <lumina:LuminaCard MinHeight="148" IsElevated="True">
                     <StackPanel Spacing="10">
-                        <TextBlock Text="{DynamicResource Sandbox.Text.0207}" Classes="SectionTitle" />
-                        <TextBlock Text="{DynamicResource Sandbox.Text.0208}"
+                        <TextBlock Text="{l10n:Loc Sandbox.Text.0207}" Classes="SectionTitle" />
+                        <TextBlock Text="{l10n:Loc Sandbox.Text.0208}"
                                    Foreground="{DynamicResource LuminaTextMutedBrush}"
                                    TextWrapping="Wrap" />
-                        <Button Content="{DynamicResource Sandbox.Text.0209}"
+                        <Button Content="{l10n:Loc Sandbox.Text.0209}"
                                 Classes="Primary"
                                 HorizontalAlignment="Left" />
                     </StackPanel>
@@ -51,21 +52,21 @@
 
                 <lumina:LuminaCard Classes="Interactive" MinHeight="148">
                     <StackPanel Spacing="10">
-                        <TextBlock Text="{DynamicResource Sandbox.Text.0210}" Classes="SectionTitle" />
-                        <TextBlock Text="{DynamicResource Sandbox.Text.0211}"
+                        <TextBlock Text="{l10n:Loc Sandbox.Text.0210}" Classes="SectionTitle" />
+                        <TextBlock Text="{l10n:Loc Sandbox.Text.0211}"
                                    Foreground="{DynamicResource LuminaTextMutedBrush}"
                                    TextWrapping="Wrap" />
                         <StackPanel Orientation="Horizontal" Spacing="8">
-                            <Button Content="{DynamicResource Sandbox.Text.0212}" Classes="Ghost" />
-                            <Button Content="{DynamicResource Sandbox.Text.0168}" Classes="Primary" />
+                            <Button Content="{l10n:Loc Sandbox.Text.0212}" Classes="Ghost" />
+                            <Button Content="{l10n:Loc Sandbox.Text.0168}" Classes="Primary" />
                         </StackPanel>
                     </StackPanel>
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard Classes="Primary" MinHeight="148">
                     <StackPanel Spacing="10">
-                        <TextBlock Text="{DynamicResource Sandbox.Text.0213}" Classes="SectionTitle" />
-                        <TextBlock Text="{DynamicResource Sandbox.Text.0214}"
+                        <TextBlock Text="{l10n:Loc Sandbox.Text.0213}" Classes="SectionTitle" />
+                        <TextBlock Text="{l10n:Loc Sandbox.Text.0214}"
                                    Foreground="{DynamicResource LuminaTextMutedBrush}"
                                    TextWrapping="Wrap" />
                         <ProgressBar Minimum="0" Maximum="100" Value="72" />
@@ -76,8 +77,8 @@
             <lumina:LuminaResponsivePanel MinItemWidth="148" MaxItemWidth="220" HorizontalSpacing="16" VerticalSpacing="16">
                 <lumina:LuminaCard MinHeight="116" Classes="Primary">
                     <StackPanel Spacing="8">
-                        <TextBlock Text="{DynamicResource Sandbox.Text.0190}" FontWeight="SemiBold" Foreground="{DynamicResource LuminaTextForegroundBrush}" />
-                        <TextBlock Text="{DynamicResource Sandbox.Text.0215}"
+                        <TextBlock Text="{l10n:Loc Sandbox.Text.0190}" FontWeight="SemiBold" Foreground="{DynamicResource LuminaTextForegroundBrush}" />
+                        <TextBlock Text="{l10n:Loc Sandbox.Text.0215}"
                                    FontSize="12"
                                    Foreground="{DynamicResource LuminaTextMutedBrush}"
                                    TextWrapping="Wrap" />
@@ -86,8 +87,8 @@
 
                 <lumina:LuminaCard MinHeight="116" Classes="Success">
                     <StackPanel Spacing="8">
-                        <TextBlock Text="{DynamicResource Sandbox.Text.0191}" FontWeight="SemiBold" Foreground="{DynamicResource LuminaTextForegroundBrush}" />
-                        <TextBlock Text="{DynamicResource Sandbox.Text.0216}"
+                        <TextBlock Text="{l10n:Loc Sandbox.Text.0191}" FontWeight="SemiBold" Foreground="{DynamicResource LuminaTextForegroundBrush}" />
+                        <TextBlock Text="{l10n:Loc Sandbox.Text.0216}"
                                    FontSize="12"
                                    Foreground="{DynamicResource LuminaTextMutedBrush}"
                                    TextWrapping="Wrap" />
@@ -96,8 +97,8 @@
 
                 <lumina:LuminaCard MinHeight="116" Classes="Warning">
                     <StackPanel Spacing="8">
-                        <TextBlock Text="{DynamicResource Sandbox.Text.0192}" FontWeight="SemiBold" Foreground="{DynamicResource LuminaTextForegroundBrush}" />
-                        <TextBlock Text="{DynamicResource Sandbox.Text.0217}"
+                        <TextBlock Text="{l10n:Loc Sandbox.Text.0192}" FontWeight="SemiBold" Foreground="{DynamicResource LuminaTextForegroundBrush}" />
+                        <TextBlock Text="{l10n:Loc Sandbox.Text.0217}"
                                    FontSize="12"
                                    Foreground="{DynamicResource LuminaTextMutedBrush}"
                                    TextWrapping="Wrap" />
@@ -106,8 +107,8 @@
 
                 <lumina:LuminaCard MinHeight="116" Classes="Danger">
                     <StackPanel Spacing="8">
-                        <TextBlock Text="{DynamicResource Sandbox.Text.0193}" FontWeight="SemiBold" Foreground="{DynamicResource LuminaTextForegroundBrush}" />
-                        <TextBlock Text="{DynamicResource Sandbox.Text.0218}"
+                        <TextBlock Text="{l10n:Loc Sandbox.Text.0193}" FontWeight="SemiBold" Foreground="{DynamicResource LuminaTextForegroundBrush}" />
+                        <TextBlock Text="{l10n:Loc Sandbox.Text.0218}"
                                    FontSize="12"
                                    Foreground="{DynamicResource LuminaTextMutedBrush}"
                                    TextWrapping="Wrap" />
@@ -116,7 +117,7 @@
             </lumina:LuminaResponsivePanel>
 
             <StackPanel Spacing="10">
-                <TextBlock Text="{DynamicResource Sandbox.Text.0219}" Classes="SectionTitle" />
+                <TextBlock Text="{l10n:Loc Sandbox.Text.0219}" Classes="SectionTitle" />
                 <Grid Height="380">
                     <Border CornerRadius="12" ClipToBounds="True">
                         <Grid>
@@ -131,13 +132,13 @@
                                     IsHitTestVisible="False">
                                 <TextBlock Canvas.Left="28"
                                            Canvas.Top="30"
-                                           Text="{DynamicResource Sandbox.Text.0831}"
+                                           Text="{l10n:Loc Sandbox.Text.0831}"
                                            FontSize="38"
                                            FontWeight="Black"
                                            Foreground="#73FFFFFF" />
                                 <TextBlock Canvas.Left="214"
                                            Canvas.Top="248"
-                                           Text="{DynamicResource Sandbox.Text.1131}"
+                                           Text="{l10n:Loc Sandbox.Text.1131}"
                                            FontSize="36"
                                            FontWeight="Black"
                                            Foreground="#73000000" />
@@ -165,11 +166,11 @@
                                        Margin="24"
                                        Classes="Glass">
                         <StackPanel Spacing="12">
-                            <TextBlock Text="{DynamicResource Sandbox.Text.0001}"
+                            <TextBlock Text="{l10n:Loc Sandbox.Text.0001}"
                                        FontSize="22"
                                        FontWeight="Bold"
                                        Foreground="{DynamicResource LuminaTextForegroundBrush}" />
-                            <TextBlock Text="{DynamicResource Sandbox.Text.0002}"
+                            <TextBlock Text="{l10n:Loc Sandbox.Text.0002}"
                                        Foreground="{DynamicResource LuminaTextMutedBrush}"
                                        TextWrapping="Wrap" />
                             <Border Height="1" Margin="0,4,0,4" Background="{DynamicResource LuminaCardGlassEdgeBrush}" />
@@ -192,14 +193,14 @@
                 <lumina:LuminaResponsivePanel MinItemWidth="220" HorizontalSpacing="20" VerticalSpacing="20">
                     <StackPanel Spacing="14">
                         <StackPanel Spacing="8">
-                            <TextBlock Text="{DynamicResource Sandbox.Text.0221}" Classes="SectionTitle" />
-                            <TextBlock Text="{DynamicResource Sandbox.Text.0222}"
+                            <TextBlock Text="{l10n:Loc Sandbox.Text.0221}" Classes="SectionTitle" />
+                            <TextBlock Text="{l10n:Loc Sandbox.Text.0222}"
                                        Foreground="{DynamicResource LuminaTextMutedBrush}"
                                        TextWrapping="Wrap" />
                         </StackPanel>
 
                         <lumina:LuminaResponsivePanel MinItemWidth="160" HorizontalSpacing="10" VerticalSpacing="10">
-                            <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0223}" />
+                            <TextBox PlaceholderText="{l10n:Loc Sandbox.Text.0223}" />
                             <ComboBox SelectedIndex="0" HorizontalAlignment="Stretch">
                                 <ComboBoxItem>Default density</ComboBoxItem>
                                 <ComboBoxItem>Compact density</ComboBoxItem>
@@ -207,9 +208,9 @@
                         </lumina:LuminaResponsivePanel>
 
                         <WrapPanel>
-                            <CheckBox Content="{DynamicResource Sandbox.Text.0226}" IsChecked="True" Margin="0,0,12,8" />
+                            <CheckBox Content="{l10n:Loc Sandbox.Text.0226}" IsChecked="True" Margin="0,0,12,8" />
                             <ToggleSwitch IsChecked="True" Margin="0,0,12,8" />
-                            <TextBlock Text="{DynamicResource Sandbox.Text.0227}"
+                            <TextBlock Text="{l10n:Loc Sandbox.Text.0227}"
                                        VerticalAlignment="Center"
                                        Foreground="{DynamicResource LuminaTextSecondaryBrush}"
                                        Margin="0,0,12,8" />

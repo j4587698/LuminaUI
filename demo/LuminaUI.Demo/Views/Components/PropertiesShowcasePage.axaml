@@ -1,5 +1,6 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.PropertiesShowcasePage"
@@ -8,8 +9,8 @@
     <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
         <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0859}" />
-                <TextBlock Text="{DynamicResource Sandbox.Text.1237}"
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.0859}" />
+                <TextBlock Text="{l10n:Loc Sandbox.Text.1237}"
                            Foreground="{DynamicResource LuminaTextMutedBrush}"
                            TextWrapping="Wrap" />
             </StackPanel>
@@ -17,7 +18,7 @@
             <lumina:LuminaResponsivePanel MinItemWidth="360" MaxItemWidth="760" HorizontalSpacing="16" VerticalSpacing="16">
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0807}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0807}" />
                         <lumina:LuminaProperties LabelWidth="150">
                             <lumina:LuminaPropertyItem PropertyName="Name">
                                 <TextBox Text="{Binding ControlName}" HorizontalAlignment="Stretch" />
@@ -34,7 +35,7 @@
                                 <ToggleSwitch IsChecked="{Binding IsEnabled}" />
                             </lumina:LuminaPropertyItem>
                             <lumina:LuminaPropertyItem PropertyName="Compiled binding">
-                                <CheckBox IsChecked="{Binding UseCompiledBinding}" Content="{DynamicResource Sandbox.Text.0705}" />
+                                <CheckBox IsChecked="{Binding UseCompiledBinding}" Content="{l10n:Loc Sandbox.Text.0705}" />
                             </lumina:LuminaPropertyItem>
                             <lumina:LuminaPropertyItem PropertyName="Description">
                                 <TextBox Text="{Binding Description}"
@@ -49,7 +50,7 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0861}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0861}" />
                         <lumina:LuminaProperties ItemsSource="{Binding Details}"
                                                  PropertyNameMemberBinding="{Binding Name}"
                                                  DisplayMemberBinding="{Binding Value}"
@@ -59,11 +60,11 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0791}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0791}" />
                         <lumina:LuminaProperties ShowBorderLines="False" BorderThickness="0" LabelWidth="130">
-                            <lumina:LuminaPropertyItem PropertyName="Density" Content="{DynamicResource Sandbox.Text.0155}" />
-                            <lumina:LuminaPropertyItem PropertyName="Theme source" Content="{DynamicResource Sandbox.Text.0779}" />
-                            <lumina:LuminaPropertyItem PropertyName="Fallback" Content="{DynamicResource Sandbox.Text.0896}" />
+                            <lumina:LuminaPropertyItem PropertyName="Density" Content="{l10n:Loc Sandbox.Text.0155}" />
+                            <lumina:LuminaPropertyItem PropertyName="Theme source" Content="{l10n:Loc Sandbox.Text.0779}" />
+                            <lumina:LuminaPropertyItem PropertyName="Fallback" Content="{l10n:Loc Sandbox.Text.0896}" />
                         </lumina:LuminaProperties>
                     </StackPanel>
                 </lumina:LuminaCard>

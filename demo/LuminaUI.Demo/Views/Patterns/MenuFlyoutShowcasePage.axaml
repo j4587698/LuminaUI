@@ -1,29 +1,30 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              x:Class="LuminaUI.Demo.Views.MenuFlyoutShowcasePage">
 
     <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
         <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.1305}" />
-                <TextBlock Text="{DynamicResource Sandbox.Text.0576}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.1305}" />
+                <TextBlock Text="{l10n:Loc Sandbox.Text.0576}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
             </StackPanel>
 
             <lumina:LuminaResponsivePanel MinItemWidth="280" MaxItemWidth="460" HorizontalSpacing="16" VerticalSpacing="16">
             <lumina:LuminaCard>
                 <StackPanel Spacing="16">
-                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0833}" />
+                    <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0833}" />
                     <Menu>
-                        <MenuItem Header="{DynamicResource Sandbox.Text.0577}">
-                            <MenuItem Header="{DynamicResource Sandbox.Text.0579}" />
-                            <MenuItem Header="{DynamicResource Sandbox.Text.0212}" />
+                        <MenuItem Header="{l10n:Loc Sandbox.Text.0577}">
+                            <MenuItem Header="{l10n:Loc Sandbox.Text.0579}" />
+                            <MenuItem Header="{l10n:Loc Sandbox.Text.0212}" />
                             <Separator />
-                            <MenuItem Header="{DynamicResource Sandbox.Text.0580}" />
+                            <MenuItem Header="{l10n:Loc Sandbox.Text.0580}" />
                         </MenuItem>
-                        <MenuItem Header="{DynamicResource Sandbox.Text.0578}">
-                            <MenuItem Header="{DynamicResource Sandbox.Text.0581}" />
-                            <MenuItem Header="{DynamicResource Sandbox.Text.0582}" IsEnabled="False" />
+                        <MenuItem Header="{l10n:Loc Sandbox.Text.0578}">
+                            <MenuItem Header="{l10n:Loc Sandbox.Text.0581}" />
+                            <MenuItem Header="{l10n:Loc Sandbox.Text.0582}" IsEnabled="False" />
                         </MenuItem>
                     </Menu>
                 </StackPanel>
@@ -31,47 +32,47 @@
 
             <lumina:LuminaCard>
                 <StackPanel Spacing="16">
-                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0814}" />
+                    <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0814}" />
                     <WrapPanel>
-                        <Button Name="OpenFlyoutButton" Content="{DynamicResource Sandbox.Text.0583}" Classes="Primary" Margin="0,0,12,12">
+                        <Button Name="OpenFlyoutButton" Content="{l10n:Loc Sandbox.Text.0583}" Classes="Primary" Margin="0,0,12,12">
                             <Button.Flyout>
                                 <Flyout>
                                     <StackPanel Spacing="12" MinWidth="220">
-                                        <TextBlock Classes="Label" Text="{DynamicResource Sandbox.Text.0584}" />
-                                        <TextBlock Classes="Helper" Text="{DynamicResource Sandbox.Text.0585}" />
-                                        <Button Content="{DynamicResource Sandbox.Text.0586}" Classes="Primary" HorizontalAlignment="Left" />
+                                        <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Text.0584}" />
+                                        <TextBlock Classes="Helper" Text="{l10n:Loc Sandbox.Text.0585}" />
+                                        <Button Content="{l10n:Loc Sandbox.Text.0586}" Classes="Primary" HorizontalAlignment="Left" />
                                     </StackPanel>
                                 </Flyout>
                             </Button.Flyout>
                         </Button>
 
-                        <Button Name="OpenMenuFlyoutButton" Content="{DynamicResource Sandbox.Text.0587}" Classes="Outline" Margin="0,0,12,12">
+                        <Button Name="OpenMenuFlyoutButton" Content="{l10n:Loc Sandbox.Text.0587}" Classes="Outline" Margin="0,0,12,12">
                             <Button.Flyout>
                                 <MenuFlyout>
-                                    <MenuItem Header="{DynamicResource Sandbox.Text.0588}" />
-                                    <MenuItem Header="{DynamicResource Sandbox.Text.0171}" />
+                                    <MenuItem Header="{l10n:Loc Sandbox.Text.0588}" />
+                                    <MenuItem Header="{l10n:Loc Sandbox.Text.0171}" />
                                     <Separator />
-                                    <MenuItem Header="{DynamicResource Sandbox.Text.0047}" />
+                                    <MenuItem Header="{l10n:Loc Sandbox.Text.0047}" />
                                 </MenuFlyout>
                             </Button.Flyout>
                         </Button>
 
-                        <Button Name="HoverTooltipButton" Content="{DynamicResource Sandbox.Text.0589}" Classes="Outline" ToolTip.Tip="Tooltip content uses Lumina popup styling." Margin="0,0,12,12" />
+                        <Button Name="HoverTooltipButton" Content="{l10n:Loc Sandbox.Text.0589}" Classes="Outline" ToolTip.Tip="Tooltip content uses Lumina popup styling." Margin="0,0,12,12" />
                     </WrapPanel>
                 </StackPanel>
             </lumina:LuminaCard>
 
             <lumina:LuminaCard>
                 <StackPanel Spacing="16">
-                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1306}" />
+                    <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1306}" />
                     <Border Name="ContextMenuSurface" Padding="20" CornerRadius="8" BorderBrush="{DynamicResource LuminaBorderBrush}" BorderThickness="1" Background="{DynamicResource LuminaSurfaceBrush}">
-                        <TextBlock Text="{DynamicResource Sandbox.Text.0591}" Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                        <TextBlock Text="{l10n:Loc Sandbox.Text.0591}" Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
                         <Border.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="{DynamicResource Sandbox.Text.0212}" />
-                                <MenuItem Header="{DynamicResource Sandbox.Text.0588}" />
+                                <MenuItem Header="{l10n:Loc Sandbox.Text.0212}" />
+                                <MenuItem Header="{l10n:Loc Sandbox.Text.0588}" />
                                 <Separator />
-                                <MenuItem Header="{DynamicResource Sandbox.Text.0047}" />
+                                <MenuItem Header="{l10n:Loc Sandbox.Text.0047}" />
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>

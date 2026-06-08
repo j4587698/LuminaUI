@@ -1,5 +1,6 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.LinkedCategoryListShowcasePage"
@@ -11,14 +12,14 @@
                     HorizontalAlignment="Stretch"
                     Margin="0,36,0,40">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0310}" />
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.0310}" />
                 <TextBlock Classes="Body"
-                           Text="{DynamicResource Sandbox.Text.0315}" />
+                           Text="{l10n:Loc Sandbox.Text.0315}" />
             </StackPanel>
 
             <lumina:LuminaCard MaxWidth="760" HorizontalAlignment="Stretch">
                 <StackPanel Spacing="16">
-                    <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0316}" />
+                    <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0316}" />
                     <lumina:LuminaLinkedCategoryList Height="460"
                                                       ItemsSource="{Binding MenuSections}">
                         <lumina:LuminaLinkedCategoryList.ItemTemplate>

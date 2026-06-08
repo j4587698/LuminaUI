@@ -1,5 +1,6 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.DataGridShowcasePage"
@@ -8,8 +9,8 @@
     <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
         <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0698}" />
-                <TextBlock Text="{DynamicResource Sandbox.Text.0699}"
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.0698}" />
+                <TextBlock Text="{l10n:Loc Sandbox.Text.0699}"
                            Foreground="{DynamicResource LuminaTextMutedBrush}"
                            TextWrapping="Wrap" />
             </StackPanel>
@@ -19,22 +20,22 @@
                     <StackPanel Spacing="16">
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
                             <StackPanel Spacing="4">
-                                <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0700}" />
-                                <TextBlock Text="{DynamicResource Sandbox.Text.0701}"
+                                <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0700}" />
+                                <TextBlock Text="{l10n:Loc Sandbox.Text.0701}"
                                            Foreground="{DynamicResource LuminaTextMutedBrush}"
                                            TextWrapping="Wrap" />
                             </StackPanel>
                             <Button Grid.Column="1"
                                     Classes="Primary"
-                                    Content="{DynamicResource Sandbox.Text.0702}"
+                                    Content="{l10n:Loc Sandbox.Text.0702}"
                                     Command="{Binding AddOrderCommand}" />
                         </Grid>
 
                         <WrapPanel>
-                            <ToggleSwitch Content="{DynamicResource Sandbox.Text.0867}"
+                            <ToggleSwitch Content="{l10n:Loc Sandbox.Text.0867}"
                                           Margin="0,0,16,0"
                                           IsChecked="{Binding CanResizeColumns}" />
-                            <ToggleSwitch Content="{DynamicResource Sandbox.Text.0865}"
+                            <ToggleSwitch Content="{l10n:Loc Sandbox.Text.0865}"
                                           IsChecked="{Binding CanReorderColumns}" />
                         </WrapPanel>
 
@@ -48,7 +49,7 @@
                                   CanUserSortColumns="True"
                                   HeadersVisibility="Column">
                             <DataGrid.Columns>
-                                <DataGridTemplateColumn Header="{DynamicResource Sandbox.Text.1152}" Width="120" MinWidth="96" SortMemberPath="Id">
+                                <DataGridTemplateColumn Header="{l10n:Loc Sandbox.Text.1152}" Width="120" MinWidth="96" SortMemberPath="Id">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate x:DataType="vm:DataGridOrderViewModel">
                                             <TextBlock Text="{Binding Id}" />
@@ -60,7 +61,7 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellEditingTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="{DynamicResource Sandbox.Text.0351}" Width="260" MinWidth="180" SortMemberPath="Project">
+                                <DataGridTemplateColumn Header="{l10n:Loc Sandbox.Text.0351}" Width="260" MinWidth="180" SortMemberPath="Project">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate x:DataType="vm:DataGridOrderViewModel">
                                             <TextBlock Text="{Binding Project}" />
@@ -72,7 +73,7 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellEditingTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="{DynamicResource Sandbox.Text.0734}" Width="150" SortMemberPath="Status">
+                                <DataGridTemplateColumn Header="{l10n:Loc Sandbox.Text.0734}" Width="150" SortMemberPath="Status">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate x:DataType="vm:DataGridOrderViewModel">
                                             <Border Padding="8,3"
@@ -94,7 +95,7 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellEditingTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="{DynamicResource Sandbox.Text.0733}" Width="160" MinWidth="130" SortMemberPath="Owner">
+                                <DataGridTemplateColumn Header="{l10n:Loc Sandbox.Text.0733}" Width="160" MinWidth="130" SortMemberPath="Owner">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate x:DataType="vm:DataGridOrderViewModel">
                                             <TextBlock Text="{Binding Owner}" />
@@ -106,7 +107,7 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellEditingTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="{DynamicResource Sandbox.Text.0704}" Width="110" MinWidth="96" SortMemberPath="Progress">
+                                <DataGridTemplateColumn Header="{l10n:Loc Sandbox.Text.0704}" Width="110" MinWidth="96" SortMemberPath="Progress">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate x:DataType="vm:DataGridOrderViewModel">
                                             <TextBlock Text="{Binding Progress, StringFormat='{}{0}%'}" />
@@ -122,7 +123,7 @@
                                     </DataGridTemplateColumn.CellEditingTemplate>
                                 </DataGridTemplateColumn>
                                 <DataGridCheckBoxColumn x:DataType="vm:DataGridOrderViewModel"
-                                                        Header="{DynamicResource Sandbox.Text.0705}"
+                                                        Header="{l10n:Loc Sandbox.Text.0705}"
                                                         Width="100"
                                                         Binding="{Binding Enabled}" />
                             </DataGrid.Columns>
@@ -132,7 +133,7 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0703}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0703}" />
                         <DataGrid Classes="Inset"
                                   MinHeight="220"
                                   AutoGenerateColumns="False"
@@ -144,21 +145,21 @@
                                   HeadersVisibility="Column"
                                   GridLinesVisibility="Horizontal">
                             <DataGrid.Columns>
-                                <DataGridTemplateColumn Header="{DynamicResource Sandbox.Text.0351}" Width="260" MinWidth="180" SortMemberPath="Project">
+                                <DataGridTemplateColumn Header="{l10n:Loc Sandbox.Text.0351}" Width="260" MinWidth="180" SortMemberPath="Project">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate x:DataType="vm:DataGridOrderViewModel">
                                             <TextBlock Text="{Binding Project}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="{DynamicResource Sandbox.Text.0734}" Width="150" MinWidth="120" SortMemberPath="Status">
+                                <DataGridTemplateColumn Header="{l10n:Loc Sandbox.Text.0734}" Width="150" MinWidth="120" SortMemberPath="Status">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate x:DataType="vm:DataGridOrderViewModel">
                                             <TextBlock Text="{Binding Status}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="{DynamicResource Sandbox.Text.0733}" Width="160" MinWidth="130" SortMemberPath="Owner">
+                                <DataGridTemplateColumn Header="{l10n:Loc Sandbox.Text.0733}" Width="160" MinWidth="130" SortMemberPath="Owner">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate x:DataType="vm:DataGridOrderViewModel">
                                             <TextBlock Text="{Binding Owner}" />

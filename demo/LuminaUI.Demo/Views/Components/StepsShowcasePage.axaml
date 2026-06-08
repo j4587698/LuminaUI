@@ -1,5 +1,6 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.StepsShowcasePage"
@@ -8,8 +9,8 @@
     <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
         <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.1248}" />
-                <TextBlock Text="{DynamicResource Sandbox.Text.1249}"
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.1248}" />
+                <TextBlock Text="{l10n:Loc Sandbox.Text.1249}"
                            Foreground="{DynamicResource LuminaTextMutedBrush}"
                            TextWrapping="Wrap" />
             </StackPanel>
@@ -18,16 +19,16 @@
                 <!-- Basic horizontal steps -->
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1250}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1250}" />
                         <lumina:LuminaSteps Current="{Binding CurrentStep}">
-                            <lumina:LuminaStepItem Header="{DynamicResource Sandbox.Text.1251}"
-                                                   Content="{DynamicResource Sandbox.Text.1252}" />
-                            <lumina:LuminaStepItem Header="{DynamicResource Sandbox.Text.1251}"
-                                                   Content="{DynamicResource Sandbox.Text.1253}" />
-                            <lumina:LuminaStepItem Header="{DynamicResource Sandbox.Text.1254}"
-                                                   Content="{DynamicResource Sandbox.Text.1255}" />
-                            <lumina:LuminaStepItem Header="{DynamicResource Sandbox.Text.1256}"
-                                                   Content="{DynamicResource Sandbox.Text.1257}" />
+                            <lumina:LuminaStepItem Header="{l10n:Loc Sandbox.Text.1251}"
+                                                   Content="{l10n:Loc Sandbox.Text.1252}" />
+                            <lumina:LuminaStepItem Header="{l10n:Loc Sandbox.Text.1251}"
+                                                   Content="{l10n:Loc Sandbox.Text.1253}" />
+                            <lumina:LuminaStepItem Header="{l10n:Loc Sandbox.Text.1254}"
+                                                   Content="{l10n:Loc Sandbox.Text.1255}" />
+                            <lumina:LuminaStepItem Header="{l10n:Loc Sandbox.Text.1256}"
+                                                   Content="{l10n:Loc Sandbox.Text.1257}" />
                         </lumina:LuminaSteps>
                     </StackPanel>
                 </lumina:LuminaCard>
@@ -35,7 +36,7 @@
                 <!-- ItemsSource binding -->
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1258}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1258}" />
                         <lumina:LuminaSteps Current="1"
                                            ItemsSource="{Binding Steps}"
                                            TitleMemberBinding="{Binding Title}"
@@ -47,7 +48,7 @@
                 <!-- Error state -->
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1259}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1259}" />
                         <lumina:LuminaSteps Current="1"
                                            ItemsSource="{Binding ErrorSteps}"
                                            TitleMemberBinding="{Binding Title}"
@@ -59,12 +60,12 @@
                 <!-- Small size -->
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1260}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1260}" />
                         <lumina:LuminaSteps Current="2" Size="Small">
-                            <lumina:LuminaStepItem Header="{DynamicResource Sandbox.Text.1261}" />
-                            <lumina:LuminaStepItem Header="{DynamicResource Sandbox.Text.1262}" />
-                            <lumina:LuminaStepItem Header="{DynamicResource Sandbox.Text.1263}" />
-                            <lumina:LuminaStepItem Header="{DynamicResource Sandbox.Text.1264}" />
+                            <lumina:LuminaStepItem Header="{l10n:Loc Sandbox.Text.1261}" />
+                            <lumina:LuminaStepItem Header="{l10n:Loc Sandbox.Text.1262}" />
+                            <lumina:LuminaStepItem Header="{l10n:Loc Sandbox.Text.1263}" />
+                            <lumina:LuminaStepItem Header="{l10n:Loc Sandbox.Text.1264}" />
                         </lumina:LuminaSteps>
                     </StackPanel>
                 </lumina:LuminaCard>
@@ -72,15 +73,15 @@
                 <!-- Vertical direction -->
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1265}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1265}" />
                         <lumina:LuminaSteps Current="{Binding CurrentVerticalStep}"
                                            Direction="Vertical">
-                            <lumina:LuminaStepItem Header="{DynamicResource Sandbox.Text.1266}"
-                                                   Content="{DynamicResource Sandbox.Text.1267}" />
-                            <lumina:LuminaStepItem Header="{DynamicResource Sandbox.Text.1268}"
-                                                   Content="{DynamicResource Sandbox.Text.1269}" />
-                            <lumina:LuminaStepItem Header="{DynamicResource Sandbox.Text.0602}"
-                                                   Content="{DynamicResource Sandbox.Text.1270}" />
+                            <lumina:LuminaStepItem Header="{l10n:Loc Sandbox.Text.1266}"
+                                                   Content="{l10n:Loc Sandbox.Text.1267}" />
+                            <lumina:LuminaStepItem Header="{l10n:Loc Sandbox.Text.1268}"
+                                                   Content="{l10n:Loc Sandbox.Text.1269}" />
+                            <lumina:LuminaStepItem Header="{l10n:Loc Sandbox.Text.0602}"
+                                                   Content="{l10n:Loc Sandbox.Text.1270}" />
                         </lumina:LuminaSteps>
                     </StackPanel>
                 </lumina:LuminaCard>
@@ -88,23 +89,23 @@
                 <!-- Interactive steps -->
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0210}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0210}" />
                         <lumina:LuminaSteps Current="{Binding CurrentInteractiveStep}">
-                            <lumina:LuminaStepItem Header="{DynamicResource Sandbox.Text.1271}"
-                                                   Content="{DynamicResource Sandbox.Text.1272}" />
-                            <lumina:LuminaStepItem Header="{DynamicResource Sandbox.Text.1273}"
-                                                   Content="{DynamicResource Sandbox.Text.1274}" />
-                            <lumina:LuminaStepItem Header="{DynamicResource Sandbox.Text.0050}"
-                                                   Content="{DynamicResource Sandbox.Text.1275}" />
-                            <lumina:LuminaStepItem Header="{DynamicResource Sandbox.Text.1090}"
-                                                   Content="{DynamicResource Sandbox.Text.1276}" />
+                            <lumina:LuminaStepItem Header="{l10n:Loc Sandbox.Text.1271}"
+                                                   Content="{l10n:Loc Sandbox.Text.1272}" />
+                            <lumina:LuminaStepItem Header="{l10n:Loc Sandbox.Text.1273}"
+                                                   Content="{l10n:Loc Sandbox.Text.1274}" />
+                            <lumina:LuminaStepItem Header="{l10n:Loc Sandbox.Text.0050}"
+                                                   Content="{l10n:Loc Sandbox.Text.1275}" />
+                            <lumina:LuminaStepItem Header="{l10n:Loc Sandbox.Text.1090}"
+                                                   Content="{l10n:Loc Sandbox.Text.1276}" />
                         </lumina:LuminaSteps>
                         <WrapPanel>
-                            <Button Content="{DynamicResource Sandbox.Text.1277}"
+                            <Button Content="{l10n:Loc Sandbox.Text.1277}"
                                     Classes="Outline"
                                     Command="{Binding PreviousStepCommand}"
                                     Margin="0,0,8,0" />
-                            <Button Content="{DynamicResource Sandbox.Text.0842}"
+                            <Button Content="{l10n:Loc Sandbox.Text.0842}"
                                     Classes="Primary"
                                     Command="{Binding NextStepCommand}" />
                         </WrapPanel>

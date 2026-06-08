@@ -1,5 +1,6 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.DemoActionSheet"
@@ -7,20 +8,20 @@
     
     <!-- This is a clean, reusable component defined entirely in XAML -->
     <StackPanel Spacing="8">
-        <TextBlock Text="{DynamicResource Sandbox.Text.0627}" 
+        <TextBlock Text="{l10n:Loc Sandbox.Text.0627}" 
                    FontWeight="Bold" 
                    FontSize="20" 
                    Foreground="{DynamicResource LuminaTextPrimaryBrush}" 
                    Margin="0,0,0,16"/>
         
-        <Button Content="{DynamicResource Sandbox.Text.0628}" 
+        <Button Content="{l10n:Loc Sandbox.Text.0628}" 
                 Classes="Ghost" 
                 HorizontalAlignment="Stretch" 
                 HorizontalContentAlignment="Left"
                 Command="{Binding SelectCommand}"
                 CommandParameter="Share to friends"/>
         
-        <Button Content="{DynamicResource Sandbox.Text.0629}" 
+        <Button Content="{l10n:Loc Sandbox.Text.0629}" 
                 Classes="Ghost" 
                 HorizontalAlignment="Stretch" 
                 HorizontalContentAlignment="Left"
@@ -29,7 +30,7 @@
         
         <Border Height="1" Background="{DynamicResource LuminaBorderSubtleBrush}" Margin="0,8" />
         
-        <Button Content="{DynamicResource Sandbox.Text.0630}" 
+        <Button Content="{l10n:Loc Sandbox.Text.0630}" 
                 Classes="Ghost Danger" 
                 HorizontalAlignment="Stretch" 
                 HorizontalContentAlignment="Left"

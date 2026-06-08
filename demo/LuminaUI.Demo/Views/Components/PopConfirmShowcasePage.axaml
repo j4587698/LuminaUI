@@ -1,5 +1,6 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.PopConfirmShowcasePage"
@@ -8,8 +9,8 @@
     <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
         <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0740}" />
-                <TextBlock Text="{DynamicResource Sandbox.Text.0741}"
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.0740}" />
+                <TextBlock Text="{l10n:Loc Sandbox.Text.0741}"
                            Foreground="{DynamicResource LuminaTextMutedBrush}"
                            TextWrapping="Wrap" />
             </StackPanel>
@@ -17,15 +18,15 @@
             <lumina:LuminaResponsivePanel MinItemWidth="320" MaxItemWidth="620" HorizontalSpacing="16" VerticalSpacing="16">
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0742}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0742}" />
                         <lumina:LuminaPopConfirm Classes="Danger"
-                                                 PopupHeader="{DynamicResource Sandbox.Text.0743}"
-                                                 PopupContent="{DynamicResource Sandbox.Text.0745}"
+                                                 PopupHeader="{l10n:Loc Sandbox.Text.0743}"
+                                                 PopupContent="{l10n:Loc Sandbox.Text.0745}"
                                                  ConfirmCommand="{Binding ConfirmCommand}"
                                                  ConfirmCommandParameter="Delete"
                                                  CancelCommand="{Binding CancelCommand}"
                                                  CancelCommandParameter="Delete">
-                            <Button Classes="Danger" Theme="{StaticResource LuminaButton}" Content="{DynamicResource Sandbox.Text.0047}" />
+                            <Button Classes="Danger" Theme="{StaticResource LuminaButton}" Content="{l10n:Loc Sandbox.Text.0047}" />
                         </lumina:LuminaPopConfirm>
                         <TextBlock Text="{Binding Status}" Foreground="{DynamicResource LuminaTextMutedBrush}" />
                     </StackPanel>
@@ -33,56 +34,56 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0747}" />
-                        <lumina:LuminaPopConfirm PopupHeader="{DynamicResource Sandbox.Text.0748}"
-                                                 PopupContent="{DynamicResource Sandbox.Text.0749}"
-                                                 ConfirmText="{DynamicResource Sandbox.Text.0586}"
-                                                 CancelText="{DynamicResource Sandbox.Text.0750}"
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0747}" />
+                        <lumina:LuminaPopConfirm PopupHeader="{l10n:Loc Sandbox.Text.0748}"
+                                                 PopupContent="{l10n:Loc Sandbox.Text.0749}"
+                                                 ConfirmText="{l10n:Loc Sandbox.Text.0586}"
+                                                 CancelText="{l10n:Loc Sandbox.Text.0750}"
                                                  ConfirmCommand="{Binding ConfirmCommand}"
                                                  ConfirmCommandParameter="Publish"
                                                  CancelCommand="{Binding CancelCommand}"
                                                  CancelCommandParameter="Publish">
-                            <Button Classes="Primary" Theme="{StaticResource LuminaButton}" Content="{DynamicResource Sandbox.Text.0586}" />
+                            <Button Classes="Primary" Theme="{StaticResource LuminaButton}" Content="{l10n:Loc Sandbox.Text.0586}" />
                         </lumina:LuminaPopConfirm>
                     </StackPanel>
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0751}" />
-                        <lumina:LuminaPopConfirm PopupHeader="{DynamicResource Sandbox.Text.0752}"
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0751}" />
+                        <lumina:LuminaPopConfirm PopupHeader="{l10n:Loc Sandbox.Text.0752}"
                                                  ConfirmCommand="{Binding ConfirmCommand}"
                                                  ConfirmCommandParameter="Archive"
                                                  CancelCommand="{Binding CancelCommand}"
                                                  CancelCommandParameter="Archive">
                             <lumina:LuminaPopConfirm.PopupContent>
                                 <StackPanel Spacing="6">
-                                    <TextBlock Text="{DynamicResource Sandbox.Text.0753}" TextWrapping="Wrap" />
-                                    <TextBlock Text="{DynamicResource Sandbox.Text.0754}" Foreground="{DynamicResource LuminaWarningBrush}" />
+                                    <TextBlock Text="{l10n:Loc Sandbox.Text.0753}" TextWrapping="Wrap" />
+                                    <TextBlock Text="{l10n:Loc Sandbox.Text.0754}" Foreground="{DynamicResource LuminaWarningBrush}" />
                                 </StackPanel>
                             </lumina:LuminaPopConfirm.PopupContent>
-                            <Button Classes="Outline" Theme="{StaticResource LuminaButton}" Content="{DynamicResource Sandbox.Text.0171}" />
+                            <Button Classes="Outline" Theme="{StaticResource LuminaButton}" Content="{l10n:Loc Sandbox.Text.0171}" />
                         </lumina:LuminaPopConfirm>
                     </StackPanel>
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0119}" />
-                        <TextBlock Text="{DynamicResource Sandbox.Text.0172}"
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0119}" />
+                        <TextBlock Text="{l10n:Loc Sandbox.Text.0172}"
                                    Foreground="{DynamicResource LuminaTextMutedBrush}"
                                    TextWrapping="Wrap" />
                         <lumina:LuminaPopConfirm PopupType="Sheet"
                                                  Classes="Danger"
-                                                 PopupHeader="{DynamicResource Sandbox.Text.0173}"
-                                                 PopupContent="{DynamicResource Sandbox.Text.0174}"
-                                                 ConfirmText="{DynamicResource Sandbox.Text.0101}"
-                                                 CancelText="{DynamicResource Sandbox.Text.0601}"
+                                                 PopupHeader="{l10n:Loc Sandbox.Text.0173}"
+                                                 PopupContent="{l10n:Loc Sandbox.Text.0174}"
+                                                 ConfirmText="{l10n:Loc Sandbox.Text.0101}"
+                                                 CancelText="{l10n:Loc Sandbox.Text.0601}"
                                                  ConfirmCommand="{Binding ConfirmCommand}"
                                                  ConfirmCommandParameter="Reset"
                                                  CancelCommand="{Binding CancelCommand}"
                                                  CancelCommandParameter="Reset">
-                            <Button Classes="Danger Outline" Theme="{StaticResource LuminaButton}" Content="{DynamicResource Sandbox.Text.0175}" />
+                            <Button Classes="Danger Outline" Theme="{StaticResource LuminaButton}" Content="{l10n:Loc Sandbox.Text.0175}" />
                         </lumina:LuminaPopConfirm>
                     </StackPanel>
                 </lumina:LuminaCard>

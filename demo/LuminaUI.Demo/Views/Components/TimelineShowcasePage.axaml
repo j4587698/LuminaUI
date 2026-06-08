@@ -1,5 +1,6 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.TimelineShowcasePage"
@@ -8,8 +9,8 @@
     <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
         <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0407}" />
-                <TextBlock Text="{DynamicResource Sandbox.Text.0668}"
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.0407}" />
+                <TextBlock Text="{l10n:Loc Sandbox.Text.0668}"
                            Foreground="{DynamicResource LuminaTextMutedBrush}"
                            TextWrapping="Wrap" />
             </StackPanel>
@@ -17,7 +18,7 @@
             <lumina:LuminaResponsivePanel MinItemWidth="320" MaxItemWidth="640" HorizontalSpacing="16" VerticalSpacing="16">
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0669}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0669}" />
                         <lumina:LuminaTimeline ItemsSource="{Binding Events}"
                                                 HeaderMemberBinding="{Binding Header}"
                                                 ContentMemberBinding="{Binding Description}"
@@ -30,22 +31,22 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0670}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0670}" />
                         <lumina:LuminaTimeline Mode="Alternate">
-                            <lumina:LuminaTimelineItem Header="{DynamicResource Sandbox.Text.0672}"
-                                                       Content="{DynamicResource Sandbox.Text.0673}"
+                            <lumina:LuminaTimelineItem Header="{l10n:Loc Sandbox.Text.0672}"
+                                                       Content="{l10n:Loc Sandbox.Text.0673}"
                                                        Time="09:00"
                                                        Status="Success" />
-                            <lumina:LuminaTimelineItem Header="{DynamicResource Sandbox.Text.0674}"
-                                                       Content="{DynamicResource Sandbox.Text.0675}"
+                            <lumina:LuminaTimelineItem Header="{l10n:Loc Sandbox.Text.0674}"
+                                                       Content="{l10n:Loc Sandbox.Text.0675}"
                                                        Time="11:30"
                                                        Status="Ongoing" />
-                            <lumina:LuminaTimelineItem Header="{DynamicResource Sandbox.Text.0676}"
-                                                       Content="{DynamicResource Sandbox.Text.0677}"
+                            <lumina:LuminaTimelineItem Header="{l10n:Loc Sandbox.Text.0676}"
+                                                       Content="{l10n:Loc Sandbox.Text.0677}"
                                                        Time="15:00"
                                                        Status="Warning" />
-                            <lumina:LuminaTimelineItem Header="{DynamicResource Sandbox.Text.0600}"
-                                                       Content="{DynamicResource Sandbox.Text.0678}"
+                            <lumina:LuminaTimelineItem Header="{l10n:Loc Sandbox.Text.0600}"
+                                                       Content="{l10n:Loc Sandbox.Text.0678}"
                                                        Time="18:00"
                                                        Status="Default" />
                         </lumina:LuminaTimeline>
@@ -54,18 +55,18 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0671}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0671}" />
                         <lumina:LuminaTimeline Mode="Center">
-                            <lumina:LuminaTimelineItem Header="{DynamicResource Sandbox.Text.0679}"
-                                                       Content="{DynamicResource Sandbox.Text.0680}"
+                            <lumina:LuminaTimelineItem Header="{l10n:Loc Sandbox.Text.0679}"
+                                                       Content="{l10n:Loc Sandbox.Text.0680}"
                                                        Time="2026-05-11"
                                                        Status="Success" />
-                            <lumina:LuminaTimelineItem Header="{DynamicResource Sandbox.Text.0681}"
-                                                       Content="{DynamicResource Sandbox.Text.0682}"
+                            <lumina:LuminaTimelineItem Header="{l10n:Loc Sandbox.Text.0681}"
+                                                       Content="{l10n:Loc Sandbox.Text.0682}"
                                                        Time="2026-05-11"
                                                        Status="Info" />
-                            <lumina:LuminaTimelineItem Header="{DynamicResource Sandbox.Text.0683}"
-                                                       Content="{DynamicResource Sandbox.Text.0684}"
+                            <lumina:LuminaTimelineItem Header="{l10n:Loc Sandbox.Text.0683}"
+                                                       Content="{l10n:Loc Sandbox.Text.0684}"
                                                        Time="2026-05-11"
                                                        Status="Ongoing" />
                         </lumina:LuminaTimeline>

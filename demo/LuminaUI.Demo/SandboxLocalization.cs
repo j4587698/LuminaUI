@@ -297,6 +297,30 @@ internal static class SandboxLocalization
 
 	public const string WindowGlassFallbackFormat = "Sandbox.WindowGlass.FallbackFormat";
 
+	public const string WindowConfirmExitTitle = "Sandbox.Window.ConfirmExitTitle";
+
+	public const string WindowConfirmExitMessage = "Sandbox.Window.ConfirmExitMessage";
+
+	public const string WindowDialogsEnvironmentDevelopment = "Sandbox.WindowDialogs.Environment.Development";
+
+	public const string WindowDialogsEnvironmentStaging = "Sandbox.WindowDialogs.Environment.Staging";
+
+	public const string WindowDialogsEnvironmentProduction = "Sandbox.WindowDialogs.Environment.Production";
+
+	public const string OverlaysNativeWindowDialogTitle = "Sandbox.Overlays.NativeWindowDialog.Title";
+
+	public const string OverlaysNativeWindowDialogConfirm = "Sandbox.Overlays.NativeWindowDialog.Confirm";
+
+	public const string OverlaysNativeWindowDialogDescription = "Sandbox.Overlays.NativeWindowDialog.Description";
+
+	public const string OverlaysTopViewToastMessage = "Sandbox.Overlays.TopViewToastMessage";
+
+	public const string NotificationsSyncFailed = "Sandbox.Notifications.SyncFailed";
+
+	public const string NotificationsSystemUpdateTitle = "Sandbox.Notifications.SystemUpdate.Title";
+
+	public const string NotificationsSystemUpdateMessage = "Sandbox.Notifications.SystemUpdate.Message";
+
 	public const string CommonCopiedFormat = "Sandbox.Common.CopiedFormat";
 
 	public const string CommonSelectedFormat = "Sandbox.Common.SelectedFormat";

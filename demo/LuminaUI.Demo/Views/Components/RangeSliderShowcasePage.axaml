@@ -1,5 +1,6 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.RangeSliderShowcasePage"
@@ -8,14 +9,14 @@
     <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
         <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0136}" />
-                <TextBlock Text="{DynamicResource Sandbox.Text.0137}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.0136}" />
+                <TextBlock Text="{l10n:Loc Sandbox.Text.0137}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
             </StackPanel>
 
             <lumina:LuminaResponsivePanel MinItemWidth="300" MaxItemWidth="560" HorizontalSpacing="16" VerticalSpacing="16">
                 <lumina:LuminaCard>
                     <StackPanel Spacing="18">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0138}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0138}" />
                         <lumina:LuminaRangeSlider Minimum="0"
                                                  Maximum="1000"
                                                  Step="20"
@@ -27,7 +28,7 @@
                                                  MinWidth="180" />
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
                             <TextBlock Text="{Binding PriceRangeText}" Foreground="{DynamicResource LuminaTextForegroundBrush}" FontWeight="SemiBold" />
-                            <Button Grid.Column="1" Content="{DynamicResource Sandbox.Text.0140}" Classes="Outline" Command="{Binding ApplyPricePresetCommand}" />
+                            <Button Grid.Column="1" Content="{l10n:Loc Sandbox.Text.0140}" Classes="Outline" Command="{Binding ApplyPricePresetCommand}" />
                         </Grid>
                         <TextBlock Text="{Binding RangeCommandText}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
                     </StackPanel>
@@ -35,7 +36,7 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="18">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0139}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0139}" />
                         <lumina:LuminaRangeSlider Minimum="0"
                                                  Maximum="100"
                                                  Step="5"
@@ -51,10 +52,10 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="18">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0142}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0142}" />
                         <lumina:LuminaRangeSlider LowerValue="20" UpperValue="80" Classes="Small" HorizontalAlignment="Stretch" MinWidth="180" />
                         <lumina:LuminaRangeSlider LowerValue="15" UpperValue="65" Classes="Large Warning" HorizontalAlignment="Stretch" MinWidth="180" />
-                        <TextBlock Text="{DynamicResource Sandbox.Text.0143}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
+                        <TextBlock Text="{l10n:Loc Sandbox.Text.0143}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
                     </StackPanel>
                 </lumina:LuminaCard>
             </lumina:LuminaResponsivePanel>

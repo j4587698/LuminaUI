@@ -28,8 +28,8 @@ public partial class FoundationShowcaseViewModel : ObservableObject
     {
         InvalidEmailErrors =
         [
-            SandboxTextLocalizer.Localize("Email already exists."),
-            SandboxTextLocalizer.Localize("Use a unique address before saving.")
+            LuminaLocalization.Get("Sandbox.Text.0499"),
+            LuminaLocalization.Get("Sandbox.Text.0500")
         ];
     }
 }

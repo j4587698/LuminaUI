@@ -1,5 +1,6 @@
 <lumina:LuminaPage xmlns="https://github.com/avaloniaui"
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
                    xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
                    xmlns:vm="using:LuminaUI.Demo.ViewModels"
                    x:Class="LuminaUI.Demo.Views.ShowcaseReferencePage"
@@ -10,7 +11,7 @@
                     Classes="Compact"
                     Padding="8"
                     VerticalAlignment="Stretch">
-            <TabItem Header="{DynamicResource Sandbox.Text.0427}">
+            <TabItem Header="{l10n:Loc Sandbox.Text.0427}">
                 <ContentControl Content="{Binding PreviewContent}"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"
@@ -18,7 +19,7 @@
                                 VerticalContentAlignment="Stretch" />
             </TabItem>
 
-            <TabItem Header="{DynamicResource Sandbox.Text.1323}">
+            <TabItem Header="{l10n:Loc Sandbox.Text.1323}">
                 <Border Background="{DynamicResource LuminaSurfaceBrush}"
                         BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
                         BorderThickness="1"
@@ -35,7 +36,7 @@
                 </Border>
             </TabItem>
 
-            <TabItem Header="{DynamicResource Sandbox.Text.1324}">
+            <TabItem Header="{l10n:Loc Sandbox.Text.1324}">
                 <Border Background="{DynamicResource LuminaSurfaceBrush}"
                         BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
                         BorderThickness="1"
@@ -52,7 +53,7 @@
                 </Border>
             </TabItem>
 
-            <TabItem Header="{DynamicResource Sandbox.Text.1325}"
+            <TabItem Header="{l10n:Loc Sandbox.Text.1325}"
                      IsVisible="{Binding HasViewModelSource}">
                 <Border Background="{DynamicResource LuminaSurfaceBrush}"
                         BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"

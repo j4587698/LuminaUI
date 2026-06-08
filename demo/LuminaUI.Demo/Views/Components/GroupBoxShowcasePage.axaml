@@ -1,5 +1,6 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.GroupBoxShowcasePage"
@@ -11,8 +12,8 @@
                     HorizontalAlignment="Stretch"
                     Margin="0,36,0,40">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0055}" />
-                <TextBlock Text="{DynamicResource Sandbox.Text.0057}"
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.0055}" />
+                <TextBlock Text="{l10n:Loc Sandbox.Text.0057}"
                            Foreground="{DynamicResource LuminaTextMutedBrush}"
                            TextWrapping="Wrap" />
             </StackPanel>
@@ -21,27 +22,27 @@
                                           MaxItemWidth="520"
                                           HorizontalSpacing="16"
                                           VerticalSpacing="16">
-                <lumina:LuminaGroupBox Header="{DynamicResource Sandbox.Text.0078}"
-                                       Description="{DynamicResource Sandbox.Text.0080}">
+                <lumina:LuminaGroupBox Header="{l10n:Loc Sandbox.Text.0078}"
+                                       Description="{l10n:Loc Sandbox.Text.0080}">
                     <StackPanel Spacing="12">
-                        <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0081}" Text="Lumina Admin" />
-                        <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0082}" Text="{DynamicResource Sandbox.Text.1175}" />
-                        <CheckBox Content="{DynamicResource Sandbox.Text.0083}" IsChecked="True" />
+                        <TextBox PlaceholderText="{l10n:Loc Sandbox.Text.0081}" Text="Lumina Admin" />
+                        <TextBox PlaceholderText="{l10n:Loc Sandbox.Text.0082}" Text="{l10n:Loc Sandbox.Text.1175}" />
+                        <CheckBox Content="{l10n:Loc Sandbox.Text.0083}" IsChecked="True" />
                     </StackPanel>
                 </lumina:LuminaGroupBox>
 
-                <lumina:LuminaGroupBox Header="{DynamicResource Sandbox.Text.0084}"
-                                       Description="{DynamicResource Sandbox.Text.0086}"
+                <lumina:LuminaGroupBox Header="{l10n:Loc Sandbox.Text.0084}"
+                                       Description="{l10n:Loc Sandbox.Text.0086}"
                                        Classes="Accent">
                     <lumina:LuminaGroupBox.Actions>
-                        <Button Content="{DynamicResource Sandbox.Text.0169}" Classes="Ghost Small" />
+                        <Button Content="{l10n:Loc Sandbox.Text.0169}" Classes="Ghost Small" />
                     </lumina:LuminaGroupBox.Actions>
 
                     <StackPanel Spacing="12">
                         <lumina:LuminaInputGroup FillIndex="1">
-                            <lumina:LuminaInputGroupAddon Content="{DynamicResource Sandbox.Text.1176}" />
-                            <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0458}" Text="{DynamicResource Sandbox.Text.1177}" />
-                            <lumina:LuminaInputGroupAddon Content="{DynamicResource Sandbox.Text.1178}" />
+                            <lumina:LuminaInputGroupAddon Content="{l10n:Loc Sandbox.Text.1176}" />
+                            <TextBox PlaceholderText="{l10n:Loc Sandbox.Text.0458}" Text="{l10n:Loc Sandbox.Text.1177}" />
+                            <lumina:LuminaInputGroupAddon Content="{l10n:Loc Sandbox.Text.1178}" />
                         </lumina:LuminaInputGroup>
                         <ComboBox SelectedIndex="0" HorizontalAlignment="Stretch">
                             <ComboBoxItem>Production</ComboBoxItem>
@@ -51,25 +52,25 @@
                     </StackPanel>
                 </lumina:LuminaGroupBox>
 
-                <lumina:LuminaGroupBox Header="{DynamicResource Sandbox.Text.0493}"
-                                       Description="{DynamicResource Sandbox.Text.0091}"
+                <lumina:LuminaGroupBox Header="{l10n:Loc Sandbox.Text.0493}"
+                                       Description="{l10n:Loc Sandbox.Text.0091}"
                                        Classes="Subtle">
                     <StackPanel Spacing="10">
-                        <ToggleSwitch Content="{DynamicResource Sandbox.Text.0470}" IsChecked="True" />
-                        <ToggleSwitch Content="{DynamicResource Sandbox.Text.0092}" />
+                        <ToggleSwitch Content="{l10n:Loc Sandbox.Text.0470}" IsChecked="True" />
+                        <ToggleSwitch Content="{l10n:Loc Sandbox.Text.0092}" />
                     </StackPanel>
                 </lumina:LuminaGroupBox>
 
-                <lumina:LuminaGroupBox Header="{DynamicResource Sandbox.Text.0093}"
-                                       Description="{DynamicResource Sandbox.Text.0095}"
+                <lumina:LuminaGroupBox Header="{l10n:Loc Sandbox.Text.0093}"
+                                       Description="{l10n:Loc Sandbox.Text.0095}"
                                        Classes="Filled">
                     <StackPanel Spacing="12">
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
-                            <TextBlock Text="{DynamicResource Sandbox.Text.0096}"
+                            <TextBlock Text="{l10n:Loc Sandbox.Text.0096}"
                                        Foreground="{DynamicResource LuminaTextMutedBrush}"
                                        VerticalAlignment="Center" />
                             <TextBlock Grid.Column="1"
-                                       Text="{DynamicResource Sandbox.Text.0097}"
+                                       Text="{l10n:Loc Sandbox.Text.0097}"
                                        FontWeight="SemiBold"
                                        Foreground="{DynamicResource LuminaTextForegroundBrush}" />
                         </Grid>
@@ -77,19 +78,19 @@
                     </StackPanel>
                 </lumina:LuminaGroupBox>
 
-                <lumina:LuminaGroupBox Header="{DynamicResource Sandbox.Text.0098}"
-                                       Description="{DynamicResource Sandbox.Text.0099}"
+                <lumina:LuminaGroupBox Header="{l10n:Loc Sandbox.Text.0098}"
+                                       Description="{l10n:Loc Sandbox.Text.0099}"
                                        Classes="Glow">
                     <StackPanel Spacing="10">
-                        <TextBox PlaceholderText="{DynamicResource Sandbox.Text.0461}" />
+                        <TextBox PlaceholderText="{l10n:Loc Sandbox.Text.0461}" />
                         <WrapPanel>
-                            <Button Content="{DynamicResource Sandbox.Text.0101}" Classes="Ghost Small" Margin="0,0,8,8" />
-                            <Button Content="{DynamicResource Sandbox.Text.0102}" Classes="Primary Small" Margin="0,0,8,8" />
+                            <Button Content="{l10n:Loc Sandbox.Text.0101}" Classes="Ghost Small" Margin="0,0,8,8" />
+                            <Button Content="{l10n:Loc Sandbox.Text.0102}" Classes="Primary Small" Margin="0,0,8,8" />
                         </WrapPanel>
                     </StackPanel>
                 </lumina:LuminaGroupBox>
 
-                <lumina:LuminaGroupBox Description="{DynamicResource Sandbox.Text.0103}"
+                <lumina:LuminaGroupBox Description="{l10n:Loc Sandbox.Text.0103}"
                                        HeaderHorizontalAlignment="Center"
                                        Classes="Elevated Compact">
                     <lumina:LuminaGroupBox.Header>
@@ -99,17 +100,17 @@
                                     CornerRadius="5"
                                     Background="{DynamicResource LuminaSuccessBrush}"
                                     VerticalAlignment="Center" />
-                            <TextBlock Text="{DynamicResource Sandbox.Text.0104}"
+                            <TextBlock Text="{l10n:Loc Sandbox.Text.0104}"
                                        FontWeight="SemiBold"
                                        Foreground="{DynamicResource LuminaTextForegroundBrush}" />
                         </StackPanel>
                     </lumina:LuminaGroupBox.Header>
 
                     <StackPanel Spacing="12">
-                        <TextBlock Text="{DynamicResource Sandbox.Text.0105}"
+                        <TextBlock Text="{l10n:Loc Sandbox.Text.0105}"
                                    TextWrapping="Wrap"
                                    Foreground="{DynamicResource LuminaTextMutedBrush}" />
-                        <Button Content="{DynamicResource Sandbox.Text.0106}" HorizontalAlignment="Left" />
+                        <Button Content="{l10n:Loc Sandbox.Text.0106}" HorizontalAlignment="Left" />
                     </StackPanel>
                 </lumina:LuminaGroupBox>
             </lumina:LuminaResponsivePanel>

@@ -1,6 +1,8 @@
 using System.Threading.Tasks;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
+using LuminaUI.Localization;
 
 namespace LuminaUI.Controls;
 
@@ -23,9 +25,39 @@ public static class LuminaWindowMessageBox
         LuminaMessageBoxIcon icon = LuminaMessageBoxIcon.None,
         string? confirmButtonTheme = null)
     {
+        var dialog = CreateDialog(buttons, confirmButtonTheme);
+        dialog.Title = title;
+
+        var textBlock = CreateMessageTextBlock();
+        textBlock.Text = message;
+        dialog.Content = CreateContent(textBlock, icon);
+        return dialog.ShowDialog<LuminaDialogResult>(owner);
+    }
+
+    public static Task<LuminaDialogResult> ShowLocalizedAsync(
+        Window owner,
+        string titleKey,
+        string messageKey,
+        LuminaDialogButtons buttons = LuminaDialogButtons.OkCancel,
+        LuminaMessageBoxIcon icon = LuminaMessageBoxIcon.None,
+        string? confirmButtonTheme = null,
+        string? titleFallback = null,
+        string? messageFallback = null)
+    {
+        var dialog = CreateDialog(buttons, confirmButtonTheme);
+        dialog.Bind(Window.TitleProperty, LuminaLocalization.Observe(titleKey, titleFallback).ToBinding());
+
+        var textBlock = CreateMessageTextBlock();
+        textBlock.Bind(TextBlock.TextProperty, LuminaLocalization.Observe(messageKey, messageFallback).ToBinding());
+
+        dialog.Content = CreateContent(textBlock, icon);
+        return dialog.ShowDialog<LuminaDialogResult>(owner);
+    }
+
+    private static LuminaWindowDialog CreateDialog(LuminaDialogButtons buttons, string? confirmButtonTheme)
+    {
         var dialog = new LuminaWindowDialog
         {
-            Title = title,
             Buttons = buttons,
             SizeToContent = SizeToContent.WidthAndHeight,
             WindowStartupLocation = WindowStartupLocation.CenterOwner
@@ -36,34 +68,37 @@ public static class LuminaWindowMessageBox
             dialog.ConfirmButtonTheme = confirmButtonTheme;
         }
 
-        var textBlock = new TextBlock
+        return dialog;
+    }
+
+    private static TextBlock CreateMessageTextBlock()
+    {
+        return new TextBlock
         {
-            Text = message,
             TextWrapping = TextWrapping.Wrap,
             MaxWidth = 420,
             VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center,
             FontSize = 14
         };
-        
+    }
+
+    private static Control CreateContent(TextBlock textBlock, LuminaMessageBoxIcon icon)
+    {
         if (icon == LuminaMessageBoxIcon.None)
         {
             textBlock.Margin = new Avalonia.Thickness(24);
-            dialog.Content = textBlock;
-        }
-        else
-        {
-            var stackPanel = new StackPanel
-            {
-                Orientation = Avalonia.Layout.Orientation.Horizontal,
-                Spacing = 16,
-                Margin = new Avalonia.Thickness(24)
-            };
-            stackPanel.Children.Add(CreateIconControl(icon));
-            stackPanel.Children.Add(textBlock);
-            dialog.Content = stackPanel;
+            return textBlock;
         }
 
-        return dialog.ShowDialog<LuminaDialogResult>(owner);
+        var stackPanel = new StackPanel
+        {
+            Orientation = Avalonia.Layout.Orientation.Horizontal,
+            Spacing = 16,
+            Margin = new Avalonia.Thickness(24)
+        };
+        stackPanel.Children.Add(CreateIconControl(icon));
+        stackPanel.Children.Add(textBlock);
+        return stackPanel;
     }
 
     private static Control CreateIconControl(LuminaMessageBoxIcon icon)

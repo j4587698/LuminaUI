@@ -6,6 +6,7 @@ using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LuminaUI.Controls;
+using LuminaUI.Localization;
 using LuminaUI.Services;
 using LuminaUI.Demo.Views;
 
@@ -28,15 +29,11 @@ public partial class OverlaysShowcaseViewModel : ObservableObject
             return;
         }
 
-        var content = new DeleteProjectDialogContent(new DeleteProjectDialogContentViewModel(shell.CloseDialog));
-        SandboxTextLocalizer.Apply(content);
-
         var dialog = new LuminaDialog
         {
-            Title = SandboxTextLocalizer.Localize("Component dialog"),
-            Content = content
+            Title = T("Sandbox.Text.0614"),
+            Content = new DeleteProjectDialogContent(new DeleteProjectDialogContentViewModel(shell.CloseDialog))
         };
-        SandboxTextLocalizer.Apply(dialog);
         shell.ShowDialog(dialog);
     }
 
@@ -49,7 +46,6 @@ public partial class OverlaysShowcaseViewModel : ObservableObject
         }
 
         dialog.DataContext = this;
-        SandboxTextLocalizer.Apply(dialog);
         shell.ShowDialog(dialog);
     }
 
@@ -61,16 +57,11 @@ public partial class OverlaysShowcaseViewModel : ObservableObject
             return;
         }
 
-        var content = new DeleteProjectDialogContent(new DeleteProjectDialogContentViewModel(topView.CloseDialog));
-        SandboxTextLocalizer.Apply(content);
-
         var dialog = new LuminaDialog
         {
-            Title = SandboxTextLocalizer.Localize("Top view dialog"),
-            Content = content
+            Title = T("Sandbox.Text.0988"),
+            Content = new DeleteProjectDialogContent(new DeleteProjectDialogContentViewModel(topView.CloseDialog))
         };
-        SandboxTextLocalizer.Apply(dialog);
-        SandboxTextLocalizer.Apply(dialog);
         topView.ShowDialog(dialog);
     }
 
@@ -82,10 +73,10 @@ public partial class OverlaysShowcaseViewModel : ObservableObject
         
         var dialog = new LuminaWindowDialog
         {
-            Title = "PC Native Window Dialog",
-            ConfirmButtonText = "Confirm Action",
+            Title = T(SandboxLocalization.OverlaysNativeWindowDialogTitle),
+            ConfirmButtonText = T(SandboxLocalization.OverlaysNativeWindowDialogConfirm),
             ConfirmButtonTheme = "Danger",
-            CancelButtonText = "Cancel",
+            CancelButtonText = T("Sandbox.Text.0601"),
             ShowFooter = true,
             SizeToContent = SizeToContent.WidthAndHeight,
             WindowStartupLocation = WindowStartupLocation.CenterOwner
@@ -94,7 +85,7 @@ public partial class OverlaysShowcaseViewModel : ObservableObject
         var content = new StackPanel { Margin = new Avalonia.Thickness(24) };
         content.Children.Add(new TextBlock 
         { 
-            Text = "This is a real OS window dialog, you can drag it out of the main window.",
+            Text = T(SandboxLocalization.OverlaysNativeWindowDialogDescription),
             FontSize = 16
         });
         
@@ -116,7 +107,6 @@ public partial class OverlaysShowcaseViewModel : ObservableObject
         var shell = GetShell();
         var sheet = new DemoActionSheet(new DemoActionSheetViewModel(
             shell == null ? null : () => shell.CloseBottomSheet()));
-        SandboxTextLocalizer.Apply(sheet);
         LuminaBottomSheetService.Instance.Show(_owner, sheet);
     }
 
@@ -126,7 +116,6 @@ public partial class OverlaysShowcaseViewModel : ObservableObject
         var topView = GetTopView();
         var sheet = new DemoActionSheet(new DemoActionSheetViewModel(
             topView == null ? null : () => topView.CloseBottomSheet()));
-        SandboxTextLocalizer.Apply(sheet);
         LuminaBottomSheetService.Instance.ShowAtTop(_owner, sheet);
     }
 
@@ -135,11 +124,11 @@ public partial class OverlaysShowcaseViewModel : ObservableObject
     {
         var toastDefinition = tone switch
         {
-            "Success" => ("Published", "The component package is ready.", "Success", TimeSpan.FromSeconds(4), false),
-            "Warning" => ("Review needed", "Two tokens use fallback colors.", "Warning", TimeSpan.FromSeconds(5), false),
-            "Danger" => ("Build failed", "Resolve the missing resource key.", "Danger", TimeSpan.FromSeconds(6), false),
-            "Top" => ("Top view", "This toast is hosted by LuminaTopView.", "Neutral", TimeSpan.FromSeconds(3), true),
-            _ => ("Saved", "The local draft was updated.", "Neutral", TimeSpan.FromSeconds(3), false)
+            "Success" => (T("Sandbox.Text.0617"), T("Sandbox.Text.0618"), "Success", TimeSpan.FromSeconds(4), false),
+            "Warning" => (T("Sandbox.Text.0619"), T("Sandbox.Text.0620"), "Warning", TimeSpan.FromSeconds(5), false),
+            "Danger" => (T("Sandbox.Text.0621"), T("Sandbox.Text.0622"), "Danger", TimeSpan.FromSeconds(6), false),
+            "Top" => (T("Sandbox.Text.1322"), T(SandboxLocalization.OverlaysTopViewToastMessage), "Neutral", TimeSpan.FromSeconds(3), true),
+            _ => (T("Sandbox.Text.0615"), T("Sandbox.Text.0616"), "Neutral", TimeSpan.FromSeconds(3), false)
         };
 
         ILuminaOverlayHost? host = toastDefinition.Item5
@@ -156,12 +145,9 @@ public partial class OverlaysShowcaseViewModel : ObservableObject
             var toast = new LuminaToast
             {
                 Classes = { toastDefinition.Item3 },
-                Content = CreateToastContent(
-                    SandboxTextLocalizer.Localize(toastDefinition.Item1),
-                    SandboxTextLocalizer.Localize(toastDefinition.Item2))
+                Content = CreateToastContent(toastDefinition.Item1, toastDefinition.Item2)
             };
 
-            SandboxTextLocalizer.Apply(toast);
             host.ShowToast(toast, toastDefinition.Item4);
         }
 
@@ -205,5 +191,10 @@ public partial class OverlaysShowcaseViewModel : ObservableObject
                 }
             }
         };
+    }
+
+    private static string T(string key)
+    {
+        return LuminaLocalization.Get(key);
     }
 }

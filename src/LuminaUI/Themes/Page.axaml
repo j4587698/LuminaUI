@@ -1,5 +1,6 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
                     xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
 
     <ControlTheme x:Key="{x:Type lumina:LuminaPage}" TargetType="lumina:LuminaPage">
@@ -48,7 +49,7 @@
                                                          Height="4"
                                                          IsIndeterminate="True"
                                                          Foreground="{DynamicResource LuminaPrimaryBrush}" />
-                                            <TextBlock Text="{DynamicResource Lumina.Page.Loading}"
+                                            <TextBlock Text="{l10n:Loc Lumina.Page.Loading}"
                                                        FontSize="14"
                                                        FontWeight="SemiBold"
                                                        TextAlignment="Center"
@@ -75,7 +76,7 @@
                                                            VerticalAlignment="Center"
                                                            Foreground="{DynamicResource LuminaTextMutedBrush}" />
                                             </Border>
-                                            <TextBlock Text="{DynamicResource Lumina.Page.Empty}"
+                                            <TextBlock Text="{l10n:Loc Lumina.Page.Empty}"
                                                        FontSize="14"
                                                        FontWeight="SemiBold"
                                                        TextAlignment="Center"
@@ -100,7 +101,7 @@
                                                            VerticalAlignment="Center"
                                                            Foreground="{DynamicResource LuminaDangerForegroundBrush}" />
                                             </Border>
-                                            <TextBlock Text="{DynamicResource Lumina.Page.Error}"
+                                            <TextBlock Text="{l10n:Loc Lumina.Page.Error}"
                                                        FontSize="14"
                                                        FontWeight="SemiBold"
                                                        TextAlignment="Center"

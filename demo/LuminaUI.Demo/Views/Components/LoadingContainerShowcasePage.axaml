@@ -1,5 +1,6 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.LoadingContainerShowcasePage"
@@ -11,8 +12,8 @@
                     HorizontalAlignment="Stretch"
                     Margin="0,36,0,40">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0828}" />
-                <TextBlock Text="{DynamicResource Sandbox.Text.0827}"
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.0828}" />
+                <TextBlock Text="{l10n:Loc Sandbox.Text.0827}"
                            Foreground="{DynamicResource LuminaTextMutedBrush}"
                            TextWrapping="Wrap" />
             </StackPanel>
@@ -23,8 +24,8 @@
                                           VerticalSpacing="16">
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0826}" />
-                        <TextBlock Classes="Label" Text="{DynamicResource Sandbox.Text.0829}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0826}" />
+                        <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Text.0829}" />
                         <lumina:LuminaLoadingContainer IsLoading="{Binding IsLoading}"
                                                        LoadingMessage="Loading members">
                             <Border Classes="Subtle" Padding="16">
@@ -36,21 +37,21 @@
                                                 Height="40"
                                                 CornerRadius="20"
                                                 Background="{DynamicResource LuminaPrimaryBgBrush}">
-                                            <TextBlock Text="{DynamicResource Sandbox.Text.1117}"
+                                            <TextBlock Text="{l10n:Loc Sandbox.Text.1117}"
                                                        HorizontalAlignment="Center"
                                                        VerticalAlignment="Center"
                                                        FontWeight="Bold"
                                                        Foreground="{DynamicResource LuminaPrimaryBrush}" />
                                         </Border>
                                         <StackPanel Spacing="3">
-                                            <TextBlock Text="{DynamicResource Sandbox.Text.1229}"
+                                            <TextBlock Text="{l10n:Loc Sandbox.Text.1229}"
                                                        FontWeight="SemiBold"
                                                        Foreground="{DynamicResource LuminaTextPrimaryBrush}" />
-                                            <TextBlock Text="{DynamicResource Sandbox.Text.0244}"
+                                            <TextBlock Text="{l10n:Loc Sandbox.Text.0244}"
                                                        Classes="Caption" />
                                         </StackPanel>
                                     </StackPanel>
-                                    <TextBlock Text="{DynamicResource Sandbox.Text.0774}"
+                                    <TextBlock Text="{l10n:Loc Sandbox.Text.0774}"
                                                TextWrapping="Wrap"
                                                Foreground="{DynamicResource LuminaTextMutedBrush}" />
                                 </StackPanel>
@@ -58,7 +59,7 @@
                         </lumina:LuminaLoadingContainer>
 
                         <Separator />
-                        <TextBlock Classes="Label" Text="{DynamicResource Sandbox.Text.0780}" />
+                        <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Text.0780}" />
                         <lumina:LuminaSkeletonContainer IsLoading="{Binding IsLoading}"
                                                         Mode="Auto">
                             <Border Classes="Subtle" Padding="16">
@@ -71,28 +72,28 @@
                                                 CornerRadius="22"
                                                 lumina:Skeleton.Shape="Circle"
                                                 Background="{DynamicResource LuminaPrimaryBgBrush}">
-                                            <TextBlock Text="{DynamicResource Sandbox.Text.1191}"
+                                            <TextBlock Text="{l10n:Loc Sandbox.Text.1191}"
                                                        HorizontalAlignment="Center"
                                                        VerticalAlignment="Center"
                                                        FontWeight="Bold"
                                                        Foreground="{DynamicResource LuminaPrimaryBrush}" />
                                         </Border>
                                         <StackPanel Spacing="3">
-                                            <TextBlock Text="{DynamicResource Sandbox.Text.1230}"
+                                            <TextBlock Text="{l10n:Loc Sandbox.Text.1230}"
                                                        FontWeight="SemiBold"
                                                        lumina:Skeleton.Shape="Title"
                                                        lumina:Skeleton.Width="180"
                                                        Foreground="{DynamicResource LuminaTextPrimaryBrush}" />
-                                            <TextBlock Text="{DynamicResource Sandbox.Text.0245}"
+                                            <TextBlock Text="{l10n:Loc Sandbox.Text.0245}"
                                                        lumina:Skeleton.Width="140"
                                                        Classes="Caption" />
                                         </StackPanel>
                                     </StackPanel>
-                                    <TextBlock Text="{DynamicResource Sandbox.Text.0850}"
+                                    <TextBlock Text="{l10n:Loc Sandbox.Text.0850}"
                                                lumina:Skeleton.Width="340"
                                                TextWrapping="Wrap"
                                                Foreground="{DynamicResource LuminaTextMutedBrush}" />
-                                    <Button Content="{DynamicResource Sandbox.Text.0845}"
+                                    <Button Content="{l10n:Loc Sandbox.Text.0845}"
                                             Classes="Outline"
                                             lumina:Skeleton.Width="112"
                                             HorizontalAlignment="Left" />
@@ -100,7 +101,7 @@
                             </Border>
                         </lumina:LuminaSkeletonContainer>
 
-                        <TextBlock Classes="Label" Text="{DynamicResource Sandbox.Text.0797}" />
+                        <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Text.0797}" />
                         <lumina:LuminaSkeletonContainer IsLoading="{Binding IsLoading}"
                                                         Mode="Auto"
                                                         PlaceholderCount="3">
@@ -135,7 +136,7 @@
                                                     Height="36"
                                                     CornerRadius="18"
                                                     Background="{DynamicResource LuminaPrimaryBgBrush}">
-                                                <TextBlock Text="{DynamicResource Sandbox.Text.1231}"
+                                                <TextBlock Text="{l10n:Loc Sandbox.Text.1231}"
                                                            HorizontalAlignment="Center"
                                                            VerticalAlignment="Center"
                                                            FontWeight="Bold"
@@ -146,7 +147,7 @@
                                                         VerticalAlignment="Center">
                                                 <TextBlock Text="{Binding}"
                                                            Foreground="{DynamicResource LuminaTextPrimaryBrush}" />
-                                                <TextBlock Text="{DynamicResource Sandbox.Text.0858}"
+                                                <TextBlock Text="{l10n:Loc Sandbox.Text.0858}"
                                                            Classes="Caption" />
                                             </StackPanel>
                                         </Grid>
@@ -155,7 +156,7 @@
                             </ListBox>
                         </lumina:LuminaSkeletonContainer>
 
-                        <Button Content="{DynamicResource Sandbox.Text.0661}"
+                        <Button Content="{l10n:Loc Sandbox.Text.0661}"
                                 Classes="Outline"
                                 Command="{Binding ToggleLoadingCommand}"
                                 HorizontalAlignment="Left" />

@@ -1,5 +1,6 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.SettingsPage"
@@ -7,43 +8,43 @@
 
     <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
         <StackPanel Spacing="24" HorizontalAlignment="Stretch" Margin="0,12,0,24">
-            <TextBlock Text="{DynamicResource Sandbox.Settings.Title}" FontSize="36" FontWeight="Black" Foreground="{DynamicResource LuminaTextForegroundBrush}" />
+            <TextBlock Text="{l10n:Loc Sandbox.Settings.Title}" FontSize="36" FontWeight="Black" Foreground="{DynamicResource LuminaTextForegroundBrush}" />
 
-            <lumina:LuminaSettingsCard Header="{DynamicResource Sandbox.Settings.MobileTitle}"
-                                       Description="{DynamicResource Sandbox.Settings.MobileDescription}">
+            <lumina:LuminaSettingsCard Header="{l10n:Loc Sandbox.Settings.MobileTitle}"
+                                       Description="{l10n:Loc Sandbox.Settings.MobileDescription}">
                 <lumina:LuminaSettingsOption Icon="P"
-                                              Header="{DynamicResource Sandbox.Settings.Profile}"
-                                              Description="{DynamicResource Sandbox.Settings.ProfileDescription}"
-                                              Value="{DynamicResource Sandbox.User.Name}"
+                                              Header="{l10n:Loc Sandbox.Settings.Profile}"
+                                              Description="{l10n:Loc Sandbox.Settings.ProfileDescription}"
+                                              Value="{l10n:Loc Sandbox.User.Name}"
                                               Command="{Binding SelectMobileSettingCommand}"
-                                              CommandParameter="{DynamicResource Sandbox.Settings.Profile}" />
+                                              CommandParameter="{l10n:Loc Sandbox.Settings.Profile}" />
                 <lumina:LuminaSettingsInputOption Icon="A"
-                                                  Header="{DynamicResource Sandbox.Text.0150}"
-                                                  PlaceholderText="{DynamicResource Sandbox.Text.0150}"
+                                                  Header="{l10n:Loc Sandbox.Text.0150}"
+                                                  PlaceholderText="{l10n:Loc Sandbox.Text.0150}"
                                                   InputText="{Binding NicknameText}"
                                                   PopupType="Sheet" />
                 <lumina:LuminaSettingsSwitchOption Icon="N"
-                                                    Header="{DynamicResource Sandbox.Settings.Notifications}"
-                                                    Description="{DynamicResource Sandbox.Settings.NotificationsDescription}"
+                                                    Header="{l10n:Loc Sandbox.Settings.Notifications}"
+                                                    Description="{l10n:Loc Sandbox.Settings.NotificationsDescription}"
                                                     IsChecked="{Binding MobileNotificationsEnabled}" />
                 <lumina:LuminaSettingsSelectOption Icon="L"
-                                                    Header="{DynamicResource Sandbox.Settings.Language}"
+                                                    Header="{l10n:Loc Sandbox.Settings.Language}"
                                                     SelectItemsSource="{Binding LanguageItems}"
                                                     SelectedIndex="{Binding SelectedLanguageIndex}"
                                                     PopupType="Sheet" />
                 <lumina:LuminaSettingsInputOption Icon="S"
-                                                  Header="{DynamicResource Sandbox.Settings.Storage}"
-                                                  PlaceholderText="{DynamicResource Sandbox.Settings.Storage}"
+                                                  Header="{l10n:Loc Sandbox.Settings.Storage}"
+                                                  PlaceholderText="{l10n:Loc Sandbox.Settings.Storage}"
                                                   InputText="{Binding StorageLimitText}"
                                                   AccessoryMinWidth="92"
                                                   PopupType="Sheet" />
                 <lumina:LuminaSettingsOption Classes="Danger"
                                               Icon="!"
-                                              Header="{DynamicResource Sandbox.Settings.DeleteAccount}"
-                                              Description="{DynamicResource Sandbox.Settings.DeleteAccountDescription}"
+                                              Header="{l10n:Loc Sandbox.Settings.DeleteAccount}"
+                                              Description="{l10n:Loc Sandbox.Settings.DeleteAccountDescription}"
                                               ShowChevron="False"
                                               Command="{Binding SelectMobileSettingCommand}"
-                                              CommandParameter="{DynamicResource Sandbox.Settings.DeleteAccount}" />
+                                              CommandParameter="{l10n:Loc Sandbox.Settings.DeleteAccount}" />
             </lumina:LuminaSettingsCard>
 
             <TextBlock Name="MobileSettingsStatusText"
@@ -53,28 +54,28 @@
             
             <lumina:LuminaCard IsElevated="True">
                 <StackPanel Spacing="16">
-                    <TextBlock Text="{DynamicResource Sandbox.Settings.Appearance}" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource LuminaTextForegroundBrush}"/>
-                    <TextBlock Text="{DynamicResource Sandbox.Settings.AppearanceDescription}" Foreground="{DynamicResource LuminaTextMutedBrush}" Margin="0,-8,0,16"/>
+                    <TextBlock Text="{l10n:Loc Sandbox.Settings.Appearance}" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource LuminaTextForegroundBrush}"/>
+                    <TextBlock Text="{l10n:Loc Sandbox.Settings.AppearanceDescription}" Foreground="{DynamicResource LuminaTextMutedBrush}" Margin="0,-8,0,16"/>
                     
-                    <lumina:LuminaSettingItem Header="{DynamicResource Sandbox.Settings.ThemeMode}"
-                                              Description="{DynamicResource Sandbox.Settings.ThemeModeDescription}">
+                    <lumina:LuminaSettingItem Header="{l10n:Loc Sandbox.Settings.ThemeMode}"
+                                              Description="{l10n:Loc Sandbox.Settings.ThemeModeDescription}">
                         <ComboBox Name="ThemeModeComboBox"
                                   Width="156"
                                   ItemsSource="{Binding ThemeModeItems}"
                                   SelectedIndex="{Binding SelectedThemeModeIndex}" />
                     </lumina:LuminaSettingItem>
 
-                    <lumina:LuminaSettingItem Header="{DynamicResource Sandbox.Settings.Language}"
-                                              Description="{DynamicResource Sandbox.Language.CurrentValue}">
+                    <lumina:LuminaSettingItem Header="{l10n:Loc Sandbox.Settings.Language}"
+                                              Description="{l10n:Loc Sandbox.Language.CurrentValue}">
                         <ComboBox Name="LanguageComboBox"
                                   Width="148"
                                   ItemsSource="{Binding LanguageItems}"
                                   SelectedIndex="{Binding SelectedLanguageIndex}" />
                     </lumina:LuminaSettingItem>
 
-                    <lumina:LuminaSettingItem Header="{DynamicResource Sandbox.Localization.OverrideTitle}"
-                                              Description="{DynamicResource Sandbox.Localization.OverrideDescription}">
-                        <TextBlock Text="{DynamicResource Lumina.Common.Done}"
+                    <lumina:LuminaSettingItem Header="{l10n:Loc Sandbox.Localization.OverrideTitle}"
+                                              Description="{l10n:Loc Sandbox.Localization.OverrideDescription}">
+                        <TextBlock Text="{l10n:Loc Lumina.Common.Done}"
                                    Foreground="{DynamicResource LuminaTextForegroundBrush}" />
                     </lumina:LuminaSettingItem>
 
@@ -83,8 +84,8 @@
                     <Grid ColumnDefinitions="*,Auto" Margin="0,8">
                         <StackPanel Grid.Column="0" Spacing="10">
                             <StackPanel Spacing="2">
-                                <TextBlock Text="{DynamicResource Sandbox.Settings.ThemeColor}" FontWeight="SemiBold" Foreground="{DynamicResource LuminaTextForegroundBrush}" />
-                                <TextBlock Text="{DynamicResource Sandbox.Settings.ThemeColorDescription}" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
+                                <TextBlock Text="{l10n:Loc Sandbox.Settings.ThemeColor}" FontWeight="SemiBold" Foreground="{DynamicResource LuminaTextForegroundBrush}" />
+                                <TextBlock Text="{l10n:Loc Sandbox.Settings.ThemeColorDescription}" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
                             </StackPanel>
 
                             <WrapPanel>
@@ -99,7 +100,7 @@
 
                             <StackPanel Orientation="Horizontal" Spacing="8">
                                 <TextBox Name="AccentHexTextBox" Width="116" Text="{Binding AccentHexText}" />
-                                <Button Name="ApplyAccentButton" Content="{DynamicResource Lumina.Common.Apply}" Classes="Outline" Command="{Binding ApplyAccentCommand}" />
+                                <Button Name="ApplyAccentButton" Content="{l10n:Loc Lumina.Common.Apply}" Classes="Outline" Command="{Binding ApplyAccentCommand}" />
                                 <TextBlock Name="AccentStatusText" Text="{Binding AccentStatusText}" VerticalAlignment="Center" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}" />
                             </StackPanel>
                         </StackPanel>
@@ -117,25 +118,25 @@
                     
                     <Border Height="1" Background="{DynamicResource LuminaDividerBrush}" Margin="0,8" />
                     
-                    <lumina:LuminaSettingItem Header="{DynamicResource Sandbox.Settings.ReduceAnimations}"
-                                              Description="{DynamicResource Sandbox.Settings.ReduceAnimationsDescription}">
-                        <Button Content="{DynamicResource Sandbox.Settings.Disabled}" Classes="Ghost" />
+                    <lumina:LuminaSettingItem Header="{l10n:Loc Sandbox.Settings.ReduceAnimations}"
+                                              Description="{l10n:Loc Sandbox.Settings.ReduceAnimationsDescription}">
+                        <Button Content="{l10n:Loc Sandbox.Settings.Disabled}" Classes="Ghost" />
                     </lumina:LuminaSettingItem>
                 </StackPanel>
             </lumina:LuminaCard>
             
             <lumina:LuminaCard>
                 <StackPanel Spacing="16">
-                    <TextBlock Text="{DynamicResource Sandbox.Settings.Account}" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource LuminaTextForegroundBrush}"/>
-                    <TextBlock Text="{DynamicResource Sandbox.Settings.AccountDescription}" Foreground="{DynamicResource LuminaTextMutedBrush}" Margin="0,-8,0,16"/>
+                    <TextBlock Text="{l10n:Loc Sandbox.Settings.Account}" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource LuminaTextForegroundBrush}"/>
+                    <TextBlock Text="{l10n:Loc Sandbox.Settings.AccountDescription}" Foreground="{DynamicResource LuminaTextMutedBrush}" Margin="0,-8,0,16"/>
                     
                     <lumina:LuminaListItem Icon="P"
-                                           Header="{DynamicResource Sandbox.User.Name}"
-                                           Description="{DynamicResource Sandbox.Text.1175}"
+                                           Header="{l10n:Loc Sandbox.User.Name}"
+                                           Description="{l10n:Loc Sandbox.Text.1175}"
                                            Background="Transparent"
                                            Padding="0" />
                     
-                    <Button Content="{DynamicResource Sandbox.Settings.LogOut}" Classes="Danger Outline" Margin="0,16,0,0" HorizontalAlignment="Left" />
+                    <Button Content="{l10n:Loc Sandbox.Settings.LogOut}" Classes="Danger Outline" Margin="0,16,0,0" HorizontalAlignment="Left" />
                 </StackPanel>
             </lumina:LuminaCard>
 

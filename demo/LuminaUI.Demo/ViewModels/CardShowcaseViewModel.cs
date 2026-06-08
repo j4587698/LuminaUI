@@ -13,8 +13,8 @@ public partial class CardShowcaseViewModel : ObservableObject
 
     public CardShowcaseViewModel()
     {
-        WindowGlassStatusText = SandboxTextLocalizer.Localize("Checking window glass...");
-        CardGlassStatusText = SandboxTextLocalizer.Localize("Checking card glass...");
+        WindowGlassStatusText = LuminaLocalization.Get("Sandbox.Text.0220");
+        CardGlassStatusText = LuminaLocalization.Get("Sandbox.Text.0015");
         LuminaLocalization.LanguageChanged += OnLanguageChanged;
     }
 
@@ -55,7 +55,7 @@ public partial class CardShowcaseViewModel : ObservableObject
         if (owner == null || TopLevel.GetTopLevel(owner) is not Window window)
         {
             WindowGlassStatusText = LuminaLocalization.Get(SandboxLocalization.WindowGlassUnavailable);
-            CardGlassStatusText = SandboxTextLocalizer.Localize("Card glass: backdrop blur.");
+            CardGlassStatusText = LuminaLocalization.Get("Sandbox.Text.0018");
             return;
         }
 

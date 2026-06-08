@@ -1,5 +1,6 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.MultiSelectShowcasePage"
@@ -11,8 +12,8 @@
                     HorizontalAlignment="Stretch"
                     Margin="0,36,0,40">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{DynamicResource Sandbox.Text.0841}" />
-                <TextBlock Text="{DynamicResource Sandbox.Text.0795}"
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.0841}" />
+                <TextBlock Text="{l10n:Loc Sandbox.Text.0795}"
                            Foreground="{DynamicResource LuminaTextMutedBrush}"
                            TextWrapping="Wrap" />
             </StackPanel>
@@ -23,17 +24,17 @@
                                           VerticalSpacing="16">
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.0840}" />
-                        <lumina:LuminaMultiSelect Watermark="{DynamicResource Sandbox.Text.0876}"
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0840}" />
+                        <lumina:LuminaMultiSelect Watermark="{l10n:Loc Sandbox.Text.0876}"
                                                   lumina:LuminaOptions.PopupType="Sheet"
                                                   CanClearSelection="False"
                                                   ItemsSource="{Binding Priorities}"
                                                   SelectedItems="{Binding SelectedPriorities}" />
-                        <lumina:LuminaMultiSelect Watermark="{DynamicResource Sandbox.Text.0875}"
+                        <lumina:LuminaMultiSelect Watermark="{l10n:Loc Sandbox.Text.0875}"
                                                   ItemsSource="{Binding TeamMembers}"
                                                   SelectedItems="{Binding SelectedMembers}" />
                         <WrapPanel>
-                            <Button Content="{DynamicResource Sandbox.Text.0866}"
+                            <Button Content="{l10n:Loc Sandbox.Text.0866}"
                                     Classes="Outline"
                                     Margin="0,0,8,8"
                                     Command="{Binding ResetSelectionCommand}" />
@@ -44,16 +45,16 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{DynamicResource Sandbox.Text.1111}" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1111}" />
                         
-                        <TextBlock Text="{DynamicResource Sandbox.Text.0199}" Classes="Label" />
-                        <lumina:LuminaMultiSelect Watermark="{DynamicResource Sandbox.Text.1232}"
+                        <TextBlock Text="{l10n:Loc Sandbox.Text.0199}" Classes="Label" />
+                        <lumina:LuminaMultiSelect Watermark="{l10n:Loc Sandbox.Text.1232}"
                                                   ItemsSource="{Binding TeamMembers}"
                                                   SelectedItems="{Binding SelectedMembers}"
                                                   IsEnabled="False" />
                                                   
-                        <TextBlock Text="{DynamicResource Sandbox.Text.1113}" Classes="Label" Margin="0,8,0,0" />
-                        <lumina:LuminaMultiSelect Watermark="{DynamicResource Sandbox.Text.0875}"
+                        <TextBlock Text="{l10n:Loc Sandbox.Text.1113}" Classes="Label" Margin="0,8,0,0" />
+                        <lumina:LuminaMultiSelect Watermark="{l10n:Loc Sandbox.Text.0875}"
                                                   ItemsSource="{Binding ComplexMembers}"
                                                   SelectedItems="{Binding SelectedComplexMembers}">
                             <lumina:LuminaMultiSelect.ItemTemplate>
