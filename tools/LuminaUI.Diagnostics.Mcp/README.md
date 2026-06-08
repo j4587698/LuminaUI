@@ -2,7 +2,7 @@
 
 `LuminaUI.Diagnostics.Mcp` 是独立的 dotnet tool 包，用 stdio MCP server 把 MCP 客户端连接到运行中的 Avalonia 应用。
 
-它只负责 live diagnostics，不索引文档。组件知识、示例和设计令牌仍由 `tools/LuminaUI.Mcp` 这个文档 MCP 服务统一提供。
+它只负责 live diagnostics，不索引文档。组件知识、示例、设计令牌、API 和包安装信息由独立的 `DotNetCatalog.Mcp` 服务提供。
 
 ## 应用侧接入
 

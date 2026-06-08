@@ -1,8 +1,6 @@
 <Project>
   <Import Project="$(MSBuildThisFileDirectory)Directory.Build.Diagnostics.props"
           Condition="Exists('$(MSBuildThisFileDirectory)Directory.Build.Diagnostics.props')" />
-  <Import Project="$(MSBuildThisFileDirectory)Directory.Build.Mcp.props"
-          Condition="Exists('$(MSBuildThisFileDirectory)Directory.Build.Mcp.props')" />
 
   <PropertyGroup>
     <LuminaUIVersion>0.3.3</LuminaUIVersion>

@@ -83,12 +83,11 @@ demo/
   LuminaUI.Demo.iOS/     iOS host.
 
 tools/
-  LuminaUI.Mcp/          Documentation MCP server for component knowledge.
   LuminaUI.Diagnostics.Mcp/
                           Live app diagnostics MCP stdio server.
 ```
 
-The documentation MCP server (`tools/LuminaUI.Mcp`) remains the single documentation and component-knowledge entry point. The diagnostics MCP tool (`tools/LuminaUI.Diagnostics.Mcp`) is separate and only connects to running Avalonia applications that opt in with `LuminaUI.Diagnostics`.
+Documentation, component, API, and package indexing is handled by the separate `DotNetCatalog` project. This repository only keeps the live diagnostics MCP tool, which connects to running Avalonia applications that opt in with `LuminaUI.Diagnostics`.
 
 ## Versioning
 
@@ -97,9 +96,8 @@ The repository uses separate version domains so tool packages are not forced to 
 - `LuminaUIVersion`: main controls and optional themed control packages.
 - `LuminaUIDiagnosticsVersion`: diagnostics protocol contracts and application-side host.
 - `LuminaUIDiagnosticsMcpVersion`: live diagnostics MCP dotnet tool.
-- `LuminaDocsMcpVersion`: documentation MCP server.
 
-`LuminaUIVersion` lives in `Directory.Build.props`. Diagnostics versions live in `Directory.Build.Diagnostics.props`. The documentation MCP version lives in `Directory.Build.Mcp.props`.
+`LuminaUIVersion` lives in `Directory.Build.props`. Diagnostics versions live in `Directory.Build.Diagnostics.props`.
 
 Only bump the version for the package whose public API, protocol, or behavior changed. Main control library changes do not require synchronized MCP tool version bumps.
 
@@ -142,7 +140,7 @@ The dotnet tool package exposes the stdio MCP server command:
 lumina-mcp
 ```
 
-The documentation MCP server remains HTTP-based at `http://localhost:3001/mcp`.
+Use the separate `DotNetCatalog.Mcp` service for documentation, component, API, and package catalog queries.
 
 ## Build and Run
 
@@ -190,11 +188,11 @@ NuGet publishing and GitHub Releases are split by version domain:
 
 1. Set the repository secret `NUGET_API_KEY` to a NuGet.org API key.
 2. Optional: set `GH_RELEASE_TOKEN` to a GitHub token with `Contents: Read and write` if the default Actions `GITHUB_TOKEN` cannot create releases in this repository.
-3. Update the matching version property in `Directory.Build.props`, `Directory.Build.Diagnostics.props`, or `Directory.Build.Mcp.props` for the packages included in the release.
+3. Update the matching version property in `Directory.Build.props` or `Directory.Build.Diagnostics.props` for the packages included in the release.
 4. Push the change to `master` or `main`.
 
 ```bash
-git add Directory.Build.props Directory.Build.Diagnostics.props Directory.Build.Mcp.props
+git add Directory.Build.props Directory.Build.Diagnostics.props
 git commit -m "Release 0.1.0"
 git push origin master
 ```

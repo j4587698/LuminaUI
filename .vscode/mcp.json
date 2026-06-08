@@ -1,8 +1,13 @@
 {
   "servers": {
-    "LuminaUI": {
+    "DotNetCatalog": {
       "type": "http",
-      "url": "http://localhost:3001/mcp"
+      "url": "http://localhost:3002/mcp"
+    },
+    "LuminaUI.Diagnostics": {
+      "type": "stdio",
+      "command": "lumina-mcp",
+      "args": []
     }
   }
 }
