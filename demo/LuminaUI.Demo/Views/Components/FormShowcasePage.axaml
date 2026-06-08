@@ -6,59 +6,61 @@
              x:Class="LuminaUI.Demo.Views.FormShowcasePage"
              x:DataType="vm:FormShowcaseViewModel">
 
-    <lumina:LuminaInputPanel x:Name="PageInputPanel" Margin="16" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24"
-                    Width="{Binding #PageInputPanel.Bounds.Width}"
-                    HorizontalAlignment="Stretch"
-                    Margin="0,36,0,40">
-            <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.1172}" />
-                <TextBlock Text="{l10n:Loc Sandbox.Text.0817}"
-                           Foreground="{DynamicResource LuminaTextMutedBrush}"
-                           TextWrapping="Wrap" />
-            </StackPanel>
+    <lumina:LuminaInputPanel>
+        <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Spacing="24"
+                        Width="{Binding #PageScroll.Bounds.Width}"
+                        HorizontalAlignment="Stretch"
+                        Margin="0,36,0,40">
+                <StackPanel Spacing="4">
+                    <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.1172}" />
+                    <TextBlock Text="{l10n:Loc Sandbox.Text.0817}"
+                               Foreground="{DynamicResource LuminaTextMutedBrush}"
+                               TextWrapping="Wrap" />
+                </StackPanel>
 
-            <lumina:LuminaResponsivePanel MinItemWidth="320"
-                                          MaxItemWidth="620"
-                                          HorizontalSpacing="16"
-                                          VerticalSpacing="16">
-                <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0816}" />
-                        <lumina:LuminaForm LabelPosition="Left" LabelWidth="120">
-                            <TextBox lumina:LuminaForm.Label="Project"
-                                     lumina:LuminaForm.IsRequired="True"
-                                     Text="Lumina UI" />
-                            <lumina:LuminaMultiSelect lumina:LuminaForm.Label="Members"
-                                                      Watermark="{l10n:Loc Sandbox.Text.0875}"
-                                                      ItemsSource="{Binding TeamMembers}"
-                                                      SelectedItems="{Binding SelectedMembers}" />
-                            <lumina:LuminaTagInput lumina:LuminaForm.Label="Labels"
-                                                   Watermark="{l10n:Loc Sandbox.Text.1173}"
-                                                   AllowDuplicates="False"
-                                                   Tags="{Binding Labels}"
-                                                   TagAddedCommand="{Binding TagAddedCommand}"
-                                                   TagRemovedCommand="{Binding TagRemovedCommand}" />
-                            <Button lumina:LuminaForm.NoLabel="True"
-                                    Content="{l10n:Loc Sandbox.Text.0647}"
-                                    Classes="Primary"
-                                    Command="{Binding SubmitFormCommand}"
-                                    HorizontalAlignment="Left" />
-                        </lumina:LuminaForm>
-                        <Separator />
-                        <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Text.1174}" />
-                        <lumina:LuminaForm LabelPosition="Top">
-                            <TextBox lumina:LuminaForm.Label="Release name"
-                                     Text="{l10n:Loc Sandbox.Text.0781}" />
-                            <lumina:LuminaMultiSelect lumina:LuminaForm.Label="Priority"
-                                                      Watermark="{l10n:Loc Sandbox.Text.0876}"
-                                                      ItemsSource="{Binding Priorities}"
-                                                      SelectedItems="{Binding SelectedPriorities}" />
-                        </lumina:LuminaForm>
-                        <TextBlock Text="{Binding StatusText}" Classes="Caption" />
-                    </StackPanel>
-                </lumina:LuminaCard>
-            </lumina:LuminaResponsivePanel>
-        </StackPanel>
+                <lumina:LuminaResponsivePanel MinItemWidth="320"
+                                              MaxItemWidth="620"
+                                              HorizontalSpacing="16"
+                                              VerticalSpacing="16">
+                    <lumina:LuminaCard>
+                        <StackPanel Spacing="16">
+                            <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0816}" />
+                            <lumina:LuminaForm LabelPosition="Left" LabelWidth="120">
+                                <TextBox lumina:LuminaForm.Label="Project"
+                                         lumina:LuminaForm.IsRequired="True"
+                                         Text="Lumina UI" />
+                                <lumina:LuminaMultiSelect lumina:LuminaForm.Label="Members"
+                                                          Watermark="{l10n:Loc Sandbox.Text.0875}"
+                                                          ItemsSource="{Binding TeamMembers}"
+                                                          SelectedItems="{Binding SelectedMembers}" />
+                                <lumina:LuminaTagInput lumina:LuminaForm.Label="Labels"
+                                                       Watermark="{l10n:Loc Sandbox.Text.1173}"
+                                                       AllowDuplicates="False"
+                                                       Tags="{Binding Labels}"
+                                                       TagAddedCommand="{Binding TagAddedCommand}"
+                                                       TagRemovedCommand="{Binding TagRemovedCommand}" />
+                                <Button lumina:LuminaForm.NoLabel="True"
+                                        Content="{l10n:Loc Sandbox.Text.0647}"
+                                        Classes="Primary"
+                                        Command="{Binding SubmitFormCommand}"
+                                        HorizontalAlignment="Left" />
+                            </lumina:LuminaForm>
+                            <Separator />
+                            <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Text.1174}" />
+                            <lumina:LuminaForm LabelPosition="Top">
+                                <TextBox lumina:LuminaForm.Label="Release name"
+                                         Text="{l10n:Loc Sandbox.Text.0781}" />
+                                <lumina:LuminaMultiSelect lumina:LuminaForm.Label="Priority"
+                                                          Watermark="{l10n:Loc Sandbox.Text.0876}"
+                                                          ItemsSource="{Binding Priorities}"
+                                                          SelectedItems="{Binding SelectedPriorities}" />
+                            </lumina:LuminaForm>
+                            <TextBlock Text="{Binding StatusText}" Classes="Caption" />
+                        </StackPanel>
+                    </lumina:LuminaCard>
+                </lumina:LuminaResponsivePanel>
+            </StackPanel>
+        </ScrollViewer>
     </lumina:LuminaInputPanel>
 </ContentPage>
