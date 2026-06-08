@@ -83,12 +83,11 @@ demo/
   LuminaUI.Demo.iOS/     iOS 宿主。
 
 tools/
-  LuminaUI.Mcp/          组件知识和文档 MCP 服务。
   LuminaUI.Diagnostics.Mcp/
                           live app diagnostics MCP stdio 服务。
 ```
 
-文档 MCP 服务（`tools/LuminaUI.Mcp`）保留为唯一的文档和组件知识入口。diagnostics MCP 工具（`tools/LuminaUI.Diagnostics.Mcp`）独立存在，只连接已通过 `LuminaUI.Diagnostics` opt-in 的运行中 Avalonia 应用。
+文档、组件、API 和包安装信息索引由独立的 `DotNetCatalog` 项目负责。本仓库只保留 live diagnostics MCP 工具，用于连接已通过 `LuminaUI.Diagnostics` opt-in 的运行中 Avalonia 应用。
 
 ## 版本策略
 
@@ -97,9 +96,8 @@ tools/
 - `LuminaUIVersion`：主控件包和可选控件主题包。
 - `LuminaUIDiagnosticsVersion`：diagnostics 协议契约和应用侧 host。
 - `LuminaUIDiagnosticsMcpVersion`：live diagnostics MCP dotnet tool。
-- `LuminaDocsMcpVersion`：文档 MCP 服务。
 
-`LuminaUIVersion` 位于 `Directory.Build.props`。Diagnostics 版本位于 `Directory.Build.Diagnostics.props`。文档 MCP 版本位于 `Directory.Build.Mcp.props`。
+`LuminaUIVersion` 位于 `Directory.Build.props`。Diagnostics 版本位于 `Directory.Build.Diagnostics.props`。
 
 只有对应包的公开 API、协议或行为发生变化时才需要升级对应版本。仅主控件库改动时，不需要同步升级 MCP 工具版本。
 
@@ -142,7 +140,7 @@ dotnet tool 包提供 stdio MCP server 命令：
 lumina-mcp
 ```
 
-文档 MCP 仍通过 HTTP 暴露在 `http://localhost:3001/mcp`。
+文档、组件、API 和包安装信息查询请使用独立的 `DotNetCatalog.Mcp` 服务。
 
 ## 构建与运行
 
@@ -190,11 +188,11 @@ NuGet 发布和 GitHub Release 按版本域拆分：
 
 1. 在仓库 Secret 中配置 `NUGET_API_KEY`，值为 NuGet.org API key。
 2. 可选：如果仓库默认的 Actions `GITHUB_TOKEN` 无法创建 Release，在仓库 Secret 中配置 `GH_RELEASE_TOKEN`，权限需要包含 `Contents: Read and write`。
-3. 按本次发布涉及的包，更新 `Directory.Build.props`、`Directory.Build.Diagnostics.props` 或 `Directory.Build.Mcp.props` 中对应的版本属性。
+3. 按本次发布涉及的包，更新 `Directory.Build.props` 或 `Directory.Build.Diagnostics.props` 中对应的版本属性。
 4. 将改动推送到 `master` 或 `main`。
 
 ```bash
-git add Directory.Build.props Directory.Build.Diagnostics.props Directory.Build.Mcp.props
+git add Directory.Build.props Directory.Build.Diagnostics.props
 git commit -m "Release 0.1.0"
 git push origin master
 ```

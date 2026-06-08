@@ -12,6 +12,5 @@
     <Deploy Solution="Debug|*" />
   </Project>
   <Project Path="demo/LuminaUI.Demo.iOS/LuminaUI.Demo.iOS.csproj" />
-  <Project Path="tools/LuminaUI.Mcp/LuminaUI.Mcp.csproj" />
   <Project Path="tools/LuminaUI.Diagnostics.Mcp/LuminaUI.Diagnostics.Mcp.csproj" />
 </Solution>
