@@ -6,9 +6,9 @@
              x:Class="LuminaUI.Demo.Views.FormShowcasePage"
              x:DataType="vm:FormShowcaseViewModel">
 
-    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+    <lumina:LuminaInputPanel x:Name="PageInputPanel" Margin="16" HorizontalScrollBarVisibility="Disabled">
         <StackPanel Spacing="24"
-                    Width="{Binding #PageScroll.Bounds.Width}"
+                    Width="{Binding #PageInputPanel.Bounds.Width}"
                     HorizontalAlignment="Stretch"
                     Margin="0,36,0,40">
             <StackPanel Spacing="4">
@@ -60,5 +60,5 @@
                 </lumina:LuminaCard>
             </lumina:LuminaResponsivePanel>
         </StackPanel>
-    </ScrollViewer>
+    </lumina:LuminaInputPanel>
 </ContentPage>
