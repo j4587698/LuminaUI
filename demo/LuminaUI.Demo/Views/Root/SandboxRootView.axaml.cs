@@ -73,6 +73,7 @@ public partial class SandboxRootView : UserControl
         "NavIndexedList",
         "NavLinkedCategory",
         "NavTabsExpanders",
+        "NavShell",
         "NavMenus",
         "NavOverlays",
         "NavWindowDialogs",
@@ -218,6 +219,7 @@ public partial class SandboxRootView : UserControl
             "NavLinkedCategory" => new LinkedCategoryListShowcasePage(),
             "NavTabsExpanders" => new TabsExpanderShowcasePage(),
 
+            "NavShell" => new ShellShowcasePage(),
             "NavMenus" => new MenuFlyoutShowcasePage(),
             "NavOverlays" => new OverlaysShowcasePage(),
             "NavWindowDialogs" => new WindowDialogShowcasePage(),
@@ -295,6 +297,7 @@ public partial class SandboxRootView : UserControl
             "NavLinkedCategory" => Source("Components/LinkedCategoryListShowcasePage", "LinkedCategoryListShowcaseViewModel"),
             "NavTabsExpanders" => Source("Components/TabsExpanderShowcasePage", StaticShowcaseViewModel),
 
+            "NavShell" => Source("Patterns/ShellShowcasePage", StaticShowcaseViewModel),
             "NavMenus" => Source("Patterns/MenuFlyoutShowcasePage", StaticShowcaseViewModel),
             "NavOverlays" => Source("Patterns/OverlaysShowcasePage", "OverlaysShowcaseViewModel"),
             "NavWindowDialogs" => Source("Popups/WindowDialogShowcasePage", "WindowDialogShowcaseViewModel"),

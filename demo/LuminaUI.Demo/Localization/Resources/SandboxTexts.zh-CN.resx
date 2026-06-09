@@ -4065,4 +4065,103 @@
   <data name="Sandbox.Text.1364" xml:space="preserve">
     <value>显示是/否/取消</value>
   </data>
+  <data name="Sandbox.ShellShowcase.Title" xml:space="preserve">
+    <value>Shell</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.Subtitle" xml:space="preserve">
+    <value>外壳、顶部栏与菜单状态控制</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.Description" xml:space="preserve">
+    <value>在嵌套的实时 Shell 中切换外壳、顶部栏、菜单、紧凑模式和响应式行为。</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.Options" xml:space="preserve">
+    <value>选项</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OptionShellChrome" xml:space="preserve">
+    <value>Shell 外壳 (IsShellChromeVisible)</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OptionShellHeader" xml:space="preserve">
+    <value>Shell 顶部栏 (IsShellHeaderVisible)</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OptionMenuOpen" xml:space="preserve">
+    <value>菜单展开 (IsMenuOpen)</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OptionCompactMenu" xml:space="preserve">
+    <value>紧凑菜单 (IsCompactMenuEnabled)</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OptionMenuAutoResponsive" xml:space="preserve">
+    <value>菜单自动响应 (IsMenuAutoResponsive)</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OptionCloseMenuOnNavigate" xml:space="preserve">
+    <value>导航后关闭菜单 (CloseMenuOnNavigate)</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OpenPaneLength" xml:space="preserve">
+    <value>展开菜单宽度</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.CompactPaneLength" xml:space="preserve">
+    <value>紧凑菜单宽度</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.EffectiveState" xml:space="preserve">
+    <value>实际状态</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StateChromeVisible" xml:space="preserve">
+    <value>外壳可见</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StateHeaderVisible" xml:space="preserve">
+    <value>顶部栏可见</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StateMenuOpen" xml:space="preserve">
+    <value>菜单展开</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StateMenuCompact" xml:space="preserve">
+    <value>菜单紧凑</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.LivePreview" xml:space="preserve">
+    <value>实时预览</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.PreviewShellTitle" xml:space="preserve">
+    <value>预览 Shell</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.PreviewShellSubtitle" xml:space="preserve">
+    <value>嵌套演示 Shell</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.MenuHeader" xml:space="preserve">
+    <value>预览</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.MenuFooter" xml:space="preserve">
+    <value>菜单底部</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.Action" xml:space="preserve">
+    <value>操作</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.NavHome" xml:space="preserve">
+    <value>首页</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.NavReports" xml:space="preserve">
+    <value>报表</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.NavSettings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.NavWorkspace" xml:space="preserve">
+    <value>工作区</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.NavAudit" xml:space="preserve">
+    <value>审计</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.RouteHomeSubtitle" xml:space="preserve">
+    <value>默认外壳和菜单内容。</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.RouteReportsSubtitle" xml:space="preserve">
+    <value>启用 CloseMenuOnNavigate 后导航到这里，用于测试移动端收起行为。</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.RouteSettingsSubtitle" xml:space="preserve">
+    <value>此路由保持 Shell 顶部栏可见。</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.RouteAuditSubtitle" xml:space="preserve">
+    <value>嵌套导航项路由。</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.RouteHint" xml:space="preserve">
+    <value>将窗口缩小到 768px 以下，切换菜单，并从左侧面板切换 Shell 选项。</value>
+  </data>
 </root>

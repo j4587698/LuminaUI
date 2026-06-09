@@ -45,6 +45,7 @@ public partial class ShowcaseReferencePage : LuminaPage
         NavigationKey = page.NavigationKey;
         CloseShellMenuOnNavigate = page.CloseShellMenuOnNavigate;
         ShowShellChrome = page.ShowShellChrome;
+        ShowShellHeader = page.ShowShellHeader;
     }
 
     private static void CompactPreviewLayout(Control previewContent)
