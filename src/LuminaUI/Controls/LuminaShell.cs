@@ -58,6 +58,14 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private bool _effectiveIsMenuOpen = true;
 
+    private bool _effectiveIsShellChromeVisible = true;
+
+    private bool _effectiveIsShellHeaderVisible = true;
+
+    private bool _effectiveIsHeaderlessMenuToggleVisible;
+
+    private bool _effectiveIsMenuCompact;
+
     private double _effectiveOpenPaneLength = 220.0;
 
     private double _effectiveCompactPaneLength = 48.0;
@@ -66,7 +74,23 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     public static readonly StyledProperty<bool> IsShellChromeVisibleProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(IsShellChromeVisible), defaultValue: true);
 
+    public static readonly StyledProperty<bool> IsShellHeaderVisibleProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(IsShellHeaderVisible), defaultValue: true);
+
+    public static readonly StyledProperty<bool> IsCompactMenuEnabledProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(IsCompactMenuEnabled), defaultValue: true);
+
+    public static readonly StyledProperty<bool> IsMenuAutoResponsiveProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(IsMenuAutoResponsive), defaultValue: true);
+
+    public static readonly AttachedProperty<bool> IsMenuCompactProperty = AvaloniaProperty.RegisterAttached<LuminaShell, Control, bool>("IsMenuCompact", defaultValue: false, inherits: true);
+
     public static readonly DirectProperty<LuminaShell, bool> EffectiveIsMenuOpenProperty = AvaloniaProperty.RegisterDirect<LuminaShell, bool>(nameof(EffectiveIsMenuOpen), (LuminaShell shell) => shell.EffectiveIsMenuOpen, null, unsetValue: false);
+
+    public static readonly DirectProperty<LuminaShell, bool> EffectiveIsShellChromeVisibleProperty = AvaloniaProperty.RegisterDirect<LuminaShell, bool>(nameof(EffectiveIsShellChromeVisible), (LuminaShell shell) => shell.EffectiveIsShellChromeVisible, null, unsetValue: false);
+
+    public static readonly DirectProperty<LuminaShell, bool> EffectiveIsShellHeaderVisibleProperty = AvaloniaProperty.RegisterDirect<LuminaShell, bool>(nameof(EffectiveIsShellHeaderVisible), (LuminaShell shell) => shell.EffectiveIsShellHeaderVisible, null, unsetValue: false);
+
+    public static readonly DirectProperty<LuminaShell, bool> EffectiveIsHeaderlessMenuToggleVisibleProperty = AvaloniaProperty.RegisterDirect<LuminaShell, bool>(nameof(EffectiveIsHeaderlessMenuToggleVisible), (LuminaShell shell) => shell.EffectiveIsHeaderlessMenuToggleVisible, null, unsetValue: false);
+
+    public static readonly DirectProperty<LuminaShell, bool> EffectiveIsMenuCompactProperty = AvaloniaProperty.RegisterDirect<LuminaShell, bool>(nameof(EffectiveIsMenuCompact), (LuminaShell shell) => shell.EffectiveIsMenuCompact, null, unsetValue: false);
 
     public static readonly StyledProperty<string?> ShellKeyProperty = AvaloniaProperty.Register<LuminaShell, string?>(nameof(ShellKey));
 
@@ -135,6 +159,8 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     public ICommand NavigateCommand { get; }
 
+    public ICommand ToggleMenuCommand { get; }
+
     public ICommand CloseDialogCommand { get; }
 
     public ICommand CloseBottomSheetCommand { get; }
@@ -153,6 +179,48 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         set => SetValue(IsShellChromeVisibleProperty, value);
     }
 
+    public bool IsShellHeaderVisible
+    {
+        get => GetValue(IsShellHeaderVisibleProperty);
+        set => SetValue(IsShellHeaderVisibleProperty, value);
+    }
+
+    public bool IsCompactMenuEnabled
+    {
+        get => GetValue(IsCompactMenuEnabledProperty);
+        set => SetValue(IsCompactMenuEnabledProperty, value);
+    }
+
+    public bool IsMenuAutoResponsive
+    {
+        get => GetValue(IsMenuAutoResponsiveProperty);
+        set => SetValue(IsMenuAutoResponsiveProperty, value);
+    }
+
+    public bool EffectiveIsShellChromeVisible
+    {
+        get
+        {
+            return _effectiveIsShellChromeVisible;
+        }
+        private set
+        {
+            SetAndRaise(EffectiveIsShellChromeVisibleProperty, ref _effectiveIsShellChromeVisible, value);
+        }
+    }
+
+    public bool EffectiveIsShellHeaderVisible
+    {
+        get
+        {
+            return _effectiveIsShellHeaderVisible;
+        }
+        private set
+        {
+            SetAndRaise(EffectiveIsShellHeaderVisibleProperty, ref _effectiveIsShellHeaderVisible, value);
+        }
+    }
+
     public bool EffectiveIsMenuOpen
     {
         get
@@ -162,6 +230,30 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         private set
         {
             SetAndRaise(EffectiveIsMenuOpenProperty, ref _effectiveIsMenuOpen, value);
+        }
+    }
+
+    public bool EffectiveIsHeaderlessMenuToggleVisible
+    {
+        get
+        {
+            return _effectiveIsHeaderlessMenuToggleVisible;
+        }
+        private set
+        {
+            SetAndRaise(EffectiveIsHeaderlessMenuToggleVisibleProperty, ref _effectiveIsHeaderlessMenuToggleVisible, value);
+        }
+    }
+
+    public bool EffectiveIsMenuCompact
+    {
+        get
+        {
+            return _effectiveIsMenuCompact;
+        }
+        private set
+        {
+            SetAndRaise(EffectiveIsMenuCompactProperty, ref _effectiveIsMenuCompact, value);
         }
     }
 
@@ -377,6 +469,16 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         set => SetValue(IsWindowGlassEnabledProperty, value);
     }
 
+    public static bool GetIsMenuCompact(Control control)
+    {
+        return control.GetValue(IsMenuCompactProperty);
+    }
+
+    public static void SetIsMenuCompact(Control control, bool value)
+    {
+        control.SetValue(IsMenuCompactProperty, value);
+    }
+
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
@@ -471,6 +573,9 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
                 NavigateTo(navigationKey);
             }
         }, (object? parameter) => parameter is string value && !string.IsNullOrWhiteSpace(value));
+        ToggleMenuCommand = new LuminaRelayCommand(_ => {
+            IsMenuOpen = !IsMenuOpen;
+        });
         CloseDialogCommand = new LuminaRelayCommand(_ => {
             CloseDialog();
         });
@@ -579,7 +684,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         {
             _isNavigating = false;
         }
-        if (closeMenuOnNavigate && Bounds.Width < 768.0)
+        if (closeMenuOnNavigate && Bounds.Width < MobileBreakpoint)
         {
             IsMenuOpen = false;
         }
@@ -656,7 +761,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         {
             ApplyActivePageMetadata();
         }
-        else if (change.Property == IsMenuOpenProperty || change.Property == IsShellChromeVisibleProperty || change.Property == OpenPaneLengthProperty || change.Property == CompactPaneLengthProperty)
+        else if (change.Property == IsMenuOpenProperty || change.Property == IsShellChromeVisibleProperty || change.Property == IsShellHeaderVisibleProperty || change.Property == IsCompactMenuEnabledProperty || change.Property == OpenPaneLengthProperty || change.Property == CompactPaneLengthProperty)
         {
             UpdateEffectiveShellChrome();
         }
@@ -788,21 +893,21 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     protected override void OnSizeChanged(SizeChangedEventArgs e)
     {
         base.OnSizeChanged(e);
-        bool isMobile = e.NewSize.Width < 768.0;
+        bool isMobile = e.NewSize.Width < MobileBreakpoint;
         PseudoClasses.Set(":mobile", isMobile);
-        if (!IsShellChromeVisible)
+        if (!EffectiveIsShellChromeVisible || !IsMenuAutoResponsive)
         {
             UpdateEffectiveShellChrome();
             return;
         }
         if (isMobile)
         {
-            if (e.PreviousSize.Width >= 768.0 || e.PreviousSize.Width <= 0.0)
+            if (e.PreviousSize.Width >= MobileBreakpoint || e.PreviousSize.Width <= 0.0)
             {
                 IsMenuOpen = false;
             }
         }
-        else if (e.PreviousSize.Width < 768.0 || e.PreviousSize.Width <= 0.0)
+        else if (e.PreviousSize.Width < MobileBreakpoint || e.PreviousSize.Width <= 0.0)
         {
             IsMenuOpen = true;
         }
@@ -811,10 +916,20 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private void UpdateEffectiveShellChrome()
     {
-        EffectiveIsMenuOpen = IsShellChromeVisible && IsMenuOpen;
-        EffectiveOpenPaneLength = IsShellChromeVisible ? OpenPaneLength : 0.0;
-        EffectiveCompactPaneLength = IsShellChromeVisible ? CompactPaneLength : 0.0;
-        PseudoClasses.Set(":chromeless", !IsShellChromeVisible);
+        bool isShellChromeEffectiveVisible = IsShellChromeVisible && (_activePage?.ShowShellChrome ?? true);
+        bool isShellHeaderEffectiveVisible = isShellChromeEffectiveVisible && IsShellHeaderVisible && (_activePage?.ShowShellHeader ?? true);
+        bool isMenuEffectiveOpen = isShellChromeEffectiveVisible && IsMenuOpen;
+        bool isMenuCompact = isShellChromeEffectiveVisible && IsCompactMenuEnabled && !IsMenuOpen;
+        EffectiveIsShellChromeVisible = isShellChromeEffectiveVisible;
+        EffectiveIsShellHeaderVisible = isShellHeaderEffectiveVisible;
+        EffectiveIsMenuOpen = isMenuEffectiveOpen;
+        EffectiveIsMenuCompact = isMenuCompact;
+        EffectiveIsHeaderlessMenuToggleVisible = isShellChromeEffectiveVisible && !isShellHeaderEffectiveVisible && !isMenuEffectiveOpen && !isMenuCompact;
+        EffectiveOpenPaneLength = isShellChromeEffectiveVisible ? OpenPaneLength : 0.0;
+        EffectiveCompactPaneLength = isShellChromeEffectiveVisible ? CompactPaneLength : 0.0;
+        PseudoClasses.Set(":chromeless", !isShellChromeEffectiveVisible);
+        PseudoClasses.Set(":headerless", !isShellHeaderEffectiveVisible);
+        PseudoClasses.Set(":menucompact", isMenuCompact);
     }
 
     private void SetActivePage(object? content)
@@ -845,7 +960,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private void OnActivePagePropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
     {
-        if (e.Property == LuminaPage.ShellTitleProperty || e.Property == LuminaPage.ShellSubtitleProperty || e.Property == LuminaPage.ShellActionsProperty || e.Property == LuminaPage.ShowShellChromeProperty || e.Property == LuminaPage.NavigationKeyProperty)
+        if (e.Property == LuminaPage.ShellTitleProperty || e.Property == LuminaPage.ShellSubtitleProperty || e.Property == LuminaPage.ShellActionsProperty || e.Property == LuminaPage.ShowShellChromeProperty || e.Property == LuminaPage.ShowShellHeaderProperty || e.Property == LuminaPage.NavigationKeyProperty)
         {
             ApplyActivePageMetadata();
         }
@@ -861,12 +976,12 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         ActivePageTitle = _activePage.ShellTitle ?? _activePage.Header ?? DefaultPageTitle;
         ActivePageSubtitle = _activePage.ShellSubtitle ?? DefaultPageSubtitle;
         ActivePageActions = _activePage.ShellActions ?? DefaultPageActions;
-        IsShellChromeVisible = _activePage.ShowShellChrome;
+        UpdateEffectiveShellChrome();
         if (!string.IsNullOrWhiteSpace(_activePage.NavigationKey))
         {
             SetActiveNavigationKey(_activePage.NavigationKey);
         }
-        if (IsShellChromeVisible && _activePage.CloseShellMenuOnNavigate && Bounds.Width < 768.0)
+        if (EffectiveIsShellChromeVisible && _activePage.CloseShellMenuOnNavigate && Bounds.Width < MobileBreakpoint)
         {
             IsMenuOpen = false;
         }
@@ -877,7 +992,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         ActivePageTitle = DefaultPageTitle;
         ActivePageSubtitle = DefaultPageSubtitle;
         ActivePageActions = DefaultPageActions;
-        IsShellChromeVisible = true;
+        UpdateEffectiveShellChrome();
     }
 
     private Control GetRouteContent(string navigationKey, Func<Control> factory)

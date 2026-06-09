@@ -14,47 +14,59 @@
                             CornerRadius="8"
                             Padding="10,8"
                             Cursor="Hand">
-                        <Grid ColumnDefinitions="3,24,*,16" ColumnSpacing="8">
-                            <Border Name="PART_Indicator"
-                                    Grid.Column="0"
-                                    Width="3"
-                                    CornerRadius="2"
-                                    Background="{DynamicResource LuminaNavigationPaneItemSelectedForegroundBrush}"
-                                    Opacity="0" />
+                        <Grid>
+                            <Grid Name="PART_HeaderLayout"
+                                  ColumnDefinitions="3,24,*,16"
+                                  ColumnSpacing="8">
+                                <Border Name="PART_Indicator"
+                                        Grid.Column="0"
+                                        Width="3"
+                                        CornerRadius="2"
+                                        Background="{DynamicResource LuminaNavigationPaneItemSelectedForegroundBrush}"
+                                        Opacity="0" />
 
-                            <ContentPresenter Name="PART_IconPresenter"
-                                              Grid.Column="1"
-                                              Width="20"
+                                <ContentPresenter Name="PART_IconPresenter"
+                                                  Grid.Column="1"
+                                                  Width="20"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Content="{TemplateBinding Icon}"
+                                                  TextElement.FontSize="14"
+                                                  TextElement.Foreground="{DynamicResource LuminaTextMutedBrush}" />
+
+                                <ContentPresenter Name="PART_HeaderPresenter"
+                                                  Grid.Column="2"
+                                                  VerticalAlignment="Center"
+                                                  Content="{TemplateBinding Header}"
+                                                  TextElement.FontSize="14"
+                                                  TextElement.FontWeight="SemiBold"
+                                                  TextElement.Foreground="{DynamicResource LuminaTextForegroundBrush}" />
+
+                                <PathIcon Name="PART_Chevron"
+                                          Grid.Column="3"
+                                          Data="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"
+                                          Width="12"
+                                          Height="12"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                          Opacity="0"
+                                          RenderTransformOrigin="50%,50%">
+                                    <PathIcon.Transitions>
+                                        <Transitions>
+                                            <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.15" Easing="CubicEaseOut" />
+                                        </Transitions>
+                                    </PathIcon.Transitions>
+                                </PathIcon>
+                            </Grid>
+
+                            <ContentPresenter Name="PART_CompactIconPresenter"
+                                              IsVisible="False"
                                               HorizontalAlignment="Center"
                                               VerticalAlignment="Center"
                                               Content="{TemplateBinding Icon}"
                                               TextElement.FontSize="14"
                                               TextElement.Foreground="{DynamicResource LuminaTextMutedBrush}" />
-
-                            <ContentPresenter Name="PART_HeaderPresenter"
-                                              Grid.Column="2"
-                                              VerticalAlignment="Center"
-                                              Content="{TemplateBinding Header}"
-                                              TextElement.FontSize="14"
-                                              TextElement.FontWeight="SemiBold"
-                                              TextElement.Foreground="{DynamicResource LuminaTextForegroundBrush}" />
-
-                            <PathIcon Name="PART_Chevron"
-                                      Grid.Column="3"
-                                      Data="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"
-                                      Width="12"
-                                      Height="12"
-                                      HorizontalAlignment="Center"
-                                      VerticalAlignment="Center"
-                                      Foreground="{DynamicResource LuminaTextMutedBrush}"
-                                      Opacity="0"
-                                      RenderTransformOrigin="50%,50%">
-                                <PathIcon.Transitions>
-                                    <Transitions>
-                                        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.15" Easing="CubicEaseOut" />
-                                    </Transitions>
-                                </PathIcon.Transitions>
-                            </PathIcon>
                         </Grid>
                     </Border>
 
@@ -102,6 +114,10 @@
             <Setter Property="TextElement.Foreground" Value="{DynamicResource LuminaNavigationPaneItemSelectedForegroundBrush}" />
         </Style>
 
+        <Style Selector="^:selected /template/ ContentPresenter#PART_CompactIconPresenter">
+            <Setter Property="TextElement.Foreground" Value="{DynamicResource LuminaNavigationPaneItemSelectedForegroundBrush}" />
+        </Style>
+
         <Style Selector="^:selected /template/ ContentPresenter#PART_HeaderPresenter">
             <Setter Property="TextElement.Foreground" Value="{DynamicResource LuminaNavigationPaneItemSelectedForegroundBrush}" />
         </Style>
@@ -116,6 +132,18 @@
 
         <Style Selector="^:expanded /template/ PathIcon#PART_Chevron">
             <Setter Property="RenderTransform" Value="rotate(90deg)" />
+        </Style>
+
+        <Style Selector="^:compact /template/ Border#PART_Header">
+            <Setter Property="Padding" Value="6,8" />
+        </Style>
+
+        <Style Selector="^:compact /template/ Grid#PART_HeaderLayout">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+
+        <Style Selector="^:compact /template/ ContentPresenter#PART_CompactIconPresenter">
+            <Setter Property="IsVisible" Value="True" />
         </Style>
 
         <Style Selector="^.Child /template/ Border#PART_Header">

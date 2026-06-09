@@ -166,6 +166,11 @@ public class LuminaNavigationItem : ItemsControl
         {
             UpdatePseudoClasses();
         }
+        if (change.Property == LuminaShell.IsMenuCompactProperty)
+        {
+            UpdatePseudoClasses();
+            ApplyExpansionState(animated: false);
+        }
         if (change.Property == IsExpandedProperty)
         {
             _expansionStateVersion++;
@@ -235,6 +240,16 @@ public class LuminaNavigationItem : ItemsControl
 
     private void InvokeOrToggle()
     {
+        if (LuminaShell.GetIsMenuCompact(this) && HasNavigationChildren())
+        {
+            LuminaShell? shell = LuminaShell.FindFor(this);
+            if (shell != null)
+            {
+                shell.IsMenuOpen = true;
+                return;
+            }
+        }
+
         if (HasNavigationChildren())
         {
             LockScrollOffset();
@@ -260,6 +275,7 @@ public class LuminaNavigationItem : ItemsControl
         PseudoClasses.Set(":selected", IsSelected);
         PseudoClasses.Set(":expanded", IsExpanded);
         PseudoClasses.Set(":hasitems", HasNavigationChildren());
+        PseudoClasses.Set(":compact", LuminaShell.GetIsMenuCompact(this));
     }
 
     private void QueueExpansionRefresh()
@@ -277,13 +293,14 @@ public class LuminaNavigationItem : ItemsControl
     {
         if (_itemsContainer != null)
         {
-            double targetHeight = IsExpanded ? MeasureItemsHeight() : 0.0;
+            bool canShowItems = IsExpanded && !LuminaShell.GetIsMenuCompact(this);
+            double targetHeight = canShowItems ? MeasureItemsHeight() : 0.0;
             if (!animated)
             {
                 _expansionTimer.Stop();
-                _itemsContainer.IsVisible = IsExpanded;
+                _itemsContainer.IsVisible = canShowItems;
                 _itemsContainer.Height = targetHeight;
-                _itemsContainer.Opacity = IsExpanded ? 1 : 0;
+                _itemsContainer.Opacity = canShowItems ? 1 : 0;
                 return;
             }
             _expansionTimer.Stop();
@@ -291,7 +308,7 @@ public class LuminaNavigationItem : ItemsControl
             _startHeight = GetCurrentExpansionHeight();
             _targetHeight = targetHeight;
             _startOpacity = _itemsContainer.Opacity;
-            _targetOpacity = IsExpanded ? 1 : 0;
+            _targetOpacity = canShowItems ? 1 : 0;
             _expansionStartedAt = DateTime.UtcNow;
             _expansionTimer.Start();
             RestoreLockedScrollOffset();
@@ -343,7 +360,7 @@ public class LuminaNavigationItem : ItemsControl
             _expansionTimer.Stop();
             _itemsContainer.Height = _targetHeight;
             _itemsContainer.Opacity = _targetOpacity;
-            _itemsContainer.IsVisible = IsExpanded;
+            _itemsContainer.IsVisible = IsExpanded && !LuminaShell.GetIsMenuCompact(this);
             ReleaseScrollOffsetLock();
         }
     }

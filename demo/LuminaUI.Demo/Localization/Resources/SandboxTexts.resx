@@ -4065,4 +4065,103 @@
   <data name="Sandbox.Text.1364" xml:space="preserve">
     <value>Show YesNoCancel</value>
   </data>
+  <data name="Sandbox.ShellShowcase.Title" xml:space="preserve">
+    <value>Shell</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.Subtitle" xml:space="preserve">
+    <value>Chrome, header, and menu state controls</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.Description" xml:space="preserve">
+    <value>Toggle Shell chrome, header, menu, compact mode, and responsive behavior against a live nested Shell.</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.Options" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OptionShellChrome" xml:space="preserve">
+    <value>Shell chrome (IsShellChromeVisible)</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OptionShellHeader" xml:space="preserve">
+    <value>Shell header (IsShellHeaderVisible)</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OptionMenuOpen" xml:space="preserve">
+    <value>Menu open (IsMenuOpen)</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OptionCompactMenu" xml:space="preserve">
+    <value>Compact menu (IsCompactMenuEnabled)</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OptionMenuAutoResponsive" xml:space="preserve">
+    <value>Auto responsive menu (IsMenuAutoResponsive)</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OptionCloseMenuOnNavigate" xml:space="preserve">
+    <value>Close on navigate (CloseMenuOnNavigate)</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OpenPaneLength" xml:space="preserve">
+    <value>Open pane length</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.CompactPaneLength" xml:space="preserve">
+    <value>Compact pane length</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.EffectiveState" xml:space="preserve">
+    <value>Effective state</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StateChromeVisible" xml:space="preserve">
+    <value>Chrome visible</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StateHeaderVisible" xml:space="preserve">
+    <value>Header visible</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StateMenuOpen" xml:space="preserve">
+    <value>Menu open</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StateMenuCompact" xml:space="preserve">
+    <value>Menu compact</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.LivePreview" xml:space="preserve">
+    <value>Live preview</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.PreviewShellTitle" xml:space="preserve">
+    <value>Preview Shell</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.PreviewShellSubtitle" xml:space="preserve">
+    <value>Nested demo shell</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.MenuHeader" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.MenuFooter" xml:space="preserve">
+    <value>Menu footer</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.NavHome" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.NavReports" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.NavSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.NavWorkspace" xml:space="preserve">
+    <value>Workspace</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.NavAudit" xml:space="preserve">
+    <value>Audit</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.RouteHomeSubtitle" xml:space="preserve">
+    <value>Default chrome and menu content.</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.RouteReportsSubtitle" xml:space="preserve">
+    <value>Navigate here with CloseMenuOnNavigate enabled to test mobile collapse.</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.RouteSettingsSubtitle" xml:space="preserve">
+    <value>This route keeps the shell header visible.</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.RouteAuditSubtitle" xml:space="preserve">
+    <value>Nested navigation item route.</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.RouteHint" xml:space="preserve">
+    <value>Resize the window below 768px, toggle the menu, and switch Shell options from the left panel.</value>
+  </data>
 </root>

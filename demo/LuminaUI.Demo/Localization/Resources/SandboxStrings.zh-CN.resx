@@ -228,6 +228,9 @@
   <data name="Sandbox.Nav.Patterns" xml:space="preserve">
     <value>模式</value>
   </data>
+  <data name="Sandbox.Nav.Shell" xml:space="preserve">
+    <value>Shell</value>
+  </data>
   <data name="Sandbox.Nav.Menus" xml:space="preserve">
     <value>菜单与浮层</value>
   </data>

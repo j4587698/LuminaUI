@@ -26,6 +26,8 @@ public class LuminaPage : ContentPage
 
     public static readonly StyledProperty<bool> ShowShellChromeProperty = AvaloniaProperty.Register<LuminaPage, bool>(nameof(ShowShellChrome), defaultValue: true);
 
+    public static readonly StyledProperty<bool> ShowShellHeaderProperty = AvaloniaProperty.Register<LuminaPage, bool>(nameof(ShowShellHeader), defaultValue: true);
+
     protected override Type StyleKeyOverride => typeof(LuminaPage);
 
     public LuminaPageState PageState
@@ -86,6 +88,12 @@ public class LuminaPage : ContentPage
     {
         get => GetValue(ShowShellChromeProperty);
         set => SetValue(ShowShellChromeProperty, value);
+    }
+
+    public bool ShowShellHeader
+    {
+        get => GetValue(ShowShellHeaderProperty);
+        set => SetValue(ShowShellHeaderProperty, value);
     }
 
     public LuminaShell? Shell => FindShell();
