@@ -588,13 +588,7 @@ public class LuminaSettingsOption : Button
             Spacing = 16.0,
             Children =
             {
-                new TextBlock
-                {
-                    Text = (Header?.ToString() ?? PlaceholderText ?? string.Empty),
-                    FontSize = 18.0,
-                    FontWeight = FontWeight.DemiBold,
-                    Foreground = LuminaPickerResources.Brush("LuminaTextForegroundBrush", Brushes.White)
-                },
+                CreateSheetTitleText(Header?.ToString() ?? PlaceholderText ?? string.Empty),
                 input,
                 actions
             }
@@ -649,28 +643,35 @@ public class LuminaSettingsOption : Button
             Spacing = 16.0,
             Children =
             {
-                new TextBlock
-                {
-                    Text = (Header?.ToString() ?? LuminaLocalization.Get("Lumina.Picker.SelectOption")),
-                    FontSize = 18.0,
-                    FontWeight = FontWeight.DemiBold,
-                    Foreground = LuminaPickerResources.Brush("LuminaTextForegroundBrush", Brushes.White)
-                },
+                CreateSheetTitleText(Header?.ToString() ?? LuminaLocalization.Get("Lumina.Picker.SelectOption")),
                 body
             }
         };
         return LuminaBottomSheetService.Instance.TryShow(this, content);
     }
 
+    private static TextBlock CreateSheetTitleText(string text)
+    {
+        TextBlock title = new TextBlock
+        {
+            Text = text,
+            FontSize = 18.0,
+            FontWeight = FontWeight.DemiBold
+        };
+        LuminaPickerResources.BindBrush(title, TextBlock.ForegroundProperty, "LuminaTextForegroundBrush");
+        return title;
+    }
+
     private static TextBlock CreateSheetEmptyText()
     {
-        return new TextBlock
+        TextBlock emptyText = new TextBlock
         {
             Text = LuminaLocalization.Get(LuminaLocalizationKeys.PageEmpty),
             HorizontalAlignment = HorizontalAlignment.Center,
-            Foreground = LuminaPickerResources.Brush("LuminaTextMutedBrush", Brushes.Gray),
             TextWrapping = TextWrapping.Wrap
         };
+        LuminaPickerResources.BindBrush(emptyText, TextBlock.ForegroundProperty, "LuminaTextMutedBrush");
+        return emptyText;
     }
 
     private Button CreateSheetOptionButton(LuminaSettingsSelectOptionItem option)
@@ -679,19 +680,19 @@ public class LuminaSettingsOption : Button
         {
             Text = option.Text,
             VerticalAlignment = VerticalAlignment.Center,
-            TextTrimming = TextTrimming.CharacterEllipsis,
-            Foreground = LuminaPickerResources.Brush("LuminaTextPrimaryBrush", Brushes.White)
+            TextTrimming = TextTrimming.CharacterEllipsis
         };
+        LuminaPickerResources.BindBrush(label, TextBlock.ForegroundProperty, "LuminaTextPrimaryBrush");
         PathIcon checkIcon = new PathIcon
         {
             Width = 18.0,
             Height = 18.0,
             Data = StreamGeometry.Parse("M9,16.2 L4.8,12 L3.4,13.4 L9,19 L21,7 L19.6,5.6 Z"),
             IsVisible = option.IsSelected,
-            Foreground = LuminaPickerResources.Brush("LuminaPrimaryBrush", Brushes.DodgerBlue),
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Center
         };
+        LuminaPickerResources.BindBrush(checkIcon, PathIcon.ForegroundProperty, "LuminaPrimaryBrush");
         Grid grid = new Grid
         {
             ColumnDefinitions = new ColumnDefinitions("*,24"),
