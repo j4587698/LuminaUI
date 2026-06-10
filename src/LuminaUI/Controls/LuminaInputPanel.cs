@@ -12,22 +12,18 @@ namespace LuminaUI.Controls;
 
 public class LuminaInputPanel : ContentControl
 {
-    private const double FocusedElementBottomSpacing = 8.0;
-
     public static readonly StyledProperty<bool> IsInputPaneAvoidanceEnabledProperty =
         AvaloniaProperty.Register<LuminaInputPanel, bool>(nameof(IsInputPaneAvoidanceEnabled), defaultValue: true);
 
     public static readonly StyledProperty<bool> AutoBringFocusedElementIntoViewProperty =
         AvaloniaProperty.Register<LuminaInputPanel, bool>(nameof(AutoBringFocusedElementIntoView), defaultValue: true);
 
-    public static readonly StyledProperty<double> ExtraBottomInsetProperty =
-        AvaloniaProperty.Register<LuminaInputPanel, double>(nameof(ExtraBottomInset), defaultValue: 12.0);
-
     private TopLevel? _topLevel;
     private IInputPane? _inputPane;
     private ScrollViewer? _scrollViewer;
-    private Thickness _scrollViewerBasePadding;
-    private bool _isScrollViewerPaddingApplied;
+    private Border? _rootBorder;
+    private Thickness _rootBorderBasePadding;
+    private bool _isRootBorderPaddingApplied;
     private InputPaneState _inputPaneState = InputPaneState.Closed;
     private Rect _occludedRect;
 
@@ -36,10 +32,7 @@ public class LuminaInputPanel : ContentControl
         IsInputPaneAvoidanceEnabledProperty.Changed.AddClassHandler<LuminaInputPanel>((panel, _) =>
         {
             panel.SyncInputPaneSubscription();
-            panel.UpdateScrollViewerPadding();
         });
-
-        ExtraBottomInsetProperty.Changed.AddClassHandler<LuminaInputPanel>((panel, _) => panel.UpdateScrollViewerPadding());
     }
 
     public bool IsInputPaneAvoidanceEnabled
@@ -54,12 +47,6 @@ public class LuminaInputPanel : ContentControl
         set => SetValue(AutoBringFocusedElementIntoViewProperty, value);
     }
 
-    public double ExtraBottomInset
-    {
-        get => GetValue(ExtraBottomInsetProperty);
-        set => SetValue(ExtraBottomInsetProperty, value);
-    }
-
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
@@ -68,14 +55,17 @@ public class LuminaInputPanel : ContentControl
         _inputPane = _topLevel?.InputPane;
         SyncInputPaneSubscription();
         UpdateInputPaneState();
-        QueueScrollViewerRefresh();
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
 
-        QueueScrollViewerRefresh();
+        _scrollViewer = e.NameScope.Find<ScrollViewer>("PART_ScrollViewer");
+        _rootBorder = e.NameScope.Find<Border>("PART_RootBorder");
+        _rootBorderBasePadding = _rootBorder?.Padding ?? default;
+        _isRootBorderPaddingApplied = false;
+        System.Diagnostics.Debug.WriteLine($"[LuminaInputPanel] OnApplyTemplate: _rootBorderBasePadding={_rootBorderBasePadding}");
     }
 
     protected override void OnGotFocus(FocusChangedEventArgs e)
@@ -84,19 +74,20 @@ public class LuminaInputPanel : ContentControl
 
         if (AutoBringFocusedElementIntoView && _inputPaneState == InputPaneState.Open)
         {
-            QueueBringFocusedElementIntoView();
+            Dispatcher.UIThread.Post(BringFocusedElementIntoView, DispatcherPriority.Render);
         }
     }
 
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         DetachInputPane();
-        ResetScrollViewerPadding();
         _scrollViewer = null;
+        _rootBorder = null;
         _topLevel = null;
         _inputPane = null;
         _inputPaneState = InputPaneState.Closed;
         _occludedRect = default;
+        _isRootBorderPaddingApplied = false;
 
         base.OnDetachedFromVisualTree(e);
     }
@@ -135,117 +126,52 @@ public class LuminaInputPanel : ContentControl
             _inputPaneState = InputPaneState.Closed;
             _occludedRect = default;
         }
-
-        UpdateScrollViewerPadding();
     }
 
     private void OnInputPaneStateChanged(object? sender, InputPaneStateEventArgs e)
     {
         _inputPaneState = e.NewState;
         _occludedRect = e.EndRect;
-        UpdateScrollViewerPadding();
+        System.Diagnostics.Debug.WriteLine($"[LuminaInputPanel] StateChanged: NewState={e.NewState}, EndRect={e.EndRect}");
+
+        UpdateBorderPadding();
 
         if (AutoBringFocusedElementIntoView && e.NewState == InputPaneState.Open)
         {
-            QueueBringFocusedElementIntoView();
-        }
-    }
-
-    private void QueueScrollViewerRefresh()
-    {
-        Dispatcher.UIThread.Post(() =>
-        {
-            if (_topLevel == null)
+            // 延迟一下，等布局完成后再滚动
+            Dispatcher.UIThread.Post(() =>
             {
-                return;
-            }
-
-            UpdateScrollViewerPadding();
-        }, DispatcherPriority.Loaded);
+                Dispatcher.UIThread.Post(BringFocusedElementIntoView, DispatcherPriority.Render);
+            }, DispatcherPriority.Loaded);
+        }
     }
 
-    private void QueueBringFocusedElementIntoView()
+    private void UpdateBorderPadding()
     {
-        Dispatcher.UIThread.Post(() =>
+        if (_rootBorder == null || _topLevel == null)
         {
-            if (_topLevel == null)
+            return;
+        }
+
+        if (_inputPaneState != InputPaneState.Open || _occludedRect.Height <= 0)
+        {
+            // 键盘关闭，恢复原始 Padding
+            if (_isRootBorderPaddingApplied)
             {
-                return;
+                _rootBorder.Padding = _rootBorderBasePadding;
+                _isRootBorderPaddingApplied = false;
             }
-
-            UpdateScrollViewerPadding();
-            Dispatcher.UIThread.Post(BringFocusedElementIntoView, DispatcherPriority.Render);
-        }, DispatcherPriority.Loaded);
-    }
-
-    private void UpdateScrollViewerPadding()
-    {
-        SetScrollViewer(ResolveScrollViewer());
-
-        if (_scrollViewer == null)
-        {
             return;
         }
 
-        if (!_isScrollViewerPaddingApplied)
-        {
-            _scrollViewerBasePadding = _scrollViewer.Padding;
-        }
-
-        double bottomInset = ResolveBottomInset();
-        if (bottomInset <= 0)
-        {
-            ResetScrollViewerPadding();
-            return;
-        }
-
-        _scrollViewer.Padding = new Thickness(
-            _scrollViewerBasePadding.Left,
-            _scrollViewerBasePadding.Top,
-            _scrollViewerBasePadding.Right,
-            _scrollViewerBasePadding.Bottom + bottomInset);
-        _isScrollViewerPaddingApplied = true;
-    }
-
-    private void SetScrollViewer(ScrollViewer? scrollViewer)
-    {
-        if (ReferenceEquals(_scrollViewer, scrollViewer))
-        {
-            return;
-        }
-
-        ResetScrollViewerPadding();
-        _scrollViewer = scrollViewer;
-        _scrollViewerBasePadding = scrollViewer?.Padding ?? default;
-        _isScrollViewerPaddingApplied = false;
-    }
-
-    private void ResetScrollViewerPadding()
-    {
-        if (_scrollViewer != null && _isScrollViewerPaddingApplied)
-        {
-            _scrollViewer.Padding = _scrollViewerBasePadding;
-            _isScrollViewerPaddingApplied = false;
-        }
-    }
-
-    private double ResolveBottomInset()
-    {
-        if (!IsInputPaneAvoidanceEnabled ||
-            _inputPaneState != InputPaneState.Open ||
-            _topLevel == null ||
-            _occludedRect.Height <= 0)
-        {
-            return 0;
-        }
-
-        double inset = Math.Max(0, _topLevel.ClientSize.Height - _occludedRect.Top);
-        if (inset <= 0)
-        {
-            return 0;
-        }
-
-        return inset + Math.Max(0, ExtraBottomInset);
+        // 键盘打开，直接设置底部 Padding 为键盘高度
+        _rootBorder.Padding = new Thickness(
+            _rootBorderBasePadding.Left,
+            _rootBorderBasePadding.Top,
+            _rootBorderBasePadding.Right,
+            _occludedRect.Height);
+        _isRootBorderPaddingApplied = true;
+        System.Diagnostics.Debug.WriteLine($"[LuminaInputPanel] Border Padding={_rootBorder.Padding}, _occludedRect.Height={_occludedRect.Height}");
     }
 
     private void BringFocusedElementIntoView()
@@ -257,8 +183,6 @@ public class LuminaInputPanel : ContentControl
             return;
         }
 
-        UpdateScrollViewerPadding();
-
         if (_inputPaneState != InputPaneState.Open ||
             _topLevel == null ||
             _scrollViewer == null ||
@@ -268,41 +192,8 @@ public class LuminaInputPanel : ContentControl
             return;
         }
 
-        Point? focusedBottom = focused.TranslatePoint(new Point(0, focused.Bounds.Height), _topLevel);
-        if (!focusedBottom.HasValue)
-        {
-            focused.BringIntoView();
-            return;
-        }
-
-        double visibleBottom = ResolveVisibleBottom(_scrollViewer, _topLevel) - Math.Max(FocusedElementBottomSpacing, ExtraBottomInset);
-        double requiredDelta = focusedBottom.Value.Y - visibleBottom;
-        if (requiredDelta <= 0)
-        {
-            focused.BringIntoView();
-            return;
-        }
-
-        SetVerticalOffset(_scrollViewer, _scrollViewer.Offset.Y + requiredDelta);
-    }
-
-    private ScrollViewer? ResolveScrollViewer()
-    {
-        if (Content is ScrollViewer contentScrollViewer)
-        {
-            return contentScrollViewer;
-        }
-
-        if (Content is Visual contentVisual)
-        {
-            ScrollViewer? descendantScrollViewer = contentVisual.GetVisualDescendants().OfType<ScrollViewer>().FirstOrDefault();
-            if (descendantScrollViewer != null)
-            {
-                return descendantScrollViewer;
-            }
-        }
-
-        return this.GetVisualAncestors().OfType<ScrollViewer>().FirstOrDefault();
+        System.Diagnostics.Debug.WriteLine($"[LuminaInputPanel] BringIntoView: calling focused.BringIntoView()");
+        focused.BringIntoView();
     }
 
     private static Control? ResolveFocusedControl(IInputElement focusedElement)
@@ -318,17 +209,6 @@ public class LuminaInputPanel : ContentControl
     private bool IsElementInsidePanel(Control control)
     {
         return ReferenceEquals(control, this) || control.GetVisualAncestors().Any(ancestor => ReferenceEquals(ancestor, this));
-    }
-
-    private double ResolveVisibleBottom(ScrollViewer scrollViewer, TopLevel topLevel)
-    {
-        Point? scrollViewerBottom = scrollViewer.TranslatePoint(new Point(0, scrollViewer.Bounds.Height), topLevel);
-        if (!scrollViewerBottom.HasValue)
-        {
-            return _occludedRect.Top;
-        }
-
-        return Math.Min(scrollViewerBottom.Value.Y, _occludedRect.Top);
     }
 
     private static void SetVerticalOffset(ScrollViewer scrollViewer, double y)

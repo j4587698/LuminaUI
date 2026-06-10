@@ -10,6 +10,6 @@ namespace LuminaUI.Demo.Android;
     Theme = "@style/LuminaUI.Theme",
     MainLauncher = true,
     LaunchMode = LaunchMode.SingleTop,
-    WindowSoftInputMode = SoftInput.AdjustResize,
+    WindowSoftInputMode = SoftInput.AdjustNothing,
     ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.UiMode)]
 public class MainActivity : AvaloniaMainActivity;
