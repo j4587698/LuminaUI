@@ -26,6 +26,8 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
 
     private static readonly TimeSpan BottomSheetClearDelay = TimeSpan.FromMilliseconds(360);
 
+    private readonly LuminaOverlayInputPaneAvoidance _overlayInputPaneAvoidance;
+
     private Control? _dialogOverlay;
 
     private Control? _bottomSheetOverlay;
@@ -115,6 +117,7 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
 
     public LuminaTopView()
     {
+        _overlayInputPaneAvoidance = new LuminaOverlayInputPaneAvoidance(this, () => IsDialogOpen, () => IsBottomSheetOpen);
         CloseDialogCommand = new LuminaRelayCommand(_ => {
             CloseDialog();
         });
@@ -233,12 +236,14 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
     {
         base.OnAttachedToVisualTree(e);
         RegisterAttachedTopView();
+        _overlayInputPaneAvoidance.AttachToVisualTree();
     }
 
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         CancelToastHide();
         CancelBottomSheetContentClear();
+        _overlayInputPaneAvoidance.DetachFromVisualTree();
         DetachOverlayHandlers();
         base.OnDetachedFromVisualTree(e);
         UnregisterAttachedTopView();
@@ -263,6 +268,9 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
         {
             _toastPresenter.Content = ToastContent;
         }
+        _overlayInputPaneAvoidance.ApplyTemplate(
+            e.NameScope.FindRequired<Control>("PART_DialogContainer"),
+            e.NameScope.FindRequired<Control>("PART_BottomSheetContainer"));
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
@@ -291,6 +299,10 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
                 ScheduleToastHide(content, duration);
             }
         }
+        else if (change.Property == IsDialogOpenProperty)
+        {
+            _overlayInputPaneAvoidance.UpdateOverlayState();
+        }
         else if (change.Property == IsBottomSheetOpenProperty)
         {
             if (change.GetNewValue<bool>())
@@ -301,7 +313,14 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
             {
                 ScheduleBottomSheetContentClear();
             }
+            _overlayInputPaneAvoidance.UpdateOverlayState();
         }
+    }
+
+    protected override void OnSizeChanged(SizeChangedEventArgs e)
+    {
+        base.OnSizeChanged(e);
+        _overlayInputPaneAvoidance.UpdateOverlayState();
     }
 
     private static List<LuminaTopView> GetOwnerChain(Control owner)

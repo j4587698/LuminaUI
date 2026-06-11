@@ -36,6 +36,8 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private readonly Dictionary<string, Control> _routeCache = new Dictionary<string, Control>(StringComparer.Ordinal);
 
+    private readonly LuminaOverlayInputPaneAvoidance _overlayInputPaneAvoidance;
+
     private LuminaPage? _activePage;
 
     private ContentPresenter? _toastPresenter;
@@ -381,6 +383,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     {
         base.OnAttachedToVisualTree(e);
         RegisterAttachedShell();
+        _overlayInputPaneAvoidance.AttachToVisualTree();
     }
 
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
@@ -394,6 +397,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         ActiveRouteContent = null;
         CancelToastHide();
         CancelBottomSheetContentClear();
+        _overlayInputPaneAvoidance.DetachFromVisualTree();
         if (_dialogOverlay != null)
         {
             _dialogOverlay.RemoveHandler(InputElement.PointerPressedEvent, OnDialogOverlayPointerPressed);
@@ -434,6 +438,9 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         {
             _toastPresenter.Content = ToastContent;
         }
+        _overlayInputPaneAvoidance.ApplyTemplate(
+            e.NameScope.FindRequired<Control>("PART_DialogContainer"),
+            e.NameScope.FindRequired<Control>("PART_BottomSheetContainer"));
     }
 
     private void OnDialogOverlayPointerPressed(object? sender, PointerPressedEventArgs ev)
@@ -464,6 +471,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     public LuminaShell()
     {
+        _overlayInputPaneAvoidance = new LuminaOverlayInputPaneAvoidance(this, () => IsDialogOpen, () => IsBottomSheetOpen);
         NavigateCommand = new LuminaRelayCommand((object? parameter) =>
         {
             if (parameter is string navigationKey)
@@ -693,6 +701,10 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
                 ScheduleToastHide(content, duration);
             }
         }
+        else if (change.Property == IsDialogOpenProperty)
+        {
+            _overlayInputPaneAvoidance.UpdateOverlayState();
+        }
         else if (change.Property == IsBottomSheetOpenProperty)
         {
             if (change.GetNewValue<bool>())
@@ -703,6 +715,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
             {
                 ScheduleBottomSheetContentClear();
             }
+            _overlayInputPaneAvoidance.UpdateOverlayState();
         }
     }
 
@@ -788,6 +801,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     protected override void OnSizeChanged(SizeChangedEventArgs e)
     {
         base.OnSizeChanged(e);
+        _overlayInputPaneAvoidance.UpdateOverlayState();
         bool isMobile = e.NewSize.Width < 768.0;
         PseudoClasses.Set(":mobile", isMobile);
         if (!IsShellChromeVisible)
