@@ -199,12 +199,8 @@ public partial class SettingsPageViewModel : ObservableObject
 
     private static string GetCultureDisplayName(CultureInfo culture)
     {
-        return culture.Name switch
-        {
-            "en-US" => LuminaLocalization.Get(SandboxLocalization.LanguageEnglish),
-            "zh-CN" => LuminaLocalization.Get(SandboxLocalization.LanguageChinese),
-            _ => culture.NativeName
-        };
+        // 使用 NativeName 而不是 LuminaLocalization.Get，因为语言名称本身不应该随语言切换而变化
+        return culture.NativeName;
     }
 
     private static int FindCultureIndex(IReadOnlyList<CultureInfo> cultures, CultureInfo culture)
