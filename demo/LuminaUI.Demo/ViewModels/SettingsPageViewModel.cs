@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.Globalization;
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -34,13 +35,13 @@ public partial class SettingsPageViewModel : ObservableObject
     private IBrush? _accentPreviewBrush;
 
     [ObservableProperty]
-    private string[] _languageItems = [];
+    private ObservableCollection<string> _languageItems = [];
 
     [ObservableProperty]
     private int _selectedLanguageIndex;
 
     [ObservableProperty]
-    private string[] _themeModeItems = [];
+    private ObservableCollection<string> _themeModeItems = [];
 
     [ObservableProperty]
     private int _selectedThemeModeIndex;
@@ -147,12 +148,11 @@ public partial class SettingsPageViewModel : ObservableObject
     private void SyncThemeModeControls()
     {
         _isSyncingThemeMode = true;
-        ThemeModeItems =
-        [
+        SyncItems(ThemeModeItems, [
             LuminaLocalization.Get(SandboxLocalization.SettingsThemeModeSystem),
             LuminaLocalization.Get(SandboxLocalization.SettingsThemeModeLight),
             LuminaLocalization.Get(SandboxLocalization.SettingsThemeModeDark)
-        ];
+        ]);
         SelectedThemeModeIndex = LuminaThemeManager.CurrentThemeMode switch
         {
             LuminaThemeMode.Light => 1,
@@ -166,7 +166,7 @@ public partial class SettingsPageViewModel : ObservableObject
     {
         _isSyncingLanguage = true;
         var cultures = LuminaLocalization.SupportedCultures;
-        LanguageItems = cultures.Select(GetCultureDisplayName).ToArray();
+        SyncItems(LanguageItems, cultures.Select(GetCultureDisplayName));
         SelectedLanguageIndex = FindCultureIndex(cultures, LuminaLocalization.CurrentCulture);
         _isSyncingLanguage = false;
 
@@ -176,14 +176,31 @@ public partial class SettingsPageViewModel : ObservableObject
         }
     }
 
+    private static void SyncItems(ObservableCollection<string> target, IEnumerable<string> source)
+    {
+        var items = source as IReadOnlyList<string> ?? source.ToArray();
+        for (var i = 0; i < items.Count; i++)
+        {
+            if (i >= target.Count)
+            {
+                target.Add(items[i]);
+            }
+            else if (!string.Equals(target[i], items[i], StringComparison.Ordinal))
+            {
+                target[i] = items[i];
+            }
+        }
+
+        while (target.Count > items.Count)
+        {
+            target.RemoveAt(target.Count - 1);
+        }
+    }
+
     private static string GetCultureDisplayName(CultureInfo culture)
     {
-        return culture.Name switch
-        {
-            "en-US" => LuminaLocalization.Get(SandboxLocalization.LanguageEnglish),
-            "zh-CN" => LuminaLocalization.Get(SandboxLocalization.LanguageChinese),
-            _ => culture.NativeName
-        };
+        // 使用 NativeName 而不是 LuminaLocalization.Get，因为语言名称本身不应该随语言切换而变化
+        return culture.NativeName;
     }
 
     private static int FindCultureIndex(IReadOnlyList<CultureInfo> cultures, CultureInfo culture)
