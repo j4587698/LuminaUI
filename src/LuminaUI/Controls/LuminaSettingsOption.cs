@@ -8,6 +8,7 @@ using Avalonia;
 using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Controls.Templates;
 using Avalonia.Data;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
@@ -616,27 +617,12 @@ public class LuminaSettingsOption : Button
 
     private bool TryShowSelectSheet()
     {
-        StackPanel list = new StackPanel
-        {
-            Spacing = 4.0
-        };
-        if (SelectOptions.Count == 0)
-        {
-            list.Children.Add(CreateSheetEmptyText());
-        }
-        else
-        {
-            foreach (LuminaSettingsSelectOptionItem option in SelectOptions)
-            {
-                list.Children.Add(CreateSheetOptionButton(option));
-            }
-        }
         ScrollViewer body = new ScrollViewer
         {
             MaxHeight = 420.0,
             HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
             VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-            Content = list
+            Content = SelectOptions.Count == 0 ? CreateSheetEmptyText() : CreateSheetOptionsList()
         };
         StackPanel content = new StackPanel
         {
@@ -648,6 +634,19 @@ public class LuminaSettingsOption : Button
             }
         };
         return LuminaBottomSheetService.Instance.TryShow(this, content);
+    }
+
+    private ItemsControl CreateSheetOptionsList()
+    {
+        return new ItemsControl
+        {
+            ItemsSource = SelectOptions,
+            ItemsPanel = new FuncTemplate<Panel?>(() => new StackPanel
+            {
+                Spacing = 4.0
+            }),
+            ItemTemplate = new FuncDataTemplate<LuminaSettingsSelectOptionItem>((option, _) => CreateSheetOptionButton(option), supportsRecycling: false)
+        };
     }
 
     private static TextBlock CreateSheetTitleText(string text)
@@ -678,20 +677,20 @@ public class LuminaSettingsOption : Button
     {
         TextBlock label = new TextBlock
         {
-            Text = option.Text,
             VerticalAlignment = VerticalAlignment.Center,
             TextTrimming = TextTrimming.CharacterEllipsis
         };
+        label.Bind(TextBlock.TextProperty, new Binding(nameof(LuminaSettingsSelectOptionItem.Text)) { Source = option });
         LuminaPickerResources.BindBrush(label, TextBlock.ForegroundProperty, "LuminaTextPrimaryBrush");
         PathIcon checkIcon = new PathIcon
         {
             Width = 18.0,
             Height = 18.0,
             Data = StreamGeometry.Parse("M9,16.2 L4.8,12 L3.4,13.4 L9,19 L21,7 L19.6,5.6 Z"),
-            IsVisible = option.IsSelected,
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Center
         };
+        checkIcon.Bind(IsVisibleProperty, new Binding(nameof(LuminaSettingsSelectOptionItem.IsSelected)) { Source = option });
         LuminaPickerResources.BindBrush(checkIcon, PathIcon.ForegroundProperty, "LuminaPrimaryBrush");
         Grid grid = new Grid
         {
