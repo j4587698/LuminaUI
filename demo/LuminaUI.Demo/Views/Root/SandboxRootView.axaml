@@ -123,6 +123,7 @@
                         </lumina:LuminaNavigationItem>
 
                         <lumina:LuminaNavigationItem Name="NavPatternsGroup" Header="{l10n:Loc Sandbox.Nav.Patterns}" Icon="PT">
+                            <lumina:LuminaNavigationItem Name="NavShell" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Shell}" Icon="SH" />
                             <lumina:LuminaNavigationItem Name="NavMenus" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Menus}" Icon="MN" />
                             <lumina:LuminaNavigationItem Name="NavOverlays" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Overlays}" Icon="OV" />
                             <lumina:LuminaNavigationItem Name="NavWindowDialogs" Classes="Child" Header="{l10n:Loc Sandbox.Nav.WindowDialogs}" Icon="WD" />

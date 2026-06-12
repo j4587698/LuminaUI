@@ -177,6 +177,8 @@ internal static class SandboxLocalization
 
 	public const string NavPatterns = "Sandbox.Nav.Patterns";
 
+	public const string NavShell = "Sandbox.Nav.Shell";
+
 	public const string NavMenus = "Sandbox.Nav.Menus";
 
 	public const string NavOverlays = "Sandbox.Nav.Overlays";

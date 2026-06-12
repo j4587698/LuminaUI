@@ -1,5 +1,6 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
                     xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
 
     <ControlTheme x:Key="{x:Type lumina:LuminaAutoScrollText}" TargetType="lumina:LuminaAutoScrollText">
@@ -290,69 +291,178 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Template">
             <ControlTemplate TargetType="lumina:LuminaSettingsOption">
-                <Border Name="PART_Root"
-                        MinHeight="{TemplateBinding MinHeight}"
-                        Padding="{TemplateBinding Padding}"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="{TemplateBinding CornerRadius}">
-                    <Grid ColumnDefinitions="Auto,*,Auto,Auto"
-                          ColumnSpacing="12"
-                          VerticalAlignment="Center">
-                        <Border IsVisible="{TemplateBinding HasIcon}"
-                                Width="32"
-                                Height="32"
-                                Background="{DynamicResource LuminaPrimaryBgBrush}"
-                                CornerRadius="9"
-                                VerticalAlignment="Center">
-                            <ContentPresenter Content="{TemplateBinding Icon}"
-                                              HorizontalContentAlignment="Center"
+                <Grid>
+                    <Border Name="PART_Root"
+                            MinHeight="{TemplateBinding MinHeight}"
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}">
+                        <Grid ColumnDefinitions="Auto,*,Auto,Auto"
+                              ColumnSpacing="12"
+                              VerticalAlignment="Center">
+                            <Border IsVisible="{TemplateBinding HasIcon}"
+                                    Width="32"
+                                    Height="32"
+                                    Background="{DynamicResource LuminaPrimaryBgBrush}"
+                                    CornerRadius="9"
+                                    VerticalAlignment="Center">
+                                <ContentPresenter Content="{TemplateBinding Icon}"
+                                                  HorizontalContentAlignment="Center"
+                                                  VerticalContentAlignment="Center"
+                                                  TextElement.FontSize="13"
+                                                  TextElement.FontWeight="SemiBold"
+                                                  TextElement.Foreground="{DynamicResource LuminaPrimaryBrush}" />
+                            </Border>
+
+                            <StackPanel Grid.Column="1"
+                                        Spacing="3"
+                                        VerticalAlignment="Center">
+                                <TextBlock Text="{TemplateBinding Header}"
+                                           FontSize="14"
+                                           FontWeight="SemiBold"
+                                           Foreground="{TemplateBinding Foreground}"
+                                           TextTrimming="CharacterEllipsis" />
+                                <TextBlock Text="{TemplateBinding Description}"
+                                           IsVisible="{TemplateBinding HasDescription}"
+                                           FontSize="12"
+                                           Foreground="{DynamicResource LuminaTextTertiaryBrush}"
+                                           TextWrapping="Wrap" />
+                            </StackPanel>
+
+                            <ContentPresenter Grid.Column="2"
+                                              Content="{TemplateBinding Value}"
+                                              IsVisible="{TemplateBinding HasValue}"
+                                              HorizontalContentAlignment="Right"
                                               VerticalContentAlignment="Center"
                                               TextElement.FontSize="13"
-                                              TextElement.FontWeight="SemiBold"
-                                              TextElement.Foreground="{DynamicResource LuminaPrimaryBrush}" />
-                        </Border>
+                                              TextElement.FontWeight="Medium"
+                                              TextElement.Foreground="{DynamicResource LuminaTextMutedBrush}" />
 
-                        <StackPanel Grid.Column="1"
-                                    Spacing="3"
-                                    VerticalAlignment="Center">
-                            <TextBlock Text="{TemplateBinding Header}"
-                                       FontSize="14"
-                                       FontWeight="SemiBold"
-                                       Foreground="{TemplateBinding Foreground}"
+                            <ContentPresenter Grid.Column="2"
+                                              Content="{TemplateBinding TrailingContent}"
+                                              IsVisible="{TemplateBinding HasTrailingContent}"
+                                              HorizontalContentAlignment="Right"
+                                              VerticalContentAlignment="Center" />
+
+                            <TextBlock Grid.Column="2"
+                                       MinWidth="{TemplateBinding AccessoryMinWidth}"
+                                       MaxWidth="{TemplateBinding AccessoryMaxWidth}"
+                                       Text="{TemplateBinding InputDisplayText}"
+                                       IsVisible="{TemplateBinding ShowTextInputAccessory}"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Center"
+                                       FontSize="13"
+                                       FontWeight="Medium"
+                                       Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                       TextAlignment="Right"
                                        TextTrimming="CharacterEllipsis" />
-                            <TextBlock Text="{TemplateBinding Description}"
-                                       IsVisible="{TemplateBinding HasDescription}"
-                                       FontSize="12"
-                                       Foreground="{DynamicResource LuminaTextTertiaryBrush}"
-                                       TextWrapping="Wrap" />
-                        </StackPanel>
 
-                        <ContentPresenter Grid.Column="2"
-                                          Content="{TemplateBinding Value}"
-                                          IsVisible="{TemplateBinding HasValue}"
-                                          HorizontalContentAlignment="Right"
-                                          VerticalContentAlignment="Center"
-                                          TextElement.FontSize="13"
-                                          TextElement.FontWeight="Medium"
-                                          TextElement.Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                            <TextBlock Grid.Column="2"
+                                       MinWidth="{TemplateBinding AccessoryMinWidth}"
+                                       MaxWidth="{TemplateBinding AccessoryMaxWidth}"
+                                       Text="{TemplateBinding SelectedDisplayText}"
+                                       IsVisible="{TemplateBinding ShowSelectAccessory}"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Center"
+                                       FontSize="13"
+                                       FontWeight="Medium"
+                                       Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                       TextAlignment="Right"
+                                       TextTrimming="CharacterEllipsis" />
 
-                        <ContentPresenter Grid.Column="2"
-                                          Content="{TemplateBinding TrailingContent}"
-                                          IsVisible="{TemplateBinding HasTrailingContent}"
-                                          HorizontalContentAlignment="Right"
-                                          VerticalContentAlignment="Center" />
+                            <TextBlock Grid.Column="3"
+                                       Text=">"
+                                       IsVisible="{TemplateBinding ShowChevronIcon}"
+                                       FontSize="16"
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                       VerticalAlignment="Center" />
+                        </Grid>
+                    </Border>
 
-                        <TextBlock Grid.Column="3"
-                                   Text=">"
-                                   IsVisible="{TemplateBinding ShowChevron}"
-                                   FontSize="16"
-                                   FontWeight="SemiBold"
-                                   Foreground="{DynamicResource LuminaTextMutedBrush}"
-                                   VerticalAlignment="Center" />
-                    </Grid>
-                </Border>
+                    <Popup Name="PART_SelectPopup"
+                           IsOpen="{Binding IsSelectPopupOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                           IsLightDismissEnabled="True"
+                           Placement="BottomEdgeAlignedRight"
+                           PlacementConstraintAdjustment="FlipY,SlideX,ResizeY"
+                           PlacementTarget="{Binding #PART_Root}"
+                           WindowManagerAddShadowHint="False">
+                        <Border MinWidth="{Binding #PART_Root.Bounds.Width}"
+                                MaxHeight="320"
+                                Margin="0,6,0,0"
+                                Padding="6"
+                                Background="{DynamicResource LuminaPopoverBrush}"
+                                BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="10"
+                                BoxShadow="{DynamicResource LuminaShadowPopup}">
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                          VerticalScrollBarVisibility="Auto">
+                                <ItemsControl ItemsSource="{TemplateBinding SelectOptions}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate DataType="lumina:LuminaSettingsSelectOptionItem">
+                                            <Button Name="PART_SelectOptionButton"
+                                                    Classes="ActionSheetItem">
+                                                <Grid ColumnDefinitions="*,24"
+                                                      ColumnSpacing="12">
+                                                    <TextBlock Text="{Binding Text}"
+                                                               VerticalAlignment="Center"
+                                                               Foreground="{DynamicResource LuminaTextPrimaryBrush}"
+                                                               TextTrimming="CharacterEllipsis" />
+                                                    <PathIcon Grid.Column="1"
+                                                              Width="18"
+                                                              Height="18"
+                                                              Data="M9,16.2 L4.8,12 L3.4,13.4 L9,19 L21,7 L19.6,5.6 Z"
+                                                              IsVisible="{Binding IsSelected}"
+                                                              Foreground="{DynamicResource LuminaPrimaryBrush}"
+                                                              HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center" />
+                                                </Grid>
+                                            </Button>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
+                        </Border>
+                    </Popup>
+
+                    <Popup Name="PART_InputPopup"
+                           IsOpen="{Binding IsInputPopupOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                           IsLightDismissEnabled="True"
+                           Placement="BottomEdgeAlignedRight"
+                           PlacementConstraintAdjustment="FlipY,SlideX,ResizeY"
+                           PlacementTarget="{Binding #PART_Root}"
+                           WindowManagerAddShadowHint="False">
+                        <Border MinWidth="{Binding #PART_Root.Bounds.Width}"
+                                Margin="0,6,0,0"
+                                Padding="12"
+                                Background="{DynamicResource LuminaPopoverBrush}"
+                                BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="10"
+                                BoxShadow="{DynamicResource LuminaShadowPopup}">
+                            <StackPanel Spacing="12">
+                                <TextBox MinHeight="38"
+                                         Text="{Binding InputDraftText, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                         PlaceholderText="{TemplateBinding PlaceholderText}"
+                                         HorizontalContentAlignment="Stretch" />
+                                <Grid ColumnDefinitions="*,Auto,Auto"
+                                      ColumnSpacing="8">
+                                    <Button Name="PART_InputCancelButton"
+                                            Grid.Column="1"
+                                            Classes="Outline"
+                                            Content="{l10n:Loc Lumina.Common.Cancel}" />
+                                    <Button Name="PART_InputDoneButton"
+                                            Grid.Column="2"
+                                            Classes="Primary"
+                                            Content="{l10n:Loc Lumina.Common.Done}" />
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </Popup>
+                </Grid>
             </ControlTemplate>
         </Setter>
 

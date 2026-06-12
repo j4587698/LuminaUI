@@ -32,6 +32,12 @@
                                                     SelectItemsSource="{Binding LanguageItems}"
                                                     SelectedIndex="{Binding SelectedLanguageIndex}"
                                                     PopupType="Sheet" />
+                <lumina:LuminaSettingsSelectOption Icon="D"
+                                                    Header="{l10n:Loc Sandbox.Picker.ModeDropdown}"
+                                                    Description="{l10n:Loc Sandbox.Settings.ThemeModeDescription}"
+                                                    SelectItemsSource="{Binding ThemeModeItems}"
+                                                    SelectedIndex="{Binding SelectedThemeModeIndex}"
+                                                    PopupType="Dropdown" />
                 <lumina:LuminaSettingsInputOption Icon="S"
                                                   Header="{l10n:Loc Sandbox.Settings.Storage}"
                                                   PlaceholderText="{l10n:Loc Sandbox.Settings.Storage}"

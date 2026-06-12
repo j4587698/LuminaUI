@@ -1,0 +1,179 @@
+<lumina:LuminaPage xmlns="https://github.com/avaloniaui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
+                   xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+                   x:Class="LuminaUI.Demo.Views.ShellShowcasePage"
+                   ShellTitle="{l10n:Loc Sandbox.ShellShowcase.Title}"
+                   ShellSubtitle="{l10n:Loc Sandbox.ShellShowcase.Subtitle}">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="20">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.ShellShowcase.Title}" />
+                <TextBlock Text="{l10n:Loc Sandbox.ShellShowcase.Description}"
+                           Foreground="{DynamicResource LuminaTextMutedBrush}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+
+            <Grid ColumnDefinitions="320,*" ColumnSpacing="16">
+                <lumina:LuminaCard Padding="16">
+                    <StackPanel Spacing="16">
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.ShellShowcase.Options}" />
+
+                        <StackPanel Spacing="10">
+                            <CheckBox Content="{l10n:Loc Sandbox.ShellShowcase.OptionShellChrome}"
+                                      IsChecked="{Binding #PreviewShell.IsShellChromeVisible, Mode=TwoWay}" />
+                            <CheckBox Content="{l10n:Loc Sandbox.ShellShowcase.OptionShellHeader}"
+                                      IsChecked="{Binding #PreviewShell.IsShellHeaderVisible, Mode=TwoWay}" />
+                            <CheckBox Content="{l10n:Loc Sandbox.ShellShowcase.OptionMenuOpen}"
+                                      IsChecked="{Binding #PreviewShell.IsMenuOpen, Mode=TwoWay}" />
+                            <CheckBox Content="{l10n:Loc Sandbox.ShellShowcase.OptionCompactMenu}"
+                                      IsChecked="{Binding #PreviewShell.IsCompactMenuEnabled, Mode=TwoWay}" />
+                            <CheckBox Content="{l10n:Loc Sandbox.ShellShowcase.OptionMenuAutoResponsive}"
+                                      IsChecked="{Binding #PreviewShell.IsMenuAutoResponsive, Mode=TwoWay}" />
+                            <CheckBox Content="{l10n:Loc Sandbox.ShellShowcase.OptionCloseMenuOnNavigate}"
+                                      IsChecked="{Binding #PreviewShell.CloseMenuOnNavigate, Mode=TwoWay}" />
+                        </StackPanel>
+
+                        <Separator />
+
+                        <StackPanel Spacing="8">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.ShellShowcase.OpenPaneLength}" />
+                                <TextBlock Grid.Column="1"
+                                           Classes="Label"
+                                           Text="{Binding #PreviewShell.OpenPaneLength, StringFormat='{}{0:0}'}" />
+                            </Grid>
+                            <Slider Minimum="160"
+                                    Maximum="320"
+                                    Value="{Binding #PreviewShell.OpenPaneLength, Mode=TwoWay}" />
+                        </StackPanel>
+
+                        <StackPanel Spacing="8">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.ShellShowcase.CompactPaneLength}" />
+                                <TextBlock Grid.Column="1"
+                                           Classes="Label"
+                                           Text="{Binding #PreviewShell.CompactPaneLength, StringFormat='{}{0:0}'}" />
+                            </Grid>
+                            <Slider Minimum="44"
+                                    Maximum="88"
+                                    Value="{Binding #PreviewShell.CompactPaneLength, Mode=TwoWay}" />
+                        </StackPanel>
+
+                        <Separator />
+
+                        <StackPanel Spacing="6">
+                            <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.ShellShowcase.EffectiveState}" />
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Text="{l10n:Loc Sandbox.ShellShowcase.StateChromeVisible}" />
+                                <TextBlock Grid.Column="1" Text="{Binding #PreviewShell.EffectiveIsShellChromeVisible}" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Text="{l10n:Loc Sandbox.ShellShowcase.StateHeaderVisible}" />
+                                <TextBlock Grid.Column="1" Text="{Binding #PreviewShell.EffectiveIsShellHeaderVisible}" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Text="{l10n:Loc Sandbox.ShellShowcase.StateMenuOpen}" />
+                                <TextBlock Grid.Column="1" Text="{Binding #PreviewShell.EffectiveIsMenuOpen}" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Text="{l10n:Loc Sandbox.ShellShowcase.StateMenuCompact}" />
+                                <TextBlock Grid.Column="1" Text="{Binding #PreviewShell.EffectiveIsMenuCompact}" />
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard Grid.Column="1" Padding="0" ClipToBounds="True">
+                    <Grid RowDefinitions="Auto,*">
+                        <Border Grid.Row="0"
+                                Padding="14"
+                                Background="{DynamicResource LuminaSurfaceBrush}"
+                                BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                                BorderThickness="0,0,0,1">
+                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                                <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.ShellShowcase.LivePreview}" />
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                                    <Button Classes="Small Outline"
+                                            Content="{l10n:Loc Sandbox.ShellShowcase.NavHome}"
+                                            Command="{Binding #PreviewShell.NavigateCommand}"
+                                            CommandParameter="PreviewHome" />
+                                    <Button Classes="Small Outline"
+                                            Content="{l10n:Loc Sandbox.ShellShowcase.NavReports}"
+                                            Command="{Binding #PreviewShell.NavigateCommand}"
+                                            CommandParameter="PreviewReports" />
+                                    <Button Classes="Small Outline"
+                                            Content="{l10n:Loc Sandbox.ShellShowcase.NavSettings}"
+                                            Command="{Binding #PreviewShell.NavigateCommand}"
+                                            CommandParameter="PreviewSettings" />
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <Border Grid.Row="1"
+                                Height="520"
+                                Background="{DynamicResource LuminaBackgroundBrush}">
+                            <lumina:LuminaShell x:Name="PreviewShell"
+                                                DefaultPageTitle="{l10n:Loc Sandbox.ShellShowcase.PreviewShellTitle}"
+                                                DefaultPageSubtitle="{l10n:Loc Sandbox.ShellShowcase.PreviewShellSubtitle}"
+                                                OpenPaneLength="220"
+                                                CompactPaneLength="56">
+                                <lumina:LuminaShell.MenuHeader>
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <Border Width="24"
+                                                Height="24"
+                                                CornerRadius="6"
+                                                Background="{DynamicResource LuminaPrimaryBrush}" />
+                                        <TextBlock Text="{l10n:Loc Sandbox.ShellShowcase.MenuHeader}"
+                                                   FontSize="18"
+                                                   FontWeight="Bold"
+                                                   VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </lumina:LuminaShell.MenuHeader>
+
+                                <lumina:LuminaShell.MenuContent>
+                                    <lumina:LuminaNavigationView SelectedKey="{Binding #PreviewShell.ActiveNavigationKey, Mode=TwoWay}">
+                                        <lumina:LuminaNavigationItem Name="PreviewHome" Header="{l10n:Loc Sandbox.ShellShowcase.NavHome}" Icon="HM" />
+                                        <lumina:LuminaNavigationItem Name="PreviewReports" Header="{l10n:Loc Sandbox.ShellShowcase.NavReports}" Icon="RP" />
+                                        <lumina:LuminaNavigationItem Name="PreviewGroup" Header="{l10n:Loc Sandbox.ShellShowcase.NavWorkspace}" Icon="WK" IsExpanded="True">
+                                            <lumina:LuminaNavigationItem Name="PreviewSettings" Classes="Child" Header="{l10n:Loc Sandbox.ShellShowcase.NavSettings}" Icon="ST" />
+                                            <lumina:LuminaNavigationItem Name="PreviewAudit" Classes="Child" Header="{l10n:Loc Sandbox.ShellShowcase.NavAudit}" Icon="AD" />
+                                        </lumina:LuminaNavigationItem>
+                                    </lumina:LuminaNavigationView>
+                                </lumina:LuminaShell.MenuContent>
+
+                                <lumina:LuminaShell.MenuFooter>
+                                    <Border Padding="10"
+                                            CornerRadius="8"
+                                            Background="{DynamicResource LuminaNavigationPaneItemBrush}">
+                                        <TextBlock Text="{l10n:Loc Sandbox.ShellShowcase.MenuFooter}"
+                                                   FontSize="12"
+                                                   Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                                    </Border>
+                                </lumina:LuminaShell.MenuFooter>
+
+                                <lumina:LuminaShell.Title>
+                                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                                        <lumina:LuminaHamburgerButton Grid.Column="0"
+                                                                      IsOpen="{Binding #PreviewShell.IsMenuOpen, Mode=TwoWay}" />
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding #PreviewShell.ActivePageTitle}"
+                                                       FontSize="20"
+                                                       FontWeight="Bold" />
+                                            <TextBlock Text="{Binding #PreviewShell.ActivePageSubtitle}"
+                                                       FontSize="12"
+                                                       Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                                        </StackPanel>
+                                        <Button Grid.Column="2"
+                                                Classes="Small Outline"
+                                                Content="{l10n:Loc Sandbox.ShellShowcase.Action}" />
+                                    </Grid>
+                                </lumina:LuminaShell.Title>
+                            </lumina:LuminaShell>
+                        </Border>
+                    </Grid>
+                </lumina:LuminaCard>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
+</lumina:LuminaPage>

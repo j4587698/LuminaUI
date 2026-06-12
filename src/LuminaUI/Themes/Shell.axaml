@@ -18,11 +18,27 @@
                         <SplitView.Pane>
                             <!-- Menu pane is separated by surface tone, not by an extra border. -->
                             <Border Background="{TemplateBinding PaneBackground}"
-                                    IsVisible="{TemplateBinding IsShellChromeVisible}">
+                                    IsVisible="{TemplateBinding EffectiveIsShellChromeVisible}"
+                                    lumina:LuminaShell.IsMenuCompact="{TemplateBinding EffectiveIsMenuCompact}">
                                 <Grid RowDefinitions="Auto,*,Auto">
                                     <!-- 菜单头部插槽 -->
-                                    <Border Grid.Row="0" Margin="16" Height="48">
+                                    <Border Name="PART_MenuHeader"
+                                            Grid.Row="0"
+                                            Margin="16"
+                                            Height="48"
+                                            IsVisible="{TemplateBinding EffectiveIsMenuOpen}">
                                         <ContentPresenter Content="{TemplateBinding MenuHeader}" VerticalAlignment="Center" />
+                                    </Border>
+
+                                    <Border Name="PART_CompactMenuHeader"
+                                            Grid.Row="0"
+                                            Margin="6"
+                                            Height="48"
+                                            IsVisible="{TemplateBinding EffectiveIsMenuCompact}">
+                                        <lumina:LuminaHamburgerButton HorizontalAlignment="Center"
+                                                                      VerticalAlignment="Center"
+                                                                      IsOpen="{TemplateBinding IsMenuOpen}"
+                                                                      Command="{Binding ToggleMenuCommand, RelativeSource={RelativeSource TemplatedParent}}" />
                                     </Border>
                                     
                                     <!-- 菜单内容投射器 -->
@@ -36,7 +52,12 @@
                                     </ScrollViewer>
                                     
                                     <!-- 菜单底部插槽 -->
-                                    <Border Grid.Row="2" Margin="16" BorderThickness="0" Padding="0,16,0,0">
+                                    <Border Name="PART_MenuFooter"
+                                            Grid.Row="2"
+                                            Margin="16"
+                                            BorderThickness="0"
+                                            Padding="0,16,0,0"
+                                            IsVisible="{TemplateBinding EffectiveIsMenuOpen}">
                                         <ContentPresenter Content="{TemplateBinding MenuFooter}" />
                                     </Border>
                                 </Grid>
@@ -50,7 +71,7 @@
                                         Height="48"
                                         Margin="16"
                                         Background="Transparent"
-                                        IsVisible="{TemplateBinding IsShellChromeVisible}">
+                                        IsVisible="{TemplateBinding EffectiveIsShellHeaderVisible}">
                                     <ContentPresenter Content="{TemplateBinding Title}" TextElement.FontSize="24" TextElement.FontWeight="Bold" VerticalAlignment="Center"/>
                                 </Border>
                                 
@@ -65,7 +86,18 @@
                             </Grid>
                         </SplitView.Content>
                     </SplitView>
-                    
+
+                    <lumina:LuminaHamburgerButton Name="PART_HeaderlessMenuToggle"
+                                                  HorizontalAlignment="Left"
+                                                  VerticalAlignment="Top"
+                                                  Margin="16"
+                                                  ZIndex="900"
+                                                  Background="{DynamicResource LuminaSurfaceBrush}"
+                                                  BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                                                  IsVisible="{TemplateBinding EffectiveIsHeaderlessMenuToggleVisible}"
+                                                  IsOpen="{TemplateBinding IsMenuOpen}"
+                                                  Command="{Binding ToggleMenuCommand, RelativeSource={RelativeSource TemplatedParent}}" />
+
                     <!-- ============================================== -->
                     <!-- Dialog Overlay (遮罩层与弹窗容器)                  -->
                     <!-- ============================================== -->
@@ -151,6 +183,14 @@
             <Setter Property="DisplayMode" Value="Inline" />
         </Style>
 
+        <Style Selector="^:menucompact /template/ SplitView#PART_SplitView">
+            <Setter Property="DisplayMode" Value="CompactInline" />
+        </Style>
+
+        <Style Selector="^:menucompact /template/ ScrollViewer#PART_MenuScrollViewer">
+            <Setter Property="Margin" Value="6,0,6,16" />
+        </Style>
+
         <Style Selector="^.WindowGlass">
             <Setter Property="Background" Value="{DynamicResource LuminaWindowGlassBackgroundBrush}" />
             <Setter Property="PaneBackground" Value="{DynamicResource LuminaWindowGlassPaneBrush}" />
@@ -159,6 +199,10 @@
         <!-- 移动/竖屏模式：激活伪类 :mobile，侧边栏变为浮动抽屉 (覆盖主内容) -->
         <Style Selector="^:mobile /template/ SplitView#PART_SplitView">
             <Setter Property="DisplayMode" Value="Overlay" />
+        </Style>
+
+        <Style Selector="^:mobile:menucompact /template/ SplitView#PART_SplitView">
+            <Setter Property="DisplayMode" Value="CompactOverlay" />
         </Style>
         
         <!-- Dialog 打开时的动画状态 -->
