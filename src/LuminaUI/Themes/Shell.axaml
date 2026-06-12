@@ -97,7 +97,7 @@
                                                   IsVisible="{TemplateBinding EffectiveIsHeaderlessMenuToggleVisible}"
                                                   IsOpen="{TemplateBinding IsMenuOpen}"
                                                   Command="{Binding ToggleMenuCommand, RelativeSource={RelativeSource TemplatedParent}}" />
-                     
+
                     <!-- ============================================== -->
                     <!-- Dialog Overlay (遮罩层与弹窗容器)                  -->
                     <!-- ============================================== -->

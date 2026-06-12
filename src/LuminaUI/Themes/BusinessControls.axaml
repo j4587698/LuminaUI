@@ -38,6 +38,25 @@
         </Style>
     </ControlTheme>
 
+    <ControlTheme x:Key="{x:Type lumina:LuminaInputPanel}" TargetType="lumina:LuminaInputPanel">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaInputPanel">
+                <Border Name="PART_RootBorder">
+                    <ScrollViewer Name="PART_ScrollViewer"
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  VerticalScrollBarVisibility="Auto">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </ScrollViewer>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
     <ControlTheme x:Key="{x:Type lumina:LuminaForm}" TargetType="lumina:LuminaForm">
         <Setter Property="ItemsPanel">
             <ItemsPanelTemplate>
