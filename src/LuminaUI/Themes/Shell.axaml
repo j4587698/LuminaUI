@@ -34,7 +34,7 @@
                                             Grid.Row="0"
                                             Margin="6"
                                             Height="48"
-                                            IsVisible="{TemplateBinding EffectiveIsMenuCompact}">
+                                            IsVisible="False">
                                         <lumina:LuminaHamburgerButton HorizontalAlignment="Center"
                                                                       VerticalAlignment="Center"
                                                                       IsOpen="{TemplateBinding IsMenuOpen}"
@@ -59,6 +59,21 @@
                                             Padding="0,16,0,0"
                                             IsVisible="{TemplateBinding EffectiveIsMenuOpen}">
                                         <ContentPresenter Content="{TemplateBinding MenuFooter}" />
+                                    </Border>
+                                    
+                                    <!-- 紧凑模式切换按钮 -->
+                                    <Border Name="PART_CompactToggleButton"
+                                            Grid.Row="2"
+                                            Margin="6"
+                                            IsVisible="{TemplateBinding EffectiveIsMenuOpen}">
+                                        <Button Classes="IconOnly"
+                                                Width="36"
+                                                Height="36"
+                                                HorizontalAlignment="Center"
+                                                Command="{Binding $parent[lumina:LuminaShell].ToggleCompactModeCommand}"
+                                                ToolTip.Tip="Toggle compact mode">
+                                            <TextBlock Text="◀" FontSize="14" />
+                                        </Button>
                                     </Border>
                                 </Grid>
                             </Border>
@@ -196,13 +211,9 @@
             <Setter Property="PaneBackground" Value="{DynamicResource LuminaWindowGlassPaneBrush}" />
         </Style>
 
-        <!-- 移动/竖屏模式：激活伪类 :mobile，侧边栏变为浮动抽屉 (覆盖主内容) -->
-        <Style Selector="^:mobile /template/ SplitView#PART_SplitView">
+        <!-- 小屏幕模式：激活伪类 :small-screen，侧边栏变为浮动抽屉 (覆盖主内容) -->
+        <Style Selector="^:small-screen /template/ SplitView#PART_SplitView">
             <Setter Property="DisplayMode" Value="Overlay" />
-        </Style>
-
-        <Style Selector="^:mobile:menucompact /template/ SplitView#PART_SplitView">
-            <Setter Property="DisplayMode" Value="CompactOverlay" />
         </Style>
         
         <!-- Dialog 打开时的动画状态 -->

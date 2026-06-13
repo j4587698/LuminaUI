@@ -26,7 +26,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private static readonly Dictionary<string, WeakReference<LuminaShell>> ShellRegistry = new Dictionary<string, WeakReference<LuminaShell>>(StringComparer.Ordinal);
 
-    private const double MobileBreakpoint = 768.0;
+    private const double SmallScreenBreakpoint = 768.0;
 
     private const string WindowGlassClass = "WindowGlass";
 
@@ -78,7 +78,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     public static readonly StyledProperty<bool> IsShellHeaderVisibleProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(IsShellHeaderVisible), defaultValue: true);
 
-    public static readonly StyledProperty<bool> IsCompactMenuEnabledProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(IsCompactMenuEnabled), defaultValue: true);
+    public static readonly StyledProperty<bool> IsCompactMenuEnabledProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(IsCompactMenuEnabled), defaultValue: false);
 
     public static readonly StyledProperty<bool> IsMenuAutoResponsiveProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(IsMenuAutoResponsive), defaultValue: true);
 
@@ -162,6 +162,8 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     public ICommand NavigateCommand { get; }
 
     public ICommand ToggleMenuCommand { get; }
+
+    public ICommand ToggleCompactModeCommand { get; }
 
     public ICommand CloseDialogCommand { get; }
 
@@ -584,6 +586,13 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         ToggleMenuCommand = new LuminaRelayCommand(_ => {
             IsMenuOpen = !IsMenuOpen;
         });
+        ToggleCompactModeCommand = new LuminaRelayCommand(_ => {
+            IsCompactMenuEnabled = !IsCompactMenuEnabled;
+            if (!IsCompactMenuEnabled)
+            {
+                IsMenuOpen = true;
+            }
+        });
         CloseDialogCommand = new LuminaRelayCommand(_ => {
             CloseDialog();
         });
@@ -692,7 +701,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         {
             _isNavigating = false;
         }
-        if (closeMenuOnNavigate && Bounds.Width < MobileBreakpoint)
+        if (closeMenuOnNavigate && Bounds.Width < SmallScreenBreakpoint)
         {
             IsMenuOpen = false;
         }
@@ -907,21 +916,20 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     {
         base.OnSizeChanged(e);
         _overlayInputPaneAvoidance.UpdateOverlayState();
-        bool isMobile = e.NewSize.Width < MobileBreakpoint;
-        PseudoClasses.Set(":mobile", isMobile);
+        PseudoClasses.Set(":small-screen", e.NewSize.Width < SmallScreenBreakpoint);
         if (!EffectiveIsShellChromeVisible || !IsMenuAutoResponsive)
         {
             UpdateEffectiveShellChrome();
             return;
         }
-        if (isMobile)
+        if (e.NewSize.Width < SmallScreenBreakpoint)
         {
-            if (e.PreviousSize.Width >= MobileBreakpoint || e.PreviousSize.Width <= 0.0)
+            if (e.PreviousSize.Width >= SmallScreenBreakpoint || e.PreviousSize.Width <= 0.0)
             {
                 IsMenuOpen = false;
             }
         }
-        else if (e.PreviousSize.Width < MobileBreakpoint || e.PreviousSize.Width <= 0.0)
+        else if (e.PreviousSize.Width < SmallScreenBreakpoint || e.PreviousSize.Width <= 0.0)
         {
             IsMenuOpen = true;
         }
@@ -995,7 +1003,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         {
             SetActiveNavigationKey(_activePage.NavigationKey);
         }
-        if (EffectiveIsShellChromeVisible && _activePage.CloseShellMenuOnNavigate && Bounds.Width < MobileBreakpoint)
+        if (EffectiveIsShellChromeVisible && _activePage.CloseShellMenuOnNavigate && Bounds.Width < SmallScreenBreakpoint)
         {
             IsMenuOpen = false;
         }
