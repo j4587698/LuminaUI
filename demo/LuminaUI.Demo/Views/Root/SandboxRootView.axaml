@@ -141,7 +141,8 @@
                 <lumina:LuminaShell.Title>
                     <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="16">
                         <lumina:LuminaHamburgerButton Grid.Column="0"
-                                                      IsOpen="{Binding #AppShell.IsMenuOpen}" />
+                                                       IsOpen="{Binding #AppShell.IsMenuOpen}"
+                                                       IsVisible="{Binding #AppShell.EffectiveIsMenuCompact, Converter={x:Static BoolConverters.Not}}" />
                         <StackPanel Grid.Column="1" VerticalAlignment="Center">
                             <TextBlock Text="{Binding #AppShell.ActivePageTitle}"
                                        FontSize="24"

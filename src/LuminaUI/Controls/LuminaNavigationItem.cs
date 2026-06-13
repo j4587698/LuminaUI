@@ -240,12 +240,18 @@ public class LuminaNavigationItem : ItemsControl
 
     private void InvokeOrToggle()
     {
-        if (LuminaShell.GetIsMenuCompact(this) && HasNavigationChildren())
+        // 紧凑模式下，点击图标展开菜单
+        if (LuminaShell.GetIsMenuCompact(this))
         {
             LuminaShell? shell = LuminaShell.FindFor(this);
             if (shell != null)
             {
                 shell.IsMenuOpen = true;
+                // 有子项的，展开子项
+                if (HasNavigationChildren())
+                {
+                    IsExpanded = true;
+                }
                 return;
             }
         }
