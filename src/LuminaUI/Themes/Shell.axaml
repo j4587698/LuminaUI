@@ -20,25 +20,15 @@
                             <Border Background="{TemplateBinding PaneBackground}"
                                     IsVisible="{TemplateBinding EffectiveIsShellChromeVisible}"
                                     lumina:LuminaShell.IsMenuCompact="{TemplateBinding EffectiveIsMenuCompact}">
-                                <Grid RowDefinitions="Auto,*,Auto">
+                                <Grid RowDefinitions="Auto,*,Auto,Auto">
                                     <!-- 菜单头部插槽 -->
                                     <Border Name="PART_MenuHeader"
                                             Grid.Row="0"
                                             Margin="16"
                                             Height="48"
+                                            ClipToBounds="True"
                                             IsVisible="{TemplateBinding EffectiveIsMenuOpen}">
                                         <ContentPresenter Content="{TemplateBinding MenuHeader}" VerticalAlignment="Center" />
-                                    </Border>
-
-                                    <Border Name="PART_CompactMenuHeader"
-                                            Grid.Row="0"
-                                            Margin="6"
-                                            Height="48"
-                                            IsVisible="False">
-                                        <lumina:LuminaHamburgerButton HorizontalAlignment="Center"
-                                                                      VerticalAlignment="Center"
-                                                                      IsOpen="{TemplateBinding IsMenuOpen}"
-                                                                      Command="{Binding ToggleMenuCommand, RelativeSource={RelativeSource TemplatedParent}}" />
                                     </Border>
                                     
                                     <!-- 菜单内容投射器 -->
@@ -55,24 +45,37 @@
                                     <Border Name="PART_MenuFooter"
                                             Grid.Row="2"
                                             Margin="16"
-                                            BorderThickness="0"
                                             Padding="0,16,0,0"
+                                            ClipToBounds="True"
                                             IsVisible="{TemplateBinding EffectiveIsMenuOpen}">
                                         <ContentPresenter Content="{TemplateBinding MenuFooter}" />
                                     </Border>
-                                    
+
                                     <!-- 紧凑模式切换按钮 -->
-                                    <Border Name="PART_CompactToggleButton"
-                                            Grid.Row="2"
-                                            Margin="6"
-                                            IsVisible="{TemplateBinding EffectiveIsMenuOpen}">
-                                        <Button Classes="IconOnly"
+                                    <Border Name="PART_MenuCompactToggleHost"
+                                            Grid.Row="3"
+                                            Margin="16,0,16,16"
+                                            IsVisible="{TemplateBinding CanCompactMenu}">
+                                        <Button Name="PART_MenuCompactToggle"
+                                                Classes="Ghost Icon"
                                                 Width="36"
                                                 Height="36"
-                                                HorizontalAlignment="Center"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Bottom"
                                                 Command="{Binding $parent[lumina:LuminaShell].ToggleCompactModeCommand}"
                                                 ToolTip.Tip="Toggle compact mode">
-                                            <TextBlock Text="◀" FontSize="14" />
+                                            <PathIcon Name="PART_MenuCompactToggleIcon"
+                                                      Width="14"
+                                                      Height="14"
+                                                      Data="M15.41,7.41L10.83,12L15.41,16.59L14,18L8,12L14,6L15.41,7.41Z"
+                                                      Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                                      RenderTransformOrigin="50%,50%">
+                                                <PathIcon.Transitions>
+                                                    <Transitions>
+                                                        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.15" Easing="CubicEaseOut" />
+                                                    </Transitions>
+                                                </PathIcon.Transitions>
+                                            </PathIcon>
                                         </Button>
                                     </Border>
                                 </Grid>
@@ -202,6 +205,26 @@
             <Setter Property="DisplayMode" Value="CompactInline" />
         </Style>
 
+        <Style Selector="^:menucompact /template/ Border#PART_MenuHeader">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+
+        <Style Selector="^:menucompact /template/ Border#PART_MenuCompactToggleHost">
+            <Setter Property="Margin" Value="6" />
+        </Style>
+
+        <Style Selector="^:menucompact /template/ Button#PART_MenuCompactToggle">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+
+        <Style Selector="^ /template/ PathIcon#PART_MenuCompactToggleIcon">
+            <Setter Property="RenderTransform" Value="rotate(0deg)" />
+        </Style>
+
+        <Style Selector="^:menucompact /template/ PathIcon#PART_MenuCompactToggleIcon">
+            <Setter Property="RenderTransform" Value="rotate(180deg)" />
+        </Style>
+
         <Style Selector="^:menucompact /template/ ScrollViewer#PART_MenuScrollViewer">
             <Setter Property="Margin" Value="6,0,6,16" />
         </Style>
@@ -214,6 +237,10 @@
         <!-- 小屏幕模式：激活伪类 :small-screen，侧边栏变为浮动抽屉 (覆盖主内容) -->
         <Style Selector="^:small-screen /template/ SplitView#PART_SplitView">
             <Setter Property="DisplayMode" Value="Overlay" />
+        </Style>
+
+        <Style Selector="^:small-screen /template/ Border#PART_MenuCompactToggleHost">
+            <Setter Property="IsVisible" Value="False" />
         </Style>
         
         <!-- Dialog 打开时的动画状态 -->

@@ -80,6 +80,8 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     public static readonly StyledProperty<bool> IsCompactMenuEnabledProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(IsCompactMenuEnabled), defaultValue: false);
 
+    public static readonly StyledProperty<bool> CanCompactMenuProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(CanCompactMenu), defaultValue: true);
+
     public static readonly StyledProperty<bool> IsMenuAutoResponsiveProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(IsMenuAutoResponsive), defaultValue: true);
 
     public static readonly AttachedProperty<bool> IsMenuCompactProperty = AvaloniaProperty.RegisterAttached<LuminaShell, Control, bool>("IsMenuCompact", defaultValue: false, inherits: true);
@@ -193,6 +195,12 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     {
         get => GetValue(IsCompactMenuEnabledProperty);
         set => SetValue(IsCompactMenuEnabledProperty, value);
+    }
+
+    public bool CanCompactMenu
+    {
+        get => GetValue(CanCompactMenuProperty);
+        set => SetValue(CanCompactMenuProperty, value);
     }
 
     public bool IsMenuAutoResponsive
@@ -587,11 +595,18 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
             IsMenuOpen = !IsMenuOpen;
         });
         ToggleCompactModeCommand = new LuminaRelayCommand(_ => {
-            IsCompactMenuEnabled = !IsCompactMenuEnabled;
-            if (!IsCompactMenuEnabled)
+            if (!CanCompactMenu || Bounds.Width < SmallScreenBreakpoint)
+            {
+                IsMenuOpen = !IsMenuOpen;
+                return;
+            }
+            if (EffectiveIsMenuCompact)
             {
                 IsMenuOpen = true;
+                return;
             }
+            IsCompactMenuEnabled = true;
+            IsMenuOpen = false;
         });
         CloseDialogCommand = new LuminaRelayCommand(_ => {
             CloseDialog();
@@ -778,7 +793,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         {
             ApplyActivePageMetadata();
         }
-        else if (change.Property == IsMenuOpenProperty || change.Property == IsShellChromeVisibleProperty || change.Property == IsShellHeaderVisibleProperty || change.Property == IsCompactMenuEnabledProperty || change.Property == OpenPaneLengthProperty || change.Property == CompactPaneLengthProperty)
+        else if (change.Property == IsMenuOpenProperty || change.Property == IsShellChromeVisibleProperty || change.Property == IsShellHeaderVisibleProperty || change.Property == IsCompactMenuEnabledProperty || change.Property == CanCompactMenuProperty || change.Property == OpenPaneLengthProperty || change.Property == CompactPaneLengthProperty)
         {
             UpdateEffectiveShellChrome();
         }
@@ -931,7 +946,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         }
         else if (e.PreviousSize.Width < SmallScreenBreakpoint || e.PreviousSize.Width <= 0.0)
         {
-            IsMenuOpen = true;
+            IsMenuOpen = !(CanCompactMenu && IsCompactMenuEnabled);
         }
         UpdateEffectiveShellChrome();
     }
@@ -940,8 +955,9 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     {
         bool isShellChromeEffectiveVisible = IsShellChromeVisible && (_activePage?.ShowShellChrome ?? true);
         bool isShellHeaderEffectiveVisible = isShellChromeEffectiveVisible && IsShellHeaderVisible && (_activePage?.ShowShellHeader ?? true);
+        bool canUseCompactMenu = CanCompactMenu && Bounds.Width >= SmallScreenBreakpoint;
         bool isMenuEffectiveOpen = isShellChromeEffectiveVisible && IsMenuOpen;
-        bool isMenuCompact = isShellChromeEffectiveVisible && IsCompactMenuEnabled && !IsMenuOpen;
+        bool isMenuCompact = isShellChromeEffectiveVisible && canUseCompactMenu && IsCompactMenuEnabled && !IsMenuOpen;
         EffectiveIsShellChromeVisible = isShellChromeEffectiveVisible;
         EffectiveIsShellHeaderVisible = isShellHeaderEffectiveVisible;
         EffectiveIsMenuOpen = isMenuEffectiveOpen;
