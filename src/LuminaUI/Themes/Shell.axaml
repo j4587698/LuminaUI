@@ -46,7 +46,7 @@
                                             Grid.Row="2"
                                             Margin="16"
                                             Padding="0,16,0,0"
-                                            ClipToBounds="True"
+                                            ClipToBounds="False"
                                             IsVisible="{TemplateBinding EffectiveIsMenuOpen}">
                                         <ContentPresenter Content="{TemplateBinding MenuFooter}" />
                                     </Border>

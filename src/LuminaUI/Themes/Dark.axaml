@@ -155,9 +155,9 @@
     <BoxShadows x:Key="LuminaShadowPopup">0 2 6 #4D000000, 0 12 24 #5F000000</BoxShadows>
     <BoxShadows x:Key="LuminaShadowNotification">0 1 2 #3D000000, 0 6 14 #52000000</BoxShadows>
     <SolidColorBrush x:Key="LuminaCardElevatedBackgroundBrush" Color="#1B202A" />
-    <SolidColorBrush x:Key="LuminaCardElevatedBorderBrush" Color="#4B5563" />
-    <BoxShadows x:Key="LuminaCardShadowElevated">0 1 2 #52000000, 0 10 22 #66000000</BoxShadows>
-    <BoxShadows x:Key="LuminaCardShadowFloating">0 2 4 #5C000000, 0 14 28 #80000000</BoxShadows>
+    <SolidColorBrush x:Key="LuminaCardElevatedBorderBrush" Color="#1AFFFFFF" />
+    <BoxShadows x:Key="LuminaCardShadowElevated">0 0 1 #26FFFFFF, 0 4 14 #52000000</BoxShadows>
+    <BoxShadows x:Key="LuminaCardShadowFloating">0 0 1 #33FFFFFF, 0 6 18 #66000000</BoxShadows>
 
     <!-- Glass Effect Brushes -->
     <SolidColorBrush x:Key="LuminaCardPseudoGlassBrush" Color="{StaticResource LuminaSurface}" Opacity="0.78" />
