@@ -6,6 +6,7 @@
         <Setter Property="Padding" Value="16" />
         <Setter Property="CornerRadius" Value="12" />
         <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="ClipToBounds" Value="False" />
         <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderBrush}" />
         <Setter Property="GlassTintBrush" Value="{DynamicResource LuminaCardGlassTintBrush}" />
@@ -133,19 +134,21 @@
             </Style>
         </Style>
 
+        <Style Selector="^.Interactive:pointerover">
+            <Setter Property="ZIndex" Value="1" />
+        </Style>
         <Style Selector="^.Interactive:pointerover /template/ Border#PART_RootBorder">
             <Setter Property="BoxShadow" Value="{DynamicResource LuminaCardShadowFloating}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource LuminaCardElevatedBorderBrush}" />
         </Style>
         <Style Selector="^.Interactive:pointerover /template/ Grid#PART_SurfaceLayer">
-            <Setter Property="RenderTransform" Value="translateY(0px)" />
+            <Setter Property="RenderTransform" Value="translateY(-2px)" />
         </Style>
         <Style Selector="^.Interactive /template/ Grid#PART_SurfaceLayer">
             <Setter Property="Margin" Value="0" />
             <Setter Property="RenderTransform" Value="translateY(0px)" />
             <Setter Property="Transitions">
                 <Transitions>
-                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.15" />
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.18" Easing="CubicEaseOut" />
                 </Transitions>
             </Setter>
         </Style>
@@ -154,6 +157,7 @@
                 <Transitions>
                     <BrushTransition Property="Background" Duration="0:0:0.15" />
                     <BrushTransition Property="BorderBrush" Duration="0:0:0.15" />
+                    <BoxShadowsTransition Property="BoxShadow" Duration="0:0:0.2" Easing="CubicEaseOut" />
                 </Transitions>
             </Setter>
         </Style>
