@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Documents;
@@ -6,6 +7,7 @@ using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Shapes;
 using Avalonia.Controls.Templates;
+using Avalonia.Data;
 using Avalonia.Layout;
 using Avalonia.Media;
 
@@ -30,6 +32,8 @@ public class LuminaButtonPresenter : ContentControl
     private bool _showsLoading;
 
     private IBrush? _effectiveIconForeground;
+
+    private readonly List<IDisposable> _contentForegroundSyncSubscriptions = new();
 
     public static readonly StyledProperty<object?> IconProperty = AvaloniaProperty.Register<LuminaButtonPresenter, object?>(nameof(Icon));
 
@@ -223,72 +227,88 @@ public class LuminaButtonPresenter : ContentControl
     {
         if (SyncIconForeground && Icon != null)
         {
-            ApplyForegroundToElement(Icon, EffectiveIconForeground);
+            ApplyForegroundToElement(Icon, EffectiveIconForeground, BindingPriority.LocalValue, null);
         }
     }
 
     private void ApplyContentForeground()
     {
+        ClearContentForegroundSync();
+
         if (SyncContentForeground && Content is Control control)
         {
-            ApplyForegroundToElement(control, Foreground);
+            ApplyForegroundToElement(control, Foreground, BindingPriority.StyleTrigger, _contentForegroundSyncSubscriptions);
         }
     }
 
-    private void ApplyForegroundToElement(object element, IBrush? foreground)
+    private void ClearContentForegroundSync()
+    {
+        foreach (IDisposable subscription in _contentForegroundSyncSubscriptions)
+        {
+            subscription.Dispose();
+        }
+
+        _contentForegroundSyncSubscriptions.Clear();
+    }
+
+    private void ApplyForegroundToElement(object element, IBrush? foreground, BindingPriority priority, ICollection<IDisposable>? subscriptions)
     {
         if (element is TemplatedControl templatedControl)
         {
-            SetIconValue(templatedControl, TemplatedControl.ForegroundProperty, foreground);
+            SetElementValue(templatedControl, TemplatedControl.ForegroundProperty, foreground, priority, subscriptions);
             if (templatedControl is ContentControl contentControl)
             {
                 object? content = contentControl.Content;
                 if (content != null && content != contentControl)
                 {
-                    ApplyForegroundToElement(content, foreground);
+                    ApplyForegroundToElement(content, foreground, priority, subscriptions);
                 }
             }
         }
         else if (element is TextBlock textBlock)
         {
-            SetIconValue(textBlock, TextBlock.ForegroundProperty, foreground);
+            SetElementValue(textBlock, TextBlock.ForegroundProperty, foreground, priority, subscriptions);
         }
         else if (element is ContentPresenter contentPresenter)
         {
-            SetIconValue(contentPresenter, ContentPresenter.ForegroundProperty, foreground);
+            SetElementValue(contentPresenter, ContentPresenter.ForegroundProperty, foreground, priority, subscriptions);
         }
         else if (element is Shape shape)
         {
-            SetIconValue(shape, Shape.FillProperty, foreground);
-            SetIconValue(shape, Shape.StrokeProperty, foreground);
+            SetElementValue(shape, Shape.FillProperty, foreground, priority, subscriptions);
+            SetElementValue(shape, Shape.StrokeProperty, foreground, priority, subscriptions);
         }
         else if (element is Panel panel)
         {
             foreach (Control child in panel.Children)
             {
-                ApplyForegroundToElement(child, foreground);
+                ApplyForegroundToElement(child, foreground, priority, subscriptions);
             }
         }
         else if (element is Decorator decorator)
         {
             if (decorator.Child != null)
             {
-                ApplyForegroundToElement(decorator.Child, foreground);
+                ApplyForegroundToElement(decorator.Child, foreground, priority, subscriptions);
             }
             else
             {
-                SetIconValue(decorator, TextElement.ForegroundProperty, foreground);
+                SetElementValue(decorator, TextElement.ForegroundProperty, foreground, priority, subscriptions);
             }
         }
         else if (element is Control control)
         {
-            SetIconValue(control, TextElement.ForegroundProperty, foreground);
+            SetElementValue(control, TextElement.ForegroundProperty, foreground, priority, subscriptions);
         }
     }
 
-    private static void SetIconValue<T>(AvaloniaObject target, StyledProperty<T> property, T value)
+    private static void SetElementValue<T>(AvaloniaObject target, StyledProperty<T> property, T value, BindingPriority priority, ICollection<IDisposable>? subscriptions)
     {
-        target.SetValue(property, value);
+        IDisposable? subscription = target.SetValue(property, value, priority);
+        if (subscription != null)
+        {
+            subscriptions?.Add(subscription);
+        }
     }
 
     private void UpdateButtonLayout()
