@@ -21,6 +21,8 @@ public sealed class LuminaButton
 
     public static readonly AttachedProperty<bool> SyncIconForegroundProperty;
 
+    public static readonly AttachedProperty<bool> SyncContentForegroundProperty;
+
     public static readonly AttachedProperty<LuminaIconPlacement> IconPlacementProperty;
 
     public static readonly AttachedProperty<double> IconSizeProperty;
@@ -43,6 +45,7 @@ public sealed class LuminaButton
         IconTemplateProperty = AvaloniaProperty.RegisterAttached<LuminaButton, Button, IDataTemplate?>("IconTemplate");
         IconForegroundProperty = AvaloniaProperty.RegisterAttached<LuminaButton, Button, IBrush?>("IconForeground");
         SyncIconForegroundProperty = AvaloniaProperty.RegisterAttached<LuminaButton, Button, bool>("SyncIconForeground", defaultValue: true);
+        SyncContentForegroundProperty = AvaloniaProperty.RegisterAttached<LuminaButton, Button, bool>("SyncContentForeground", defaultValue: true);
         IconPlacementProperty = AvaloniaProperty.RegisterAttached<LuminaButton, Button, LuminaIconPlacement>("IconPlacement", LuminaIconPlacement.Left);
         IconSizeProperty = AvaloniaProperty.RegisterAttached<LuminaButton, Button, double>("IconSize", 16.0);
         IconSpacingProperty = AvaloniaProperty.RegisterAttached<LuminaButton, Button, double>("IconSpacing", 8.0);
@@ -116,6 +119,16 @@ public sealed class LuminaButton
     public static void SetSyncIconForeground(Button button, bool value)
     {
         button.SetValue(SyncIconForegroundProperty, value);
+    }
+
+    public static bool GetSyncContentForeground(Button button)
+    {
+        return button.GetValue(SyncContentForegroundProperty);
+    }
+
+    public static void SetSyncContentForeground(Button button, bool value)
+    {
+        button.SetValue(SyncContentForegroundProperty, value);
     }
 
     public static LuminaIconPlacement GetIconPlacement(Button button)
