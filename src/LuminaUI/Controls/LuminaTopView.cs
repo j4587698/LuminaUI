@@ -556,10 +556,19 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
     private void UpdateEffectiveSafeAreaPadding()
     {
         Thickness safeAreaPadding = UseSafeArea ? SafeAreaPadding : default;
-        EffectiveContentPadding = Padding;
+        EffectiveContentPadding = ApplySafeAreaPadding(Padding, safeAreaPadding);
         OverlaySafeAreaPadding = safeAreaPadding;
         ApplyBottomSheetSafeAreaPadding();
         ApplyDrawerSafeAreaPadding();
+    }
+
+    private static Thickness ApplySafeAreaPadding(Thickness padding, Thickness safeAreaPadding)
+    {
+        return new Thickness(
+            Math.Max(padding.Left, safeAreaPadding.Left),
+            Math.Max(padding.Top, safeAreaPadding.Top),
+            Math.Max(padding.Right, safeAreaPadding.Right),
+            Math.Max(padding.Bottom, safeAreaPadding.Bottom));
     }
 
     private void ApplyBottomSheetSafeAreaPadding()

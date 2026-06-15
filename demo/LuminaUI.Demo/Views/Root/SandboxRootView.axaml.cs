@@ -121,13 +121,6 @@ public partial class SandboxRootView : UserControl
 
     private void OnLoaded(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        var insetsManager = TopLevel.GetTopLevel(this)?.InsetsManager;
-        if (insetsManager != null)
-        {
-            insetsManager.DisplayEdgeToEdgePreference = true;
-            insetsManager.IsSystemBarVisible = false;
-        }
-
         if (_hasNavigated)
         {
             return;

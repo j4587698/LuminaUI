@@ -34,8 +34,6 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private static readonly TimeSpan DrawerClearDelay = TimeSpan.FromMilliseconds(360);
 
-    private const double ShellChromeInset = 16.0;
-
     private readonly Dictionary<string, Func<Control>> _routeFactories = new Dictionary<string, Func<Control>>(StringComparer.Ordinal);
 
     private readonly Dictionary<string, Control> _routeCache = new Dictionary<string, Control>(StringComparer.Ordinal);
@@ -43,10 +41,6 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     private readonly LuminaOverlayInputPaneAvoidance _overlayInputPaneAvoidance;
 
     private LuminaPage? _activePage;
-
-    private Page? _safeAreaPage;
-
-    private LuminaTopView? _safeAreaHost;
 
     private ContentPresenter? _toastPresenter;
 
@@ -120,16 +114,6 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private object? _effectiveMenuFooter;
 
-    private Thickness _safeAreaPadding;
-
-    private Thickness _effectiveHeaderMargin = new Thickness(ShellChromeInset);
-
-    private Thickness _effectiveHeaderlessMenuToggleMargin = new Thickness(ShellChromeInset);
-
-    private Thickness _effectiveMenuHeaderMargin = new Thickness(ShellChromeInset);
-
-    private Thickness _effectiveMenuFooterMargin = new Thickness(ShellChromeInset);
-
     public static readonly StyledProperty<bool> IsMenuOpenProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(IsMenuOpen), defaultValue: true);
 
     public static readonly StyledProperty<bool> IsShellChromeVisibleProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(IsShellChromeVisible), defaultValue: true);
@@ -167,16 +151,6 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     public static readonly DirectProperty<LuminaShell, object?> EffectiveMenuContentProperty = AvaloniaProperty.RegisterDirect<LuminaShell, object?>(nameof(EffectiveMenuContent), shell => shell.EffectiveMenuContent);
 
     public static readonly DirectProperty<LuminaShell, object?> EffectiveMenuFooterProperty = AvaloniaProperty.RegisterDirect<LuminaShell, object?>(nameof(EffectiveMenuFooter), shell => shell.EffectiveMenuFooter);
-
-    public static readonly DirectProperty<LuminaShell, Thickness> SafeAreaPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaShell, Thickness>(nameof(SafeAreaPadding), shell => shell.SafeAreaPadding);
-
-    public static readonly DirectProperty<LuminaShell, Thickness> EffectiveHeaderMarginProperty = AvaloniaProperty.RegisterDirect<LuminaShell, Thickness>(nameof(EffectiveHeaderMargin), shell => shell.EffectiveHeaderMargin);
-
-    public static readonly DirectProperty<LuminaShell, Thickness> EffectiveHeaderlessMenuToggleMarginProperty = AvaloniaProperty.RegisterDirect<LuminaShell, Thickness>(nameof(EffectiveHeaderlessMenuToggleMargin), shell => shell.EffectiveHeaderlessMenuToggleMargin);
-
-    public static readonly DirectProperty<LuminaShell, Thickness> EffectiveMenuHeaderMarginProperty = AvaloniaProperty.RegisterDirect<LuminaShell, Thickness>(nameof(EffectiveMenuHeaderMargin), shell => shell.EffectiveMenuHeaderMargin);
-
-    public static readonly DirectProperty<LuminaShell, Thickness> EffectiveMenuFooterMarginProperty = AvaloniaProperty.RegisterDirect<LuminaShell, Thickness>(nameof(EffectiveMenuFooterMargin), shell => shell.EffectiveMenuFooterMargin);
 
     public static readonly StyledProperty<object?> TitleProperty = AvaloniaProperty.Register<LuminaShell, object?>(nameof(Title));
 
@@ -409,67 +383,6 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         }
     }
 
-    public Thickness SafeAreaPadding
-    {
-        get
-        {
-            return _safeAreaPadding;
-        }
-        private set
-        {
-            SetAndRaise(SafeAreaPaddingProperty, ref _safeAreaPadding, value);
-            UpdateEffectiveSafeAreaLayout();
-        }
-    }
-
-    public Thickness EffectiveHeaderMargin
-    {
-        get
-        {
-            return _effectiveHeaderMargin;
-        }
-        private set
-        {
-            SetAndRaise(EffectiveHeaderMarginProperty, ref _effectiveHeaderMargin, value);
-        }
-    }
-
-    public Thickness EffectiveHeaderlessMenuToggleMargin
-    {
-        get
-        {
-            return _effectiveHeaderlessMenuToggleMargin;
-        }
-        private set
-        {
-            SetAndRaise(EffectiveHeaderlessMenuToggleMarginProperty, ref _effectiveHeaderlessMenuToggleMargin, value);
-        }
-    }
-
-    public Thickness EffectiveMenuHeaderMargin
-    {
-        get
-        {
-            return _effectiveMenuHeaderMargin;
-        }
-        private set
-        {
-            SetAndRaise(EffectiveMenuHeaderMarginProperty, ref _effectiveMenuHeaderMargin, value);
-        }
-    }
-
-    public Thickness EffectiveMenuFooterMargin
-    {
-        get
-        {
-            return _effectiveMenuFooterMargin;
-        }
-        private set
-        {
-            SetAndRaise(EffectiveMenuFooterMarginProperty, ref _effectiveMenuFooterMargin, value);
-        }
-    }
-
     public object? Title
     {
         get => GetValue(TitleProperty);
@@ -684,7 +597,6 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     {
         base.OnAttachedToVisualTree(e);
         RegisterAttachedShell();
-        AttachSafeAreaHost();
         _overlayInputPaneAvoidance.AttachToVisualTree();
         UpdateEffectiveShellChrome();
     }
@@ -699,8 +611,6 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         }
         ActivePage = null;
         ActiveRouteContent = null;
-        SetSafeAreaPage(null);
-        DetachSafeAreaHost();
         CancelToastHide();
         CancelBottomSheetContentClear();
         CancelDrawerContentClear();
@@ -1291,7 +1201,6 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         PseudoClasses.Set(":chromeless", !isShellChromeEffectiveVisible);
         PseudoClasses.Set(":headerless", !isShellHeaderEffectiveVisible);
         PseudoClasses.Set(":menucompact", isMenuCompact);
-        ApplySafeAreaToActivePage();
         SyncTopMenuDrawer();
     }
 
@@ -1609,7 +1518,6 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     private void SetActivePage(object? content)
     {
         ActiveRouteContent = content as Control;
-        SetSafeAreaPage(content as Page);
         if (_activePage != null)
         {
             _activePage.PropertyChanged -= OnActivePagePropertyChanged;
@@ -1668,91 +1576,6 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         ActivePageSubtitle = DefaultPageSubtitle;
         ActivePageActions = DefaultPageActions;
         UpdateEffectiveShellChrome();
-    }
-
-    private void AttachSafeAreaHost()
-    {
-        DetachSafeAreaHost();
-        if (!ShouldUseTopViewSafeArea())
-        {
-            SafeAreaPadding = default;
-            return;
-        }
-
-        _safeAreaHost = LuminaTopView.FindOuterFor(this);
-        if (_safeAreaHost != null)
-        {
-            _safeAreaHost.PropertyChanged += OnSafeAreaHostPropertyChanged;
-            SafeAreaPadding = _safeAreaHost.SafeAreaPadding;
-            return;
-        }
-
-        SafeAreaPadding = default;
-    }
-
-    private bool ShouldUseTopViewSafeArea()
-    {
-        return !this.GetVisualAncestors().OfType<Page>().Any();
-    }
-
-    private void DetachSafeAreaHost()
-    {
-        if (_safeAreaHost != null)
-        {
-            _safeAreaHost.PropertyChanged -= OnSafeAreaHostPropertyChanged;
-            _safeAreaHost = null;
-        }
-        SafeAreaPadding = default;
-    }
-
-    private void OnSafeAreaHostPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
-    {
-        if (e.Property == LuminaTopView.SafeAreaPaddingProperty && _safeAreaHost != null)
-        {
-            SafeAreaPadding = _safeAreaHost.SafeAreaPadding;
-        }
-    }
-
-    private void UpdateEffectiveSafeAreaLayout()
-    {
-        Thickness padding = SafeAreaPadding;
-        EffectiveHeaderMargin = new Thickness(ShellChromeInset, Math.Max(ShellChromeInset, padding.Top), ShellChromeInset, ShellChromeInset);
-        EffectiveHeaderlessMenuToggleMargin = new Thickness(ShellChromeInset, Math.Max(ShellChromeInset, padding.Top), ShellChromeInset, ShellChromeInset);
-        EffectiveMenuHeaderMargin = new Thickness(ShellChromeInset, Math.Max(ShellChromeInset, padding.Top), ShellChromeInset, ShellChromeInset);
-        EffectiveMenuFooterMargin = new Thickness(ShellChromeInset, ShellChromeInset, ShellChromeInset, Math.Max(ShellChromeInset, padding.Bottom));
-        ApplySafeAreaToActivePage();
-    }
-
-    private void SetSafeAreaPage(Page? page)
-    {
-        if (ReferenceEquals(_safeAreaPage, page))
-        {
-            ApplySafeAreaToActivePage();
-            return;
-        }
-
-        if (_safeAreaPage != null)
-        {
-            _safeAreaPage.SafeAreaPadding = default;
-        }
-
-        _safeAreaPage = page;
-        ApplySafeAreaToActivePage();
-    }
-
-    private void ApplySafeAreaToActivePage()
-    {
-        if (_safeAreaPage == null)
-        {
-            return;
-        }
-
-        Thickness padding = SafeAreaPadding;
-        _safeAreaPage.SafeAreaPadding = new Thickness(
-            padding.Left,
-            EffectiveIsShellHeaderVisible ? 0.0 : padding.Top,
-            padding.Right,
-            padding.Bottom);
     }
 
     private Control GetRouteContent(string navigationKey, Func<Control> factory)
