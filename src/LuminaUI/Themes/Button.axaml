@@ -41,6 +41,7 @@
                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                       HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                       VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      Foreground="{TemplateBinding Foreground}"
                                       RecognizesAccessKey="True"
                                       TextElement.Foreground="{TemplateBinding Foreground}" />
                 </Grid>
@@ -603,4 +604,3 @@
         </Style>
     </ControlTheme>
 </ResourceDictionary>
-

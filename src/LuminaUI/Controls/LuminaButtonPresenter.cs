@@ -207,6 +207,7 @@ public class LuminaButtonPresenter : ContentControl
         ShowsIcon = HasIcon && !ShowsLoading;
         EffectiveIconForeground = IconForeground ?? Foreground;
         ApplyIconForeground();
+        ApplyContentForeground();
         UpdateButtonLayout();
     }
 
@@ -214,13 +215,21 @@ public class LuminaButtonPresenter : ContentControl
     {
         if (SyncIconForeground && Icon != null)
         {
-            ApplyForegroundToIcon(Icon, EffectiveIconForeground);
+            ApplyForegroundToElement(Icon, EffectiveIconForeground);
         }
     }
 
-    private void ApplyForegroundToIcon(object icon, IBrush? foreground)
+    private void ApplyContentForeground()
     {
-        if (icon is TemplatedControl templatedControl)
+        if (Content is Control control)
+        {
+            ApplyForegroundToElement(control, Foreground);
+        }
+    }
+
+    private void ApplyForegroundToElement(object element, IBrush? foreground)
+    {
+        if (element is TemplatedControl templatedControl)
         {
             SetIconValue(templatedControl, TemplatedControl.ForegroundProperty, foreground);
             if (templatedControl is ContentControl contentControl)
@@ -228,42 +237,42 @@ public class LuminaButtonPresenter : ContentControl
                 object? content = contentControl.Content;
                 if (content != null && content != contentControl)
                 {
-                    ApplyForegroundToIcon(content, foreground);
+                    ApplyForegroundToElement(content, foreground);
                 }
             }
         }
-        else if (icon is TextBlock textBlock)
+        else if (element is TextBlock textBlock)
         {
             SetIconValue(textBlock, TextBlock.ForegroundProperty, foreground);
         }
-        else if (icon is ContentPresenter contentPresenter)
+        else if (element is ContentPresenter contentPresenter)
         {
             SetIconValue(contentPresenter, ContentPresenter.ForegroundProperty, foreground);
         }
-        else if (icon is Shape shape)
+        else if (element is Shape shape)
         {
             SetIconValue(shape, Shape.FillProperty, foreground);
             SetIconValue(shape, Shape.StrokeProperty, foreground);
         }
-        else if (icon is Panel panel)
+        else if (element is Panel panel)
         {
             foreach (Control child in panel.Children)
             {
-                ApplyForegroundToIcon(child, foreground);
+                ApplyForegroundToElement(child, foreground);
             }
         }
-        else if (icon is Decorator decorator)
+        else if (element is Decorator decorator)
         {
             if (decorator.Child != null)
             {
-                ApplyForegroundToIcon(decorator.Child, foreground);
+                ApplyForegroundToElement(decorator.Child, foreground);
             }
             else
             {
                 SetIconValue(decorator, TextElement.ForegroundProperty, foreground);
             }
         }
-        else if (icon is Control control)
+        else if (element is Control control)
         {
             SetIconValue(control, TextElement.ForegroundProperty, foreground);
         }
