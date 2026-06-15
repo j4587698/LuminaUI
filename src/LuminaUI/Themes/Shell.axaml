@@ -24,7 +24,7 @@
                                     <!-- 菜单头部插槽 -->
                                     <Border Name="PART_MenuHeader"
                                             Grid.Row="0"
-                                            Margin="16"
+                                            Margin="{TemplateBinding EffectiveMenuHeaderMargin}"
                                             Height="48"
                                             ClipToBounds="True"
                                             IsVisible="{TemplateBinding EffectiveIsMenuOpen}">
@@ -44,7 +44,7 @@
                                     <!-- 菜单底部插槽 -->
                                     <Border Name="PART_MenuFooter"
                                             Grid.Row="2"
-                                            Margin="16"
+                                            Margin="{TemplateBinding EffectiveMenuFooterMargin}"
                                             Padding="0,16,0,0"
                                             ClipToBounds="False"
                                             IsVisible="{TemplateBinding EffectiveIsMenuOpen}">
@@ -87,7 +87,7 @@
                                 <!-- 主区域头部栏插槽 -->
                                 <Border Grid.Row="0"
                                         Height="48"
-                                        Margin="16"
+                                        Margin="{TemplateBinding EffectiveHeaderMargin}"
                                         Background="Transparent"
                                         IsVisible="{TemplateBinding EffectiveIsShellHeaderVisible}">
                                     <ContentPresenter Content="{TemplateBinding Title}" TextElement.FontSize="24" TextElement.FontWeight="Bold" VerticalAlignment="Center"/>
@@ -108,7 +108,7 @@
                     <lumina:LuminaHamburgerButton Name="PART_HeaderlessMenuToggle"
                                                   HorizontalAlignment="Left"
                                                   VerticalAlignment="Top"
-                                                  Margin="16"
+                                                  Margin="{TemplateBinding EffectiveHeaderlessMenuToggleMargin}"
                                                   ZIndex="900"
                                                   Background="{DynamicResource LuminaSurfaceBrush}"
                                                   BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
