@@ -381,9 +381,9 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
         base.OnAttachedToVisualTree(e);
         RegisterAttachedTopView();
         _topLevel = TopLevel.GetTopLevel(this);
-        SyncTopLevelSafeAreaMode();
         SyncInsetsManagerSubscription();
         UpdateSafeAreaPadding();
+        SyncTopLevelSafeAreaMode();
         _overlayInputPaneAvoidance.AttachToVisualTree();
     }
 
@@ -555,10 +555,15 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
     private void UpdateEffectiveSafeAreaPadding()
     {
         Thickness safeAreaPadding = UseSafeArea ? SafeAreaPadding : default;
-        EffectiveContentPadding = Padding;
+        EffectiveContentPadding = new Thickness(
+            Padding.Left + safeAreaPadding.Left,
+            Padding.Top + safeAreaPadding.Top,
+            Padding.Right + safeAreaPadding.Right,
+            Padding.Bottom + safeAreaPadding.Bottom);
         OverlaySafeAreaPadding = safeAreaPadding;
         ApplyBottomSheetSafeAreaPadding();
         ApplyDrawerSafeAreaPadding();
+        System.Diagnostics.Debug.WriteLine($"[LuminaTopView] SafeAreaPadding={safeAreaPadding}, Padding={Padding}, EffectiveContentPadding={EffectiveContentPadding}");
     }
 
     private void ApplyBottomSheetSafeAreaPadding()
@@ -588,6 +593,7 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
         _autoSafeAreaTarget = content;
         _autoSafeAreaPreviousValue = TopLevel.GetAutoSafeAreaPadding(content);
         _hasAutoSafeAreaOverride = true;
+        System.Diagnostics.Debug.WriteLine($"[LuminaTopView] SyncTopLevelSafeAreaMode: _autoSafeAreaPreviousValue={_autoSafeAreaPreviousValue}, SafeAreaPadding={SafeAreaPadding}");
         TopLevel.SetAutoSafeAreaPadding(content, value: false);
     }
 
