@@ -85,6 +85,7 @@
                                                    IconTemplate="{Binding (lumina:LuminaButton.IconTemplate), RelativeSource={RelativeSource TemplatedParent}}"
                                                    IconForeground="{Binding (lumina:LuminaButton.IconForeground), RelativeSource={RelativeSource TemplatedParent}}"
                                                    SyncIconForeground="{Binding (lumina:LuminaButton.SyncIconForeground), RelativeSource={RelativeSource TemplatedParent}}"
+                                                   SyncContentForeground="{Binding (lumina:LuminaButton.SyncContentForeground), RelativeSource={RelativeSource TemplatedParent}}"
                                                    IconPlacement="{Binding (lumina:LuminaButton.IconPlacement), RelativeSource={RelativeSource TemplatedParent}}"
                                                    IconSize="{Binding (lumina:LuminaButton.IconSize), RelativeSource={RelativeSource TemplatedParent}}"
                                                    IconSpacing="{Binding (lumina:LuminaButton.IconSpacing), RelativeSource={RelativeSource TemplatedParent}}"

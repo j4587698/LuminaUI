@@ -39,6 +39,8 @@ public class LuminaButtonPresenter : ContentControl
 
     public static readonly StyledProperty<bool> SyncIconForegroundProperty = AvaloniaProperty.Register<LuminaButtonPresenter, bool>(nameof(SyncIconForeground), defaultValue: true);
 
+    public static readonly StyledProperty<bool> SyncContentForegroundProperty = AvaloniaProperty.Register<LuminaButtonPresenter, bool>(nameof(SyncContentForeground), defaultValue: true);
+
     public static readonly StyledProperty<LuminaIconPlacement> IconPlacementProperty = AvaloniaProperty.Register<LuminaButtonPresenter, LuminaIconPlacement>(nameof(IconPlacement), LuminaIconPlacement.Left);
 
     public static readonly StyledProperty<double> IconSizeProperty = AvaloniaProperty.Register<LuminaButtonPresenter, double>(nameof(IconSize), 16.0);
@@ -81,6 +83,12 @@ public class LuminaButtonPresenter : ContentControl
     {
         get => GetValue(SyncIconForegroundProperty);
         set => SetValue(SyncIconForegroundProperty, value);
+    }
+
+    public bool SyncContentForeground
+    {
+        get => GetValue(SyncContentForegroundProperty);
+        set => SetValue(SyncContentForegroundProperty, value);
     }
 
     public LuminaIconPlacement IconPlacement
@@ -193,7 +201,7 @@ public class LuminaButtonPresenter : ContentControl
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
-        if (change.Property == IconProperty || change.Property == ContentControl.ContentProperty || change.Property == IconForegroundProperty || change.Property == SyncIconForegroundProperty || change.Property == IconPlacementProperty || change.Property == IconSizeProperty || change.Property == IconSpacingProperty || change.Property == IsLoadingProperty || change.Property == TemplatedControl.ForegroundProperty || change.Property == ContentControl.HorizontalContentAlignmentProperty || change.Property == ContentControl.VerticalContentAlignmentProperty)
+        if (change.Property == IconProperty || change.Property == ContentControl.ContentProperty || change.Property == IconForegroundProperty || change.Property == SyncIconForegroundProperty || change.Property == SyncContentForegroundProperty || change.Property == IconPlacementProperty || change.Property == IconSizeProperty || change.Property == IconSpacingProperty || change.Property == IsLoadingProperty || change.Property == TemplatedControl.ForegroundProperty || change.Property == ContentControl.HorizontalContentAlignmentProperty || change.Property == ContentControl.VerticalContentAlignmentProperty)
         {
             UpdateState();
         }
@@ -221,7 +229,7 @@ public class LuminaButtonPresenter : ContentControl
 
     private void ApplyContentForeground()
     {
-        if (Content is Control control)
+        if (SyncContentForeground && Content is Control control)
         {
             ApplyForegroundToElement(control, Foreground);
         }
