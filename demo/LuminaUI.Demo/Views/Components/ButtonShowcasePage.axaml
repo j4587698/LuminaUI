@@ -24,6 +24,9 @@
                         <Button Content="{l10n:Loc Sandbox.Text.0193}" Classes="Danger" Margin="0,0,12,12" />
                         <Button Content="{l10n:Loc Sandbox.Text.0194}" Classes="Outline" Margin="0,0,12,12" />
                         <Button Content="{l10n:Loc Sandbox.Text.0195}" Classes="Ghost" Margin="0,0,12,12" />
+                        <Button Classes="Primary" lumina:LuminaButton.SyncContentForeground="False" Margin="0,0,12,12">
+                            <TextBlock Text="{l10n:Loc Sandbox.Text.0190}" Foreground="{DynamicResource LuminaDangerBrush}" />
+                        </Button>
                     </WrapPanel>
                     <WrapPanel>
                         <Button Content="{l10n:Loc Sandbox.Text.0196}" Classes="Small Outline" Margin="0,0,12,12" />
