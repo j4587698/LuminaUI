@@ -35,7 +35,7 @@ public class LuminaBottomSheetService
 
     public bool TryShow(object content)
     {
-        return TryShowCore(LuminaShell.Current, content);
+        return TryShowCore(LuminaOverlayHostResolver.FindDefault(), content);
     }
 
     public bool TryShow(LuminaShell shell, object content)
@@ -50,17 +50,17 @@ public class LuminaBottomSheetService
 
     public bool TryShow(Control owner, object content)
     {
-        return TryShowCore(FindHost(owner), content);
+        return TryShowCore(LuminaOverlayHostResolver.FindFor(owner), content);
     }
 
     public bool TryShowAtTop(Control owner, object content)
     {
-        return TryShowCore(LuminaTopView.FindOuterFor(owner), content);
+        return TryShowCore(LuminaOverlayHostResolver.FindTopFor(owner), content);
     }
 
     public void Close()
     {
-        CloseCore(LuminaShell.Current);
+        CloseCore(LuminaOverlayHostResolver.FindDefault());
     }
 
     public void Close(LuminaShell shell)
@@ -75,12 +75,12 @@ public class LuminaBottomSheetService
 
     public void Close(Control owner)
     {
-        CloseCore(FindHost(owner));
+        CloseCore(LuminaOverlayHostResolver.FindFor(owner));
     }
 
     public void CloseAtTop(Control owner)
     {
-        CloseCore(LuminaTopView.FindOuterFor(owner));
+        CloseCore(LuminaOverlayHostResolver.FindTopFor(owner));
     }
 
     private static bool TryShowCore(ILuminaOverlayHost? host, object content)
@@ -90,18 +90,9 @@ public class LuminaBottomSheetService
             return false;
         }
         Dispatcher.UIThread.Post(() => {
-            host.ShowBottomSheet(new LuminaBottomSheet
-            {
-                Content = content
-            });
+            host.ShowBottomSheet(LuminaBottomSheet.EnsureSheet(content));
         });
         return true;
-    }
-
-    private static ILuminaOverlayHost? FindHost(Control owner)
-    {
-        ILuminaOverlayHost? luminaOverlayHost = LuminaShell.FindFor(owner);
-        return luminaOverlayHost ?? LuminaTopView.FindFor(owner);
     }
 
     private static void CloseCore(ILuminaOverlayHost? host)

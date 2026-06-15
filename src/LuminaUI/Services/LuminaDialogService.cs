@@ -15,7 +15,7 @@ public class LuminaDialogService : ILuminaDialogService
 
     public void ShowDialog(object content, string? title = null)
     {
-        ShowDialogCore(LuminaShell.Current, content, title);
+        ShowDialogCore(LuminaOverlayHostResolver.FindDefault(), content, title);
     }
 
     public void ShowDialog(LuminaShell shell, object content, string? title = null)
@@ -30,17 +30,17 @@ public class LuminaDialogService : ILuminaDialogService
 
     public void ShowDialog(Control owner, object content, string? title = null)
     {
-        ShowDialogCore(LuminaShell.FindFor(owner), content, title);
+        ShowDialogCore(LuminaOverlayHostResolver.FindFor(owner), content, title);
     }
 
     public void ShowTopDialog(Control owner, object content, string? title = null)
     {
-        ShowDialogCore(LuminaTopView.FindOuterFor(owner), content, title);
+        ShowDialogCore(LuminaOverlayHostResolver.FindTopFor(owner), content, title);
     }
 
     public Task<bool> ShowConfirmAsync(string title, string message, string? confirmText = null, string? cancelText = null, bool isDanger = false)
     {
-        return ShowConfirmCoreAsync(LuminaShell.Current, title, message, confirmText, cancelText, isDanger);
+        return ShowConfirmCoreAsync(LuminaOverlayHostResolver.FindDefault(), title, message, confirmText, cancelText, isDanger);
     }
 
     public Task<bool> ShowConfirmAsync(LuminaShell shell, string title, string message, string? confirmText = null, string? cancelText = null, bool isDanger = false)
@@ -55,17 +55,17 @@ public class LuminaDialogService : ILuminaDialogService
 
     public Task<bool> ShowConfirmAsync(Control owner, string title, string message, string? confirmText = null, string? cancelText = null, bool isDanger = false)
     {
-        return ShowConfirmCoreAsync(LuminaShell.FindFor(owner), title, message, confirmText, cancelText, isDanger);
+        return ShowConfirmCoreAsync(LuminaOverlayHostResolver.FindFor(owner), title, message, confirmText, cancelText, isDanger);
     }
 
     public Task<bool> ShowTopConfirmAsync(Control owner, string title, string message, string? confirmText = null, string? cancelText = null, bool isDanger = false)
     {
-        return ShowConfirmCoreAsync(LuminaTopView.FindOuterFor(owner), title, message, confirmText, cancelText, isDanger);
+        return ShowConfirmCoreAsync(LuminaOverlayHostResolver.FindTopFor(owner), title, message, confirmText, cancelText, isDanger);
     }
 
     public void CloseDialog()
     {
-        CloseDialogCore(LuminaShell.Current);
+        CloseDialogCore(LuminaOverlayHostResolver.FindDefault());
     }
 
     public void CloseDialog(LuminaShell shell)
@@ -80,12 +80,12 @@ public class LuminaDialogService : ILuminaDialogService
 
     public void CloseDialog(Control owner)
     {
-        CloseDialogCore(LuminaShell.FindFor(owner));
+        CloseDialogCore(LuminaOverlayHostResolver.FindFor(owner));
     }
 
     public void CloseTopDialog(Control owner)
     {
-        CloseDialogCore(LuminaTopView.FindOuterFor(owner));
+        CloseDialogCore(LuminaOverlayHostResolver.FindTopFor(owner));
     }
 
     private static void ShowDialogCore(ILuminaOverlayHost? host, object content, string? title)

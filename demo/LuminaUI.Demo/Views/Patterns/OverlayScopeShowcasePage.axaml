@@ -1,0 +1,194 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.OverlayScopeShowcasePage"
+             x:DataType="vm:OverlayScopeShowcaseViewModel">
+  <ScrollViewer x:Name="PageScroll"
+                HorizontalScrollBarVisibility="Disabled"
+                BringIntoViewOnFocusChange="False">
+    <StackPanel Spacing="24"
+                Width="{Binding #PageScroll.Bounds.Width}"
+                Margin="0,0,0,24">
+      <StackPanel Spacing="8" MaxWidth="860">
+        <TextBlock Text="{l10n:Loc Sandbox.Overlays.HostScope.Title}"
+                   Classes="Display" />
+        <TextBlock Text="{l10n:Loc Sandbox.Overlays.HostScope.Description}"
+                   Classes="Body"
+                   Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                   TextWrapping="Wrap" />
+      </StackPanel>
+
+      <lumina:LuminaResponsivePanel MinItemWidth="340"
+                                    MaxItemWidth="820"
+                                    HorizontalSpacing="18"
+                                    VerticalSpacing="18">
+        <Border MinHeight="540"
+                Padding="18"
+                Background="{DynamicResource LuminaPrimaryBgBrush}"
+                BorderBrush="{DynamicResource LuminaPrimaryBrush}"
+                BorderThickness="1"
+                CornerRadius="14">
+          <Grid RowDefinitions="Auto,*" RowSpacing="16">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+              <StackPanel Spacing="4">
+                <TextBlock Text="{l10n:Loc Sandbox.Overlays.HostScope.RootLayer}"
+                           Foreground="{DynamicResource LuminaPrimaryBrush}"
+                           FontWeight="SemiBold" />
+                <TextBlock Text="{l10n:Loc Sandbox.Overlays.HostScope.RootMarker}"
+                           Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                           TextWrapping="Wrap" />
+              </StackPanel>
+              <Border Grid.Column="1"
+                      Padding="10,6"
+                      Background="{DynamicResource LuminaSurfaceBrush}"
+                      BorderBrush="{DynamicResource LuminaPrimaryBrush}"
+                      BorderThickness="1"
+                      CornerRadius="8"
+                      VerticalAlignment="Top">
+                <TextBlock Text="{l10n:Loc Sandbox.Overlays.HostScope.RootBadge}"
+                           Foreground="{DynamicResource LuminaPrimaryBrush}"
+                           FontWeight="SemiBold" />
+              </Border>
+            </Grid>
+
+            <Border Grid.Row="1"
+                    Padding="18,22,18,42"
+                    Background="{DynamicResource LuminaSurfaceBrush}"
+                    BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="12"
+                    ClipToBounds="False">
+              <lumina:LuminaShell x:Name="ScopeShell"
+                                  Height="420"
+                                  OpenPaneLength="150"
+                                  CompactPaneLength="44"
+                                  IsMenuOpen="True"
+                                  CanCompactMenu="False"
+                                  CloseMenuOnNavigate="False"
+                                  DefaultPageTitle="{l10n:Loc Sandbox.Overlays.HostScope.ShellLayer}"
+                                  Background="{DynamicResource LuminaSurfaceElevatedBrush}"
+                                  PaneBackground="{DynamicResource LuminaNavigationPaneBrush}">
+                <lumina:LuminaShell.MenuHeader>
+                  <StackPanel Spacing="2">
+                    <TextBlock Text="{l10n:Loc Sandbox.Overlays.HostScope.ShellMenu}"
+                               FontWeight="SemiBold" />
+                    <TextBlock Text="{l10n:Loc Sandbox.Overlays.HostScope.InnerHint}"
+                               FontSize="12"
+                               Foreground="{DynamicResource LuminaTextMutedBrush}"
+                               TextWrapping="Wrap" />
+                  </StackPanel>
+                </lumina:LuminaShell.MenuHeader>
+
+                <lumina:LuminaShell.MenuContent>
+                  <StackPanel Spacing="8">
+                    <Border Height="8" CornerRadius="4" Background="{DynamicResource LuminaPrimaryBrush}" />
+                    <Border Height="8" CornerRadius="4" Background="{DynamicResource LuminaDividerBrush}" />
+                    <Border Height="8" CornerRadius="4" Background="{DynamicResource LuminaDividerBrush}" />
+                    <Border Width="88" Height="8" CornerRadius="4" Background="{DynamicResource LuminaDividerBrush}" HorizontalAlignment="Left" />
+                  </StackPanel>
+                </lumina:LuminaShell.MenuContent>
+
+                <lumina:LuminaShell.MenuFooter>
+                  <TextBlock Text="{l10n:Loc Sandbox.Overlays.HostScope.InnerHost}"
+                             FontSize="12"
+                             FontWeight="SemiBold"
+                             Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                </lumina:LuminaShell.MenuFooter>
+
+                <lumina:LuminaShell.Title>
+                  <TextBlock Text="{l10n:Loc Sandbox.Overlays.HostScope.ShellLayer}"
+                             FontSize="18"
+                             FontWeight="SemiBold" />
+                </lumina:LuminaShell.Title>
+
+                <Grid Margin="18"
+                      RowDefinitions="Auto,*,Auto"
+                      RowSpacing="14">
+                  <StackPanel Spacing="6">
+                    <TextBlock Text="{l10n:Loc Sandbox.Overlays.HostScope.ShellContent}"
+                               FontSize="20"
+                               FontWeight="SemiBold" />
+                    <TextBlock Text="{l10n:Loc Sandbox.Overlays.HostScope.ShellContentDescription}"
+                               Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                               TextWrapping="Wrap" />
+                  </StackPanel>
+
+                  <Grid Grid.Row="1" RowDefinitions="*,*,*" RowSpacing="10">
+                    <Border CornerRadius="6" Background="{DynamicResource LuminaDividerBrush}" Opacity="0.8" />
+                    <Border Grid.Row="1" CornerRadius="6" Background="{DynamicResource LuminaDividerBrush}" Opacity="0.55" />
+                    <Border Grid.Row="2" Width="210" CornerRadius="6" Background="{DynamicResource LuminaDividerBrush}" Opacity="0.4" HorizontalAlignment="Left" />
+                  </Grid>
+
+                  <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="10">
+                    <Button Content="{l10n:Loc Sandbox.Overlays.HostScope.ShellDrawerButton}"
+                            Classes="Outline"
+                            HorizontalAlignment="Stretch"
+                            Command="{Binding OpenShellDrawerCommand}" />
+                    <Button Grid.Column="1"
+                            Content="{l10n:Loc Sandbox.Overlays.HostScope.ShellSheetButton}"
+                            Classes="Outline"
+                            HorizontalAlignment="Stretch"
+                            Command="{Binding OpenShellBottomSheetCommand}" />
+                  </Grid>
+                </Grid>
+              </lumina:LuminaShell>
+            </Border>
+          </Grid>
+        </Border>
+
+        <StackPanel Spacing="16" MaxWidth="430">
+          <lumina:LuminaCard Padding="18" Classes="Glass">
+            <StackPanel Spacing="16">
+              <TextBlock Text="{l10n:Loc Sandbox.Overlays.HostScope.InnerHost}"
+                         FontWeight="SemiBold" />
+              <Button Name="OpenShellDrawerScopeButton"
+                      Content="{l10n:Loc Sandbox.Overlays.HostScope.ShellDrawerButton}"
+                      Classes="Outline"
+                      HorizontalAlignment="Stretch"
+                      Command="{Binding OpenShellDrawerCommand}" />
+              <Button Name="OpenShellHostBottomSheetButton"
+                      Content="{l10n:Loc Sandbox.Overlays.HostScope.ShellSheetButton}"
+                      Classes="Outline"
+                      HorizontalAlignment="Stretch"
+                      Command="{Binding OpenShellBottomSheetCommand}" />
+            </StackPanel>
+          </lumina:LuminaCard>
+
+          <lumina:LuminaCard Padding="18" Classes="Glass">
+            <StackPanel Spacing="16">
+              <TextBlock Text="{l10n:Loc Sandbox.Overlays.HostScope.OuterHost}"
+                         FontWeight="SemiBold" />
+              <Button Name="ShowRootOverlayMarkerButton"
+                      Content="{l10n:Loc Sandbox.Overlays.HostScope.MarkerButton}"
+                      Classes="Outline"
+                      HorizontalAlignment="Stretch"
+                      Command="{Binding ShowRootOverlayMarkerCommand}" />
+              <Button Name="OpenTopDrawerScopeButton"
+                      Content="{l10n:Loc Sandbox.Overlays.HostScope.TopDrawerButton}"
+                      Classes="Primary"
+                      HorizontalAlignment="Stretch"
+                      Command="{Binding OpenTopDrawerCommand}" />
+              <Button Name="OpenTopHostBottomSheetButton"
+                      Content="{l10n:Loc Sandbox.Overlays.HostScope.TopSheetButton}"
+                      Classes="Primary"
+                      HorizontalAlignment="Stretch"
+                      Command="{Binding OpenTopBottomSheetCommand}" />
+            </StackPanel>
+          </lumina:LuminaCard>
+
+          <Border Padding="16"
+                  Background="{DynamicResource LuminaSurfaceBrush}"
+                  BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                  BorderThickness="1"
+                  CornerRadius="12">
+            <TextBlock Text="{l10n:Loc Sandbox.Overlays.HostScope.Hint}"
+                       Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                       TextWrapping="Wrap" />
+          </Border>
+        </StackPanel>
+      </lumina:LuminaResponsivePanel>
+    </StackPanel>
+  </ScrollViewer>
+</ContentPage>

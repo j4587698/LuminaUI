@@ -24,6 +24,51 @@ public class LuminaBottomSheet : ContentControl
 
     private TranslateTransform? _translateTransform;
 
+    private Thickness _effectiveContentPadding = new Thickness(24.0, 0.0, 24.0, 24.0);
+
+    public static readonly StyledProperty<Thickness> ContentPaddingProperty = AvaloniaProperty.Register<LuminaBottomSheet, Thickness>(nameof(ContentPadding), new Thickness(24.0, 0.0, 24.0, 24.0));
+
+    public static readonly StyledProperty<Thickness> SafeAreaPaddingProperty = AvaloniaProperty.Register<LuminaBottomSheet, Thickness>(nameof(SafeAreaPadding));
+
+    public static readonly DirectProperty<LuminaBottomSheet, Thickness> EffectiveContentPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaBottomSheet, Thickness>(nameof(EffectiveContentPadding), (LuminaBottomSheet sheet) => sheet.EffectiveContentPadding);
+
+    public Thickness ContentPadding
+    {
+        get => GetValue(ContentPaddingProperty);
+        set => SetValue(ContentPaddingProperty, value);
+    }
+
+    public Thickness SafeAreaPadding
+    {
+        get => GetValue(SafeAreaPaddingProperty);
+        set => SetValue(SafeAreaPaddingProperty, value);
+    }
+
+    public Thickness EffectiveContentPadding
+    {
+        get
+        {
+            return _effectiveContentPadding;
+        }
+        private set
+        {
+            SetAndRaise(EffectiveContentPaddingProperty, ref _effectiveContentPadding, value);
+        }
+    }
+
+    internal static LuminaBottomSheet? EnsureSheet(object? content)
+    {
+        if (content == null)
+        {
+            return null;
+        }
+
+        return content as LuminaBottomSheet ?? new LuminaBottomSheet
+        {
+            Content = content
+        };
+    }
+
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
@@ -51,6 +96,26 @@ public class LuminaBottomSheet : ContentControl
         {
             _translateTransform = (TranslateTransform)RenderTransform;
         }
+    }
+
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
+    {
+        base.OnPropertyChanged(change);
+        if (change.Property == ContentPaddingProperty || change.Property == SafeAreaPaddingProperty)
+        {
+            UpdateEffectiveContentPadding();
+        }
+    }
+
+    private void UpdateEffectiveContentPadding()
+    {
+        Thickness padding = ContentPadding;
+        Thickness safeAreaPadding = SafeAreaPadding;
+        EffectiveContentPadding = new Thickness(
+            padding.Left + safeAreaPadding.Left,
+            padding.Top,
+            padding.Right + safeAreaPadding.Right,
+            padding.Bottom + safeAreaPadding.Bottom);
     }
 
     private void OnDragHandlePointerPressed(object? sender, PointerPressedEventArgs e)

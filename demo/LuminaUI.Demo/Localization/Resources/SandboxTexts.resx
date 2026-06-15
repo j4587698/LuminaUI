@@ -1084,7 +1084,7 @@
     <value>Drawer content</value>
   </data>
   <data name="Sandbox.Text.0358" xml:space="preserve">
-    <value>DrawerPage is the native sidebar pattern for app-level navigation.</value>
+    <value>LuminaDrawer is hosted by the overlay layer and can appear from any edge.</value>
   </data>
   <data name="Sandbox.Text.0359" xml:space="preserve">
     <value>Left</value>
@@ -2308,7 +2308,7 @@
     <value>A container that provides a header for its content.</value>
   </data>
   <data name="Sandbox.Text.0766" xml:space="preserve">
-    <value>A container with a sliding drawer.</value>
+    <value>Overlay drawer surface for Shell and TopView hosts.</value>
   </data>
   <data name="Sandbox.Text.0767" xml:space="preserve">
     <value>A container with two views: a pane for navigation and a content area.</value>
@@ -3430,7 +3430,7 @@
     <value>ID</value>
   </data>
   <data name="Sandbox.Text.1153" xml:space="preserve">
-    <value>DrawerPage</value>
+    <value>LuminaDrawer</value>
   </data>
   <data name="Sandbox.Text.1154" xml:space="preserve">
     <value>DropDownButton</value>

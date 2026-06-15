@@ -124,7 +124,7 @@
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
-                            <TextBlock Classes="SectionTitle" Text="DrawerPage" />
+                            <TextBlock Classes="SectionTitle" Text="LuminaDrawer" />
                             <ToggleButton Grid.Column="1"
                                           Classes="Small Outline"
                                           Content="Open"
@@ -157,26 +157,40 @@
                                 BorderThickness="1"
                                 CornerRadius="8"
                                 ClipToBounds="True">
-                            <DrawerPage Header="Workspace"
-                                        IsOpen="{Binding IsDrawerOpen, Mode=TwoWay}"
-                                        DisplayMode="Overlay"
-                                        DrawerPlacement="{Binding DrawerPlacement}"
-                                        DrawerLength="170"
-                                        CompactDrawerLength="48">
-                                <DrawerPage.Drawer>
-                                    <StackPanel Spacing="6" Margin="8">
-                                        <Button Classes="Ghost" Content="Home" HorizontalAlignment="Stretch" />
-                                        <Button Classes="Ghost" Content="Reports" HorizontalAlignment="Stretch" />
-                                        <Button Classes="Ghost" Content="Team" HorizontalAlignment="Stretch" />
-                                    </StackPanel>
-                                </DrawerPage.Drawer>
-                                <StackPanel Margin="16,64,16,16" Spacing="10">
-                                    <TextBlock Classes="Label" Text="Drawer content" />
+                            <lumina:LuminaTopView Name="NavigationDrawerPreviewHost"
+                                                  IsDrawerOpen="{Binding IsDrawerOpen, Mode=TwoWay}"
+                                                  Background="{DynamicResource LuminaBackgroundBrush}">
+                                <lumina:LuminaTopView.DrawerContent>
+                                    <lumina:LuminaDrawer Placement="{Binding DrawerPlacement}"
+                                                         DrawerLength="170"
+                                                         ContentPadding="14">
+                                        <Grid RowDefinitions="Auto,*,Auto" RowSpacing="12">
+                                            <StackPanel Spacing="6">
+                                                <TextBlock Classes="Label" Text="Drawer content" />
+                                                <TextBlock Classes="Helper"
+                                                           Text="LuminaDrawer is hosted by the overlay layer."
+                                                           TextWrapping="Wrap" />
+                                            </StackPanel>
+                                            <StackPanel Grid.Row="1" Spacing="6">
+                                                <Button Classes="Ghost" Content="Home" HorizontalAlignment="Stretch" />
+                                                <Button Classes="Ghost" Content="Reports" HorizontalAlignment="Stretch" />
+                                                <Button Classes="Ghost" Content="Team" HorizontalAlignment="Stretch" />
+                                            </StackPanel>
+                                            <Button Grid.Row="2"
+                                                    Classes="Outline Small"
+                                                    Content="Close"
+                                                    HorizontalAlignment="Left"
+                                                    Command="{Binding CloseDrawerCommand}" />
+                                        </Grid>
+                                    </lumina:LuminaDrawer>
+                                </lumina:LuminaTopView.DrawerContent>
+                                <StackPanel Margin="16" Spacing="10" Background="{DynamicResource LuminaSurfaceElevatedBrush}">
+                                    <TextBlock Classes="Label" Text="Host content" />
                                     <TextBlock Classes="Helper"
-                                               Text="DrawerPage is the native sidebar pattern for app-level navigation."
+                                               Text="The drawer surface uses the current TopView overlay host."
                                                TextWrapping="Wrap" />
                                 </StackPanel>
-                            </DrawerPage>
+                            </lumina:LuminaTopView>
                         </Border>
                     </StackPanel>
                 </lumina:LuminaCard>

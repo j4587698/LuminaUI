@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Platform;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
@@ -26,11 +27,15 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
 
     private static readonly TimeSpan BottomSheetClearDelay = TimeSpan.FromMilliseconds(360);
 
+    private static readonly TimeSpan DrawerClearDelay = TimeSpan.FromMilliseconds(360);
+
     private readonly LuminaOverlayInputPaneAvoidance _overlayInputPaneAvoidance;
 
     private Control? _dialogOverlay;
 
     private Control? _bottomSheetOverlay;
+
+    private Control? _drawerOverlay;
 
     private ContentPresenter? _toastPresenter;
 
@@ -40,7 +45,33 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
 
     private CancellationTokenSource? _bottomSheetClearCancellation;
 
+    private CancellationTokenSource? _drawerClearCancellation;
+
+    private bool _ownsBottomSheetContent;
+
+    private bool _ownsDrawerContent;
+
+    private bool _settingOwnedBottomSheetContent;
+
+    private bool _settingOwnedDrawerContent;
+
     private TimeSpan? _pendingToastDuration;
+
+    private TopLevel? _topLevel;
+
+    private IInsetsManager? _insetsManager;
+
+    private Control? _autoSafeAreaTarget;
+
+    private bool _autoSafeAreaPreviousValue;
+
+    private bool _hasAutoSafeAreaOverride;
+
+    private Thickness _safeAreaPadding;
+
+    private Thickness _effectiveContentPadding;
+
+    private Thickness _overlaySafeAreaPadding;
 
     public static readonly StyledProperty<string?> TopViewKeyProperty = AvaloniaProperty.Register<LuminaTopView, string?>(nameof(TopViewKey));
 
@@ -57,11 +88,27 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
 
     public static readonly StyledProperty<object?> BottomSheetContentProperty = AvaloniaProperty.Register<LuminaTopView, object?>(nameof(BottomSheetContent));
 
+    public static readonly StyledProperty<bool> IsDrawerOpenProperty = AvaloniaProperty.Register<LuminaTopView, bool>(nameof(IsDrawerOpen), defaultValue: false);
+
+    public static readonly StyledProperty<object?> DrawerContentProperty = AvaloniaProperty.Register<LuminaTopView, object?>(nameof(DrawerContent));
+
     public static readonly StyledProperty<TimeSpan> ToastDurationProperty = AvaloniaProperty.Register<LuminaTopView, TimeSpan>(nameof(ToastDuration), TimeSpan.FromSeconds(3));
+
+    public static readonly StyledProperty<bool> UseSafeAreaProperty = AvaloniaProperty.Register<LuminaTopView, bool>(nameof(UseSafeArea), defaultValue: true);
+
+    public static readonly AttachedProperty<bool> IsSafeAreaManagedProperty = AvaloniaProperty.RegisterAttached<LuminaTopView, Control, bool>("IsSafeAreaManaged", defaultValue: false, inherits: true);
+
+    public static readonly DirectProperty<LuminaTopView, Thickness> SafeAreaPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaTopView, Thickness>(nameof(SafeAreaPadding), (LuminaTopView topView) => topView.SafeAreaPadding);
+
+    public static readonly DirectProperty<LuminaTopView, Thickness> EffectiveContentPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaTopView, Thickness>(nameof(EffectiveContentPadding), (LuminaTopView topView) => topView.EffectiveContentPadding);
+
+    public static readonly DirectProperty<LuminaTopView, Thickness> OverlaySafeAreaPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaTopView, Thickness>(nameof(OverlaySafeAreaPadding), (LuminaTopView topView) => topView.OverlaySafeAreaPadding);
 
     public ICommand CloseDialogCommand { get; }
 
     public ICommand CloseBottomSheetCommand { get; }
+
+    public ICommand CloseDrawerCommand { get; }
 
     public ICommand ClearToastCommand { get; }
 
@@ -109,10 +156,75 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
         set => SetValue(BottomSheetContentProperty, value);
     }
 
+    public bool IsDrawerOpen
+    {
+        get => GetValue(IsDrawerOpenProperty);
+        set => SetValue(IsDrawerOpenProperty, value);
+    }
+
+    public object? DrawerContent
+    {
+        get => GetValue(DrawerContentProperty);
+        set => SetValue(DrawerContentProperty, value);
+    }
+
     public TimeSpan ToastDuration
     {
         get => GetValue(ToastDurationProperty);
         set => SetValue(ToastDurationProperty, value);
+    }
+
+    public bool UseSafeArea
+    {
+        get => GetValue(UseSafeAreaProperty);
+        set => SetValue(UseSafeAreaProperty, value);
+    }
+
+    public Thickness SafeAreaPadding
+    {
+        get
+        {
+            return _safeAreaPadding;
+        }
+        private set
+        {
+            SetAndRaise(SafeAreaPaddingProperty, ref _safeAreaPadding, value);
+            UpdateEffectiveSafeAreaPadding();
+        }
+    }
+
+    public Thickness EffectiveContentPadding
+    {
+        get
+        {
+            return _effectiveContentPadding;
+        }
+        private set
+        {
+            SetAndRaise(EffectiveContentPaddingProperty, ref _effectiveContentPadding, value);
+        }
+    }
+
+    public Thickness OverlaySafeAreaPadding
+    {
+        get
+        {
+            return _overlaySafeAreaPadding;
+        }
+        private set
+        {
+            SetAndRaise(OverlaySafeAreaPaddingProperty, ref _overlaySafeAreaPadding, value);
+        }
+    }
+
+    public static bool GetIsSafeAreaManaged(Control element)
+    {
+        return element.GetValue(IsSafeAreaManagedProperty);
+    }
+
+    public static void SetIsSafeAreaManaged(Control element, bool value)
+    {
+        element.SetValue(IsSafeAreaManagedProperty, value);
     }
 
     public LuminaTopView()
@@ -123,6 +235,9 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
         });
         CloseBottomSheetCommand = new LuminaRelayCommand(_ => {
             CloseBottomSheet();
+        });
+        CloseDrawerCommand = new LuminaRelayCommand(_ => {
+            CloseDrawer();
         });
         ClearToastCommand = new LuminaRelayCommand(_ => {
             ClearToast();
@@ -223,8 +338,23 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
 
     public void ShowBottomSheet(object? content)
     {
-        BottomSheetContent = content;
-        IsBottomSheetOpen = content != null;
+        LuminaBottomSheet? bottomSheet = LuminaBottomSheet.EnsureSheet(content);
+        if (bottomSheet != null)
+        {
+            bottomSheet.SafeAreaPadding = OverlaySafeAreaPadding;
+        }
+
+        _settingOwnedBottomSheetContent = true;
+        try
+        {
+            _ownsBottomSheetContent = bottomSheet != null;
+            BottomSheetContent = bottomSheet;
+        }
+        finally
+        {
+            _settingOwnedBottomSheetContent = false;
+        }
+        IsBottomSheetOpen = bottomSheet != null;
     }
 
     public void CloseBottomSheet()
@@ -232,10 +362,40 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
         IsBottomSheetOpen = false;
     }
 
+    public void ShowDrawer(object? content)
+    {
+        LuminaDrawer? drawer = LuminaDrawer.EnsureDrawer(content);
+        if (drawer != null)
+        {
+            drawer.SafeAreaPadding = OverlaySafeAreaPadding;
+        }
+
+        _settingOwnedDrawerContent = true;
+        try
+        {
+            _ownsDrawerContent = drawer != null;
+            DrawerContent = drawer;
+        }
+        finally
+        {
+            _settingOwnedDrawerContent = false;
+        }
+        IsDrawerOpen = drawer != null;
+    }
+
+    public void CloseDrawer()
+    {
+        IsDrawerOpen = false;
+    }
+
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
         RegisterAttachedTopView();
+        _topLevel = TopLevel.GetTopLevel(this);
+        SyncTopLevelSafeAreaMode();
+        SyncInsetsManagerSubscription();
+        UpdateSafeAreaPadding();
         _overlayInputPaneAvoidance.AttachToVisualTree();
     }
 
@@ -243,6 +403,10 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
     {
         CancelToastHide();
         CancelBottomSheetContentClear();
+        CancelDrawerContentClear();
+        DetachInsetsManager();
+        RestoreTopLevelAutoSafeAreaPadding();
+        _topLevel = null;
         _overlayInputPaneAvoidance.DetachFromVisualTree();
         DetachOverlayHandlers();
         base.OnDetachedFromVisualTree(e);
@@ -263,6 +427,11 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
         {
             _bottomSheetOverlay.AddHandler(InputElement.PointerPressedEvent, OnBottomSheetOverlayPointerPressed, RoutingStrategies.Tunnel, handledEventsToo: true);
         }
+        _drawerOverlay = e.NameScope.FindRequired<Control>("PART_DrawerOverlay");
+        if (_drawerOverlay != null)
+        {
+            _drawerOverlay.AddHandler(InputElement.PointerPressedEvent, OnDrawerOverlayPointerPressed, RoutingStrategies.Tunnel, handledEventsToo: true);
+        }
         _toastPresenter = e.NameScope.FindRequired<ContentPresenter>("PART_ToastPresenter");
         if (_toastPresenter != null)
         {
@@ -271,6 +440,8 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
         _overlayInputPaneAvoidance.ApplyTemplate(
             e.NameScope.FindRequired<Control>("PART_DialogContainer"),
             e.NameScope.FindRequired<Control>("PART_BottomSheetContainer"));
+        ApplyBottomSheetSafeAreaPadding();
+        ApplyDrawerSafeAreaPadding();
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
@@ -279,6 +450,16 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
         if (change.Property == TopViewKeyProperty)
         {
             UpdateTopViewKey(change.GetOldValue<string>(), change.GetNewValue<string>());
+        }
+        else if (change.Property == UseSafeAreaProperty)
+        {
+            SyncTopLevelSafeAreaMode();
+            SyncInsetsManagerSubscription();
+            UpdateSafeAreaPadding();
+        }
+        else if (change.Property == PaddingProperty)
+        {
+            UpdateEffectiveSafeAreaPadding();
         }
         else if (change.Property == ToastContentProperty)
         {
@@ -315,12 +496,134 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
             }
             _overlayInputPaneAvoidance.UpdateOverlayState();
         }
+        else if (change.Property == IsDrawerOpenProperty)
+        {
+            if (change.GetNewValue<bool>())
+            {
+                CancelDrawerContentClear();
+            }
+            else
+            {
+                ScheduleDrawerContentClear();
+            }
+        }
+        else if (change.Property == BottomSheetContentProperty)
+        {
+            if (!_settingOwnedBottomSheetContent)
+            {
+                _ownsBottomSheetContent = false;
+                CancelBottomSheetContentClear();
+            }
+            ApplyBottomSheetSafeAreaPadding();
+        }
+        else if (change.Property == DrawerContentProperty)
+        {
+            if (!_settingOwnedDrawerContent)
+            {
+                _ownsDrawerContent = false;
+                CancelDrawerContentClear();
+            }
+            ApplyDrawerSafeAreaPadding();
+        }
     }
 
     protected override void OnSizeChanged(SizeChangedEventArgs e)
     {
         base.OnSizeChanged(e);
         _overlayInputPaneAvoidance.UpdateOverlayState();
+    }
+
+    private void SyncInsetsManagerSubscription()
+    {
+        DetachInsetsManager();
+        if (!UseSafeArea || _topLevel?.InsetsManager is not { } insetsManager)
+        {
+            return;
+        }
+
+        _insetsManager = insetsManager;
+        _insetsManager.SafeAreaChanged += OnSafeAreaChanged;
+    }
+
+    private void DetachInsetsManager()
+    {
+        if (_insetsManager != null)
+        {
+            _insetsManager.SafeAreaChanged -= OnSafeAreaChanged;
+            _insetsManager = null;
+        }
+    }
+
+    private void OnSafeAreaChanged(object? sender, SafeAreaChangedArgs e)
+    {
+        SafeAreaPadding = e.SafeAreaPadding;
+    }
+
+    private void UpdateSafeAreaPadding()
+    {
+        SafeAreaPadding = UseSafeArea && _insetsManager != null ? _insetsManager.SafeAreaPadding : default;
+    }
+
+    private void UpdateEffectiveSafeAreaPadding()
+    {
+        Thickness safeAreaPadding = UseSafeArea ? SafeAreaPadding : default;
+        SetIsSafeAreaManaged(this, UseSafeArea);
+        EffectiveContentPadding = Add(Padding, safeAreaPadding);
+        OverlaySafeAreaPadding = safeAreaPadding;
+        ApplyBottomSheetSafeAreaPadding();
+        ApplyDrawerSafeAreaPadding();
+    }
+
+    private static Thickness Add(Thickness padding, Thickness safeAreaPadding)
+    {
+        return new Thickness(
+            padding.Left + safeAreaPadding.Left,
+            padding.Top + safeAreaPadding.Top,
+            padding.Right + safeAreaPadding.Right,
+            padding.Bottom + safeAreaPadding.Bottom);
+    }
+
+    private void ApplyBottomSheetSafeAreaPadding()
+    {
+        if (BottomSheetContent is LuminaBottomSheet bottomSheet)
+        {
+            bottomSheet.SafeAreaPadding = OverlaySafeAreaPadding;
+        }
+    }
+
+    private void ApplyDrawerSafeAreaPadding()
+    {
+        if (DrawerContent is LuminaDrawer drawer)
+        {
+            drawer.SafeAreaPadding = OverlaySafeAreaPadding;
+        }
+    }
+
+    private void SyncTopLevelSafeAreaMode()
+    {
+        RestoreTopLevelAutoSafeAreaPadding();
+        if (!UseSafeArea || _topLevel?.Content is not Control content)
+        {
+            return;
+        }
+
+        _autoSafeAreaTarget = content;
+        _autoSafeAreaPreviousValue = TopLevel.GetAutoSafeAreaPadding(content);
+        _hasAutoSafeAreaOverride = true;
+        TopLevel.SetAutoSafeAreaPadding(content, value: false);
+    }
+
+    private void RestoreTopLevelAutoSafeAreaPadding()
+    {
+        if (!_hasAutoSafeAreaOverride || _autoSafeAreaTarget == null)
+        {
+            return;
+        }
+
+        TopLevel.SetAutoSafeAreaPadding(_autoSafeAreaTarget, _autoSafeAreaPreviousValue);
+        _autoSafeAreaTarget = null;
+        _autoSafeAreaPreviousValue = false;
+        _hasAutoSafeAreaOverride = false;
     }
 
     private static List<LuminaTopView> GetOwnerChain(Control owner)
@@ -355,6 +658,14 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
         }
     }
 
+    private void OnDrawerOverlayPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        if (!IsPointerSourceInsidePart(e.Source, "PART_DrawerContainer"))
+        {
+            IsDrawerOpen = false;
+        }
+    }
+
     private static bool IsPointerSourceInsidePart(object? source, string partName)
     {
         if (source is not Control control)
@@ -376,6 +687,11 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
         {
             _bottomSheetOverlay.RemoveHandler(InputElement.PointerPressedEvent, OnBottomSheetOverlayPointerPressed);
             _bottomSheetOverlay = null;
+        }
+        if (_drawerOverlay != null)
+        {
+            _drawerOverlay.RemoveHandler(InputElement.PointerPressedEvent, OnDrawerOverlayPointerPressed);
+            _drawerOverlay = null;
         }
     }
 
@@ -424,7 +740,7 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
     private void ScheduleBottomSheetContentClear()
     {
         CancelBottomSheetContentClear();
-        if (BottomSheetContent != null)
+        if (_ownsBottomSheetContent && BottomSheetContent != null)
         {
             _ = ClearBottomSheetContentAsync(_bottomSheetClearCancellation = new CancellationTokenSource());
         }
@@ -434,6 +750,22 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
     {
         CancellationTokenSource? cancellation = _bottomSheetClearCancellation;
         _bottomSheetClearCancellation = null;
+        cancellation?.Cancel();
+    }
+
+    private void ScheduleDrawerContentClear()
+    {
+        CancelDrawerContentClear();
+        if (_ownsDrawerContent && DrawerContent != null)
+        {
+            _ = ClearDrawerContentAsync(_drawerClearCancellation = new CancellationTokenSource());
+        }
+    }
+
+    private void CancelDrawerContentClear()
+    {
+        CancellationTokenSource? cancellation = _drawerClearCancellation;
+        _drawerClearCancellation = null;
         cancellation?.Cancel();
     }
 
@@ -449,10 +781,33 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
             return;
         }
         await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
-            if (_bottomSheetClearCancellation == cancellation && !IsBottomSheetOpen)
+            if (_bottomSheetClearCancellation == cancellation && !IsBottomSheetOpen && _ownsBottomSheetContent)
             {
                 _bottomSheetClearCancellation = null;
+                _ownsBottomSheetContent = false;
                 BottomSheetContent = null;
+            }
+            cancellation.Dispose();
+        });
+    }
+
+    private async Task ClearDrawerContentAsync(CancellationTokenSource cancellation)
+    {
+        try
+        {
+            await Task.Delay(DrawerClearDelay, cancellation.Token).ConfigureAwait(continueOnCapturedContext: false);
+        }
+        catch (TaskCanceledException)
+        {
+            cancellation.Dispose();
+            return;
+        }
+        await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
+            if (_drawerClearCancellation == cancellation && !IsDrawerOpen && _ownsDrawerContent)
+            {
+                _drawerClearCancellation = null;
+                _ownsDrawerContent = false;
+                DrawerContent = null;
             }
             cancellation.Dispose();
         });

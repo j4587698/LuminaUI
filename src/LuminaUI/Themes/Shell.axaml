@@ -28,7 +28,7 @@
                                             Height="48"
                                             ClipToBounds="True"
                                             IsVisible="{TemplateBinding EffectiveIsMenuOpen}">
-                                        <ContentPresenter Content="{TemplateBinding MenuHeader}" VerticalAlignment="Center" />
+                                        <ContentPresenter Content="{TemplateBinding EffectiveMenuHeader}" VerticalAlignment="Center" />
                                     </Border>
                                     
                                     <!-- 菜单内容投射器 -->
@@ -38,7 +38,7 @@
                                                   BringIntoViewOnFocusChange="False"
                                                   HorizontalScrollBarVisibility="Disabled"
                                                   VerticalScrollBarVisibility="Hidden">
-                                        <ContentPresenter Content="{TemplateBinding MenuContent}" />
+                                        <ContentPresenter Content="{TemplateBinding EffectiveMenuContent}" />
                                     </ScrollViewer>
                                     
                                     <!-- 菜单底部插槽 -->
@@ -48,7 +48,7 @@
                                             Padding="0,16,0,0"
                                             ClipToBounds="False"
                                             IsVisible="{TemplateBinding EffectiveIsMenuOpen}">
-                                        <ContentPresenter Content="{TemplateBinding MenuFooter}" />
+                                        <ContentPresenter Content="{TemplateBinding EffectiveMenuFooter}" />
                                     </Border>
 
                                     <!-- 紧凑模式切换按钮 -->
@@ -155,6 +155,31 @@
                     <!-- ============================================== -->
                     <!-- BottomSheet Overlay (底部抽屉遮罩)                  -->
                     <!-- ============================================== -->
+                    <Border Name="PART_DrawerOverlay"
+                            Background="Transparent"
+                            Opacity="0"
+                            IsHitTestVisible="False"
+                            ZIndex="1400">
+                        <Border.Transitions>
+                            <Transitions>
+                                <DoubleTransition Property="Opacity" Duration="0:0:0.2" />
+                            </Transitions>
+                        </Border.Transitions>
+
+                        <Grid>
+                            <lumina:LuminaBackdropBlur BlurRadius="10"
+                                                       HorizontalAlignment="Stretch"
+                                                       VerticalAlignment="Stretch" />
+                            <Border Background="{DynamicResource LuminaOverlayScrimBrush}"
+                                    IsHitTestVisible="False" />
+
+                            <ContentPresenter Name="PART_DrawerContainer"
+                                              Content="{TemplateBinding DrawerContent}"
+                                              HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Stretch" />
+                        </Grid>
+                    </Border>
+
                     <Border Name="PART_BottomSheetOverlay"
                             Background="Transparent"
                             Opacity="0"
@@ -264,6 +289,11 @@
         </Style>
 
             <!-- 回到原本位置 -->
+
+        <Style Selector="^[IsDrawerOpen=True] /template/ Border#PART_DrawerOverlay">
+            <Setter Property="Opacity" Value="1" />
+            <Setter Property="IsHitTestVisible" Value="True" />
+        </Style>
 
     </ControlTheme>
 

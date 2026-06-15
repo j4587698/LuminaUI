@@ -7,7 +7,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LuminaUI.Controls;
 using LuminaUI.Localization;
-using LuminaUI.Services;
 using LuminaUI.Demo.Views;
 
 namespace LuminaUI.Demo.ViewModels;
@@ -50,22 +49,6 @@ public partial class OverlaysShowcaseViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void OpenTopDialog()
-    {
-        if (GetTopView() is not { } topView)
-        {
-            return;
-        }
-
-        var dialog = new LuminaDialog
-        {
-            Title = T("Sandbox.Text.0988"),
-            Content = new DeleteProjectDialogContent(new DeleteProjectDialogContentViewModel(topView.CloseDialog))
-        };
-        topView.ShowDialog(dialog);
-    }
-
-    [RelayCommand]
     private async Task OpenWindowDialog()
     {
         var window = TopLevel.GetTopLevel(_owner) as Window;
@@ -105,18 +88,12 @@ public partial class OverlaysShowcaseViewModel : ObservableObject
     private void OpenBottomSheet()
     {
         var shell = GetShell();
-        var sheet = new DemoActionSheet(new DemoActionSheetViewModel(
-            shell == null ? null : () => shell.CloseBottomSheet()));
-        LuminaBottomSheetService.Instance.Show(_owner, sheet);
-    }
+        if (shell == null)
+        {
+            return;
+        }
 
-    [RelayCommand]
-    private void OpenTopBottomSheet()
-    {
-        var topView = GetTopView();
-        var sheet = new DemoActionSheet(new DemoActionSheetViewModel(
-            topView == null ? null : () => topView.CloseBottomSheet()));
-        LuminaBottomSheetService.Instance.ShowAtTop(_owner, sheet);
+        shell.ShowBottomSheet(new DemoActionSheet(new DemoActionSheetViewModel(shell.CloseBottomSheet)));
     }
 
     [RelayCommand]
@@ -124,31 +101,26 @@ public partial class OverlaysShowcaseViewModel : ObservableObject
     {
         var toastDefinition = tone switch
         {
-            "Success" => (T("Sandbox.Text.0617"), T("Sandbox.Text.0618"), "Success", TimeSpan.FromSeconds(4), false),
-            "Warning" => (T("Sandbox.Text.0619"), T("Sandbox.Text.0620"), "Warning", TimeSpan.FromSeconds(5), false),
-            "Danger" => (T("Sandbox.Text.0621"), T("Sandbox.Text.0622"), "Danger", TimeSpan.FromSeconds(6), false),
-            "Top" => (T("Sandbox.Text.1322"), T(SandboxLocalization.OverlaysTopViewToastMessage), "Neutral", TimeSpan.FromSeconds(3), true),
-            _ => (T("Sandbox.Text.0615"), T("Sandbox.Text.0616"), "Neutral", TimeSpan.FromSeconds(3), false)
+            "Success" => (T("Sandbox.Text.0617"), T("Sandbox.Text.0618"), "Success", TimeSpan.FromSeconds(4)),
+            "Warning" => (T("Sandbox.Text.0619"), T("Sandbox.Text.0620"), "Warning", TimeSpan.FromSeconds(5)),
+            "Danger" => (T("Sandbox.Text.0621"), T("Sandbox.Text.0622"), "Danger", TimeSpan.FromSeconds(6)),
+            _ => (T("Sandbox.Text.0615"), T("Sandbox.Text.0616"), "Neutral", TimeSpan.FromSeconds(3))
         };
 
-        ILuminaOverlayHost? host = toastDefinition.Item5
-            ? GetTopView()
-            : GetShell();
+        ShowToastCore(GetShell(), toastDefinition.Item1, toastDefinition.Item2, toastDefinition.Item3, toastDefinition.Item4);
+    }
 
-        if (host == null)
-        {
-            return;
-        }
-
+    private static void ShowToastCore(ILuminaOverlayHost? host, string title, string message, string styleClass, TimeSpan duration)
+    {
         void Show()
         {
             var toast = new LuminaToast
             {
-                Classes = { toastDefinition.Item3 },
-                Content = CreateToastContent(toastDefinition.Item1, toastDefinition.Item2)
+                Classes = { styleClass },
+                Content = CreateToastContent(title, message)
             };
 
-            host.ShowToast(toast, toastDefinition.Item4);
+            host?.ShowToast(toast, duration);
         }
 
         if (Dispatcher.UIThread.CheckAccess())

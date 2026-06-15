@@ -90,21 +90,56 @@
         </Style>
     </ControlTheme>
 
+    <!-- LuminaDrawer Theme -->
+    <ControlTheme x:Key="{x:Type lumina:LuminaDrawer}" TargetType="lumina:LuminaDrawer">
+        <Setter Property="Background" Value="{DynamicResource LuminaPopoverBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="ClipToBounds" Value="False" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid ClipToBounds="False">
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            BoxShadow="{DynamicResource LuminaShadowPopup}"
+                            IsHitTestVisible="False" />
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            ClipToBounds="True">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Padding="{TemplateBinding EffectiveContentPadding}"
+                                          TextElement.Foreground="{DynamicResource LuminaTextPrimaryBrush}" />
+                    </Border>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
     <!-- LuminaBottomSheet Theme -->
     <ControlTheme x:Key="{x:Type lumina:LuminaBottomSheet}" TargetType="lumina:LuminaBottomSheet">
+        <Setter Property="Background" Value="{DynamicResource LuminaPopoverBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
+        <Setter Property="BorderThickness" Value="1,1,1,0" />
+        <Setter Property="CornerRadius" Value="24,24,0,0" />
+        <Setter Property="ClipToBounds" Value="False" />
         <Setter Property="Template">
             <ControlTemplate>
                 <!-- 移动端底边无间隙，上边大圆角，极深投影 -->
-                <Panel ClipToBounds="False">
-                    <Border Background="{DynamicResource LuminaSurfaceBrush}"
+                <Grid ClipToBounds="False">
+                    <Border Background="{TemplateBinding Background}"
                             BorderThickness="0"
-                            CornerRadius="24,24,0,0"
-                            BoxShadow="0 -4 20 #4D000000" />
-                    <Border Background="{DynamicResource LuminaSurfaceBrush}"
-                            BorderThickness="0"
-                            CornerRadius="24,24,0,0"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            BoxShadow="{DynamicResource LuminaShadowPopup}"
+                            IsHitTestVisible="False" />
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
                             ClipToBounds="True">
-                    <StackPanel>
+                    <StackPanel TextElement.Foreground="{DynamicResource LuminaTextPrimaryBrush}">
                         <!-- 拖拽胶囊 (Drag Handle) -->
                         <Border Name="PART_DragHandle" 
                                 Background="Transparent" 
@@ -115,10 +150,12 @@
                         </Border>
                         
                         <!-- 身体内容区 -->
-                        <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Padding="24,0,24,24" />
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Padding="{TemplateBinding EffectiveContentPadding}" />
                     </StackPanel>
                     </Border>
-                </Panel>
+                </Grid>
             </ControlTemplate>
         </Setter>
     </ControlTheme>

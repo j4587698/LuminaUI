@@ -10,7 +10,7 @@
                     <ContentPresenter Name="PART_ContentPresenter"
                                       Content="{TemplateBinding Content}"
                                       ContentTemplate="{TemplateBinding ContentTemplate}"
-                                      Padding="{TemplateBinding Padding}"
+                                      Padding="{TemplateBinding EffectiveContentPadding}"
                                       HorizontalAlignment="Stretch"
                                       VerticalAlignment="Stretch" />
 
@@ -32,17 +32,44 @@
                             <Border Background="{DynamicResource LuminaOverlayScrimBrush}"
                                     IsHitTestVisible="False" />
 
-                            <Border Name="PART_DialogContainer">
-                                <Border.Transitions>
-                                    <Transitions>
-                                        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25" Easing="CubicEaseOut" />
-                                    </Transitions>
-                                </Border.Transitions>
-                                <ContentPresenter Content="{TemplateBinding DialogContent}"
-                                                  Margin="16"
-                                                  HorizontalAlignment="Stretch"
-                                                  VerticalAlignment="Center" />
+                            <Border Padding="{TemplateBinding OverlaySafeAreaPadding}">
+                                <Border Name="PART_DialogContainer">
+                                    <Border.Transitions>
+                                        <Transitions>
+                                            <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25" Easing="CubicEaseOut" />
+                                        </Transitions>
+                                    </Border.Transitions>
+                                    <ContentPresenter Content="{TemplateBinding DialogContent}"
+                                                      Margin="16"
+                                                      HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Center" />
+                                </Border>
                             </Border>
+                        </Grid>
+                    </Border>
+
+                    <Border Name="PART_DrawerOverlay"
+                            Background="Transparent"
+                            Opacity="0"
+                            IsHitTestVisible="False"
+                            ZIndex="1400">
+                        <Border.Transitions>
+                            <Transitions>
+                                <DoubleTransition Property="Opacity" Duration="0:0:0.2" />
+                            </Transitions>
+                        </Border.Transitions>
+
+                        <Grid>
+                            <lumina:LuminaBackdropBlur BlurRadius="10"
+                                                       HorizontalAlignment="Stretch"
+                                                       VerticalAlignment="Stretch" />
+                            <Border Background="{DynamicResource LuminaOverlayScrimBrush}"
+                                    IsHitTestVisible="False" />
+
+                            <ContentPresenter Name="PART_DrawerContainer"
+                                              Content="{TemplateBinding DrawerContent}"
+                                              HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Stretch" />
                         </Grid>
                     </Border>
 
@@ -65,8 +92,8 @@
                                     IsHitTestVisible="False" />
 
                             <Border Name="PART_BottomSheetContainer"
-                                    VerticalAlignment="Bottom"
-                                    HorizontalAlignment="Stretch">
+                                     VerticalAlignment="Bottom"
+                                     HorizontalAlignment="Stretch">
                                 <ContentPresenter Content="{TemplateBinding BottomSheetContent}" />
                             </Border>
                         </Grid>
@@ -74,6 +101,7 @@
 
                     <Border ZIndex="2000"
                             Margin="16"
+                            Padding="{TemplateBinding OverlaySafeAreaPadding}"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Bottom"
                             IsHitTestVisible="False">
@@ -97,6 +125,11 @@
         </Style>
 
         <Style Selector="^[IsBottomSheetOpen=True] /template/ Border#PART_BottomSheetOverlay">
+            <Setter Property="Opacity" Value="1" />
+            <Setter Property="IsHitTestVisible" Value="True" />
+        </Style>
+
+        <Style Selector="^[IsDrawerOpen=True] /template/ Border#PART_DrawerOverlay">
             <Setter Property="Opacity" Value="1" />
             <Setter Property="IsHitTestVisible" Value="True" />
         </Style>
