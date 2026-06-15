@@ -530,6 +530,7 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
         }
 
         _insetsManager = insetsManager;
+        _insetsManager.DisplayEdgeToEdgePreference = true;
         _insetsManager.SafeAreaChanged += OnSafeAreaChanged;
     }
 
