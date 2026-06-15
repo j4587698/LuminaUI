@@ -175,9 +175,6 @@
             <Setter Property="IsVisible" Value="True" />
         </Style>
 
-        <Style Selector="^[(lumina|LuminaTopView.IsSafeAreaManaged)=True]">
-            <Setter Property="AutomaticallyApplySafeAreaPadding" Value="False" />
-        </Style>
     </ControlTheme>
 
 </ResourceDictionary>

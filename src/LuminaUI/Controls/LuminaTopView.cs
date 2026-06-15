@@ -96,8 +96,6 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
 
     public static readonly StyledProperty<bool> UseSafeAreaProperty = AvaloniaProperty.Register<LuminaTopView, bool>(nameof(UseSafeArea), defaultValue: true);
 
-    public static readonly AttachedProperty<bool> IsSafeAreaManagedProperty = AvaloniaProperty.RegisterAttached<LuminaTopView, Control, bool>("IsSafeAreaManaged", defaultValue: false, inherits: true);
-
     public static readonly DirectProperty<LuminaTopView, Thickness> SafeAreaPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaTopView, Thickness>(nameof(SafeAreaPadding), (LuminaTopView topView) => topView.SafeAreaPadding);
 
     public static readonly DirectProperty<LuminaTopView, Thickness> EffectiveContentPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaTopView, Thickness>(nameof(EffectiveContentPadding), (LuminaTopView topView) => topView.EffectiveContentPadding);
@@ -215,16 +213,6 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
         {
             SetAndRaise(OverlaySafeAreaPaddingProperty, ref _overlaySafeAreaPadding, value);
         }
-    }
-
-    public static bool GetIsSafeAreaManaged(Control element)
-    {
-        return element.GetValue(IsSafeAreaManagedProperty);
-    }
-
-    public static void SetIsSafeAreaManaged(Control element, bool value)
-    {
-        element.SetValue(IsSafeAreaManagedProperty, value);
     }
 
     public LuminaTopView()
@@ -567,20 +555,10 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
     private void UpdateEffectiveSafeAreaPadding()
     {
         Thickness safeAreaPadding = UseSafeArea ? SafeAreaPadding : default;
-        SetIsSafeAreaManaged(this, UseSafeArea);
-        EffectiveContentPadding = Add(Padding, safeAreaPadding);
+        EffectiveContentPadding = Padding;
         OverlaySafeAreaPadding = safeAreaPadding;
         ApplyBottomSheetSafeAreaPadding();
         ApplyDrawerSafeAreaPadding();
-    }
-
-    private static Thickness Add(Thickness padding, Thickness safeAreaPadding)
-    {
-        return new Thickness(
-            padding.Left + safeAreaPadding.Left,
-            padding.Top + safeAreaPadding.Top,
-            padding.Right + safeAreaPadding.Right,
-            padding.Bottom + safeAreaPadding.Bottom);
     }
 
     private void ApplyBottomSheetSafeAreaPadding()
