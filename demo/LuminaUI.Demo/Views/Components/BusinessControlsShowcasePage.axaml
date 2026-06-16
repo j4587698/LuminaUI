@@ -1,5 +1,6 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.BusinessControlsShowcasePage"
@@ -11,8 +12,8 @@
                     HorizontalAlignment="Stretch"
                     Margin="0,36,0,40">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="Business Controls" />
-                <TextBlock Text="Form, multi select, tag input, banner, loading container, and skeleton states."
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Components.Business.Title}" />
+                <TextBlock Text="{l10n:Loc Sandbox.Components.Business.Description}"
                            Foreground="{DynamicResource LuminaTextMutedBrush}"
                            TextWrapping="Wrap" />
             </StackPanel>
@@ -23,34 +24,34 @@
                                           VerticalSpacing="16">
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="Form layout" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Business.FormLayout}" />
                         <lumina:LuminaForm LabelPosition="Left" LabelWidth="120">
-                            <TextBox lumina:LuminaForm.Label="Project"
+                            <TextBox lumina:LuminaForm.Label="{l10n:Loc Sandbox.Components.Business.Project}"
                                      lumina:LuminaForm.IsRequired="True"
-                                     Text="Lumina UI" />
-                            <lumina:LuminaMultiSelect lumina:LuminaForm.Label="Members"
-                                                      Watermark="Select members"
+                                     Text="{l10n:Loc Sandbox.Components.Business.LuminaUI}" />
+                            <lumina:LuminaMultiSelect lumina:LuminaForm.Label="{l10n:Loc Sandbox.Components.Business.Members}"
+                                                      Watermark="{l10n:Loc Sandbox.Components.Business.SelectMembers}"
                                                       ItemsSource="{Binding TeamMembers}"
                                                       SelectedItems="{Binding SelectedMembers}" />
-                            <lumina:LuminaTagInput lumina:LuminaForm.Label="Labels"
-                                                   Watermark="Type and press Enter"
+                            <lumina:LuminaTagInput lumina:LuminaForm.Label="{l10n:Loc Sandbox.Components.Business.Labels}"
+                                                   Watermark="{l10n:Loc Sandbox.Components.Business.TypeAndPressEnter}"
                                                    AllowDuplicates="False"
                                                    Tags="{Binding Labels}"
                                                    TagAddedCommand="{Binding TagAddedCommand}"
                                                    TagRemovedCommand="{Binding TagRemovedCommand}" />
                             <Button lumina:LuminaForm.NoLabel="True"
-                                    Content="Submit"
+                                    Content="{l10n:Loc Sandbox.Components.Business.Submit}"
                                     Classes="Primary"
                                     Command="{Binding SubmitFormCommand}"
                                     HorizontalAlignment="Left" />
                         </lumina:LuminaForm>
                         <Separator />
-                        <TextBlock Classes="Label" Text="Top label layout" />
+                        <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Components.Business.TopLabelLayout}" />
                         <lumina:LuminaForm LabelPosition="Top">
-                            <TextBox lumina:LuminaForm.Label="Release name"
-                                     Text="Avalonia 12 refresh" />
-                            <lumina:LuminaMultiSelect lumina:LuminaForm.Label="Priority"
-                                                      Watermark="Select priority"
+                            <TextBox lumina:LuminaForm.Label="{l10n:Loc Sandbox.Components.Business.ReleaseName}"
+                                     Text="{l10n:Loc Sandbox.Components.Business.Avalonia12Refresh}" />
+                            <lumina:LuminaMultiSelect lumina:LuminaForm.Label="{l10n:Loc Sandbox.Components.Business.Priority}"
+                                                      Watermark="{l10n:Loc Sandbox.Components.Business.SelectPriority}"
                                                       ItemsSource="{Binding Priorities}"
                                                       SelectedItems="{Binding SelectedPriorities}" />
                         </lumina:LuminaForm>
@@ -60,22 +61,22 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="Multi select" />
-                        <lumina:LuminaMultiSelect Watermark="Select priority"
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Business.MultiSelect}" />
+                        <lumina:LuminaMultiSelect Watermark="{l10n:Loc Sandbox.Components.Business.SelectPriority}"
                                                   lumina:LuminaOptions.PopupType="Sheet"
                                                   CanClearSelection="False"
                                                   ItemsSource="{Binding Priorities}"
                                                   SelectedItems="{Binding SelectedPriorities}" />
-                        <lumina:LuminaTagInput Watermark="Tags without remove buttons"
+                        <lumina:LuminaTagInput Watermark="{l10n:Loc Sandbox.Components.Business.TagsWithoutRemoveButtons}"
                                                CanRemoveTags="False"
                                                CanInput="False"
                                                Tags="{Binding LockedLabels}" />
                         <WrapPanel>
-                            <Button Content="Reset members"
+                            <Button Content="{l10n:Loc Sandbox.Components.Business.ResetMembers}"
                                     Classes="Outline"
                                     Margin="0,0,8,8"
                                     Command="{Binding ResetSelectionCommand}" />
-                            <Button Content="Add tags"
+                            <Button Content="{l10n:Loc Sandbox.Components.Business.AddTags}"
                                     Classes="Outline"
                                     Margin="0,0,8,8"
                                     Command="{Binding AddDefaultTagsCommand}" />
@@ -83,39 +84,39 @@
                         <StackPanel Orientation="Horizontal"
                                     Spacing="10"
                                     VerticalAlignment="Center">
-                            <TextBlock Text="Close button"
+                            <TextBlock Text="{l10n:Loc Sandbox.Components.Business.CloseButton}"
                                        VerticalAlignment="Center"
                                        Foreground="{DynamicResource LuminaTextMutedBrush}" />
                             <lumina:LuminaCloseButton Command="{Binding RunCloseButtonCommand}"
-                                                      ToolTip.Tip="Close" />
+                                                      ToolTip.Tip="{l10n:Loc Sandbox.Components.Business.Close}" />
                         </StackPanel>
                     </StackPanel>
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="12">
-                        <TextBlock Classes="SectionTitle" Text="Banners" />
-                        <lumina:LuminaBanner Header="Information"
-                                             Content="Use page-level banners for persistent guidance."
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Business.Banners}" />
+                        <lumina:LuminaBanner Header="{l10n:Loc Sandbox.Components.Business.Information}"
+                                             Content="{l10n:Loc Sandbox.Components.Business.BannerInfoContent}"
                                              CanClose="True" />
                         <lumina:LuminaBanner Type="Success"
-                                             Header="Saved"
-                                             Content="Changes were applied without leaving the page." />
+                                             Header="{l10n:Loc Sandbox.Components.Business.Saved}"
+                                             Content="{l10n:Loc Sandbox.Components.Business.BannerSavedContent}" />
                         <lumina:LuminaBanner Type="Warning"
-                                             Header="Review needed"
-                                             Content="Some settings will take effect after restart." />
+                                             Header="{l10n:Loc Sandbox.Components.Business.ReviewNeeded}"
+                                             Content="{l10n:Loc Sandbox.Components.Business.BannerWarningContent}" />
                         <lumina:LuminaBanner Type="Danger"
-                                             Header="Danger zone"
-                                             Content="Use inline warnings before destructive actions." />
+                                             Header="{l10n:Loc Sandbox.Components.Business.DangerZone}"
+                                             Content="{l10n:Loc Sandbox.Components.Business.BannerDangerContent}" />
                     </StackPanel>
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="Loading and skeleton" />
-                        <TextBlock Classes="Label" Text="Loading overlay" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Business.LoadingAndSkeleton}" />
+                        <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Components.Business.LoadingOverlay}" />
                         <lumina:LuminaLoadingContainer IsLoading="{Binding IsLoading}"
-                                                       LoadingMessage="Loading members">
+                                                       LoadingMessage="{l10n:Loc Sandbox.Components.Business.LoadingMembers}">
                             <Border Classes="Subtle" Padding="16">
                                 <StackPanel Spacing="12">
                                     <StackPanel Orientation="Horizontal"
@@ -132,14 +133,14 @@
                                                        Foreground="{DynamicResource LuminaPrimaryBrush}" />
                                         </Border>
                                         <StackPanel Spacing="3">
-                                            <TextBlock Text="Ava Chen"
+                                            <TextBlock Text="{l10n:Loc Sandbox.Components.Business.AvaChen}"
                                                        FontWeight="SemiBold"
                                                        Foreground="{DynamicResource LuminaTextPrimaryBrush}" />
-                                            <TextBlock Text="Product designer"
+                                            <TextBlock Text="{l10n:Loc Sandbox.Components.Business.ProductDesigner}"
                                                        Classes="Caption" />
                                         </StackPanel>
                                     </StackPanel>
-                                    <TextBlock Text="Active in release planning and design review."
+                                    <TextBlock Text="{l10n:Loc Sandbox.Components.Business.AvaChenDesc}"
                                                TextWrapping="Wrap"
                                                Foreground="{DynamicResource LuminaTextMutedBrush}" />
                                 </StackPanel>
@@ -147,7 +148,7 @@
                         </lumina:LuminaLoadingContainer>
 
                         <Separator />
-                        <TextBlock Classes="Label" Text="Auto skeleton" />
+                        <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Components.Business.AutoSkeleton}" />
                         <lumina:LuminaSkeletonContainer IsLoading="{Binding IsLoading}"
                                                         Mode="Auto">
                             <Border Classes="Subtle" Padding="16">
@@ -167,21 +168,21 @@
                                                        Foreground="{DynamicResource LuminaPrimaryBrush}" />
                                         </Border>
                                         <StackPanel Spacing="3">
-                                            <TextBlock Text="Mia Johnson"
+                                            <TextBlock Text="{l10n:Loc Sandbox.Components.Business.MiaJohnson}"
                                                        FontWeight="SemiBold"
                                                        lumina:Skeleton.Shape="Title"
                                                        lumina:Skeleton.Width="180"
                                                        Foreground="{DynamicResource LuminaTextPrimaryBrush}" />
-                                            <TextBlock Text="Frontend engineer"
+                                            <TextBlock Text="{l10n:Loc Sandbox.Components.Business.FrontendEngineer}"
                                                        lumina:Skeleton.Width="140"
                                                        Classes="Caption" />
                                         </StackPanel>
                                     </StackPanel>
-                                    <TextBlock Text="Owns component QA, accessibility checks, and release notes."
+                                    <TextBlock Text="{l10n:Loc Sandbox.Components.Business.MiaJohnsonDesc}"
                                                lumina:Skeleton.Width="340"
                                                TextWrapping="Wrap"
                                                Foreground="{DynamicResource LuminaTextMutedBrush}" />
-                                    <Button Content="Open profile"
+                                    <Button Content="{l10n:Loc Sandbox.Components.Business.OpenProfile}"
                                             Classes="Outline"
                                             lumina:Skeleton.Width="112"
                                             HorizontalAlignment="Left" />
@@ -189,7 +190,7 @@
                             </Border>
                         </lumina:LuminaSkeletonContainer>
 
-                        <TextBlock Classes="Label" Text="Custom list skeleton" />
+                        <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Components.Business.CustomListSkeleton}" />
                         <lumina:LuminaSkeletonContainer IsLoading="{Binding IsLoading}"
                                                         Mode="Auto"
                                                         PlaceholderCount="3">
@@ -235,7 +236,7 @@
                                                         VerticalAlignment="Center">
                                                 <TextBlock Text="{Binding}"
                                                            Foreground="{DynamicResource LuminaTextPrimaryBrush}" />
-                                                <TextBlock Text="Product team"
+                                                <TextBlock Text="{l10n:Loc Sandbox.Components.Business.ProductTeam}"
                                                            Classes="Caption" />
                                             </StackPanel>
                                         </Grid>
@@ -244,7 +245,7 @@
                             </ListBox>
                         </lumina:LuminaSkeletonContainer>
 
-                        <Button Content="Toggle loading"
+                        <Button Content="{l10n:Loc Sandbox.Components.Business.ToggleLoading}"
                                 Classes="Outline"
                                 Command="{Binding ToggleLoadingCommand}"
                                 HorizontalAlignment="Left" />

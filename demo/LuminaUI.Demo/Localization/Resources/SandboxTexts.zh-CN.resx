@@ -631,10 +631,10 @@
     <value>基础卡片在整个库中使用同一套中性表面。</value>
   </data>
   <data name="Sandbox.Text.0207" xml:space="preserve">
-    <value>Elevated</value>
+    <value>悬浮</value>
   </data>
   <data name="Sandbox.Text.0208" xml:space="preserve">
-    <value>层级仅增强阴影和边缘，不再变成另一种灰色卡片。</value>
+    <value>具有悬浮投影效果的卡片。</value>
   </data>
   <data name="Sandbox.Text.0209" xml:space="preserve">
     <value>主要操作</value>
@@ -4163,5 +4163,821 @@
   </data>
   <data name="Sandbox.ShellShowcase.RouteHint" xml:space="preserve">
     <value>将窗口缩小到 768px 以下，切换菜单，并从左侧面板切换 Shell 选项。</value>
+  </data>
+  <data name="Sandbox.Popups.WindowDialogs.Title" xml:space="preserve">
+    <value>窗口对话框</value>
+  </data>
+  <data name="Sandbox.Popups.WindowDialogs.Description" xml:space="preserve">
+    <value>原生级别的模态窗口，支持自定义按钮，非常适合需要用户深度关注的传统桌面应用。</value>
+  </data>
+  <data name="Sandbox.Popups.WindowDialogs.StandardMessageBox" xml:space="preserve">
+    <value>标准 MessageBox</value>
+  </data>
+  <data name="Sandbox.Popups.WindowDialogs.StandardMessageBoxDesc" xml:space="preserve">
+    <value>预设的按钮组 (OkCancel, YesNo)，仅需一行 C# 代码即可触发。</value>
+  </data>
+  <data name="Sandbox.Popups.WindowDialogs.BtnOkCancel" xml:space="preserve">
+    <value>显示 OkCancel</value>
+  </data>
+  <data name="Sandbox.Popups.WindowDialogs.BtnYesNo" xml:space="preserve">
+    <value>显示 YesNo</value>
+  </data>
+  <data name="Sandbox.Popups.WindowDialogs.BtnYesNoCancel" xml:space="preserve">
+    <value>显示 YesNoCancel</value>
+  </data>
+  <data name="Sandbox.Popups.WindowDialogs.BtnDanger" xml:space="preserve">
+    <value>显示危险操作</value>
+  </data>
+  <data name="Sandbox.Popups.WindowDialogs.FormInputSelect" xml:space="preserve">
+    <value>表单输入与选择</value>
+  </data>
+  <data name="Sandbox.Popups.WindowDialogs.FormInputSelectDesc" xml:space="preserve">
+    <value>在对话框中嵌入任意 XAML 内容，如输入框、下拉框或复杂的表单。</value>
+  </data>
+  <data name="Sandbox.Popups.WindowDialogs.BtnSelectOptions" xml:space="preserve">
+    <value>选择项对话框</value>
+  </data>
+  <data name="Sandbox.Popups.WindowDialogs.BtnDataEntry" xml:space="preserve">
+    <value>数据录入表单</value>
+  </data>
+  <data name="Sandbox.Popups.WindowDialogs.CustomFooter" xml:space="preserve">
+    <value>自定义底部布局 (Footer)</value>
+  </data>
+  <data name="Sandbox.Popups.WindowDialogs.CustomFooterDesc" xml:space="preserve">
+    <value>使用完全自定义的模板覆盖底部，或者将其完全隐藏。</value>
+  </data>
+  <data name="Sandbox.Popups.WindowDialogs.BtnCustomFooter" xml:space="preserve">
+    <value>自定义 Footer 模板</value>
+  </data>
+  <data name="Sandbox.Popups.WindowDialogs.BtnNoFooter" xml:space="preserve">
+    <value>无 Footer (ShowFooter=False)</value>
+  </data>
+  <data name="Sandbox.Popups.About.Description" xml:space="preserve">
+    <value>下一代 Avalonia UI 组件库，专为现代桌面应用程序打造。</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Title" xml:space="preserve">
+    <value>导航与容器</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Description" xml:space="preserve">
+    <value>原生的导航页面、内容容器、轮播图、过渡内容以及通知交互层。</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.HeaderedContentControl" xml:space="preserve">
+    <value>HeaderedContentControl</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.ServiceStatus" xml:space="preserve">
+    <value>服务状态</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.APIHealthy" xml:space="preserve">
+    <value>API 正常</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.SyncCompleted" xml:space="preserve">
+    <value>同步已完成</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.BillingCheckPending" xml:space="preserve">
+    <value>计费检查挂起</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.ItemsControl" xml:space="preserve">
+    <value>ItemsControl</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Design" xml:space="preserve">
+    <value>设计</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Build" xml:space="preserve">
+    <value>构建</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Verify" xml:space="preserve">
+    <value>验证</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Release" xml:space="preserve">
+    <value>发布</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.SplitView" xml:space="preserve">
+    <value>SplitView</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Pane" xml:space="preserve">
+    <value>面板</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Inbox" xml:space="preserve">
+    <value>收件箱</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Archive" xml:space="preserve">
+    <value>归档</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Settings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.CompactInlineLayout" xml:space="preserve">
+    <value>紧凑内联布局</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.CompactInlineLayoutDesc" xml:space="preserve">
+    <value>在桌面端面板保持可读状态，在窄屏布局下可折叠为紧凑的窄条。</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.NavigationPage" xml:space="preserve">
+    <value>NavigationPage</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Project" xml:space="preserve">
+    <value>项目</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.NavigationRoot" xml:space="preserve">
+    <value>导航根页面</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.OpenDetail" xml:space="preserve">
+    <value>打开详情</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.DrawerPage" xml:space="preserve">
+    <value>DrawerPage</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Open" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Left" xml:space="preserve">
+    <value>左侧</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Right" xml:space="preserve">
+    <value>右侧</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Top" xml:space="preserve">
+    <value>顶部</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Bottom" xml:space="preserve">
+    <value>底部</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Workspace" xml:space="preserve">
+    <value>工作区</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Home" xml:space="preserve">
+    <value>首页</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Reports" xml:space="preserve">
+    <value>报告</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Team" xml:space="preserve">
+    <value>团队</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.DrawerContent" xml:space="preserve">
+    <value>抽屉内容</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.DrawerPageDesc" xml:space="preserve">
+    <value>DrawerPage 是应用级别导航的原生侧边栏模式。</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.TabbedPage" xml:space="preserve">
+    <value>TabbedPage</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Search" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Profile" xml:space="preserve">
+    <value>个人资料</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.HomePageContent" xml:space="preserve">
+    <value>首页内容</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.SearchPageContent" xml:space="preserve">
+    <value>搜索页内容</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.ProfilePageContent" xml:space="preserve">
+    <value>个人资料页内容</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Carousel" xml:space="preserve">
+    <value>Carousel</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.AutoPlay" xml:space="preserve">
+    <value>自动播放</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.ReleaseDashboard" xml:space="preserve">
+    <value>发布仪表盘</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.ReleaseDashboardDesc" xml:space="preserve">
+    <value>在紧凑的面板中跟踪构建健康状况、代码审查队列以及组件覆盖率。</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.ComponentAudit" xml:space="preserve">
+    <value>组件审查</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.ComponentAuditDesc" xml:space="preserve">
+    <value>导航、浮层、选择器和动作控件现在都有了专门的演示示例。</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.ResponsivePreview" xml:space="preserve">
+    <value>响应式预览</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.ResponsivePreviewDesc" xml:space="preserve">
+    <value>轮播图会随卡片缩放，并保持控制按钮始终锚定在组件内部。</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.TransitioningContentControl" xml:space="preserve">
+    <value>TransitioningContentControl</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.UpdatedContentSurface" xml:space="preserve">
+    <value>已更新的内容表面</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.NotificationCards" xml:space="preserve">
+    <value>通知卡片</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.NotificationDuration" xml:space="preserve">
+    <value>通知持续时间</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.NotificationPosition" xml:space="preserve">
+    <value>通知显示位置</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.TopLeft" xml:space="preserve">
+    <value>左上角</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.TopRight" xml:space="preserve">
+    <value>右上角</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.BottomLeft" xml:space="preserve">
+    <value>左下角</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.BottomRight" xml:space="preserve">
+    <value>右下角</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Information" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Success" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="Sandbox.Components.Navigation.Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="Sandbox.Components.Business.Title" xml:space="preserve">
+    <value>业务控件</value>
+  </data>
+  <data name="Sandbox.Components.Business.Description" xml:space="preserve">
+    <value>表单、多选框、标签输入、横幅、加载容器以及骨架屏状态。</value>
+  </data>
+  <data name="Sandbox.Components.Business.FormLayout" xml:space="preserve">
+    <value>表单布局</value>
+  </data>
+  <data name="Sandbox.Components.Business.Project" xml:space="preserve">
+    <value>项目</value>
+  </data>
+  <data name="Sandbox.Components.Business.LuminaUI" xml:space="preserve">
+    <value>Lumina UI</value>
+  </data>
+  <data name="Sandbox.Components.Business.Members" xml:space="preserve">
+    <value>成员</value>
+  </data>
+  <data name="Sandbox.Components.Business.SelectMembers" xml:space="preserve">
+    <value>选择成员</value>
+  </data>
+  <data name="Sandbox.Components.Business.Labels" xml:space="preserve">
+    <value>标签</value>
+  </data>
+  <data name="Sandbox.Components.Business.TypeAndPressEnter" xml:space="preserve">
+    <value>输入并按回车键</value>
+  </data>
+  <data name="Sandbox.Components.Business.Submit" xml:space="preserve">
+    <value>提交</value>
+  </data>
+  <data name="Sandbox.Components.Business.TopLabelLayout" xml:space="preserve">
+    <value>顶部标签布局</value>
+  </data>
+  <data name="Sandbox.Components.Business.ReleaseName" xml:space="preserve">
+    <value>发布名称</value>
+  </data>
+  <data name="Sandbox.Components.Business.Avalonia12Refresh" xml:space="preserve">
+    <value>Avalonia 12 更新</value>
+  </data>
+  <data name="Sandbox.Components.Business.Priority" xml:space="preserve">
+    <value>优先级</value>
+  </data>
+  <data name="Sandbox.Components.Business.SelectPriority" xml:space="preserve">
+    <value>选择优先级</value>
+  </data>
+  <data name="Sandbox.Components.Business.MultiSelect" xml:space="preserve">
+    <value>多选</value>
+  </data>
+  <data name="Sandbox.Components.Business.TagsWithoutRemoveButtons" xml:space="preserve">
+    <value>没有删除按钮的标签</value>
+  </data>
+  <data name="Sandbox.Components.Business.ResetMembers" xml:space="preserve">
+    <value>重置成员</value>
+  </data>
+  <data name="Sandbox.Components.Business.AddTags" xml:space="preserve">
+    <value>添加标签</value>
+  </data>
+  <data name="Sandbox.Components.Business.CloseButton" xml:space="preserve">
+    <value>关闭按钮</value>
+  </data>
+  <data name="Sandbox.Components.Business.Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="Sandbox.Components.Business.Banners" xml:space="preserve">
+    <value>横幅</value>
+  </data>
+  <data name="Sandbox.Components.Business.Information" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="Sandbox.Components.Business.BannerInfoContent" xml:space="preserve">
+    <value>使用页面级横幅提供持久的引导。</value>
+  </data>
+  <data name="Sandbox.Components.Business.Saved" xml:space="preserve">
+    <value>已保存</value>
+  </data>
+  <data name="Sandbox.Components.Business.BannerSavedContent" xml:space="preserve">
+    <value>更改已应用，无需离开页面。</value>
+  </data>
+  <data name="Sandbox.Components.Business.ReviewNeeded" xml:space="preserve">
+    <value>需要复审</value>
+  </data>
+  <data name="Sandbox.Components.Business.BannerWarningContent" xml:space="preserve">
+    <value>部分设置将在重启后生效。</value>
+  </data>
+  <data name="Sandbox.Components.Business.DangerZone" xml:space="preserve">
+    <value>危险区域</value>
+  </data>
+  <data name="Sandbox.Components.Business.BannerDangerContent" xml:space="preserve">
+    <value>在执行破坏性操作之前使用内联警告。</value>
+  </data>
+  <data name="Sandbox.Components.Business.LoadingAndSkeleton" xml:space="preserve">
+    <value>加载与骨架屏</value>
+  </data>
+  <data name="Sandbox.Components.Business.LoadingOverlay" xml:space="preserve">
+    <value>加载覆盖层</value>
+  </data>
+  <data name="Sandbox.Components.Business.LoadingMembers" xml:space="preserve">
+    <value>正在加载成员</value>
+  </data>
+  <data name="Sandbox.Components.Business.AvaChen" xml:space="preserve">
+    <value>Ava Chen</value>
+  </data>
+  <data name="Sandbox.Components.Business.ProductDesigner" xml:space="preserve">
+    <value>产品设计师</value>
+  </data>
+  <data name="Sandbox.Components.Business.AvaChenDesc" xml:space="preserve">
+    <value>积极参与发布计划和设计评审。</value>
+  </data>
+  <data name="Sandbox.Components.Business.AutoSkeleton" xml:space="preserve">
+    <value>自动骨架屏</value>
+  </data>
+  <data name="Sandbox.Components.Business.MiaJohnson" xml:space="preserve">
+    <value>Mia Johnson</value>
+  </data>
+  <data name="Sandbox.Components.Business.FrontendEngineer" xml:space="preserve">
+    <value>前端工程师</value>
+  </data>
+  <data name="Sandbox.Components.Business.MiaJohnsonDesc" xml:space="preserve">
+    <value>负责组件质量保证、可访问性检查以及发布说明。</value>
+  </data>
+  <data name="Sandbox.Components.Business.OpenProfile" xml:space="preserve">
+    <value>打开个人资料</value>
+  </data>
+  <data name="Sandbox.Components.Business.CustomListSkeleton" xml:space="preserve">
+    <value>自定义列表骨架屏</value>
+  </data>
+  <data name="Sandbox.Components.Business.ProductTeam" xml:space="preserve">
+    <value>产品团队</value>
+  </data>
+  <data name="Sandbox.Components.Business.ToggleLoading" xml:space="preserve">
+    <value>切换加载状态</value>
+  </data>
+  <data name="Sandbox.Components.Smart.Title" xml:space="preserve">
+    <value>智能组件</value>
+  </data>
+  <data name="Sandbox.Components.Smart.Description" xml:space="preserve">
+    <value>用于溢出文本、字母索引以及联动分类滚动等可复用交互组件。</value>
+  </data>
+  <data name="Sandbox.Components.Smart.AutoScrollText" xml:space="preserve">
+    <value>自动滚动文本</value>
+  </data>
+  <data name="Sandbox.Components.Smart.FlashSale" xml:space="preserve">
+    <value>限时特卖：烤鳗鱼饭套餐、松露薯条、茉莉气泡茶及季节限定蛋糕，供应至21:30。</value>
+  </data>
+  <data name="Sandbox.Components.Smart.ShortNames" xml:space="preserve">
+    <value>较短的名称保持静止。</value>
+  </data>
+  <data name="Sandbox.Components.Smart.AlphabetIndexList" xml:space="preserve">
+    <value>字母索引列表</value>
+  </data>
+  <data name="Sandbox.Components.Smart.AliciaChen" xml:space="preserve">
+    <value>Alicia Chen</value>
+  </data>
+  <data name="Sandbox.Components.Smart.ProductDesigner" xml:space="preserve">
+    <value>产品设计师</value>
+  </data>
+  <data name="Sandbox.Components.Smart.AustinReed" xml:space="preserve">
+    <value>Austin Reed</value>
+  </data>
+  <data name="Sandbox.Components.Smart.FrontendEngineer" xml:space="preserve">
+    <value>前端工程师</value>
+  </data>
+  <data name="Sandbox.Components.Smart.BellaStone" xml:space="preserve">
+    <value>Bella Stone</value>
+  </data>
+  <data name="Sandbox.Components.Smart.OperationsLead" xml:space="preserve">
+    <value>运营主管</value>
+  </data>
+  <data name="Sandbox.Components.Smart.BensonLee" xml:space="preserve">
+    <value>Benson Lee</value>
+  </data>
+  <data name="Sandbox.Components.Smart.MotionDesigner" xml:space="preserve">
+    <value>动效设计师</value>
+  </data>
+  <data name="Sandbox.Components.Smart.CarmenXu" xml:space="preserve">
+    <value>Carmen Xu</value>
+  </data>
+  <data name="Sandbox.Components.Smart.DataAnalyst" xml:space="preserve">
+    <value>数据分析师</value>
+  </data>
+  <data name="Sandbox.Components.Smart.ColinBaker" xml:space="preserve">
+    <value>Colin Baker</value>
+  </data>
+  <data name="Sandbox.Components.Smart.SupportSpecialist" xml:space="preserve">
+    <value>技术支持专家</value>
+  </data>
+  <data name="Sandbox.Components.Smart.DaphneRay" xml:space="preserve">
+    <value>Daphne Ray</value>
+  </data>
+  <data name="Sandbox.Components.Smart.ResearchManager" xml:space="preserve">
+    <value>研究经理</value>
+  </data>
+  <data name="Sandbox.Components.Smart.DerekHuang" xml:space="preserve">
+    <value>Derek Huang</value>
+  </data>
+  <data name="Sandbox.Components.Smart.PlatformEngineer" xml:space="preserve">
+    <value>平台工程师</value>
+  </data>
+  <data name="Sandbox.Components.Smart.MinaPark" xml:space="preserve">
+    <value>Mina Park</value>
+  </data>
+  <data name="Sandbox.Components.Smart.BrandStrategist" xml:space="preserve">
+    <value>品牌策略师</value>
+  </data>
+  <data name="Sandbox.Components.Smart.MorganWells" xml:space="preserve">
+    <value>Morgan Wells</value>
+  </data>
+  <data name="Sandbox.Components.Smart.QAEngineer" xml:space="preserve">
+    <value>QA工程师</value>
+  </data>
+  <data name="Sandbox.Components.Smart.SofiaYoung" xml:space="preserve">
+    <value>Sofia Young</value>
+  </data>
+  <data name="Sandbox.Components.Smart.DesignSystems" xml:space="preserve">
+    <value>设计系统</value>
+  </data>
+  <data name="Sandbox.Components.Smart.SimonWhite" xml:space="preserve">
+    <value>Simon White</value>
+  </data>
+  <data name="Sandbox.Components.Smart.TechnicalWriter" xml:space="preserve">
+    <value>技术文档工程师</value>
+  </data>
+  <data name="Sandbox.Components.Smart.ZaraLiu" xml:space="preserve">
+    <value>Zara Liu</value>
+  </data>
+  <data name="Sandbox.Components.Smart.MobileEngineer" xml:space="preserve">
+    <value>移动端工程师</value>
+  </data>
+  <data name="Sandbox.Components.Smart.ZedCooper" xml:space="preserve">
+    <value>Zed Cooper</value>
+  </data>
+  <data name="Sandbox.Components.Smart.AccountManager" xml:space="preserve">
+    <value>客户经理</value>
+  </data>
+  <data name="Sandbox.Components.Smart.LinkedCategoryList" xml:space="preserve">
+    <value>联动分类列表</value>
+  </data>
+  <data name="Sandbox.Components.Smart.Popular" xml:space="preserve">
+    <value>热门</value>
+  </data>
+  <data name="Sandbox.Components.Smart.SignatureBeefBowl" xml:space="preserve">
+    <value>招牌牛肉盖饭</value>
+  </data>
+  <data name="Sandbox.Components.Smart.BeefBowlDesc" xml:space="preserve">
+    <value>慢炖牛肉、温泉蛋、秘制酱汁。</value>
+  </data>
+  <data name="Sandbox.Components.Smart.CrispyChickenRice" xml:space="preserve">
+    <value>脆皮鸡排饭</value>
+  </data>
+  <data name="Sandbox.Components.Smart.ChickenRiceDesc" xml:space="preserve">
+    <value>鸡腿肉、腌黄瓜、辣椒蛋黄酱。</value>
+  </data>
+  <data name="Sandbox.Components.Smart.Noodles" xml:space="preserve">
+    <value>面条</value>
+  </data>
+  <data name="Sandbox.Components.Smart.TonkotsuRamen" xml:space="preserve">
+    <value>豚骨拉面</value>
+  </data>
+  <data name="Sandbox.Components.Smart.TonkotsuRamenDesc" xml:space="preserve">
+    <value>猪骨汤、叉烧、笋干。</value>
+  </data>
+  <data name="Sandbox.Components.Smart.ColdSesameNoodles" xml:space="preserve">
+    <value>麻酱凉面</value>
+  </data>
+  <data name="Sandbox.Components.Smart.ColdNoodlesDesc" xml:space="preserve">
+    <value>芝麻酱、黄瓜、葱花。</value>
+  </data>
+  <data name="Sandbox.Components.Smart.Snacks" xml:space="preserve">
+    <value>小吃</value>
+  </data>
+  <data name="Sandbox.Components.Smart.TruffleFries" xml:space="preserve">
+    <value>松露薯条</value>
+  </data>
+  <data name="Sandbox.Components.Smart.TruffleFriesDesc" xml:space="preserve">
+    <value>帕尔马干酪、欧芹、黑松露油。</value>
+  </data>
+  <data name="Sandbox.Components.Smart.Gyoza" xml:space="preserve">
+    <value>煎饺</value>
+  </data>
+  <data name="Sandbox.Components.Smart.GyozaDesc" xml:space="preserve">
+    <value>煎猪肉饺子、香醋酱油。</value>
+  </data>
+  <data name="Sandbox.Components.Smart.Drinks" xml:space="preserve">
+    <value>饮料</value>
+  </data>
+  <data name="Sandbox.Components.Smart.JasmineSparklingTea" xml:space="preserve">
+    <value>茉莉气泡茶</value>
+  </data>
+  <data name="Sandbox.Components.Smart.JasmineTeaDesc" xml:space="preserve">
+    <value>冷萃茶配柑橘苏打。</value>
+  </data>
+  <data name="Sandbox.Components.Smart.YuzuLemonade" xml:space="preserve">
+    <value>柚子柠檬水</value>
+  </data>
+  <data name="Sandbox.Components.Smart.YuzuLemonadeDesc" xml:space="preserve">
+    <value>柚子皮、柠檬、低糖糖浆。</value>
+  </data>
+  <data name="Sandbox.Components.Actions.Title" xml:space="preserve">
+    <value>操作控件</value>
+  </data>
+  <data name="Sandbox.Components.Actions.Description" xml:space="preserve">
+    <value>命令、下拉菜单、数字选择器、分页器、自动完成及刷新原语。</value>
+  </data>
+  <data name="Sandbox.Components.Actions.AutoCompleteBox" xml:space="preserve">
+    <value>自动完成框 (AutoCompleteBox)</value>
+  </data>
+  <data name="Sandbox.Components.Actions.SearchComponent" xml:space="preserve">
+    <value>搜索组件</value>
+  </data>
+  <data name="Sandbox.Components.Actions.DropDownButton" xml:space="preserve">
+    <value>DropDownButton</value>
+  </data>
+  <data name="Sandbox.Components.Actions.ViewOptions" xml:space="preserve">
+    <value>查看选项</value>
+  </data>
+  <data name="Sandbox.Components.Actions.Compact" xml:space="preserve">
+    <value>紧凑</value>
+  </data>
+  <data name="Sandbox.Components.Actions.Comfortable" xml:space="preserve">
+    <value>舒适</value>
+  </data>
+  <data name="Sandbox.Components.Actions.Expanded" xml:space="preserve">
+    <value>展开</value>
+  </data>
+  <data name="Sandbox.Components.Actions.MoreActions" xml:space="preserve">
+    <value>更多操作</value>
+  </data>
+  <data name="Sandbox.Components.Actions.QuickAction" xml:space="preserve">
+    <value>快速操作</value>
+  </data>
+  <data name="Sandbox.Components.Actions.RunCheck" xml:space="preserve">
+    <value>运行检查</value>
+  </data>
+  <data name="Sandbox.Components.Actions.SplitButton" xml:space="preserve">
+    <value>SplitButton</value>
+  </data>
+  <data name="Sandbox.Components.Actions.Export" xml:space="preserve">
+    <value>导出</value>
+  </data>
+  <data name="Sandbox.Components.Actions.ExportCSV" xml:space="preserve">
+    <value>导出 CSV</value>
+  </data>
+  <data name="Sandbox.Components.Actions.ExportJSON" xml:space="preserve">
+    <value>导出 JSON</value>
+  </data>
+  <data name="Sandbox.Components.Actions.ExportPDF" xml:space="preserve">
+    <value>导出 PDF</value>
+  </data>
+  <data name="Sandbox.Components.Actions.Sync" xml:space="preserve">
+    <value>同步</value>
+  </data>
+  <data name="Sandbox.Components.Actions.SyncNow" xml:space="preserve">
+    <value>立即同步</value>
+  </data>
+  <data name="Sandbox.Components.Actions.ScheduleSync" xml:space="preserve">
+    <value>计划同步</value>
+  </data>
+  <data name="Sandbox.Components.Actions.CommandBar" xml:space="preserve">
+    <value>CommandBar</value>
+  </data>
+  <data name="Sandbox.Components.Actions.Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Sandbox.Components.Actions.Edit" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="Sandbox.Components.Actions.Pin" xml:space="preserve">
+    <value>固定</value>
+  </data>
+  <data name="Sandbox.Components.Actions.Archive" xml:space="preserve">
+    <value>归档</value>
+  </data>
+  <data name="Sandbox.Components.Actions.Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="Sandbox.Components.Actions.LuminaCommand" xml:space="preserve">
+    <value>LuminaCommand</value>
+  </data>
+  <data name="Sandbox.Components.Actions.LuminaCommandDesc" xml:space="preserve">
+    <value>无需反射即可将公共控件事件附加到 ICommand。</value>
+  </data>
+  <data name="Sandbox.Components.Actions.RunCommandBtn" xml:space="preserve">
+    <value>运行命令</value>
+  </data>
+  <data name="Sandbox.Components.Actions.TypeToTrigger" xml:space="preserve">
+    <value>输入以触发</value>
+  </data>
+  <data name="Sandbox.Components.Actions.PassEventArgs" xml:space="preserve">
+    <value>传递事件参数</value>
+  </data>
+  <data name="Sandbox.Components.Actions.ButtonSpinner" xml:space="preserve">
+    <value>ButtonSpinner</value>
+  </data>
+  <data name="Sandbox.Components.Actions.PipsPager" xml:space="preserve">
+    <value>PipsPager</value>
+  </data>
+  <data name="Sandbox.Components.Actions.RefreshContainer" xml:space="preserve">
+    <value>RefreshContainer</value>
+  </data>
+  <data name="Sandbox.Components.Actions.PullCapableScrollContent" xml:space="preserve">
+    <value>支持下拉的滚动内容</value>
+  </data>
+  <data name="Sandbox.Components.Actions.RefreshDesc" xml:space="preserve">
+    <value>桌面端使用普通滚动；触摸表面可触发刷新手势。</value>
+  </data>
+  <data name="Sandbox.Components.Actions.UpdatedTime" xml:space="preserve">
+    <value>10:30 更新</value>
+  </data>
+  <data name="Sandbox.Components.PCNativeDialog" xml:space="preserve">
+    <value>原生 PC 弹窗</value>
+  </data>
+  <data name="Sandbox.Components.IconButton.Title" xml:space="preserve">
+    <value>IconButton</value>
+  </data>
+  <data name="Sandbox.Components.IconButton.Description" xml:space="preserve">
+    <value>带有前置、后置、顶部、底部图标，或纯图标内容的按钮。</value>
+  </data>
+  <data name="Sandbox.Components.IconButton.Actions" xml:space="preserve">
+    <value>操作</value>
+  </data>
+  <data name="Sandbox.Components.IconButton.Refresh" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="Sandbox.Components.IconButton.Search" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="Sandbox.Components.IconButton.Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="Sandbox.Components.IconButton.IconOnly" xml:space="preserve">
+    <value>纯图标</value>
+  </data>
+  <data name="Sandbox.Components.IconButton.Settings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="Sandbox.Components.IconButton.Upload" xml:space="preserve">
+    <value>上传</value>
+  </data>
+  <data name="Sandbox.Components.IconButton.Confirm" xml:space="preserve">
+    <value>确认</value>
+  </data>
+  <data name="Sandbox.Components.IconButton.Placement" xml:space="preserve">
+    <value>位置</value>
+  </data>
+  <data name="Sandbox.Components.IconButton.Right" xml:space="preserve">
+    <value>右侧</value>
+  </data>
+  <data name="Sandbox.Components.IconButton.Top" xml:space="preserve">
+    <value>顶部</value>
+  </data>
+  <data name="Sandbox.Components.IconButton.Bottom" xml:space="preserve">
+    <value>底部</value>
+  </data>
+  <data name="Sandbox.Patterns.MenuFlyout.TooltipContent" xml:space="preserve">
+    <value>提示内容使用 Lumina 弹出层样式。</value>
+  </data>
+  <data name="Sandbox.Components.TagInput.Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="Sandbox.Components.TransitioningContentControl.ContentTransition" xml:space="preserve">
+    <value>内容过渡</value>
+  </data>
+  <data name="Sandbox.Components.TransitioningContentControl.ContentTransitionDesc" xml:space="preserve">
+    <value>切换页面以预览所选过渡效果。</value>
+  </data>
+  <data name="Sandbox.Components.TransitioningContentControl.Page1" xml:space="preserve">
+    <value>页面 1</value>
+  </data>
+  <data name="Sandbox.Components.TransitioningContentControl.Page2" xml:space="preserve">
+    <value>页面 2</value>
+  </data>
+  <data name="Sandbox.Components.TransitioningContentControl.Page3" xml:space="preserve">
+    <value>页面 3</value>
+  </data>
+  <data name="Sandbox.Components.NavigationPage.NavigationTransition" xml:space="preserve">
+    <value>导航过渡</value>
+  </data>
+  <data name="Sandbox.Components.NavigationPage.NavigationTransitionDesc" xml:space="preserve">
+    <value>选择过渡效果，然后推入和弹出页面。</value>
+  </data>
+  <data name="Sandbox.Components.NavigationPage.Page1" xml:space="preserve">
+    <value>页面 1</value>
+  </data>
+  <data name="Sandbox.Components.NavigationPage.RootPageDesc" xml:space="preserve">
+    <value>根页面。推入另一个页面以查看导航过渡效果。</value>
+  </data>
+  <data name="Sandbox.Components.NavigationPage.RootStackPage" xml:space="preserve">
+    <value>堆栈根页面</value>
+  </data>
+  <data name="Sandbox.Components.NavigationPage.PushPage2" xml:space="preserve">
+    <value>推入页面 2</value>
+  </data>
+  <data name="Sandbox.Components.Loading.SyncingMembers" xml:space="preserve">
+    <value>同步成员中</value>
+  </data>
+  <data name="Sandbox.Components.Loading.DisabledTip" xml:space="preserve">
+    <value>此部分已被容器禁用。</value>
+  </data>
+  <data name="Sandbox.Components.Loading.LuminaDashboard" xml:space="preserve">
+    <value>Lumina dashboard</value>
+  </data>
+  <data name="Sandbox.Components.Form.Project" xml:space="preserve">
+    <value>项目</value>
+  </data>
+  <data name="Sandbox.Components.Form.LuminaUI" xml:space="preserve">
+    <value>Lumina UI</value>
+  </data>
+  <data name="Sandbox.Components.Form.Members" xml:space="preserve">
+    <value>成员</value>
+  </data>
+  <data name="Sandbox.Components.Form.Labels" xml:space="preserve">
+    <value>标签</value>
+  </data>
+  <data name="Sandbox.Components.Form.ReleaseName" xml:space="preserve">
+    <value>发布名称</value>
+  </data>
+  <data name="Sandbox.Components.Form.Priority" xml:space="preserve">
+    <value>优先级</value>
+  </data>
+  <data name="Sandbox.Components.GroupBox.LuminaAdmin" xml:space="preserve">
+    <value>Lumina Admin</value>
+  </data>
+  <data name="Sandbox.Components.GroupBox.Production" xml:space="preserve">
+    <value>生产环境</value>
+  </data>
+  <data name="Sandbox.Components.GroupBox.Staging" xml:space="preserve">
+    <value>测试环境</value>
+  </data>
+  <data name="Sandbox.Components.GroupBox.Local" xml:space="preserve">
+    <value>本地环境</value>
+  </data>
+  <data name="Sandbox.Components.Descriptions.Environment" xml:space="preserve">
+    <value>环境</value>
+  </data>
+  <data name="Sandbox.Components.Descriptions.Region" xml:space="preserve">
+    <value>地区</value>
+  </data>
+  <data name="Sandbox.Components.Descriptions.Owner" xml:space="preserve">
+    <value>负责人</value>
+  </data>
+  <data name="Sandbox.Settings.Color.Blue" xml:space="preserve">
+    <value>蓝色</value>
+  </data>
+  <data name="Sandbox.Settings.Color.Indigo" xml:space="preserve">
+    <value>靛青</value>
+  </data>
+  <data name="Sandbox.Settings.Color.Violet" xml:space="preserve">
+    <value>紫罗兰</value>
+  </data>
+  <data name="Sandbox.Settings.Color.Teal" xml:space="preserve">
+    <value>蓝绿</value>
+  </data>
+  <data name="Sandbox.Settings.Color.Emerald" xml:space="preserve">
+    <value>翠绿</value>
+  </data>
+  <data name="Sandbox.Settings.Color.Rose" xml:space="preserve">
+    <value>玫瑰红</value>
+  </data>
+  <data name="Sandbox.Settings.Color.Orange" xml:space="preserve">
+    <value>橙色</value>
+  </data>
+  <data name="Sandbox.Components.Button.Settings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="Sandbox.Components.Button.IconOnlyLoading" xml:space="preserve">
+    <value>仅图标加载</value>
+  </data>
+  <data name="Sandbox.Components.CommandBar.Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Sandbox.Components.CommandBar.Edit" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="Sandbox.Components.CommandBar.Pin" xml:space="preserve">
+    <value>固定</value>
+  </data>
+  <data name="Sandbox.Components.CommandBar.Archive" xml:space="preserve">
+    <value>归档</value>
+  </data>
+  <data name="Sandbox.Components.CommandBar.Delete" xml:space="preserve">
+    <value>删除</value>
   </data>
 </root>

@@ -25,14 +25,14 @@
                     <StackPanel Spacing="16">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0816}" />
                         <lumina:LuminaForm LabelPosition="Left" LabelWidth="120">
-                            <TextBox lumina:LuminaForm.Label="Project"
+                            <TextBox lumina:LuminaForm.Label="{l10n:Loc Sandbox.Components.Form.Project}"
                                      lumina:LuminaForm.IsRequired="True"
-                                     Text="Lumina UI" />
-                            <lumina:LuminaMultiSelect lumina:LuminaForm.Label="Members"
+                                     Text="{l10n:Loc Sandbox.Components.Form.LuminaUI}" />
+                            <lumina:LuminaMultiSelect lumina:LuminaForm.Label="{l10n:Loc Sandbox.Components.Form.Members}"
                                                       Watermark="{l10n:Loc Sandbox.Text.0875}"
                                                       ItemsSource="{Binding TeamMembers}"
                                                       SelectedItems="{Binding SelectedMembers}" />
-                            <lumina:LuminaTagInput lumina:LuminaForm.Label="Labels"
+                            <lumina:LuminaTagInput lumina:LuminaForm.Label="{l10n:Loc Sandbox.Components.Form.Labels}"
                                                    Watermark="{l10n:Loc Sandbox.Text.1173}"
                                                    AllowDuplicates="False"
                                                    Tags="{Binding Labels}"
@@ -47,9 +47,9 @@
                         <Separator />
                         <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Text.1174}" />
                         <lumina:LuminaForm LabelPosition="Top">
-                            <TextBox lumina:LuminaForm.Label="Release name"
+                            <TextBox lumina:LuminaForm.Label="{l10n:Loc Sandbox.Components.Form.ReleaseName}"
                                      Text="{l10n:Loc Sandbox.Text.0781}" />
-                            <lumina:LuminaMultiSelect lumina:LuminaForm.Label="Priority"
+                            <lumina:LuminaMultiSelect lumina:LuminaForm.Label="{l10n:Loc Sandbox.Components.Form.Priority}"
                                                       Watermark="{l10n:Loc Sandbox.Text.0876}"
                                                       ItemsSource="{Binding Priorities}"
                                                       SelectedItems="{Binding SelectedPriorities}" />

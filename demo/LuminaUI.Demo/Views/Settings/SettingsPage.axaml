@@ -95,13 +95,13 @@
                             </StackPanel>
 
                             <WrapPanel>
-                                <lumina:LuminaColorButton SwatchBrush="#2563EB" Command="{Binding ApplyAccentPresetCommand}" CommandParameter="#2563EB" ToolTip.Tip="Blue" />
-                                <lumina:LuminaColorButton SwatchBrush="#4F46E5" Command="{Binding ApplyAccentPresetCommand}" CommandParameter="#4F46E5" ToolTip.Tip="Indigo" />
-                                <lumina:LuminaColorButton SwatchBrush="#7C3AED" Command="{Binding ApplyAccentPresetCommand}" CommandParameter="#7C3AED" ToolTip.Tip="Violet" />
-                                <lumina:LuminaColorButton SwatchBrush="#0D9488" Command="{Binding ApplyAccentPresetCommand}" CommandParameter="#0D9488" ToolTip.Tip="Teal" />
-                                <lumina:LuminaColorButton SwatchBrush="#16A34A" Command="{Binding ApplyAccentPresetCommand}" CommandParameter="#16A34A" ToolTip.Tip="Emerald" />
-                                <lumina:LuminaColorButton SwatchBrush="#E11D48" Command="{Binding ApplyAccentPresetCommand}" CommandParameter="#E11D48" ToolTip.Tip="Rose" />
-                                <lumina:LuminaColorButton SwatchBrush="#EA580C" Command="{Binding ApplyAccentPresetCommand}" CommandParameter="#EA580C" ToolTip.Tip="Orange" />
+                                <lumina:LuminaColorButton SwatchBrush="#2563EB" Command="{Binding ApplyAccentPresetCommand}" CommandParameter="#2563EB" ToolTip.Tip="{l10n:Loc Sandbox.Settings.Color.Blue}" />
+                                <lumina:LuminaColorButton SwatchBrush="#4F46E5" Command="{Binding ApplyAccentPresetCommand}" CommandParameter="#4F46E5" ToolTip.Tip="{l10n:Loc Sandbox.Settings.Color.Indigo}" />
+                                <lumina:LuminaColorButton SwatchBrush="#7C3AED" Command="{Binding ApplyAccentPresetCommand}" CommandParameter="#7C3AED" ToolTip.Tip="{l10n:Loc Sandbox.Settings.Color.Violet}" />
+                                <lumina:LuminaColorButton SwatchBrush="#0D9488" Command="{Binding ApplyAccentPresetCommand}" CommandParameter="#0D9488" ToolTip.Tip="{l10n:Loc Sandbox.Settings.Color.Teal}" />
+                                <lumina:LuminaColorButton SwatchBrush="#16A34A" Command="{Binding ApplyAccentPresetCommand}" CommandParameter="#16A34A" ToolTip.Tip="{l10n:Loc Sandbox.Settings.Color.Emerald}" />
+                                <lumina:LuminaColorButton SwatchBrush="#E11D48" Command="{Binding ApplyAccentPresetCommand}" CommandParameter="#E11D48" ToolTip.Tip="{l10n:Loc Sandbox.Settings.Color.Rose}" />
+                                <lumina:LuminaColorButton SwatchBrush="#EA580C" Command="{Binding ApplyAccentPresetCommand}" CommandParameter="#EA580C" ToolTip.Tip="{l10n:Loc Sandbox.Settings.Color.Orange}" />
                             </WrapPanel>
 
                             <StackPanel Orientation="Horizontal" Spacing="8">

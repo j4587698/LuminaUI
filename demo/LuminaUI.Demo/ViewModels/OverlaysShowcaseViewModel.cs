@@ -91,7 +91,7 @@ public partial class OverlaysShowcaseViewModel : ObservableObject
         
         dialog.Content = content;
         
-        await dialog.ShowDialog<bool>(window);
+        await dialog.ShowDialog<LuminaDialogResult>(window);
     }
 
     [RelayCommand]

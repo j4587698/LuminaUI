@@ -5,7 +5,7 @@ namespace LuminaUI.Demo.Views.Popups;
 
 public partial class AboutDialogView : UserControl
 {
-    public string AppVersion => $"Version {Assembly.GetExecutingAssembly().GetName().Version?.ToString(3) ?? "Unknown"}";
+    public string AppVersion => $"版本 {Assembly.GetExecutingAssembly().GetName().Version?.ToString(3) ?? "未知"}";
 
     public AboutDialogView()
     {

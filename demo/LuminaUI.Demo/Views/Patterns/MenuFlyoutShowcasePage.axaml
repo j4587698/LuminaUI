@@ -57,7 +57,7 @@
                             </Button.Flyout>
                         </Button>
 
-                        <Button Name="HoverTooltipButton" Content="{l10n:Loc Sandbox.Text.0589}" Classes="Outline" ToolTip.Tip="Tooltip content uses Lumina popup styling." Margin="0,0,12,12" />
+                        <Button Name="HoverTooltipButton" Content="{l10n:Loc Sandbox.Text.0589}" Classes="Outline" ToolTip.Tip="{l10n:Loc Sandbox.Patterns.MenuFlyout.TooltipContent}" Margin="0,0,12,12" />
                     </WrapPanel>
                 </StackPanel>
             </lumina:LuminaCard>

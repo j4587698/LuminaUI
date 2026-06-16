@@ -12,8 +12,8 @@
                     HorizontalAlignment="Stretch"
                     Margin="0,36,0,40">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="Actions" />
-                <TextBlock Classes="Body" Text="Command, dropdown, spinner, pager, autocomplete, and refresh primitives." />
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Components.Actions.Title}" />
+                <TextBlock Classes="Body" Text="{l10n:Loc Sandbox.Components.Actions.Description}" />
             </StackPanel>
 
             <lumina:LuminaResponsivePanel MinItemWidth="280"
@@ -22,9 +22,9 @@
                                           VerticalSpacing="16">
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="AutoCompleteBox" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Actions.AutoCompleteBox}" />
                         <AutoCompleteBox x:Name="ComponentSearch"
-                                         PlaceholderText="Search component"
+                                         PlaceholderText="{l10n:Loc Sandbox.Components.Actions.SearchComponent}"
                                          ItemsSource="{Binding Components}"
                                          MinimumPrefixLength="0"
                                          FilterMode="Contains" />
@@ -33,22 +33,22 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="DropDownButton" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Actions.DropDownButton}" />
                         <WrapPanel>
-                            <DropDownButton Content="View options" Margin="0,0,12,12">
+                            <DropDownButton Content="{l10n:Loc Sandbox.Components.Actions.ViewOptions}" Margin="0,0,12,12">
                                 <DropDownButton.Flyout>
                                     <MenuFlyout>
-                                        <MenuItem Header="Compact">
+                                        <MenuItem Header="{l10n:Loc Sandbox.Components.Actions.Compact}">
                                             <MenuItem.Icon>
                                                 <PathIcon Width="16" Height="16" Data="M4,7 L20,7 M4,12 L16,12 M4,17 L12,17" />
                                             </MenuItem.Icon>
                                         </MenuItem>
-                                        <MenuItem Header="Comfortable">
+                                        <MenuItem Header="{l10n:Loc Sandbox.Components.Actions.Comfortable}">
                                             <MenuItem.Icon>
                                                 <PathIcon Width="16" Height="16" Data="M4,6 L20,6 M4,12 L20,12 M4,18 L20,18" />
                                             </MenuItem.Icon>
                                         </MenuItem>
-                                        <MenuItem Header="Expanded">
+                                        <MenuItem Header="{l10n:Loc Sandbox.Components.Actions.Expanded}">
                                             <MenuItem.Icon>
                                                 <PathIcon Width="16" Height="16" Data="M4,5 L20,5 M4,12 L20,12 M4,19 L20,19" />
                                             </MenuItem.Icon>
@@ -80,12 +80,12 @@
                                     </MenuFlyout>
                                 </DropDownButton.Flyout>
                             </DropDownButton>
-                            <DropDownButton Content="More actions" Margin="0,0,12,12">
+                            <DropDownButton Content="{l10n:Loc Sandbox.Components.Actions.MoreActions}" Margin="0,0,12,12">
                                 <DropDownButton.Flyout>
                                     <Flyout>
                                         <StackPanel Spacing="8" MinWidth="180">
-                                            <TextBlock Classes="Label" Text="Quick action" />
-                                            <Button Classes="Small Outline" Content="Run check" />
+                                            <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Components.Actions.QuickAction}" />
+                                            <Button Classes="Small Outline" Content="{l10n:Loc Sandbox.Components.Actions.RunCheck}" />
                                         </StackPanel>
                                     </Flyout>
                                 </DropDownButton.Flyout>
@@ -96,22 +96,22 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="SplitButton" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Actions.SplitButton}" />
                         <WrapPanel>
-                            <SplitButton Content="Export" Margin="0,0,12,12">
+                            <SplitButton Content="{l10n:Loc Sandbox.Components.Actions.Export}" Margin="0,0,12,12">
                                 <SplitButton.Flyout>
                                     <MenuFlyout>
-                                        <MenuItem Header="Export CSV">
+                                        <MenuItem Header="{l10n:Loc Sandbox.Components.Actions.ExportCSV}">
                                             <MenuItem.Icon>
                                                 <PathIcon Width="16" Height="16" Data="M6,3 L15,3 L20,8 L20,21 L6,21 Z M15,3 L15,8 L20,8 M9,12 L17,12 M9,16 L17,16" />
                                             </MenuItem.Icon>
                                         </MenuItem>
-                                        <MenuItem Header="Export JSON">
+                                        <MenuItem Header="{l10n:Loc Sandbox.Components.Actions.ExportJSON}">
                                             <MenuItem.Icon>
                                                 <PathIcon Width="16" Height="16" Data="M8,7 L5,12 L8,17 M16,7 L19,12 L16,17 M13,6 L11,18" />
                                             </MenuItem.Icon>
                                         </MenuItem>
-                                        <MenuItem Header="Export PDF">
+                                        <MenuItem Header="{l10n:Loc Sandbox.Components.Actions.ExportPDF}">
                                             <MenuItem.Icon>
                                                 <PathIcon Width="16" Height="16" Data="M6,3 L15,3 L20,8 L20,21 L6,21 Z M15,3 L15,8 L20,8 M9,13 L17,13 M9,17 L14,17" />
                                             </MenuItem.Icon>
@@ -119,18 +119,18 @@
                                     </MenuFlyout>
                                 </SplitButton.Flyout>
                             </SplitButton>
-                            <ToggleSplitButton Content="Sync"
+                            <ToggleSplitButton Content="{l10n:Loc Sandbox.Components.Actions.Sync}"
                                                IsChecked="True"
                                                Margin="0,0,12,12"
                                                lumina:LuminaOptions.PopupType="Sheet">
                                 <ToggleSplitButton.Flyout>
                                     <MenuFlyout>
-                                        <MenuItem Header="Sync now">
+                                        <MenuItem Header="{l10n:Loc Sandbox.Components.Actions.SyncNow}">
                                             <MenuItem.Icon>
                                                 <PathIcon Width="16" Height="16" Data="M20,12 A8,8 0 0,1 6.4,17.6 L4,20 L4,14 L10,14 L7.8,16.2 A5,5 0 0,0 17,12 Z M4,12 A8,8 0 0,1 17.6,6.4 L20,4 L20,10 L14,10 L16.2,7.8 A5,5 0 0,0 7,12 Z" />
                                             </MenuItem.Icon>
                                         </MenuItem>
-                                        <MenuItem Header="Schedule sync">
+                                        <MenuItem Header="{l10n:Loc Sandbox.Components.Actions.ScheduleSync}">
                                             <MenuItem.Icon>
                                                 <PathIcon Width="16" Height="16" Data="M12,3 A9,9 0 1,0 12,21 A9,9 0 1,0 12,3 M12,7 L12,12 L16,14" />
                                             </MenuItem.Icon>
@@ -144,33 +144,33 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="CommandBar" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Actions.CommandBar}" />
                         <CommandBar lumina:LuminaOptions.PopupType="Sheet">
                             <CommandBar.PrimaryCommands>
-                                <CommandBarButton Label="Save">
+                                <CommandBarButton Label="{l10n:Loc Sandbox.Components.Actions.Save}">
                                     <CommandBarButton.Icon>
                                         <PathIcon Width="16" Height="16" Data="M5,20 L19,20 M7,4 L17,4 L20,7 L20,20 L4,20 L4,4 Z M8,4 L8,10 L16,10 L16,4" />
                                     </CommandBarButton.Icon>
                                 </CommandBarButton>
-                                <CommandBarButton Label="Edit">
+                                <CommandBarButton Label="{l10n:Loc Sandbox.Components.Actions.Edit}">
                                     <CommandBarButton.Icon>
                                         <PathIcon Width="16" Height="16" Data="M4,20 L8,19 L19,8 L16,5 L5,16 Z M14,7 L17,10" />
                                     </CommandBarButton.Icon>
                                 </CommandBarButton>
                                 <CommandBarSeparator />
-                                <CommandBarToggleButton Label="Pin" IsChecked="True">
+                                <CommandBarToggleButton Label="{l10n:Loc Sandbox.Components.Actions.Pin}" IsChecked="True">
                                     <CommandBarToggleButton.Icon>
                                         <PathIcon Width="16" Height="16" Data="M12,2 L15,8 L21,9 L16.5,13.5 L17.5,20 L12,17 L6.5,20 L7.5,13.5 L3,9 L9,8 Z" />
                                     </CommandBarToggleButton.Icon>
                                 </CommandBarToggleButton>
                             </CommandBar.PrimaryCommands>
                             <CommandBar.SecondaryCommands>
-                                <CommandBarButton Label="Archive">
+                                <CommandBarButton Label="{l10n:Loc Sandbox.Components.Actions.Archive}">
                                     <CommandBarButton.Icon>
                                         <PathIcon Width="16" Height="16" Data="M4,7 L20,7 L18,21 L6,21 Z M7,3 L17,3 L20,7 L4,7 Z M9,11 L15,11" />
                                     </CommandBarButton.Icon>
                                 </CommandBarButton>
-                                <CommandBarButton Label="Delete">
+                                <CommandBarButton Label="{l10n:Loc Sandbox.Components.Actions.Delete}">
                                     <CommandBarButton.Icon>
                                         <PathIcon Width="16" Height="16" Data="M5,7 L19,7 M10,11 L10,18 M14,11 L14,18 M8,7 L8,20 L16,20 L16,7 M10,4 L14,4 L15,7 L9,7 Z" />
                                     </CommandBarButton.Icon>
@@ -183,27 +183,27 @@
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
                         <StackPanel Spacing="4">
-                            <TextBlock Classes="SectionTitle" Text="LuminaCommand" />
+                            <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Actions.LuminaCommand}" />
                             <TextBlock Classes="Body"
-                                       Text="Attach common control events to ICommand without reflection."
+                                       Text="{l10n:Loc Sandbox.Components.Actions.LuminaCommandDesc}"
                                        TextWrapping="Wrap" />
                         </StackPanel>
 
                         <WrapPanel>
                             <Button Name="EventCommandButton"
-                                    Content="Run command"
+                                    Content="{l10n:Loc Sandbox.Components.Actions.RunCommandBtn}"
                                     Classes="Primary"
                                     Margin="0,0,12,12"
                                     lumina:LuminaCommand.ClickCommand="{Binding RecordCommand}"
                                     lumina:LuminaCommand.ClickCommandParameter="Button.Click" />
                             <TextBox Name="EventToCommandTextBox"
                                      Width="180"
-                                     PlaceholderText="Type to trigger"
+                                     PlaceholderText="{l10n:Loc Sandbox.Components.Actions.TypeToTrigger}"
                                      Margin="0,0,12,12"
                                      lumina:LuminaCommand.TextChangedCommand="{Binding RecordCommand}"
                                      lumina:LuminaCommand.TextChangedCommandParameter="{Binding #EventToCommandTextBox.Text}" />
                             <Button Name="EventArgsCommandButton"
-                                    Content="Pass event args"
+                                    Content="{l10n:Loc Sandbox.Components.Actions.PassEventArgs}"
                                     Classes="Outline"
                                     Margin="0,0,12,12"
                                     lumina:LuminaCommand.ClickCommand="{Binding RecordCommand}"
@@ -221,7 +221,7 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="ButtonSpinner" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Actions.ButtonSpinner}" />
                         <ButtonSpinner>
                             <TextBox Text="24" BorderThickness="0" Background="Transparent" />
                         </ButtonSpinner>
@@ -230,7 +230,7 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="PipsPager" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Actions.PipsPager}" />
                         <PipsPager NumberOfPages="7"
                                    SelectedPageIndex="2"
                                    MaxVisiblePips="5" />
@@ -239,16 +239,16 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="RefreshContainer" />
+                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Actions.RefreshContainer}" />
                         <RefreshContainer>
                             <ScrollViewer Height="120"
                                           BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
                                           BorderThickness="1"
                                           Padding="12">
                                 <StackPanel Spacing="8">
-                                    <TextBlock Classes="Body" Text="Pull-capable scroll content" />
-                                    <TextBlock Classes="Caption" Text="Desktop uses normal scrolling; touch surfaces can trigger refresh gestures." />
-                                    <TextBlock Classes="Body" Text="Updated 10:30" />
+                                    <TextBlock Classes="Body" Text="{l10n:Loc Sandbox.Components.Actions.PullCapableScrollContent}" />
+                                    <TextBlock Classes="Caption" Text="{l10n:Loc Sandbox.Components.Actions.RefreshDesc}" />
+                                    <TextBlock Classes="Body" Text="{l10n:Loc Sandbox.Components.Actions.UpdatedTime}" />
                                 </StackPanel>
                             </ScrollViewer>
                         </RefreshContainer>

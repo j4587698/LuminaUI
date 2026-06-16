@@ -136,6 +136,7 @@
 
         <Style Selector="^.Interactive:pointerover">
             <Setter Property="ZIndex" Value="1" />
+            <Setter Property="Background" Value="{DynamicResource LuminaSurfaceElevatedBrush}" />
         </Style>
         <Style Selector="^.Interactive:pointerover /template/ Border#PART_RootBorder">
             <Setter Property="BoxShadow" Value="{DynamicResource LuminaCardShadowFloating}" />
