@@ -46,6 +46,10 @@ public static class LuminaLocalizationKeys
 
     public const string PickerSelectDate = "Lumina.Picker.SelectDate";
 
+    public const string PickerStartDate = "Lumina.Picker.StartDate";
+
+    public const string PickerEndDate = "Lumina.Picker.EndDate";
+
     public const string PickerSelectTime = "Lumina.Picker.SelectTime";
 
     public const string PickerYear = "Lumina.Picker.Year";

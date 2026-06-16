@@ -59,7 +59,7 @@ internal sealed class LuminaDateWheelPicker : Grid
             Child = _summaryText
         };
         summary.Background = LuminaPickerResources.Brush("LuminaPrimaryBgBrush", Brushes.Transparent);
-        _summaryText.Foreground = LuminaPickerResources.Brush("LuminaTextPrimaryBrush", Brushes.White);
+        _summaryText.Foreground = LuminaPickerResources.Brush("LuminaPrimaryBrush", Brushes.White);
         summary.Classes.Add("LuminaWheelSummary");
         Children.Add(summary);
         Grid wheelGrid = new Grid

@@ -169,6 +169,16 @@ public class LuminaDateRangePicker : TemplatedControl
     {
         AddHandler(InputElement.PointerPressedEvent, OnPickerPointerPressed, RoutingStrategies.Tunnel);
         AddHandler(InputElement.KeyDownEvent, OnPickerKeyDown, RoutingStrategies.Tunnel);
+
+        if (StartPlaceholder == "Start date")
+        {
+            SetCurrentValue(StartPlaceholderProperty, LuminaLocalization.Get(LuminaLocalizationKeys.PickerStartDate));
+        }
+
+        if (EndPlaceholder == "End date")
+        {
+            SetCurrentValue(EndPlaceholderProperty, LuminaLocalization.Get(LuminaLocalizationKeys.PickerEndDate));
+        }
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
@@ -483,13 +493,12 @@ public class LuminaDateRangePicker : TemplatedControl
                 {
                     Text = title,
                     FontSize = 12.0,
-                    Foreground = LuminaPickerResources.Brush("LuminaTextMutedBrush", Brushes.Gray)
+                    Opacity = 0.7
                 },
                 new TextBlock
                 {
                     Text = FormatDate(date),
-                    FontWeight = FontWeight.DemiBold,
-                    Foreground = LuminaPickerResources.Brush("LuminaTextForegroundBrush", Brushes.White)
+                    FontWeight = FontWeight.DemiBold
                 }
             }
         };
