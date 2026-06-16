@@ -43,7 +43,7 @@
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0657}" />
                         <lumina:LuminaLoadingContainer IsLoading="{Binding IsLoading}"
                                                        LoadingKind="Ring"
-                                                       LoadingMessage="Syncing members"
+                                                       LoadingMessage="{l10n:Loc Sandbox.Components.Loading.SyncingMembers}"
                                                        MinHeight="180">
                             <Border Padding="16"
                                     CornerRadius="8"
@@ -71,9 +71,9 @@
                     <StackPanel Spacing="16">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0662}" />
                         <lumina:LuminaDisableContainer IsDisabled="{Binding IsDisabled}"
-                                                       DisabledTip="This section is disabled by the container.">
+                                                       DisabledTip="{l10n:Loc Sandbox.Components.Loading.DisabledTip}">
                             <StackPanel Spacing="10">
-                                <TextBox PlaceholderText="{l10n:Loc Sandbox.Text.0664}" Text="Lumina dashboard" />
+                                <TextBox PlaceholderText="{l10n:Loc Sandbox.Text.0664}" Text="{l10n:Loc Sandbox.Components.Loading.LuminaDashboard}" />
                                 <Button Content="{l10n:Loc Sandbox.Text.0666}" Classes="Primary" HorizontalAlignment="Left" />
                             </StackPanel>
                         </lumina:LuminaDisableContainer>

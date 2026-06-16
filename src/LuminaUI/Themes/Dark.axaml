@@ -11,7 +11,7 @@
     <Color x:Key="LuminaNavigationPaneItemSelected">#172554</Color>
     <Color x:Key="LuminaNavigationPaneItemSelectedForeground">#93C5FD</Color>
     <Color x:Key="LuminaSurface">#0D0E11</Color>                <!-- Level 1: Cards -->
-    <Color x:Key="LuminaSurfaceElevated">#171A20</Color>        <!-- Level 2: Raised cards -->
+    <Color x:Key="LuminaSurfaceElevated">#20242C</Color>        <!-- Level 2: Raised cards, made lighter for visibility -->
     <Color x:Key="LuminaPopover">#16171C</Color>                <!-- Level 3: Menus, dialogs, popups -->
     <Color x:Key="LuminaActionDisabledBg">#1D1D22</Color>       <!-- Disabled surface -->
 
@@ -155,9 +155,9 @@
     <BoxShadows x:Key="LuminaShadowPopup">0 2 6 #4D000000, 0 12 24 #5F000000</BoxShadows>
     <BoxShadows x:Key="LuminaShadowNotification">0 1 2 #3D000000, 0 6 14 #52000000</BoxShadows>
     <SolidColorBrush x:Key="LuminaCardElevatedBackgroundBrush" Color="#1B202A" />
-    <SolidColorBrush x:Key="LuminaCardElevatedBorderBrush" Color="#1AFFFFFF" />
-    <BoxShadows x:Key="LuminaCardShadowElevated">0 0 1 #26FFFFFF, 0 4 14 #52000000</BoxShadows>
-    <BoxShadows x:Key="LuminaCardShadowFloating">0 0 1 #33FFFFFF, 0 6 18 #66000000</BoxShadows>
+    <SolidColorBrush x:Key="LuminaCardElevatedBorderBrush" Color="#26FFFFFF" />
+    <BoxShadows x:Key="LuminaCardShadowElevated">0 0 1 #33FFFFFF, 0 8 20 #80000000</BoxShadows>
+    <BoxShadows x:Key="LuminaCardShadowFloating">0 0 1 #40FFFFFF, 0 12 28 #99000000</BoxShadows>
 
     <!-- Glass Effect Brushes -->
     <SolidColorBrush x:Key="LuminaCardPseudoGlassBrush" Color="{StaticResource LuminaSurface}" Opacity="0.78" />

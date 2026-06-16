@@ -25,30 +25,30 @@
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1151}" />
                         <CommandBar lumina:LuminaOptions.PopupType="Sheet">
                             <CommandBar.PrimaryCommands>
-                                <CommandBarButton Label="Save">
+                                <CommandBarButton Label="{l10n:Loc Sandbox.Components.CommandBar.Save}">
                                     <CommandBarButton.Icon>
                                         <PathIcon Width="16" Height="16" Data="M5,20 L19,20 M7,4 L17,4 L20,7 L20,20 L4,20 L4,4 Z M8,4 L8,10 L16,10 L16,4" />
                                     </CommandBarButton.Icon>
                                 </CommandBarButton>
-                                <CommandBarButton Label="Edit">
+                                <CommandBarButton Label="{l10n:Loc Sandbox.Components.CommandBar.Edit}">
                                     <CommandBarButton.Icon>
                                         <PathIcon Width="16" Height="16" Data="M4,20 L8,19 L19,8 L16,5 L5,16 Z M14,7 L17,10" />
                                     </CommandBarButton.Icon>
                                 </CommandBarButton>
                                 <CommandBarSeparator />
-                                <CommandBarToggleButton Label="Pin" IsChecked="True">
+                                <CommandBarToggleButton Label="{l10n:Loc Sandbox.Components.CommandBar.Pin}" IsChecked="True">
                                     <CommandBarToggleButton.Icon>
                                         <PathIcon Width="16" Height="16" Data="M12,2 L15,8 L21,9 L16.5,13.5 L17.5,20 L12,17 L6.5,20 L7.5,13.5 L3,9 L9,8 Z" />
                                     </CommandBarToggleButton.Icon>
                                 </CommandBarToggleButton>
                             </CommandBar.PrimaryCommands>
                             <CommandBar.SecondaryCommands>
-                                <CommandBarButton Label="Archive">
+                                <CommandBarButton Label="{l10n:Loc Sandbox.Components.CommandBar.Archive}">
                                     <CommandBarButton.Icon>
                                         <PathIcon Width="16" Height="16" Data="M4,7 L20,7 L18,21 L6,21 Z M7,3 L17,3 L20,7 L4,7 Z M9,11 L15,11" />
                                     </CommandBarButton.Icon>
                                 </CommandBarButton>
-                                <CommandBarButton Label="Delete">
+                                <CommandBarButton Label="{l10n:Loc Sandbox.Components.CommandBar.Delete}">
                                     <CommandBarButton.Icon>
                                         <PathIcon Width="16" Height="16" Data="M5,7 L19,7 M10,11 L10,18 M14,11 L14,18 M8,7 L8,20 L16,20 L16,7 M10,4 L14,4 L15,7 L9,7 Z" />
                                     </CommandBarButton.Icon>

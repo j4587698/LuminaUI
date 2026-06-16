@@ -17,9 +17,9 @@
                     <StackPanel Spacing="16">
                         <Grid ColumnDefinitions="*,220" ColumnSpacing="16">
                             <StackPanel Spacing="4">
-                                <TextBlock Classes="SectionTitle" Text="Content transition" />
+                                <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.TransitioningContentControl.ContentTransition}" />
                                 <TextBlock Classes="Helper"
-                                           Text="Switch Page 1, Page 2, and Page 3 with the selected transition."
+                                           Text="{l10n:Loc Sandbox.Components.TransitioningContentControl.ContentTransitionDesc}"
                                            TextWrapping="Wrap" />
                             </StackPanel>
 
@@ -38,17 +38,17 @@
 
                         <WrapPanel>
                             <Button Classes="Outline"
-                                    Content="Page 1"
+                                    Content="{l10n:Loc Sandbox.Components.TransitioningContentControl.Page1}"
                                     Command="{Binding ShowPageCommand}"
                                     CommandParameter="1"
                                     Margin="0,0,8,8" />
                             <Button Classes="Outline"
-                                    Content="Page 2"
+                                    Content="{l10n:Loc Sandbox.Components.TransitioningContentControl.Page2}"
                                     Command="{Binding ShowPageCommand}"
                                     CommandParameter="2"
                                     Margin="0,0,8,8" />
                             <Button Classes="Outline"
-                                    Content="Page 3"
+                                    Content="{l10n:Loc Sandbox.Components.TransitioningContentControl.Page3}"
                                     Command="{Binding ShowPageCommand}"
                                     CommandParameter="3"
                                     Margin="0,0,8,8" />

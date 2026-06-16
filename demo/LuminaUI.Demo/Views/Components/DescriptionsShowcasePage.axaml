@@ -43,9 +43,9 @@
                     <StackPanel Spacing="16">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0730}" />
                         <lumina:LuminaDescriptions LabelWidth="96" ShowBorderLines="True">
-                            <lumina:LuminaDescriptionsItem Label="Environment" Content="{l10n:Loc Sandbox.Text.0087}" />
-                            <lumina:LuminaDescriptionsItem Label="Region" Content="{l10n:Loc Sandbox.Text.0806}" />
-                            <lumina:LuminaDescriptionsItem Label="Owner" Content="{l10n:Loc Sandbox.Text.0732}" />
+                            <lumina:LuminaDescriptionsItem Label="{l10n:Loc Sandbox.Components.Descriptions.Environment}" Content="{l10n:Loc Sandbox.Text.0087}" />
+                            <lumina:LuminaDescriptionsItem Label="{l10n:Loc Sandbox.Components.Descriptions.Region}" Content="{l10n:Loc Sandbox.Text.0806}" />
+                            <lumina:LuminaDescriptionsItem Label="{l10n:Loc Sandbox.Components.Descriptions.Owner}" Content="{l10n:Loc Sandbox.Text.0732}" />
                         </lumina:LuminaDescriptions>
                     </StackPanel>
                 </lumina:LuminaCard>

@@ -1,5 +1,6 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.WindowDialogShowcasePage"
@@ -10,8 +11,8 @@
       
       <!-- Header -->
       <StackPanel Spacing="8" MaxWidth="760">
-        <TextBlock Text="Window Dialogs" Classes="Display"/>
-        <TextBlock Text="Native OS-level modal windows with customizable buttons, ideal for traditional desktop applications requiring deep user attention."
+        <TextBlock Text="{l10n:Loc Sandbox.Popups.WindowDialogs.Title}" Classes="Display"/>
+        <TextBlock Text="{l10n:Loc Sandbox.Popups.WindowDialogs.Description}"
                    Classes="Body" Foreground="{DynamicResource LuminaTextSecondaryBrush}" TextWrapping="Wrap"/>
       </StackPanel>
 
@@ -21,19 +22,19 @@
         <lumina:LuminaCard Padding="18" Classes="Glass">
           <StackPanel Spacing="16">
             <StackPanel Spacing="6">
-              <TextBlock Text="Standard MessageBox" FontSize="20" FontWeight="SemiBold"/>
-              <TextBlock Text="Pre-configured button groups (OkCancel, YesNo) triggered via a single line of C# code."
+              <TextBlock Text="{l10n:Loc Sandbox.Popups.WindowDialogs.StandardMessageBox}" FontSize="20" FontWeight="SemiBold"/>
+              <TextBlock Text="{l10n:Loc Sandbox.Popups.WindowDialogs.StandardMessageBoxDesc}"
                          Foreground="{DynamicResource LuminaTextSecondaryBrush}" TextWrapping="Wrap"/>
             </StackPanel>
 
             <WrapPanel>
-              <Button Content="Show OkCancel" Classes="Outline" Margin="0,0,10,10"
+              <Button Content="{l10n:Loc Sandbox.Popups.WindowDialogs.BtnOkCancel}" Classes="Outline" Margin="0,0,10,10"
                       Command="{Binding ShowOkCancelCommand}"/>
-              <Button Content="Show YesNo" Classes="Outline" Margin="0,0,10,10"
+              <Button Content="{l10n:Loc Sandbox.Popups.WindowDialogs.BtnYesNo}" Classes="Outline" Margin="0,0,10,10"
                       Command="{Binding ShowYesNoCommand}"/>
-              <Button Content="Show YesNoCancel" Classes="Outline" Margin="0,0,10,10"
+              <Button Content="{l10n:Loc Sandbox.Popups.WindowDialogs.BtnYesNoCancel}" Classes="Outline" Margin="0,0,10,10"
                       Command="{Binding ShowYesNoCancelCommand}"/>
-              <Button Content="Show Danger Action" Classes="Outline Danger" Margin="0,0,10,10"
+              <Button Content="{l10n:Loc Sandbox.Popups.WindowDialogs.BtnDanger}" Classes="Outline Danger" Margin="0,0,10,10"
                       Command="{Binding ShowDangerCommand}"/>
             </WrapPanel>
             
@@ -45,15 +46,15 @@
         <lumina:LuminaCard Padding="18" Classes="Glass">
           <StackPanel Spacing="16">
             <StackPanel Spacing="6">
-              <TextBlock Text="Form Input &amp; Select" FontSize="20" FontWeight="SemiBold"/>
-              <TextBlock Text="Embed any XAML content inside the dialog, like inputs, comboboxes or complex forms."
+              <TextBlock Text="{l10n:Loc Sandbox.Popups.WindowDialogs.FormInputSelect}" FontSize="20" FontWeight="SemiBold"/>
+              <TextBlock Text="{l10n:Loc Sandbox.Popups.WindowDialogs.FormInputSelectDesc}"
                          Foreground="{DynamicResource LuminaTextSecondaryBrush}" TextWrapping="Wrap"/>
             </StackPanel>
 
             <WrapPanel>
-              <Button Content="Select Options Dialog" Classes="Outline" Margin="0,0,10,10"
+              <Button Content="{l10n:Loc Sandbox.Popups.WindowDialogs.BtnSelectOptions}" Classes="Outline" Margin="0,0,10,10"
                       Command="{Binding ShowSelectDialogCommand}"/>
-              <Button Content="Data Entry Form" Classes="Primary" Margin="0,0,10,10"
+              <Button Content="{l10n:Loc Sandbox.Popups.WindowDialogs.BtnDataEntry}" Classes="Primary" Margin="0,0,10,10"
                       Command="{Binding ShowFormDialogCommand}"/>
             </WrapPanel>
             
@@ -65,15 +66,15 @@
         <lumina:LuminaCard Padding="18" Classes="Glass">
           <StackPanel Spacing="16">
             <StackPanel Spacing="6">
-              <TextBlock Text="Custom Footer Layouts" FontSize="20" FontWeight="SemiBold"/>
-              <TextBlock Text="Override the footer with completely custom templates or hide it completely."
+              <TextBlock Text="{l10n:Loc Sandbox.Popups.WindowDialogs.CustomFooter}" FontSize="20" FontWeight="SemiBold"/>
+              <TextBlock Text="{l10n:Loc Sandbox.Popups.WindowDialogs.CustomFooterDesc}"
                          Foreground="{DynamicResource LuminaTextSecondaryBrush}" TextWrapping="Wrap"/>
             </StackPanel>
 
             <WrapPanel>
-              <Button Content="Custom Footer Template" Classes="Outline" Margin="0,0,10,10"
+              <Button Content="{l10n:Loc Sandbox.Popups.WindowDialogs.BtnCustomFooter}" Classes="Outline" Margin="0,0,10,10"
                       Command="{Binding ShowCustomFooterCommand}"/>
-              <Button Content="No Footer (ShowFooter=False)" Classes="Outline" Margin="0,0,10,10"
+              <Button Content="{l10n:Loc Sandbox.Popups.WindowDialogs.BtnNoFooter}" Classes="Outline" Margin="0,0,10,10"
                       Command="{Binding ShowNoFooterCommand}"/>
             </WrapPanel>
           </StackPanel>
