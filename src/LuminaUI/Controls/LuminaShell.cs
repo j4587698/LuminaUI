@@ -928,6 +928,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         base.OnPropertyChanged(change);
         if (change.Property == ContentControl.ContentProperty)
         {
+            DisablePageAutoSafeArea(change.GetNewValue<object>());
             SetActivePage(change.GetNewValue<object>());
         }
         else if (change.Property == ShellKeyProperty)
@@ -1513,6 +1514,14 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     private static int GetVisualDepth(Control control)
     {
         return control.GetVisualAncestors().Count();
+    }
+
+    private void DisablePageAutoSafeArea(object? content)
+    {
+        if (content is ContentPage page)
+        {
+            page.AutomaticallyApplySafeAreaPadding = false;
+        }
     }
 
     private void SetActivePage(object? content)

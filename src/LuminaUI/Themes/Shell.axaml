@@ -19,6 +19,7 @@
                             <!-- Menu pane is separated by surface tone, not by an extra border. -->
                             <Border Background="{TemplateBinding PaneBackground}"
                                     IsVisible="{TemplateBinding EffectiveIsShellChromeVisible}"
+                                    Padding="{Binding (lumina:LuminaInsets.SafeAreaPadding), RelativeSource={RelativeSource TemplatedParent}}"
                                     lumina:LuminaShell.IsMenuCompact="{TemplateBinding EffectiveIsMenuCompact}">
                                 <Grid RowDefinitions="Auto,*,Auto,Auto">
                                     <!-- 菜单头部插槽 -->
@@ -83,15 +84,16 @@
                         </SplitView.Pane>
                         
                         <SplitView.Content>
-                            <Grid RowDefinitions="Auto,*">
-                                <!-- 主区域头部栏插槽 -->
-                                <Border Grid.Row="0"
-                                        Height="48"
-                                        Margin="16"
-                                        Background="Transparent"
-                                        IsVisible="{TemplateBinding EffectiveIsShellHeaderVisible}">
-                                    <ContentPresenter Content="{TemplateBinding Title}" TextElement.FontSize="24" TextElement.FontWeight="Bold" VerticalAlignment="Center"/>
-                                </Border>
+                            <Border Padding="{Binding (lumina:LuminaInsets.SafeAreaPadding), RelativeSource={RelativeSource TemplatedParent}}">
+                                <Grid RowDefinitions="Auto,*">
+                                    <!-- 主区域头部栏插槽 -->
+                                    <Border Grid.Row="0"
+                                            Height="48"
+                                            Margin="16"
+                                            Background="Transparent"
+                                            IsVisible="{TemplateBinding EffectiveIsShellHeaderVisible}">
+                                        <ContentPresenter Content="{TemplateBinding Title}" TextElement.FontSize="24" TextElement.FontWeight="Bold" VerticalAlignment="Center"/>
+                                    </Border>
                                 
                                 <!-- 主视图内容投射器 (添加了平滑切页动画) -->
                                 <Border Grid.Row="1" ClipToBounds="True">
@@ -101,7 +103,8 @@
                                         </TransitioningContentControl.PageTransition>
                                     </TransitioningContentControl>
                                 </Border>
-                            </Grid>
+                                </Grid>
+                            </Border>
                         </SplitView.Content>
                     </SplitView>
 

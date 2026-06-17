@@ -69,8 +69,6 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
 
     private Thickness _safeAreaPadding;
 
-    private Thickness _effectiveContentPadding;
-
     private Thickness _overlaySafeAreaPadding;
 
     public static readonly StyledProperty<string?> TopViewKeyProperty = AvaloniaProperty.Register<LuminaTopView, string?>(nameof(TopViewKey));
@@ -97,8 +95,6 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
     public static readonly StyledProperty<bool> UseSafeAreaProperty = AvaloniaProperty.Register<LuminaTopView, bool>(nameof(UseSafeArea), defaultValue: true);
 
     public static readonly DirectProperty<LuminaTopView, Thickness> SafeAreaPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaTopView, Thickness>(nameof(SafeAreaPadding), (LuminaTopView topView) => topView.SafeAreaPadding);
-
-    public static readonly DirectProperty<LuminaTopView, Thickness> EffectiveContentPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaTopView, Thickness>(nameof(EffectiveContentPadding), (LuminaTopView topView) => topView.EffectiveContentPadding);
 
     public static readonly DirectProperty<LuminaTopView, Thickness> OverlaySafeAreaPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaTopView, Thickness>(nameof(OverlaySafeAreaPadding), (LuminaTopView topView) => topView.OverlaySafeAreaPadding);
 
@@ -188,18 +184,6 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
         {
             SetAndRaise(SafeAreaPaddingProperty, ref _safeAreaPadding, value);
             UpdateEffectiveSafeAreaPadding();
-        }
-    }
-
-    public Thickness EffectiveContentPadding
-    {
-        get
-        {
-            return _effectiveContentPadding;
-        }
-        private set
-        {
-            SetAndRaise(EffectiveContentPaddingProperty, ref _effectiveContentPadding, value);
         }
     }
 
@@ -385,6 +369,16 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
         SyncInsetsManagerSubscription();
         UpdateSafeAreaPadding();
         _overlayInputPaneAvoidance.AttachToVisualTree();
+
+        if (_topLevel != null)
+        {
+            _topLevel.ScalingChanged += OnTopLevelScalingChanged;
+        }
+    }
+
+    private void OnTopLevelScalingChanged(object? sender, EventArgs e)
+    {
+        UpdateSafeAreaPadding();
     }
 
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
@@ -394,6 +388,10 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
         CancelDrawerContentClear();
         DetachInsetsManager();
         RestoreTopLevelAutoSafeAreaPadding();
+        if (_topLevel != null)
+        {
+            _topLevel.ScalingChanged -= OnTopLevelScalingChanged;
+        }
         _topLevel = null;
         _overlayInputPaneAvoidance.DetachFromVisualTree();
         DetachOverlayHandlers();
@@ -444,10 +442,6 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
             SyncTopLevelSafeAreaMode();
             SyncInsetsManagerSubscription();
             UpdateSafeAreaPadding();
-        }
-        else if (change.Property == PaddingProperty)
-        {
-            UpdateEffectiveSafeAreaPadding();
         }
         else if (change.Property == ToastContentProperty)
         {
@@ -556,19 +550,10 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
     private void UpdateEffectiveSafeAreaPadding()
     {
         Thickness safeAreaPadding = UseSafeArea ? SafeAreaPadding : default;
-        EffectiveContentPadding = ApplySafeAreaPadding(Padding, safeAreaPadding);
+        LuminaInsets.SetSafeAreaPadding(this, safeAreaPadding);
         OverlaySafeAreaPadding = safeAreaPadding;
         ApplyBottomSheetSafeAreaPadding();
         ApplyDrawerSafeAreaPadding();
-    }
-
-    private static Thickness ApplySafeAreaPadding(Thickness padding, Thickness safeAreaPadding)
-    {
-        return new Thickness(
-            Math.Max(padding.Left, safeAreaPadding.Left),
-            Math.Max(padding.Top, safeAreaPadding.Top),
-            Math.Max(padding.Right, safeAreaPadding.Right),
-            Math.Max(padding.Bottom, safeAreaPadding.Bottom));
     }
 
     private void ApplyBottomSheetSafeAreaPadding()
