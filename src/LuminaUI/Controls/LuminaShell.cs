@@ -114,6 +114,10 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private object? _effectiveMenuFooter;
 
+    private Thickness _layoutSafeAreaPadding;
+
+    private Thickness _overlaySafeAreaPadding;
+
     public static readonly StyledProperty<bool> IsMenuOpenProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(IsMenuOpen), defaultValue: true);
 
     public static readonly StyledProperty<bool> IsShellChromeVisibleProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(IsShellChromeVisible), defaultValue: true);
@@ -208,6 +212,14 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     public static readonly StyledProperty<double> CompactPaneLengthProperty = AvaloniaProperty.Register<LuminaShell, double>(nameof(CompactPaneLength), 48.0);
 
     public static readonly DirectProperty<LuminaShell, double> EffectiveCompactPaneLengthProperty = AvaloniaProperty.RegisterDirect<LuminaShell, double>(nameof(EffectiveCompactPaneLength), (LuminaShell shell) => shell.EffectiveCompactPaneLength, null, 0.0);
+
+    public static readonly StyledProperty<LuminaSafeAreaMode> SafeAreaModeProperty = AvaloniaProperty.Register<LuminaShell, LuminaSafeAreaMode>(nameof(SafeAreaMode), LuminaSafeAreaMode.Auto);
+
+    public static readonly StyledProperty<bool> UseSafeAreaForOverlaysProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(UseSafeAreaForOverlays), defaultValue: true);
+
+    public static readonly DirectProperty<LuminaShell, Thickness> LayoutSafeAreaPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaShell, Thickness>(nameof(LayoutSafeAreaPadding), shell => shell.LayoutSafeAreaPadding);
+
+    public static readonly DirectProperty<LuminaShell, Thickness> OverlaySafeAreaPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaShell, Thickness>(nameof(OverlaySafeAreaPadding), shell => shell.OverlaySafeAreaPadding);
 
     public static readonly StyledProperty<bool> IsWindowGlassEnabledProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(IsWindowGlassEnabled), defaultValue: false);
 
@@ -577,6 +589,42 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         }
     }
 
+    public LuminaSafeAreaMode SafeAreaMode
+    {
+        get => GetValue(SafeAreaModeProperty);
+        set => SetValue(SafeAreaModeProperty, value);
+    }
+
+    public bool UseSafeAreaForOverlays
+    {
+        get => GetValue(UseSafeAreaForOverlaysProperty);
+        set => SetValue(UseSafeAreaForOverlaysProperty, value);
+    }
+
+    public Thickness LayoutSafeAreaPadding
+    {
+        get
+        {
+            return _layoutSafeAreaPadding;
+        }
+        private set
+        {
+            SetAndRaise(LayoutSafeAreaPaddingProperty, ref _layoutSafeAreaPadding, value);
+        }
+    }
+
+    public Thickness OverlaySafeAreaPadding
+    {
+        get
+        {
+            return _overlaySafeAreaPadding;
+        }
+        private set
+        {
+            SetAndRaise(OverlaySafeAreaPaddingProperty, ref _overlaySafeAreaPadding, value);
+        }
+    }
+
     public bool IsWindowGlassEnabled
     {
         get => GetValue(IsWindowGlassEnabledProperty);
@@ -598,6 +646,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         base.OnAttachedToVisualTree(e);
         RegisterAttachedShell();
         _overlayInputPaneAvoidance.AttachToVisualTree();
+        UpdateEffectiveSafeAreaPadding();
         UpdateEffectiveShellChrome();
     }
 
@@ -671,7 +720,10 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         }
         _overlayInputPaneAvoidance.ApplyTemplate(
             e.NameScope.FindRequired<Control>("PART_DialogContainer"),
-            e.NameScope.FindRequired<Control>("PART_BottomSheetContainer"));
+            e.NameScope.FindRequired<Control>("PART_BottomSheetContainer"),
+            e.NameScope.FindRequired<Control>("PART_DrawerContainer"));
+        ApplyBottomSheetSafeAreaPadding();
+        ApplyDrawerSafeAreaPadding();
     }
 
     private void OnDialogOverlayPointerPressed(object? sender, PointerPressedEventArgs ev)
@@ -710,7 +762,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     public LuminaShell()
     {
-        _overlayInputPaneAvoidance = new LuminaOverlayInputPaneAvoidance(this, () => IsDialogOpen, () => IsBottomSheetOpen);
+        _overlayInputPaneAvoidance = new LuminaOverlayInputPaneAvoidance(this, () => IsDialogOpen, () => IsBottomSheetOpen, () => IsDrawerOpen);
         NavigateCommand = new LuminaRelayCommand((object? parameter) =>
         {
             if (parameter is string navigationKey)
@@ -793,6 +845,11 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     public void ShowBottomSheet(object? content)
     {
         LuminaBottomSheet? bottomSheet = LuminaBottomSheet.EnsureSheet(content);
+        if (bottomSheet != null)
+        {
+            bottomSheet.SafeAreaPadding = OverlaySafeAreaPadding;
+        }
+
         _settingOwnedBottomSheetContent = true;
         try
         {
@@ -814,6 +871,11 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     public void ShowDrawer(object? content)
     {
         LuminaDrawer? drawer = LuminaDrawer.EnsureDrawer(content);
+        if (drawer != null)
+        {
+            drawer.SafeAreaPadding = OverlaySafeAreaPadding;
+        }
+
         _settingOwnedDrawerContent = true;
         try
         {
@@ -963,6 +1025,10 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         {
             UpdateEffectiveMenuSlots();
         }
+        else if (change.Property == SafeAreaModeProperty || change.Property == UseSafeAreaForOverlaysProperty || change.Property == LuminaInsets.SafeAreaPaddingProperty)
+        {
+            UpdateEffectiveSafeAreaPadding();
+        }
         else if (change.Property == IsWindowGlassEnabledProperty)
         {
             if (change.GetNewValue<bool>())
@@ -1022,6 +1088,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
             {
                 ScheduleDrawerContentClear();
             }
+            _overlayInputPaneAvoidance.UpdateOverlayState();
         }
         else if (change.Property == BottomSheetContentProperty)
         {
@@ -1030,6 +1097,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
                 _ownsBottomSheetContent = false;
                 CancelBottomSheetContentClear();
             }
+            ApplyBottomSheetSafeAreaPadding();
         }
         else if (change.Property == DrawerContentProperty)
         {
@@ -1038,6 +1106,42 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
                 _ownsDrawerContent = false;
                 CancelDrawerContentClear();
             }
+            ApplyDrawerSafeAreaPadding();
+        }
+    }
+
+    private void UpdateEffectiveSafeAreaPadding()
+    {
+        Thickness safeAreaPadding = LuminaInsets.GetSafeAreaPadding(this);
+        LayoutSafeAreaPadding = ShouldApplyLayoutSafeArea() ? safeAreaPadding : default;
+        OverlaySafeAreaPadding = UseSafeAreaForOverlays ? safeAreaPadding : default;
+        ApplyBottomSheetSafeAreaPadding();
+        ApplyDrawerSafeAreaPadding();
+    }
+
+    private bool ShouldApplyLayoutSafeArea()
+    {
+        return SafeAreaMode switch
+        {
+            LuminaSafeAreaMode.Enabled => true,
+            LuminaSafeAreaMode.Disabled => false,
+            _ => !this.GetVisualAncestors().OfType<LuminaShell>().Any()
+        };
+    }
+
+    private void ApplyBottomSheetSafeAreaPadding()
+    {
+        if (BottomSheetContent is LuminaBottomSheet bottomSheet)
+        {
+            bottomSheet.SafeAreaPadding = OverlaySafeAreaPadding;
+        }
+    }
+
+    private void ApplyDrawerSafeAreaPadding()
+    {
+        if (DrawerContent is LuminaDrawer drawer)
+        {
+            drawer.SafeAreaPadding = OverlaySafeAreaPadding;
         }
     }
 

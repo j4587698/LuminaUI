@@ -19,7 +19,7 @@
                             <!-- Menu pane is separated by surface tone, not by an extra border. -->
                             <Border Background="{TemplateBinding PaneBackground}"
                                     IsVisible="{TemplateBinding EffectiveIsShellChromeVisible}"
-                                    Padding="{Binding (lumina:LuminaInsets.SafeAreaPadding), RelativeSource={RelativeSource TemplatedParent}}"
+                                    Padding="{TemplateBinding LayoutSafeAreaPadding}"
                                     lumina:LuminaShell.IsMenuCompact="{TemplateBinding EffectiveIsMenuCompact}">
                                 <Grid RowDefinitions="Auto,*,Auto,Auto">
                                     <!-- 菜单头部插槽 -->
@@ -84,7 +84,7 @@
                         </SplitView.Pane>
                         
                         <SplitView.Content>
-                            <Border Padding="{Binding (lumina:LuminaInsets.SafeAreaPadding), RelativeSource={RelativeSource TemplatedParent}}">
+                            <Border Padding="{TemplateBinding LayoutSafeAreaPadding}">
                                 <Grid RowDefinitions="Auto,*">
                                     <!-- 主区域头部栏插槽 -->
                                     <Border Grid.Row="0"
@@ -141,16 +141,18 @@
                             <Border Background="{DynamicResource LuminaOverlayScrimBrush}"
                                     IsHitTestVisible="False" />
 
-                            <Border Name="PART_DialogContainer">
-                                <Border.Transitions>
-                                    <Transitions>
-                                        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25" Easing="CubicEaseOut" />
-                                    </Transitions>
-                                </Border.Transitions>
-                                <ContentPresenter Content="{TemplateBinding DialogContent}"
-                                                  Margin="16"
-                                                  HorizontalAlignment="Stretch"
-                                                  VerticalAlignment="Center" />
+                            <Border Padding="{TemplateBinding OverlaySafeAreaPadding}">
+                                <Border Name="PART_DialogContainer">
+                                    <Border.Transitions>
+                                        <Transitions>
+                                            <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25" Easing="CubicEaseOut" />
+                                        </Transitions>
+                                    </Border.Transitions>
+                                    <ContentPresenter Content="{TemplateBinding DialogContent}"
+                                                      Margin="16"
+                                                      HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Center" />
+                                </Border>
                             </Border>
                         </Grid>
                     </Border>
@@ -213,7 +215,11 @@
                     <!-- ============================================== -->
                     <!-- Toast Overlay (全局底部通知)                       -->
                     <!-- ============================================== -->
-                    <Border ZIndex="2000" HorizontalAlignment="Center" VerticalAlignment="Bottom" IsHitTestVisible="False">
+                    <Border ZIndex="2000"
+                            Padding="{TemplateBinding OverlaySafeAreaPadding}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            IsHitTestVisible="False">
                         <ContentPresenter Name="PART_ToastPresenter" />
                     </Border>
                 </Grid>

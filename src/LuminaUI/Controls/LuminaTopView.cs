@@ -61,6 +61,10 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
 
     private IInsetsManager? _insetsManager;
 
+    private bool _previousDisplayEdgeToEdgePreference;
+
+    private bool _hasDisplayEdgeToEdgePreferenceOverride;
+
     private Control? _autoSafeAreaTarget;
 
     private bool _autoSafeAreaPreviousValue;
@@ -201,7 +205,7 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
 
     public LuminaTopView()
     {
-        _overlayInputPaneAvoidance = new LuminaOverlayInputPaneAvoidance(this, () => IsDialogOpen, () => IsBottomSheetOpen);
+        _overlayInputPaneAvoidance = new LuminaOverlayInputPaneAvoidance(this, () => IsDialogOpen, () => IsBottomSheetOpen, () => IsDrawerOpen);
         CloseDialogCommand = new LuminaRelayCommand(_ => {
             CloseDialog();
         });
@@ -425,7 +429,8 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
         }
         _overlayInputPaneAvoidance.ApplyTemplate(
             e.NameScope.FindRequired<Control>("PART_DialogContainer"),
-            e.NameScope.FindRequired<Control>("PART_BottomSheetContainer"));
+            e.NameScope.FindRequired<Control>("PART_BottomSheetContainer"),
+            e.NameScope.FindRequired<Control>("PART_DrawerContainer"));
         ApplyBottomSheetSafeAreaPadding();
         ApplyDrawerSafeAreaPadding();
     }
@@ -488,6 +493,7 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
             {
                 ScheduleDrawerContentClear();
             }
+            _overlayInputPaneAvoidance.UpdateOverlayState();
         }
         else if (change.Property == BottomSheetContentProperty)
         {
@@ -524,6 +530,8 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
         }
 
         _insetsManager = insetsManager;
+        _previousDisplayEdgeToEdgePreference = insetsManager.DisplayEdgeToEdgePreference;
+        _hasDisplayEdgeToEdgePreferenceOverride = true;
         _insetsManager.DisplayEdgeToEdgePreference = true;
         _insetsManager.SafeAreaChanged += OnSafeAreaChanged;
     }
@@ -533,8 +541,20 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
         if (_insetsManager != null)
         {
             _insetsManager.SafeAreaChanged -= OnSafeAreaChanged;
+            RestoreInsetsManagerEdgeToEdgePreference();
             _insetsManager = null;
         }
+    }
+
+    private void RestoreInsetsManagerEdgeToEdgePreference()
+    {
+        if (_hasDisplayEdgeToEdgePreferenceOverride && _insetsManager != null)
+        {
+            _insetsManager.DisplayEdgeToEdgePreference = _previousDisplayEdgeToEdgePreference;
+        }
+
+        _previousDisplayEdgeToEdgePreference = false;
+        _hasDisplayEdgeToEdgePreferenceOverride = false;
     }
 
     private void OnSafeAreaChanged(object? sender, SafeAreaChangedArgs e)
