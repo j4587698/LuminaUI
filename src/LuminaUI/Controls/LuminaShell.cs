@@ -1114,7 +1114,9 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     {
         Thickness safeAreaPadding = LuminaInsets.GetSafeAreaPadding(this);
         LayoutSafeAreaPadding = ShouldApplyLayoutSafeArea() ? safeAreaPadding : default;
-        OverlaySafeAreaPadding = UseSafeAreaForOverlays ? safeAreaPadding : default;
+        // Overlay layers span the whole shell. When an ancestor shell already insets this
+        // shell via its own layout safe area, applying it again here would double the padding.
+        OverlaySafeAreaPadding = UseSafeAreaForOverlays && !IsSafeAreaProvidedByAncestorShell() ? safeAreaPadding : default;
         ApplyBottomSheetSafeAreaPadding();
         ApplyDrawerSafeAreaPadding();
     }
@@ -1127,6 +1129,19 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
             LuminaSafeAreaMode.Disabled => false,
             _ => !this.GetVisualAncestors().OfType<LuminaShell>().Any()
         };
+    }
+
+    private bool IsSafeAreaProvidedByAncestorShell()
+    {
+        foreach (LuminaShell ancestor in this.GetVisualAncestors().OfType<LuminaShell>())
+        {
+            if (ancestor.ShouldApplyLayoutSafeArea())
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void ApplyBottomSheetSafeAreaPadding()

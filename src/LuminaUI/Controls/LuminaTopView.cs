@@ -186,8 +186,10 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
         }
         private set
         {
-            SetAndRaise(SafeAreaPaddingProperty, ref _safeAreaPadding, value);
-            UpdateEffectiveSafeAreaPadding();
+            if (SetAndRaise(SafeAreaPaddingProperty, ref _safeAreaPadding, value))
+            {
+                UpdateEffectiveSafeAreaPadding();
+            }
         }
     }
 

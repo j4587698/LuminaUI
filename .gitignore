@@ -61,3 +61,7 @@ secrets.json
 *.tmp
 *.temp
 *.bak
+
+# Tooling-generated artifacts (should never be committed)
+.playwright-mcp/
+.spec-workflow/
