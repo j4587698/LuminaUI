@@ -511,8 +511,7 @@ public class LuminaWindow : Window
             object background;
             if (WindowState != WindowState.FullScreen)
             {
-                IBrush transparent = Brushes.Transparent;
-                background = transparent;
+                background = ContentBackground ?? FindBrush("LuminaBackgroundBrush") ?? Brushes.Transparent;
             }
             else
             {
