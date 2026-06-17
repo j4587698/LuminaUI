@@ -92,7 +92,7 @@
                       Command="{Binding OpenInlineDialogCommand}"
                       CommandParameter="{StaticResource InlineStatusDialog}"/>
               <Button Name="OpenWindowDialogButton"
-                      Content="PC Native Dialog"
+                      Content="{l10n:Loc Sandbox.Components.PCNativeDialog}"
                       Classes="Outline"
                       Margin="0,0,10,10"
                       Command="{Binding OpenWindowDialogCommand}"/>

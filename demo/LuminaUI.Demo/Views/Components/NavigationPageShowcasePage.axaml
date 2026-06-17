@@ -17,9 +17,9 @@
                     <StackPanel Spacing="16">
                         <Grid ColumnDefinitions="*,220" ColumnSpacing="16">
                             <StackPanel Spacing="4">
-                                <TextBlock Classes="SectionTitle" Text="Navigation transition" />
+                                <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.NavigationPage.NavigationTransition}" />
                                 <TextBlock Classes="Helper"
-                                           Text="Pick a transition, then push and pop Page 1, Page 2, and Page 3."
+                                           Text="{l10n:Loc Sandbox.Components.NavigationPage.NavigationTransitionDesc}"
                                            TextWrapping="Wrap" />
                             </StackPanel>
 
@@ -36,24 +36,24 @@
                             </ComboBox>
                         </Grid>
 
-                        <Border Height="320"
+                        <Border Height="420"
                                 BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
                                 BorderThickness="1"
                                 CornerRadius="10"
                                 ClipToBounds="True">
                             <NavigationPage x:Name="DemoNavigationPage"
                                             PageTransition="{Binding PageTransition}">
-                                <ContentPage Header="Page 1">
+                                <ContentPage Header="{l10n:Loc Sandbox.Components.NavigationPage.Page1}">
                                     <Grid Margin="16,68,16,16" RowDefinitions="*,Auto">
                                         <StackPanel HorizontalAlignment="Center"
                                                     VerticalAlignment="Center"
                                                     Spacing="8">
-                                            <TextBlock Text="Page 1"
+                                            <TextBlock Text="{l10n:Loc Sandbox.Components.NavigationPage.Page1}"
                                                        FontSize="34"
                                                        FontWeight="Bold"
                                                        HorizontalAlignment="Center" />
                                             <TextBlock Classes="Helper"
-                                                       Text="Root page. Push another page to see the NavigationPage transition."
+                                                       Text="{l10n:Loc Sandbox.Components.NavigationPage.RootPageDesc}"
                                                        TextAlignment="Center"
                                                        TextWrapping="Wrap"
                                                        MaxWidth="360"
@@ -62,14 +62,14 @@
                                                     Background="#14000000"
                                                     CornerRadius="999"
                                                     HorizontalAlignment="Center">
-                                                <TextBlock Text="Root stack page" FontSize="12" />
+                                                <TextBlock Text="{l10n:Loc Sandbox.Components.NavigationPage.RootStackPage}" FontSize="12" />
                                             </Border>
                                         </StackPanel>
 
                                         <Button x:Name="PushNavigationButton"
                                                 Grid.Row="1"
                                                 Classes="Primary Small"
-                                                Content="Push Page 2"
+                                                Content="{l10n:Loc Sandbox.Components.NavigationPage.PushPage2}"
                                                 HorizontalAlignment="Center"
                                                 Command="{Binding PushNavigationCommand}"
                                                 CommandParameter="{Binding #DemoNavigationPage}" />

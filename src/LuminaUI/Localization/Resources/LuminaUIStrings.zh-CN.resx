@@ -85,4 +85,10 @@
   <data name="Lumina.Menu.Quit" xml:space="preserve">
     <value>退出 {0}</value>
   </data>
+  <data name="Lumina.Picker.StartDate" xml:space="preserve">
+    <value>开始日期</value>
+  </data>
+  <data name="Lumina.Picker.EndDate" xml:space="preserve">
+    <value>结束日期</value>
+  </data>
 </root>

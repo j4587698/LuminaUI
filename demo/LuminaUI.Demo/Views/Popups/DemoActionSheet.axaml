@@ -19,14 +19,14 @@
                 HorizontalAlignment="Stretch" 
                 HorizontalContentAlignment="Left"
                 Command="{Binding SelectCommand}"
-                CommandParameter="Share to friends"/>
+                CommandParameter="分享给朋友"/>
         
         <Button Content="{l10n:Loc Sandbox.Text.0629}" 
                 Classes="Ghost" 
                 HorizontalAlignment="Stretch" 
                 HorizontalContentAlignment="Left"
                 Command="{Binding SelectCommand}"
-                CommandParameter="Copy link"/>
+                CommandParameter="复制链接"/>
         
         <Border Height="1" Background="{DynamicResource LuminaBorderSubtleBrush}" Margin="0,8" />
         
@@ -35,6 +35,6 @@
                 HorizontalAlignment="Stretch" 
                 HorizontalContentAlignment="Left"
                 Command="{Binding SelectCommand}"
-                CommandParameter="Delete item"/>
+                CommandParameter="删除项目"/>
     </StackPanel>
 </UserControl>

@@ -25,7 +25,7 @@
                 <lumina:LuminaGroupBox Header="{l10n:Loc Sandbox.Text.0078}"
                                        Description="{l10n:Loc Sandbox.Text.0080}">
                     <StackPanel Spacing="12">
-                        <TextBox PlaceholderText="{l10n:Loc Sandbox.Text.0081}" Text="Lumina Admin" />
+                        <TextBox PlaceholderText="{l10n:Loc Sandbox.Text.0081}" Text="{l10n:Loc Sandbox.Components.GroupBox.LuminaAdmin}" />
                         <TextBox PlaceholderText="{l10n:Loc Sandbox.Text.0082}" Text="{l10n:Loc Sandbox.Text.1175}" />
                         <CheckBox Content="{l10n:Loc Sandbox.Text.0083}" IsChecked="True" />
                     </StackPanel>
@@ -45,9 +45,9 @@
                             <lumina:LuminaInputGroupAddon Content="{l10n:Loc Sandbox.Text.1178}" />
                         </lumina:LuminaInputGroup>
                         <ComboBox SelectedIndex="0" HorizontalAlignment="Stretch">
-                            <ComboBoxItem>Production</ComboBoxItem>
-                            <ComboBoxItem>Staging</ComboBoxItem>
-                            <ComboBoxItem>Local</ComboBoxItem>
+                            <ComboBoxItem Content="{l10n:Loc Sandbox.Components.GroupBox.Production}" />
+                            <ComboBoxItem Content="{l10n:Loc Sandbox.Components.GroupBox.Staging}" />
+                            <ComboBoxItem Content="{l10n:Loc Sandbox.Components.GroupBox.Local}" />
                         </ComboBox>
                     </StackPanel>
                 </lumina:LuminaGroupBox>

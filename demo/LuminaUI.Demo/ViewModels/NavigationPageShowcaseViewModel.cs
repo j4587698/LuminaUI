@@ -55,7 +55,7 @@ public partial class NavigationPageShowcaseViewModel : ObservableObject
         {
             Name = "PushGeneratedNavigationButton",
             Classes = { "Primary", "Small" },
-            Content = pageNumber == 2 ? "Push Page 3" : "Push Page 2",
+            Content = pageNumber == 2 ? "推入页面 3" : "推入页面 2",
             HorizontalAlignment = HorizontalAlignment.Left,
             Command = PushNavigationCommand,
             CommandParameter = navigationPage
@@ -65,7 +65,7 @@ public partial class NavigationPageShowcaseViewModel : ObservableObject
         {
             Name = "PopGeneratedNavigationButton",
             Classes = { "Outline", "Small" },
-            Content = "Pop page",
+            Content = "弹出页面",
             HorizontalAlignment = HorizontalAlignment.Left,
             Command = PopNavigationCommand,
             CommandParameter = navigationPage
@@ -73,11 +73,11 @@ public partial class NavigationPageShowcaseViewModel : ObservableObject
 
         return new ContentPage
         {
-            Header = $"Page {pageNumber}",
+            Header = $"页面 {pageNumber}",
             Content = CreatePageContent(
-                $"Page {pageNumber}",
-                "This page was pushed onto the NavigationPage stack.",
-                $"Stack page: {pageNumber}",
+                $"页面 {pageNumber}",
+                "此页面已被推入 NavigationPage 的堆栈中。",
+                $"堆栈层级: {pageNumber}",
                 pushButton,
                 popButton)
         };

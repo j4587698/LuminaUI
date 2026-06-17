@@ -110,6 +110,11 @@
             <Setter Property="Padding" Value="8" />
             <Setter Property="CornerRadius" Value="8" />
             <Setter Property="RenderTransform" Value="scale(1)" />
+            <Setter Property="ContentTemplate">
+                <DataTemplate>
+                    <PathIcon Width="16" Height="16" Data="M15.41,16.59 L10.83,12 L15.41,7.41 L14,6 L8,12 L14,18 Z" />
+                </DataTemplate>
+            </Setter>
         </Style>
 
         <Style Selector="^ /template/ Button#PART_BackButton:pointerover">

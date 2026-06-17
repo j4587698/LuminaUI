@@ -47,7 +47,7 @@
                                        VerticalAlignment="Center"
                                        Foreground="{DynamicResource LuminaTextMutedBrush}" />
                             <lumina:LuminaCloseButton Command="{Binding RunCloseButtonCommand}"
-                                                      ToolTip.Tip="Close" />
+                                                      ToolTip.Tip="{l10n:Loc Sandbox.Components.TagInput.Close}" />
                         </StackPanel>
                         <TextBlock Text="{Binding StatusText}" Classes="Caption" />
                     </StackPanel>

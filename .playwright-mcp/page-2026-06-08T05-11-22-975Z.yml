@@ -1,0 +1,7 @@
+- generic [ref=e2]:
+  - heading "DotNetCatalog MCP" [level=1] [ref=e3]
+  - generic [ref=e4]: Username
+  - textbox "Username" [ref=e5]
+  - generic [ref=e6]: Password
+  - textbox "Password" [ref=e7]
+  - button "Sign in" [ref=e8] [cursor=pointer]
