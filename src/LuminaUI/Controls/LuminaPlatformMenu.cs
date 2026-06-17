@@ -209,7 +209,7 @@ public class LuminaPlatformMenu : Menu
         {
             LuminaNativeMenuMode.Never => false, 
             LuminaNativeMenuMode.MacOnly => OperatingSystem.IsMacOS(), 
-            _ => OperatingSystem.IsMacOS() || OperatingSystem.IsLinux(), 
+            _ => LuminaPlatform.SupportsNativeMenu, 
         };
     }
 

@@ -7,13 +7,13 @@ public static class LuminaSheetPlacement
         return popupType switch
         {
             LuminaPopupType.Sheet => true,
-            LuminaPopupType.Auto => IsMobilePlatform(),
+            LuminaPopupType.Auto => LuminaPlatform.PreferSheetPopup,
             _ => false
         };
     }
 
     public static bool IsMobilePlatform()
     {
-        return OperatingSystem.IsAndroid() || OperatingSystem.IsIOS();
+        return LuminaPlatform.PreferSheetPopup;
     }
 }

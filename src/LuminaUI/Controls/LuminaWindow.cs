@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -611,14 +610,14 @@ public class LuminaWindow : Window
         {
             LuminaExtendedSystemButtonMode.Native => true, 
             LuminaExtendedSystemButtonMode.Lumina => false, 
-            _ => RuntimeInformation.IsOSPlatform(OSPlatform.OSX), 
+            _ => LuminaPlatform.UseNativeExtendedSystemButtonsByDefault, 
         };
         return result;
     }
 
     private bool UsesNativeSystemButtonAreaOnLeft()
     {
-        return WindowChromeMode == LuminaWindowChromeMode.Extended && UsesNativeExtendedSystemButtons() && RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
+        return WindowChromeMode == LuminaWindowChromeMode.Extended && UsesNativeExtendedSystemButtons() && LuminaPlatform.IsNativeSystemButtonAreaOnLeft;
     }
 
     private WindowDecorations GetExtendedWindowDecorations()
