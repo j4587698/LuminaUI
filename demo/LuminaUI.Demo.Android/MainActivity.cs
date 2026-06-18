@@ -19,7 +19,6 @@ public class MainActivity : AvaloniaMainActivity
 {
     protected override void OnCreate(Bundle? savedInstanceState)
     {
-        SplashScreen.InstallSplashScreen(this);
         base.OnCreate(savedInstanceState);
     }
 }
