@@ -3,11 +3,11 @@
           Condition="Exists('$(MSBuildThisFileDirectory)Directory.Build.Diagnostics.props')" />
 
   <PropertyGroup>
-    <LuminaUIVersion>0.3.4</LuminaUIVersion>
+    <LuminaUIVersion>0.4.0</LuminaUIVersion>
 
     <Version>$(LuminaUIVersion)</Version>
     <PackageVersion>$(LuminaUIVersion)</PackageVersion>
-    <LuminaUIAssemblyVersion>0.3.4.0</LuminaUIAssemblyVersion>
+    <LuminaUIAssemblyVersion>0.4.0.0</LuminaUIAssemblyVersion>
     <AssemblyVersion>$(LuminaUIAssemblyVersion)</AssemblyVersion>
     <FileVersion>$(LuminaUIAssemblyVersion)</FileVersion>
     <InformationalVersion>$(LuminaUIVersion)</InformationalVersion>
