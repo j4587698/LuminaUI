@@ -113,8 +113,9 @@
                         <Border Grid.Row="1"
                                 Height="520"
                                 Background="{DynamicResource LuminaBackgroundBrush}">
+                            <!-- Embedded preview shells can use LuminaShell directly; app roots should wrap it in LuminaTopView. -->
                             <lumina:LuminaShell x:Name="PreviewShell"
-                                                DefaultPageTitle="{l10n:Loc Sandbox.ShellShowcase.PreviewShellTitle}"
+                                                 DefaultPageTitle="{l10n:Loc Sandbox.ShellShowcase.PreviewShellTitle}"
                                                 DefaultPageSubtitle="{l10n:Loc Sandbox.ShellShowcase.PreviewShellSubtitle}"
                                                 OpenPaneLength="220"
                                                 CompactPaneLength="56">

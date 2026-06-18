@@ -63,6 +63,25 @@ NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NE
 </lumina:LuminaCard>
 ```
 
+如果应用使用 `LuminaShell`、全局覆盖层，或需要移动端安全区处理，推荐把 Shell 放在根 `LuminaTopView` 内。`LuminaTopView` 负责采集平台 safe area，并把 inset 继承传递给视觉树；`LuminaShell` 负责消费这些 inset，用于 Shell chrome 和局部覆盖层。
+
+```xml
+<lumina:LuminaTopView TopViewKey="Root">
+  <lumina:LuminaShell ShellKey="App"
+                      DefaultPageTitle="仪表盘">
+    <lumina:LuminaShell.MenuContent>
+      <lumina:LuminaNavigationView />
+    </lumina:LuminaShell.MenuContent>
+
+    <lumina:LuminaPage Header="仪表盘">
+      <TextBlock Text="内容" />
+    </lumina:LuminaPage>
+  </lumina:LuminaShell>
+</lumina:LuminaTopView>
+```
+
+仅在预览、嵌入式 Shell，或不需要平台安全区 inset 的桌面专用界面中，才建议直接使用 `LuminaShell` 作为根容器。
+
 ## 目录结构
 
 ```text

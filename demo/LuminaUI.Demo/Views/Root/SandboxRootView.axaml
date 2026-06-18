@@ -5,8 +5,9 @@
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.SandboxRootView"
              x:Name="RootView">
+    <!-- Root TopView provides safe-area insets and application-level overlays for the shell. -->
     <lumina:LuminaTopView x:Name="RootTopView"
-                          TopViewKey="SandboxRoot">
+                           TopViewKey="SandboxRoot">
         <Grid>
             <lumina:LuminaShell x:Name="AppShell"
                                 ShellKey="Sandbox"

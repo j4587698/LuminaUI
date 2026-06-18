@@ -63,6 +63,25 @@ Use controls with the Lumina namespace:
 </lumina:LuminaCard>
 ```
 
+For applications that use `LuminaShell`, global overlays, or mobile safe-area handling, wrap the shell in a root `LuminaTopView`. `LuminaTopView` owns platform safe-area collection and publishes those insets to the visual tree; `LuminaShell` consumes them for shell chrome and scoped overlays.
+
+```xml
+<lumina:LuminaTopView TopViewKey="Root">
+  <lumina:LuminaShell ShellKey="App"
+                      DefaultPageTitle="Dashboard">
+    <lumina:LuminaShell.MenuContent>
+      <lumina:LuminaNavigationView />
+    </lumina:LuminaShell.MenuContent>
+
+    <lumina:LuminaPage Header="Dashboard">
+      <TextBlock Text="Content" />
+    </lumina:LuminaPage>
+  </lumina:LuminaShell>
+</lumina:LuminaTopView>
+```
+
+Use `LuminaShell` directly only for previews, embedded shells, or desktop-only surfaces where platform safe-area insets are not required.
+
 ## Repository Layout
 
 ```text
