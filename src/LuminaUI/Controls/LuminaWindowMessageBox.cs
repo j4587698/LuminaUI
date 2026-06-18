@@ -76,9 +76,9 @@ public static class LuminaWindowMessageBox
         return new TextBlock
         {
             TextWrapping = TextWrapping.Wrap,
-            MaxWidth = 420,
+            MaxWidth = LuminaPickerResources.Double("LuminaWindowMessageBoxTextMaxWidth", 420),
             VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center,
-            FontSize = 14
+            FontSize = LuminaPickerResources.Double("LuminaWindowMessageBoxTextFontSize", 14)
         };
     }
 
@@ -86,15 +86,15 @@ public static class LuminaWindowMessageBox
     {
         if (icon == LuminaMessageBoxIcon.None)
         {
-            textBlock.Margin = new Avalonia.Thickness(24);
+            textBlock.Margin = LuminaPickerResources.Thickness("LuminaWindowMessageBoxContentMargin", new Avalonia.Thickness(24));
             return textBlock;
         }
 
         var stackPanel = new StackPanel
         {
             Orientation = Avalonia.Layout.Orientation.Horizontal,
-            Spacing = 16,
-            Margin = new Avalonia.Thickness(24)
+            Spacing = LuminaPickerResources.Double("LuminaWindowMessageBoxIconSpacing", 16),
+            Margin = LuminaPickerResources.Thickness("LuminaWindowMessageBoxContentMargin", new Avalonia.Thickness(24))
         };
         stackPanel.Children.Add(CreateIconControl(icon));
         stackPanel.Children.Add(textBlock);
@@ -115,8 +115,8 @@ public static class LuminaWindowMessageBox
         var pathIcon = new PathIcon
         {
             Data = Geometry.Parse(data),
-            Width = 32,
-            Height = 32,
+            Width = LuminaPickerResources.Double("LuminaWindowMessageBoxIconSize", 32),
+            Height = LuminaPickerResources.Double("LuminaWindowMessageBoxIconSize", 32),
             VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center
         };
 

@@ -1,11 +1,37 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <Thickness x:Key="LuminaItemsControlBorderThickness">0</Thickness>
+    <Thickness x:Key="LuminaItemsControlPadding">0</Thickness>
+    <Thickness x:Key="LuminaItemsControlSurfaceBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaItemsControlSurfaceCornerRadius">8</CornerRadius>
+    <Thickness x:Key="LuminaItemsControlSurfacePadding">12</Thickness>
+    <Thickness x:Key="LuminaHeaderedContentControlBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaHeaderedContentControlCornerRadius">8</CornerRadius>
+    <Thickness x:Key="LuminaHeaderedContentControlPadding">0</Thickness>
+    <Thickness x:Key="LuminaHeaderedContentControlHeaderPadding">14,12</Thickness>
+    <x:Double x:Key="LuminaHeaderedContentControlDividerHeight">1</x:Double>
+    <Thickness x:Key="LuminaHeaderedContentControlContentPadding">14</Thickness>
+    <x:Double x:Key="LuminaSplitViewOpenPaneLength">240</x:Double>
+    <x:Double x:Key="LuminaSplitViewCompactPaneLength">48</x:Double>
+    <x:Double x:Key="LuminaNavigationPageBarHeight">52</x:Double>
+    <Thickness x:Key="LuminaNavigationPageBarBorderThickness">0,0,0,1</Thickness>
+    <x:Double x:Key="LuminaNavigationPageBackButtonSize">36</x:Double>
+    <Thickness x:Key="LuminaNavigationPageBackButtonPadding">8</Thickness>
+    <CornerRadius x:Key="LuminaNavigationPageBackButtonCornerRadius">8</CornerRadius>
+    <x:Double x:Key="LuminaNavigationPageBackButtonIconSize">16</x:Double>
+    <x:Double x:Key="LuminaNavigationPageLargeBarHeight">64</x:Double>
+    <x:Double x:Key="LuminaDrawerPageDrawerLength">260</x:Double>
+    <x:Double x:Key="LuminaDrawerPageCompactDrawerLength">52</x:Double>
+    <Thickness x:Key="LuminaDrawerPageTopBarBorderThickness">0,0,0,1</Thickness>
+    <Thickness x:Key="LuminaTransitioningContentControlBorderThickness">0</Thickness>
+    <Thickness x:Key="LuminaTransitioningContentControlPadding">0</Thickness>
+
     <ControlTheme x:Key="{x:Type ItemsControl}" TargetType="ItemsControl">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Padding" Value="0" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaItemsControlBorderThickness}" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaItemsControlPadding}" />
         <Setter Property="Template">
             <ControlTemplate TargetType="ItemsControl">
                 <Border Padding="{TemplateBinding Padding}"
@@ -22,18 +48,18 @@
         <Style Selector="^.Surface">
             <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="8" />
-            <Setter Property="Padding" Value="12" />
+            <Setter Property="BorderThickness" Value="{DynamicResource LuminaItemsControlSurfaceBorderThickness}" />
+            <Setter Property="CornerRadius" Value="{DynamicResource LuminaItemsControlSurfaceCornerRadius}" />
+            <Setter Property="Padding" Value="{DynamicResource LuminaItemsControlSurfacePadding}" />
         </Style>
     </ControlTheme>
 
     <ControlTheme x:Key="{x:Type HeaderedContentControl}" TargetType="HeaderedContentControl">
         <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="CornerRadius" Value="8" />
-        <Setter Property="Padding" Value="0" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaHeaderedContentControlBorderThickness}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaHeaderedContentControlCornerRadius}" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaHeaderedContentControlPadding}" />
         <Setter Property="Template">
             <ControlTemplate TargetType="HeaderedContentControl">
                 <Border Background="{TemplateBinding Background}"
@@ -44,7 +70,7 @@
                     <Grid RowDefinitions="Auto,Auto,*">
                         <ContentPresenter Name="PART_HeaderPresenter"
                                           Grid.Row="0"
-                                          Padding="14,12"
+                                          Padding="{DynamicResource LuminaHeaderedContentControlHeaderPadding}"
                                           Content="{TemplateBinding Header}"
                                           ContentTemplate="{TemplateBinding HeaderTemplate}"
                                           FontWeight="SemiBold"
@@ -52,12 +78,12 @@
                                           IsVisible="{TemplateBinding Header, Converter={x:Static ObjectConverters.IsNotNull}}"
                                           RecognizesAccessKey="True" />
                         <Border Grid.Row="1"
-                                Height="1"
+                                Height="{DynamicResource LuminaHeaderedContentControlDividerHeight}"
                                 Background="{DynamicResource LuminaDividerBrush}"
                                 IsVisible="{TemplateBinding Header, Converter={x:Static ObjectConverters.IsNotNull}}" />
                         <ContentPresenter Name="PART_ContentPresenter"
                                           Grid.Row="2"
-                                          Padding="14"
+                                          Padding="{DynamicResource LuminaHeaderedContentControlContentPadding}"
                                           Content="{TemplateBinding Content}"
                                           ContentTemplate="{TemplateBinding ContentTemplate}"
                                           HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -78,8 +104,8 @@
     <ControlTheme x:Key="{x:Type SplitView}" TargetType="SplitView" BasedOn="{StaticResource {x:Type SplitView}}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="PaneBackground" Value="{DynamicResource LuminaNavigationPaneBrush}" />
-        <Setter Property="OpenPaneLength" Value="240" />
-        <Setter Property="CompactPaneLength" Value="48" />
+        <Setter Property="OpenPaneLength" Value="{DynamicResource LuminaSplitViewOpenPaneLength}" />
+        <Setter Property="CompactPaneLength" Value="{DynamicResource LuminaSplitViewCompactPaneLength}" />
 
         <Style Selector="^ /template/ Rectangle#HCPaneBorder">
             <Setter Property="Fill" Value="{DynamicResource LuminaDividerBrush}" />
@@ -88,14 +114,14 @@
 
     <ControlTheme x:Key="{x:Type NavigationPage}" TargetType="NavigationPage" BasedOn="{StaticResource {x:Type NavigationPage}}">
         <Setter Property="Background" Value="{DynamicResource LuminaBackgroundBrush}" />
-        <Setter Property="BarHeight" Value="52" />
+        <Setter Property="BarHeight" Value="{DynamicResource LuminaNavigationPageBarHeight}" />
         <Setter Property="HasShadow" Value="False" />
         <Setter Property="IsBackButtonVisible" Value="True" />
 
         <Style Selector="^ /template/ Border#PART_NavigationBar">
             <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource LuminaDividerBrush}" />
-            <Setter Property="BorderThickness" Value="0,0,0,1" />
+            <Setter Property="BorderThickness" Value="{DynamicResource LuminaNavigationPageBarBorderThickness}" />
         </Style>
 
         <Style Selector="^ /template/ Button#PART_BackButton">
@@ -103,16 +129,18 @@
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="Transparent" />
             <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
-            <Setter Property="Width" Value="36" />
-            <Setter Property="Height" Value="36" />
-            <Setter Property="MinWidth" Value="36" />
-            <Setter Property="MinHeight" Value="36" />
-            <Setter Property="Padding" Value="8" />
-            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Width" Value="{DynamicResource LuminaNavigationPageBackButtonSize}" />
+            <Setter Property="Height" Value="{DynamicResource LuminaNavigationPageBackButtonSize}" />
+            <Setter Property="MinWidth" Value="{DynamicResource LuminaNavigationPageBackButtonSize}" />
+            <Setter Property="MinHeight" Value="{DynamicResource LuminaNavigationPageBackButtonSize}" />
+            <Setter Property="Padding" Value="{DynamicResource LuminaNavigationPageBackButtonPadding}" />
+            <Setter Property="CornerRadius" Value="{DynamicResource LuminaNavigationPageBackButtonCornerRadius}" />
             <Setter Property="RenderTransform" Value="scale(1)" />
             <Setter Property="ContentTemplate">
                 <DataTemplate>
-                    <PathIcon Width="16" Height="16" Data="M15.41,16.59 L10.83,12 L15.41,7.41 L14,6 L8,12 L14,18 Z" />
+                    <PathIcon Width="{DynamicResource LuminaNavigationPageBackButtonIconSize}"
+                              Height="{DynamicResource LuminaNavigationPageBackButtonIconSize}"
+                              Data="M15.41,16.59 L10.83,12 L15.41,7.41 L14,6 L8,12 L14,18 Z" />
                 </DataTemplate>
             </Setter>
         </Style>
@@ -135,7 +163,7 @@
         </Style>
 
         <Style Selector="^.Large">
-            <Setter Property="BarHeight" Value="64" />
+            <Setter Property="BarHeight" Value="{DynamicResource LuminaNavigationPageLargeBarHeight}" />
         </Style>
     </ControlTheme>
 
@@ -146,13 +174,13 @@
         <Setter Property="DrawerHeaderBackground" Value="{DynamicResource LuminaNavigationPaneBrush}" />
         <Setter Property="DrawerFooterBackground" Value="{DynamicResource LuminaNavigationPaneBrush}" />
         <Setter Property="BackdropBrush" Value="#66000000" />
-        <Setter Property="DrawerLength" Value="260" />
-        <Setter Property="CompactDrawerLength" Value="52" />
+        <Setter Property="DrawerLength" Value="{DynamicResource LuminaDrawerPageDrawerLength}" />
+        <Setter Property="CompactDrawerLength" Value="{DynamicResource LuminaDrawerPageCompactDrawerLength}" />
 
         <Style Selector="^ /template/ Border#PART_TopBar">
             <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource LuminaDividerBrush}" />
-            <Setter Property="BorderThickness" Value="0,0,0,1" />
+            <Setter Property="BorderThickness" Value="{DynamicResource LuminaDrawerPageTopBarBorderThickness}" />
         </Style>
     </ControlTheme>
 
@@ -167,8 +195,8 @@
     <ControlTheme x:Key="{x:Type TransitioningContentControl}" TargetType="TransitioningContentControl" BasedOn="{StaticResource {x:Type TransitioningContentControl}}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Padding" Value="0" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaTransitioningContentControlBorderThickness}" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaTransitioningContentControlPadding}" />
     </ControlTheme>
 
     <ControlTheme x:Key="{x:Type ThemeVariantScope}" TargetType="ThemeVariantScope" BasedOn="{StaticResource {x:Type ThemeVariantScope}}" />

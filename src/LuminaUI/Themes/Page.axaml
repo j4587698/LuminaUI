@@ -3,6 +3,23 @@
                     xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
                     xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
 
+    <Thickness x:Key="LuminaPageHeaderMargin">0,0,0,16</Thickness>
+    <x:Double x:Key="LuminaPageHeaderFontSize">28</x:Double>
+    <Thickness x:Key="LuminaPageTopCommandBarMargin">0,0,0,12</Thickness>
+    <Thickness x:Key="LuminaPageBottomCommandBarMargin">0,12,0,0</Thickness>
+    <Thickness x:Key="LuminaPageStateHostPadding">24</Thickness>
+    <x:Double x:Key="LuminaPageStateMaxWidth">420</x:Double>
+    <x:Double x:Key="LuminaPageLoadingStateSpacing">16</x:Double>
+    <x:Double x:Key="LuminaPageLoadingProgressWidth">160</x:Double>
+    <x:Double x:Key="LuminaPageLoadingProgressHeight">4</x:Double>
+    <x:Double x:Key="LuminaPageStateTextFontSize">14</x:Double>
+    <x:Double x:Key="LuminaPageEmptyStateSpacing">14</x:Double>
+    <x:Double x:Key="LuminaPageErrorStateSpacing">14</x:Double>
+    <x:Double x:Key="LuminaPageStateIconSize">48</x:Double>
+    <CornerRadius x:Key="LuminaPageStateIconCornerRadius">24</CornerRadius>
+    <Thickness x:Key="LuminaPageEmptyStateIconBorderThickness">1</Thickness>
+    <x:Double x:Key="LuminaPageStateIconFontSize">22</x:Double>
+
     <ControlTheme x:Key="{x:Type lumina:LuminaPage}" TargetType="lumina:LuminaPage">
         <Setter Property="AutomaticallyApplySafeAreaPadding" Value="True" />
         <Setter Property="Background" Value="{DynamicResource LuminaBackgroundBrush}" />
@@ -15,16 +32,16 @@
                         Padding="{TemplateBinding Padding}">
                     <Grid RowDefinitions="Auto,Auto,*,Auto">
                         <Border Grid.Row="0"
-                                Margin="0,0,0,16"
+                                Margin="{DynamicResource LuminaPageHeaderMargin}"
                                 IsVisible="{TemplateBinding Header, Converter={x:Static ObjectConverters.IsNotNull}}">
                             <ContentPresenter Content="{TemplateBinding Header}"
-                                              TextElement.FontSize="28"
+                                              TextElement.FontSize="{DynamicResource LuminaPageHeaderFontSize}"
                                               TextElement.FontWeight="Bold"
                                               TextElement.Foreground="{DynamicResource LuminaTextForegroundBrush}" />
                         </Border>
 
                         <ContentPresenter Grid.Row="1"
-                                          Margin="0,0,0,12"
+                                          Margin="{DynamicResource LuminaPageTopCommandBarMargin}"
                                           Content="{TemplateBinding TopCommandBar}"
                                           IsVisible="{TemplateBinding TopCommandBar, Converter={x:Static ObjectConverters.IsNotNull}}" />
 
@@ -37,20 +54,20 @@
 
                             <Border Name="PART_StateHost"
                                     Background="{TemplateBinding Background}"
-                                    Padding="24">
-                                <Grid MaxWidth="420"
+                                    Padding="{DynamicResource LuminaPageStateHostPadding}">
+                                <Grid MaxWidth="{DynamicResource LuminaPageStateMaxWidth}"
                                       HorizontalAlignment="Center"
                                       VerticalAlignment="Center">
                                     <Grid Name="PART_LoadingState">
-                                        <StackPanel Spacing="16"
+                                        <StackPanel Spacing="{DynamicResource LuminaPageLoadingStateSpacing}"
                                                     HorizontalAlignment="Center"
                                                     IsVisible="{TemplateBinding LoadingContent, Converter={x:Static ObjectConverters.IsNull}}">
-                                            <ProgressBar Width="160"
-                                                         Height="4"
+                                            <ProgressBar Width="{DynamicResource LuminaPageLoadingProgressWidth}"
+                                                         Height="{DynamicResource LuminaPageLoadingProgressHeight}"
                                                          IsIndeterminate="True"
                                                          Foreground="{DynamicResource LuminaPrimaryBrush}" />
                                             <TextBlock Text="{l10n:Loc Lumina.Page.Loading}"
-                                                       FontSize="14"
+                                                       FontSize="{DynamicResource LuminaPageStateTextFontSize}"
                                                        FontWeight="SemiBold"
                                                        TextAlignment="Center"
                                                        Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
@@ -60,24 +77,24 @@
                                     </Grid>
 
                                     <Grid Name="PART_EmptyState">
-                                        <StackPanel Spacing="14"
+                                        <StackPanel Spacing="{DynamicResource LuminaPageEmptyStateSpacing}"
                                                     HorizontalAlignment="Center"
                                                     IsVisible="{TemplateBinding EmptyContent, Converter={x:Static ObjectConverters.IsNull}}">
-                                            <Border Width="48"
-                                                    Height="48"
-                                                    CornerRadius="24"
+                                            <Border Width="{DynamicResource LuminaPageStateIconSize}"
+                                                    Height="{DynamicResource LuminaPageStateIconSize}"
+                                                    CornerRadius="{DynamicResource LuminaPageStateIconCornerRadius}"
                                                     Background="{DynamicResource LuminaSurfaceBrush}"
                                                     BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
-                                                    BorderThickness="1">
+                                                    BorderThickness="{DynamicResource LuminaPageEmptyStateIconBorderThickness}">
                                                 <TextBlock Text="—"
-                                                           FontSize="22"
+                                                           FontSize="{DynamicResource LuminaPageStateIconFontSize}"
                                                            FontWeight="SemiBold"
                                                            HorizontalAlignment="Center"
                                                            VerticalAlignment="Center"
                                                            Foreground="{DynamicResource LuminaTextMutedBrush}" />
                                             </Border>
                                             <TextBlock Text="{l10n:Loc Lumina.Page.Empty}"
-                                                       FontSize="14"
+                                                       FontSize="{DynamicResource LuminaPageStateTextFontSize}"
                                                        FontWeight="SemiBold"
                                                        TextAlignment="Center"
                                                        Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
@@ -87,22 +104,22 @@
                                     </Grid>
 
                                     <Grid Name="PART_ErrorState">
-                                        <StackPanel Spacing="14"
+                                        <StackPanel Spacing="{DynamicResource LuminaPageErrorStateSpacing}"
                                                     HorizontalAlignment="Center"
                                                     IsVisible="{TemplateBinding ErrorContent, Converter={x:Static ObjectConverters.IsNull}}">
-                                            <Border Width="48"
-                                                    Height="48"
-                                                    CornerRadius="24"
+                                            <Border Width="{DynamicResource LuminaPageStateIconSize}"
+                                                    Height="{DynamicResource LuminaPageStateIconSize}"
+                                                    CornerRadius="{DynamicResource LuminaPageStateIconCornerRadius}"
                                                     Background="{DynamicResource LuminaDangerHoverBrush}">
                                                 <TextBlock Text="!"
-                                                           FontSize="22"
+                                                           FontSize="{DynamicResource LuminaPageStateIconFontSize}"
                                                            FontWeight="Bold"
                                                            HorizontalAlignment="Center"
                                                            VerticalAlignment="Center"
                                                            Foreground="{DynamicResource LuminaDangerForegroundBrush}" />
                                             </Border>
                                             <TextBlock Text="{l10n:Loc Lumina.Page.Error}"
-                                                       FontSize="14"
+                                                       FontSize="{DynamicResource LuminaPageStateTextFontSize}"
                                                        FontWeight="SemiBold"
                                                        TextAlignment="Center"
                                                        Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
@@ -115,7 +132,7 @@
                         </Grid>
 
                         <ContentPresenter Grid.Row="3"
-                                          Margin="0,12,0,0"
+                                          Margin="{DynamicResource LuminaPageBottomCommandBarMargin}"
                                           Content="{TemplateBinding BottomCommandBar}"
                                           IsVisible="{TemplateBinding BottomCommandBar, Converter={x:Static ObjectConverters.IsNotNull}}" />
                     </Grid>

@@ -195,9 +195,9 @@ public class LuminaSkeletonContainer : ContentControl
     {
         return content switch
         {
-            Control control => BuildSkeletonForControl(control) ?? CreateSkeleton(null, LuminaSkeletonShape.Block, 240.0, 96.0),
+            Control control => BuildSkeletonForControl(control) ?? CreateDefaultBlockSkeleton(null),
             string text => CreateTextSkeleton(null, text, LuminaSkeletonShape.Text),
-            _ => CreateSkeleton(null, LuminaSkeletonShape.Block, 240.0, 96.0)
+            _ => CreateDefaultBlockSkeleton(null)
         };
     }
 
@@ -215,17 +215,23 @@ public class LuminaSkeletonContainer : ContentControl
         }
         if (shape != LuminaSkeletonShape.Auto)
         {
-            return shape == LuminaSkeletonShape.List ? BuildListSkeleton(source) : CreateSkeleton(source, shape, 160.0, 36.0);
+            return shape == LuminaSkeletonShape.List
+                ? BuildListSkeleton(source)
+                : CreateSkeleton(
+                    source,
+                    shape,
+                    ResourceDouble("LuminaSkeletonContainerDefaultWidth", 160.0),
+                    ResourceDouble("LuminaSkeletonContainerControlHeight", 36.0));
         }
         return source switch
         {
             TextBlock textBlock => CreateTextSkeleton(textBlock, textBlock.Text, GuessTextShape(textBlock)),
-            Image => CreateSkeleton(source, GuessImageShape(source), 96.0, 96.0),
-            LuminaImage => CreateSkeleton(source, GuessImageShape(source), 96.0, 96.0),
-            LuminaAvatar => CreateSkeleton(source, LuminaSkeletonShape.Circle, 44.0, 44.0),
-            Button => CreateSkeleton(source, LuminaSkeletonShape.Rectangle, 96.0, 36.0),
-            TextBox => CreateSkeleton(source, LuminaSkeletonShape.Rectangle, 220.0, 36.0),
-            ComboBox => CreateSkeleton(source, LuminaSkeletonShape.Rectangle, 220.0, 36.0),
+            Image => CreateSkeleton(source, GuessImageShape(source), ResourceDouble("LuminaSkeletonContainerImageSize", 96.0), ResourceDouble("LuminaSkeletonContainerImageSize", 96.0)),
+            LuminaImage => CreateSkeleton(source, GuessImageShape(source), ResourceDouble("LuminaSkeletonContainerImageSize", 96.0), ResourceDouble("LuminaSkeletonContainerImageSize", 96.0)),
+            LuminaAvatar => CreateSkeleton(source, LuminaSkeletonShape.Circle, ResourceDouble("LuminaSkeletonContainerAvatarSize", 44.0), ResourceDouble("LuminaSkeletonContainerAvatarSize", 44.0)),
+            Button => CreateSkeleton(source, LuminaSkeletonShape.Rectangle, ResourceDouble("LuminaSkeletonContainerButtonWidth", 96.0), ResourceDouble("LuminaSkeletonContainerControlHeight", 36.0)),
+            TextBox => CreateSkeleton(source, LuminaSkeletonShape.Rectangle, ResourceDouble("LuminaSkeletonContainerInputWidth", 220.0), ResourceDouble("LuminaSkeletonContainerControlHeight", 36.0)),
+            ComboBox => CreateSkeleton(source, LuminaSkeletonShape.Rectangle, ResourceDouble("LuminaSkeletonContainerInputWidth", 220.0), ResourceDouble("LuminaSkeletonContainerControlHeight", 36.0)),
             ItemsControl => BuildListSkeleton(source),
             Border border => BuildBorderSkeleton(border),
             Grid grid => BuildGridSkeleton(grid),
@@ -233,21 +239,39 @@ public class LuminaSkeletonContainer : ContentControl
             Panel panel => BuildPanelSkeleton(panel),
             LuminaCard card => BuildCardSkeleton(card),
             ContentControl contentControl => BuildContentControlSkeleton(contentControl),
-            _ => CreateSkeleton(source, LuminaSkeletonShape.Rectangle, 160.0, 32.0)
+            _ => CreateDefaultRectangleSkeleton(source)
         };
+    }
+
+    private static LuminaSkeleton CreateDefaultBlockSkeleton(Control? source)
+    {
+        return CreateSkeleton(
+            source,
+            LuminaSkeletonShape.Block,
+            ResourceDouble("LuminaSkeletonContainerBlockWidth", 240.0),
+            ResourceDouble("LuminaSkeletonContainerBlockHeight", 96.0));
+    }
+
+    private static LuminaSkeleton CreateDefaultRectangleSkeleton(Control? source)
+    {
+        return CreateSkeleton(
+            source,
+            LuminaSkeletonShape.Rectangle,
+            ResourceDouble("LuminaSkeletonContainerDefaultWidth", 160.0),
+            ResourceDouble("LuminaSkeletonContainerDefaultHeight", 32.0));
     }
 
     private Control BuildCustomSkeleton(Control source, IDataTemplate? itemTemplate)
     {
         if (itemTemplate == null)
         {
-            return CreateSkeleton(source, LuminaSkeletonShape.Rectangle, 160.0, 32.0);
+            return CreateDefaultRectangleSkeleton(source);
         }
         if (source is ItemsControl)
         {
             StackPanel panel = new StackPanel
             {
-                Spacing = 10.0
+                Spacing = ResourceDouble("LuminaSkeletonContainerListSpacing", 10.0)
             };
             CopyLayout(source, panel);
             int count = GetPlaceholderCount(source);
@@ -262,7 +286,7 @@ public class LuminaSkeletonContainer : ContentControl
             return panel;
         }
         Control? content = BuildTemplateContent(itemTemplate, source.DataContext ?? source);
-        return (content != null) ? CopyLayoutAndReturn(source, content) : CreateSkeleton(source, LuminaSkeletonShape.Rectangle, 160.0, 32.0);
+        return (content != null) ? CopyLayoutAndReturn(source, content) : CreateDefaultRectangleSkeleton(source);
     }
 
     private static Control? BuildTemplateContent(IDataTemplate itemTemplate, object? data)
@@ -274,7 +298,7 @@ public class LuminaSkeletonContainer : ContentControl
     {
         StackPanel panel = new StackPanel
         {
-            Spacing = 10.0
+            Spacing = ResourceDouble("LuminaSkeletonContainerListSpacing", 10.0)
         };
         CopyLayout(source, panel);
         int count = GetPlaceholderCount(source);
@@ -290,13 +314,13 @@ public class LuminaSkeletonContainer : ContentControl
     {
         Control result = itemShape switch
         {
-            LuminaSkeletonShape.Text => CreateSkeleton(null, LuminaSkeletonShape.Text, 220.0, 14.0), 
-            LuminaSkeletonShape.Title => CreateSkeleton(null, LuminaSkeletonShape.Title, 180.0, 22.0), 
-            LuminaSkeletonShape.Block => CreateSkeleton(null, LuminaSkeletonShape.Block, 320.0, 72.0), 
+            LuminaSkeletonShape.Text => CreateSkeleton(null, LuminaSkeletonShape.Text, ResourceDouble("LuminaSkeletonContainerListTextWidth", 220.0), ResourceDouble("LuminaSkeletonContainerListTextHeight", 14.0)),
+            LuminaSkeletonShape.Title => CreateSkeleton(null, LuminaSkeletonShape.Title, ResourceDouble("LuminaSkeletonContainerListTitleWidth", 180.0), ResourceDouble("LuminaSkeletonContainerListTitleHeight", 22.0)),
+            LuminaSkeletonShape.Block => CreateSkeleton(null, LuminaSkeletonShape.Block, ResourceDouble("LuminaSkeletonContainerListBlockWidth", 320.0), ResourceDouble("LuminaSkeletonContainerListBlockHeight", 72.0)),
             LuminaSkeletonShape.Card => new LuminaCard
             {
                 Content = CreateAvatarTextSkeleton(),
-                Margin = new Thickness(0.0, 0.0, 0.0, 2.0)
+                Margin = ResourceThickness("LuminaSkeletonContainerCardMargin", new Thickness(0.0, 0.0, 0.0, 2.0))
             }, 
             _ => CreateAvatarTextSkeleton(), 
         };
@@ -318,8 +342,8 @@ public class LuminaSkeletonContainer : ContentControl
                     Width = new GridLength(1.0, GridUnitType.Star)
                 }
             },
-            ColumnSpacing = 12.0,
-            Margin = new Thickness(0.0, 2.0)
+            ColumnSpacing = ResourceDouble("LuminaSkeletonContainerAvatarTextColumnSpacing", 12.0),
+            Margin = ResourceThickness("LuminaSkeletonContainerAvatarTextMargin", new Thickness(0.0, 2.0))
         };
         LuminaSkeleton avatar = new LuminaSkeleton
         {
@@ -327,18 +351,18 @@ public class LuminaSkeletonContainer : ContentControl
         };
         StackPanel text = new StackPanel
         {
-            Spacing = 8.0,
+            Spacing = ResourceDouble("LuminaSkeletonContainerAvatarTextSpacing", 8.0),
             VerticalAlignment = VerticalAlignment.Center
         };
         text.Children.Add(new LuminaSkeleton
         {
             Classes = { "Title" },
-            Width = 180.0
+            Width = ResourceDouble("LuminaSkeletonContainerAvatarTextTitleWidth", 180.0)
         });
         text.Children.Add(new LuminaSkeleton
         {
             Classes = { "Text" },
-            Width = 260.0
+            Width = ResourceDouble("LuminaSkeletonContainerAvatarTextTextWidth", 260.0)
         });
         Grid.SetColumn(text, 1);
         root.Children.Add(avatar);
@@ -359,7 +383,7 @@ public class LuminaSkeletonContainer : ContentControl
         CopyLayout(source, border);
         CopyClasses(source, border);
         Control? child = source.Child;
-        border.Child = child != null ? BuildSkeletonForControl(child) : CreateSkeleton(null, LuminaSkeletonShape.Block, 240.0, 96.0);
+        border.Child = child != null ? BuildSkeletonForControl(child) : CreateDefaultBlockSkeleton(null);
         return border;
     }
 
@@ -401,7 +425,7 @@ public class LuminaSkeletonContainer : ContentControl
                 grid.Children.Add(skeleton);
             }
         }
-        return grid.Children.Count > 0 ? grid : CreateSkeleton(source, LuminaSkeletonShape.Block, 240.0, 96.0);
+        return grid.Children.Count > 0 ? grid : CreateDefaultBlockSkeleton(source);
     }
 
     private Control BuildStackPanelSkeleton(StackPanel source)
@@ -420,14 +444,14 @@ public class LuminaSkeletonContainer : ContentControl
                 panel.Children.Add(skeleton);
             }
         }
-        return panel.Children.Count > 0 ? panel : CreateSkeleton(source, LuminaSkeletonShape.Block, 240.0, 96.0);
+        return panel.Children.Count > 0 ? panel : CreateDefaultBlockSkeleton(source);
     }
 
     private Control BuildPanelSkeleton(Panel source)
     {
         StackPanel panel = new StackPanel
         {
-            Spacing = 8.0
+            Spacing = ResourceDouble("LuminaSkeletonContainerPanelSpacing", 8.0)
         };
         CopyLayout(source, panel);
         foreach (Control child in source.Children)
@@ -438,7 +462,7 @@ public class LuminaSkeletonContainer : ContentControl
                 panel.Children.Add(skeleton);
             }
         }
-        return panel.Children.Count > 0 ? panel : CreateSkeleton(source, LuminaSkeletonShape.Block, 240.0, 96.0);
+        return panel.Children.Count > 0 ? panel : CreateDefaultBlockSkeleton(source);
     }
 
     private Control BuildCardSkeleton(LuminaCard source)
@@ -446,7 +470,7 @@ public class LuminaSkeletonContainer : ContentControl
         LuminaCard card = new LuminaCard
         {
             IsElevated = source.IsElevated,
-            Content = source.Content is Control child ? BuildSkeletonForControl(child) : CreateSkeleton(null, LuminaSkeletonShape.Block, 240.0, 96.0)
+            Content = source.Content is Control child ? BuildSkeletonForControl(child) : CreateDefaultBlockSkeleton(null)
         };
         CopyLayout(source, card);
         CopyClasses(source, card);
@@ -463,7 +487,7 @@ public class LuminaSkeletonContainer : ContentControl
                 return CopyLayoutAndReturn(source, childSkeleton);
             }
         }
-        return CreateSkeleton(source, LuminaSkeletonShape.Rectangle, 160.0, 32.0);
+        return CreateDefaultRectangleSkeleton(source);
     }
 
     private static LuminaSkeletonShape GuessTextShape(TextBlock source)
@@ -596,6 +620,16 @@ public class LuminaSkeletonContainer : ContentControl
             return source.Height;
         }
         return (source.Bounds.Height > 0.0) ? source.Bounds.Height : fallback;
+    }
+
+    private static double ResourceDouble(string key, double fallback)
+    {
+        return LuminaPickerResources.Double(key, fallback);
+    }
+
+    private static Thickness ResourceThickness(string key, Thickness fallback)
+    {
+        return LuminaPickerResources.Thickness(key, fallback);
     }
 
     private int GetPlaceholderCount(Control source)

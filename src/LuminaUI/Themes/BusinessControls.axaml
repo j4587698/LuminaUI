@@ -2,16 +2,93 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
 
+    <x:Double x:Key="LuminaMultiSelectOptionMinHeight">34</x:Double>
+    <Thickness x:Key="LuminaMultiSelectOptionPadding">9,7</Thickness>
+    <Thickness x:Key="LuminaMultiSelectOptionBorderThickness">0</Thickness>
+    <CornerRadius x:Key="LuminaMultiSelectOptionCornerRadius">7</CornerRadius>
+    <x:Double x:Key="LuminaFormItemsSpacing">14</x:Double>
+    <x:Double x:Key="LuminaFormGroupItemsSpacing">14</x:Double>
+    <x:Double x:Key="LuminaFormGroupLayoutSpacing">12</x:Double>
+    <x:Double x:Key="LuminaFormGroupHeaderSpacing">3</x:Double>
+    <x:Double x:Key="LuminaFormGroupHeaderFontSize">14</x:Double>
+    <x:Double x:Key="LuminaFormItemColumnSpacing">12</x:Double>
+    <x:Double x:Key="LuminaFormItemRowSpacing">6</x:Double>
+    <x:Double x:Key="LuminaFormItemLabelSpacing">4</x:Double>
+    <x:Double x:Key="LuminaFormItemLabelFontSize">13</x:Double>
+    <Thickness x:Key="LuminaMultiSelectSurfacePadding">10,5</Thickness>
+    <x:Double x:Key="LuminaMultiSelectSurfaceColumnSpacing">6</x:Double>
+    <x:Double x:Key="LuminaMultiSelectClearIconSize">11</x:Double>
+    <x:Double x:Key="LuminaMultiSelectChevronIconSize">14</x:Double>
+    <x:Double x:Key="LuminaMultiSelectPopupMinWidth">220</x:Double>
+    <Thickness x:Key="LuminaMultiSelectPopupMargin">0,6,0,0</Thickness>
+    <Thickness x:Key="LuminaMultiSelectPopupPadding">6</Thickness>
+    <Thickness x:Key="LuminaMultiSelectPopupBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaMultiSelectPopupCornerRadius">10</CornerRadius>
+    <x:Double x:Key="LuminaMultiSelectPopupOptionColumnSpacing">10</x:Double>
+    <x:Double x:Key="LuminaTagInputTextBoxMinHeight">24</x:Double>
+    <Thickness x:Key="LuminaTagInputTextBoxPadding">4,0</Thickness>
+    <Thickness x:Key="LuminaTagInputTextBoxBorderThickness">0</Thickness>
+    <Thickness x:Key="LuminaTagInputTagMargin">0,0,6,6</Thickness>
+    <Thickness x:Key="LuminaTagInputTagPadding">8,3,3,3</Thickness>
+    <x:Double x:Key="LuminaTagInputTagMinHeight">26</x:Double>
+    <Thickness x:Key="LuminaTagInputTagBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaTagInputTagCornerRadius">7</CornerRadius>
+    <x:Double x:Key="LuminaTagInputTagColumnSpacing">5</x:Double>
+    <x:Double x:Key="LuminaTagInputTagFontSize">13</x:Double>
+    <x:Double x:Key="LuminaTagInputRemoveButtonSize">20</x:Double>
+    <x:Double x:Key="LuminaTagInputRemoveIconSize">9</x:Double>
+    <x:Double x:Key="LuminaTagInputInputMinWidth">120</x:Double>
+    <x:Double x:Key="LuminaTagInputInputMinHeight">24</x:Double>
+    <Thickness x:Key="LuminaTagInputInputMargin">0,0,0,6</Thickness>
+    <Thickness x:Key="LuminaTagInputInputPadding">4,0</Thickness>
+    <Thickness x:Key="LuminaTagInputInputBorderThickness">0</Thickness>
+    <x:Double x:Key="LuminaBannerColumnSpacing">12</x:Double>
+    <x:Double x:Key="LuminaBannerIconSize">28</x:Double>
+    <CornerRadius x:Key="LuminaBannerIconCornerRadius">14</CornerRadius>
+    <x:Double x:Key="LuminaBannerIconFontSize">11</x:Double>
+    <x:Double x:Key="LuminaBannerContentSpacing">4</x:Double>
+    <x:Double x:Key="LuminaBannerCloseButtonSize">28</x:Double>
+    <x:Double x:Key="LuminaBannerCloseIconSize">11</x:Double>
+    <CornerRadius x:Key="LuminaLoadingContainerOverlayCornerRadius">8</CornerRadius>
+    <x:Double x:Key="LuminaLoadingContainerLayoutSpacing">10</x:Double>
+    <x:Double x:Key="LuminaLoadingContainerIndicatorSize">28</x:Double>
+    <x:Double x:Key="LuminaLoadingContainerIndicatorStrokeThickness">3.4</x:Double>
+    <x:Double x:Key="LuminaSkeletonShimmerWidth">144</x:Double>
+    <x:Double x:Key="LuminaSkeletonShimmerOpacity">0.78</x:Double>
+    <x:Double x:Key="LuminaSkeletonContainerBlockWidth">240</x:Double>
+    <x:Double x:Key="LuminaSkeletonContainerBlockHeight">96</x:Double>
+    <x:Double x:Key="LuminaSkeletonContainerDefaultWidth">160</x:Double>
+    <x:Double x:Key="LuminaSkeletonContainerDefaultHeight">32</x:Double>
+    <x:Double x:Key="LuminaSkeletonContainerControlHeight">36</x:Double>
+    <x:Double x:Key="LuminaSkeletonContainerImageSize">96</x:Double>
+    <x:Double x:Key="LuminaSkeletonContainerAvatarSize">44</x:Double>
+    <x:Double x:Key="LuminaSkeletonContainerButtonWidth">96</x:Double>
+    <x:Double x:Key="LuminaSkeletonContainerInputWidth">220</x:Double>
+    <x:Double x:Key="LuminaSkeletonContainerListSpacing">10</x:Double>
+    <x:Double x:Key="LuminaSkeletonContainerPanelSpacing">8</x:Double>
+    <x:Double x:Key="LuminaSkeletonContainerListTextWidth">220</x:Double>
+    <x:Double x:Key="LuminaSkeletonContainerListTextHeight">14</x:Double>
+    <x:Double x:Key="LuminaSkeletonContainerListTitleWidth">180</x:Double>
+    <x:Double x:Key="LuminaSkeletonContainerListTitleHeight">22</x:Double>
+    <x:Double x:Key="LuminaSkeletonContainerListBlockWidth">320</x:Double>
+    <x:Double x:Key="LuminaSkeletonContainerListBlockHeight">72</x:Double>
+    <Thickness x:Key="LuminaSkeletonContainerCardMargin">0,0,0,2</Thickness>
+    <x:Double x:Key="LuminaSkeletonContainerAvatarTextColumnSpacing">12</x:Double>
+    <Thickness x:Key="LuminaSkeletonContainerAvatarTextMargin">0,2</Thickness>
+    <x:Double x:Key="LuminaSkeletonContainerAvatarTextSpacing">8</x:Double>
+    <x:Double x:Key="LuminaSkeletonContainerAvatarTextTitleWidth">180</x:Double>
+    <x:Double x:Key="LuminaSkeletonContainerAvatarTextTextWidth">260</x:Double>
+
     <ControlTheme x:Key="LuminaMultiSelectOptionButtonTheme" TargetType="Button">
-        <Setter Property="MinHeight" Value="34" />
-        <Setter Property="Padding" Value="9,7" />
+        <Setter Property="MinHeight" Value="{DynamicResource LuminaMultiSelectOptionMinHeight}" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaMultiSelectOptionPadding}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaMultiSelectOptionBorderThickness}" />
         <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
-        <Setter Property="CornerRadius" Value="7" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaMultiSelectOptionCornerRadius}" />
         <Setter Property="Template">
             <ControlTemplate TargetType="Button">
                 <Border Background="{TemplateBinding Background}"
@@ -60,7 +137,7 @@
     <ControlTheme x:Key="{x:Type lumina:LuminaForm}" TargetType="lumina:LuminaForm">
         <Setter Property="ItemsPanel">
             <ItemsPanelTemplate>
-                <StackPanel Spacing="14" />
+                <StackPanel Spacing="{DynamicResource LuminaFormItemsSpacing}" />
             </ItemsPanelTemplate>
         </Setter>
         <Setter Property="Template">
@@ -73,17 +150,17 @@
     <ControlTheme x:Key="{x:Type lumina:LuminaFormGroup}" TargetType="lumina:LuminaFormGroup">
         <Setter Property="ItemsPanel">
             <ItemsPanelTemplate>
-                <StackPanel Spacing="14" />
+                <StackPanel Spacing="{DynamicResource LuminaFormGroupItemsSpacing}" />
             </ItemsPanelTemplate>
         </Setter>
         <Setter Property="Template">
             <ControlTemplate TargetType="lumina:LuminaFormGroup">
-                <StackPanel Spacing="12">
-                    <StackPanel IsVisible="{TemplateBinding HasHeader}" Spacing="3">
+                <StackPanel Spacing="{DynamicResource LuminaFormGroupLayoutSpacing}">
+                    <StackPanel IsVisible="{TemplateBinding HasHeader}" Spacing="{DynamicResource LuminaFormGroupHeaderSpacing}">
                         <ContentPresenter Content="{TemplateBinding Header}"
                                           ContentTemplate="{TemplateBinding HeaderTemplate}"
                                           TextElement.Foreground="{DynamicResource LuminaTextPrimaryBrush}"
-                                          TextElement.FontSize="14"
+                                          TextElement.FontSize="{DynamicResource LuminaFormGroupHeaderFontSize}"
                                           TextElement.FontWeight="SemiBold" />
                         <TextBlock Text="{TemplateBinding Description}"
                                    IsVisible="{TemplateBinding HasDescription}"
@@ -102,8 +179,8 @@
                 <Grid Name="PART_Layout"
                       RowDefinitions="Auto,Auto,Auto"
                       ColumnDefinitions="Auto,*"
-                      ColumnSpacing="12"
-                      RowSpacing="6"
+                      ColumnSpacing="{DynamicResource LuminaFormItemColumnSpacing}"
+                      RowSpacing="{DynamicResource LuminaFormItemRowSpacing}"
                       Margin="{TemplateBinding Margin}">
                     <StackPanel Name="PART_LabelHost"
                                 Grid.Row="0"
@@ -111,12 +188,12 @@
                                 Width="{TemplateBinding EffectiveLabelWidth}"
                                 IsVisible="{TemplateBinding HasLabel}"
                                 Orientation="Horizontal"
-                                Spacing="4"
+                                Spacing="{DynamicResource LuminaFormItemLabelSpacing}"
                                 VerticalAlignment="Center">
                         <ContentPresenter Content="{TemplateBinding Label}"
                                           VerticalAlignment="Center"
                                           TextElement.Foreground="{DynamicResource LuminaTextSecondaryBrush}"
-                                          TextElement.FontSize="13"
+                                          TextElement.FontSize="{DynamicResource LuminaFormItemLabelFontSize}"
                                           TextElement.FontWeight="SemiBold" />
                         <TextBlock Text="*"
                                    IsVisible="{TemplateBinding IsRequired}"
@@ -182,7 +259,7 @@
                 <Grid>
                     <Button Name="PART_SurfaceButton"
                             MinHeight="{TemplateBinding MinHeight}"
-                            Padding="10,5"
+                            Padding="{DynamicResource LuminaMultiSelectSurfacePadding}"
                             HorizontalContentAlignment="Stretch"
                             VerticalContentAlignment="Center"
                             Background="{TemplateBinding Background}"
@@ -191,7 +268,7 @@
                             CornerRadius="{TemplateBinding CornerRadius}"
                             Foreground="{TemplateBinding Foreground}"
                             Theme="{StaticResource LuminaPickerFlyoutButton}">
-                        <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="6">
+                        <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="{DynamicResource LuminaMultiSelectSurfaceColumnSpacing}">
                             <TextBlock Text="{TemplateBinding SelectionSummary}"
                                        IsVisible="{TemplateBinding HasSelection}"
                                        VerticalAlignment="Center"
@@ -205,10 +282,10 @@
                             <lumina:LuminaCloseButton Name="PART_ClearButton"
                                                       Grid.Column="1"
                                                       IsVisible="{TemplateBinding ShowClearButton}"
-                                                      IconSize="11" />
+                                                      IconSize="{DynamicResource LuminaMultiSelectClearIconSize}" />
                             <PathIcon Grid.Column="2"
-                                      Width="14"
-                                      Height="14"
+                                      Width="{DynamicResource LuminaMultiSelectChevronIconSize}"
+                                      Height="{DynamicResource LuminaMultiSelectChevronIconSize}"
                                       VerticalAlignment="Center"
                                       Data="M7,10 L12,15 L17,10 Z"
                                       Foreground="{DynamicResource LuminaTextMutedBrush}" />
@@ -221,14 +298,14 @@
                            PlacementTarget="{TemplateBinding}"
                            IsLightDismissEnabled="True"
                            WindowManagerAddShadowHint="False">
-                        <Border MinWidth="220"
+                        <Border MinWidth="{DynamicResource LuminaMultiSelectPopupMinWidth}"
                                 MaxHeight="{TemplateBinding MaxDropDownHeight}"
-                                Margin="0,6,0,0"
-                                Padding="6"
+                                Margin="{DynamicResource LuminaMultiSelectPopupMargin}"
+                                Padding="{DynamicResource LuminaMultiSelectPopupPadding}"
                                 Background="{DynamicResource LuminaPopoverBrush}"
                                 BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
-                                BorderThickness="1"
-                                CornerRadius="10"
+                                BorderThickness="{DynamicResource LuminaMultiSelectPopupBorderThickness}"
+                                CornerRadius="{DynamicResource LuminaMultiSelectPopupCornerRadius}"
                                 BoxShadow="{DynamicResource LuminaShadowPopup}">
                             <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                                           VerticalScrollBarVisibility="Auto">
@@ -237,7 +314,7 @@
                                         <DataTemplate DataType="lumina:LuminaMultiSelectOption">
                                             <Button Name="PART_OptionButton"
                                                     Theme="{StaticResource LuminaMultiSelectOptionButtonTheme}">
-                                                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="{DynamicResource LuminaMultiSelectPopupOptionColumnSpacing}">
                                                     <CheckBox IsChecked="{Binding IsSelected}"
                                                               IsHitTestVisible="False"
                                                               VerticalAlignment="Center" />
@@ -271,11 +348,11 @@
     <ControlTheme x:Key="LuminaTagInputTextBoxTheme"
                   TargetType="TextBox"
                   BasedOn="{StaticResource {x:Type TextBox}}">
-        <Setter Property="MinHeight" Value="24" />
-        <Setter Property="Padding" Value="4,0" />
+        <Setter Property="MinHeight" Value="{DynamicResource LuminaTagInputTextBoxMinHeight}" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaTagInputTextBoxPadding}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaTagInputTextBoxBorderThickness}" />
 
         <Style Selector="^ /template/ Border#PART_BorderElement">
             <Setter Property="Background" Value="Transparent" />
@@ -321,41 +398,41 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Margin="0,0,6,6"
-                                            Padding="8,3,3,3"
-                                            MinHeight="26"
+                                    <Border Margin="{DynamicResource LuminaTagInputTagMargin}"
+                                            Padding="{DynamicResource LuminaTagInputTagPadding}"
+                                            MinHeight="{DynamicResource LuminaTagInputTagMinHeight}"
                                             Background="{DynamicResource LuminaStateHoverBrush}"
                                             BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
-                                            BorderThickness="1"
-                                            CornerRadius="7">
-                                        <Grid ColumnDefinitions="Auto,Auto" ColumnSpacing="5">
+                                            BorderThickness="{DynamicResource LuminaTagInputTagBorderThickness}"
+                                            CornerRadius="{DynamicResource LuminaTagInputTagCornerRadius}">
+                                        <Grid ColumnDefinitions="Auto,Auto" ColumnSpacing="{DynamicResource LuminaTagInputTagColumnSpacing}">
                                             <TextBlock Text="{Binding}"
                                                        VerticalAlignment="Center"
-                                                       FontSize="13"
+                                                       FontSize="{DynamicResource LuminaTagInputTagFontSize}"
                                                        FontWeight="SemiBold"
                                                        Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
                                             <lumina:LuminaCloseButton Name="PART_RemoveTagButton"
                                                                       Grid.Column="1"
-                                                                      Width="20"
-                                                                      Height="20"
-                                                                      MinWidth="20"
-                                                                      MinHeight="20"
+                                                                      Width="{DynamicResource LuminaTagInputRemoveButtonSize}"
+                                                                      Height="{DynamicResource LuminaTagInputRemoveButtonSize}"
+                                                                      MinWidth="{DynamicResource LuminaTagInputRemoveButtonSize}"
+                                                                      MinHeight="{DynamicResource LuminaTagInputRemoveButtonSize}"
                                                                       IsVisible="{Binding $parent[lumina:LuminaTagInput].CanRemoveTags}"
-                                                                      IconSize="9" />
+                                                                      IconSize="{DynamicResource LuminaTagInputRemoveIconSize}" />
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                         <TextBox Name="PART_TextBox"
-                                 MinWidth="120"
-                                 MinHeight="24"
-                                 Margin="0,0,0,6"
-                                 Padding="4,0"
+                                 MinWidth="{DynamicResource LuminaTagInputInputMinWidth}"
+                                 MinHeight="{DynamicResource LuminaTagInputInputMinHeight}"
+                                 Margin="{DynamicResource LuminaTagInputInputMargin}"
+                                 Padding="{DynamicResource LuminaTagInputInputPadding}"
                                  IsVisible="{TemplateBinding CanInput}"
                                  PlaceholderText="{TemplateBinding Watermark}"
                                  Background="Transparent"
-                                 BorderThickness="0"
+                                 BorderThickness="{DynamicResource LuminaTagInputInputBorderThickness}"
                                  Theme="{StaticResource LuminaTagInputTextBoxTheme}" />
                     </WrapPanel>
                 </Border>
@@ -388,22 +465,22 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{TemplateBinding CornerRadius}">
-                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="{DynamicResource LuminaBannerColumnSpacing}">
                         <Border Name="PART_Icon"
                                 IsVisible="{TemplateBinding ShowIcon}"
-                                Width="28"
-                                Height="28"
-                                CornerRadius="14"
+                                Width="{DynamicResource LuminaBannerIconSize}"
+                                Height="{DynamicResource LuminaBannerIconSize}"
+                                CornerRadius="{DynamicResource LuminaBannerIconCornerRadius}"
                                 Background="{DynamicResource LuminaPrimaryBrush}"
                                 VerticalAlignment="Top">
                             <ContentPresenter Content="{TemplateBinding EffectiveIcon}"
                                               HorizontalContentAlignment="Center"
                                               VerticalContentAlignment="Center"
                                               TextElement.Foreground="{DynamicResource LuminaPrimaryForegroundBrush}"
-                                              TextElement.FontSize="11"
+                                              TextElement.FontSize="{DynamicResource LuminaBannerIconFontSize}"
                                               TextElement.FontWeight="Bold" />
                         </Border>
-                        <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                        <StackPanel Grid.Column="1" Spacing="{DynamicResource LuminaBannerContentSpacing}" VerticalAlignment="Center">
                             <ContentPresenter Content="{TemplateBinding Header}"
                                               IsVisible="{TemplateBinding HasHeader}"
                                               TextElement.Foreground="{DynamicResource LuminaTextPrimaryBrush}"
@@ -415,11 +492,11 @@
                         <lumina:LuminaCloseButton Name="PART_CloseButton"
                                                   Grid.Column="2"
                                                   IsVisible="{TemplateBinding CanClose}"
-                                                  Width="28"
-                                                  Height="28"
-                                                  MinWidth="28"
-                                                  MinHeight="28"
-                                                  IconSize="11" />
+                                                  Width="{DynamicResource LuminaBannerCloseButtonSize}"
+                                                  Height="{DynamicResource LuminaBannerCloseButtonSize}"
+                                                  MinWidth="{DynamicResource LuminaBannerCloseButtonSize}"
+                                                  MinHeight="{DynamicResource LuminaBannerCloseButtonSize}"
+                                                  IconSize="{DynamicResource LuminaBannerCloseIconSize}" />
                     </Grid>
                 </Border>
             </ControlTemplate>
@@ -460,8 +537,8 @@
                                       ContentTemplate="{TemplateBinding ContentTemplate}" />
                     <Border IsVisible="{TemplateBinding IsLoading}"
                             Background="{TemplateBinding OverlayBackground}"
-                            CornerRadius="8">
-                        <StackPanel Spacing="10"
+                            CornerRadius="{DynamicResource LuminaLoadingContainerOverlayCornerRadius}">
+                        <StackPanel Spacing="{DynamicResource LuminaLoadingContainerLayoutSpacing}"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center">
                             <ContentPresenter Content="{TemplateBinding Indicator}"
@@ -472,8 +549,8 @@
                                                    IsActive="{TemplateBinding IsLoading}"
                                                    IsVisible="{TemplateBinding Indicator, Converter={x:Static ObjectConverters.IsNull}}"
                                                    Kind="{TemplateBinding LoadingKind}"
-                                                   Size="28"
-                                                   StrokeThickness="3.4" />
+                                                   Size="{DynamicResource LuminaLoadingContainerIndicatorSize}"
+                                                   StrokeThickness="{DynamicResource LuminaLoadingContainerIndicatorStrokeThickness}" />
                         </StackPanel>
                     </Border>
                 </Grid>
@@ -511,10 +588,10 @@
                         ClipToBounds="True"
                         CornerRadius="{TemplateBinding CornerRadius}">
                     <Border Name="PART_Shimmer"
-                            Width="144"
+                            Width="{DynamicResource LuminaSkeletonShimmerWidth}"
                             HorizontalAlignment="Left"
                             IsHitTestVisible="False"
-                            Opacity="0.78">
+                            Opacity="{DynamicResource LuminaSkeletonShimmerOpacity}">
                         <Border.RenderTransform>
                             <TranslateTransform X="-180" />
                         </Border.RenderTransform>

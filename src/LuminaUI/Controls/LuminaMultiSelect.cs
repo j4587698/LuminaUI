@@ -365,10 +365,8 @@ public class LuminaMultiSelect : TemplatedControl
             RebuildOptions();
         }
         List<SheetSelectionEntry> entries = new List<SheetSelectionEntry>();
-        StackPanel list = new StackPanel
-        {
-            Spacing = 4.0
-        };
+        StackPanel list = new StackPanel();
+        LuminaPickerResources.BindResource(list, StackPanel.SpacingProperty, "LuminaMultiSelectSheetListSpacing");
         if (_options.Count == 0)
         {
             list.Children.Add(CreateSheetEmptyText());
@@ -382,9 +380,11 @@ public class LuminaMultiSelect : TemplatedControl
                 list.Children.Add(CreateSheetSelectionButton(entry));
             }
         }
+        double sheetMinHeight = LuminaPickerResources.Double("LuminaMultiSelectSheetBodyMinHeight", 240.0);
+        double sheetMaxHeight = LuminaPickerResources.Double("LuminaMultiSelectSheetBodyMaxHeight", 420.0);
         ScrollViewer body = new ScrollViewer
         {
-            MaxHeight = Math.Max(240.0, Math.Min(420.0, MaxDropDownHeight)),
+            MaxHeight = Math.Max(sheetMinHeight, Math.Min(sheetMaxHeight, MaxDropDownHeight)),
             HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
             VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
             Content = list
@@ -433,13 +433,13 @@ public class LuminaMultiSelect : TemplatedControl
         Grid grid = new Grid
         {
             ColumnDefinitions = new ColumnDefinitions("Auto,*"),
-            ColumnSpacing = 12.0,
             Children =
             {
                 checkBox,
                 label
             }
         };
+        LuminaPickerResources.BindResource(grid, Grid.ColumnSpacingProperty, "LuminaMultiSelectSheetItemColumnSpacing");
         Grid.SetColumn(label, 1);
         Button button = new Button
         {
@@ -456,9 +456,9 @@ public class LuminaMultiSelect : TemplatedControl
     {
         Grid actions = new Grid
         {
-            ColumnDefinitions = new ColumnDefinitions(CanClearSelection ? "*,Auto,Auto" : "*,Auto"),
-            ColumnSpacing = 8.0
+            ColumnDefinitions = new ColumnDefinitions(CanClearSelection ? "*,Auto,Auto" : "*,Auto")
         };
+        LuminaPickerResources.BindResource(actions, Grid.ColumnSpacingProperty, "LuminaSheetActionsColumnSpacing");
         Button cancelButton = new Button
         {
             Content = LuminaLocalization.Get("Lumina.Common.Cancel")
@@ -523,21 +523,18 @@ public class LuminaMultiSelect : TemplatedControl
 
     private static StackPanel CreateSheetLayout(string title, Control body, Control footer)
     {
-        return new StackPanel
+        StackPanel layout = new StackPanel();
+        LuminaPickerResources.BindResource(layout, StackPanel.SpacingProperty, "LuminaSheetLayoutSpacing");
+        TextBlock titleBlock = new TextBlock
         {
-            Spacing = 16.0,
-            Children =
-            {
-                new TextBlock
-                {
-                    Text = title,
-                    FontSize = 18.0,
-                    FontWeight = FontWeight.DemiBold
-                },
-                body,
-                footer
-            }
+            Text = title,
+            FontWeight = FontWeight.DemiBold
         };
+        LuminaPickerResources.BindResource(titleBlock, TextBlock.FontSizeProperty, "LuminaSheetTitleFontSize");
+        layout.Children.Add(titleBlock);
+        layout.Children.Add(body);
+        layout.Children.Add(footer);
+        return layout;
     }
 
     private void RebuildOptions()

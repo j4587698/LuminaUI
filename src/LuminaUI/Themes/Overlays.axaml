@@ -2,9 +2,47 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
 
+    <x:Double x:Key="LuminaOverlayBackdropBlurRadius">10</x:Double>
+    <Thickness x:Key="LuminaOverlayDialogMargin">16</Thickness>
+    <Thickness x:Key="LuminaOverlayToastHostMargin">16</Thickness>
+
+    <x:Double x:Key="LuminaDialogMaxWidth">480</x:Double>
+    <Thickness x:Key="LuminaDialogBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaDialogCornerRadius">16</CornerRadius>
+    <Thickness x:Key="LuminaDialogContentMargin">24</Thickness>
+    <x:Double x:Key="LuminaDialogTitleFontSize">20</x:Double>
+    <Thickness x:Key="LuminaDialogTitleMargin">0,0,0,16</Thickness>
+
+    <Thickness x:Key="LuminaToastBorderThickness">1</Thickness>
+    <Thickness x:Key="LuminaToastPadding">16,12</Thickness>
+    <Thickness x:Key="LuminaToastMargin">0,0,0,32</Thickness>
+    <CornerRadius x:Key="LuminaToastCornerRadius">12</CornerRadius>
+    <x:Double x:Key="LuminaToastMinWidth">280</x:Double>
+    <x:Double x:Key="LuminaToastMaxWidth">420</x:Double>
+    <x:Double x:Key="LuminaToastContentSpacing">12</x:Double>
+    <x:Double x:Key="LuminaToastAccentSize">8</x:Double>
+    <CornerRadius x:Key="LuminaToastAccentCornerRadius">4</CornerRadius>
+    <x:Double x:Key="LuminaToastFontSize">14</x:Double>
+
+    <Thickness x:Key="LuminaDrawerBorderThickness">1</Thickness>
+    <Thickness x:Key="LuminaDrawerContentPadding">24</Thickness>
+    <CornerRadius x:Key="LuminaDrawerLeftCornerRadius">0,16,16,0</CornerRadius>
+    <CornerRadius x:Key="LuminaDrawerRightCornerRadius">16,0,0,16</CornerRadius>
+    <CornerRadius x:Key="LuminaDrawerTopCornerRadius">0,0,16,16</CornerRadius>
+    <CornerRadius x:Key="LuminaDrawerBottomCornerRadius">16,16,0,0</CornerRadius>
+
+    <Thickness x:Key="LuminaBottomSheetBorderThickness">1,1,1,0</Thickness>
+    <Thickness x:Key="LuminaBottomSheetShadowBorderThickness">0</Thickness>
+    <CornerRadius x:Key="LuminaBottomSheetCornerRadius">24,24,0,0</CornerRadius>
+    <Thickness x:Key="LuminaBottomSheetContentPadding">24,0,24,24</Thickness>
+    <x:Double x:Key="LuminaBottomSheetDragHandleHitHeight">32</x:Double>
+    <x:Double x:Key="LuminaBottomSheetDragHandleWidth">36</x:Double>
+    <x:Double x:Key="LuminaBottomSheetDragHandleHeight">4</x:Double>
+    <CornerRadius x:Key="LuminaBottomSheetDragHandleCornerRadius">2</CornerRadius>
+
     <!-- LuminaDialog Theme (Ultra Modern, No Gray, Big Shadow, Deep Black) -->
     <ControlTheme x:Key="{x:Type lumina:LuminaDialog}" TargetType="lumina:LuminaDialog">
-        <Setter Property="MaxWidth" Value="480" />
+        <Setter Property="MaxWidth" Value="{DynamicResource LuminaDialogMaxWidth}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="Template">
             <ControlTemplate>
@@ -12,19 +50,19 @@
                 <Border Name="PART_DialogRoot"
                         Background="{DynamicResource LuminaSurfaceBrush}"
                         BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
-                        BorderThickness="1"
-                        CornerRadius="16"
+                        BorderThickness="{DynamicResource LuminaDialogBorderThickness}"
+                        CornerRadius="{DynamicResource LuminaDialogCornerRadius}"
                         MaxWidth="{TemplateBinding MaxWidth}"
                         HorizontalAlignment="Stretch"
                         BoxShadow="{DynamicResource LuminaShadowPopup}">
                     
-                    <StackPanel Margin="24">
+                    <StackPanel Margin="{DynamicResource LuminaDialogContentMargin}">
                         <!-- 头部标题区 (去除了陈旧的分割线) -->
                         <TextBlock Text="{TemplateBinding Title}" 
-                                   FontSize="20" 
+                                   FontSize="{DynamicResource LuminaDialogTitleFontSize}"
                                    FontWeight="SemiBold" 
                                    Foreground="{DynamicResource LuminaTextPrimaryBrush}" 
-                                   Margin="0,0,0,16" />
+                                   Margin="{DynamicResource LuminaDialogTitleMargin}" />
                         
                         <!-- 身体内容区 -->
                         <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" />
@@ -43,23 +81,23 @@
                 <Border Name="PART_Root"
                         Background="{DynamicResource LuminaSurfaceBrush}"
                         BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
-                        BorderThickness="1"
-                        Padding="16,12"
-                        Margin="0,0,0,32"
-                        CornerRadius="12"
-                        MinWidth="280"
-                        MaxWidth="420"
+                        BorderThickness="{DynamicResource LuminaToastBorderThickness}"
+                        Padding="{DynamicResource LuminaToastPadding}"
+                        Margin="{DynamicResource LuminaToastMargin}"
+                        CornerRadius="{DynamicResource LuminaToastCornerRadius}"
+                        MinWidth="{DynamicResource LuminaToastMinWidth}"
+                        MaxWidth="{DynamicResource LuminaToastMaxWidth}"
                         BoxShadow="{DynamicResource LuminaShadowNotification}">
-                    <StackPanel Orientation="Horizontal" Spacing="12">
+                    <StackPanel Orientation="Horizontal" Spacing="{DynamicResource LuminaToastContentSpacing}">
                         <!-- 左侧色彩点缀更加现代 -->
                         <Border Name="PART_Accent"
-                                Width="8"
-                                Height="8"
-                                CornerRadius="4"
+                                Width="{DynamicResource LuminaToastAccentSize}"
+                                Height="{DynamicResource LuminaToastAccentSize}"
+                                CornerRadius="{DynamicResource LuminaToastAccentCornerRadius}"
                                 Background="{DynamicResource LuminaPrimaryBrush}"
                                 VerticalAlignment="Center" />
                         <!-- 通知文本 -->
-                        <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" Foreground="{DynamicResource LuminaTextPrimaryBrush}" FontWeight="Medium" FontSize="14" />
+                        <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" Foreground="{DynamicResource LuminaTextPrimaryBrush}" FontWeight="Medium" FontSize="{DynamicResource LuminaToastFontSize}" />
                     </StackPanel>
                 </Border>
             </ControlTemplate>
@@ -94,7 +132,9 @@
     <ControlTheme x:Key="{x:Type lumina:LuminaDrawer}" TargetType="lumina:LuminaDrawer">
         <Setter Property="Background" Value="{DynamicResource LuminaPopoverBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaDrawerBorderThickness}" />
+        <Setter Property="ContentPadding" Value="{DynamicResource LuminaDrawerContentPadding}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaDrawerRightCornerRadius}" />
         <Setter Property="ClipToBounds" Value="False" />
         <Setter Property="Template">
             <ControlTemplate>
@@ -116,21 +156,38 @@
                 </Grid>
             </ControlTemplate>
         </Setter>
+
+        <Style Selector="^:left">
+            <Setter Property="CornerRadius" Value="{DynamicResource LuminaDrawerLeftCornerRadius}" />
+        </Style>
+
+        <Style Selector="^:right">
+            <Setter Property="CornerRadius" Value="{DynamicResource LuminaDrawerRightCornerRadius}" />
+        </Style>
+
+        <Style Selector="^:top">
+            <Setter Property="CornerRadius" Value="{DynamicResource LuminaDrawerTopCornerRadius}" />
+        </Style>
+
+        <Style Selector="^:bottom">
+            <Setter Property="CornerRadius" Value="{DynamicResource LuminaDrawerBottomCornerRadius}" />
+        </Style>
     </ControlTheme>
 
     <!-- LuminaBottomSheet Theme -->
     <ControlTheme x:Key="{x:Type lumina:LuminaBottomSheet}" TargetType="lumina:LuminaBottomSheet">
         <Setter Property="Background" Value="{DynamicResource LuminaPopoverBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
-        <Setter Property="BorderThickness" Value="1,1,1,0" />
-        <Setter Property="CornerRadius" Value="24,24,0,0" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaBottomSheetBorderThickness}" />
+        <Setter Property="ContentPadding" Value="{DynamicResource LuminaBottomSheetContentPadding}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaBottomSheetCornerRadius}" />
         <Setter Property="ClipToBounds" Value="False" />
         <Setter Property="Template">
             <ControlTemplate>
                 <!-- 移动端底边无间隙，上边大圆角，极深投影 -->
                 <Grid ClipToBounds="False">
                     <Border Background="{TemplateBinding Background}"
-                            BorderThickness="0"
+                            BorderThickness="{DynamicResource LuminaBottomSheetShadowBorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}"
                             BoxShadow="{DynamicResource LuminaShadowPopup}"
                             IsHitTestVisible="False" />
@@ -143,10 +200,14 @@
                         <!-- 拖拽胶囊 (Drag Handle) -->
                         <Border Name="PART_DragHandle" 
                                 Background="Transparent" 
-                                Height="32" 
+                                Height="{DynamicResource LuminaBottomSheetDragHandleHitHeight}"
                                 HorizontalAlignment="Stretch"
                                 Cursor="SizeAll">
-                            <Border Width="36" Height="4" CornerRadius="2" Background="{DynamicResource LuminaBorderStrongBrush}" VerticalAlignment="Center" />
+                            <Border Width="{DynamicResource LuminaBottomSheetDragHandleWidth}"
+                                    Height="{DynamicResource LuminaBottomSheetDragHandleHeight}"
+                                    CornerRadius="{DynamicResource LuminaBottomSheetDragHandleCornerRadius}"
+                                    Background="{DynamicResource LuminaBorderStrongBrush}"
+                                    VerticalAlignment="Center" />
                         </Border>
                         
                         <!-- 身体内容区 -->

@@ -3,6 +3,78 @@
                     xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
                     xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
 
+    <x:Double x:Key="LuminaListItemIconSize">30</x:Double>
+    <Thickness x:Key="LuminaListItemIconMargin">0,0,12,0</Thickness>
+    <CornerRadius x:Key="LuminaListItemIconCornerRadius">15</CornerRadius>
+    <x:Double x:Key="LuminaListItemIconFontSize">13</x:Double>
+    <x:Double x:Key="LuminaListItemContentSpacing">3</x:Double>
+    <x:Double x:Key="LuminaListItemHeaderFontSize">13</x:Double>
+    <x:Double x:Key="LuminaListItemDescriptionFontSize">12</x:Double>
+    <Thickness x:Key="LuminaListItemValueMargin">12,0,0,0</Thickness>
+    <Thickness x:Key="LuminaColorSwatchBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaColorSwatchCornerRadius">12</CornerRadius>
+    <x:Double x:Key="LuminaColorSwatchPreviewSize">64</x:Double>
+    <CornerRadius x:Key="LuminaColorSwatchPreviewCornerRadius">32</CornerRadius>
+    <Thickness x:Key="LuminaColorSwatchPreviewMargin">0,0,0,12</Thickness>
+    <Thickness x:Key="LuminaColorSwatchPreviewBorderThickness">1</Thickness>
+    <x:Double x:Key="LuminaColorSwatchTitleFontSize">14</x:Double>
+    <Thickness x:Key="LuminaColorSwatchDescriptionMargin">0,4,0,0</Thickness>
+    <x:Double x:Key="LuminaColorSwatchDescriptionFontSize">11</x:Double>
+    <Thickness x:Key="LuminaColorButtonSwatchBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaColorButtonSwatchCornerRadius">12</CornerRadius>
+    <x:Double x:Key="LuminaSettingItemColumnSpacing">16</x:Double>
+    <x:Double x:Key="LuminaSettingItemTextSpacing">2</x:Double>
+    <x:Double x:Key="LuminaSettingItemDescriptionFontSize">12</x:Double>
+    <x:Double x:Key="LuminaSettingsCardSpacing">10</x:Double>
+    <x:Double x:Key="LuminaSettingsCardHeaderSpacing">4</x:Double>
+    <Thickness x:Key="LuminaSettingsCardHeaderMargin">2,0,2,0</Thickness>
+    <x:Double x:Key="LuminaSettingsCardHeaderFontSize">13</x:Double>
+    <x:Double x:Key="LuminaSettingsCardDescriptionFontSize">12</x:Double>
+    <Thickness x:Key="LuminaSettingsCardBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaSettingsCardCornerRadius">14</CornerRadius>
+    <x:Double x:Key="LuminaSettingsOptionColumnSpacing">12</x:Double>
+    <x:Double x:Key="LuminaSettingsOptionIconSize">32</x:Double>
+    <CornerRadius x:Key="LuminaSettingsOptionIconCornerRadius">9</CornerRadius>
+    <x:Double x:Key="LuminaSettingsOptionIconFontSize">13</x:Double>
+    <x:Double x:Key="LuminaSettingsOptionContentSpacing">3</x:Double>
+    <x:Double x:Key="LuminaSettingsOptionHeaderFontSize">14</x:Double>
+    <x:Double x:Key="LuminaSettingsOptionDescriptionFontSize">12</x:Double>
+    <x:Double x:Key="LuminaSettingsOptionValueFontSize">13</x:Double>
+    <x:Double x:Key="LuminaSettingsOptionChevronFontSize">16</x:Double>
+    <x:Double x:Key="LuminaSettingsOptionPopupMaxHeight">320</x:Double>
+    <Thickness x:Key="LuminaSettingsOptionPopupMargin">0,6,0,0</Thickness>
+    <Thickness x:Key="LuminaSettingsOptionPopupPadding">6</Thickness>
+    <Thickness x:Key="LuminaSettingsOptionPopupBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaSettingsOptionPopupCornerRadius">10</CornerRadius>
+    <x:Double x:Key="LuminaSettingsOptionPopupCheckColumnWidth">24</x:Double>
+    <x:Double x:Key="LuminaSettingsOptionPopupCheckIconSize">18</x:Double>
+    <Thickness x:Key="LuminaSettingsOptionInputPopupPadding">12</Thickness>
+    <x:Double x:Key="LuminaSettingsOptionInputPopupSpacing">12</x:Double>
+    <x:Double x:Key="LuminaSettingsOptionInputMinHeight">38</x:Double>
+    <x:Double x:Key="LuminaSettingsOptionInputActionsSpacing">8</x:Double>
+    <Thickness x:Key="LuminaIndexedListIndexHostMargin">0,0,4,0</Thickness>
+    <Thickness x:Key="LuminaIndexedListIndexHostPadding">0</Thickness>
+    <x:Double x:Key="LuminaIndexedListIndexPanelMinWidth">16</x:Double>
+    <x:Double x:Key="LuminaIndexedListIndexPanelSpacing">0</x:Double>
+    <Thickness x:Key="LuminaIndexedSectionHeaderPadding">16,4</Thickness>
+    <x:Double x:Key="LuminaIndexedSectionHeaderFontSize">13</x:Double>
+    <Thickness x:Key="LuminaIndexedSectionItemsMargin">0,0,24,0</Thickness>
+    <Thickness x:Key="LuminaLinkedCategoryListCategoryMargin">0,0,12,0</Thickness>
+    <Thickness x:Key="LuminaLinkedCategoryListCategoryPadding">6</Thickness>
+    <Thickness x:Key="LuminaLinkedCategoryListBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaLinkedCategoryListCornerRadius">12</CornerRadius>
+    <x:Double x:Key="LuminaLinkedCategoryListCategorySpacing">4</x:Double>
+    <Thickness x:Key="LuminaLinkedCategorySectionHeaderPadding">16,10,16,6</Thickness>
+    <x:Double x:Key="LuminaLinkedCategorySectionHeaderFontSize">13</x:Double>
+    <x:Double x:Key="LuminaIndexButtonSize">16</x:Double>
+    <Thickness x:Key="LuminaIndexButtonPadding">0</Thickness>
+    <x:Double x:Key="LuminaIndexButtonFontSize">10</x:Double>
+    <CornerRadius x:Key="LuminaIndexButtonCornerRadius">8</CornerRadius>
+    <x:Double x:Key="LuminaCategoryButtonMinHeight">38</x:Double>
+    <Thickness x:Key="LuminaCategoryButtonPadding">10,8</Thickness>
+    <x:Double x:Key="LuminaCategoryButtonFontSize">13</x:Double>
+    <CornerRadius x:Key="LuminaCategoryButtonCornerRadius">8</CornerRadius>
+
     <ControlTheme x:Key="{x:Type lumina:LuminaAutoScrollText}" TargetType="lumina:LuminaAutoScrollText">
         <Setter Property="MinHeight" Value="28" />
         <Setter Property="Padding" Value="0" />
@@ -78,14 +150,14 @@
                         CornerRadius="{TemplateBinding CornerRadius}">
                     <Grid ColumnDefinitions="Auto,*,Auto">
                         <Border IsVisible="{TemplateBinding HasIcon}"
-                                Width="30"
-                                Height="30"
-                                Margin="0,0,12,0"
+                                Width="{DynamicResource LuminaListItemIconSize}"
+                                Height="{DynamicResource LuminaListItemIconSize}"
+                                Margin="{DynamicResource LuminaListItemIconMargin}"
                                 Background="{DynamicResource LuminaPrimaryBgBrush}"
-                                CornerRadius="15"
+                                CornerRadius="{DynamicResource LuminaListItemIconCornerRadius}"
                                 VerticalAlignment="Center">
                             <TextBlock Text="{TemplateBinding Icon}"
-                                       FontSize="13"
+                                       FontSize="{DynamicResource LuminaListItemIconFontSize}"
                                        FontWeight="Bold"
                                        Foreground="{DynamicResource LuminaPrimaryBrush}"
                                        HorizontalAlignment="Center"
@@ -93,25 +165,25 @@
                         </Border>
 
                         <StackPanel Grid.Column="1"
-                                    Spacing="3"
+                                    Spacing="{DynamicResource LuminaListItemContentSpacing}"
                                     VerticalAlignment="Center">
                             <TextBlock Text="{TemplateBinding Header}"
-                                       FontSize="13"
+                                       FontSize="{DynamicResource LuminaListItemHeaderFontSize}"
                                        FontWeight="SemiBold"
                                        Foreground="{TemplateBinding Foreground}"
                                        TextTrimming="CharacterEllipsis" />
                             <TextBlock Text="{TemplateBinding Description}"
                                        IsVisible="{TemplateBinding HasDescription}"
-                                       FontSize="12"
+                                       FontSize="{DynamicResource LuminaListItemDescriptionFontSize}"
                                        Foreground="{DynamicResource LuminaTextTertiaryBrush}"
                                        TextWrapping="Wrap" />
                         </StackPanel>
 
                         <TextBlock Grid.Column="2"
-                                   Margin="12,0,0,0"
+                                   Margin="{DynamicResource LuminaListItemValueMargin}"
                                    Text="{TemplateBinding Value}"
                                    IsVisible="{TemplateBinding HasValue}"
-                                   FontSize="13"
+                                   FontSize="{DynamicResource LuminaListItemHeaderFontSize}"
                                    FontWeight="SemiBold"
                                    Foreground="{DynamicResource LuminaTextPrimaryBrush}"
                                    VerticalAlignment="Center" />
@@ -155,18 +227,18 @@
                 <Border Padding="{TemplateBinding Padding}"
                         Background="{DynamicResource LuminaSurfaceBrush}"
                         BorderBrush="{DynamicResource LuminaBorderBrush}"
-                        BorderThickness="1"
-                        CornerRadius="12">
+                        BorderThickness="{DynamicResource LuminaColorSwatchBorderThickness}"
+                        CornerRadius="{DynamicResource LuminaColorSwatchCornerRadius}">
                     <StackPanel HorizontalAlignment="Center">
-                        <Border Width="64"
-                                Height="64"
-                                CornerRadius="32"
-                                Margin="0,0,0,12"
+                        <Border Width="{DynamicResource LuminaColorSwatchPreviewSize}"
+                                Height="{DynamicResource LuminaColorSwatchPreviewSize}"
+                                CornerRadius="{DynamicResource LuminaColorSwatchPreviewCornerRadius}"
+                                Margin="{DynamicResource LuminaColorSwatchPreviewMargin}"
                                 Background="{TemplateBinding SwatchBrush}"
                                 BorderBrush="{DynamicResource LuminaBorderBrush}"
-                                BorderThickness="1" />
+                                BorderThickness="{DynamicResource LuminaColorSwatchPreviewBorderThickness}" />
                         <TextBlock Text="{TemplateBinding Title}"
-                                   FontSize="14"
+                                   FontSize="{DynamicResource LuminaColorSwatchTitleFontSize}"
                                    FontWeight="Bold"
                                    Foreground="{DynamicResource LuminaTextForegroundBrush}"
                                    TextWrapping="Wrap"
@@ -174,8 +246,8 @@
                                    HorizontalAlignment="Center" />
                         <TextBlock Text="{TemplateBinding Description}"
                                    IsVisible="{TemplateBinding HasDescription}"
-                                   Margin="0,4,0,0"
-                                   FontSize="11"
+                                   Margin="{DynamicResource LuminaColorSwatchDescriptionMargin}"
+                                   FontSize="{DynamicResource LuminaColorSwatchDescriptionFontSize}"
                                    Foreground="{DynamicResource LuminaTextTertiaryBrush}"
                                    TextWrapping="Wrap"
                                    TextAlignment="Center"
@@ -205,8 +277,8 @@
                         CornerRadius="{TemplateBinding CornerRadius}">
                     <Border Background="{TemplateBinding SwatchBrush}"
                             BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
-                            BorderThickness="1"
-                            CornerRadius="12" />
+                            BorderThickness="{DynamicResource LuminaColorButtonSwatchBorderThickness}"
+                            CornerRadius="{DynamicResource LuminaColorButtonSwatchCornerRadius}" />
                 </Border>
             </ControlTemplate>
         </Setter>
@@ -226,15 +298,15 @@
             <ControlTemplate TargetType="lumina:LuminaSettingItem">
                 <Grid Margin="{TemplateBinding Margin}"
                       ColumnDefinitions="*,Auto"
-                      ColumnSpacing="16">
+                      ColumnSpacing="{DynamicResource LuminaSettingItemColumnSpacing}">
                     <StackPanel Grid.Column="0"
-                                Spacing="2"
+                                Spacing="{DynamicResource LuminaSettingItemTextSpacing}"
                                 VerticalAlignment="Center">
                         <TextBlock Text="{TemplateBinding Header}"
                                    FontWeight="SemiBold"
                                    Foreground="{DynamicResource LuminaTextForegroundBrush}" />
                         <TextBlock Text="{TemplateBinding Description}"
-                                   FontSize="12"
+                                   FontSize="{DynamicResource LuminaSettingItemDescriptionFontSize}"
                                    Foreground="{DynamicResource LuminaTextMutedBrush}"
                                    TextWrapping="Wrap" />
                     </StackPanel>
@@ -253,23 +325,25 @@
         <Setter Property="Margin" Value="0" />
         <Setter Property="Template">
             <ControlTemplate TargetType="lumina:LuminaSettingsCard">
-                <StackPanel Margin="{TemplateBinding Margin}" Spacing="10">
-                    <StackPanel IsVisible="{TemplateBinding HasHeader}" Spacing="4" Margin="2,0,2,0">
+                <StackPanel Margin="{TemplateBinding Margin}" Spacing="{DynamicResource LuminaSettingsCardSpacing}">
+                    <StackPanel IsVisible="{TemplateBinding HasHeader}"
+                                Spacing="{DynamicResource LuminaSettingsCardHeaderSpacing}"
+                                Margin="{DynamicResource LuminaSettingsCardHeaderMargin}">
                         <TextBlock Text="{TemplateBinding Header}"
-                                   FontSize="13"
+                                   FontSize="{DynamicResource LuminaSettingsCardHeaderFontSize}"
                                    FontWeight="SemiBold"
                                    Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
                         <TextBlock Text="{TemplateBinding Description}"
                                    IsVisible="{TemplateBinding HasDescription}"
-                                   FontSize="12"
+                                   FontSize="{DynamicResource LuminaSettingsCardDescriptionFontSize}"
                                    Foreground="{DynamicResource LuminaTextMutedBrush}"
                                    TextWrapping="Wrap" />
                     </StackPanel>
 
                     <Border Background="{DynamicResource LuminaSurfaceBrush}"
                             BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
-                            BorderThickness="1"
-                            CornerRadius="14"
+                            BorderThickness="{DynamicResource LuminaSettingsCardBorderThickness}"
+                            CornerRadius="{DynamicResource LuminaSettingsCardCornerRadius}"
                             ClipToBounds="True">
                         <ItemsPresenter Name="PART_ItemsPresenter"
                                         ItemsPanel="{TemplateBinding ItemsPanel}" />
@@ -300,33 +374,33 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}">
                         <Grid ColumnDefinitions="Auto,*,Auto,Auto"
-                              ColumnSpacing="12"
+                              ColumnSpacing="{DynamicResource LuminaSettingsOptionColumnSpacing}"
                               VerticalAlignment="Center">
                             <Border IsVisible="{TemplateBinding HasIcon}"
-                                    Width="32"
-                                    Height="32"
+                                    Width="{DynamicResource LuminaSettingsOptionIconSize}"
+                                    Height="{DynamicResource LuminaSettingsOptionIconSize}"
                                     Background="{DynamicResource LuminaPrimaryBgBrush}"
-                                    CornerRadius="9"
+                                    CornerRadius="{DynamicResource LuminaSettingsOptionIconCornerRadius}"
                                     VerticalAlignment="Center">
                                 <ContentPresenter Content="{TemplateBinding Icon}"
                                                   HorizontalContentAlignment="Center"
                                                   VerticalContentAlignment="Center"
-                                                  TextElement.FontSize="13"
+                                                  TextElement.FontSize="{DynamicResource LuminaSettingsOptionIconFontSize}"
                                                   TextElement.FontWeight="SemiBold"
                                                   TextElement.Foreground="{DynamicResource LuminaPrimaryBrush}" />
                             </Border>
 
                             <StackPanel Grid.Column="1"
-                                        Spacing="3"
+                                        Spacing="{DynamicResource LuminaSettingsOptionContentSpacing}"
                                         VerticalAlignment="Center">
                                 <TextBlock Text="{TemplateBinding Header}"
-                                           FontSize="14"
+                                           FontSize="{DynamicResource LuminaSettingsOptionHeaderFontSize}"
                                            FontWeight="SemiBold"
                                            Foreground="{TemplateBinding Foreground}"
                                            TextTrimming="CharacterEllipsis" />
                                 <TextBlock Text="{TemplateBinding Description}"
                                            IsVisible="{TemplateBinding HasDescription}"
-                                           FontSize="12"
+                                           FontSize="{DynamicResource LuminaSettingsOptionDescriptionFontSize}"
                                            Foreground="{DynamicResource LuminaTextTertiaryBrush}"
                                            TextWrapping="Wrap" />
                             </StackPanel>
@@ -336,7 +410,7 @@
                                               IsVisible="{TemplateBinding HasValue}"
                                               HorizontalContentAlignment="Right"
                                               VerticalContentAlignment="Center"
-                                              TextElement.FontSize="13"
+                                              TextElement.FontSize="{DynamicResource LuminaSettingsOptionValueFontSize}"
                                               TextElement.FontWeight="Medium"
                                               TextElement.Foreground="{DynamicResource LuminaTextMutedBrush}" />
 
@@ -353,7 +427,7 @@
                                        IsVisible="{TemplateBinding ShowTextInputAccessory}"
                                        HorizontalAlignment="Right"
                                        VerticalAlignment="Center"
-                                       FontSize="13"
+                                       FontSize="{DynamicResource LuminaSettingsOptionValueFontSize}"
                                        FontWeight="Medium"
                                        Foreground="{DynamicResource LuminaTextMutedBrush}"
                                        TextAlignment="Right"
@@ -366,7 +440,7 @@
                                        IsVisible="{TemplateBinding ShowSelectAccessory}"
                                        HorizontalAlignment="Right"
                                        VerticalAlignment="Center"
-                                       FontSize="13"
+                                       FontSize="{DynamicResource LuminaSettingsOptionValueFontSize}"
                                        FontWeight="Medium"
                                        Foreground="{DynamicResource LuminaTextMutedBrush}"
                                        TextAlignment="Right"
@@ -375,7 +449,7 @@
                             <TextBlock Grid.Column="3"
                                        Text=">"
                                        IsVisible="{TemplateBinding ShowChevronIcon}"
-                                       FontSize="16"
+                                       FontSize="{DynamicResource LuminaSettingsOptionChevronFontSize}"
                                        FontWeight="SemiBold"
                                        Foreground="{DynamicResource LuminaTextMutedBrush}"
                                        VerticalAlignment="Center" />
@@ -390,13 +464,13 @@
                            PlacementTarget="{Binding #PART_Root}"
                            WindowManagerAddShadowHint="False">
                         <Border MinWidth="{Binding #PART_Root.Bounds.Width}"
-                                MaxHeight="320"
-                                Margin="0,6,0,0"
-                                Padding="6"
+                                MaxHeight="{DynamicResource LuminaSettingsOptionPopupMaxHeight}"
+                                Margin="{DynamicResource LuminaSettingsOptionPopupMargin}"
+                                Padding="{DynamicResource LuminaSettingsOptionPopupPadding}"
                                 Background="{DynamicResource LuminaPopoverBrush}"
                                 BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
-                                BorderThickness="1"
-                                CornerRadius="10"
+                                BorderThickness="{DynamicResource LuminaSettingsOptionPopupBorderThickness}"
+                                CornerRadius="{DynamicResource LuminaSettingsOptionPopupCornerRadius}"
                                 BoxShadow="{DynamicResource LuminaShadowPopup}">
                             <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                                           VerticalScrollBarVisibility="Auto">
@@ -406,14 +480,14 @@
                                             <Button Name="PART_SelectOptionButton"
                                                     Classes="ActionSheetItem">
                                                 <Grid ColumnDefinitions="*,24"
-                                                      ColumnSpacing="12">
+                                                      ColumnSpacing="{DynamicResource LuminaSettingsOptionColumnSpacing}">
                                                     <TextBlock Text="{Binding Text}"
                                                                VerticalAlignment="Center"
                                                                Foreground="{DynamicResource LuminaTextPrimaryBrush}"
                                                                TextTrimming="CharacterEllipsis" />
                                                     <PathIcon Grid.Column="1"
-                                                              Width="18"
-                                                              Height="18"
+                                                              Width="{DynamicResource LuminaSettingsOptionPopupCheckIconSize}"
+                                                              Height="{DynamicResource LuminaSettingsOptionPopupCheckIconSize}"
                                                               Data="M9,16.2 L4.8,12 L3.4,13.4 L9,19 L21,7 L19.6,5.6 Z"
                                                               IsVisible="{Binding IsSelected}"
                                                               Foreground="{DynamicResource LuminaPrimaryBrush}"
@@ -436,20 +510,20 @@
                            PlacementTarget="{Binding #PART_Root}"
                            WindowManagerAddShadowHint="False">
                         <Border MinWidth="{Binding #PART_Root.Bounds.Width}"
-                                Margin="0,6,0,0"
-                                Padding="12"
+                                Margin="{DynamicResource LuminaSettingsOptionPopupMargin}"
+                                Padding="{DynamicResource LuminaSettingsOptionInputPopupPadding}"
                                 Background="{DynamicResource LuminaPopoverBrush}"
                                 BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
-                                BorderThickness="1"
-                                CornerRadius="10"
+                                BorderThickness="{DynamicResource LuminaSettingsOptionPopupBorderThickness}"
+                                CornerRadius="{DynamicResource LuminaSettingsOptionPopupCornerRadius}"
                                 BoxShadow="{DynamicResource LuminaShadowPopup}">
-                            <StackPanel Spacing="12">
-                                <TextBox MinHeight="38"
+                            <StackPanel Spacing="{DynamicResource LuminaSettingsOptionInputPopupSpacing}">
+                                <TextBox MinHeight="{DynamicResource LuminaSettingsOptionInputMinHeight}"
                                          Text="{Binding InputDraftText, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                          PlaceholderText="{TemplateBinding PlaceholderText}"
                                          HorizontalContentAlignment="Stretch" />
                                 <Grid ColumnDefinitions="*,Auto,Auto"
-                                      ColumnSpacing="8">
+                                      ColumnSpacing="{DynamicResource LuminaSettingsOptionInputActionsSpacing}">
                                     <Button Name="PART_InputCancelButton"
                                             Grid.Column="1"
                                             Classes="Outline"
@@ -532,12 +606,12 @@
                     <!-- Mobile style index overlay -->
                     <Border HorizontalAlignment="Right"
                             VerticalAlignment="Center"
-                            Margin="0,0,4,0"
-                            Padding="0"
+                            Margin="{DynamicResource LuminaIndexedListIndexHostMargin}"
+                            Padding="{DynamicResource LuminaIndexedListIndexHostPadding}"
                             Background="Transparent">
                         <StackPanel Name="PART_IndexPanel"
-                                    MinWidth="16"
-                                    Spacing="0"
+                                    MinWidth="{DynamicResource LuminaIndexedListIndexPanelMinWidth}"
+                                    Spacing="{DynamicResource LuminaIndexedListIndexPanelSpacing}"
                                     HorizontalAlignment="Center" />
                     </Border>
                 </Grid>
@@ -549,16 +623,16 @@
         <Setter Property="Template">
             <ControlTemplate TargetType="lumina:LuminaIndexedSection">
                 <StackPanel>
-                    <Border Padding="16,4"
+                    <Border Padding="{DynamicResource LuminaIndexedSectionHeaderPadding}"
                             Background="{DynamicResource LuminaBackgroundBrush}">
                         <TextBlock Text="{TemplateBinding Header}"
-                                   FontSize="13"
+                                   FontSize="{DynamicResource LuminaIndexedSectionHeaderFontSize}"
                                    FontWeight="Bold"
                                    Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
                     </Border>
                     <!-- Give enough right margin to avoid the index bar -->
                     <ItemsPresenter Name="PART_ItemsPresenter"
-                                    Margin="0,0,24,0"
+                                    Margin="{DynamicResource LuminaIndexedSectionItemsMargin}"
                                     ItemsPanel="{TemplateBinding ItemsPanel}" />
                 </StackPanel>
             </ControlTemplate>
@@ -572,21 +646,21 @@
                 <Grid ColumnDefinitions="Auto,*">
                     <Border Grid.Column="0"
                             Width="{TemplateBinding CategoryWidth}"
-                            Margin="0,0,12,0"
-                            Padding="6"
+                            Margin="{DynamicResource LuminaLinkedCategoryListCategoryMargin}"
+                            Padding="{DynamicResource LuminaLinkedCategoryListCategoryPadding}"
                             Background="{DynamicResource LuminaBackgroundBrush}"
                             BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
-                            BorderThickness="1"
-                            CornerRadius="12">
+                            BorderThickness="{DynamicResource LuminaLinkedCategoryListBorderThickness}"
+                            CornerRadius="{DynamicResource LuminaLinkedCategoryListCornerRadius}">
                         <StackPanel Name="PART_CategoryPanel"
-                                    Spacing="4" />
+                                    Spacing="{DynamicResource LuminaLinkedCategoryListCategorySpacing}" />
                     </Border>
 
                     <Border Grid.Column="1"
                             Background="{DynamicResource LuminaSurfaceBrush}"
                             BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
-                            BorderThickness="1"
-                            CornerRadius="12"
+                            BorderThickness="{DynamicResource LuminaLinkedCategoryListBorderThickness}"
+                            CornerRadius="{DynamicResource LuminaLinkedCategoryListCornerRadius}"
                             ClipToBounds="True">
                         <ScrollViewer Name="PART_ScrollViewer"
                                       HorizontalScrollBarVisibility="Disabled"
@@ -604,10 +678,10 @@
         <Setter Property="Template">
             <ControlTemplate TargetType="lumina:LuminaLinkedCategorySection">
                 <StackPanel>
-                    <Border Padding="16,10,16,6"
+                    <Border Padding="{DynamicResource LuminaLinkedCategorySectionHeaderPadding}"
                             Background="{DynamicResource LuminaSurfaceBrush}">
                         <TextBlock Text="{TemplateBinding Header}"
-                                   FontSize="13"
+                                   FontSize="{DynamicResource LuminaLinkedCategorySectionHeaderFontSize}"
                                    FontWeight="Bold"
                                    Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
                     </Border>
@@ -619,14 +693,14 @@
     </ControlTheme>
 
     <ControlTheme x:Key="LuminaIndexButtonTheme" TargetType="Button" BasedOn="{StaticResource LuminaButton}">
-        <Setter Property="Width" Value="16" />
-        <Setter Property="Height" Value="16" />
-        <Setter Property="MinWidth" Value="16" />
-        <Setter Property="MinHeight" Value="16" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="10" />
+        <Setter Property="Width" Value="{DynamicResource LuminaIndexButtonSize}" />
+        <Setter Property="Height" Value="{DynamicResource LuminaIndexButtonSize}" />
+        <Setter Property="MinWidth" Value="{DynamicResource LuminaIndexButtonSize}" />
+        <Setter Property="MinHeight" Value="{DynamicResource LuminaIndexButtonSize}" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaIndexButtonPadding}" />
+        <Setter Property="FontSize" Value="{DynamicResource LuminaIndexButtonFontSize}" />
         <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaIndexButtonCornerRadius}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource LuminaTextTertiaryBrush}" />
@@ -646,11 +720,11 @@
     <ControlTheme x:Key="LuminaCategoryButtonTheme" TargetType="Button" BasedOn="{StaticResource LuminaButton}">
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
-        <Setter Property="MinHeight" Value="38" />
-        <Setter Property="Padding" Value="10,8" />
-        <Setter Property="FontSize" Value="13" />
+        <Setter Property="MinHeight" Value="{DynamicResource LuminaCategoryButtonMinHeight}" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaCategoryButtonPadding}" />
+        <Setter Property="FontSize" Value="{DynamicResource LuminaCategoryButtonFontSize}" />
         <Setter Property="FontWeight" Value="Medium" />
-        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaCategoryButtonCornerRadius}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />

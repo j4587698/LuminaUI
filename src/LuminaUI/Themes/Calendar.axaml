@@ -2,15 +2,51 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
 
+    <x:Double x:Key="LuminaCalendarDatePickerMinHeight">36</x:Double>
+    <Thickness x:Key="LuminaCalendarDatePickerPadding">12,6</Thickness>
+    <CornerRadius x:Key="LuminaCalendarDatePickerCornerRadius">6</CornerRadius>
+    <Thickness x:Key="LuminaCalendarDatePickerBorderThickness">1</Thickness>
+    <Thickness x:Key="LuminaCalendarDatePickerTextBoxBorderThickness">0</Thickness>
+    <x:Double x:Key="LuminaCalendarDatePickerButtonSize">34</x:Double>
+    <Thickness x:Key="LuminaCalendarDatePickerButtonMargin">0,1,1,1</Thickness>
+    <Thickness x:Key="LuminaCalendarDatePickerButtonPadding">0</Thickness>
+    <x:Double x:Key="LuminaCalendarDatePickerIconSize">16</x:Double>
+    <x:Double x:Key="LuminaCalendarDatePickerIconCanvasSize">24</x:Double>
+    <x:Double x:Key="LuminaCalendarDatePickerIconStrokeThickness">2</x:Double>
+    <Thickness x:Key="LuminaCalendarDatePickerPopupMargin">0,6,0,0</Thickness>
+    <Thickness x:Key="LuminaCalendarDatePickerPopupBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaCalendarDatePickerPopupCornerRadius">12</CornerRadius>
+    <Thickness x:Key="LuminaCalendarBorderThickness">0</Thickness>
+    <CornerRadius x:Key="LuminaCalendarCornerRadius">12</CornerRadius>
+    <x:Double x:Key="LuminaCalendarDatePickerDisabledOpacity">0.55</x:Double>
+    <x:Double x:Key="LuminaCalendarItemMinWidth">296</x:Double>
+    <x:Double x:Key="LuminaCalendarItemMinHeight">318</x:Double>
+    <x:Double x:Key="LuminaCalendarItemDayTitleFontSize">12</x:Double>
+    <Thickness x:Key="LuminaCalendarItemPadding">12</Thickness>
+    <x:Double x:Key="LuminaCalendarItemHeaderButtonSize">32</x:Double>
+    <Thickness x:Key="LuminaCalendarItemHeaderButtonPadding">0</Thickness>
+    <x:Double x:Key="LuminaCalendarItemDayTitleRowHeight">28</x:Double>
+    <Thickness x:Key="LuminaCalendarButtonMargin">2</Thickness>
+    <Thickness x:Key="LuminaCalendarButtonPadding">4</Thickness>
+    <x:Double x:Key="LuminaCalendarButtonMinHeight">38</x:Double>
+    <Thickness x:Key="LuminaCalendarButtonBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaCalendarButtonCornerRadius">8</CornerRadius>
+    <Thickness x:Key="LuminaCalendarDayButtonMargin">2</Thickness>
+    <Thickness x:Key="LuminaCalendarDayButtonPadding">0</Thickness>
+    <x:Double x:Key="LuminaCalendarDayButtonMinHeight">34</x:Double>
+    <Thickness x:Key="LuminaCalendarDayButtonBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaCalendarDayButtonCornerRadius">8</CornerRadius>
+    <x:Double x:Key="LuminaCalendarDayButtonDisabledOpacity">0.45</x:Double>
+
     <ControlTheme x:Key="{x:Type CalendarDatePicker}" TargetType="CalendarDatePicker">
-        <Setter Property="MinHeight" Value="36" />
-        <Setter Property="Padding" Value="12,6" />
-        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="MinHeight" Value="{DynamicResource LuminaCalendarDatePickerMinHeight}" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaCalendarDatePickerPadding}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaCalendarDatePickerCornerRadius}" />
         <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
         <Setter Property="PlaceholderForeground" Value="{DynamicResource LuminaTextMutedBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaCalendarDatePickerBorderThickness}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -36,7 +72,7 @@
                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                      Background="Transparent"
                                      BorderBrush="Transparent"
-                                     BorderThickness="0"
+                                     BorderThickness="{DynamicResource LuminaCalendarDatePickerTextBoxBorderThickness}"
                                      CornerRadius="{TemplateBinding CornerRadius}"
                                      Foreground="{TemplateBinding Foreground}"
                                      PlaceholderForeground="{TemplateBinding PlaceholderForeground}"
@@ -46,13 +82,13 @@
                                     <Style Selector="TextBox#PART_TextBox:pointerover /template/ Border#PART_BorderElement">
                                         <Setter Property="Background" Value="Transparent" />
                                         <Setter Property="BorderBrush" Value="Transparent" />
-                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Setter Property="BorderThickness" Value="{DynamicResource LuminaCalendarDatePickerTextBoxBorderThickness}" />
                                         <Setter Property="BoxShadow" Value="0 0 0 0 #00000000" />
                                     </Style>
                                     <Style Selector="TextBox#PART_TextBox:focus /template/ Border#PART_BorderElement">
                                         <Setter Property="Background" Value="Transparent" />
                                         <Setter Property="BorderBrush" Value="Transparent" />
-                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Setter Property="BorderThickness" Value="{DynamicResource LuminaCalendarDatePickerTextBoxBorderThickness}" />
                                         <Setter Property="BoxShadow" Value="0 0 0 0 #00000000" />
                                     </Style>
                                 </TextBox.Styles>
@@ -61,31 +97,33 @@
                             <Button Name="PART_Button"
                                     Grid.Column="1"
                                     Classes="Ghost Icon"
-                                    Width="34"
-                                    Height="34"
-                                    MinWidth="34"
-                                    Margin="0,1,1,1"
-                                    Padding="0"
+                                    Width="{DynamicResource LuminaCalendarDatePickerButtonSize}"
+                                    Height="{DynamicResource LuminaCalendarDatePickerButtonSize}"
+                                    MinWidth="{DynamicResource LuminaCalendarDatePickerButtonSize}"
+                                    Margin="{DynamicResource LuminaCalendarDatePickerButtonMargin}"
+                                    Padding="{DynamicResource LuminaCalendarDatePickerButtonPadding}"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
                                     Focusable="False">
-                                <Viewbox Width="16" Height="16">
-                                    <Canvas Width="24" Height="24">
+                                <Viewbox Width="{DynamicResource LuminaCalendarDatePickerIconSize}"
+                                         Height="{DynamicResource LuminaCalendarDatePickerIconSize}">
+                                    <Canvas Width="{DynamicResource LuminaCalendarDatePickerIconCanvasSize}"
+                                            Height="{DynamicResource LuminaCalendarDatePickerIconCanvasSize}">
                                         <Path Data="M8 2L8 6"
                                               Stroke="{DynamicResource LuminaTextMutedBrush}"
-                                              StrokeThickness="2"
+                                              StrokeThickness="{DynamicResource LuminaCalendarDatePickerIconStrokeThickness}"
                                               StrokeLineCap="Round" />
                                         <Path Data="M16 2L16 6"
                                               Stroke="{DynamicResource LuminaTextMutedBrush}"
-                                              StrokeThickness="2"
+                                              StrokeThickness="{DynamicResource LuminaCalendarDatePickerIconStrokeThickness}"
                                               StrokeLineCap="Round" />
                                         <Path Data="M3 10L21 10"
                                               Stroke="{DynamicResource LuminaTextMutedBrush}"
-                                              StrokeThickness="2"
+                                              StrokeThickness="{DynamicResource LuminaCalendarDatePickerIconStrokeThickness}"
                                               StrokeLineCap="Round" />
                                         <Path Data="M5 4L19 4C20.1 4 21 4.9 21 6L21 20C21 21.1 20.1 22 19 22L5 22C3.9 22 3 21.1 3 20L3 6C3 4.9 3.9 4 5 4Z"
                                               Stroke="{DynamicResource LuminaTextMutedBrush}"
-                                              StrokeThickness="2" />
+                                              StrokeThickness="{DynamicResource LuminaCalendarDatePickerIconStrokeThickness}" />
                                     </Canvas>
                                 </Viewbox>
                             </Button>
@@ -97,19 +135,19 @@
                                    IsLightDismissEnabled="True"
                                    Placement="BottomEdgeAlignedLeft"
                                    PlacementTarget="{TemplateBinding}">
-                                <Panel Margin="0,6,0,0" ClipToBounds="False">
+                                <Panel Margin="{DynamicResource LuminaCalendarDatePickerPopupMargin}" ClipToBounds="False">
                                     <Border Background="{DynamicResource LuminaPopoverBrush}"
                                             BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
-                                            BorderThickness="1"
-                                            CornerRadius="12"
+                                            BorderThickness="{DynamicResource LuminaCalendarDatePickerPopupBorderThickness}"
+                                            CornerRadius="{DynamicResource LuminaCalendarDatePickerPopupCornerRadius}"
                                             BoxShadow="{DynamicResource LuminaShadowPopup}" />
                                     <Border Background="{DynamicResource LuminaPopoverBrush}"
                                             BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
-                                            BorderThickness="1"
-                                            CornerRadius="12"
+                                            BorderThickness="{DynamicResource LuminaCalendarDatePickerPopupBorderThickness}"
+                                            CornerRadius="{DynamicResource LuminaCalendarDatePickerPopupCornerRadius}"
                                             ClipToBounds="True">
                                         <Calendar Name="PART_Calendar"
-                                                  BorderThickness="0"
+                                                  BorderThickness="{DynamicResource LuminaCalendarBorderThickness}"
                                                   DisplayDate="{TemplateBinding DisplayDate}"
                                                   DisplayDateEnd="{TemplateBinding DisplayDateEnd}"
                                                   DisplayDateStart="{TemplateBinding DisplayDateStart}"
@@ -136,7 +174,7 @@
         </Style>
 
         <Style Selector="^:disabled">
-            <Setter Property="Opacity" Value="0.55" />
+            <Setter Property="Opacity" Value="{DynamicResource LuminaCalendarDatePickerDisabledOpacity}" />
         </Style>
 
         <Style Selector="^[(lumina|LuminaOptions.PopupType)=Sheet]">
@@ -148,8 +186,8 @@
         <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
         <Setter Property="Background" Value="{DynamicResource LuminaPopoverBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaCalendarBorderThickness}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaCalendarCornerRadius}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Template">
@@ -169,15 +207,15 @@
     </ControlTheme>
 
     <ControlTheme x:Key="{x:Type CalendarItem}" TargetType="CalendarItem">
-        <Setter Property="MinWidth" Value="296" />
-        <Setter Property="MinHeight" Value="318" />
+        <Setter Property="MinWidth" Value="{DynamicResource LuminaCalendarItemMinWidth}" />
+        <Setter Property="MinHeight" Value="{DynamicResource LuminaCalendarItemMinHeight}" />
         <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
         <Setter Property="DayTitleTemplate">
             <Template>
                 <TextBlock x:DataType="x:String"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
-                           FontSize="12"
+                           FontSize="{DynamicResource LuminaCalendarItemDayTitleFontSize}"
                            FontWeight="SemiBold"
                            Foreground="{DynamicResource LuminaTextMutedBrush}"
                            Text="{Binding}" />
@@ -185,7 +223,7 @@
         </Setter>
         <Setter Property="Template">
             <ControlTemplate TargetType="CalendarItem">
-                <Border Padding="12"
+                <Border Padding="{DynamicResource LuminaCalendarItemPadding}"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
@@ -193,20 +231,20 @@
                     <Grid MinWidth="{TemplateBinding MinWidth}"
                           MinHeight="{TemplateBinding MinHeight}"
                           RowDefinitions="Auto,12,*">
-                        <Grid Grid.Row="0" ColumnDefinitions="36,*,36">
+                        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto">
                             <RepeatButton Name="PART_PreviousButton"
                                           Grid.Column="0"
                                           Classes="Ghost Small"
-                                          Width="32"
-                                          Height="32"
-                                          MinWidth="32"
-                                          Padding="0"
+                                          Width="{DynamicResource LuminaCalendarItemHeaderButtonSize}"
+                                          Height="{DynamicResource LuminaCalendarItemHeaderButtonSize}"
+                                          MinWidth="{DynamicResource LuminaCalendarItemHeaderButtonSize}"
+                                          Padding="{DynamicResource LuminaCalendarItemHeaderButtonPadding}"
                                           Content="&lt;" />
 
                             <Button Name="PART_HeaderButton"
                                     Grid.Column="1"
                                     Classes="Ghost Small"
-                                    Height="32"
+                                    Height="{DynamicResource LuminaCalendarItemHeaderButtonSize}"
                                     HorizontalAlignment="Stretch"
                                     HorizontalContentAlignment="Center"
                                     FontWeight="SemiBold"
@@ -215,10 +253,10 @@
                             <RepeatButton Name="PART_NextButton"
                                           Grid.Column="2"
                                           Classes="Ghost Small"
-                                          Width="32"
-                                          Height="32"
-                                          MinWidth="32"
-                                          Padding="0"
+                                          Width="{DynamicResource LuminaCalendarItemHeaderButtonSize}"
+                                          Height="{DynamicResource LuminaCalendarItemHeaderButtonSize}"
+                                          MinWidth="{DynamicResource LuminaCalendarItemHeaderButtonSize}"
+                                          Padding="{DynamicResource LuminaCalendarItemHeaderButtonPadding}"
                                           Content="&gt;" />
                         </Grid>
 
@@ -228,7 +266,7 @@
                               IsVisible="False"
                               ColumnDefinitions="*,*,*,*,*,*,*">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="28" />
+                                <RowDefinition Height="{DynamicResource LuminaCalendarItemDayTitleRowHeight}" />
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
@@ -252,14 +290,14 @@
 
     <ControlTheme x:Key="{x:Type CalendarButton}" TargetType="CalendarButton">
         <Setter Property="ClickMode" Value="Release" />
-        <Setter Property="Margin" Value="2" />
-        <Setter Property="Padding" Value="4" />
-        <Setter Property="MinHeight" Value="38" />
+        <Setter Property="Margin" Value="{DynamicResource LuminaCalendarButtonMargin}" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaCalendarButtonPadding}" />
+        <Setter Property="MinHeight" Value="{DynamicResource LuminaCalendarButtonMinHeight}" />
         <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaCalendarButtonBorderThickness}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaCalendarButtonCornerRadius}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -312,14 +350,14 @@
 
     <ControlTheme x:Key="{x:Type CalendarDayButton}" TargetType="CalendarDayButton">
         <Setter Property="ClickMode" Value="Release" />
-        <Setter Property="Margin" Value="2" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="MinHeight" Value="34" />
+        <Setter Property="Margin" Value="{DynamicResource LuminaCalendarDayButtonMargin}" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaCalendarDayButtonPadding}" />
+        <Setter Property="MinHeight" Value="{DynamicResource LuminaCalendarDayButtonMinHeight}" />
         <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaCalendarDayButtonBorderThickness}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaCalendarDayButtonCornerRadius}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -380,7 +418,7 @@
         </Style>
 
         <Style Selector="^:disabled">
-            <Setter Property="Opacity" Value="0.45" />
+            <Setter Property="Opacity" Value="{DynamicResource LuminaCalendarDayButtonDisabledOpacity}" />
         </Style>
     </ControlTheme>
 </ResourceDictionary>

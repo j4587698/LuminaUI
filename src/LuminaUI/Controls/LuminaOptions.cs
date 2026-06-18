@@ -320,10 +320,8 @@ public class LuminaOptions : AvaloniaObject
     private static bool ShowComboBoxSheet(ComboBox comboBox)
     {
         comboBox.IsDropDownOpen = false;
-        StackPanel options = new StackPanel
-        {
-            Spacing = 6.0
-        };
+        StackPanel options = new StackPanel();
+        LuminaPickerResources.BindResource(options, StackPanel.SpacingProperty, "LuminaComboBoxSheetOptionsSpacing");
         int index = 0;
         foreach (object? item in GetComboBoxItems(comboBox))
         {
@@ -345,7 +343,7 @@ public class LuminaOptions : AvaloniaObject
         }
         StackPanel content = CreateSheetLayout(LuminaLocalization.Get("Lumina.Picker.SelectOption"), new ScrollViewer
         {
-            MaxHeight = 360.0,
+            MaxHeight = LuminaPickerResources.Double("LuminaComboBoxSheetBodyMaxHeight", 360.0),
             HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
             VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
             Content = options
@@ -422,20 +420,19 @@ public class LuminaOptions : AvaloniaObject
 
     private static bool ShowActionSheet(Control owner, string title, IReadOnlyList<ActionSheetEntry> entries)
     {
-        StackPanel list = new StackPanel
-        {
-            Spacing = 4.0
-        };
+        StackPanel list = new StackPanel();
+        LuminaPickerResources.BindResource(list, StackPanel.SpacingProperty, "LuminaActionSheetListSpacing");
         foreach (ActionSheetEntry entry in entries)
         {
             if (entry.IsSeparator)
             {
-                list.Children.Add(new Border
+                Border separator = new Border
                 {
-                    Height = 1.0,
-                    Margin = new Thickness(4.0, 6.0),
                     Background = LuminaPickerResources.Brush("LuminaDividerBrush", Brushes.Transparent)
-                });
+                };
+                LuminaPickerResources.BindResource(separator, Layoutable.HeightProperty, "LuminaActionSheetSeparatorHeight");
+                LuminaPickerResources.BindResource(separator, Border.MarginProperty, "LuminaActionSheetSeparatorMargin");
+                list.Children.Add(separator);
             }
             else
             {
@@ -444,7 +441,7 @@ public class LuminaOptions : AvaloniaObject
         }
         ScrollViewer body = new ScrollViewer
         {
-            MaxHeight = 420.0,
+            MaxHeight = LuminaPickerResources.Double("LuminaActionSheetBodyMaxHeight", 420.0),
             HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
             VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
             Content = list
@@ -567,13 +564,13 @@ public class LuminaOptions : AvaloniaObject
         Grid grid = new Grid
         {
             ColumnDefinitions = new ColumnDefinitions("24,*,24"),
-            ColumnSpacing = 12.0,
             Children = 
             {
                 CreateActionIcon(entry),
                 (Control)label
             }
         };
+        LuminaPickerResources.BindResource(grid, Grid.ColumnSpacingProperty, "LuminaActionSheetItemColumnSpacing");
         Grid.SetColumn(label, 1);
         if (entry.IsChecked)
         {
@@ -605,8 +602,8 @@ public class LuminaOptions : AvaloniaObject
         }
         return new Border
         {
-            Width = 20.0,
-            Height = 20.0
+            Width = LuminaPickerResources.Double("LuminaActionSheetIconSize", 20.0),
+            Height = LuminaPickerResources.Double("LuminaActionSheetIconSize", 20.0)
         };
     }
 
@@ -614,8 +611,8 @@ public class LuminaOptions : AvaloniaObject
     {
         return (icon is PathIcon pathIcon) ? new PathIcon
         {
-            Width = (double.IsNaN(pathIcon.Width) ? 20.0 : pathIcon.Width),
-            Height = (double.IsNaN(pathIcon.Height) ? 20.0 : pathIcon.Height),
+            Width = (double.IsNaN(pathIcon.Width) ? LuminaPickerResources.Double("LuminaActionSheetIconSize", 20.0) : pathIcon.Width),
+            Height = (double.IsNaN(pathIcon.Height) ? LuminaPickerResources.Double("LuminaActionSheetIconSize", 20.0) : pathIcon.Height),
             Data = pathIcon.Data,
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Center
@@ -626,8 +623,8 @@ public class LuminaOptions : AvaloniaObject
     {
         return new PathIcon
         {
-            Width = 18.0,
-            Height = 18.0,
+            Width = LuminaPickerResources.Double("LuminaActionSheetCheckIconSize", 18.0),
+            Height = LuminaPickerResources.Double("LuminaActionSheetCheckIconSize", 18.0),
             Data = StreamGeometry.Parse(data),
             Foreground = LuminaPickerResources.Brush(brushKey, Brushes.DodgerBlue),
             HorizontalAlignment = HorizontalAlignment.Center,
@@ -713,16 +710,15 @@ public class LuminaOptions : AvaloniaObject
 
     private static StackPanel CreateSheetLayout(string title, Control body, Control? footer = null)
     {
-        StackPanel layout = new StackPanel
-        {
-            Spacing = 16.0
-        };
-        layout.Children.Add(new TextBlock
+        StackPanel layout = new StackPanel();
+        LuminaPickerResources.BindResource(layout, StackPanel.SpacingProperty, "LuminaSheetLayoutSpacing");
+        TextBlock titleBlock = new TextBlock
         {
             Text = title,
-            FontSize = 18.0,
             FontWeight = FontWeight.DemiBold
-        });
+        };
+        LuminaPickerResources.BindResource(titleBlock, TextBlock.FontSizeProperty, "LuminaSheetTitleFontSize");
+        layout.Children.Add(titleBlock);
         layout.Children.Add(body);
         if (footer != null)
         {
@@ -771,10 +767,9 @@ public class LuminaOptions : AvaloniaObject
         };
         Grid.SetColumn(cancelButton, 1);
         Grid.SetColumn(applyButton, 2);
-        return new Grid
+        Grid actions = new Grid
         {
             ColumnDefinitions = new ColumnDefinitions("*,Auto,Auto"),
-            ColumnSpacing = 8.0,
             Children =
             {
                 clearButton,
@@ -782,6 +777,8 @@ public class LuminaOptions : AvaloniaObject
                 applyButton
             }
         };
+        LuminaPickerResources.BindResource(actions, Grid.ColumnSpacingProperty, "LuminaSheetActionsColumnSpacing");
+        return actions;
     }
 
     private static string GetComboBoxItemText(object? item)

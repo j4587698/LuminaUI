@@ -1,10 +1,46 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <Thickness x:Key="LuminaTabStripBorderThickness">0</Thickness>
+    <Thickness x:Key="LuminaTabStripChromeBorderThickness">1,1,1,0</Thickness>
+    <CornerRadius x:Key="LuminaTabStripChromeCornerRadius">8,8,0,0</CornerRadius>
+    <Thickness x:Key="LuminaTabStripPillBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaTabStripPillCornerRadius">999</CornerRadius>
+    <Thickness x:Key="LuminaTabStripMobileBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaTabStripMobileCornerRadius">16</CornerRadius>
+    <Thickness x:Key="LuminaLineTabStripItemPadding">12,8</Thickness>
+    <Thickness x:Key="LuminaLineTabStripItemBorderThickness">0</Thickness>
+    <CornerRadius x:Key="LuminaLineTabStripItemCornerRadius">6</CornerRadius>
+    <x:Double x:Key="LuminaLineTabStripIndicatorThickness">2</x:Double>
+    <Thickness x:Key="LuminaLineTabStripIndicatorMargin">8,0</Thickness>
+    <CornerRadius x:Key="LuminaLineTabStripIndicatorCornerRadius">1</CornerRadius>
+    <x:Double x:Key="LuminaTabStripItemDisabledOpacity">0.45</x:Double>
+    <Thickness x:Key="LuminaChromeTabStripItemMargin">2,2,0,0</Thickness>
+    <Thickness x:Key="LuminaChromeTabStripItemPadding">14,8</Thickness>
+    <Thickness x:Key="LuminaChromeTabStripItemBorderThickness">1,1,1,0</Thickness>
+    <CornerRadius x:Key="LuminaChromeTabStripItemCornerRadius">7,7,0,0</CornerRadius>
+    <x:Double x:Key="LuminaChromeTabStripItemMinHeight">34</x:Double>
+    <Thickness x:Key="LuminaPillTabStripItemMargin">2</Thickness>
+    <Thickness x:Key="LuminaPillTabStripItemPadding">13,7</Thickness>
+    <CornerRadius x:Key="LuminaPillTabStripItemCornerRadius">999</CornerRadius>
+    <x:Double x:Key="LuminaPillTabStripItemMinHeight">32</x:Double>
+    <Thickness x:Key="LuminaVerticalTabStripItemPadding">12,9</Thickness>
+    <CornerRadius x:Key="LuminaVerticalTabStripItemCornerRadius">7</CornerRadius>
+    <x:Double x:Key="LuminaVerticalTabStripIndicatorWidth">3</x:Double>
+    <CornerRadius x:Key="LuminaVerticalTabStripIndicatorCornerRadius">2</CornerRadius>
+    <Thickness x:Key="LuminaVerticalTabStripContentMargin">8,0,0,0</Thickness>
+    <Thickness x:Key="LuminaCompactTabStripItemPadding">9,5</Thickness>
+    <CornerRadius x:Key="LuminaCompactTabStripItemCornerRadius">5</CornerRadius>
+    <x:Double x:Key="LuminaMobileTabStripItemMinHeight">62</x:Double>
+    <x:Double x:Key="LuminaMobileTabStripItemMinWidth">64</x:Double>
+    <Thickness x:Key="LuminaMobileTabStripItemPadding">8,6</Thickness>
+    <CornerRadius x:Key="LuminaMobileTabStripItemCornerRadius">12</CornerRadius>
+    <Thickness x:Key="LuminaMobileTabStripItemMargin">4</Thickness>
+
     <ControlTheme x:Key="{x:Type TabStrip}" TargetType="TabStrip">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaTabStripBorderThickness}" />
         <Setter Property="ItemContainerTheme" Value="{StaticResource LuminaLineTabStripItem}" />
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="Template">
@@ -22,8 +58,8 @@
         <Style Selector="^.Chrome">
             <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderSubtleBrush}" />
-            <Setter Property="BorderThickness" Value="1,1,1,0" />
-            <Setter Property="CornerRadius" Value="8,8,0,0" />
+            <Setter Property="BorderThickness" Value="{DynamicResource LuminaTabStripChromeBorderThickness}" />
+            <Setter Property="CornerRadius" Value="{DynamicResource LuminaTabStripChromeCornerRadius}" />
             <Setter Property="ItemContainerTheme" Value="{StaticResource LuminaChromeTabStripItem}" />
         </Style>
 
@@ -34,8 +70,8 @@
         <Style Selector="^.Pills">
             <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderSubtleBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="999" />
+            <Setter Property="BorderThickness" Value="{DynamicResource LuminaTabStripPillBorderThickness}" />
+            <Setter Property="CornerRadius" Value="{DynamicResource LuminaTabStripPillCornerRadius}" />
             <Setter Property="ItemContainerTheme" Value="{StaticResource LuminaPillTabStripItem}" />
         </Style>
 
@@ -55,8 +91,8 @@
         <Style Selector="^.Mobile">
             <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderSubtleBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="16" />
+            <Setter Property="BorderThickness" Value="{DynamicResource LuminaTabStripMobileBorderThickness}" />
+            <Setter Property="CornerRadius" Value="{DynamicResource LuminaTabStripMobileCornerRadius}" />
             <Setter Property="ItemContainerTheme" Value="{StaticResource LuminaMobileTabStripItem}" />
             <Setter Property="ItemsPanel">
                 <ItemsPanelTemplate>
@@ -67,12 +103,12 @@
     </ControlTheme>
 
     <ControlTheme x:Key="LuminaLineTabStripItem" TargetType="TabStripItem">
-        <Setter Property="Padding" Value="12,8" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaLineTabStripItemPadding}" />
         <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaLineTabStripItemBorderThickness}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaLineTabStripItemCornerRadius}" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <ControlTemplate TargetType="TabStripItem">
@@ -91,10 +127,10 @@
                     </Border>
                     <Border Name="PART_SelectedIndicator"
                             Grid.Row="1"
-                            Height="2"
-                            Margin="8,0"
+                            Height="{DynamicResource LuminaLineTabStripIndicatorThickness}"
+                            Margin="{DynamicResource LuminaLineTabStripIndicatorMargin}"
                             Background="Transparent"
-                            CornerRadius="1"
+                            CornerRadius="{DynamicResource LuminaLineTabStripIndicatorCornerRadius}"
                             IsVisible="False" />
                 </Grid>
             </ControlTemplate>
@@ -119,7 +155,7 @@
         </Style>
 
         <Style Selector="^:disabled">
-            <Setter Property="Opacity" Value="0.45" />
+            <Setter Property="Opacity" Value="{DynamicResource LuminaTabStripItemDisabledOpacity}" />
             <Setter Property="Cursor" Value="Arrow" />
         </Style>
     </ControlTheme>
@@ -127,21 +163,21 @@
     <ControlTheme x:Key="{x:Type TabStripItem}" TargetType="TabStripItem" BasedOn="{StaticResource LuminaLineTabStripItem}" />
 
     <ControlTheme x:Key="LuminaBottomLineTabStripItem" TargetType="TabStripItem">
-        <Setter Property="Padding" Value="12,8" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaLineTabStripItemPadding}" />
         <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaLineTabStripItemBorderThickness}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaLineTabStripItemCornerRadius}" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <ControlTemplate TargetType="TabStripItem">
                 <Grid RowDefinitions="2,*">
                     <Border Name="PART_SelectedIndicator"
-                            Height="2"
-                            Margin="8,0"
+                            Height="{DynamicResource LuminaLineTabStripIndicatorThickness}"
+                            Margin="{DynamicResource LuminaLineTabStripIndicatorMargin}"
                             Background="Transparent"
-                            CornerRadius="1"
+                            CornerRadius="{DynamicResource LuminaLineTabStripIndicatorCornerRadius}"
                             IsVisible="False" />
                     <Border Name="PART_ItemBackground"
                             Grid.Row="1"
@@ -178,24 +214,24 @@
         </Style>
 
         <Style Selector="^:disabled">
-            <Setter Property="Opacity" Value="0.45" />
+            <Setter Property="Opacity" Value="{DynamicResource LuminaTabStripItemDisabledOpacity}" />
             <Setter Property="Cursor" Value="Arrow" />
         </Style>
     </ControlTheme>
 
     <ControlTheme x:Key="LuminaChromeTabStripItem" TargetType="TabStripItem">
-        <Setter Property="Margin" Value="2,2,0,0" />
-        <Setter Property="Padding" Value="14,8" />
+        <Setter Property="Margin" Value="{DynamicResource LuminaChromeTabStripItemMargin}" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaChromeTabStripItemPadding}" />
         <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="1,1,1,0" />
-        <Setter Property="CornerRadius" Value="7,7,0,0" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaChromeTabStripItemBorderThickness}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaChromeTabStripItemCornerRadius}" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <ControlTemplate TargetType="TabStripItem">
                 <Border Name="PART_Tab"
-                        MinHeight="34"
+                        MinHeight="{DynamicResource LuminaChromeTabStripItemMinHeight}"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
@@ -223,22 +259,22 @@
         </Style>
 
         <Style Selector="^:disabled">
-            <Setter Property="Opacity" Value="0.45" />
+            <Setter Property="Opacity" Value="{DynamicResource LuminaTabStripItemDisabledOpacity}" />
             <Setter Property="Cursor" Value="Arrow" />
         </Style>
     </ControlTheme>
 
     <ControlTheme x:Key="LuminaPillTabStripItem" TargetType="TabStripItem">
-        <Setter Property="Margin" Value="2" />
-        <Setter Property="Padding" Value="13,7" />
+        <Setter Property="Margin" Value="{DynamicResource LuminaPillTabStripItemMargin}" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaPillTabStripItemPadding}" />
         <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="CornerRadius" Value="999" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaPillTabStripItemCornerRadius}" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <ControlTemplate TargetType="TabStripItem">
                 <Border Name="PART_Pill"
-                        MinHeight="32"
+                        MinHeight="{DynamicResource LuminaPillTabStripItemMinHeight}"
                         Background="{TemplateBinding Background}"
                         CornerRadius="{TemplateBinding CornerRadius}"
                         Padding="{TemplateBinding Padding}">
@@ -263,29 +299,29 @@
         </Style>
 
         <Style Selector="^:disabled">
-            <Setter Property="Opacity" Value="0.45" />
+            <Setter Property="Opacity" Value="{DynamicResource LuminaTabStripItemDisabledOpacity}" />
             <Setter Property="Cursor" Value="Arrow" />
         </Style>
     </ControlTheme>
 
     <ControlTheme x:Key="LuminaVerticalTabStripItem" TargetType="TabStripItem">
-        <Setter Property="Padding" Value="12,9" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaVerticalTabStripItemPadding}" />
         <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="CornerRadius" Value="7" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaVerticalTabStripItemCornerRadius}" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="Template">
             <ControlTemplate TargetType="TabStripItem">
                 <Grid ColumnDefinitions="3,*">
                     <Border Name="PART_SelectedIndicator"
-                            Width="3"
+                            Width="{DynamicResource LuminaVerticalTabStripIndicatorWidth}"
                             Background="Transparent"
-                            CornerRadius="2"
+                            CornerRadius="{DynamicResource LuminaVerticalTabStripIndicatorCornerRadius}"
                             IsVisible="False" />
                     <Border Name="PART_ItemBackground"
                             Grid.Column="1"
-                            Margin="8,0,0,0"
+                            Margin="{DynamicResource LuminaVerticalTabStripContentMargin}"
                             Background="{TemplateBinding Background}"
                             CornerRadius="{TemplateBinding CornerRadius}"
                             Padding="{TemplateBinding Padding}">
@@ -316,28 +352,28 @@
         </Style>
 
         <Style Selector="^:disabled">
-            <Setter Property="Opacity" Value="0.45" />
+            <Setter Property="Opacity" Value="{DynamicResource LuminaTabStripItemDisabledOpacity}" />
             <Setter Property="Cursor" Value="Arrow" />
         </Style>
     </ControlTheme>
 
     <ControlTheme x:Key="LuminaCompactTabStripItem" TargetType="TabStripItem" BasedOn="{StaticResource LuminaLineTabStripItem}">
-        <Setter Property="Padding" Value="9,5" />
-        <Setter Property="CornerRadius" Value="5" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaCompactTabStripItemPadding}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaCompactTabStripItemCornerRadius}" />
     </ControlTheme>
 
     <ControlTheme x:Key="LuminaMobileTabStripItem" TargetType="TabStripItem">
-        <Setter Property="MinHeight" Value="62" />
-        <Setter Property="MinWidth" Value="64" />
-        <Setter Property="Padding" Value="8,6" />
+        <Setter Property="MinHeight" Value="{DynamicResource LuminaMobileTabStripItemMinHeight}" />
+        <Setter Property="MinWidth" Value="{DynamicResource LuminaMobileTabStripItemMinWidth}" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaMobileTabStripItemPadding}" />
         <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaMobileTabStripItemCornerRadius}" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <ControlTemplate TargetType="TabStripItem">
                 <Border Name="PART_TabBackground"
-                        Margin="4"
+                        Margin="{DynamicResource LuminaMobileTabStripItemMargin}"
                         Background="{TemplateBinding Background}"
                         CornerRadius="{TemplateBinding CornerRadius}"
                         Padding="{TemplateBinding Padding}">
@@ -362,7 +398,7 @@
         </Style>
 
         <Style Selector="^:disabled">
-            <Setter Property="Opacity" Value="0.45" />
+            <Setter Property="Opacity" Value="{DynamicResource LuminaTabStripItemDisabledOpacity}" />
             <Setter Property="Cursor" Value="Arrow" />
         </Style>
     </ControlTheme>

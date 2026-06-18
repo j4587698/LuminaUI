@@ -2,6 +2,25 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
 
+    <Thickness x:Key="LuminaShellTopMenuDrawerBorderThickness">0,0,1,0</Thickness>
+    <CornerRadius x:Key="LuminaShellTopMenuDrawerCornerRadius">0,4,4,0</CornerRadius>
+    <Thickness x:Key="LuminaShellMenuHeaderMargin">16</Thickness>
+    <x:Double x:Key="LuminaShellMenuHeaderHeight">48</x:Double>
+    <Thickness x:Key="LuminaShellMenuScrollMargin">16,0,16,16</Thickness>
+    <Thickness x:Key="LuminaShellMenuFooterMargin">16</Thickness>
+    <Thickness x:Key="LuminaShellMenuFooterPadding">0,16,0,0</Thickness>
+    <Thickness x:Key="LuminaShellMenuCompactToggleHostMargin">16,0,16,16</Thickness>
+    <x:Double x:Key="LuminaShellMenuCompactToggleSize">36</x:Double>
+    <x:Double x:Key="LuminaShellMenuCompactToggleIconSize">14</x:Double>
+    <x:Double x:Key="LuminaShellContentHeaderHeight">48</x:Double>
+    <Thickness x:Key="LuminaShellContentHeaderMargin">16</Thickness>
+    <x:Double x:Key="LuminaShellContentHeaderFontSize">24</x:Double>
+    <Thickness x:Key="LuminaShellHeaderlessMenuToggleMargin">16</Thickness>
+    <x:Double x:Key="LuminaShellOverlayCollapsedOpacity">0</x:Double>
+    <x:Double x:Key="LuminaShellOverlayVisibleOpacity">1</x:Double>
+    <Thickness x:Key="LuminaShellMenuCompactToggleHostCompactMargin">6</Thickness>
+    <Thickness x:Key="LuminaShellMenuCompactScrollMargin">6,0,6,16</Thickness>
+
     <ControlTheme x:Key="{x:Type lumina:LuminaShell}" TargetType="lumina:LuminaShell">
         <Setter Property="Background" Value="{DynamicResource LuminaBackgroundBrush}" />
         <Setter Property="PaneBackground" Value="{DynamicResource LuminaNavigationPaneBrush}" />
@@ -25,8 +44,8 @@
                                     <!-- 菜单头部插槽 -->
                                     <Border Name="PART_MenuHeader"
                                             Grid.Row="0"
-                                            Margin="16"
-                                            Height="48"
+                                            Margin="{DynamicResource LuminaShellMenuHeaderMargin}"
+                                            Height="{DynamicResource LuminaShellMenuHeaderHeight}"
                                             ClipToBounds="True"
                                             IsVisible="{TemplateBinding EffectiveIsMenuOpen}">
                                         <ContentPresenter Content="{TemplateBinding EffectiveMenuHeader}" VerticalAlignment="Center" />
@@ -35,7 +54,7 @@
                                     <!-- 菜单内容投射器 -->
                                     <ScrollViewer Name="PART_MenuScrollViewer"
                                                   Grid.Row="1"
-                                                  Margin="16,0,16,16"
+                                                  Margin="{DynamicResource LuminaShellMenuScrollMargin}"
                                                   BringIntoViewOnFocusChange="False"
                                                   HorizontalScrollBarVisibility="Disabled"
                                                   VerticalScrollBarVisibility="Hidden">
@@ -45,8 +64,8 @@
                                     <!-- 菜单底部插槽 -->
                                     <Border Name="PART_MenuFooter"
                                             Grid.Row="2"
-                                            Margin="16"
-                                            Padding="0,16,0,0"
+                                            Margin="{DynamicResource LuminaShellMenuFooterMargin}"
+                                            Padding="{DynamicResource LuminaShellMenuFooterPadding}"
                                             ClipToBounds="False"
                                             IsVisible="{TemplateBinding EffectiveIsMenuOpen}">
                                         <ContentPresenter Content="{TemplateBinding EffectiveMenuFooter}" />
@@ -55,19 +74,19 @@
                                     <!-- 紧凑模式切换按钮 -->
                                     <Border Name="PART_MenuCompactToggleHost"
                                             Grid.Row="3"
-                                            Margin="16,0,16,16"
+                                            Margin="{DynamicResource LuminaShellMenuCompactToggleHostMargin}"
                                             IsVisible="{TemplateBinding CanCompactMenu}">
                                         <Button Name="PART_MenuCompactToggle"
                                                 Classes="Ghost Icon"
-                                                Width="36"
-                                                Height="36"
+                                                Width="{DynamicResource LuminaShellMenuCompactToggleSize}"
+                                                Height="{DynamicResource LuminaShellMenuCompactToggleSize}"
                                                 HorizontalAlignment="Right"
                                                 VerticalAlignment="Bottom"
                                                 Command="{Binding $parent[lumina:LuminaShell].ToggleCompactModeCommand}"
                                                 ToolTip.Tip="Toggle compact mode">
                                             <PathIcon Name="PART_MenuCompactToggleIcon"
-                                                      Width="14"
-                                                      Height="14"
+                                                      Width="{DynamicResource LuminaShellMenuCompactToggleIconSize}"
+                                                      Height="{DynamicResource LuminaShellMenuCompactToggleIconSize}"
                                                       Data="M15.41,7.41L10.83,12L15.41,16.59L14,18L8,12L14,6L15.41,7.41Z"
                                                       Foreground="{DynamicResource LuminaTextMutedBrush}"
                                                       RenderTransformOrigin="50%,50%">
@@ -88,11 +107,11 @@
                                 <Grid RowDefinitions="Auto,*">
                                     <!-- 主区域头部栏插槽 -->
                                     <Border Grid.Row="0"
-                                            Height="48"
-                                            Margin="16"
+                                            Height="{DynamicResource LuminaShellContentHeaderHeight}"
+                                            Margin="{DynamicResource LuminaShellContentHeaderMargin}"
                                             Background="Transparent"
                                             IsVisible="{TemplateBinding EffectiveIsShellHeaderVisible}">
-                                        <ContentPresenter Content="{TemplateBinding Title}" TextElement.FontSize="24" TextElement.FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <ContentPresenter Content="{TemplateBinding Title}" TextElement.FontSize="{DynamicResource LuminaShellContentHeaderFontSize}" TextElement.FontWeight="Bold" VerticalAlignment="Center"/>
                                     </Border>
                                 
                                 <!-- 主视图内容投射器 (添加了平滑切页动画) -->
@@ -111,7 +130,7 @@
                     <lumina:LuminaHamburgerButton Name="PART_HeaderlessMenuToggle"
                                                   HorizontalAlignment="Left"
                                                   VerticalAlignment="Top"
-                                                  Margin="16"
+                                                  Margin="{DynamicResource LuminaShellHeaderlessMenuToggleMargin}"
                                                   ZIndex="900"
                                                   Background="{DynamicResource LuminaSurfaceBrush}"
                                                   BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
@@ -124,7 +143,7 @@
                     <!-- ============================================== -->
                     <Border Name="PART_DialogOverlay"
                             Background="Transparent"
-                            Opacity="0"
+                            Opacity="{DynamicResource LuminaShellOverlayCollapsedOpacity}"
                             IsHitTestVisible="False"
                             ZIndex="1000">
                         <Border.Transitions>
@@ -135,7 +154,7 @@
                         
                         <!-- 对弹窗实体进行缩放滑入动画 -->
                         <Grid>
-                            <lumina:LuminaBackdropBlur BlurRadius="10"
+                            <lumina:LuminaBackdropBlur BlurRadius="{DynamicResource LuminaOverlayBackdropBlurRadius}"
                                                        HorizontalAlignment="Stretch"
                                                        VerticalAlignment="Stretch" />
                             <Border Background="{DynamicResource LuminaOverlayScrimBrush}"
@@ -149,7 +168,7 @@
                                         </Transitions>
                                     </Border.Transitions>
                                     <ContentPresenter Content="{TemplateBinding DialogContent}"
-                                                      Margin="16"
+                                                      Margin="{DynamicResource LuminaOverlayDialogMargin}"
                                                       HorizontalAlignment="Stretch"
                                                       VerticalAlignment="Center" />
                                 </Border>
@@ -162,7 +181,7 @@
                     <!-- ============================================== -->
                     <Border Name="PART_DrawerOverlay"
                             Background="Transparent"
-                            Opacity="0"
+                            Opacity="{DynamicResource LuminaShellOverlayCollapsedOpacity}"
                             IsHitTestVisible="False"
                             ZIndex="1400">
                         <Border.Transitions>
@@ -172,7 +191,7 @@
                         </Border.Transitions>
 
                         <Grid>
-                            <lumina:LuminaBackdropBlur BlurRadius="10"
+                            <lumina:LuminaBackdropBlur BlurRadius="{DynamicResource LuminaOverlayBackdropBlurRadius}"
                                                        HorizontalAlignment="Stretch"
                                                        VerticalAlignment="Stretch" />
                             <Border Background="{DynamicResource LuminaOverlayScrimBrush}"
@@ -187,7 +206,7 @@
 
                     <Border Name="PART_BottomSheetOverlay"
                             Background="Transparent"
-                            Opacity="0"
+                            Opacity="{DynamicResource LuminaShellOverlayCollapsedOpacity}"
                             IsHitTestVisible="False"
                             ZIndex="1500">
                         <Border.Transitions>
@@ -198,7 +217,7 @@
                         
                         <!-- 底部容器，默认向下平移 100% 藏在屏幕外 -->
                         <Grid>
-                            <lumina:LuminaBackdropBlur BlurRadius="10"
+                            <lumina:LuminaBackdropBlur BlurRadius="{DynamicResource LuminaOverlayBackdropBlurRadius}"
                                                        HorizontalAlignment="Stretch"
                                                        VerticalAlignment="Stretch" />
                             <Border Background="{DynamicResource LuminaOverlayScrimBrush}"
@@ -244,7 +263,7 @@
         </Style>
 
         <Style Selector="^:menucompact /template/ Border#PART_MenuCompactToggleHost">
-            <Setter Property="Margin" Value="6" />
+            <Setter Property="Margin" Value="{DynamicResource LuminaShellMenuCompactToggleHostCompactMargin}" />
         </Style>
 
         <Style Selector="^:menucompact /template/ Button#PART_MenuCompactToggle">
@@ -260,7 +279,7 @@
         </Style>
 
         <Style Selector="^:menucompact /template/ ScrollViewer#PART_MenuScrollViewer">
-            <Setter Property="Margin" Value="6,0,6,16" />
+            <Setter Property="Margin" Value="{DynamicResource LuminaShellMenuCompactScrollMargin}" />
         </Style>
 
         <Style Selector="^.WindowGlass">
@@ -279,7 +298,7 @@
         
         <!-- Dialog 打开时的动画状态 -->
         <Style Selector="^[IsDialogOpen=True] /template/ Border#PART_DialogOverlay">
-            <Setter Property="Opacity" Value="1" />
+            <Setter Property="Opacity" Value="{DynamicResource LuminaShellOverlayVisibleOpacity}" />
             <Setter Property="IsHitTestVisible" Value="True" />
         </Style>
         <!-- Dialog 关闭时的卡片缩放偏移 -->
@@ -293,14 +312,14 @@
 
         <!-- BottomSheet 打开时的动画状态 -->
         <Style Selector="^[IsBottomSheetOpen=True] /template/ Border#PART_BottomSheetOverlay">
-            <Setter Property="Opacity" Value="1" />
+            <Setter Property="Opacity" Value="{DynamicResource LuminaShellOverlayVisibleOpacity}" />
             <Setter Property="IsHitTestVisible" Value="True" />
         </Style>
 
             <!-- 回到原本位置 -->
 
         <Style Selector="^[IsDrawerOpen=True] /template/ Border#PART_DrawerOverlay">
-            <Setter Property="Opacity" Value="1" />
+            <Setter Property="Opacity" Value="{DynamicResource LuminaShellOverlayVisibleOpacity}" />
             <Setter Property="IsHitTestVisible" Value="True" />
         </Style>
 

@@ -2,6 +2,21 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:lumina="using:LuminaUI.Controls">
 
+    <x:Double x:Key="LuminaTimelineItemMinHeight">62</x:Double>
+    <x:Double x:Key="LuminaTimelineItemIconPanelSize">28</x:Double>
+    <x:Double x:Key="LuminaTimelineItemDefaultIconSize">12</x:Double>
+    <CornerRadius x:Key="LuminaTimelineItemDefaultIconCornerRadius">6</CornerRadius>
+    <x:Double x:Key="LuminaTimelineItemLineWidth">2</x:Double>
+    <Thickness x:Key="LuminaTimelineItemHeaderMargin">10,3,0,0</Thickness>
+    <Thickness x:Key="LuminaTimelineItemContentMargin">10,4,0,0</Thickness>
+    <x:Double x:Key="LuminaTimelineItemContentFontSize">13</x:Double>
+    <Thickness x:Key="LuminaTimelineItemTimeMargin">10,5,0,16</Thickness>
+    <x:Double x:Key="LuminaTimelineItemTimeFontSize">12</x:Double>
+    <Thickness x:Key="LuminaTimelineItemLeftHeaderMargin">0,3,10,0</Thickness>
+    <Thickness x:Key="LuminaTimelineItemLeftContentMargin">0,4,10,0</Thickness>
+    <Thickness x:Key="LuminaTimelineItemLeftTimeMargin">0,5,10,16</Thickness>
+    <Thickness x:Key="LuminaTimelineItemSeparateTimeMargin">0,4,10,0</Thickness>
+
     <ControlTheme x:Key="{x:Type lumina:LuminaTimeline}" TargetType="lumina:LuminaTimeline">
         <Setter Property="Template">
             <ControlTemplate TargetType="lumina:LuminaTimeline">
@@ -17,18 +32,18 @@
                 <Grid Name="PART_Root"
                       ColumnDefinitions="*,Auto,*"
                       RowDefinitions="Auto,Auto,Auto"
-                      MinHeight="62">
+                      MinHeight="{DynamicResource LuminaTimelineItemMinHeight}">
                     <Grid Grid.Column="1"
                           Grid.Row="0"
                           Grid.RowSpan="3"
                           RowDefinitions="Auto,*">
                         <Panel Grid.Row="0"
-                               Width="28"
-                               Height="28">
+                               Width="{DynamicResource LuminaTimelineItemIconPanelSize}"
+                               Height="{DynamicResource LuminaTimelineItemIconPanelSize}">
                             <Border Name="PART_DefaultIcon"
-                                    Width="12"
-                                    Height="12"
-                                    CornerRadius="6"
+                                    Width="{DynamicResource LuminaTimelineItemDefaultIconSize}"
+                                    Height="{DynamicResource LuminaTimelineItemDefaultIconSize}"
+                                    CornerRadius="{DynamicResource LuminaTimelineItemDefaultIconCornerRadius}"
                                     Background="{DynamicResource LuminaBorderBrush}"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
@@ -42,7 +57,7 @@
 
                         <Border Name="PART_Line"
                                 Grid.Row="1"
-                                Width="2"
+                                Width="{DynamicResource LuminaTimelineItemLineWidth}"
                                 Background="{DynamicResource LuminaBorderBrush}"
                                 HorizontalAlignment="Center" />
                     </Grid>
@@ -50,7 +65,7 @@
                     <ContentPresenter Name="PART_Header"
                                       Grid.Column="2"
                                       Grid.Row="0"
-                                      Margin="10,3,0,0"
+                                      Margin="{DynamicResource LuminaTimelineItemHeaderMargin}"
                                       Content="{TemplateBinding Header}"
                                       ContentTemplate="{TemplateBinding HeaderTemplate}"
                                       FontWeight="DemiBold"
@@ -59,18 +74,18 @@
                     <ContentPresenter Name="PART_Content"
                                       Grid.Column="2"
                                       Grid.Row="1"
-                                      Margin="10,4,0,0"
+                                      Margin="{DynamicResource LuminaTimelineItemContentMargin}"
                                       Content="{TemplateBinding Content}"
                                       ContentTemplate="{TemplateBinding ContentTemplate}"
                                       TextElement.Foreground="{DynamicResource LuminaTextMutedBrush}"
-                                      TextElement.FontSize="13" />
+                                      TextElement.FontSize="{DynamicResource LuminaTimelineItemContentFontSize}" />
 
                     <TextBlock Name="PART_Time"
                                Grid.Column="2"
                                Grid.Row="2"
-                               Margin="10,5,0,16"
+                               Margin="{DynamicResource LuminaTimelineItemTimeMargin}"
                                Text="{TemplateBinding DisplayTime}"
-                               FontSize="12"
+                               FontSize="{DynamicResource LuminaTimelineItemTimeFontSize}"
                                Foreground="{DynamicResource LuminaTextMutedBrush}" />
                 </Grid>
             </ControlTemplate>
@@ -86,19 +101,19 @@
 
         <Style Selector="^:left /template/ ContentPresenter#PART_Header">
             <Setter Property="Grid.Column" Value="0" />
-            <Setter Property="Margin" Value="0,3,10,0" />
+            <Setter Property="Margin" Value="{DynamicResource LuminaTimelineItemLeftHeaderMargin}" />
             <Setter Property="HorizontalAlignment" Value="Right" />
         </Style>
 
         <Style Selector="^:left /template/ ContentPresenter#PART_Content">
             <Setter Property="Grid.Column" Value="0" />
-            <Setter Property="Margin" Value="0,4,10,0" />
+            <Setter Property="Margin" Value="{DynamicResource LuminaTimelineItemLeftContentMargin}" />
             <Setter Property="HorizontalAlignment" Value="Right" />
         </Style>
 
         <Style Selector="^:left /template/ TextBlock#PART_Time">
             <Setter Property="Grid.Column" Value="0" />
-            <Setter Property="Margin" Value="0,5,10,16" />
+            <Setter Property="Margin" Value="{DynamicResource LuminaTimelineItemLeftTimeMargin}" />
             <Setter Property="HorizontalAlignment" Value="Right" />
             <Setter Property="TextAlignment" Value="Right" />
         </Style>
@@ -106,7 +121,7 @@
         <Style Selector="^:separate /template/ TextBlock#PART_Time">
             <Setter Property="Grid.Column" Value="0" />
             <Setter Property="Grid.Row" Value="0" />
-            <Setter Property="Margin" Value="0,4,10,0" />
+            <Setter Property="Margin" Value="{DynamicResource LuminaTimelineItemSeparateTimeMargin}" />
             <Setter Property="HorizontalAlignment" Value="Right" />
             <Setter Property="TextAlignment" Value="Right" />
         </Style>

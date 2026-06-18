@@ -2,6 +2,17 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:lumina="using:LuminaUI.Controls">
 
+    <x:Double x:Key="LuminaDescriptionsItemColumnSpacing">14</x:Double>
+    <x:Double x:Key="LuminaDescriptionsItemTopSpacing">4</x:Double>
+    <x:Double x:Key="LuminaDescriptionsItemTopLabelFontSize">12</x:Double>
+    <Thickness x:Key="LuminaDescriptionsItemBorderLinesBorderThickness">0,0,0,1</Thickness>
+    <Thickness x:Key="LuminaDescriptionsItemBorderLinesPadding">0,9</Thickness>
+    <Thickness x:Key="LuminaPropertyItemRowBorderThickness">0,0,0,1</Thickness>
+    <Thickness x:Key="LuminaPropertyItemNamePadding">10,7</Thickness>
+    <Thickness x:Key="LuminaPropertyItemNameBorderThickness">0,0,1,0</Thickness>
+    <Thickness x:Key="LuminaPropertyItemContentPadding">10,5</Thickness>
+    <Thickness x:Key="LuminaRatingItemMargin">0,0,4,0</Thickness>
+
     <ControlTheme x:Key="{x:Type lumina:LuminaDescriptions}" TargetType="lumina:LuminaDescriptions">
         <Setter Property="Template">
             <ControlTemplate TargetType="lumina:LuminaDescriptions">
@@ -31,7 +42,7 @@
                         BorderBrush="{DynamicResource LuminaDividerBrush}"
                         BorderThickness="0"
                         Padding="0">
-                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="{DynamicResource LuminaDescriptionsItemColumnSpacing}">
                         <ContentControl Name="PART_Label"
                                         Grid.Column="0"
                                         MinWidth="0"
@@ -73,13 +84,13 @@
                             BorderBrush="{DynamicResource LuminaDividerBrush}"
                             BorderThickness="0"
                             Padding="0">
-                        <StackPanel Spacing="4">
+                        <StackPanel Spacing="{DynamicResource LuminaDescriptionsItemTopSpacing}">
                             <ContentControl Name="PART_Label"
                                             Width="{TemplateBinding LabelWidth}"
                                             Content="{TemplateBinding Label}"
                                             ContentTemplate="{TemplateBinding LabelTemplate}"
                                             TextElement.Foreground="{DynamicResource LuminaTextTertiaryBrush}"
-                                            TextElement.FontSize="12"
+                                            TextElement.FontSize="{DynamicResource LuminaDescriptionsItemTopLabelFontSize}"
                                             TextElement.FontWeight="DemiBold">
                                 <ContentControl.DataTemplates>
                                     <DataTemplate DataType="x:String">
@@ -111,8 +122,8 @@
         </Style>
 
         <Style Selector="^[ShowBorderLines=True] /template/ Border#PART_RowBorder">
-            <Setter Property="BorderThickness" Value="0,0,0,1" />
-            <Setter Property="Padding" Value="0,9" />
+            <Setter Property="BorderThickness" Value="{DynamicResource LuminaDescriptionsItemBorderLinesBorderThickness}" />
+            <Setter Property="Padding" Value="{DynamicResource LuminaDescriptionsItemBorderLinesPadding}" />
         </Style>
 
         <Style Selector="^[ItemAlignment=Center] /template/ ContentControl#PART_Label">
@@ -165,14 +176,14 @@
                 <Border Name="PART_RowBorder"
                         Background="#00FFFFFF"
                         BorderBrush="{DynamicResource LuminaDividerBrush}"
-                        BorderThickness="0,0,0,1">
+                        BorderThickness="{DynamicResource LuminaPropertyItemRowBorderThickness}">
                     <Grid ColumnDefinitions="Auto,*">
                         <Border Name="PART_NameCell"
                                 Width="{TemplateBinding LabelWidth}"
-                                Padding="10,7"
+                                Padding="{DynamicResource LuminaPropertyItemNamePadding}"
                                 Background="{DynamicResource LuminaHoverBackgroundBrush}"
                                 BorderBrush="{DynamicResource LuminaDividerBrush}"
-                                BorderThickness="0,0,1,0">
+                                BorderThickness="{DynamicResource LuminaPropertyItemNameBorderThickness}">
                             <ContentControl Content="{TemplateBinding PropertyName}"
                                             ContentTemplate="{TemplateBinding PropertyNameTemplate}"
                                             VerticalAlignment="Center"
@@ -187,7 +198,7 @@
                         </Border>
 
                         <Border Grid.Column="1"
-                                Padding="10,5"
+                                Padding="{DynamicResource LuminaPropertyItemContentPadding}"
                                 MinWidth="0">
                             <ContentControl Content="{TemplateBinding Content}"
                                             ContentTemplate="{TemplateBinding ContentTemplate}"
@@ -233,7 +244,7 @@
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Foreground" Value="{DynamicResource LuminaWarningBrush}" />
         <Setter Property="Background" Value="{DynamicResource LuminaBorderStrongBrush}" />
-        <Setter Property="Margin" Value="0,0,4,0" />
+        <Setter Property="Margin" Value="{DynamicResource LuminaRatingItemMargin}" />
         <Setter Property="Template">
             <ControlTemplate TargetType="lumina:LuminaRatingItem">
                 <Grid Width="{TemplateBinding Size}"

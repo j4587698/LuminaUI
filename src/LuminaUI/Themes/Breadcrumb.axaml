@@ -2,6 +2,15 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:lumina="using:LuminaUI.Controls">
 
+    <x:Double x:Key="LuminaBreadcrumbItemMinHeight">30</x:Double>
+    <Thickness x:Key="LuminaBreadcrumbItemPadding">7,4</Thickness>
+    <CornerRadius x:Key="LuminaBreadcrumbItemCornerRadius">6</CornerRadius>
+    <x:Double x:Key="LuminaBreadcrumbItemSpacing">6</x:Double>
+    <x:Double x:Key="LuminaBreadcrumbItemIconFontSize">13</x:Double>
+    <x:Double x:Key="LuminaBreadcrumbItemContentFontSize">14</x:Double>
+    <Thickness x:Key="LuminaBreadcrumbSeparatorMargin">4,0</Thickness>
+    <x:Double x:Key="LuminaBreadcrumbSeparatorFontSize">13</x:Double>
+
     <ControlTheme x:Key="{x:Type lumina:LuminaBreadcrumb}"
                   TargetType="lumina:LuminaBreadcrumb">
         <Setter Property="ItemsPanel">
@@ -26,25 +35,25 @@
                 <Grid ColumnDefinitions="Auto,Auto"
                       VerticalAlignment="Center">
                     <Border Name="PART_ItemRoot"
-                            MinHeight="30"
-                            Padding="7,4"
-                            CornerRadius="6"
+                            MinHeight="{DynamicResource LuminaBreadcrumbItemMinHeight}"
+                            Padding="{DynamicResource LuminaBreadcrumbItemPadding}"
+                            CornerRadius="{DynamicResource LuminaBreadcrumbItemCornerRadius}"
                             Background="Transparent">
                         <StackPanel Orientation="Horizontal"
-                                    Spacing="6"
+                                    Spacing="{DynamicResource LuminaBreadcrumbItemSpacing}"
                                     VerticalAlignment="Center">
                             <ContentPresenter Content="{TemplateBinding Icon}"
                                               ContentTemplate="{TemplateBinding IconTemplate}"
                                               IsVisible="{TemplateBinding Icon, Converter={x:Static ObjectConverters.IsNotNull}}"
                                               VerticalAlignment="Center"
-                                              TextElement.FontSize="13"
+                                              TextElement.FontSize="{DynamicResource LuminaBreadcrumbItemIconFontSize}"
                                               TextElement.FontWeight="SemiBold"
                                               TextElement.Foreground="{TemplateBinding Foreground}" />
                             <ContentPresenter Content="{TemplateBinding Content}"
                                               ContentTemplate="{TemplateBinding ContentTemplate}"
                                               VerticalAlignment="Center"
                                               RecognizesAccessKey="True"
-                                              TextElement.FontSize="14"
+                                              TextElement.FontSize="{DynamicResource LuminaBreadcrumbItemContentFontSize}"
                                               TextElement.FontWeight="SemiBold"
                                               TextElement.Foreground="{TemplateBinding Foreground}" />
                         </StackPanel>
@@ -52,10 +61,10 @@
 
                     <ContentPresenter Name="PART_SeparatorPresenter"
                                       Grid.Column="1"
-                                      Margin="4,0"
+                                      Margin="{DynamicResource LuminaBreadcrumbSeparatorMargin}"
                                       Content="{TemplateBinding Separator}"
                                       VerticalAlignment="Center"
-                                      TextElement.FontSize="13"
+                                      TextElement.FontSize="{DynamicResource LuminaBreadcrumbSeparatorFontSize}"
                                       TextElement.FontWeight="SemiBold"
                                       TextElement.Foreground="{DynamicResource LuminaTextMutedBrush}" />
                 </Grid>

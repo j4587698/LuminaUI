@@ -8,6 +8,30 @@
     <converters:CornerRadiusFilterConverter x:Key="LuminaSplitButtonRightCornerRadiusFilter"
                                             Filter="TopRight,BottomRight" />
 
+    <x:Double x:Key="LuminaDropDownButtonContentSpacing">8</x:Double>
+    <x:Double x:Key="LuminaDropDownButtonGlyphSize">12</x:Double>
+    <x:Double x:Key="LuminaSplitButtonDisabledOpacity">0.5</x:Double>
+    <Thickness x:Key="LuminaSplitButtonPrimaryBorderThickness">1,1,0,1</Thickness>
+    <Thickness x:Key="LuminaSplitButtonSecondaryPadding">0</Thickness>
+    <Thickness x:Key="LuminaSplitButtonSecondaryBorderThickness">0,1,1,1</Thickness>
+    <x:Double x:Key="LuminaSplitButtonGlyphSize">12</x:Double>
+    <x:Double x:Key="LuminaSplitButtonDividerWidth">1</x:Double>
+    <x:Double x:Key="LuminaSplitButtonDividerHeight">18</x:Double>
+    <x:Double x:Key="LuminaCommandBarOverflowIconSize">16</x:Double>
+    <x:Double x:Key="LuminaCommandBarPrimaryCommandsSpacing">2</x:Double>
+    <x:Double x:Key="LuminaCommandBarOverflowMinWidth">144</x:Double>
+    <x:Double x:Key="LuminaCommandBarOverflowMaxWidth">240</x:Double>
+    <x:Double x:Key="LuminaCommandBarOverflowMaxHeight">360</x:Double>
+    <Thickness x:Key="LuminaCommandBarOverflowMargin">0,8,0,0</Thickness>
+    <Thickness x:Key="LuminaCommandBarOverflowPadding">4</Thickness>
+    <Thickness x:Key="LuminaCommandBarOverflowBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaCommandBarOverflowCornerRadius">8</CornerRadius>
+    <x:Double x:Key="LuminaCommandBarOverflowItemMinWidth">136</x:Double>
+    <x:Double x:Key="LuminaCommandBarOverflowItemMinHeight">34</x:Double>
+    <Thickness x:Key="LuminaCommandBarOverflowItemPadding">10,8</Thickness>
+    <x:Double x:Key="LuminaCommandBarOverflowItemSpacing">8</x:Double>
+    <x:Double x:Key="LuminaCommandBarOverflowIconPresenterWidth">20</x:Double>
+
     <ControlTheme x:Key="{x:Type AutoCompleteBox}" TargetType="AutoCompleteBox" BasedOn="{StaticResource {x:Type AutoCompleteBox}}">
         <Setter Property="MinHeight" Value="36" />
         <Setter Property="Padding" Value="12,6" />
@@ -40,11 +64,11 @@
                         Padding="{TemplateBinding Padding}">
                     <DockPanel HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                               HorizontalSpacing="8">
+                               HorizontalSpacing="{DynamicResource LuminaDropDownButtonContentSpacing}">
                         <PathIcon Name="DropDownGlyph"
                                   DockPanel.Dock="Right"
-                                  Width="12"
-                                  Height="12"
+                                  Width="{DynamicResource LuminaDropDownButtonGlyphSize}"
+                                  Height="{DynamicResource LuminaDropDownButtonGlyphSize}"
                                   HorizontalAlignment="Center"
                                   VerticalAlignment="Center"
                                   Data="M7,9 L12,14 L17,9"
@@ -288,7 +312,7 @@
         </Style>
 
         <Style Selector="^:disabled">
-            <Setter Property="Opacity" Value="0.5" />
+            <Setter Property="Opacity" Value="{DynamicResource LuminaSplitButtonDisabledOpacity}" />
         </Style>
 
         <Style Selector="^[(lumina|LuminaOptions.PopupType)=Sheet]">
@@ -320,7 +344,7 @@
                             VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="1,1,0,1"
+                            BorderThickness="{DynamicResource LuminaSplitButtonPrimaryBorderThickness}"
                             Command="{TemplateBinding Command}"
                             CommandParameter="{TemplateBinding CommandParameter}"
                             Content="{TemplateBinding Content}"
@@ -336,26 +360,26 @@
                             Grid.Column="1"
                             Width="{TemplateBinding MinHeight}"
                             MinHeight="{TemplateBinding MinHeight}"
-                            Padding="0"
+                            Padding="{DynamicResource LuminaSplitButtonSecondaryPadding}"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             HorizontalContentAlignment="Center"
                             VerticalContentAlignment="Center"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="0,1,1,1"
+                            BorderThickness="{DynamicResource LuminaSplitButtonSecondaryBorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius, Converter={StaticResource LuminaSplitButtonRightCornerRadiusFilter}}"
                             Foreground="{TemplateBinding Foreground}"
                             Theme="{StaticResource LuminaSplitButtonElement}">
-                        <PathIcon Width="12"
-                                  Height="12"
+                        <PathIcon Width="{DynamicResource LuminaSplitButtonGlyphSize}"
+                                  Height="{DynamicResource LuminaSplitButtonGlyphSize}"
                                   Data="M7,9 L12,14 L17,9"
                                   Foreground="{Binding $parent[Button].Foreground}" />
                     </Button>
 
                     <Border Grid.Column="1"
-                            Width="1"
-                            Height="18"
+                            Width="{DynamicResource LuminaSplitButtonDividerWidth}"
+                            Height="{DynamicResource LuminaSplitButtonDividerHeight}"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Background="{DynamicResource LuminaDividerBrush}" />
@@ -370,7 +394,7 @@
         </Style>
 
         <Style Selector="^:disabled">
-            <Setter Property="Opacity" Value="0.5" />
+            <Setter Property="Opacity" Value="{DynamicResource LuminaSplitButtonDisabledOpacity}" />
         </Style>
 
         <Style Selector="^.Small">
@@ -585,8 +609,8 @@
                                               IsCompact="True"
                                               IsVisible="{TemplateBinding IsOverflowButtonVisible}">
                                 <CommandBarButton.Icon>
-                                    <PathIcon Width="16"
-                                              Height="16"
+                                    <PathIcon Width="{DynamicResource LuminaCommandBarOverflowIconSize}"
+                                              Height="{DynamicResource LuminaCommandBarOverflowIconSize}"
                                               Data="M5,12 A2,2 0 1,0 5,12.01 Z M12,12 A2,2 0 1,0 12,12.01 Z M19,12 A2,2 0 1,0 19,12.01 Z" />
                                 </CommandBarButton.Icon>
                             </CommandBarButton>
@@ -603,7 +627,7 @@
                                           ClipToBounds="True">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Horizontal" Spacing="2" />
+                                        <StackPanel Orientation="Horizontal" Spacing="{DynamicResource LuminaCommandBarPrimaryCommandsSpacing}" />
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
                             </ItemsControl>
@@ -615,16 +639,16 @@
                                Placement="Bottom"
                                IsLightDismissEnabled="True"
                                WindowManagerAddShadowHint="False">
-                            <Border MinWidth="144"
-                                    MaxWidth="240"
-                                    MaxHeight="360"
-                                    Margin="0,8,0,0"
-                                    Padding="4"
+                            <Border MinWidth="{DynamicResource LuminaCommandBarOverflowMinWidth}"
+                                    MaxWidth="{DynamicResource LuminaCommandBarOverflowMaxWidth}"
+                                    MaxHeight="{DynamicResource LuminaCommandBarOverflowMaxHeight}"
+                                    Margin="{DynamicResource LuminaCommandBarOverflowMargin}"
+                                    Padding="{DynamicResource LuminaCommandBarOverflowPadding}"
                                     Background="{DynamicResource LuminaPopoverBrush}"
                                     BorderBrush="{DynamicResource LuminaBorderBrush}"
-                                    BorderThickness="1"
+                                    BorderThickness="{DynamicResource LuminaCommandBarOverflowBorderThickness}"
                                     BoxShadow="{DynamicResource LuminaShadowPopup}"
-                                    CornerRadius="8">
+                                    CornerRadius="{DynamicResource LuminaCommandBarOverflowCornerRadius}">
                                 <ItemsControl Name="PART_OverflowPresenter"
                                               ItemsSource="{Binding OverflowItems, RelativeSource={RelativeSource TemplatedParent}}"
                                               HorizontalAlignment="Stretch">
@@ -715,18 +739,18 @@
             <Setter Property="HorizontalContentAlignment" Value="Left" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="Width" Value="{x:Static x:Double.NaN}" />
-            <Setter Property="MinWidth" Value="136" />
+            <Setter Property="MinWidth" Value="{DynamicResource LuminaCommandBarOverflowItemMinWidth}" />
             <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
             <Setter Property="Background" Value="Transparent" />
-            <Setter Property="MinHeight" Value="34" />
-            <Setter Property="Padding" Value="10,8" />
+            <Setter Property="MinHeight" Value="{DynamicResource LuminaCommandBarOverflowItemMinHeight}" />
+            <Setter Property="Padding" Value="{DynamicResource LuminaCommandBarOverflowItemPadding}" />
             <Style Selector="^ /template/ StackPanel#PART_LayoutRoot">
                 <Setter Property="Orientation" Value="Horizontal" />
                 <Setter Property="HorizontalAlignment" Value="Stretch" />
-                <Setter Property="Spacing" Value="8" />
+                <Setter Property="Spacing" Value="{DynamicResource LuminaCommandBarOverflowItemSpacing}" />
             </Style>
             <Style Selector="^ /template/ ContentPresenter#PART_IconPresenter">
-                <Setter Property="Width" Value="20" />
+                <Setter Property="Width" Value="{DynamicResource LuminaCommandBarOverflowIconPresenterWidth}" />
                 <Setter Property="HorizontalAlignment" Value="Center" />
                 <Setter Property="VerticalAlignment" Value="Center" />
             </Style>
@@ -796,18 +820,18 @@
             <Setter Property="HorizontalContentAlignment" Value="Left" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="Width" Value="{x:Static x:Double.NaN}" />
-            <Setter Property="MinWidth" Value="136" />
+            <Setter Property="MinWidth" Value="{DynamicResource LuminaCommandBarOverflowItemMinWidth}" />
             <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
             <Setter Property="Background" Value="Transparent" />
-            <Setter Property="MinHeight" Value="34" />
-            <Setter Property="Padding" Value="10,8" />
+            <Setter Property="MinHeight" Value="{DynamicResource LuminaCommandBarOverflowItemMinHeight}" />
+            <Setter Property="Padding" Value="{DynamicResource LuminaCommandBarOverflowItemPadding}" />
             <Style Selector="^ /template/ StackPanel#PART_LayoutRoot">
                 <Setter Property="Orientation" Value="Horizontal" />
                 <Setter Property="HorizontalAlignment" Value="Stretch" />
-                <Setter Property="Spacing" Value="8" />
+                <Setter Property="Spacing" Value="{DynamicResource LuminaCommandBarOverflowItemSpacing}" />
             </Style>
             <Style Selector="^ /template/ ContentPresenter#PART_IconPresenter">
-                <Setter Property="Width" Value="20" />
+                <Setter Property="Width" Value="{DynamicResource LuminaCommandBarOverflowIconPresenterWidth}" />
                 <Setter Property="HorizontalAlignment" Value="Center" />
                 <Setter Property="VerticalAlignment" Value="Center" />
             </Style>

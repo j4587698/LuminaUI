@@ -2,6 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
 
+    <x:Double x:Key="LuminaButtonLoadingStrokeThickness">2</x:Double>
+    <x:Double x:Key="LuminaButtonDisabledOpacity">0.5</x:Double>
+    <x:Double x:Key="LuminaButtonActionSheetItemMinHeight">44</x:Double>
+    <Thickness x:Key="LuminaButtonActionSheetItemPadding">12,10</Thickness>
+    <CornerRadius x:Key="LuminaButtonActionSheetItemCornerRadius">10</CornerRadius>
+    <x:Double x:Key="LuminaCloseButtonDisabledOpacity">0.45</x:Double>
+
     <ControlTheme x:Key="{x:Type lumina:LuminaButtonPresenter}" TargetType="lumina:LuminaButtonPresenter">
         <Setter Property="Template">
             <ControlTemplate TargetType="lumina:LuminaButtonPresenter">
@@ -31,7 +38,7 @@
                                            IsVisible="{TemplateBinding ShowsLoading}"
                                            Kind="{TemplateBinding LoadingKind}"
                                            Size="{TemplateBinding IconSize}"
-                                           StrokeThickness="2" />
+                                           StrokeThickness="{DynamicResource LuminaButtonLoadingStrokeThickness}" />
 
                     <ContentPresenter Name="PART_ContentPresenter"
                                       Content="{TemplateBinding Content}"
@@ -103,7 +110,7 @@
         <!-- States: Disabled & Pressed -->
         <!-- ========================================== -->
         <Style Selector="^:disabled">
-            <Setter Property="Opacity" Value="0.5" />
+            <Setter Property="Opacity" Value="{DynamicResource LuminaButtonDisabledOpacity}" />
         </Style>
         
         <!-- Ripple effect replacement for mobile & AOT friendliness -->
@@ -443,9 +450,9 @@
         </Style>
 
         <Style Selector="^.ActionSheetItem">
-            <Setter Property="MinHeight" Value="44" />
-            <Setter Property="Padding" Value="12,10" />
-            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="MinHeight" Value="{DynamicResource LuminaButtonActionSheetItemMinHeight}" />
+            <Setter Property="Padding" Value="{DynamicResource LuminaButtonActionSheetItemPadding}" />
+            <Setter Property="CornerRadius" Value="{DynamicResource LuminaButtonActionSheetItemCornerRadius}" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="Transparent" />
             <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
@@ -597,7 +604,7 @@
         </Style>
 
         <Style Selector="^:disabled">
-            <Setter Property="Opacity" Value="0.45" />
+            <Setter Property="Opacity" Value="{DynamicResource LuminaCloseButtonDisabledOpacity}" />
         </Style>
 
         <Style Selector="^:focus-visible /template/ Border#PART_Border">

@@ -1,43 +1,80 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <x:Double x:Key="LuminaTextBlockFontSize">14</x:Double>
+    <x:Double x:Key="LuminaTextBlockDisplayFontSize">36</x:Double>
+    <x:Double x:Key="LuminaTextBlockTitleFontSize">28</x:Double>
+    <x:Double x:Key="LuminaTextBlockSectionTitleFontSize">20</x:Double>
+    <x:Double x:Key="LuminaTextBlockLabelFontSize">13</x:Double>
+    <x:Double x:Key="LuminaTextBlockCaptionFontSize">12</x:Double>
+    <Thickness x:Key="LuminaTextBlockCodePadding">4,2</Thickness>
+    <Thickness x:Key="LuminaTextBlockMarkPadding">3,1</Thickness>
+    <Thickness x:Key="LuminaSelectableTextBlockCodePadding">10</Thickness>
+    <Thickness x:Key="LuminaBorderBaseThickness">0</Thickness>
+    <CornerRadius x:Key="LuminaBorderBaseCornerRadius">0</CornerRadius>
+    <Thickness x:Key="LuminaBorderSurfaceThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaBorderSurfaceCornerRadius">8</CornerRadius>
+    <CornerRadius x:Key="LuminaBorderGlassCornerRadius">12</CornerRadius>
+    <x:Double x:Key="LuminaLabelFontSize">14</x:Double>
+    <Thickness x:Key="LuminaLabelPadding">0</Thickness>
+    <x:Double x:Key="LuminaLabelTagMinHeight">24</x:Double>
+    <Thickness x:Key="LuminaLabelTagPadding">8,2</Thickness>
+    <CornerRadius x:Key="LuminaLabelTagCornerRadius">12</CornerRadius>
+    <x:Double x:Key="LuminaLabelTagFontSize">12</x:Double>
+    <Thickness x:Key="LuminaLabelTagBorderThickness">1</Thickness>
+    <Thickness x:Key="LuminaHyperlinkButtonPadding">0</Thickness>
+    <x:Double x:Key="LuminaHyperlinkButtonFontSize">14</x:Double>
+    <Thickness x:Key="LuminaHyperlinkButtonBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaHyperlinkButtonCornerRadius">6</CornerRadius>
+    <Thickness x:Key="LuminaHyperlinkButtonLikePadding">12,6</Thickness>
+    <Thickness x:Key="LuminaDataValidationErrorMargin">0,6,0,0</Thickness>
+    <x:Double x:Key="LuminaDataValidationErrorFontSize">12</x:Double>
+    <x:Double x:Key="LuminaPathIconSize">16</x:Double>
+    <Thickness x:Key="LuminaScrollViewerBorderThickness">0</Thickness>
+    <Thickness x:Key="LuminaScrollViewerPadding">0</Thickness>
+    <x:Double x:Key="LuminaScrollBarMinSize">10</x:Double>
+    <x:Double x:Key="LuminaScrollBarOpacity">0.72</x:Double>
+    <x:Double x:Key="LuminaScrollBarPointerOverOpacity">1</x:Double>
+    <Thickness x:Key="LuminaThumbBorderThickness">0</Thickness>
+    <CornerRadius x:Key="LuminaThumbCornerRadius">999</CornerRadius>
+
     <ControlTheme x:Key="{x:Type TextBlock}" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
-        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontSize" Value="{DynamicResource LuminaTextBlockFontSize}" />
         <Setter Property="TextWrapping" Value="NoWrap" />
 
         <Style Selector="^.Display">
-            <Setter Property="FontSize" Value="36" />
+            <Setter Property="FontSize" Value="{DynamicResource LuminaTextBlockDisplayFontSize}" />
             <Setter Property="FontWeight" Value="Black" />
             <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
         </Style>
 
         <Style Selector="^.Title">
-            <Setter Property="FontSize" Value="28" />
+            <Setter Property="FontSize" Value="{DynamicResource LuminaTextBlockTitleFontSize}" />
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
         </Style>
 
         <Style Selector="^.SectionTitle">
-            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontSize" Value="{DynamicResource LuminaTextBlockSectionTitleFontSize}" />
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
         </Style>
 
         <Style Selector="^.Label">
-            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontSize" Value="{DynamicResource LuminaTextBlockLabelFontSize}" />
             <Setter Property="FontWeight" Value="SemiBold" />
             <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
         </Style>
 
         <Style Selector="^.Body">
-            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontSize" Value="{DynamicResource LuminaTextBlockFontSize}" />
             <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
             <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
 
         <Style Selector="^.Caption">
-            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontSize" Value="{DynamicResource LuminaTextBlockCaptionFontSize}" />
             <Setter Property="Foreground" Value="{DynamicResource LuminaTextTertiaryBrush}" />
             <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
@@ -60,16 +97,16 @@
 
         <Style Selector="^.Code">
             <Setter Property="FontFamily" Value="Consolas" />
-            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontSize" Value="{DynamicResource LuminaTextBlockCaptionFontSize}" />
             <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
-            <Setter Property="Padding" Value="4,2" />
+            <Setter Property="Padding" Value="{DynamicResource LuminaTextBlockCodePadding}" />
             <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
         </Style>
 
         <Style Selector="^.Mark">
             <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBgBrush}" />
             <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
-            <Setter Property="Padding" Value="3,1" />
+            <Setter Property="Padding" Value="{DynamicResource LuminaTextBlockMarkPadding}" />
         </Style>
 
         <Style Selector="^.Underline">
@@ -87,15 +124,15 @@
 
     <ControlTheme x:Key="{x:Type SelectableTextBlock}" TargetType="SelectableTextBlock" BasedOn="{StaticResource {x:Type SelectableTextBlock}}">
         <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
-        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontSize" Value="{DynamicResource LuminaTextBlockFontSize}" />
         <Setter Property="SelectionBrush" Value="{DynamicResource LuminaPrimaryBgBrush}" />
         <Setter Property="SelectionForegroundBrush" Value="{DynamicResource LuminaTextPrimaryBrush}" />
 
         <Style Selector="^.Code">
             <Setter Property="FontFamily" Value="Consolas" />
-            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontSize" Value="{DynamicResource LuminaTextBlockCaptionFontSize}" />
             <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
-            <Setter Property="Padding" Value="10" />
+            <Setter Property="Padding" Value="{DynamicResource LuminaSelectableTextBlockCodePadding}" />
             <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
         </Style>
     </ControlTheme>
@@ -103,36 +140,36 @@
     <ControlTheme x:Key="{x:Type Border}" TargetType="Border">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaBorderBaseThickness}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaBorderBaseCornerRadius}" />
 
         <Style Selector="^.Surface">
             <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="BorderThickness" Value="{DynamicResource LuminaBorderSurfaceThickness}" />
+            <Setter Property="CornerRadius" Value="{DynamicResource LuminaBorderSurfaceCornerRadius}" />
         </Style>
 
         <Style Selector="^.Elevated">
             <Setter Property="Background" Value="{DynamicResource LuminaSurfaceElevatedBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderStrongBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="BorderThickness" Value="{DynamicResource LuminaBorderSurfaceThickness}" />
+            <Setter Property="CornerRadius" Value="{DynamicResource LuminaBorderSurfaceCornerRadius}" />
             <Setter Property="BoxShadow" Value="{DynamicResource LuminaShadowElevated}" />
         </Style>
 
         <Style Selector="^.Subtle">
             <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderSubtleBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="BorderThickness" Value="{DynamicResource LuminaBorderSurfaceThickness}" />
+            <Setter Property="CornerRadius" Value="{DynamicResource LuminaBorderSurfaceCornerRadius}" />
         </Style>
 
         <Style Selector="^.Glass">
             <Setter Property="Background" Value="{DynamicResource LuminaCardGlassTintBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource LuminaCardGlassBorderBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="BorderThickness" Value="{DynamicResource LuminaBorderSurfaceThickness}" />
+            <Setter Property="CornerRadius" Value="{DynamicResource LuminaBorderGlassCornerRadius}" />
         </Style>
 
         <Style Selector="^.Interactive">
@@ -157,36 +194,36 @@
         <Style Selector="^.Primary">
             <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBgBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="BorderThickness" Value="{DynamicResource LuminaBorderSurfaceThickness}" />
+            <Setter Property="CornerRadius" Value="{DynamicResource LuminaBorderSurfaceCornerRadius}" />
         </Style>
 
         <Style Selector="^.Success">
             <Setter Property="Background" Value="{DynamicResource LuminaSuccessBgBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource LuminaSuccessBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="BorderThickness" Value="{DynamicResource LuminaBorderSurfaceThickness}" />
+            <Setter Property="CornerRadius" Value="{DynamicResource LuminaBorderSurfaceCornerRadius}" />
         </Style>
 
         <Style Selector="^.Warning">
             <Setter Property="Background" Value="{DynamicResource LuminaWarningBgBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource LuminaWarningBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="BorderThickness" Value="{DynamicResource LuminaBorderSurfaceThickness}" />
+            <Setter Property="CornerRadius" Value="{DynamicResource LuminaBorderSurfaceCornerRadius}" />
         </Style>
 
         <Style Selector="^.Danger">
             <Setter Property="Background" Value="{DynamicResource LuminaDangerBgBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource LuminaDangerBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="BorderThickness" Value="{DynamicResource LuminaBorderSurfaceThickness}" />
+            <Setter Property="CornerRadius" Value="{DynamicResource LuminaBorderSurfaceCornerRadius}" />
         </Style>
     </ControlTheme>
 
     <ControlTheme x:Key="{x:Type Label}" TargetType="Label">
         <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="Padding" Value="0" />
+        <Setter Property="FontSize" Value="{DynamicResource LuminaLabelFontSize}" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaLabelPadding}" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
@@ -230,15 +267,15 @@
 
         <Style Selector="^.Tag">
             <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="MinHeight" Value="24" />
-            <Setter Property="Padding" Value="8,2" />
-            <Setter Property="CornerRadius" Value="12" />
-            <Setter Property="FontSize" Value="12" />
+            <Setter Property="MinHeight" Value="{DynamicResource LuminaLabelTagMinHeight}" />
+            <Setter Property="Padding" Value="{DynamicResource LuminaLabelTagPadding}" />
+            <Setter Property="CornerRadius" Value="{DynamicResource LuminaLabelTagCornerRadius}" />
+            <Setter Property="FontSize" Value="{DynamicResource LuminaLabelTagFontSize}" />
             <Setter Property="FontWeight" Value="SemiBold" />
             <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
             <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderThickness" Value="{DynamicResource LuminaLabelTagBorderThickness}" />
         </Style>
 
         <Style Selector="^.Tag.Primary">
@@ -274,14 +311,14 @@
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaHyperlinkButtonPadding}" />
+        <Setter Property="FontSize" Value="{DynamicResource LuminaHyperlinkButtonFontSize}" />
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="Foreground" Value="{DynamicResource LuminaPrimaryBrush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaHyperlinkButtonBorderThickness}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaHyperlinkButtonCornerRadius}" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <ControlTemplate TargetType="HyperlinkButton">
@@ -320,7 +357,7 @@
         </Style>
 
         <Style Selector="^.ButtonLike">
-            <Setter Property="Padding" Value="12,6" />
+            <Setter Property="Padding" Value="{DynamicResource LuminaHyperlinkButtonLikePadding}" />
             <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
         </Style>
 
@@ -338,7 +375,7 @@
             <ControlTemplate TargetType="DataValidationErrors">
                 <DockPanel LastChildFill="True">
                     <ContentControl Name="InlineDataValidationContentControl"
-                                    Margin="0,6,0,0"
+                                    Margin="{DynamicResource LuminaDataValidationErrorMargin}"
                                     Content="{Binding (DataValidationErrors.Errors)}"
                                     ContentTemplate="{TemplateBinding ErrorTemplate}"
                                     DataContext="{TemplateBinding Owner}"
@@ -360,7 +397,7 @@
                 <ItemsControl ItemsSource="{Binding}" Foreground="{DynamicResource LuminaDangerBrush}">
                     <ItemsControl.Styles>
                         <Style Selector="TextBlock">
-                            <Setter Property="FontSize" Value="12" />
+                            <Setter Property="FontSize" Value="{DynamicResource LuminaDataValidationErrorFontSize}" />
                             <Setter Property="Foreground" Value="{DynamicResource LuminaDangerBrush}" />
                             <Setter Property="TextWrapping" Value="Wrap" />
                         </Style>
@@ -371,26 +408,26 @@
     </ControlTheme>
 
     <ControlTheme x:Key="{x:Type PathIcon}" TargetType="PathIcon" BasedOn="{StaticResource {x:Type PathIcon}}">
-        <Setter Property="Width" Value="16" />
-        <Setter Property="Height" Value="16" />
+        <Setter Property="Width" Value="{DynamicResource LuminaPathIconSize}" />
+        <Setter Property="Height" Value="{DynamicResource LuminaPathIconSize}" />
         <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
     </ControlTheme>
 
     <ControlTheme x:Key="{x:Type ScrollViewer}" TargetType="ScrollViewer" BasedOn="{StaticResource {x:Type ScrollViewer}}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Padding" Value="0" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaScrollViewerBorderThickness}" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaScrollViewerPadding}" />
     </ControlTheme>
 
     <ControlTheme x:Key="{x:Type ScrollBar}" TargetType="ScrollBar" BasedOn="{StaticResource {x:Type ScrollBar}}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="MinWidth" Value="10" />
-        <Setter Property="MinHeight" Value="10" />
-        <Setter Property="Opacity" Value="0.72" />
+        <Setter Property="MinWidth" Value="{DynamicResource LuminaScrollBarMinSize}" />
+        <Setter Property="MinHeight" Value="{DynamicResource LuminaScrollBarMinSize}" />
+        <Setter Property="Opacity" Value="{DynamicResource LuminaScrollBarOpacity}" />
 
         <Style Selector="^:pointerover">
-            <Setter Property="Opacity" Value="1" />
+            <Setter Property="Opacity" Value="{DynamicResource LuminaScrollBarPointerOverOpacity}" />
         </Style>
 
         <Style Selector="^ /template/ Thumb">
@@ -405,13 +442,13 @@
     <ControlTheme x:Key="{x:Type Thumb}" TargetType="Thumb">
         <Setter Property="Background" Value="{DynamicResource LuminaBorderStrongBrush}" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaThumbBorderThickness}" />
         <Setter Property="Template">
             <ControlTemplate>
                 <Border Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="999" />
+                        CornerRadius="{DynamicResource LuminaThumbCornerRadius}" />
             </ControlTemplate>
         </Setter>
     </ControlTheme>

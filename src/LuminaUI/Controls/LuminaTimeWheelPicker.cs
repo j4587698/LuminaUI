@@ -52,31 +52,31 @@ internal sealed class LuminaTimeWheelPicker : Grid
         _second = selectedTime.Seconds;
         _isPm = _hour >= 12;
         RowDefinitions = new RowDefinitions("Auto,Auto");
-        RowSpacing = 14.0;
         HorizontalAlignment = HorizontalAlignment.Stretch;
+        LuminaPickerResources.BindResource(this, Grid.RowSpacingProperty, "LuminaWheelPickerRowSpacing");
         _summaryText = new TextBlock
         {
             HorizontalAlignment = HorizontalAlignment.Center,
-            FontSize = 15.0,
             FontWeight = FontWeight.DemiBold
         };
+        LuminaPickerResources.BindResource(_summaryText, TextBlock.FontSizeProperty, "LuminaWheelPickerSummaryFontSize");
         _summaryText.Classes.Add("LuminaWheelSummaryText");
         Border summary = new Border
         {
-            Padding = new Thickness(14.0, 10.0),
-            CornerRadius = new CornerRadius(999.0),
             HorizontalAlignment = HorizontalAlignment.Center,
             Child = _summaryText
         };
+        LuminaPickerResources.BindResource(summary, Border.PaddingProperty, "LuminaWheelPickerSummaryPadding");
+        LuminaPickerResources.BindResource(summary, Border.CornerRadiusProperty, "LuminaWheelPickerSummaryCornerRadius");
         summary.Background = LuminaPickerResources.Brush("LuminaPrimaryBgBrush", Brushes.Transparent);
         _summaryText.Foreground = LuminaPickerResources.Brush("LuminaPrimaryBrush", Brushes.White);
         summary.Classes.Add("LuminaWheelSummary");
         Children.Add(summary);
         Grid wheelGrid = new Grid
         {
-            ColumnSpacing = 8.0,
             HorizontalAlignment = HorizontalAlignment.Stretch
         };
+        LuminaPickerResources.BindResource(wheelGrid, Grid.ColumnSpacingProperty, "LuminaWheelPickerColumnSpacing");
         Grid.SetRow(wheelGrid, 1);
         Children.Add(wheelGrid);
         _hourColumn = AddColumn(wheelGrid, LuminaLocalization.Get("Lumina.Picker.Hour"));
