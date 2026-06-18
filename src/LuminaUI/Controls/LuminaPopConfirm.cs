@@ -445,14 +445,14 @@ public class LuminaPopConfirm : ContentControl
         Grid message = new Grid
         {
             ColumnDefinitions = new ColumnDefinitions("Auto,*"),
-            ColumnSpacing = 12.0
         };
+        LuminaPickerResources.BindResource(message, Grid.ColumnSpacingProperty, "LuminaPopConfirmSheetMessageColumnSpacing");
         message.Children.Add(CreateSheetIcon());
         StackPanel textPanel = new StackPanel
         {
-            Spacing = 8.0,
             HorizontalAlignment = HorizontalAlignment.Stretch
         };
+        LuminaPickerResources.BindResource(textPanel, StackPanel.SpacingProperty, "LuminaPopConfirmSheetContentSpacing");
         Grid.SetColumn(textPanel, 1);
         if (PopupHeader != null)
         {
@@ -481,24 +481,15 @@ public class LuminaPopConfirm : ContentControl
         };
         confirmButton.Classes.Add(Classes.Contains("Danger") ? "Danger" : "Primary");
         confirmButton.Click += OnConfirmClick;
-        StackPanel actions = new StackPanel
-        {
-            Spacing = 10.0,
-            Children =
-            {
-                confirmButton,
-                cancelButton
-            }
-        };
-        return new StackPanel
-        {
-            Spacing = 18.0,
-            Children =
-            {
-                message,
-                actions
-            }
-        };
+        StackPanel actions = new StackPanel();
+        LuminaPickerResources.BindResource(actions, StackPanel.SpacingProperty, "LuminaPopConfirmSheetActionsSpacing");
+        actions.Children.Add(confirmButton);
+        actions.Children.Add(cancelButton);
+        StackPanel layout = new StackPanel();
+        LuminaPickerResources.BindResource(layout, StackPanel.SpacingProperty, "LuminaPopConfirmSheetLayoutSpacing");
+        layout.Children.Add(message);
+        layout.Children.Add(actions);
+        return layout;
     }
 
     private Control CreateSheetIcon()
@@ -508,16 +499,16 @@ public class LuminaPopConfirm : ContentControl
             return new ContentControl
             {
                 Content = Icon,
-                Width = 24.0,
-                Height = 24.0,
+                Width = LuminaPickerResources.Double("LuminaPopConfirmSheetCustomIconSize", 24.0),
+                Height = LuminaPickerResources.Double("LuminaPopConfirmSheetCustomIconSize", 24.0),
                 VerticalAlignment = VerticalAlignment.Top
             };
         }
         PathIcon icon = new PathIcon
         {
             Data = Geometry.Parse("M12 2 L22 20 H2 Z M12 8 V13 M12 16 V18"),
-            Width = 22.0,
-            Height = 22.0,
+            Width = LuminaPickerResources.Double("LuminaPopConfirmSheetDefaultIconSize", 22.0),
+            Height = LuminaPickerResources.Double("LuminaPopConfirmSheetDefaultIconSize", 22.0),
             VerticalAlignment = VerticalAlignment.Top,
             Foreground = Brush("LuminaWarningBrush", Brushes.Orange)
         };
@@ -544,7 +535,9 @@ public class LuminaPopConfirm : ContentControl
             {
                 Text = text,
                 TextWrapping = TextWrapping.Wrap,
-                FontSize = (isHeader ? 18 : 14),
+                FontSize = isHeader
+                    ? LuminaPickerResources.Double("LuminaPopConfirmSheetHeaderFontSize", 18.0)
+                    : LuminaPickerResources.Double("LuminaPopConfirmSheetContentFontSize", 14.0),
                 FontWeight = (isHeader ? FontWeight.DemiBold : FontWeight.Normal)
             };
         }

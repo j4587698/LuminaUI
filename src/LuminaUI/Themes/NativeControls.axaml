@@ -1,6 +1,10 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <Thickness x:Key="LuminaFlyoutPresenterMargin">12</Thickness>
+    <Thickness x:Key="LuminaMenuFlyoutPresenterMargin">12</Thickness>
+    <Thickness x:Key="LuminaContextMenuMargin">12</Thickness>
+
     <ControlTheme x:Key="{x:Type ProgressBar}" TargetType="ProgressBar" BasedOn="{StaticResource {x:Type ProgressBar}}">
         <Setter Property="MinHeight" Value="8" />
         <Setter Property="Background" Value="{DynamicResource LuminaBorderSubtleBrush}" />
@@ -58,7 +62,7 @@
         <Setter Property="TextElement.Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
         <Setter Property="Template">
             <ControlTemplate>
-                <Panel Margin="12" ClipToBounds="False">
+                <Panel Margin="{DynamicResource LuminaFlyoutPresenterMargin}" ClipToBounds="False">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
@@ -94,7 +98,7 @@
         <Setter Property="TextElement.Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
         <Setter Property="Template">
             <ControlTemplate>
-                <Panel Margin="12" ClipToBounds="False">
+                <Panel Margin="{DynamicResource LuminaMenuFlyoutPresenterMargin}" ClipToBounds="False">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
@@ -126,7 +130,7 @@
         <Setter Property="TextElement.Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
         <Setter Property="Template">
             <ControlTemplate>
-                <Panel Margin="12" ClipToBounds="False">
+                <Panel Margin="{DynamicResource LuminaContextMenuMargin}" ClipToBounds="False">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"

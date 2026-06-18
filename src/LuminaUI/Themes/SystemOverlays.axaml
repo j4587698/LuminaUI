@@ -7,11 +7,67 @@
                     xmlns:notifications="clr-namespace:Avalonia.Controls.Notifications;assembly=Avalonia.Controls"
                     xmlns:primitives="clr-namespace:Avalonia.Controls.Primitives;assembly=Avalonia.Controls">
 
+    <x:Double x:Key="LuminaWindowDialogTitleFontSize">12</x:Double>
+    <Thickness x:Key="LuminaWindowDialogFooterPadding">24,8</Thickness>
+    <Thickness x:Key="LuminaWindowDialogFooterBorderThickness">0,1,0,0</Thickness>
+    <x:Double x:Key="LuminaWindowDialogFooterSpacing">12</x:Double>
+    <x:Double x:Key="LuminaWindowMessageBoxTextMaxWidth">420</x:Double>
+    <x:Double x:Key="LuminaWindowMessageBoxTextFontSize">14</x:Double>
+    <Thickness x:Key="LuminaWindowMessageBoxContentMargin">24</Thickness>
+    <x:Double x:Key="LuminaWindowMessageBoxIconSpacing">16</x:Double>
+    <x:Double x:Key="LuminaWindowMessageBoxIconSize">32</x:Double>
+    <x:Double x:Key="LuminaWindowAboutDialogSpacing">8</x:Double>
+    <Thickness x:Key="LuminaWindowAboutDialogMargin">16</Thickness>
+    <x:Double x:Key="LuminaWindowAboutDialogTitleFontSize">20</x:Double>
+    <x:Double x:Key="LuminaEmbeddableControlRootFontSize">14</x:Double>
+    <x:Double x:Key="LuminaWindowDrawnDecorationsTitleBarHeight">40</x:Double>
+    <Thickness x:Key="LuminaWindowDrawnDecorationsFrameThickness">0</Thickness>
+    <Thickness x:Key="LuminaWindowDrawnDecorationsShadowThickness">12</Thickness>
+    <Thickness x:Key="LuminaManagedFileChooserHeaderPadding">14,12</Thickness>
+    <Thickness x:Key="LuminaManagedFileChooserHeaderBorderThickness">0,0,0,1</Thickness>
+    <Thickness x:Key="LuminaManagedFileChooserGoUpMargin">0,0,8,0</Thickness>
+    <x:Double x:Key="LuminaManagedFileChooserIconSize">16</x:Double>
+    <Thickness x:Key="LuminaManagedFileChooserSidebarPadding">10</Thickness>
+    <Thickness x:Key="LuminaManagedFileChooserSidebarBorderThickness">0,0,1,0</Thickness>
+    <x:Double x:Key="LuminaManagedFileChooserItemColumnSpacing">8</x:Double>
+    <Thickness x:Key="LuminaManagedFileChooserContentMargin">12</Thickness>
+    <Thickness x:Key="LuminaManagedFileChooserContentPadding">10</Thickness>
+    <Thickness x:Key="LuminaManagedFileChooserContentBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaManagedFileChooserContentCornerRadius">8</CornerRadius>
+    <x:Double x:Key="LuminaManagedFileChooserColumnSpacing">10</x:Double>
+    <x:Double x:Key="LuminaManagedFileChooserHeaderMinHeight">30</x:Double>
+    <x:Double x:Key="LuminaManagedFileChooserRowMinHeight">32</x:Double>
+    <Thickness x:Key="LuminaManagedFileChooserFooterPadding">14,12</Thickness>
+    <Thickness x:Key="LuminaManagedFileChooserFooterBorderThickness">0,1,0,0</Thickness>
+    <x:Double x:Key="LuminaManagedFileChooserFooterColumnSpacing">12</x:Double>
+    <x:Double x:Key="LuminaManagedFileChooserFooterRowSpacing">10</x:Double>
+    <x:Double x:Key="LuminaManagedFileChooserFilterMinWidth">180</x:Double>
+    <x:Double x:Key="LuminaManagedFileChooserActionsSpacing">10</x:Double>
+    <x:Double x:Key="LuminaManagedFileChooserOverwriteMaxWidth">420</x:Double>
+    <Thickness x:Key="LuminaManagedFileChooserOverwritePadding">16</Thickness>
+    <Thickness x:Key="LuminaManagedFileChooserOverwriteBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaManagedFileChooserOverwriteCornerRadius">10</CornerRadius>
+    <x:Double x:Key="LuminaManagedFileChooserOverwriteLayoutSpacing">14</x:Double>
+    <x:Double x:Key="LuminaManagedFileChooserOverwriteTextSpacing">6</x:Double>
+    <x:Double x:Key="LuminaManagedFileChooserOverwriteActionsSpacing">10</x:Double>
+    <Thickness x:Key="LuminaPickerPresenterBorderThickness">1</Thickness>
+    <Thickness x:Key="LuminaNotificationCardBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaNotificationCardCornerRadius">10</CornerRadius>
+    <Thickness x:Key="LuminaNotificationCardMargin">0,0,0,10</Thickness>
+    <Thickness x:Key="LuminaNotificationCardPadding">14</Thickness>
+    <x:Double x:Key="LuminaNotificationCardMinWidth">280</x:Double>
+    <x:Double x:Key="LuminaNotificationCardMaxWidth">420</x:Double>
+    <x:Double x:Key="LuminaNotificationIconSize">18</x:Double>
+    <Thickness x:Key="LuminaNotificationIconMargin">0,1,12,0</Thickness>
+    <x:Double x:Key="LuminaNotificationContentSpacing">4</x:Double>
+    <Thickness x:Key="LuminaWindowNotificationManagerMargin">16</Thickness>
+    <x:Double x:Key="LuminaWindowNotificationManagerItemsSpacing">8</x:Double>
+
     <ControlTheme x:Key="{x:Type EmbeddableControlRoot}" TargetType="EmbeddableControlRoot">
         <Setter Property="Background" Value="{DynamicResource LuminaBackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
         <Setter Property="FontFamily" Value="{DynamicResource LuminaFontFamily}" />
-        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontSize" Value="{DynamicResource LuminaEmbeddableControlRootFontSize}" />
         <Setter Property="Template">
             <ControlTemplate TargetType="EmbeddableControlRoot">
                 <Panel>
@@ -36,9 +92,9 @@
     </ControlTheme>
 
     <ControlTheme x:Key="{x:Type chrome:WindowDrawnDecorations}" TargetType="chrome:WindowDrawnDecorations" BasedOn="{StaticResource {x:Type chrome:WindowDrawnDecorations}}">
-        <Setter Property="DefaultTitleBarHeight" Value="40" />
-        <Setter Property="DefaultFrameThickness" Value="0" />
-        <Setter Property="DefaultShadowThickness" Value="12" />
+        <Setter Property="DefaultTitleBarHeight" Value="{DynamicResource LuminaWindowDrawnDecorationsTitleBarHeight}" />
+        <Setter Property="DefaultFrameThickness" Value="{DynamicResource LuminaWindowDrawnDecorationsFrameThickness}" />
+        <Setter Property="DefaultShadowThickness" Value="{DynamicResource LuminaWindowDrawnDecorationsShadowThickness}" />
     </ControlTheme>
 
     <ControlTheme x:Key="{x:Type primitives:AdornerLayer}" TargetType="primitives:AdornerLayer" BasedOn="{StaticResource {x:Type primitives:AdornerLayer}}" />
@@ -60,17 +116,17 @@
                       Background="{DynamicResource LuminaBackgroundBrush}">
                     <Border Grid.Row="0"
                             Grid.ColumnSpan="2"
-                            Padding="14,12"
+                            Padding="{DynamicResource LuminaManagedFileChooserHeaderPadding}"
                             Background="{DynamicResource LuminaSurfaceBrush}"
                             BorderBrush="{DynamicResource LuminaDividerBrush}"
-                            BorderThickness="0,0,0,1">
+                            BorderThickness="{DynamicResource LuminaManagedFileChooserHeaderBorderThickness}">
                         <DockPanel LastChildFill="True">
                             <Button DockPanel.Dock="Left"
                                     Classes="Ghost Icon"
                                     Command="{Binding GoUp}"
-                                    Margin="0,0,8,0">
-                                <PathIcon Width="16"
-                                          Height="16"
+                                    Margin="{DynamicResource LuminaManagedFileChooserGoUpMargin}">
+                                <PathIcon Width="{DynamicResource LuminaManagedFileChooserIconSize}"
+                                          Height="{DynamicResource LuminaManagedFileChooserIconSize}"
                                           Data="M12,5 L5,12 L7,14 L11,10 L11,20 L13,20 L13,10 L17,14 L19,12 Z"
                                           Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
                             </Button>
@@ -86,19 +142,19 @@
 
                     <Border Grid.Row="1"
                             Grid.Column="0"
-                            Padding="10"
+                            Padding="{DynamicResource LuminaManagedFileChooserSidebarPadding}"
                             Background="{DynamicResource LuminaNavigationPaneBrush}"
                             BorderBrush="{DynamicResource LuminaDividerBrush}"
-                            BorderThickness="0,0,1,0">
+                            BorderThickness="{DynamicResource LuminaManagedFileChooserSidebarBorderThickness}">
                         <ListBox Name="PART_QuickLinks"
                                  Focusable="False"
                                  ItemsSource="{Binding QuickLinks}"
                                  SelectedIndex="{Binding QuickLinksSelectedIndex}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate x:DataType="dialogModels:ManagedFileChooserItemViewModel">
-                                    <StackPanel Orientation="Horizontal" Spacing="8">
-                                        <PathIcon Width="16"
-                                                  Height="16"
+                                    <StackPanel Orientation="Horizontal" Spacing="{DynamicResource LuminaManagedFileChooserItemColumnSpacing}">
+                                        <PathIcon Width="{DynamicResource LuminaManagedFileChooserIconSize}"
+                                                  Height="{DynamicResource LuminaManagedFileChooserIconSize}"
                                                   Data="M4,5 L10,5 L12,7 L20,7 L20,19 L4,19 Z"
                                                   Foreground="{DynamicResource LuminaTextMutedBrush}" />
                                         <TextBlock Text="{Binding DisplayName}"
@@ -112,17 +168,17 @@
 
                     <Border Grid.Row="1"
                             Grid.Column="1"
-                            Margin="12"
-                            Padding="10"
+                            Margin="{DynamicResource LuminaManagedFileChooserContentMargin}"
+                            Padding="{DynamicResource LuminaManagedFileChooserContentPadding}"
                             Background="{DynamicResource LuminaSurfaceBrush}"
                             BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
-                            BorderThickness="1"
-                            CornerRadius="8">
+                            BorderThickness="{DynamicResource LuminaManagedFileChooserContentBorderThickness}"
+                            CornerRadius="{DynamicResource LuminaManagedFileChooserContentCornerRadius}">
                         <DockPanel Grid.IsSharedSizeScope="True">
                             <Grid DockPanel.Dock="Top"
                                   ColumnDefinitions="24,*,144,120,96"
-                                  ColumnSpacing="10"
-                                  MinHeight="30">
+                                  ColumnSpacing="{DynamicResource LuminaManagedFileChooserColumnSpacing}"
+                                  MinHeight="{DynamicResource LuminaManagedFileChooserHeaderMinHeight}">
                                 <TextBlock Grid.Column="1"
                                            Classes="Label"
                                            Text="{DynamicResource STRING_CHOOSER_NAME_COLUMN}" />
@@ -143,10 +199,10 @@
                                 <ListBox.ItemTemplate>
                                     <DataTemplate x:DataType="dialogModels:ManagedFileChooserItemViewModel">
                                         <Grid ColumnDefinitions="24,*,144,120,96"
-                                              ColumnSpacing="10"
-                                              MinHeight="32">
-                                            <PathIcon Width="16"
-                                                      Height="16"
+                                              ColumnSpacing="{DynamicResource LuminaManagedFileChooserColumnSpacing}"
+                                              MinHeight="{DynamicResource LuminaManagedFileChooserRowMinHeight}">
+                                            <PathIcon Width="{DynamicResource LuminaManagedFileChooserIconSize}"
+                                                      Height="{DynamicResource LuminaManagedFileChooserIconSize}"
                                                       VerticalAlignment="Center"
                                                       Data="M6,3 L14,3 L20,9 L20,21 L6,21 Z M14,3 L14,9 L20,9"
                                                       Foreground="{DynamicResource LuminaTextMutedBrush}" />
@@ -175,16 +231,19 @@
 
                     <Border Grid.Row="2"
                             Grid.ColumnSpan="2"
-                            Padding="14,12"
+                            Padding="{DynamicResource LuminaManagedFileChooserFooterPadding}"
                             Background="{DynamicResource LuminaSurfaceBrush}"
                             BorderBrush="{DynamicResource LuminaDividerBrush}"
-                            BorderThickness="0,1,0,0">
-                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="10">
+                            BorderThickness="{DynamicResource LuminaManagedFileChooserFooterBorderThickness}">
+                        <Grid ColumnDefinitions="*,Auto"
+                              RowDefinitions="Auto,Auto"
+                              ColumnSpacing="{DynamicResource LuminaManagedFileChooserFooterColumnSpacing}"
+                              RowSpacing="{DynamicResource LuminaManagedFileChooserFooterRowSpacing}">
                             <TextBox Text="{Binding FileName}"
                                      PlaceholderText="{DynamicResource STRING_CHOOSER_FILE_NAME}"
                                      IsVisible="{Binding !SelectingFolder}" />
                             <ComboBox Grid.Column="1"
-                                      MinWidth="180"
+                                      MinWidth="{DynamicResource LuminaManagedFileChooserFilterMinWidth}"
                                       ItemsSource="{Binding Filters}"
                                       SelectedItem="{Binding SelectedFilter}"
                                       IsVisible="{Binding ShowFilters}" />
@@ -195,7 +254,7 @@
                                         Grid.Column="1"
                                         Orientation="Horizontal"
                                         HorizontalAlignment="Right"
-                                        Spacing="10">
+                                        Spacing="{DynamicResource LuminaManagedFileChooserActionsSpacing}">
                                 <Button Content="{DynamicResource STRING_CHOOSER_DIALOG_CANCEL}"
                                         Classes="Outline"
                                         Command="{Binding Cancel}" />
@@ -212,18 +271,18 @@
 
     <ControlTheme x:Key="{x:Type dialogs:ManagedFileChooserOverwritePrompt}"
                   TargetType="dialogs:ManagedFileChooserOverwritePrompt">
-        <Setter Property="MaxWidth" Value="420" />
-        <Setter Property="Padding" Value="16" />
+        <Setter Property="MaxWidth" Value="{DynamicResource LuminaManagedFileChooserOverwriteMaxWidth}" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaManagedFileChooserOverwritePadding}" />
         <Setter Property="Template">
             <ControlTemplate TargetType="dialogs:ManagedFileChooserOverwritePrompt">
                 <Border x:DataType="dialogs:ManagedFileChooserOverwritePrompt"
                         Background="{DynamicResource LuminaPopoverBrush}"
                         BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
-                        BorderThickness="1"
-                        CornerRadius="10"
+                        BorderThickness="{DynamicResource LuminaManagedFileChooserOverwriteBorderThickness}"
+                        CornerRadius="{DynamicResource LuminaManagedFileChooserOverwriteCornerRadius}"
                         Padding="{TemplateBinding Padding}">
-                    <StackPanel Spacing="14">
-                        <StackPanel Spacing="6">
+                    <StackPanel Spacing="{DynamicResource LuminaManagedFileChooserOverwriteLayoutSpacing}">
+                        <StackPanel Spacing="{DynamicResource LuminaManagedFileChooserOverwriteTextSpacing}">
                             <TextBlock Text="File already exists"
                                        FontWeight="SemiBold"
                                        Foreground="{DynamicResource LuminaTextPrimaryBrush}" />
@@ -233,7 +292,7 @@
                         </StackPanel>
                         <StackPanel HorizontalAlignment="Right"
                                     Orientation="Horizontal"
-                                    Spacing="10">
+                                    Spacing="{DynamicResource LuminaManagedFileChooserOverwriteActionsSpacing}">
                             <Button Content="{DynamicResource STRING_CHOOSER_DIALOG_CANCEL}"
                                     Classes="Outline"
                                     IsCancel="True"
@@ -253,14 +312,14 @@
         <Setter Property="Background" Value="{DynamicResource LuminaPopoverBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaPickerPresenterBorderThickness}" />
     </ControlTheme>
 
     <ControlTheme x:Key="{x:Type TimePickerPresenter}" TargetType="TimePickerPresenter" BasedOn="{StaticResource {x:Type TimePickerPresenter}}">
         <Setter Property="Background" Value="{DynamicResource LuminaPopoverBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaPickerPresenterBorderThickness}" />
     </ControlTheme>
 
     <ControlTheme x:Key="{x:Type notifications:NotificationCard}" TargetType="notifications:NotificationCard">
@@ -268,24 +327,25 @@
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Background" Value="{DynamicResource LuminaPopoverBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaNotificationCardBorderThickness}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaNotificationCardCornerRadius}" />
         <Setter Property="RenderTransformOrigin" Value="50%,50%" />
         <Setter Property="Template">
             <ControlTemplate TargetType="notifications:NotificationCard">
                 <LayoutTransformControl Name="PART_LayoutTransformControl" UseRenderTransform="True">
-                    <Border Margin="0,0,0,10"
+                    <Border Margin="{DynamicResource LuminaNotificationCardMargin}"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}"
-                            Padding="14"
+                            Padding="{DynamicResource LuminaNotificationCardPadding}"
                             BoxShadow="{DynamicResource LuminaShadowNotification}">
-                        <DockPanel MinWidth="280" MaxWidth="420">
+                        <DockPanel MinWidth="{DynamicResource LuminaNotificationCardMinWidth}"
+                                   MaxWidth="{DynamicResource LuminaNotificationCardMaxWidth}">
                             <PathIcon Name="NotificationIcon"
-                                      Width="18"
-                                      Height="18"
-                                      Margin="0,1,12,0"
+                                      Width="{DynamicResource LuminaNotificationIconSize}"
+                                      Height="{DynamicResource LuminaNotificationIconSize}"
+                                      Margin="{DynamicResource LuminaNotificationIconMargin}"
                                       VerticalAlignment="Top"
                                       Data="M12,2 A10,10 0,1,0 12,22 A10,10 0,1,0 12,2 M11,10 L13,10 L13,17 L11,17 Z M11,7 L13,7 L13,9 L11,9 Z"
                                       Foreground="{DynamicResource LuminaPrimaryBrush}"
@@ -294,7 +354,7 @@
                                             Content="{TemplateBinding Content}">
                                 <ContentControl.DataTemplates>
                                     <DataTemplate DataType="notifications:INotification">
-                                        <StackPanel Spacing="4">
+                                        <StackPanel Spacing="{DynamicResource LuminaNotificationContentSpacing}">
                                             <SelectableTextBlock Text="{Binding Title}"
                                                                  FontWeight="SemiBold"
                                                                  Foreground="{DynamicResource LuminaTextPrimaryBrush}"
@@ -341,10 +401,10 @@
     </ControlTheme>
 
     <ControlTheme x:Key="{x:Type notifications:WindowNotificationManager}" TargetType="notifications:WindowNotificationManager">
-        <Setter Property="Margin" Value="16" />
+        <Setter Property="Margin" Value="{DynamicResource LuminaWindowNotificationManagerMargin}" />
         <Setter Property="Template">
             <ControlTemplate TargetType="notifications:WindowNotificationManager">
-                <ReversibleStackPanel Name="PART_Items" Spacing="8" />
+                <ReversibleStackPanel Name="PART_Items" Spacing="{DynamicResource LuminaWindowNotificationManagerItemsSpacing}" />
             </ControlTemplate>
         </Setter>
 

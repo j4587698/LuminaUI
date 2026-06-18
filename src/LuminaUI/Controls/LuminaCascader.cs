@@ -688,9 +688,12 @@ public class LuminaCascader : TemplatedControl
             Content = CreateSheetHeader()
         };
         _sheetPanelsHost = new ItemsControl();
+        double sheetMinHeight = LuminaPickerResources.Double("LuminaCascaderSheetBodyMinHeight", 280.0);
+        double sheetMaxHeight = LuminaPickerResources.Double("LuminaCascaderSheetBodyMaxHeight", 480.0);
+        double sheetExtraHeight = LuminaPickerResources.Double("LuminaCascaderSheetBodyExtraHeight", 120.0);
         ScrollViewer body = new ScrollViewer
         {
-            MaxHeight = Math.Max(280.0, Math.Min(480.0, MaxDropDownHeight + 120.0)),
+            MaxHeight = Math.Max(sheetMinHeight, Math.Min(sheetMaxHeight, MaxDropDownHeight + sheetExtraHeight)),
             HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
             VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
             Content = _sheetPanelsHost
@@ -701,10 +704,8 @@ public class LuminaCascader : TemplatedControl
         };
         closeButton.Classes.Add("Ghost");
         closeButton.Click += (_, _) => CloseSheet();
-        StackPanel layout = new StackPanel
-        {
-            Spacing = 16.0
-        };
+        StackPanel layout = new StackPanel();
+        LuminaPickerResources.BindResource(layout, StackPanel.SpacingProperty, "LuminaCascaderSheetContentSpacing");
         layout.Children.Add(_sheetHeaderHost);
         layout.Children.Add(body);
         layout.Children.Add(new Grid
@@ -725,46 +726,42 @@ public class LuminaCascader : TemplatedControl
         TextBlock title = new TextBlock
         {
             Text = titleText,
-            FontSize = 18.0,
             FontWeight = FontWeight.DemiBold,
             VerticalAlignment = VerticalAlignment.Center,
             TextTrimming = TextTrimming.CharacterEllipsis
         };
+        LuminaPickerResources.BindResource(title, TextBlock.FontSizeProperty, "LuminaCascaderSheetHeaderTitleFontSize");
         TextBlock subtitle = new TextBlock
         {
             Text = _selectedPath.Count == 0 ? LuminaLocalization.Get(LuminaLocalizationKeys.CascaderChooseOption) : LuminaLocalization.Format(LuminaLocalizationKeys.CascaderCurrentFormat, string.Join(Separator, _selectedPath.Select(n => n.Label))),
-            FontSize = 12.0,
             Foreground = Brush("LuminaTextMutedBrush", Brushes.Gray),
             TextTrimming = TextTrimming.CharacterEllipsis
         };
-        StackPanel titleBlock = new StackPanel
-        {
-            Spacing = 2.0,
-            Children =
-            {
-                title,
-                subtitle
-            }
-        };
+        LuminaPickerResources.BindResource(subtitle, TextBlock.FontSizeProperty, "LuminaCascaderSheetHeaderSubtitleFontSize");
+        StackPanel titleBlock = new StackPanel();
+        LuminaPickerResources.BindResource(titleBlock, StackPanel.SpacingProperty, "LuminaCascaderSheetHeaderSpacing");
+        titleBlock.Children.Add(title);
+        titleBlock.Children.Add(subtitle);
         Grid.SetColumn(titleBlock, 1);
         if (_activePath.Count == 0)
         {
             return titleBlock;
         }
+        PathIcon backIcon = new PathIcon
+        {
+            Data = Geometry.Parse("M15,6 L9,12 L15,18"),
+            Foreground = Brush("LuminaTextMutedBrush", Brushes.Gray),
+            HorizontalAlignment = HorizontalAlignment.Center,
+            VerticalAlignment = VerticalAlignment.Center
+        };
+        LuminaPickerResources.BindResource(backIcon, Layoutable.WidthProperty, "LuminaCascaderSheetBackIconSize");
+        LuminaPickerResources.BindResource(backIcon, Layoutable.HeightProperty, "LuminaCascaderSheetBackIconSize");
         Button backButton = new Button
         {
-            Content = new PathIcon
-            {
-                Width = 12.0,
-                Height = 12.0,
-                Data = Geometry.Parse("M15,6 L9,12 L15,18"),
-                Foreground = Brush("LuminaTextMutedBrush", Brushes.Gray),
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center
-            },
-            MinWidth = 40.0,
-            MinHeight = 40.0,
-            Padding = new Thickness(0.0),
+            Content = backIcon,
+            MinWidth = LuminaPickerResources.Double("LuminaCascaderSheetBackButtonMinSize", 40.0),
+            MinHeight = LuminaPickerResources.Double("LuminaCascaderSheetBackButtonMinSize", 40.0),
+            Padding = LuminaPickerResources.Thickness("LuminaCascaderSheetBackButtonPadding", new Thickness(0.0)),
             HorizontalAlignment = HorizontalAlignment.Left,
             Theme = TryFindControlTheme("LuminaCascaderNodeButtonTheme")
         };
@@ -775,16 +772,17 @@ public class LuminaCascader : TemplatedControl
             }
             RefreshSheetContent();
         };
-        return new Grid
+        Grid header = new Grid
         {
             ColumnDefinitions = new ColumnDefinitions("Auto,*"),
-            ColumnSpacing = 10.0,
             Children =
             {
                 backButton,
                 titleBlock
             }
         };
+        LuminaPickerResources.BindResource(header, Grid.ColumnSpacingProperty, "LuminaCascaderSheetHeaderColumnSpacing");
+        return header;
     }
 
     private void CloseSheet()
@@ -814,10 +812,14 @@ public class LuminaCascader : TemplatedControl
     {
         _panelsHost = new ItemsControl
         {
-            ItemsPanel = new FuncTemplate<Panel?>(() => new StackPanel
+            ItemsPanel = new FuncTemplate<Panel?>(() =>
             {
-                Orientation = Orientation.Horizontal,
-                Spacing = 6.0
+                StackPanel panel = new StackPanel
+                {
+                    Orientation = Orientation.Horizontal
+                };
+                LuminaPickerResources.BindResource(panel, StackPanel.SpacingProperty, "LuminaCascaderPopupPanelSpacing");
+                return panel;
             })
         };
         ScrollViewer scrollViewer = new ScrollViewer
@@ -828,15 +830,15 @@ public class LuminaCascader : TemplatedControl
         };
         Border popupFrame = new Border
         {
-            Margin = new Thickness(0.0, 6.0, 0.0, 0.0),
-            Padding = new Thickness(6.0),
             Background = Brush("LuminaPopoverBrush", Brushes.White),
             BorderBrush = Brush("LuminaBorderDefaultBrush", Brushes.LightGray),
-            BorderThickness = new Thickness(1.0),
-            CornerRadius = new CornerRadius(10.0),
             BoxShadow = Shadow("LuminaShadowPopup"),
             Child = scrollViewer
         };
+        LuminaPickerResources.BindResource(popupFrame, Border.MarginProperty, "LuminaCascaderPopupFrameMargin");
+        LuminaPickerResources.BindResource(popupFrame, Border.PaddingProperty, "LuminaCascaderPopupFramePadding");
+        LuminaPickerResources.BindResource(popupFrame, Border.BorderThicknessProperty, "LuminaCascaderPopupFrameBorderThickness");
+        LuminaPickerResources.BindResource(popupFrame, Border.CornerRadiusProperty, "LuminaCascaderPopupFrameCornerRadius");
         popupFrame.AddHandler(InputElement.PointerWheelChangedEvent, OnPopupPointerWheelChanged, RoutingStrategies.Bubble, handledEventsToo: true);
         return popupFrame;
     }
@@ -870,10 +872,8 @@ public class LuminaCascader : TemplatedControl
         AvaloniaList<LuminaCascaderNode> current = _activePath.Count != 0
             ? _activePath[^1].Children
             : _roots;
-        StackPanel list = new StackPanel
-        {
-            Spacing = 8.0
-        };
+        StackPanel list = new StackPanel();
+        LuminaPickerResources.BindResource(list, StackPanel.SpacingProperty, "LuminaCascaderSheetListSpacing");
         if (_activePath.Count > 0 && CanSelectNode(_activePath[^1]))
         {
             LuminaCascaderNode currentNode = _activePath[^1];
@@ -933,78 +933,75 @@ public class LuminaCascader : TemplatedControl
         TextBlock label = new TextBlock
         {
             Text = text,
-            FontSize = 15.0,
             FontWeight = (isPrimary ? FontWeight.DemiBold : FontWeight.Normal),
             VerticalAlignment = VerticalAlignment.Center,
             TextTrimming = TextTrimming.CharacterEllipsis
         };
+        LuminaPickerResources.BindResource(label, TextBlock.FontSizeProperty, "LuminaCascaderSheetRowFontSize");
         Grid content = new Grid
         {
             ColumnDefinitions = new ColumnDefinitions("*,Auto"),
-            ColumnSpacing = 8.0,
             HorizontalAlignment = HorizontalAlignment.Stretch,
             Children = { label }
         };
+        LuminaPickerResources.BindResource(content, Grid.ColumnSpacingProperty, "LuminaCascaderSheetRowColumnSpacing");
         if (isActive)
         {
-            content.Children.Add(new PathIcon
+            PathIcon checkIcon = new PathIcon
             {
-                Width = 18.0,
-                Height = 18.0,
                 Data = Geometry.Parse("M9,16.2 L4.8,12 L3.4,13.4 L9,19 L21,7 L19.6,5.6 Z"),
                 VerticalAlignment = VerticalAlignment.Center,
                 Foreground = Brush("LuminaPrimaryBrush", Brushes.DodgerBlue),
                 [Grid.ColumnProperty] = 1
-            });
+            };
+            LuminaPickerResources.BindResource(checkIcon, Layoutable.WidthProperty, "LuminaCascaderSheetRowCheckIconSize");
+            LuminaPickerResources.BindResource(checkIcon, Layoutable.HeightProperty, "LuminaCascaderSheetRowCheckIconSize");
+            content.Children.Add(checkIcon);
         }
         else if (showChevron)
         {
-            content.Children.Add(new PathIcon
+            PathIcon chevronIcon = new PathIcon
             {
-                Width = 12.0,
-                Height = 12.0,
                 VerticalAlignment = VerticalAlignment.Center,
                 Data = Geometry.Parse("M9,6 L15,12 L9,18 Z"),
                 Foreground = Brush("LuminaTextMutedBrush", Brushes.Gray),
                 [Grid.ColumnProperty] = 1
-            });
+            };
+            LuminaPickerResources.BindResource(chevronIcon, Layoutable.WidthProperty, "LuminaCascaderSheetRowChevronIconSize");
+            LuminaPickerResources.BindResource(chevronIcon, Layoutable.HeightProperty, "LuminaCascaderSheetRowChevronIconSize");
+            content.Children.Add(chevronIcon);
         }
         Button button = new Button
         {
             Content = content,
-            MinHeight = 52.0,
-            Padding = new Thickness(14.0, 10.0),
+            MinHeight = LuminaPickerResources.Double("LuminaCascaderSheetRowMinHeight", 52.0),
+            Padding = LuminaPickerResources.Thickness("LuminaCascaderSheetRowPadding", new Thickness(14.0, 10.0)),
             HorizontalContentAlignment = HorizontalAlignment.Stretch,
             Theme = TryFindControlTheme("LuminaCascaderNodeButtonTheme")
         };
         button.Classes.Set("active", isActive || isPrimary);
         button.Background = isPrimary ? Brush("LuminaPrimaryBgBrush", Brushes.Transparent) : Brush("LuminaSurfaceElevatedBrush", Brushes.Transparent);
         button.BorderBrush = isActive ? Brush("LuminaPrimaryBrush", Brushes.DodgerBlue) : Brush("LuminaBorderDefaultBrush", Brushes.LightGray);
-        button.BorderThickness = new Thickness(1.0);
-        button.CornerRadius = new CornerRadius(14.0);
+        button.BorderThickness = LuminaPickerResources.Thickness("LuminaCascaderSheetRowBorderThickness", new Thickness(1.0));
+        button.CornerRadius = LuminaPickerResources.CornerRadius("LuminaCascaderSheetRowCornerRadius", new CornerRadius(14.0));
         label[!TextBlock.ForegroundProperty] = button[!TemplatedControl.ForegroundProperty];
         return button;
     }
 
     private Control CreatePanel(LuminaCascaderPanel panel)
     {
-        StackPanel list = new StackPanel
-        {
-            Spacing = 2.0
-        };
+        StackPanel list = new StackPanel();
+        LuminaPickerResources.BindResource(list, StackPanel.SpacingProperty, "LuminaCascaderPanelListSpacing");
         foreach (LuminaCascaderNode node in panel.Nodes)
         {
             list.Children.Add(CreateNodeButton(node));
         }
-        return new Border
+        Border panelFrame = new Border
         {
             Width = panel.Width,
             MaxHeight = panel.MaxHeight,
-            Padding = new Thickness(4.0),
             Background = Brush("LuminaSurfaceBrush", Brushes.White),
             BorderBrush = Brush("LuminaBorderBrush", Brushes.LightGray),
-            BorderThickness = new Thickness(1.0),
-            CornerRadius = new CornerRadius(8.0),
             Child = new ScrollViewer
             {
                 HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
@@ -1012,6 +1009,10 @@ public class LuminaCascader : TemplatedControl
                 Content = list
             }
         };
+        LuminaPickerResources.BindResource(panelFrame, Border.PaddingProperty, "LuminaCascaderPanelPadding");
+        LuminaPickerResources.BindResource(panelFrame, Border.BorderThicknessProperty, "LuminaCascaderPanelBorderThickness");
+        LuminaPickerResources.BindResource(panelFrame, Border.CornerRadiusProperty, "LuminaCascaderPanelCornerRadius");
+        return panelFrame;
     }
 
     private Button CreateNodeButton(LuminaCascaderNode node)
@@ -1025,9 +1026,9 @@ public class LuminaCascader : TemplatedControl
         Grid content = new Grid
         {
             ColumnDefinitions = new ColumnDefinitions("*,Auto"),
-            ColumnSpacing = 8.0,
             Children = { label }
         };
+        LuminaPickerResources.BindResource(content, Grid.ColumnSpacingProperty, "LuminaCascaderNodeContentColumnSpacing");
         if (node.IsLoading)
         {
             content.Children.Add(new TextBlock
@@ -1040,15 +1041,16 @@ public class LuminaCascader : TemplatedControl
         }
         else if (IsExpandable(node))
         {
-            content.Children.Add(new PathIcon
+            PathIcon chevronIcon = new PathIcon
             {
-                Width = 12.0,
-                Height = 12.0,
                 VerticalAlignment = VerticalAlignment.Center,
                 Data = Geometry.Parse("M9,6 L15,12 L9,18 Z"),
                 Foreground = Brush("LuminaTextMutedBrush", Brushes.Gray),
                 [Grid.ColumnProperty] = 1
-            });
+            };
+            LuminaPickerResources.BindResource(chevronIcon, Layoutable.WidthProperty, "LuminaCascaderNodeChevronIconSize");
+            LuminaPickerResources.BindResource(chevronIcon, Layoutable.HeightProperty, "LuminaCascaderNodeChevronIconSize");
+            content.Children.Add(chevronIcon);
         }
         Button button = new Button
         {

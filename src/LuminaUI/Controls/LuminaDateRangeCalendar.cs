@@ -308,10 +308,10 @@ public class LuminaDateRangeCalendar : TemplatedControl
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                     Foreground = Brush("LuminaTextMutedBrush", Brushes.Gray),
-                    FontSize = 12.0,
                     FontWeight = FontWeight.DemiBold,
-                    Margin = new Thickness(0.0, 0.0, 0.0, 6.0)
+                    Margin = LuminaPickerResources.Thickness("LuminaDateRangeCalendarHeaderMargin", new Thickness(0.0, 0.0, 0.0, 6.0))
                 };
+                LuminaPickerResources.BindResource(header, TextBlock.FontSizeProperty, "LuminaDateRangeCalendarHeaderFontSize");
                 Grid.SetRow(header, 0);
                 Grid.SetColumn(header, column);
                 _daysGrid.Children.Add(header);

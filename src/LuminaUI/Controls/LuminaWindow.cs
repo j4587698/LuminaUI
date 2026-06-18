@@ -446,12 +446,15 @@ public class LuminaWindow : Window
                 return nativeHeight;
             }
         }
-        return 40.0;
+        return LuminaPickerResources.Double("LuminaTitleBarHeight", 40.0);
     }
 
     private Thickness GetEffectiveLeftContentMargin()
     {
-        return IsNativeSystemButtonAreaOnLeft ? new Thickness(GetEffectiveNativeSystemButtonReservedWidth() + 16.0, 0.0, 16.0, 0.0) : new Thickness(16.0, 0.0, 16.0, 0.0);
+        Thickness margin = LuminaPickerResources.Thickness("LuminaTitleBarLeftContentMargin", new Thickness(16.0, 0.0, 16.0, 0.0));
+        return IsNativeSystemButtonAreaOnLeft
+            ? new Thickness(GetEffectiveNativeSystemButtonReservedWidth() + margin.Left, margin.Top, margin.Right, margin.Bottom)
+            : margin;
     }
 
     private double GetEffectiveNativeSystemButtonReservedWidth()
@@ -936,12 +939,16 @@ public class LuminaWindow : Window
     protected virtual object? CreateDefaultAboutDialogContent()
     {
         var appName = ResolveApplicationDisplayName() ?? "Application";
-        var stack = new StackPanel { Spacing = 8, Margin = new Thickness(16) };
+        var stack = new StackPanel
+        {
+            Spacing = LuminaPickerResources.Double("LuminaWindowAboutDialogSpacing", 8.0),
+            Margin = LuminaPickerResources.Thickness("LuminaWindowAboutDialogMargin", new Thickness(16.0))
+        };
 
         stack.Children.Add(new TextBlock
         {
             Text = appName,
-            FontSize = 20,
+            FontSize = LuminaPickerResources.Double("LuminaWindowAboutDialogTitleFontSize", 20.0),
             FontWeight = FontWeight.Bold
         });
 

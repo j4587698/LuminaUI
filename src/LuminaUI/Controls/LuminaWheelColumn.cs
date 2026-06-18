@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
@@ -12,11 +13,13 @@ namespace LuminaUI.Controls;
 
 internal sealed class LuminaWheelColumn : Grid
 {
-    private const double ItemHeight = 44.0;
+    private const double DefaultItemHeight = 44.0;
 
     private const int VisibleItemCount = 5;
 
     private const int CenterRowIndex = 2;
+
+    private readonly double _itemHeight;
 
     private readonly Grid _itemsGrid;
 
@@ -34,27 +37,28 @@ internal sealed class LuminaWheelColumn : Grid
 
     public LuminaWheelColumn(string label)
     {
+        _itemHeight = LuminaPickerResources.Double("LuminaWheelColumnItemHeight", DefaultItemHeight);
         RowDefinitions = new RowDefinitions("Auto,Auto");
-        RowSpacing = 8.0;
         HorizontalAlignment = HorizontalAlignment.Stretch;
+        LuminaPickerResources.BindResource(this, Grid.RowSpacingProperty, "LuminaWheelColumnRowSpacing");
         TextBlock labelBlock = new TextBlock
         {
             Text = label,
-            FontSize = 11.0,
             FontWeight = FontWeight.DemiBold,
             HorizontalAlignment = HorizontalAlignment.Center
         };
+        LuminaPickerResources.BindResource(labelBlock, TextBlock.FontSizeProperty, "LuminaWheelColumnLabelFontSize");
         labelBlock.Foreground = LuminaPickerResources.Brush("LuminaTextMutedBrush", Brushes.Gray);
         labelBlock.Classes.Add("LuminaWheelColumnLabel");
         Children.Add(labelBlock);
         _itemsGrid = new Grid
         {
-            Height = 220.0,
-            RowDefinitions = new RowDefinitions("44,44,44,44,44"),
+            Height = _itemHeight * VisibleItemCount,
+            RowDefinitions = CreateItemRows(_itemHeight),
             HorizontalAlignment = HorizontalAlignment.Stretch,
             ZIndex = 2
         };
-        for (int rowIndex = 0; rowIndex < 5; rowIndex++)
+        for (int rowIndex = 0; rowIndex < VisibleItemCount; rowIndex++)
         {
             TextBlock textBlock = new TextBlock
             {
@@ -64,7 +68,7 @@ internal sealed class LuminaWheelColumn : Grid
             textBlock.Classes.Add("LuminaWheelItemText");
             Border row = new Border
             {
-                Height = 44.0,
+                Height = _itemHeight,
                 Background = Brushes.Transparent,
                 Child = textBlock
             };
@@ -82,22 +86,20 @@ internal sealed class LuminaWheelColumn : Grid
         }
         Border selectionBand = new Border
         {
-            Height = 44.0,
+            Height = _itemHeight,
             VerticalAlignment = VerticalAlignment.Center,
             IsHitTestVisible = false,
             ZIndex = 1,
-            BorderThickness = new Thickness(1.0),
-            CornerRadius = new CornerRadius(10.0),
-            Opacity = 0.72
+            Opacity = LuminaPickerResources.Double("LuminaWheelColumnSelectionBandOpacity", 0.72)
         };
+        LuminaPickerResources.BindResource(selectionBand, Border.BorderThicknessProperty, "LuminaWheelColumnSelectionBandBorderThickness");
+        LuminaPickerResources.BindResource(selectionBand, Border.CornerRadiusProperty, "LuminaWheelColumnSelectionBandCornerRadius");
         selectionBand.Background = LuminaPickerResources.Brush("LuminaPrimaryBgBrush", Brushes.Transparent);
         selectionBand.BorderBrush = LuminaPickerResources.Brush("LuminaPrimaryBrush", Brushes.DodgerBlue);
         selectionBand.Classes.Add("LuminaWheelSelectionBand");
         Border frame = new Border
         {
             ClipToBounds = true,
-            BorderThickness = new Thickness(1.0),
-            CornerRadius = new CornerRadius(16.0),
             Child = new Grid
             {
                 Children =
@@ -107,6 +109,8 @@ internal sealed class LuminaWheelColumn : Grid
                 }
             }
         };
+        LuminaPickerResources.BindResource(frame, Border.BorderThicknessProperty, "LuminaWheelColumnFrameBorderThickness");
+        LuminaPickerResources.BindResource(frame, Border.CornerRadiusProperty, "LuminaWheelColumnFrameCornerRadius");
         frame.Background = LuminaPickerResources.Brush("LuminaSurfaceElevatedBrush", Brushes.Transparent);
         frame.BorderBrush = LuminaPickerResources.Brush("LuminaBorderDefaultBrush", Brushes.Gray);
         frame.Classes.Add("LuminaWheelFrame");
@@ -165,7 +169,12 @@ internal sealed class LuminaWheelColumn : Grid
 
     private void RefreshVisibleItems()
     {
-        for (int rowIndex = 0; rowIndex < 5; rowIndex++)
+        double nearOpacity = LuminaPickerResources.Double("LuminaWheelColumnNearOpacity", 0.72);
+        double farOpacity = LuminaPickerResources.Double("LuminaWheelColumnFarOpacity", 0.42);
+        double selectedFontSize = LuminaPickerResources.Double("LuminaWheelColumnSelectedFontSize", 20.0);
+        double nearFontSize = LuminaPickerResources.Double("LuminaWheelColumnNearFontSize", 16.0);
+        double farFontSize = LuminaPickerResources.Double("LuminaWheelColumnFarFontSize", 14.0);
+        for (int rowIndex = 0; rowIndex < VisibleItemCount; rowIndex++)
         {
             int optionIndex = _selectedIndex + rowIndex - 2;
             Border row = _itemRows[rowIndex];
@@ -185,20 +194,20 @@ internal sealed class LuminaWheelColumn : Grid
             }
             else
             {
-                opacity = rowIndex is 1 or 3 ? 0.72 : 0.42;
+                opacity = rowIndex is 1 or 3 ? nearOpacity : farOpacity;
             }
             border.Opacity = opacity;
             row.IsHitTestVisible = true;
             textBlock.Text = _options[optionIndex].Label;
             if (rowIndex == 2)
             {
-                textBlock.FontSize = 20.0;
+                textBlock.FontSize = selectedFontSize;
                 textBlock.FontWeight = FontWeight.DemiBold;
                 textBlock.Foreground = LuminaPickerResources.Brush("LuminaPrimaryBrush", Brushes.DodgerBlue);
             }
             else
             {
-                textBlock.FontSize = rowIndex is 1 or 3 ? 16 : 14;
+                textBlock.FontSize = rowIndex is 1 or 3 ? nearFontSize : farFontSize;
                 textBlock.FontWeight = FontWeight.Medium;
                 textBlock.Foreground = LuminaPickerResources.Brush("LuminaTextTertiaryBrush", Brushes.Gray);
             }
@@ -219,5 +228,11 @@ internal sealed class LuminaWheelColumn : Grid
             }
         }
         return selectedIndex;
+    }
+
+    private static RowDefinitions CreateItemRows(double itemHeight)
+    {
+        string rowHeight = itemHeight.ToString(CultureInfo.InvariantCulture);
+        return new RowDefinitions(string.Join(",", Enumerable.Repeat(rowHeight, VisibleItemCount)));
     }
 }

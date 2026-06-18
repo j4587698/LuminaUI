@@ -2,6 +2,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
 
+    <x:Double x:Key="LuminaTopViewOverlayCollapsedOpacity">0</x:Double>
+    <x:Double x:Key="LuminaTopViewOverlayVisibleOpacity">1</x:Double>
+
     <ControlTheme x:Key="{x:Type lumina:LuminaTopView}" TargetType="lumina:LuminaTopView">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Template">
@@ -15,7 +18,7 @@
 
                     <Border Name="PART_DialogOverlay"
                             Background="Transparent"
-                            Opacity="0"
+                            Opacity="{DynamicResource LuminaTopViewOverlayCollapsedOpacity}"
                             IsHitTestVisible="False"
                             ZIndex="1000">
                         <Border.Transitions>
@@ -25,7 +28,7 @@
                         </Border.Transitions>
 
                         <Grid>
-                            <lumina:LuminaBackdropBlur BlurRadius="10"
+                            <lumina:LuminaBackdropBlur BlurRadius="{DynamicResource LuminaOverlayBackdropBlurRadius}"
                                                        HorizontalAlignment="Stretch"
                                                        VerticalAlignment="Stretch" />
                             <Border Background="{DynamicResource LuminaOverlayScrimBrush}"
@@ -39,7 +42,7 @@
                                         </Transitions>
                                     </Border.Transitions>
                                     <ContentPresenter Content="{TemplateBinding DialogContent}"
-                                                      Margin="16"
+                                                      Margin="{DynamicResource LuminaOverlayDialogMargin}"
                                                       HorizontalAlignment="Stretch"
                                                       VerticalAlignment="Center" />
                                 </Border>
@@ -49,7 +52,7 @@
 
                     <Border Name="PART_DrawerOverlay"
                             Background="Transparent"
-                            Opacity="0"
+                            Opacity="{DynamicResource LuminaTopViewOverlayCollapsedOpacity}"
                             IsHitTestVisible="False"
                             ZIndex="1400">
                         <Border.Transitions>
@@ -59,7 +62,7 @@
                         </Border.Transitions>
 
                         <Grid>
-                            <lumina:LuminaBackdropBlur BlurRadius="10"
+                            <lumina:LuminaBackdropBlur BlurRadius="{DynamicResource LuminaOverlayBackdropBlurRadius}"
                                                        HorizontalAlignment="Stretch"
                                                        VerticalAlignment="Stretch" />
                             <Border Background="{DynamicResource LuminaOverlayScrimBrush}"
@@ -74,7 +77,7 @@
 
                     <Border Name="PART_BottomSheetOverlay"
                             Background="Transparent"
-                            Opacity="0"
+                            Opacity="{DynamicResource LuminaTopViewOverlayCollapsedOpacity}"
                             IsHitTestVisible="False"
                             ZIndex="1500">
                         <Border.Transitions>
@@ -84,7 +87,7 @@
                         </Border.Transitions>
 
                         <Grid>
-                            <lumina:LuminaBackdropBlur BlurRadius="10"
+                            <lumina:LuminaBackdropBlur BlurRadius="{DynamicResource LuminaOverlayBackdropBlurRadius}"
                                                        HorizontalAlignment="Stretch"
                                                        VerticalAlignment="Stretch" />
                             <Border Background="{DynamicResource LuminaOverlayScrimBrush}"
@@ -99,7 +102,7 @@
                     </Border>
 
                     <Border ZIndex="2000"
-                            Margin="16"
+                            Margin="{DynamicResource LuminaOverlayToastHostMargin}"
                             Padding="{TemplateBinding OverlaySafeAreaPadding}"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Bottom"
@@ -111,7 +114,7 @@
         </Setter>
 
         <Style Selector="^[IsDialogOpen=True] /template/ Border#PART_DialogOverlay">
-            <Setter Property="Opacity" Value="1" />
+            <Setter Property="Opacity" Value="{DynamicResource LuminaTopViewOverlayVisibleOpacity}" />
             <Setter Property="IsHitTestVisible" Value="True" />
         </Style>
 
@@ -124,12 +127,12 @@
         </Style>
 
         <Style Selector="^[IsBottomSheetOpen=True] /template/ Border#PART_BottomSheetOverlay">
-            <Setter Property="Opacity" Value="1" />
+            <Setter Property="Opacity" Value="{DynamicResource LuminaTopViewOverlayVisibleOpacity}" />
             <Setter Property="IsHitTestVisible" Value="True" />
         </Style>
 
         <Style Selector="^[IsDrawerOpen=True] /template/ Border#PART_DrawerOverlay">
-            <Setter Property="Opacity" Value="1" />
+            <Setter Property="Opacity" Value="{DynamicResource LuminaTopViewOverlayVisibleOpacity}" />
             <Setter Property="IsHitTestVisible" Value="True" />
         </Style>
 

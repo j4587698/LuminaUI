@@ -160,10 +160,13 @@
     <BoxShadows x:Key="LuminaCardShadowFloating">0 0 1 #40FFFFFF, 0 12 28 #99000000</BoxShadows>
 
     <!-- Glass Effect Brushes -->
-    <SolidColorBrush x:Key="LuminaCardPseudoGlassBrush" Color="{StaticResource LuminaSurface}" Opacity="0.78" />
-    <SolidColorBrush x:Key="LuminaCardGlassBorderBrush" Color="{StaticResource LuminaBorderDefault}" Opacity="0.40" />
+    <x:Double x:Key="LuminaCardPseudoGlassOpacity">0.78</x:Double>
+    <x:Double x:Key="LuminaCardGlassBorderOpacity">0.40</x:Double>
+    <x:Double x:Key="LuminaCardGlassBackgroundOpacity">0.40</x:Double>
+    <SolidColorBrush x:Key="LuminaCardPseudoGlassBrush" Color="{StaticResource LuminaSurface}" Opacity="{StaticResource LuminaCardPseudoGlassOpacity}" />
+    <SolidColorBrush x:Key="LuminaCardGlassBorderBrush" Color="{StaticResource LuminaBorderDefault}" Opacity="{StaticResource LuminaCardGlassBorderOpacity}" />
 
-    <SolidColorBrush x:Key="LuminaCardGlassBackgroundBrush" Color="#0A0A0A" Opacity="0.40" />
+    <SolidColorBrush x:Key="LuminaCardGlassBackgroundBrush" Color="#0A0A0A" Opacity="{StaticResource LuminaCardGlassBackgroundOpacity}" />
     <SolidColorBrush x:Key="LuminaCardGlassTintBrush" Color="#180B0F17" />
     <SolidColorBrush x:Key="LuminaCardGlassEdgeBrush" Color="#30FFFFFF" />
     <SolidColorBrush x:Key="LuminaBlurBackgroundTintBrush" Color="#180B0F17" />

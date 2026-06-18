@@ -402,23 +402,18 @@ public class LuminaDateRangePicker : TemplatedControl
         Grid selectorGrid = new Grid
         {
             ColumnDefinitions = new ColumnDefinitions("*,*"),
-            ColumnSpacing = 10.0,
             Children =
             {
                 startButton,
                 endButton
             }
         };
+        LuminaPickerResources.BindResource(selectorGrid, Grid.ColumnSpacingProperty, "LuminaDateRangeSheetSelectorColumnSpacing");
         Grid.SetColumn(endButton, 1);
-        StackPanel body = new StackPanel
-        {
-            Spacing = 14.0,
-            Children =
-            {
-                selectorGrid,
-                pickerHost
-            }
-        };
+        StackPanel body = new StackPanel();
+        LuminaPickerResources.BindResource(body, StackPanel.SpacingProperty, "LuminaDateRangeSheetBodySpacing");
+        body.Children.Add(selectorGrid);
+        body.Children.Add(pickerHost);
         StackPanel content = CreateSheetLayout(LuminaLocalization.Get("Lumina.Picker.SelectDate"), body, CreateSheetActions(() => {
             StartDate = null;
             EndDate = null;
@@ -476,7 +471,7 @@ public class LuminaDateRangePicker : TemplatedControl
             Content = CreateSheetDateButtonContent(title, date),
             HorizontalAlignment = HorizontalAlignment.Stretch,
             HorizontalContentAlignment = HorizontalAlignment.Stretch,
-            Padding = new Thickness(12.0, 10.0)
+            Padding = LuminaPickerResources.Thickness("LuminaDateRangeSheetDateButtonPadding", new Thickness(12.0, 10.0))
         };
         SetSheetButtonState(button, isSelected);
         return button;
@@ -484,24 +479,21 @@ public class LuminaDateRangePicker : TemplatedControl
 
     private Control CreateSheetDateButtonContent(string title, DateTime date)
     {
-        return new StackPanel
+        StackPanel content = new StackPanel();
+        LuminaPickerResources.BindResource(content, StackPanel.SpacingProperty, "LuminaDateRangeSheetDateButtonSpacing");
+        TextBlock titleBlock = new TextBlock
         {
-            Spacing = 4.0,
-            Children = 
-            {
-                new TextBlock
-                {
-                    Text = title,
-                    FontSize = 12.0,
-                    Opacity = 0.7
-                },
-                new TextBlock
-                {
-                    Text = FormatDate(date),
-                    FontWeight = FontWeight.DemiBold
-                }
-            }
+            Text = title,
+            Opacity = LuminaPickerResources.Double("LuminaDateRangeSheetDateButtonTitleOpacity", 0.7)
         };
+        LuminaPickerResources.BindResource(titleBlock, TextBlock.FontSizeProperty, "LuminaDateRangeSheetDateButtonTitleFontSize");
+        content.Children.Add(titleBlock);
+        content.Children.Add(new TextBlock
+        {
+            Text = FormatDate(date),
+            FontWeight = FontWeight.DemiBold
+        });
+        return content;
     }
 
     private static void SetSheetButtonState(Button button, bool isSelected)
@@ -533,10 +525,9 @@ public class LuminaDateRangePicker : TemplatedControl
         applyButton.Click += (_, _) => onApply();
         Grid.SetColumn(cancelButton, 1);
         Grid.SetColumn(applyButton, 2);
-        return new Grid
+        Grid actions = new Grid
         {
             ColumnDefinitions = new ColumnDefinitions("*,Auto,Auto"),
-            ColumnSpacing = 8.0,
             Children =
             {
                 clearButton,
@@ -544,25 +535,24 @@ public class LuminaDateRangePicker : TemplatedControl
                 applyButton
             }
         };
+        LuminaPickerResources.BindResource(actions, Grid.ColumnSpacingProperty, "LuminaSheetActionsColumnSpacing");
+        return actions;
     }
 
     private static StackPanel CreateSheetLayout(string title, Control body, Control footer)
     {
-        return new StackPanel
+        StackPanel layout = new StackPanel();
+        LuminaPickerResources.BindResource(layout, StackPanel.SpacingProperty, "LuminaSheetLayoutSpacing");
+        TextBlock titleBlock = new TextBlock
         {
-            Spacing = 16.0,
-            Children =
-            {
-                new TextBlock
-                {
-                    Text = title,
-                    FontSize = 18.0,
-                    FontWeight = FontWeight.DemiBold
-                },
-                body,
-                footer
-            }
+            Text = title,
+            FontWeight = FontWeight.DemiBold
         };
+        LuminaPickerResources.BindResource(titleBlock, TextBlock.FontSizeProperty, "LuminaSheetTitleFontSize");
+        layout.Children.Add(titleBlock);
+        layout.Children.Add(body);
+        layout.Children.Add(footer);
+        return layout;
     }
 
     private void OnTextBoxLostFocus(object? sender, RoutedEventArgs e)

@@ -2,6 +2,29 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:lumina="using:LuminaUI.Controls">
 
+    <x:Double x:Key="LuminaPopConfirmMinWidth">260</x:Double>
+    <x:Double x:Key="LuminaPopConfirmMaxWidth">340</x:Double>
+    <Thickness x:Key="LuminaPopConfirmMargin">12,20,12,12</Thickness>
+    <Thickness x:Key="LuminaPopConfirmPadding">14</Thickness>
+    <Thickness x:Key="LuminaPopConfirmBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaPopConfirmCornerRadius">10</CornerRadius>
+    <x:Double x:Key="LuminaPopConfirmColumnSpacing">10</x:Double>
+    <x:Double x:Key="LuminaPopConfirmIconHostSize">22</x:Double>
+    <x:Double x:Key="LuminaPopConfirmIconSize">20</x:Double>
+    <x:Double x:Key="LuminaPopConfirmContentSpacing">6</x:Double>
+    <x:Double x:Key="LuminaPopConfirmContentFontSize">13</x:Double>
+    <x:Double x:Key="LuminaPopConfirmCloseIconSize">12</x:Double>
+    <Thickness x:Key="LuminaPopConfirmActionsMargin">0,18,0,0</Thickness>
+    <x:Double x:Key="LuminaPopConfirmActionsSpacing">8</x:Double>
+    <x:Double x:Key="LuminaPopConfirmSheetMessageColumnSpacing">12</x:Double>
+    <x:Double x:Key="LuminaPopConfirmSheetContentSpacing">8</x:Double>
+    <x:Double x:Key="LuminaPopConfirmSheetActionsSpacing">10</x:Double>
+    <x:Double x:Key="LuminaPopConfirmSheetLayoutSpacing">18</x:Double>
+    <x:Double x:Key="LuminaPopConfirmSheetCustomIconSize">24</x:Double>
+    <x:Double x:Key="LuminaPopConfirmSheetDefaultIconSize">22</x:Double>
+    <x:Double x:Key="LuminaPopConfirmSheetHeaderFontSize">18</x:Double>
+    <x:Double x:Key="LuminaPopConfirmSheetContentFontSize">14</x:Double>
+
     <ControlTheme x:Key="{x:Type lumina:LuminaPopConfirm}" TargetType="lumina:LuminaPopConfirm">
         <Setter Property="Placement" Value="BottomEdgeAlignedLeft" />
         <Setter Property="Template">
@@ -19,36 +42,36 @@
                            PlacementTarget="{Binding #PART_TargetHost}"
                            IsLightDismissEnabled="True"
                            WindowManagerAddShadowHint="False">
-                        <Border MinWidth="260"
-                                MaxWidth="340"
-                                Margin="12,20,12,12"
-                                Padding="14"
+                        <Border MinWidth="{DynamicResource LuminaPopConfirmMinWidth}"
+                                MaxWidth="{DynamicResource LuminaPopConfirmMaxWidth}"
+                                Margin="{DynamicResource LuminaPopConfirmMargin}"
+                                Padding="{DynamicResource LuminaPopConfirmPadding}"
                                 Background="{DynamicResource LuminaPopoverBrush}"
                                 BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
-                                BorderThickness="1"
-                                CornerRadius="10"
+                                BorderThickness="{DynamicResource LuminaPopConfirmBorderThickness}"
+                                CornerRadius="{DynamicResource LuminaPopConfirmCornerRadius}"
                                 BoxShadow="{DynamicResource LuminaShadowPopup}">
                             <Grid RowDefinitions="Auto,Auto"
                                   ColumnDefinitions="Auto,*,Auto"
-                                  ColumnSpacing="10">
+                                  ColumnSpacing="{DynamicResource LuminaPopConfirmColumnSpacing}">
                                 <Panel Grid.Row="0"
                                        Grid.Column="0"
-                                       Width="22"
-                                       Height="22"
+                                       Width="{DynamicResource LuminaPopConfirmIconHostSize}"
+                                       Height="{DynamicResource LuminaPopConfirmIconHostSize}"
                                        VerticalAlignment="Top">
                                     <ContentPresenter Content="{TemplateBinding Icon}"
                                                       IsVisible="{TemplateBinding Icon, Converter={x:Static ObjectConverters.IsNotNull}}" />
                                     <PathIcon Name="PART_DefaultIcon"
                                               Data="M12 2 L22 20 H2 Z M12 8 V13 M12 16 V18"
-                                              Width="20"
-                                              Height="20"
+                                              Width="{DynamicResource LuminaPopConfirmIconSize}"
+                                              Height="{DynamicResource LuminaPopConfirmIconSize}"
                                               Foreground="{DynamicResource LuminaWarningBrush}"
                                               IsVisible="{TemplateBinding Icon, Converter={x:Static ObjectConverters.IsNull}}" />
                                 </Panel>
 
                                 <StackPanel Grid.Row="0"
                                             Grid.Column="1"
-                                            Spacing="6"
+                                            Spacing="{DynamicResource LuminaPopConfirmContentSpacing}"
                                             HorizontalAlignment="Stretch">
                                     <ContentControl Content="{TemplateBinding PopupHeader}"
                                                     ContentTemplate="{TemplateBinding PopupHeaderTemplate}"
@@ -70,7 +93,7 @@
                                             <DataTemplate DataType="x:String">
                                                 <TextBlock Text="{Binding}"
                                                            TextWrapping="Wrap"
-                                                           FontSize="13"
+                                                           FontSize="{DynamicResource LuminaPopConfirmContentFontSize}"
                                                            Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
                                             </DataTemplate>
                                         </ContentControl.DataTemplates>
@@ -86,18 +109,18 @@
                                         VerticalAlignment="Top"
                                         Command="{TemplateBinding CancelCommand}"
                                         CommandParameter="{TemplateBinding CancelCommandParameter}">
-                                    <PathIcon Width="12"
-                                              Height="12"
+                                    <PathIcon Width="{DynamicResource LuminaPopConfirmCloseIconSize}"
+                                              Height="{DynamicResource LuminaPopConfirmCloseIconSize}"
                                               Data="M6,6 L18,18 M18,6 L6,18" />
                                 </Button>
 
                                 <StackPanel Grid.Row="1"
                                             Grid.Column="0"
                                             Grid.ColumnSpan="3"
-                                            Margin="0,18,0,0"
+                                            Margin="{DynamicResource LuminaPopConfirmActionsMargin}"
                                             Orientation="Horizontal"
                                             HorizontalAlignment="Right"
-                                            Spacing="8">
+                                            Spacing="{DynamicResource LuminaPopConfirmActionsSpacing}">
                                     <Button Name="PART_CancelButton"
                                             Classes="Small Ghost"
                                             Theme="{StaticResource LuminaButton}"

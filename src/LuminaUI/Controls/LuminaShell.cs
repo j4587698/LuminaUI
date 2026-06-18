@@ -1414,9 +1414,10 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         {
             Placement = DrawerPlacement.Left,
             ContentPadding = default,
-            BorderThickness = new Thickness(0, 0, 1, 0),
+            BorderThickness = LuminaPickerResources.Thickness("LuminaShellTopMenuDrawerBorderThickness", new Thickness(0, 0, 1, 0)),
             Content = CreateTopMenuDrawerContent()
         };
+        LuminaPickerResources.BindResource(drawer, TemplatedControl.CornerRadiusProperty, "LuminaShellTopMenuDrawerCornerRadius");
         drawer.Bind(TemplatedControl.BackgroundProperty, new Binding(nameof(PaneBackground))
         {
             Source = this
@@ -1449,8 +1450,8 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         Border header = new Border
         {
             Name = "PART_TopMenuDrawerHeader",
-            Margin = new Thickness(16),
-            Height = 48,
+            Margin = LuminaPickerResources.Thickness("LuminaShellMenuHeaderMargin", new Thickness(16)),
+            Height = LuminaPickerResources.Double("LuminaShellMenuHeaderHeight", 48),
             ClipToBounds = true,
             Child = headerPresenter
         };
@@ -1465,7 +1466,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         ScrollViewer scrollViewer = new ScrollViewer
         {
             Name = "PART_TopMenuDrawerScrollViewer",
-            Margin = new Thickness(16, 0, 16, 16),
+            Margin = LuminaPickerResources.Thickness("LuminaShellMenuScrollMargin", new Thickness(16, 0, 16, 16)),
             BringIntoViewOnFocusChange = false,
             HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
             VerticalScrollBarVisibility = ScrollBarVisibility.Hidden,
@@ -1482,8 +1483,8 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         Border footer = new Border
         {
             Name = "PART_TopMenuDrawerFooter",
-            Margin = new Thickness(16),
-            Padding = new Thickness(0, 16, 0, 0),
+            Margin = LuminaPickerResources.Thickness("LuminaShellMenuFooterMargin", new Thickness(16)),
+            Padding = LuminaPickerResources.Thickness("LuminaShellMenuFooterPadding", new Thickness(0, 16, 0, 0)),
             ClipToBounds = false,
             Child = footerPresenter
         };

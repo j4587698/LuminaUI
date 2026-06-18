@@ -2,6 +2,19 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
 
+    <Thickness x:Key="LuminaImageRootBorderThickness">0</Thickness>
+    <CornerRadius x:Key="LuminaImageRootCornerRadius">0</CornerRadius>
+    <x:Double x:Key="LuminaImageLoadingSpacing">8</x:Double>
+    <x:Double x:Key="LuminaImageLoadingProgressWidth">96</x:Double>
+    <x:Double x:Key="LuminaImageLoadingProgressHeight">4</x:Double>
+    <x:Double x:Key="LuminaImageStateTextFontSize">12</x:Double>
+    <x:Double x:Key="LuminaImageErrorSpacing">8</x:Double>
+    <Thickness x:Key="LuminaImageErrorMargin">16</Thickness>
+    <x:Double x:Key="LuminaImageErrorIconSize">24</x:Double>
+    <Thickness x:Key="LuminaImageFramedBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaImageFramedCornerRadius">8</CornerRadius>
+    <CornerRadius x:Key="LuminaImageCircleCornerRadius">999</CornerRadius>
+
     <ControlTheme x:Key="{x:Type lumina:LuminaImage}" TargetType="lumina:LuminaImage">
         <Setter Property="Stretch" Value="UniformToFill" />
         <Setter Property="StretchDirection" Value="Both" />
@@ -15,8 +28,8 @@
                 <Border Name="PART_Root"
                         Background="{DynamicResource LuminaStateHoverBrush}"
                         BorderBrush="Transparent"
-                        BorderThickness="0"
-                        CornerRadius="0"
+                        BorderThickness="{DynamicResource LuminaImageRootBorderThickness}"
+                        CornerRadius="{DynamicResource LuminaImageRootCornerRadius}"
                         ClipToBounds="True">
                     <Grid>
                         <Image Name="PART_Image"
@@ -33,30 +46,30 @@
 
                         <Border Background="{TemplateBinding LoadingBackground}"
                                 IsVisible="{TemplateBinding ShowDefaultLoading}">
-                            <StackPanel Spacing="8"
+                            <StackPanel Spacing="{DynamicResource LuminaImageLoadingSpacing}"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center">
-                                <ProgressBar Width="96"
-                                             Height="4"
+                                <ProgressBar Width="{DynamicResource LuminaImageLoadingProgressWidth}"
+                                             Height="{DynamicResource LuminaImageLoadingProgressHeight}"
                                              IsIndeterminate="True" />
                                 <TextBlock Text="{TemplateBinding DisplayLoadingText}"
-                                           FontSize="12"
+                                           FontSize="{DynamicResource LuminaImageStateTextFontSize}"
                                            Foreground="{TemplateBinding LoadingForeground}" />
                             </StackPanel>
                         </Border>
 
                         <Border Background="{TemplateBinding ErrorBackground}"
                                 IsVisible="{TemplateBinding ShowDefaultError}">
-                            <StackPanel Spacing="8"
-                                        Margin="16"
+                            <StackPanel Spacing="{DynamicResource LuminaImageErrorSpacing}"
+                                        Margin="{DynamicResource LuminaImageErrorMargin}"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center">
-                                <PathIcon Width="24"
-                                          Height="24"
+                                <PathIcon Width="{DynamicResource LuminaImageErrorIconSize}"
+                                          Height="{DynamicResource LuminaImageErrorIconSize}"
                                           Data="M12,2 L22,20 H2 Z M12,8 V13 M12,16 V17"
                                           Foreground="{TemplateBinding ErrorForeground}" />
                                 <TextBlock Text="{TemplateBinding DisplayErrorText}"
-                                           FontSize="12"
+                                           FontSize="{DynamicResource LuminaImageStateTextFontSize}"
                                            FontWeight="SemiBold"
                                            TextWrapping="Wrap"
                                            TextAlignment="Center"
@@ -76,12 +89,12 @@
 
         <Style Selector="^.Framed /template/ Border#PART_Root">
             <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="BorderThickness" Value="{DynamicResource LuminaImageFramedBorderThickness}" />
+            <Setter Property="CornerRadius" Value="{DynamicResource LuminaImageFramedCornerRadius}" />
         </Style>
 
         <Style Selector="^.Circle /template/ Border#PART_Root">
-            <Setter Property="CornerRadius" Value="999" />
+            <Setter Property="CornerRadius" Value="{DynamicResource LuminaImageCircleCornerRadius}" />
         </Style>
 
         <Style Selector="^.Contain">

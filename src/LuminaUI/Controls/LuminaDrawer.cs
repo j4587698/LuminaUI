@@ -6,8 +6,6 @@ namespace LuminaUI.Controls;
 
 public class LuminaDrawer : ContentControl
 {
-    private const double DefaultCornerRadius = 16.0;
-
     private Thickness _effectiveContentPadding = new Thickness(24);
 
     public static readonly StyledProperty<DrawerPlacement> PlacementProperty = AvaloniaProperty.Register<LuminaDrawer, DrawerPlacement>(nameof(Placement), DrawerPlacement.Right);
@@ -122,28 +120,24 @@ public class LuminaDrawer : ContentControl
                 Height = double.NaN;
                 HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Left;
                 VerticalAlignment = Avalonia.Layout.VerticalAlignment.Stretch;
-                CornerRadius = new CornerRadius(0, DefaultCornerRadius, DefaultCornerRadius, 0);
                 break;
             case DrawerPlacement.Right:
                 Width = length;
                 Height = double.NaN;
                 HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Right;
                 VerticalAlignment = Avalonia.Layout.VerticalAlignment.Stretch;
-                CornerRadius = new CornerRadius(DefaultCornerRadius, 0, 0, DefaultCornerRadius);
                 break;
             case DrawerPlacement.Top:
                 Width = double.NaN;
                 Height = length;
                 HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Stretch;
                 VerticalAlignment = Avalonia.Layout.VerticalAlignment.Top;
-                CornerRadius = new CornerRadius(0, 0, DefaultCornerRadius, DefaultCornerRadius);
                 break;
             case DrawerPlacement.Bottom:
                 Width = double.NaN;
                 Height = length;
                 HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Stretch;
                 VerticalAlignment = Avalonia.Layout.VerticalAlignment.Bottom;
-                CornerRadius = new CornerRadius(DefaultCornerRadius, DefaultCornerRadius, 0, 0);
                 break;
         }
     }

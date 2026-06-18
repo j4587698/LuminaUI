@@ -4,18 +4,49 @@
 
     <StreamGeometry x:Key="LuminaCarouselPreviousGlyph">M15,6 L9,12 L15,18</StreamGeometry>
     <StreamGeometry x:Key="LuminaCarouselNextGlyph">M9,6 L15,12 L9,18</StreamGeometry>
+    <Thickness x:Key="LuminaCarouselIndicatorDotMargin">3,0</Thickness>
+    <x:Double x:Key="LuminaCarouselIndicatorDotSize">7</x:Double>
+    <CornerRadius x:Key="LuminaCarouselIndicatorDotCornerRadius">4</CornerRadius>
+    <x:Double x:Key="LuminaCarouselIndicatorDotSelectedWidth">20</x:Double>
+    <Thickness x:Key="LuminaCarouselIndicatorLineMargin">2,0</Thickness>
+    <x:Double x:Key="LuminaCarouselIndicatorLineHeight">4</x:Double>
+    <CornerRadius x:Key="LuminaCarouselIndicatorLineCornerRadius">2</CornerRadius>
+    <x:Double x:Key="LuminaCarouselIndicatorColumnarWidth">5</x:Double>
+    <x:Double x:Key="LuminaCarouselIndicatorColumnarHeight">22</x:Double>
+    <Thickness x:Key="LuminaCarouselIndicatorColumnarMargin">3,0</Thickness>
+    <x:Double x:Key="LuminaCarouselIndicatorColumnarIdleHeight">10</x:Double>
+    <CornerRadius x:Key="LuminaCarouselIndicatorColumnarCornerRadius">3</CornerRadius>
+    <x:Double x:Key="LuminaCarouselButtonSize">36</x:Double>
+    <Thickness x:Key="LuminaCarouselButtonPadding">0</Thickness>
+    <Thickness x:Key="LuminaCarouselButtonBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaCarouselButtonCornerRadius">18</CornerRadius>
+    <x:Double x:Key="LuminaCarouselButtonIconSize">18</x:Double>
+    <x:Double x:Key="LuminaCarouselButtonIconCanvasSize">24</x:Double>
+    <x:Double x:Key="LuminaCarouselButtonIconStrokeThickness">2.4</x:Double>
+    <Thickness x:Key="LuminaCarouselBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaCarouselCornerRadius">10</CornerRadius>
+    <x:Double x:Key="LuminaCarouselIndicatorScrimHeight">52</x:Double>
+    <Thickness x:Key="LuminaCarouselIndicatorMargin">0,0,0,16</Thickness>
+    <Thickness x:Key="LuminaCarouselIndicatorPadding">0</Thickness>
+    <x:Double x:Key="LuminaCarouselIndicatorMinHeight">20</x:Double>
+    <Thickness x:Key="LuminaCarouselIndicatorBorderThickness">0</Thickness>
+    <Thickness x:Key="LuminaCarouselPreviousButtonMargin">14,0,0,0</Thickness>
+    <Thickness x:Key="LuminaCarouselNextButtonMargin">0,0,14,0</Thickness>
+    <x:Double x:Key="LuminaCarouselLineIndicatorsWidth">180</x:Double>
+    <Thickness x:Key="LuminaCarouselLeftIndicatorsMargin">18,0,0,16</Thickness>
+    <Thickness x:Key="LuminaCarouselRightIndicatorsMargin">0,0,18,16</Thickness>
 
     <ControlTheme x:Key="LuminaCarouselIndicatorDotItem" TargetType="ListBoxItem">
-        <Setter Property="Margin" Value="3,0" />
+        <Setter Property="Margin" Value="{DynamicResource LuminaCarouselIndicatorDotMargin}" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="Background" Value="{DynamicResource LuminaTextMutedBrush}" />
         <Setter Property="Template">
             <ControlTemplate TargetType="ListBoxItem">
                 <Border Name="PART_Dot"
-                        Width="7"
-                        Height="7"
-                        CornerRadius="4"
+                        Width="{DynamicResource LuminaCarouselIndicatorDotSize}"
+                        Height="{DynamicResource LuminaCarouselIndicatorDotSize}"
+                        CornerRadius="{DynamicResource LuminaCarouselIndicatorDotCornerRadius}"
                         Background="{TemplateBinding Background}">
                     <Border.Transitions>
                         <Transitions>
@@ -36,19 +67,19 @@
         </Style>
 
         <Style Selector="^:selected /template/ Border#PART_Dot">
-            <Setter Property="Width" Value="20" />
+            <Setter Property="Width" Value="{DynamicResource LuminaCarouselIndicatorDotSelectedWidth}" />
         </Style>
     </ControlTheme>
 
     <ControlTheme x:Key="LuminaCarouselIndicatorLineItem"
                   TargetType="ListBoxItem"
                   BasedOn="{StaticResource LuminaCarouselIndicatorDotItem}">
-        <Setter Property="Margin" Value="2,0" />
+        <Setter Property="Margin" Value="{DynamicResource LuminaCarouselIndicatorLineMargin}" />
         <Setter Property="Template">
             <ControlTemplate TargetType="ListBoxItem">
                 <Border Name="PART_Line"
-                        Height="4"
-                        CornerRadius="2"
+                        Height="{DynamicResource LuminaCarouselIndicatorLineHeight}"
+                        CornerRadius="{DynamicResource LuminaCarouselIndicatorLineCornerRadius}"
                         Background="{TemplateBinding Background}">
                     <Border.Transitions>
                         <Transitions>
@@ -63,16 +94,16 @@
     <ControlTheme x:Key="LuminaCarouselIndicatorColumnarItem"
                   TargetType="ListBoxItem"
                   BasedOn="{StaticResource LuminaCarouselIndicatorDotItem}">
-        <Setter Property="Width" Value="5" />
-        <Setter Property="Height" Value="22" />
-        <Setter Property="Margin" Value="3,0" />
+        <Setter Property="Width" Value="{DynamicResource LuminaCarouselIndicatorColumnarWidth}" />
+        <Setter Property="Height" Value="{DynamicResource LuminaCarouselIndicatorColumnarHeight}" />
+        <Setter Property="Margin" Value="{DynamicResource LuminaCarouselIndicatorColumnarMargin}" />
         <Setter Property="Template">
             <ControlTemplate TargetType="ListBoxItem">
                 <Border Name="PART_Column"
-                        Width="5"
-                        Height="10"
+                        Width="{DynamicResource LuminaCarouselIndicatorColumnarWidth}"
+                        Height="{DynamicResource LuminaCarouselIndicatorColumnarIdleHeight}"
                         VerticalAlignment="Bottom"
-                        CornerRadius="3"
+                        CornerRadius="{DynamicResource LuminaCarouselIndicatorColumnarCornerRadius}"
                         Background="{TemplateBinding Background}">
                     <Border.Transitions>
                         <Transitions>
@@ -85,19 +116,19 @@
         </Setter>
 
         <Style Selector="^:selected /template/ Border#PART_Column">
-            <Setter Property="Height" Value="22" />
+            <Setter Property="Height" Value="{DynamicResource LuminaCarouselIndicatorColumnarHeight}" />
         </Style>
     </ControlTheme>
 
     <ControlTheme x:Key="LuminaCarouselButton" TargetType="Button">
-        <Setter Property="Width" Value="36" />
-        <Setter Property="Height" Value="36" />
-        <Setter Property="Padding" Value="0" />
+        <Setter Property="Width" Value="{DynamicResource LuminaCarouselButtonSize}" />
+        <Setter Property="Height" Value="{DynamicResource LuminaCarouselButtonSize}" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaCarouselButtonPadding}" />
         <Setter Property="Background" Value="#66000000" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="BorderBrush" Value="#26FFFFFF" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="CornerRadius" Value="18" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaCarouselButtonBorderThickness}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaCarouselButtonCornerRadius}" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="Template">
@@ -109,18 +140,19 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{TemplateBinding CornerRadius}">
-                    <Viewbox Width="18"
-                             Height="18"
+                    <Viewbox Width="{DynamicResource LuminaCarouselButtonIconSize}"
+                             Height="{DynamicResource LuminaCarouselButtonIconSize}"
                              HorizontalAlignment="Center"
                              VerticalAlignment="Center"
                              Stretch="Uniform">
-                        <Canvas Width="24" Height="24">
+                        <Canvas Width="{DynamicResource LuminaCarouselButtonIconCanvasSize}"
+                                Height="{DynamicResource LuminaCarouselButtonIconCanvasSize}">
                             <Path Data="{TemplateBinding Content}"
                                   Fill="Transparent"
                                   Stroke="{TemplateBinding Foreground}"
                                   StrokeLineCap="Round"
                                   StrokeJoin="Round"
-                                  StrokeThickness="2.4" />
+                                  StrokeThickness="{DynamicResource LuminaCarouselButtonIconStrokeThickness}" />
                         </Canvas>
                     </Viewbox>
                 </Border>
@@ -140,7 +172,7 @@
     <ControlTheme x:Key="{x:Type Carousel}" TargetType="Carousel">
         <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaCarouselBorderThickness}" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="AutoScrollToSelectedItem" Value="False" />
         <Setter Property="PageTransition">
@@ -151,7 +183,7 @@
                 <Border Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="10"
+                        CornerRadius="{DynamicResource LuminaCarouselCornerRadius}"
                         ClipToBounds="True">
                     <Grid RowDefinitions="*,Auto">
                         <ScrollViewer Name="PART_ScrollViewer"
@@ -168,7 +200,7 @@
 
                         <Border Name="PART_IndicatorScrim"
                                 Grid.Row="1"
-                                Height="52"
+                                Height="{DynamicResource LuminaCarouselIndicatorScrimHeight}"
                                 VerticalAlignment="Bottom"
                                 IsHitTestVisible="False">
                             <Border.Background>
@@ -181,13 +213,13 @@
 
                         <ListBox Name="PART_Indicators"
                                  Grid.Row="1"
-                                 Margin="0,0,0,16"
-                                 Padding="0"
-                                 MinHeight="20"
+                                 Margin="{DynamicResource LuminaCarouselIndicatorMargin}"
+                                 Padding="{DynamicResource LuminaCarouselIndicatorPadding}"
+                                 MinHeight="{DynamicResource LuminaCarouselIndicatorMinHeight}"
                                  HorizontalAlignment="Center"
                                  VerticalAlignment="Bottom"
                                  Background="Transparent"
-                                 BorderThickness="0"
+                                 BorderThickness="{DynamicResource LuminaCarouselIndicatorBorderThickness}"
                                  AutoScrollToSelectedItem="False"
                                  Focusable="False"
                                  ScrollViewer.BringIntoViewOnFocusChange="False"
@@ -205,7 +237,7 @@
                         <Button Name="PART_PreviousButton"
                                 Grid.Row="0"
                                 Grid.RowSpan="2"
-                                Margin="14,0,0,0"
+                                Margin="{DynamicResource LuminaCarouselPreviousButtonMargin}"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
                                 Theme="{StaticResource LuminaCarouselButton}"
@@ -216,7 +248,7 @@
                         <Button Name="PART_NextButton"
                                 Grid.Row="0"
                                 Grid.RowSpan="2"
-                                Margin="0,0,14,0"
+                                Margin="{DynamicResource LuminaCarouselNextButtonMargin}"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
                                 Theme="{StaticResource LuminaCarouselButton}"
@@ -230,7 +262,7 @@
 
         <Style Selector="^.Line /template/ ListBox#PART_Indicators">
             <Setter Property="ItemContainerTheme" Value="{StaticResource LuminaCarouselIndicatorLineItem}" />
-            <Setter Property="Width" Value="180" />
+            <Setter Property="Width" Value="{DynamicResource LuminaCarouselLineIndicatorsWidth}" />
             <Setter Property="ItemsPanel">
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="{TemplateBinding ItemCount}" Rows="1" />
@@ -260,7 +292,7 @@
 
         <Style Selector="^.Left /template/ ListBox#PART_Indicators">
             <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="Margin" Value="18,0,0,16" />
+            <Setter Property="Margin" Value="{DynamicResource LuminaCarouselLeftIndicatorsMargin}" />
         </Style>
 
         <Style Selector="^.Center /template/ ListBox#PART_Indicators">
@@ -269,7 +301,7 @@
 
         <Style Selector="^.Right /template/ ListBox#PART_Indicators">
             <Setter Property="HorizontalAlignment" Value="Right" />
-            <Setter Property="Margin" Value="0,0,18,16" />
+            <Setter Property="Margin" Value="{DynamicResource LuminaCarouselRightIndicatorsMargin}" />
         </Style>
     </ControlTheme>
 

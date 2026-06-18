@@ -332,7 +332,7 @@ public class LuminaPagination : TemplatedControl
             return new TextBlock
             {
                 Text = "...",
-                Width = 32.0,
+                Width = LuminaPickerResources.Double("LuminaPaginationEllipsisWidth", 32.0),
                 TextAlignment = TextAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center
             };

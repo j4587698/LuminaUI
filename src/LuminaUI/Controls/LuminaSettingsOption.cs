@@ -554,7 +554,7 @@ public class LuminaSettingsOption : Button
         {
             Text = InputText,
             PlaceholderText = PlaceholderText,
-            MinHeight = 38.0,
+            MinHeight = LuminaPickerResources.Double("LuminaSettingsOptionSheetInputMinHeight", 38.0),
             HorizontalContentAlignment = HorizontalAlignment.Stretch
         };
         Button cancelButton = new Button
@@ -577,23 +577,18 @@ public class LuminaSettingsOption : Button
         Grid actions = new Grid
         {
             ColumnDefinitions = new ColumnDefinitions("*,Auto,Auto"),
-            ColumnSpacing = 8.0,
             Children =
             {
                 cancelButton,
                 doneButton
             }
         };
-        StackPanel content = new StackPanel
-        {
-            Spacing = 16.0,
-            Children =
-            {
-                CreateSheetTitleText(Header?.ToString() ?? PlaceholderText ?? string.Empty),
-                input,
-                actions
-            }
-        };
+        LuminaPickerResources.BindResource(actions, Grid.ColumnSpacingProperty, "LuminaSheetActionsColumnSpacing");
+        StackPanel content = new StackPanel();
+        LuminaPickerResources.BindResource(content, StackPanel.SpacingProperty, "LuminaSheetLayoutSpacing");
+        content.Children.Add(CreateSheetTitleText(Header?.ToString() ?? PlaceholderText ?? string.Empty));
+        content.Children.Add(input);
+        content.Children.Add(actions);
         return LuminaBottomSheetService.Instance.TryShow(this, content);
     }
 
@@ -619,20 +614,15 @@ public class LuminaSettingsOption : Button
     {
         ScrollViewer body = new ScrollViewer
         {
-            MaxHeight = 420.0,
+            MaxHeight = LuminaPickerResources.Double("LuminaSettingsOptionSheetBodyMaxHeight", 420.0),
             HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
             VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
             Content = SelectOptions.Count == 0 ? CreateSheetEmptyText() : CreateSheetOptionsList()
         };
-        StackPanel content = new StackPanel
-        {
-            Spacing = 16.0,
-            Children =
-            {
-                CreateSheetTitleText(Header?.ToString() ?? LuminaLocalization.Get("Lumina.Picker.SelectOption")),
-                body
-            }
-        };
+        StackPanel content = new StackPanel();
+        LuminaPickerResources.BindResource(content, StackPanel.SpacingProperty, "LuminaSheetLayoutSpacing");
+        content.Children.Add(CreateSheetTitleText(Header?.ToString() ?? LuminaLocalization.Get("Lumina.Picker.SelectOption")));
+        content.Children.Add(body);
         return LuminaBottomSheetService.Instance.TryShow(this, content);
     }
 
@@ -641,9 +631,11 @@ public class LuminaSettingsOption : Button
         return new ItemsControl
         {
             ItemsSource = SelectOptions,
-            ItemsPanel = new FuncTemplate<Panel?>(() => new StackPanel
+            ItemsPanel = new FuncTemplate<Panel?>(() =>
             {
-                Spacing = 4.0
+                StackPanel panel = new StackPanel();
+                LuminaPickerResources.BindResource(panel, StackPanel.SpacingProperty, "LuminaSettingsOptionSheetOptionsSpacing");
+                return panel;
             }),
             ItemTemplate = new FuncDataTemplate<LuminaSettingsSelectOptionItem>((option, _) => CreateSheetOptionButton(option), supportsRecycling: false)
         };
@@ -654,9 +646,9 @@ public class LuminaSettingsOption : Button
         TextBlock title = new TextBlock
         {
             Text = text,
-            FontSize = 18.0,
             FontWeight = FontWeight.DemiBold
         };
+        LuminaPickerResources.BindResource(title, TextBlock.FontSizeProperty, "LuminaSheetTitleFontSize");
         LuminaPickerResources.BindBrush(title, TextBlock.ForegroundProperty, "LuminaTextForegroundBrush");
         return title;
     }
@@ -684,24 +676,24 @@ public class LuminaSettingsOption : Button
         LuminaPickerResources.BindBrush(label, TextBlock.ForegroundProperty, "LuminaTextPrimaryBrush");
         PathIcon checkIcon = new PathIcon
         {
-            Width = 18.0,
-            Height = 18.0,
             Data = StreamGeometry.Parse("M9,16.2 L4.8,12 L3.4,13.4 L9,19 L21,7 L19.6,5.6 Z"),
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Center
         };
+        LuminaPickerResources.BindResource(checkIcon, Layoutable.WidthProperty, "LuminaSettingsOptionSheetCheckIconSize");
+        LuminaPickerResources.BindResource(checkIcon, Layoutable.HeightProperty, "LuminaSettingsOptionSheetCheckIconSize");
         checkIcon.Bind(IsVisibleProperty, new Binding(nameof(LuminaSettingsSelectOptionItem.IsSelected)) { Source = option });
         LuminaPickerResources.BindBrush(checkIcon, PathIcon.ForegroundProperty, "LuminaPrimaryBrush");
         Grid grid = new Grid
         {
             ColumnDefinitions = new ColumnDefinitions("*,24"),
-            ColumnSpacing = 12.0,
             Children =
             {
                 label,
                 checkIcon
             }
         };
+        LuminaPickerResources.BindResource(grid, Grid.ColumnSpacingProperty, "LuminaSettingsOptionSheetOptionColumnSpacing");
         Grid.SetColumn(checkIcon, 1);
         Button button = new Button
         {

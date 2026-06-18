@@ -109,9 +109,9 @@ public class LuminaWindowDialog : LuminaWindow
         var titleText = new Avalonia.Controls.TextBlock
         {
             VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center,
-            FontSize = 12,
             Margin = new Avalonia.Thickness(0, 0, 0, 0)
         };
+        LuminaPickerResources.BindResource(titleText, Avalonia.Controls.TextBlock.FontSizeProperty, "LuminaWindowDialogTitleFontSize");
         titleText.Bind(Avalonia.Controls.TextBlock.TextProperty, this.GetObservable(TitleProperty));
         TitleBarLeftContent = titleText;
 
@@ -173,18 +173,18 @@ public class LuminaWindowDialog : LuminaWindow
     {
         var border = new Border
         {
-            Padding = new Thickness(24, 8),
-            BorderThickness = new Thickness(0, 1, 0, 0),
             Background = Avalonia.Media.Brushes.Transparent
         };
+        LuminaPickerResources.BindResource(border, Border.PaddingProperty, "LuminaWindowDialogFooterPadding");
+        LuminaPickerResources.BindResource(border, Border.BorderThicknessProperty, "LuminaWindowDialogFooterBorderThickness");
         border.Bind(Border.BorderBrushProperty, new DynamicResourceExtension("LuminaBorderDefaultBrush"));
 
         var stack = new StackPanel
         {
             Orientation = Orientation.Horizontal,
-            Spacing = 12,
             HorizontalAlignment = HorizontalAlignment.Right
         };
+        LuminaPickerResources.BindResource(stack, StackPanel.SpacingProperty, "LuminaWindowDialogFooterSpacing");
 
         _footerButtons.Clear();
 

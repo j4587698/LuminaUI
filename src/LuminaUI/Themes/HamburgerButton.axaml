@@ -2,14 +2,23 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
 
+    <x:Double x:Key="LuminaHamburgerButtonSize">36</x:Double>
+    <Thickness x:Key="LuminaHamburgerButtonPadding">0</Thickness>
+    <CornerRadius x:Key="LuminaHamburgerButtonCornerRadius">8</CornerRadius>
+    <Thickness x:Key="LuminaHamburgerButtonBorderThickness">1</Thickness>
+    <x:Double x:Key="LuminaHamburgerButtonIconWidth">18</x:Double>
+    <x:Double x:Key="LuminaHamburgerButtonIconHeight">14</x:Double>
+    <x:Double x:Key="LuminaHamburgerButtonLineHeight">2</x:Double>
+    <CornerRadius x:Key="LuminaHamburgerButtonLineCornerRadius">1</CornerRadius>
+
     <ControlTheme x:Key="{x:Type lumina:LuminaHamburgerButton}" TargetType="lumina:LuminaHamburgerButton">
-        <Setter Property="Width" Value="36" />
-        <Setter Property="Height" Value="36" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Width" Value="{DynamicResource LuminaHamburgerButtonSize}" />
+        <Setter Property="Height" Value="{DynamicResource LuminaHamburgerButtonSize}" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaHamburgerButtonPadding}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaHamburgerButtonCornerRadius}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaHamburgerButtonBorderThickness}" />
         <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
         <Setter Property="Template">
             <ControlTemplate TargetType="lumina:LuminaHamburgerButton">
@@ -18,23 +27,23 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{TemplateBinding CornerRadius}">
-                    <Grid Width="18"
-                          Height="14"
+                    <Grid Width="{DynamicResource LuminaHamburgerButtonIconWidth}"
+                          Height="{DynamicResource LuminaHamburgerButtonIconHeight}"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Center">
                         <Border Name="PART_Top"
-                                Height="2"
-                                CornerRadius="1"
+                                Height="{DynamicResource LuminaHamburgerButtonLineHeight}"
+                                CornerRadius="{DynamicResource LuminaHamburgerButtonLineCornerRadius}"
                                 Background="{TemplateBinding Foreground}"
                                 VerticalAlignment="Top" />
                         <Border Name="PART_Middle"
-                                Height="2"
-                                CornerRadius="1"
+                                Height="{DynamicResource LuminaHamburgerButtonLineHeight}"
+                                CornerRadius="{DynamicResource LuminaHamburgerButtonLineCornerRadius}"
                                 Background="{TemplateBinding Foreground}"
                                 VerticalAlignment="Center" />
                         <Border Name="PART_Bottom"
-                                Height="2"
-                                CornerRadius="1"
+                                Height="{DynamicResource LuminaHamburgerButtonLineHeight}"
+                                CornerRadius="{DynamicResource LuminaHamburgerButtonLineCornerRadius}"
                                 Background="{TemplateBinding Foreground}"
                                 VerticalAlignment="Bottom" />
                     </Grid>
