@@ -49,6 +49,7 @@
   <data name="Lumina.Picker.TimeSummaryFormat12Hour" xml:space="preserve"><value>h:mm tt</value></data>
   <data name="Lumina.Picker.Minute" xml:space="preserve"><value>Minute</value></data>
   <data name="Lumina.Image.Unavailable" xml:space="preserve"><value>Image unavailable</value></data>
+  <data name="Lumina.ShortcutInput.Placeholder" xml:space="preserve"><value>Press shortcut</value></data>
   <data name="Lumina.Common.Cancel" xml:space="preserve"><value>Cancel</value></data>
   <data name="Lumina.Common.Clear" xml:space="preserve"><value>Clear</value></data>
   <data name="Lumina.Common.Close" xml:space="preserve"><value>Close</value></data>

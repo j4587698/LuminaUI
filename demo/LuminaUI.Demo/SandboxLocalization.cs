@@ -265,6 +265,36 @@ internal static class SandboxLocalization
 
 	public const string SettingsInvalidColor = "Sandbox.Settings.InvalidColor";
 
+	public const string TextInputsShortcutInput = "Sandbox.TextInputs.ShortcutInput";
+
+	public const string TextInputsSaveAction = "Sandbox.TextInputs.SaveAction";
+
+	public const string TextInputsStorageFormat = "Sandbox.TextInputs.StorageFormat";
+
+	public const string TextInputsCommandKeys = "Sandbox.TextInputs.CommandKeys";
+
+	public const string TextInputsSingleKey = "Sandbox.TextInputs.SingleKey";
+
+	public const string TextInputsShortcutScope = "Sandbox.TextInputs.ShortcutScope";
+
+	public const string TextInputsShortcutScopePlaceholder = "Sandbox.TextInputs.ShortcutScopePlaceholder";
+
+	public const string TextInputsShortcutStatusHint = "Sandbox.TextInputs.ShortcutStatusHint";
+
+	public const string TextInputsShortcutTriggeredFormat = "Sandbox.TextInputs.ShortcutTriggeredFormat";
+
+	public const string TextInputsMultipleShortcuts = "Sandbox.TextInputs.MultipleShortcuts";
+
+	public const string TextInputsMultipleShortcutsPlaceholder = "Sandbox.TextInputs.MultipleShortcutsPlaceholder";
+
+	public const string TextInputsMultipleShortcutStatusHint = "Sandbox.TextInputs.MultipleShortcutStatusHint";
+
+	public const string TextInputsShortcutActionTriggeredFormat = "Sandbox.TextInputs.ShortcutActionTriggeredFormat";
+
+	public const string TextInputsPaletteAction = "Sandbox.TextInputs.PaletteAction";
+
+	public const string TextInputsRenameAction = "Sandbox.TextInputs.RenameAction";
+
 	public const string LocalizationOverrideTitle = "Sandbox.Localization.OverrideTitle";
 
 	public const string LocalizationOverrideDescription = "Sandbox.Localization.OverrideDescription";

@@ -2,7 +2,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
-             x:Class="LuminaUI.Demo.Views.TextInputShowcasePage">
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.TextInputShowcasePage"
+             x:DataType="vm:TextInputShowcaseViewModel">
 
     <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
         <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
@@ -103,6 +105,79 @@
                                        VerticalAlignment="Center" />
                         </TextBox.InnerRightContent>
                     </TextBox>
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard>
+                <StackPanel Spacing="16">
+                    <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.TextInputs.ShortcutInput}" />
+                    <lumina:LuminaResponsivePanel MinItemWidth="220"
+                                                  MaxItemWidth="360"
+                                                  HorizontalSpacing="16"
+                                                  VerticalSpacing="16">
+                        <StackPanel Spacing="8">
+                            <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.TextInputs.SaveAction}" />
+                            <lumina:LuminaShortcutInput Width="300"
+                                                        Classes="ClearButton"
+                                                        Gesture="{Binding SaveGesture}" />
+                            <TextBlock FontSize="12"
+                                       Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                       Text="{Binding SaveGestureStorageDisplayText}"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+
+                        <StackPanel Spacing="8">
+                            <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.TextInputs.CommandKeys}" />
+                            <lumina:LuminaShortcutInput Width="300"
+                                                        Classes="ClearButton"
+                                                        Gesture="{Binding PaletteGesture}" />
+                        </StackPanel>
+
+                        <StackPanel Spacing="8">
+                            <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.TextInputs.SingleKey}" />
+                            <lumina:LuminaShortcutInput Width="300"
+                                                        Classes="ClearButton"
+                                                        ConsiderKeyModifiers="False"
+                                                        Gesture="{Binding RenameGesture}" />
+                        </StackPanel>
+                    </lumina:LuminaResponsivePanel>
+
+                    <Border Padding="12"
+                            BorderBrush="{DynamicResource LuminaBorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="6"
+                            lumina:LuminaShortcut.Command="{Binding TriggerSaveShortcutCommand}"
+                            lumina:LuminaShortcut.Gestures="{Binding SaveGestures}">
+                        <StackPanel Spacing="8">
+                            <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.TextInputs.ShortcutScope}" />
+                            <TextBox PlaceholderText="{l10n:Loc Sandbox.TextInputs.ShortcutScopePlaceholder}" />
+                            <TextBlock Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                       Text="{Binding ShortcutStatus}"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Padding="12"
+                            BorderBrush="{DynamicResource LuminaBorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="6">
+                        <lumina:LuminaShortcut.Shortcuts>
+                            <lumina:LuminaShortcutBinding Gestures="{Binding PaletteGestures}"
+                                                         Command="{Binding TriggerShortcutActionCommand}"
+                                                         CommandParameter="Sandbox.TextInputs.PaletteAction" />
+                            <lumina:LuminaShortcutBinding Gesture="{Binding RenameGesture}"
+                                                         Command="{Binding TriggerShortcutActionCommand}"
+                                                         CommandParameter="Sandbox.TextInputs.RenameAction" />
+                        </lumina:LuminaShortcut.Shortcuts>
+
+                        <StackPanel Spacing="8">
+                            <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.TextInputs.MultipleShortcuts}" />
+                            <TextBox PlaceholderText="{l10n:Loc Sandbox.TextInputs.MultipleShortcutsPlaceholder}" />
+                            <TextBlock Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                       Text="{Binding MultiShortcutStatus}"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Border>
                 </StackPanel>
             </lumina:LuminaCard>
 

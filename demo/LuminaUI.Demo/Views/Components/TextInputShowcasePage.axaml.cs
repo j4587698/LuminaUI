@@ -7,7 +7,7 @@ public partial class TextInputShowcasePage : ContentPage
 {
     public TextInputShowcasePage()
     {
-        DataContext = new StaticShowcaseViewModel();
+        DataContext = new TextInputShowcaseViewModel();
         InitializeComponent();
     }
 }

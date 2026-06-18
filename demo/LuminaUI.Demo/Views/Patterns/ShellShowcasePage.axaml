@@ -118,7 +118,19 @@
                                                  DefaultPageTitle="{l10n:Loc Sandbox.ShellShowcase.PreviewShellTitle}"
                                                 DefaultPageSubtitle="{l10n:Loc Sandbox.ShellShowcase.PreviewShellSubtitle}"
                                                 OpenPaneLength="220"
-                                                CompactPaneLength="56">
+                                                CompactPaneLength="56"
+                                                lumina:LuminaShortcut.Gesture="Ctrl+H"
+                                                lumina:LuminaShortcut.Command="{Binding #PreviewShell.NavigateCommand}"
+                                                lumina:LuminaShortcut.CommandParameter="PreviewHome">
+                                <lumina:LuminaShortcut.Shortcuts>
+                                    <lumina:LuminaShortcutBinding Gesture="Ctrl+R"
+                                                                 Command="{Binding #PreviewShell.NavigateCommand}"
+                                                                 CommandParameter="PreviewReports" />
+                                    <lumina:LuminaShortcutBinding Gesture="Ctrl+T"
+                                                                 Command="{Binding #PreviewShell.NavigateCommand}"
+                                                                 CommandParameter="PreviewSettings" />
+                                </lumina:LuminaShortcut.Shortcuts>
+
                                 <lumina:LuminaShell.MenuHeader>
                                     <StackPanel Orientation="Horizontal" Spacing="8">
                                         <Border Width="24"
