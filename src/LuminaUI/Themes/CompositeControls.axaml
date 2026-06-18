@@ -1,6 +1,9 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="using:Avalonia.Controls.Converters"
                     xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
+
+    <converters:PlatformKeyGestureConverter x:Key="LuminaShortcutGestureConverter" />
 
     <x:Double x:Key="LuminaDateRangeCalendarHeaderFontSize">12</x:Double>
     <Thickness x:Key="LuminaDateRangeCalendarHeaderMargin">0,0,0,6</Thickness>
@@ -65,6 +68,12 @@
     <x:Double x:Key="LuminaDateRangePickerLargeMinHeight">48</x:Double>
     <Thickness x:Key="LuminaPaginationButtonPadding">0</Thickness>
     <Thickness x:Key="LuminaPaginationButtonBorderThickness">0</Thickness>
+    <x:Double x:Key="LuminaShortcutInputMinHeight">36</x:Double>
+    <Thickness x:Key="LuminaShortcutInputPadding">12,6</Thickness>
+    <Thickness x:Key="LuminaShortcutInputBorderThickness">1</Thickness>
+    <CornerRadius x:Key="LuminaShortcutInputCornerRadius">6</CornerRadius>
+    <x:Double x:Key="LuminaShortcutInputClearButtonSize">28</x:Double>
+    <x:Double x:Key="LuminaShortcutInputClearIconSize">12</x:Double>
 
     <ControlTheme x:Key="{x:Type lumina:LuminaAvatar}" TargetType="lumina:LuminaAvatar">
         <Setter Property="Size" Value="40" />
@@ -932,6 +941,110 @@
                             Spacing="{TemplateBinding ItemSpacing}" />
             </ControlTemplate>
         </Setter>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaShortcutInput}" TargetType="lumina:LuminaShortcutInput">
+        <Setter Property="MinHeight" Value="{DynamicResource LuminaShortcutInputMinHeight}" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaShortcutInputPadding}" />
+        <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderBrush}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaShortcutInputBorderThickness}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaShortcutInputCornerRadius}" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaShortcutInput">
+                <Border Name="PART_Root"
+                        MinHeight="{TemplateBinding MinHeight}"
+                        Padding="{TemplateBinding Padding}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Grid Grid.Column="0"
+                              MinWidth="0"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <TextBlock Name="PART_PlaceholderText"
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                       Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                       IsHitTestVisible="False"
+                                       IsVisible="False"
+                                       Text="{TemplateBinding PlaceholderText}"
+                                       TextTrimming="CharacterEllipsis" />
+                            <TextBlock Name="PART_GestureText"
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       IsHitTestVisible="False"
+                                       Text="{TemplateBinding Gesture, Converter={StaticResource LuminaShortcutGestureConverter}}"
+                                       TextTrimming="CharacterEllipsis" />
+                        </Grid>
+
+                        <Grid Grid.Column="1"
+                              ColumnDefinitions="Auto">
+                            <Button Name="PART_ClearButton"
+                                    Grid.Column="0"
+                                    Width="{DynamicResource LuminaShortcutInputClearButtonSize}"
+                                    Height="{DynamicResource LuminaShortcutInputClearButtonSize}"
+                                    MinWidth="0"
+                                    MinHeight="0"
+                                    Margin="8,0,0,0"
+                                    Padding="0"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Command="{Binding $parent[lumina:LuminaShortcutInput].ClearCommand}"
+                                    Focusable="False"
+                                    Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                    IsHitTestVisible="False"
+                                    Opacity="0"
+                                    IsVisible="False">
+                                <Viewbox Width="{DynamicResource LuminaShortcutInputClearIconSize}"
+                                         Height="{DynamicResource LuminaShortcutInputClearIconSize}">
+                                    <Path Data="M18.3,5.71 L12,12 L18.3,18.29 L16.89,19.7 L10.59,13.41 L4.29,19.7 L2.88,18.29 L9.17,12 L2.88,5.71 L4.29,4.3 L10.59,10.59 L16.89,4.3 Z"
+                                          Fill="{Binding $parent[Button].Foreground}"
+                                          Stretch="Uniform" />
+                                </Viewbox>
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:pointerover /template/ Border#PART_Root">
+            <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderDefaultBrush}" />
+        </Style>
+
+        <Style Selector="^:focus /template/ Border#PART_Root">
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderStrongBrush}" />
+        </Style>
+
+        <Style Selector="^:empty /template/ TextBlock#PART_PlaceholderText">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+
+        <Style Selector="^:empty /template/ TextBlock#PART_GestureText">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+
+        <Style Selector="^.ClearButton /template/ Button#PART_ClearButton">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+
+        <Style Selector="^:not(:empty).ClearButton:focus /template/ Button#PART_ClearButton">
+            <Setter Property="IsHitTestVisible" Value="True" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+
+        <Style Selector="^:not(:empty).ClearButton:pointerover /template/ Button#PART_ClearButton">
+            <Setter Property="IsHitTestVisible" Value="True" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
     </ControlTheme>
 
     <ControlTheme x:Key="{x:Type lumina:LuminaPagination}" TargetType="lumina:LuminaPagination">

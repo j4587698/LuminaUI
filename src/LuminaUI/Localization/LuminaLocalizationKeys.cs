@@ -40,6 +40,8 @@ public static class LuminaLocalizationKeys
 
     public const string ImageUnavailable = "Lumina.Image.Unavailable";
 
+    public const string ShortcutInputPlaceholder = "Lumina.ShortcutInput.Placeholder";
+
     public const string PickerSelectOption = "Lumina.Picker.SelectOption";
 
     public const string PickerSelectColor = "Lumina.Picker.SelectColor";

@@ -357,6 +357,51 @@
   <data name="Sandbox.Settings.InvalidColor" xml:space="preserve">
     <value>Invalid color</value>
   </data>
+  <data name="Sandbox.TextInputs.ShortcutInput" xml:space="preserve">
+    <value>Shortcut input</value>
+  </data>
+  <data name="Sandbox.TextInputs.SaveAction" xml:space="preserve">
+    <value>Save action</value>
+  </data>
+  <data name="Sandbox.TextInputs.StorageFormat" xml:space="preserve">
+    <value>Storage: {0}</value>
+  </data>
+  <data name="Sandbox.TextInputs.CommandKeys" xml:space="preserve">
+    <value>Palette shortcut</value>
+  </data>
+  <data name="Sandbox.TextInputs.SingleKey" xml:space="preserve">
+    <value>Rename shortcut (single key)</value>
+  </data>
+  <data name="Sandbox.TextInputs.ShortcutScope" xml:space="preserve">
+    <value>Shortcut scope</value>
+  </data>
+  <data name="Sandbox.TextInputs.ShortcutScopePlaceholder" xml:space="preserve">
+    <value>Focus here, then press the save shortcut</value>
+  </data>
+  <data name="Sandbox.TextInputs.ShortcutStatusHint" xml:space="preserve">
+    <value>Focus the field below and press the save shortcut.</value>
+  </data>
+  <data name="Sandbox.TextInputs.ShortcutTriggeredFormat" xml:space="preserve">
+    <value>Save shortcut triggered: {0}</value>
+  </data>
+  <data name="Sandbox.TextInputs.MultipleShortcuts" xml:space="preserve">
+    <value>Multiple shortcuts</value>
+  </data>
+  <data name="Sandbox.TextInputs.MultipleShortcutsPlaceholder" xml:space="preserve">
+    <value>Focus here, then press the palette or rename shortcut</value>
+  </data>
+  <data name="Sandbox.TextInputs.MultipleShortcutStatusHint" xml:space="preserve">
+    <value>Palette uses the palette shortcut plus Ctrl+P; rename uses the single-key rename shortcut.</value>
+  </data>
+  <data name="Sandbox.TextInputs.ShortcutActionTriggeredFormat" xml:space="preserve">
+    <value>Shortcut action triggered: {0}</value>
+  </data>
+  <data name="Sandbox.TextInputs.PaletteAction" xml:space="preserve">
+    <value>Palette action</value>
+  </data>
+  <data name="Sandbox.TextInputs.RenameAction" xml:space="preserve">
+    <value>Rename action</value>
+  </data>
   <data name="Sandbox.Picker.Title" xml:space="preserve">
     <value>Pickers</value>
   </data>

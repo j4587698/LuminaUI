@@ -357,6 +357,51 @@
   <data name="Sandbox.Settings.InvalidColor" xml:space="preserve">
     <value>颜色无效</value>
   </data>
+  <data name="Sandbox.TextInputs.ShortcutInput" xml:space="preserve">
+    <value>快捷键输入</value>
+  </data>
+  <data name="Sandbox.TextInputs.SaveAction" xml:space="preserve">
+    <value>保存操作</value>
+  </data>
+  <data name="Sandbox.TextInputs.StorageFormat" xml:space="preserve">
+    <value>存储：{0}</value>
+  </data>
+  <data name="Sandbox.TextInputs.CommandKeys" xml:space="preserve">
+    <value>命令面板快捷键</value>
+  </data>
+  <data name="Sandbox.TextInputs.SingleKey" xml:space="preserve">
+    <value>重命名快捷键（单键）</value>
+  </data>
+  <data name="Sandbox.TextInputs.ShortcutScope" xml:space="preserve">
+    <value>快捷键作用域</value>
+  </data>
+  <data name="Sandbox.TextInputs.ShortcutScopePlaceholder" xml:space="preserve">
+    <value>聚焦这里，然后按保存快捷键</value>
+  </data>
+  <data name="Sandbox.TextInputs.ShortcutStatusHint" xml:space="preserve">
+    <value>聚焦下方输入框，然后按保存快捷键。</value>
+  </data>
+  <data name="Sandbox.TextInputs.ShortcutTriggeredFormat" xml:space="preserve">
+    <value>已触发保存快捷键：{0}</value>
+  </data>
+  <data name="Sandbox.TextInputs.MultipleShortcuts" xml:space="preserve">
+    <value>多个快捷键</value>
+  </data>
+  <data name="Sandbox.TextInputs.MultipleShortcutsPlaceholder" xml:space="preserve">
+    <value>聚焦这里，然后按命令面板或重命名快捷键</value>
+  </data>
+  <data name="Sandbox.TextInputs.MultipleShortcutStatusHint" xml:space="preserve">
+    <value>命令面板支持上方录入的命令面板快捷键和 Ctrl+P；重命名使用单键重命名快捷键。</value>
+  </data>
+  <data name="Sandbox.TextInputs.ShortcutActionTriggeredFormat" xml:space="preserve">
+    <value>已触发快捷键操作：{0}</value>
+  </data>
+  <data name="Sandbox.TextInputs.PaletteAction" xml:space="preserve">
+    <value>命令面板操作</value>
+  </data>
+  <data name="Sandbox.TextInputs.RenameAction" xml:space="preserve">
+    <value>重命名操作</value>
+  </data>
   <data name="Sandbox.Picker.Title" xml:space="preserve">
     <value>选择器</value>
   </data>

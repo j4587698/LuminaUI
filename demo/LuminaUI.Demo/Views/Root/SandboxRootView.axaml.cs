@@ -263,7 +263,7 @@ public partial class SandboxRootView : UserControl
             "NavBreadcrumb" => Source("Components/BreadcrumbShowcasePage", "BreadcrumbShowcaseViewModel"),
             "NavTabStrip" => Source("Components/TabStripShowcasePage", StaticShowcaseViewModel),
             "NavTabControl" => Source("Components/TabControlShowcasePage", StaticShowcaseViewModel),
-            "NavTextInputs" => Source("Components/TextInputShowcasePage", StaticShowcaseViewModel),
+            "NavTextInputs" => Source("Components/TextInputShowcasePage", "TextInputShowcaseViewModel"),
             "NavInputOtp" => Source("Components/InputOtpShowcasePage", "InputOtpShowcaseViewModel"),
             "NavForm" => Source("Components/FormShowcasePage", "FormShowcaseViewModel"),
             "NavMultiSelect" => Source("Components/MultiSelectShowcasePage", "MultiSelectShowcaseViewModel"),
