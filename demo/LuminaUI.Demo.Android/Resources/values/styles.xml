@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
     <style name="LuminaUI.Theme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
+
+    <style name="LuminaUI.LaunchTheme" parent="@style/Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/lumina_splash_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_logo</item>
+        <item name="postSplashScreenTheme">@style/LuminaUI.Theme</item>
     </style>
 </resources>

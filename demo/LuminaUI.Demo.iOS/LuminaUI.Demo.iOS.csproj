@@ -14,4 +14,11 @@
   <ItemGroup>
     <ProjectReference Include="..\LuminaUI.Demo\LuminaUI.Demo.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\*.png" />
+    <InterfaceDefinition Include="LaunchScreen.storyboard" />
+    <BundleResource Include="Resources\splash_logo.png" />
+  </ItemGroup>
 </Project>
