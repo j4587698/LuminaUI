@@ -19,4 +19,8 @@ public interface ILuminaOverlayHost
     void ShowBottomSheet(object? content);
 
     void CloseBottomSheet();
+
+    void ShowDrawer(object? content);
+
+    void CloseDrawer();
 }

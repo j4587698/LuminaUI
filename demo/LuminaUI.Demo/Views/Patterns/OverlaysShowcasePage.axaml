@@ -91,11 +91,6 @@
                       Margin="0,0,10,10"
                       Command="{Binding OpenInlineDialogCommand}"
                       CommandParameter="{StaticResource InlineStatusDialog}"/>
-              <Button Name="OpenTopDialogButton"
-                      Content="{l10n:Loc Sandbox.Text.0847}"
-                      Classes="Outline"
-                      Margin="0,0,10,10"
-                      Command="{Binding OpenTopDialogCommand}"/>
               <Button Name="OpenWindowDialogButton"
                       Content="{l10n:Loc Sandbox.Components.PCNativeDialog}"
                       Classes="Outline"
@@ -145,13 +140,6 @@
                       Margin="0,0,10,10"
                       Command="{Binding ShowToastCommand}"
                       CommandParameter="Danger"/>
-              <Button Name="ShowTopToastButton"
-                      Content="{l10n:Loc Sandbox.Text.1322}"
-                      Classes="Outline"
-                      MinWidth="96"
-                      Margin="0,0,10,10"
-                      Command="{Binding ShowToastCommand}"
-                      CommandParameter="Top"/>
             </WrapPanel>
           </StackPanel>
         </lumina:LuminaCard>
@@ -173,11 +161,6 @@
                       Classes="Outline"
                       Margin="0,0,10,10"
                       Command="{Binding OpenBottomSheetCommand}"/>
-              <Button Name="OpenTopBottomSheetButton"
-                      Content="{l10n:Loc Sandbox.Text.0846}"
-                      Classes="Outline"
-                      Margin="0,0,10,10"
-                      Command="{Binding OpenTopBottomSheetCommand}"/>
             </WrapPanel>
           </StackPanel>
         </lumina:LuminaCard>

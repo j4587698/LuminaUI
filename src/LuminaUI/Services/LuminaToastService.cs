@@ -11,7 +11,7 @@ public class LuminaToastService : ILuminaToastService
 
     public void Show(string content, TimeSpan? duration = null)
     {
-        ShowCore(LuminaShell.Current, content, duration);
+        ShowCore(LuminaOverlayHostResolver.FindDefault(), content, duration);
     }
 
     public void Show(LuminaShell shell, string content, TimeSpan? duration = null)
@@ -26,12 +26,12 @@ public class LuminaToastService : ILuminaToastService
 
     public void Show(Control owner, string content, TimeSpan? duration = null)
     {
-        ShowCore(LuminaShell.FindFor(owner), content, duration);
+        ShowCore(LuminaOverlayHostResolver.FindFor(owner), content, duration);
     }
 
     public void ShowAtTop(Control owner, string content, TimeSpan? duration = null)
     {
-        ShowCore(LuminaTopView.FindOuterFor(owner), content, duration);
+        ShowCore(LuminaOverlayHostResolver.FindTopFor(owner), content, duration);
     }
 
     private static void ShowCore(ILuminaOverlayHost? host, string content, TimeSpan? duration)

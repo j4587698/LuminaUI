@@ -145,7 +145,7 @@
     <value>导航页</value>
   </data>
   <data name="Sandbox.Nav.DrawerPage" xml:space="preserve">
-    <value>抽屉页</value>
+    <value>抽屉</value>
   </data>
   <data name="Sandbox.Nav.TabbedPage" xml:space="preserve">
     <value>标签页容器</value>
@@ -236,6 +236,9 @@
   </data>
   <data name="Sandbox.Nav.Overlays" xml:space="preserve">
     <value>悬浮层</value>
+  </data>
+  <data name="Sandbox.Nav.OverlayScope" xml:space="preserve">
+    <value>悬浮层作用域</value>
   </data>
   <data name="Sandbox.Nav.WindowDialogs" xml:space="preserve">
     <value>独立弹窗窗口</value>
@@ -534,8 +537,89 @@
   <data name="Sandbox.Overlays.NativeWindowDialog.Description" xml:space="preserve">
     <value>这是一个真正的系统窗口对话框，可以拖出主窗口。</value>
   </data>
-  <data name="Sandbox.Overlays.TopViewToastMessage" xml:space="preserve">
-    <value>此提示由 LuminaTopView 承载。</value>
+  <data name="Sandbox.Overlays.HostScope.Title" xml:space="preserve">
+    <value>悬浮层宿主作用域</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.Description" xml:space="preserve">
+    <value>对比 Shell 级和 TopView 级侧边抽屉、底部抽屉的覆盖范围。Shell 级悬浮层只停留在应用壳内；TopView 级悬浮层会覆盖应用根层。</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.RootLayer" xml:space="preserve">
+    <value>应用根层</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.RootBadge" xml:space="preserve">
+    <value>TopView</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.ShellMenu" xml:space="preserve">
+    <value>Shell 菜单</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.ShellContent" xml:space="preserve">
+    <value>Shell 内容</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.ShellLayer" xml:space="preserve">
+    <value>Shell 层</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.ShellContentDescription" xml:space="preserve">
+    <value>Shell 悬浮层覆盖这里；TopView 悬浮层会连同外层根区域一起覆盖。</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.RootMarker" xml:space="preserve">
+    <value>根层背景用于观察 TopView 级覆盖是否越过 Shell 边界。</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.MarkerButton" xml:space="preserve">
+    <value>显示根层标记</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.ShellSheetButton" xml:space="preserve">
+    <value>Shell 底部抽屉</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.ShellDrawerButton" xml:space="preserve">
+    <value>Shell 侧边抽屉</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.TopSheetButton" xml:space="preserve">
+    <value>TopView 底部抽屉</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.TopDrawerButton" xml:space="preserve">
+    <value>TopView 侧边抽屉</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.InnerHost" xml:space="preserve">
+    <value>Shell 内层宿主</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.OuterHost" xml:space="preserve">
+    <value>TopView 外层宿主</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.InnerHint" xml:space="preserve">
+    <value>停在 Shell 边界内。</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.Hint" xml:space="preserve">
+    <value>先显示根层标记，再打开 Shell 级和 TopView 级悬浮层，对比遮罩是否覆盖到 Shell 外侧。</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.RootMarker.Title" xml:space="preserve">
+    <value>根层标记</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.RootMarker.Message" xml:space="preserve">
+    <value>这个标记位于 Shell 外侧，用来观察不同悬浮层的覆盖边界。</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.ShellSheet.Title" xml:space="preserve">
+    <value>Shell 底部抽屉</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.ShellSheet.Message" xml:space="preserve">
+    <value>Shell 级底部抽屉用于当前应用壳内的上下文操作。</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.TopSheet.Title" xml:space="preserve">
+    <value>TopView 底部抽屉</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.TopSheet.Message" xml:space="preserve">
+    <value>TopView 级底部抽屉用于全局操作，覆盖范围高于 Shell 层。</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.ShellDrawer.Title" xml:space="preserve">
+    <value>Shell 侧边抽屉</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.ShellDrawer.Message" xml:space="preserve">
+    <value>Shell 级侧边抽屉只作用于当前应用壳，外层根区域不会进入遮罩范围。</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.TopDrawer.Title" xml:space="preserve">
+    <value>TopView 侧边抽屉</value>
+  </data>
+  <data name="Sandbox.Overlays.HostScope.TopDrawer.Message" xml:space="preserve">
+    <value>TopView 级侧边抽屉属于全局悬浮层，会覆盖包括 Shell 外侧在内的整个应用根层。</value>
   </data>
   <data name="Sandbox.Notifications.SyncFailed" xml:space="preserve">
     <value>工作区同步失败。</value>

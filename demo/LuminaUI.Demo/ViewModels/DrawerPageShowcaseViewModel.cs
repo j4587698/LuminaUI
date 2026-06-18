@@ -12,10 +12,19 @@ public partial class DrawerPageShowcaseViewModel : ObservableObject
     [ObservableProperty]
     private bool _isDrawerOpen = true;
 
+    [ObservableProperty]
+    private double _drawerLength = 220.0;
+
     [RelayCommand]
     private void SetDrawerPlacement(DrawerPlacement placement)
     {
         DrawerPlacement = placement;
         IsDrawerOpen = true;
+    }
+
+    [RelayCommand]
+    private void CloseDrawer()
+    {
+        IsDrawerOpen = false;
     }
 }

@@ -104,17 +104,17 @@ public class LuminaPage : ContentPage
 
     public void ShowToast(object? content)
     {
-        FindShell()?.ShowToast(content);
+        FindOverlayHost()?.ShowToast(content);
     }
 
     public void ShowToast(object? content, TimeSpan duration)
     {
-        FindShell()?.ShowToast(content, duration);
+        FindOverlayHost()?.ShowToast(content, duration);
     }
 
     public void ClearToast()
     {
-        FindShell()?.ClearToast();
+        FindOverlayHost()?.ClearToast();
     }
 
     public bool NavigateTo(string navigationKey)
@@ -124,22 +124,32 @@ public class LuminaPage : ContentPage
 
     public void ShowDialog(object? content)
     {
-        FindShell()?.ShowDialog(content);
+        FindOverlayHost()?.ShowDialog(content);
     }
 
     public void CloseDialog()
     {
-        FindShell()?.CloseDialog();
+        FindOverlayHost()?.CloseDialog();
     }
 
     public void ShowBottomSheet(object? content)
     {
-        FindShell()?.ShowBottomSheet(content);
+        FindOverlayHost()?.ShowBottomSheet(content);
     }
 
     public void CloseBottomSheet()
     {
-        FindShell()?.CloseBottomSheet();
+        FindOverlayHost()?.CloseBottomSheet();
+    }
+
+    public void ShowDrawer(object? content)
+    {
+        FindOverlayHost()?.ShowDrawer(content);
+    }
+
+    public void CloseDrawer()
+    {
+        FindOverlayHost()?.CloseDrawer();
     }
 
     public void ShowTopToast(object? content)
@@ -177,8 +187,23 @@ public class LuminaPage : ContentPage
         LuminaTopView.FindOuterFor(this)?.CloseBottomSheet();
     }
 
+    public void ShowTopDrawer(object? content)
+    {
+        LuminaTopView.FindOuterFor(this)?.ShowDrawer(content);
+    }
+
+    public void CloseTopDrawer()
+    {
+        LuminaTopView.FindOuterFor(this)?.CloseDrawer();
+    }
+
     private LuminaShell? FindShell()
     {
         return LuminaShell.FindFor(this);
+    }
+
+    private ILuminaOverlayHost? FindOverlayHost()
+    {
+        return LuminaOverlayHostResolver.FindFor(this);
     }
 }

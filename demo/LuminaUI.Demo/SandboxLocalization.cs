@@ -183,6 +183,8 @@ internal static class SandboxLocalization
 
 	public const string NavOverlays = "Sandbox.Nav.Overlays";
 
+	public const string NavOverlayScope = "Sandbox.Nav.OverlayScope";
+
 	public const string NavWindowDialogs = "Sandbox.Nav.WindowDialogs";
 
 	public const string NavLayout = "Sandbox.Nav.Layout";
@@ -314,8 +316,6 @@ internal static class SandboxLocalization
 	public const string OverlaysNativeWindowDialogConfirm = "Sandbox.Overlays.NativeWindowDialog.Confirm";
 
 	public const string OverlaysNativeWindowDialogDescription = "Sandbox.Overlays.NativeWindowDialog.Description";
-
-	public const string OverlaysTopViewToastMessage = "Sandbox.Overlays.TopViewToastMessage";
 
 	public const string NotificationsSyncFailed = "Sandbox.Notifications.SyncFailed";
 

@@ -1084,7 +1084,7 @@
     <value>抽屉内容</value>
   </data>
   <data name="Sandbox.Text.0358" xml:space="preserve">
-    <value>DrawerPage 是应用级导航的原生侧边栏模式。</value>
+    <value>LuminaDrawer 由悬浮层承载，可以从任意边缘打开。</value>
   </data>
   <data name="Sandbox.Text.0359" xml:space="preserve">
     <value>左侧</value>
@@ -2308,7 +2308,7 @@
     <value>为其内容提供标题的容器。</value>
   </data>
   <data name="Sandbox.Text.0766" xml:space="preserve">
-    <value>带有滑动抽屉的容器。</value>
+    <value>用于 Shell 和 TopView 悬浮层宿主的抽屉表面。</value>
   </data>
   <data name="Sandbox.Text.0767" xml:space="preserve">
     <value>包含两个视图的容器：导航窗格和内容区域。</value>
@@ -3430,7 +3430,7 @@
     <value>ID</value>
   </data>
   <data name="Sandbox.Text.1153" xml:space="preserve">
-    <value>抽屉页面</value>
+    <value>LuminaDrawer</value>
   </data>
   <data name="Sandbox.Text.1154" xml:space="preserve">
     <value>下拉按钮</value>

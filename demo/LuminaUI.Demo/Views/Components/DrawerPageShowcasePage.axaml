@@ -12,7 +12,7 @@
                 <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.1153}" />
                 <TextBlock Classes="Body" Text="{l10n:Loc Sandbox.Text.0766}" TextWrapping="Wrap" />
             </StackPanel>
-            <lumina:LuminaResponsivePanel MinItemWidth="300" MaxItemWidth="640" HorizontalSpacing="16" VerticalSpacing="16">
+            <lumina:LuminaResponsivePanel MinItemWidth="320" MaxItemWidth="720" HorizontalSpacing="16" VerticalSpacing="16">
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
@@ -44,31 +44,74 @@
                                     Command="{Binding SetDrawerPlacementCommand}"
                                     CommandParameter="{x:Static controls:DrawerPlacement.Bottom}" />
                         </WrapPanel>
-                        <Border Height="260"
+
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                            <TextBlock Text="DrawerLength" VerticalAlignment="Center" Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                            <Slider Grid.Column="1"
+                                    Minimum="140"
+                                    Maximum="280"
+                                    Value="{Binding DrawerLength, Mode=TwoWay}" />
+                            <TextBlock Grid.Column="2"
+                                       Text="{Binding DrawerLength, StringFormat='{}{0:0}px'}"
+                                       VerticalAlignment="Center"
+                                       Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                        </Grid>
+
+                        <Border Height="320"
                                 BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
                                 BorderThickness="1"
                                 CornerRadius="8"
-                                ClipToBounds="True">
-                            <DrawerPage Header="{l10n:Loc Sandbox.Text.0084}"
-                                        IsOpen="{Binding IsDrawerOpen, Mode=TwoWay}"
-                                        DisplayMode="Overlay"
-                                        DrawerPlacement="{Binding DrawerPlacement}"
-                                        DrawerLength="170"
-                                        CompactDrawerLength="48">
-                                <DrawerPage.Drawer>
-                                    <StackPanel Spacing="6" Margin="8">
-                                        <Button Classes="Ghost" Content="{l10n:Loc Sandbox.Text.0354}" HorizontalAlignment="Stretch" />
-                                        <Button Classes="Ghost" Content="{l10n:Loc Sandbox.Text.0355}" HorizontalAlignment="Stretch" />
-                                        <Button Classes="Ghost" Content="{l10n:Loc Sandbox.Text.0356}" HorizontalAlignment="Stretch" />
+                                ClipToBounds="False">
+                            <lumina:LuminaTopView Name="DrawerPreviewHost"
+                                                  IsDrawerOpen="{Binding IsDrawerOpen, Mode=TwoWay}"
+                                                  Background="{DynamicResource LuminaBackgroundBrush}">
+                                <lumina:LuminaTopView.DrawerContent>
+                                    <lumina:LuminaDrawer Placement="{Binding DrawerPlacement}"
+                                                         DrawerLength="{Binding DrawerLength}"
+                                                         ContentPadding="18">
+                                        <Grid RowDefinitions="Auto,*,Auto" RowSpacing="16">
+                                            <StackPanel Spacing="6">
+                                                <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Text.0357}" />
+                                                <TextBlock Classes="Helper"
+                                                           Text="{l10n:Loc Sandbox.Text.0358}"
+                                                           TextWrapping="Wrap" />
+                                            </StackPanel>
+
+                                            <StackPanel Grid.Row="1" Spacing="6">
+                                                <Button Classes="Ghost" Content="{l10n:Loc Sandbox.Text.0354}" HorizontalAlignment="Stretch" />
+                                                <Button Classes="Ghost" Content="{l10n:Loc Sandbox.Text.0355}" HorizontalAlignment="Stretch" />
+                                                <Button Classes="Ghost" Content="{l10n:Loc Sandbox.Text.0356}" HorizontalAlignment="Stretch" />
+                                            </StackPanel>
+
+                                            <Button Grid.Row="2"
+                                                    Classes="Outline"
+                                                    Content="{l10n:Loc Sandbox.Text.0600}"
+                                                    HorizontalAlignment="Left"
+                                                    Command="{Binding CloseDrawerCommand}" />
+                                        </Grid>
+                                    </lumina:LuminaDrawer>
+                                </lumina:LuminaTopView.DrawerContent>
+
+                                <Grid RowDefinitions="Auto,*" Background="{DynamicResource LuminaSurfaceElevatedBrush}">
+                                    <Border Background="{DynamicResource LuminaSurfaceBrush}"
+                                            BorderBrush="{DynamicResource LuminaDividerBrush}"
+                                            BorderThickness="0,0,0,1"
+                                            Padding="16,12">
+                                        <TextBlock Text="{l10n:Loc Sandbox.Text.1153}" FontWeight="SemiBold" />
+                                    </Border>
+                                    <StackPanel Grid.Row="1" Margin="16" Spacing="10">
+                                        <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Text.0357}" />
+                                        <TextBlock Classes="Helper"
+                                                   Text="{l10n:Loc Sandbox.Text.0766}"
+                                                   TextWrapping="Wrap" />
+                                        <Button Classes="Primary"
+                                                Content="{l10n:Loc Sandbox.Text.0212}"
+                                                HorizontalAlignment="Left"
+                                                Command="{Binding SetDrawerPlacementCommand}"
+                                                CommandParameter="{Binding DrawerPlacement}" />
                                     </StackPanel>
-                                </DrawerPage.Drawer>
-                                <StackPanel Margin="16,64,16,16" Spacing="10">
-                                    <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Text.0357}" />
-                                    <TextBlock Classes="Helper"
-                                               Text="{l10n:Loc Sandbox.Text.0358}"
-                                               TextWrapping="Wrap" />
-                                </StackPanel>
-                            </DrawerPage>
+                                </Grid>
+                            </lumina:LuminaTopView>
                         </Border>
                     </StackPanel>
                 </lumina:LuminaCard>

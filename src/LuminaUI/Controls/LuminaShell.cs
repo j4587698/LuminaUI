@@ -32,6 +32,8 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private static readonly TimeSpan BottomSheetClearDelay = TimeSpan.FromMilliseconds(360);
 
+    private static readonly TimeSpan DrawerClearDelay = TimeSpan.FromMilliseconds(360);
+
     private readonly Dictionary<string, Func<Control>> _routeFactories = new Dictionary<string, Func<Control>>(StringComparer.Ordinal);
 
     private readonly Dictionary<string, Control> _routeCache = new Dictionary<string, Control>(StringComparer.Ordinal);
@@ -46,17 +48,51 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private Control? _bottomSheetOverlay;
 
+    private Control? _drawerOverlay;
+
     private object? _toastContent;
 
     private CancellationTokenSource? _toastHideCancellation;
 
     private CancellationTokenSource? _bottomSheetClearCancellation;
 
+    private CancellationTokenSource? _drawerClearCancellation;
+
+    private bool _ownsBottomSheetContent;
+
+    private bool _ownsDrawerContent;
+
+    private bool _settingOwnedBottomSheetContent;
+
+    private bool _settingOwnedDrawerContent;
+
+    private LuminaTopView? _topMenuDrawerHost;
+
+    private LuminaDrawer? _topMenuDrawer;
+
+    private ContentPresenter? _topMenuDrawerHeaderPresenter;
+
+    private ContentPresenter? _topMenuDrawerContentPresenter;
+
+    private ContentPresenter? _topMenuDrawerFooterPresenter;
+
+    private IDisposable? _topMenuDrawerHeaderBinding;
+
+    private IDisposable? _topMenuDrawerContentBinding;
+
+    private IDisposable? _topMenuDrawerFooterBinding;
+
     private TimeSpan? _pendingToastDuration;
 
     private bool _isNavigating;
 
     private bool _syncingNavigationKey;
+
+    private bool _syncingTopMenuDrawer;
+
+    private bool _isTopMenuDrawerMode;
+
+    private int _topMenuDrawerSyncVersion;
 
     private bool _effectiveIsMenuOpen = true;
 
@@ -71,6 +107,16 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     private double _effectiveOpenPaneLength = 220.0;
 
     private double _effectiveCompactPaneLength = 48.0;
+
+    private object? _effectiveMenuHeader;
+
+    private object? _effectiveMenuContent;
+
+    private object? _effectiveMenuFooter;
+
+    private Thickness _layoutSafeAreaPadding;
+
+    private Thickness _overlaySafeAreaPadding;
 
     public static readonly StyledProperty<bool> IsMenuOpenProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(IsMenuOpen), defaultValue: true);
 
@@ -103,6 +149,12 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     public static readonly StyledProperty<object?> MenuHeaderProperty = AvaloniaProperty.Register<LuminaShell, object?>(nameof(MenuHeader));
 
     public static readonly StyledProperty<object?> MenuFooterProperty = AvaloniaProperty.Register<LuminaShell, object?>(nameof(MenuFooter));
+
+    public static readonly DirectProperty<LuminaShell, object?> EffectiveMenuHeaderProperty = AvaloniaProperty.RegisterDirect<LuminaShell, object?>(nameof(EffectiveMenuHeader), shell => shell.EffectiveMenuHeader);
+
+    public static readonly DirectProperty<LuminaShell, object?> EffectiveMenuContentProperty = AvaloniaProperty.RegisterDirect<LuminaShell, object?>(nameof(EffectiveMenuContent), shell => shell.EffectiveMenuContent);
+
+    public static readonly DirectProperty<LuminaShell, object?> EffectiveMenuFooterProperty = AvaloniaProperty.RegisterDirect<LuminaShell, object?>(nameof(EffectiveMenuFooter), shell => shell.EffectiveMenuFooter);
 
     public static readonly StyledProperty<object?> TitleProperty = AvaloniaProperty.Register<LuminaShell, object?>(nameof(Title));
 
@@ -145,6 +197,10 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     public static readonly StyledProperty<object?> BottomSheetContentProperty = AvaloniaProperty.Register<LuminaShell, object?>(nameof(BottomSheetContent));
 
+    public static readonly StyledProperty<bool> IsDrawerOpenProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(IsDrawerOpen), defaultValue: false);
+
+    public static readonly StyledProperty<object?> DrawerContentProperty = AvaloniaProperty.Register<LuminaShell, object?>(nameof(DrawerContent));
+
     public static readonly StyledProperty<TimeSpan> ToastDurationProperty = AvaloniaProperty.Register<LuminaShell, TimeSpan>(nameof(ToastDuration), TimeSpan.FromSeconds(3));
 
     public static readonly StyledProperty<IBrush?> PaneBackgroundProperty = AvaloniaProperty.Register<LuminaShell, IBrush?>(nameof(PaneBackground));
@@ -156,6 +212,14 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     public static readonly StyledProperty<double> CompactPaneLengthProperty = AvaloniaProperty.Register<LuminaShell, double>(nameof(CompactPaneLength), 48.0);
 
     public static readonly DirectProperty<LuminaShell, double> EffectiveCompactPaneLengthProperty = AvaloniaProperty.RegisterDirect<LuminaShell, double>(nameof(EffectiveCompactPaneLength), (LuminaShell shell) => shell.EffectiveCompactPaneLength, null, 0.0);
+
+    public static readonly StyledProperty<LuminaSafeAreaMode> SafeAreaModeProperty = AvaloniaProperty.Register<LuminaShell, LuminaSafeAreaMode>(nameof(SafeAreaMode), LuminaSafeAreaMode.Auto);
+
+    public static readonly StyledProperty<bool> UseSafeAreaForOverlaysProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(UseSafeAreaForOverlays), defaultValue: true);
+
+    public static readonly DirectProperty<LuminaShell, Thickness> LayoutSafeAreaPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaShell, Thickness>(nameof(LayoutSafeAreaPadding), shell => shell.LayoutSafeAreaPadding);
+
+    public static readonly DirectProperty<LuminaShell, Thickness> OverlaySafeAreaPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaShell, Thickness>(nameof(OverlaySafeAreaPadding), shell => shell.OverlaySafeAreaPadding);
 
     public static readonly StyledProperty<bool> IsWindowGlassEnabledProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(IsWindowGlassEnabled), defaultValue: false);
 
@@ -170,6 +234,8 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     public ICommand CloseDialogCommand { get; }
 
     public ICommand CloseBottomSheetCommand { get; }
+
+    public ICommand CloseDrawerCommand { get; }
 
     public ICommand ClearToastCommand { get; }
 
@@ -291,6 +357,42 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     {
         get => GetValue(MenuFooterProperty);
         set => SetValue(MenuFooterProperty, value);
+    }
+
+    public object? EffectiveMenuHeader
+    {
+        get
+        {
+            return _effectiveMenuHeader;
+        }
+        private set
+        {
+            SetAndRaise(EffectiveMenuHeaderProperty, ref _effectiveMenuHeader, value);
+        }
+    }
+
+    public object? EffectiveMenuContent
+    {
+        get
+        {
+            return _effectiveMenuContent;
+        }
+        private set
+        {
+            SetAndRaise(EffectiveMenuContentProperty, ref _effectiveMenuContent, value);
+        }
+    }
+
+    public object? EffectiveMenuFooter
+    {
+        get
+        {
+            return _effectiveMenuFooter;
+        }
+        private set
+        {
+            SetAndRaise(EffectiveMenuFooterProperty, ref _effectiveMenuFooter, value);
+        }
     }
 
     public object? Title
@@ -427,6 +529,18 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         set => SetValue(BottomSheetContentProperty, value);
     }
 
+    public bool IsDrawerOpen
+    {
+        get => GetValue(IsDrawerOpenProperty);
+        set => SetValue(IsDrawerOpenProperty, value);
+    }
+
+    public object? DrawerContent
+    {
+        get => GetValue(DrawerContentProperty);
+        set => SetValue(DrawerContentProperty, value);
+    }
+
     public TimeSpan ToastDuration
     {
         get => GetValue(ToastDurationProperty);
@@ -475,6 +589,42 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         }
     }
 
+    public LuminaSafeAreaMode SafeAreaMode
+    {
+        get => GetValue(SafeAreaModeProperty);
+        set => SetValue(SafeAreaModeProperty, value);
+    }
+
+    public bool UseSafeAreaForOverlays
+    {
+        get => GetValue(UseSafeAreaForOverlaysProperty);
+        set => SetValue(UseSafeAreaForOverlaysProperty, value);
+    }
+
+    public Thickness LayoutSafeAreaPadding
+    {
+        get
+        {
+            return _layoutSafeAreaPadding;
+        }
+        private set
+        {
+            SetAndRaise(LayoutSafeAreaPaddingProperty, ref _layoutSafeAreaPadding, value);
+        }
+    }
+
+    public Thickness OverlaySafeAreaPadding
+    {
+        get
+        {
+            return _overlaySafeAreaPadding;
+        }
+        private set
+        {
+            SetAndRaise(OverlaySafeAreaPaddingProperty, ref _overlaySafeAreaPadding, value);
+        }
+    }
+
     public bool IsWindowGlassEnabled
     {
         get => GetValue(IsWindowGlassEnabledProperty);
@@ -496,10 +646,13 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         base.OnAttachedToVisualTree(e);
         RegisterAttachedShell();
         _overlayInputPaneAvoidance.AttachToVisualTree();
+        UpdateEffectiveSafeAreaPadding();
+        UpdateEffectiveShellChrome();
     }
 
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
+        CloseTopMenuDrawer(forceClearContent: true);
         if (_activePage != null)
         {
             _activePage.PropertyChanged -= OnActivePagePropertyChanged;
@@ -509,6 +662,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         ActiveRouteContent = null;
         CancelToastHide();
         CancelBottomSheetContentClear();
+        CancelDrawerContentClear();
         _overlayInputPaneAvoidance.DetachFromVisualTree();
         if (_dialogOverlay != null)
         {
@@ -519,6 +673,11 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         {
             _bottomSheetOverlay.RemoveHandler(InputElement.PointerPressedEvent, OnBottomSheetOverlayPointerPressed);
             _bottomSheetOverlay = null;
+        }
+        if (_drawerOverlay != null)
+        {
+            _drawerOverlay.RemoveHandler(InputElement.PointerPressedEvent, OnDrawerOverlayPointerPressed);
+            _drawerOverlay = null;
         }
         base.OnDetachedFromVisualTree(e);
         UnregisterAttachedShell();
@@ -545,6 +704,15 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         {
             _bottomSheetOverlay.AddHandler(InputElement.PointerPressedEvent, OnBottomSheetOverlayPointerPressed, RoutingStrategies.Tunnel, handledEventsToo: true);
         }
+        if (_drawerOverlay != null)
+        {
+            _drawerOverlay.RemoveHandler(InputElement.PointerPressedEvent, OnDrawerOverlayPointerPressed);
+        }
+        _drawerOverlay = e.NameScope.FindRequired<Control>("PART_DrawerOverlay");
+        if (_drawerOverlay != null)
+        {
+            _drawerOverlay.AddHandler(InputElement.PointerPressedEvent, OnDrawerOverlayPointerPressed, RoutingStrategies.Tunnel, handledEventsToo: true);
+        }
         _toastPresenter = e.NameScope.FindRequired<ContentPresenter>("PART_ToastPresenter");
         if (_toastPresenter != null)
         {
@@ -552,7 +720,10 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         }
         _overlayInputPaneAvoidance.ApplyTemplate(
             e.NameScope.FindRequired<Control>("PART_DialogContainer"),
-            e.NameScope.FindRequired<Control>("PART_BottomSheetContainer"));
+            e.NameScope.FindRequired<Control>("PART_BottomSheetContainer"),
+            e.NameScope.FindRequired<Control>("PART_DrawerContainer"));
+        ApplyBottomSheetSafeAreaPadding();
+        ApplyDrawerSafeAreaPadding();
     }
 
     private void OnDialogOverlayPointerPressed(object? sender, PointerPressedEventArgs ev)
@@ -571,6 +742,14 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         }
     }
 
+    private void OnDrawerOverlayPointerPressed(object? sender, PointerPressedEventArgs ev)
+    {
+        if (!IsPointerSourceInsidePart(ev.Source, "PART_DrawerContainer"))
+        {
+            IsDrawerOpen = false;
+        }
+    }
+
     private static bool IsPointerSourceInsidePart(object? source, string partName)
     {
         if (source is not Control control)
@@ -583,7 +762,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     public LuminaShell()
     {
-        _overlayInputPaneAvoidance = new LuminaOverlayInputPaneAvoidance(this, () => IsDialogOpen, () => IsBottomSheetOpen);
+        _overlayInputPaneAvoidance = new LuminaOverlayInputPaneAvoidance(this, () => IsDialogOpen, () => IsBottomSheetOpen, () => IsDrawerOpen);
         NavigateCommand = new LuminaRelayCommand((object? parameter) =>
         {
             if (parameter is string navigationKey)
@@ -613,6 +792,9 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         });
         CloseBottomSheetCommand = new LuminaRelayCommand(_ => {
             CloseBottomSheet();
+        });
+        CloseDrawerCommand = new LuminaRelayCommand(_ => {
+            CloseDrawer();
         });
         ClearToastCommand = new LuminaRelayCommand(_ => {
             ClearToast();
@@ -662,13 +844,54 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     public void ShowBottomSheet(object? content)
     {
-        BottomSheetContent = content;
-        IsBottomSheetOpen = content != null;
+        LuminaBottomSheet? bottomSheet = LuminaBottomSheet.EnsureSheet(content);
+        if (bottomSheet != null)
+        {
+            bottomSheet.SafeAreaPadding = OverlaySafeAreaPadding;
+        }
+
+        _settingOwnedBottomSheetContent = true;
+        try
+        {
+            _ownsBottomSheetContent = bottomSheet != null;
+            BottomSheetContent = bottomSheet;
+        }
+        finally
+        {
+            _settingOwnedBottomSheetContent = false;
+        }
+        IsBottomSheetOpen = bottomSheet != null;
     }
 
     public void CloseBottomSheet()
     {
         IsBottomSheetOpen = false;
+    }
+
+    public void ShowDrawer(object? content)
+    {
+        LuminaDrawer? drawer = LuminaDrawer.EnsureDrawer(content);
+        if (drawer != null)
+        {
+            drawer.SafeAreaPadding = OverlaySafeAreaPadding;
+        }
+
+        _settingOwnedDrawerContent = true;
+        try
+        {
+            _ownsDrawerContent = drawer != null;
+            DrawerContent = drawer;
+        }
+        finally
+        {
+            _settingOwnedDrawerContent = false;
+        }
+        IsDrawerOpen = drawer != null;
+    }
+
+    public void CloseDrawer()
+    {
+        IsDrawerOpen = false;
     }
 
     public void RegisterRoute(string navigationKey, Func<Control> factory)
@@ -767,6 +990,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         base.OnPropertyChanged(change);
         if (change.Property == ContentControl.ContentProperty)
         {
+            DisablePageAutoSafeArea(change.GetNewValue<object>());
             SetActivePage(change.GetNewValue<object>());
         }
         else if (change.Property == ShellKeyProperty)
@@ -796,6 +1020,14 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         else if (change.Property == IsMenuOpenProperty || change.Property == IsShellChromeVisibleProperty || change.Property == IsShellHeaderVisibleProperty || change.Property == IsCompactMenuEnabledProperty || change.Property == CanCompactMenuProperty || change.Property == OpenPaneLengthProperty || change.Property == CompactPaneLengthProperty)
         {
             UpdateEffectiveShellChrome();
+        }
+        else if (change.Property == MenuHeaderProperty || change.Property == MenuContentProperty || change.Property == MenuFooterProperty)
+        {
+            UpdateEffectiveMenuSlots();
+        }
+        else if (change.Property == SafeAreaModeProperty || change.Property == UseSafeAreaForOverlaysProperty || change.Property == LuminaInsets.SafeAreaPaddingProperty)
+        {
+            UpdateEffectiveSafeAreaPadding();
         }
         else if (change.Property == IsWindowGlassEnabledProperty)
         {
@@ -846,6 +1078,86 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
             }
             _overlayInputPaneAvoidance.UpdateOverlayState();
         }
+        else if (change.Property == IsDrawerOpenProperty)
+        {
+            if (change.GetNewValue<bool>())
+            {
+                CancelDrawerContentClear();
+            }
+            else
+            {
+                ScheduleDrawerContentClear();
+            }
+            _overlayInputPaneAvoidance.UpdateOverlayState();
+        }
+        else if (change.Property == BottomSheetContentProperty)
+        {
+            if (!_settingOwnedBottomSheetContent)
+            {
+                _ownsBottomSheetContent = false;
+                CancelBottomSheetContentClear();
+            }
+            ApplyBottomSheetSafeAreaPadding();
+        }
+        else if (change.Property == DrawerContentProperty)
+        {
+            if (!_settingOwnedDrawerContent)
+            {
+                _ownsDrawerContent = false;
+                CancelDrawerContentClear();
+            }
+            ApplyDrawerSafeAreaPadding();
+        }
+    }
+
+    private void UpdateEffectiveSafeAreaPadding()
+    {
+        Thickness safeAreaPadding = LuminaInsets.GetSafeAreaPadding(this);
+        LayoutSafeAreaPadding = ShouldApplyLayoutSafeArea() ? safeAreaPadding : default;
+        // Overlay layers span the whole shell. When an ancestor shell already insets this
+        // shell via its own layout safe area, applying it again here would double the padding.
+        OverlaySafeAreaPadding = UseSafeAreaForOverlays && !IsSafeAreaProvidedByAncestorShell() ? safeAreaPadding : default;
+        ApplyBottomSheetSafeAreaPadding();
+        ApplyDrawerSafeAreaPadding();
+    }
+
+    private bool ShouldApplyLayoutSafeArea()
+    {
+        return SafeAreaMode switch
+        {
+            LuminaSafeAreaMode.Enabled => true,
+            LuminaSafeAreaMode.Disabled => false,
+            _ => !this.GetVisualAncestors().OfType<LuminaShell>().Any()
+        };
+    }
+
+    private bool IsSafeAreaProvidedByAncestorShell()
+    {
+        foreach (LuminaShell ancestor in this.GetVisualAncestors().OfType<LuminaShell>())
+        {
+            if (ancestor.ShouldApplyLayoutSafeArea())
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void ApplyBottomSheetSafeAreaPadding()
+    {
+        if (BottomSheetContent is LuminaBottomSheet bottomSheet)
+        {
+            bottomSheet.SafeAreaPadding = OverlaySafeAreaPadding;
+        }
+    }
+
+    private void ApplyDrawerSafeAreaPadding()
+    {
+        if (DrawerContent is LuminaDrawer drawer)
+        {
+            drawer.SafeAreaPadding = OverlaySafeAreaPadding;
+        }
     }
 
     private void ScheduleToastHide(object content, TimeSpan duration)
@@ -893,7 +1205,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     private void ScheduleBottomSheetContentClear()
     {
         CancelBottomSheetContentClear();
-        if (BottomSheetContent != null)
+        if (_ownsBottomSheetContent && BottomSheetContent != null)
         {
             _ = ClearBottomSheetContentAsync(_bottomSheetClearCancellation = new CancellationTokenSource());
         }
@@ -903,6 +1215,22 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     {
         CancellationTokenSource? cancellation = _bottomSheetClearCancellation;
         _bottomSheetClearCancellation = null;
+        cancellation?.Cancel();
+    }
+
+    private void ScheduleDrawerContentClear()
+    {
+        CancelDrawerContentClear();
+        if (_ownsDrawerContent && DrawerContent != null)
+        {
+            _ = ClearDrawerContentAsync(_drawerClearCancellation = new CancellationTokenSource());
+        }
+    }
+
+    private void CancelDrawerContentClear()
+    {
+        CancellationTokenSource? cancellation = _drawerClearCancellation;
+        _drawerClearCancellation = null;
         cancellation?.Cancel();
     }
 
@@ -918,10 +1246,33 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
             return;
         }
         await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
-            if (_bottomSheetClearCancellation == cancellation && !IsBottomSheetOpen)
+            if (_bottomSheetClearCancellation == cancellation && !IsBottomSheetOpen && _ownsBottomSheetContent)
             {
                 _bottomSheetClearCancellation = null;
+                _ownsBottomSheetContent = false;
                 BottomSheetContent = null;
+            }
+            cancellation.Dispose();
+        });
+    }
+
+    private async Task ClearDrawerContentAsync(CancellationTokenSource cancellation)
+    {
+        try
+        {
+            await Task.Delay(DrawerClearDelay, cancellation.Token).ConfigureAwait(continueOnCapturedContext: false);
+        }
+        catch (TaskCanceledException)
+        {
+            cancellation.Dispose();
+            return;
+        }
+        await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
+            if (_drawerClearCancellation == cancellation && !IsDrawerOpen && _ownsDrawerContent)
+            {
+                _drawerClearCancellation = null;
+                _ownsDrawerContent = false;
+                DrawerContent = null;
             }
             cancellation.Dispose();
         });
@@ -956,7 +1307,9 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         bool isShellChromeEffectiveVisible = IsShellChromeVisible && (_activePage?.ShowShellChrome ?? true);
         bool isShellHeaderEffectiveVisible = isShellChromeEffectiveVisible && IsShellHeaderVisible && (_activePage?.ShowShellHeader ?? true);
         bool canUseCompactMenu = CanCompactMenu && Bounds.Width >= SmallScreenBreakpoint;
-        bool isMenuEffectiveOpen = isShellChromeEffectiveVisible && IsMenuOpen;
+        bool useTopMenuDrawer = isShellChromeEffectiveVisible && ShouldUseTopMenuDrawer();
+        SetTopMenuDrawerMode(useTopMenuDrawer);
+        bool isMenuEffectiveOpen = isShellChromeEffectiveVisible && IsMenuOpen && !useTopMenuDrawer;
         bool isMenuCompact = isShellChromeEffectiveVisible && canUseCompactMenu && IsCompactMenuEnabled && !IsMenuOpen;
         EffectiveIsShellChromeVisible = isShellChromeEffectiveVisible;
         EffectiveIsShellHeaderVisible = isShellHeaderEffectiveVisible;
@@ -968,6 +1321,326 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         PseudoClasses.Set(":chromeless", !isShellChromeEffectiveVisible);
         PseudoClasses.Set(":headerless", !isShellHeaderEffectiveVisible);
         PseudoClasses.Set(":menucompact", isMenuCompact);
+        SyncTopMenuDrawer();
+    }
+
+    private bool ShouldUseTopMenuDrawer()
+    {
+        return Bounds.Width < SmallScreenBreakpoint && FindOuterTopViewHost() != null;
+    }
+
+    private void SetTopMenuDrawerMode(bool value)
+    {
+        if (_isTopMenuDrawerMode == value)
+        {
+            UpdateEffectiveMenuSlots();
+            return;
+        }
+
+        if (!value)
+        {
+            CloseTopMenuDrawer(forceClearContent: true);
+        }
+
+        _isTopMenuDrawerMode = value;
+        UpdateEffectiveMenuSlots();
+    }
+
+    private void UpdateEffectiveMenuSlots()
+    {
+        EffectiveMenuHeader = _isTopMenuDrawerMode ? null : MenuHeader;
+        EffectiveMenuContent = _isTopMenuDrawerMode ? null : MenuContent;
+        EffectiveMenuFooter = _isTopMenuDrawerMode ? null : MenuFooter;
+    }
+
+    private void SyncTopMenuDrawer()
+    {
+        if (_syncingTopMenuDrawer)
+        {
+            return;
+        }
+
+        if (!_isTopMenuDrawerMode || !EffectiveIsShellChromeVisible || !IsMenuOpen)
+        {
+            CloseTopMenuDrawer(forceClearContent: false);
+            return;
+        }
+
+        LuminaTopView? host = FindOuterTopViewHost();
+        if (host == null)
+        {
+            CloseTopMenuDrawer(forceClearContent: true);
+            return;
+        }
+
+        if (_topMenuDrawerHost != host)
+        {
+            CloseTopMenuDrawer(forceClearContent: true);
+            _topMenuDrawerHost = host;
+            _topMenuDrawerHost.PropertyChanged += OnTopMenuDrawerHostPropertyChanged;
+        }
+
+        QueueOpenTopMenuDrawer(host);
+    }
+
+    private void QueueOpenTopMenuDrawer(LuminaTopView host)
+    {
+        int version = ++_topMenuDrawerSyncVersion;
+        Dispatcher.UIThread.Post(() => OpenTopMenuDrawer(host, version), DispatcherPriority.Loaded);
+    }
+
+    private void OpenTopMenuDrawer(LuminaTopView host, int version)
+    {
+        if (version != _topMenuDrawerSyncVersion || _syncingTopMenuDrawer || !_isTopMenuDrawerMode || !EffectiveIsShellChromeVisible || !IsMenuOpen || !ReferenceEquals(host, _topMenuDrawerHost))
+        {
+            return;
+        }
+
+        if (_topMenuDrawer == null)
+        {
+            _topMenuDrawer = CreateTopMenuDrawer();
+        }
+
+        if (ReferenceEquals(host.DrawerContent, _topMenuDrawer) && host.IsDrawerOpen)
+        {
+            return;
+        }
+
+        _syncingTopMenuDrawer = true;
+        try
+        {
+            host.ShowDrawer(_topMenuDrawer);
+        }
+        finally
+        {
+            _syncingTopMenuDrawer = false;
+        }
+    }
+
+    private LuminaDrawer CreateTopMenuDrawer()
+    {
+        LuminaDrawer drawer = new LuminaDrawer
+        {
+            Placement = DrawerPlacement.Left,
+            ContentPadding = default,
+            BorderThickness = new Thickness(0, 0, 1, 0),
+            Content = CreateTopMenuDrawerContent()
+        };
+        drawer.Bind(TemplatedControl.BackgroundProperty, new Binding(nameof(PaneBackground))
+        {
+            Source = this
+        });
+        drawer.Bind(LuminaDrawer.DrawerLengthProperty, new Binding(nameof(OpenPaneLength))
+        {
+            Source = this
+        });
+        return drawer;
+    }
+
+    private Control CreateTopMenuDrawerContent()
+    {
+        Grid root = new Grid
+        {
+            RowDefinitions = new RowDefinitions("Auto,*,Auto")
+        };
+        SetIsMenuCompact(root, false);
+
+        ContentPresenter headerPresenter = new ContentPresenter
+        {
+            VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center
+        };
+        _topMenuDrawerHeaderPresenter = headerPresenter;
+        _topMenuDrawerHeaderBinding = headerPresenter.Bind(ContentPresenter.ContentProperty, new Binding(nameof(MenuHeader))
+        {
+            Source = this
+        });
+
+        Border header = new Border
+        {
+            Name = "PART_TopMenuDrawerHeader",
+            Margin = new Thickness(16),
+            Height = 48,
+            ClipToBounds = true,
+            Child = headerPresenter
+        };
+
+        ContentPresenter menuContentPresenter = new ContentPresenter();
+        _topMenuDrawerContentPresenter = menuContentPresenter;
+        _topMenuDrawerContentBinding = menuContentPresenter.Bind(ContentPresenter.ContentProperty, new Binding(nameof(MenuContent))
+        {
+            Source = this
+        });
+
+        ScrollViewer scrollViewer = new ScrollViewer
+        {
+            Name = "PART_TopMenuDrawerScrollViewer",
+            Margin = new Thickness(16, 0, 16, 16),
+            BringIntoViewOnFocusChange = false,
+            HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
+            VerticalScrollBarVisibility = ScrollBarVisibility.Hidden,
+            Content = menuContentPresenter
+        };
+
+        ContentPresenter footerPresenter = new ContentPresenter();
+        _topMenuDrawerFooterPresenter = footerPresenter;
+        _topMenuDrawerFooterBinding = footerPresenter.Bind(ContentPresenter.ContentProperty, new Binding(nameof(MenuFooter))
+        {
+            Source = this
+        });
+
+        Border footer = new Border
+        {
+            Name = "PART_TopMenuDrawerFooter",
+            Margin = new Thickness(16),
+            Padding = new Thickness(0, 16, 0, 0),
+            ClipToBounds = false,
+            Child = footerPresenter
+        };
+        Grid.SetRow(scrollViewer, 1);
+        Grid.SetRow(footer, 2);
+
+        root.Children.Add(header);
+        root.Children.Add(scrollViewer);
+        root.Children.Add(footer);
+        return root;
+    }
+
+    private void CloseTopMenuDrawer(bool forceClearContent)
+    {
+        _topMenuDrawerSyncVersion++;
+        LuminaTopView? host = _topMenuDrawerHost;
+        LuminaDrawer? drawer = _topMenuDrawer;
+        if (host == null)
+        {
+            return;
+        }
+
+        bool previousSyncingTopMenuDrawer = _syncingTopMenuDrawer;
+        if (forceClearContent)
+        {
+            _syncingTopMenuDrawer = true;
+        }
+
+        try
+        {
+            if (ReferenceEquals(host.DrawerContent, drawer))
+            {
+                host.CloseDrawer();
+                if (forceClearContent)
+                {
+                    host.DrawerContent = null;
+                }
+            }
+        }
+        finally
+        {
+            _syncingTopMenuDrawer = previousSyncingTopMenuDrawer;
+        }
+
+        if (forceClearContent)
+        {
+            ReleaseTopMenuDrawerReference();
+        }
+    }
+
+    private void ReleaseTopMenuDrawerReference()
+    {
+        if (_topMenuDrawerHost != null)
+        {
+            _topMenuDrawerHost.PropertyChanged -= OnTopMenuDrawerHostPropertyChanged;
+        }
+        ClearTopMenuDrawerSlots();
+        _topMenuDrawerHost = null;
+        _topMenuDrawer = null;
+    }
+
+    private void ClearTopMenuDrawerSlots()
+    {
+        _topMenuDrawerHeaderBinding?.Dispose();
+        _topMenuDrawerContentBinding?.Dispose();
+        _topMenuDrawerFooterBinding?.Dispose();
+        _topMenuDrawerHeaderBinding = null;
+        _topMenuDrawerContentBinding = null;
+        _topMenuDrawerFooterBinding = null;
+
+        if (_topMenuDrawerHeaderPresenter != null)
+        {
+            _topMenuDrawerHeaderPresenter.Content = null;
+            _topMenuDrawerHeaderPresenter = null;
+        }
+        if (_topMenuDrawerContentPresenter != null)
+        {
+            _topMenuDrawerContentPresenter.Content = null;
+            _topMenuDrawerContentPresenter = null;
+        }
+        if (_topMenuDrawerFooterPresenter != null)
+        {
+            _topMenuDrawerFooterPresenter.Content = null;
+            _topMenuDrawerFooterPresenter = null;
+        }
+        if (_topMenuDrawer != null)
+        {
+            _topMenuDrawer.Content = null;
+        }
+    }
+
+    private void OnTopMenuDrawerHostPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
+    {
+        if (_syncingTopMenuDrawer || !ReferenceEquals(sender, _topMenuDrawerHost))
+        {
+            return;
+        }
+
+        if (sender is not LuminaTopView host)
+        {
+            return;
+        }
+
+        if (e.Property == LuminaTopView.IsDrawerOpenProperty && !host.IsDrawerOpen && ReferenceEquals(host.DrawerContent, _topMenuDrawer))
+        {
+            SetMenuOpenFromTopDrawer(false);
+        }
+        else if (e.Property == LuminaTopView.DrawerContentProperty && host.DrawerContent != null && !ReferenceEquals(host.DrawerContent, _topMenuDrawer))
+        {
+            bool wasMenuOpen = IsMenuOpen;
+            ReleaseTopMenuDrawerReference();
+            if (wasMenuOpen)
+            {
+                SetMenuOpenFromTopDrawer(false);
+            }
+        }
+    }
+
+    private void SetMenuOpenFromTopDrawer(bool value)
+    {
+        _syncingTopMenuDrawer = true;
+        try
+        {
+            IsMenuOpen = value;
+        }
+        finally
+        {
+            _syncingTopMenuDrawer = false;
+        }
+        UpdateEffectiveShellChrome();
+    }
+
+    private LuminaTopView? FindOuterTopViewHost()
+    {
+        return this.GetVisualAncestors().OfType<LuminaTopView>().OrderBy(GetVisualDepth).FirstOrDefault();
+    }
+
+    private static int GetVisualDepth(Control control)
+    {
+        return control.GetVisualAncestors().Count();
+    }
+
+    private void DisablePageAutoSafeArea(object? content)
+    {
+        if (content is ContentPage page)
+        {
+            page.AutomaticallyApplySafeAreaPadding = false;
+        }
     }
 
     private void SetActivePage(object? content)

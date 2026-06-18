@@ -5,8 +5,9 @@
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.SandboxRootView"
              x:Name="RootView">
+    <!-- Root TopView provides safe-area insets and application-level overlays for the shell. -->
     <lumina:LuminaTopView x:Name="RootTopView"
-                          TopViewKey="SandboxRoot">
+                           TopViewKey="SandboxRoot">
         <Grid>
             <lumina:LuminaShell x:Name="AppShell"
                                 ShellKey="Sandbox"
@@ -126,6 +127,7 @@
                             <lumina:LuminaNavigationItem Name="NavShell" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Shell}" Icon="SH" />
                             <lumina:LuminaNavigationItem Name="NavMenus" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Menus}" Icon="MN" />
                             <lumina:LuminaNavigationItem Name="NavOverlays" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Overlays}" Icon="OV" />
+                            <lumina:LuminaNavigationItem Name="NavOverlayScope" Classes="Child" Header="{l10n:Loc Sandbox.Nav.OverlayScope}" Icon="OS" />
                             <lumina:LuminaNavigationItem Name="NavWindowDialogs" Classes="Child" Header="{l10n:Loc Sandbox.Nav.WindowDialogs}" Icon="WD" />
                             <lumina:LuminaNavigationItem Name="NavLayout" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Layout}" Icon="LY" />
                             <lumina:LuminaNavigationItem Name="NavMotion" Classes="Child" Header="{l10n:Loc Sandbox.Text.1313}" Icon="HM" />

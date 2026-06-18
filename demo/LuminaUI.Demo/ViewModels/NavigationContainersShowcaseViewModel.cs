@@ -88,6 +88,12 @@ public partial class NavigationContainersShowcaseViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private void CloseDrawer()
+    {
+        IsDrawerOpen = false;
+    }
+
+    [RelayCommand]
     private void ShowInfoNotification()
     {
         ShowNotification("Sandbox.Text.0641", "Sandbox.Text.0642", NotificationType.Information);

@@ -1,6 +1,5 @@
 <ContentPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:controls="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              xmlns:notifications="clr-namespace:Avalonia.Controls.Notifications;assembly=Avalonia.Controls"
@@ -15,9 +14,9 @@
                     HorizontalAlignment="Stretch"
                     Margin="0,36,0,40">
             <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Components.Navigation.Title}" />
+                <TextBlock Classes="Display" Text="Navigation &amp; Containers" />
                 <TextBlock Classes="Body"
-                           Text="{l10n:Loc Sandbox.Components.Navigation.Description}"
+                           Text="Native navigation pages, content containers, carousel, transitioning content, and notification surfaces."
                            TextWrapping="Wrap" />
             </StackPanel>
 
@@ -27,15 +26,15 @@
                                           VerticalSpacing="16">
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Navigation.HeaderedContentControl}" />
-                        <HeaderedContentControl Header="{l10n:Loc Sandbox.Components.Navigation.ServiceStatus}">
+                        <TextBlock Classes="SectionTitle" Text="HeaderedContentControl" />
+                        <HeaderedContentControl Header="Service status">
                             <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="8">
                                 <Border Width="8" Height="8" CornerRadius="4" Background="{DynamicResource LuminaSuccessBrush}" />
-                                <TextBlock Grid.Column="1" Text="{l10n:Loc Sandbox.Components.Navigation.APIHealthy}" />
+                                <TextBlock Grid.Column="1" Text="API healthy" />
                                 <Border Grid.Row="1" Width="8" Height="8" CornerRadius="4" Background="{DynamicResource LuminaPrimaryBrush}" />
-                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{l10n:Loc Sandbox.Components.Navigation.SyncCompleted}" />
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="Sync completed" />
                                 <Border Grid.Row="2" Width="8" Height="8" CornerRadius="4" Background="{DynamicResource LuminaWarningBrush}" />
-                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{l10n:Loc Sandbox.Components.Navigation.BillingCheckPending}" />
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="Billing check pending" />
                             </Grid>
                         </HeaderedContentControl>
                     </StackPanel>
@@ -43,17 +42,17 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Navigation.ItemsControl}" />
+                        <TextBlock Classes="SectionTitle" Text="ItemsControl" />
                         <ItemsControl Classes="Surface">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
-                            <lumina:LuminaTag Classes="Primary" Content="{l10n:Loc Sandbox.Components.Navigation.Design}" />
-                            <lumina:LuminaTag Content="{l10n:Loc Sandbox.Components.Navigation.Build}" />
-                            <lumina:LuminaTag Content="{l10n:Loc Sandbox.Components.Navigation.Verify}" />
-                            <lumina:LuminaTag Content="{l10n:Loc Sandbox.Components.Navigation.Release}" />
+                            <lumina:LuminaTag Classes="Primary">Design</lumina:LuminaTag>
+                            <lumina:LuminaTag>Build</lumina:LuminaTag>
+                            <lumina:LuminaTag>Verify</lumina:LuminaTag>
+                            <lumina:LuminaTag>Release</lumina:LuminaTag>
                         </ItemsControl>
                     </StackPanel>
                 </lumina:LuminaCard>
@@ -61,11 +60,11 @@
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
-                            <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Navigation.SplitView}" />
+                            <TextBlock Classes="SectionTitle" Text="SplitView" />
                             <ToggleButton x:Name="SplitPaneToggle"
                                           Grid.Column="1"
                                           Classes="Small Outline"
-                                          Content="{l10n:Loc Sandbox.Components.Navigation.Pane}"
+                                          Content="Pane"
                                           IsChecked="{Binding #DemoSplitView.IsPaneOpen, Mode=TwoWay}" />
                         </Grid>
                         <SplitView x:Name="DemoSplitView"
@@ -76,9 +75,9 @@
                                    CompactPaneLength="48">
                             <SplitView.Pane>
                                 <StackPanel Spacing="6" Margin="8">
-                                    <Button Classes="Ghost" Content="{l10n:Loc Sandbox.Components.Navigation.Inbox}" HorizontalAlignment="Stretch" />
-                                    <Button Classes="Ghost" Content="{l10n:Loc Sandbox.Components.Navigation.Archive}" HorizontalAlignment="Stretch" />
-                                    <Button Classes="Ghost" Content="{l10n:Loc Sandbox.Components.Navigation.Settings}" HorizontalAlignment="Stretch" />
+                                    <Button Classes="Ghost" Content="Inbox" HorizontalAlignment="Stretch" />
+                                    <Button Classes="Ghost" Content="Archive" HorizontalAlignment="Stretch" />
+                                    <Button Classes="Ghost" Content="Settings" HorizontalAlignment="Stretch" />
                                 </StackPanel>
                             </SplitView.Pane>
                             <Border Padding="14"
@@ -87,9 +86,9 @@
                                     BorderThickness="1"
                                     CornerRadius="8">
                                 <StackPanel Spacing="8">
-                                    <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Components.Navigation.CompactInlineLayout}" />
+                                    <TextBlock Classes="Label" Text="Compact inline layout" />
                                     <TextBlock Classes="Helper"
-                                               Text="{l10n:Loc Sandbox.Components.Navigation.CompactInlineLayoutDesc}"
+                                               Text="The pane can stay readable on desktop and collapse to the compact strip on narrow layouts."
                                                TextWrapping="Wrap" />
                                 </StackPanel>
                             </Border>
@@ -99,19 +98,19 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Navigation.NavigationPage}" />
+                        <TextBlock Classes="SectionTitle" Text="NavigationPage" />
                         <Border Height="240"
                                 BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
                                 BorderThickness="1"
                                 CornerRadius="8"
                                 ClipToBounds="True">
                             <NavigationPage x:Name="DemoNavigationPage">
-                                <ContentPage Header="{l10n:Loc Sandbox.Components.Navigation.Project}">
+                                <ContentPage Header="Project">
                                     <StackPanel Margin="16,68,16,16" Spacing="10">
-                                        <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Components.Navigation.NavigationRoot}" />
+                                        <TextBlock Classes="Label" Text="Navigation root" />
                                         <Button x:Name="PushNavigationButton"
                                                 Classes="Primary Small"
-                                                Content="{l10n:Loc Sandbox.Components.Navigation.OpenDetail}"
+                                                Content="Open detail"
                                                 HorizontalAlignment="Left"
                                                 Command="{Binding PushNavigationCommand}"
                                                 CommandParameter="{Binding #DemoNavigationPage}" />
@@ -125,30 +124,30 @@
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
-                            <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Navigation.DrawerPage}" />
+                            <TextBlock Classes="SectionTitle" Text="LuminaDrawer" />
                             <ToggleButton Grid.Column="1"
                                           Classes="Small Outline"
-                                          Content="{l10n:Loc Sandbox.Components.Navigation.Open}"
+                                          Content="Open"
                                           IsChecked="{Binding IsDrawerOpen, Mode=TwoWay}" />
                         </Grid>
                         <WrapPanel>
                             <Button Classes="Ghost Small"
-                                    Content="{l10n:Loc Sandbox.Components.Navigation.Left}"
+                                    Content="Left"
                                     Margin="0,0,8,8"
                                     Command="{Binding SetDrawerPlacementCommand}"
                                     CommandParameter="{x:Static controls:DrawerPlacement.Left}" />
                             <Button Classes="Ghost Small"
-                                    Content="{l10n:Loc Sandbox.Components.Navigation.Right}"
+                                    Content="Right"
                                     Margin="0,0,8,8"
                                     Command="{Binding SetDrawerPlacementCommand}"
                                     CommandParameter="{x:Static controls:DrawerPlacement.Right}" />
                             <Button Classes="Ghost Small"
-                                    Content="{l10n:Loc Sandbox.Components.Navigation.Top}"
+                                    Content="Top"
                                     Margin="0,0,8,8"
                                     Command="{Binding SetDrawerPlacementCommand}"
                                     CommandParameter="{x:Static controls:DrawerPlacement.Top}" />
                             <Button Classes="Ghost Small"
-                                    Content="{l10n:Loc Sandbox.Components.Navigation.Bottom}"
+                                    Content="Bottom"
                                     Margin="0,0,8,8"
                                     Command="{Binding SetDrawerPlacementCommand}"
                                     CommandParameter="{x:Static controls:DrawerPlacement.Bottom}" />
@@ -158,47 +157,61 @@
                                 BorderThickness="1"
                                 CornerRadius="8"
                                 ClipToBounds="True">
-                            <DrawerPage Header="{l10n:Loc Sandbox.Components.Navigation.Workspace}"
-                                        IsOpen="{Binding IsDrawerOpen, Mode=TwoWay}"
-                                        DisplayMode="Overlay"
-                                        DrawerPlacement="{Binding DrawerPlacement}"
-                                        DrawerLength="170"
-                                        CompactDrawerLength="48">
-                                <DrawerPage.Drawer>
-                                    <StackPanel Spacing="6" Margin="8">
-                                        <Button Classes="Ghost" Content="{l10n:Loc Sandbox.Components.Navigation.Home}" HorizontalAlignment="Stretch" />
-                                        <Button Classes="Ghost" Content="{l10n:Loc Sandbox.Components.Navigation.Reports}" HorizontalAlignment="Stretch" />
-                                        <Button Classes="Ghost" Content="{l10n:Loc Sandbox.Components.Navigation.Team}" HorizontalAlignment="Stretch" />
-                                    </StackPanel>
-                                </DrawerPage.Drawer>
-                                <StackPanel Margin="16,64,16,16" Spacing="10">
-                                    <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Components.Navigation.DrawerContent}" />
+                            <lumina:LuminaTopView Name="NavigationDrawerPreviewHost"
+                                                  IsDrawerOpen="{Binding IsDrawerOpen, Mode=TwoWay}"
+                                                  Background="{DynamicResource LuminaBackgroundBrush}">
+                                <lumina:LuminaTopView.DrawerContent>
+                                    <lumina:LuminaDrawer Placement="{Binding DrawerPlacement}"
+                                                         DrawerLength="170"
+                                                         ContentPadding="14">
+                                        <Grid RowDefinitions="Auto,*,Auto" RowSpacing="12">
+                                            <StackPanel Spacing="6">
+                                                <TextBlock Classes="Label" Text="Drawer content" />
+                                                <TextBlock Classes="Helper"
+                                                           Text="LuminaDrawer is hosted by the overlay layer."
+                                                           TextWrapping="Wrap" />
+                                            </StackPanel>
+                                            <StackPanel Grid.Row="1" Spacing="6">
+                                                <Button Classes="Ghost" Content="Home" HorizontalAlignment="Stretch" />
+                                                <Button Classes="Ghost" Content="Reports" HorizontalAlignment="Stretch" />
+                                                <Button Classes="Ghost" Content="Team" HorizontalAlignment="Stretch" />
+                                            </StackPanel>
+                                            <Button Grid.Row="2"
+                                                    Classes="Outline Small"
+                                                    Content="Close"
+                                                    HorizontalAlignment="Left"
+                                                    Command="{Binding CloseDrawerCommand}" />
+                                        </Grid>
+                                    </lumina:LuminaDrawer>
+                                </lumina:LuminaTopView.DrawerContent>
+                                <StackPanel Margin="16" Spacing="10" Background="{DynamicResource LuminaSurfaceElevatedBrush}">
+                                    <TextBlock Classes="Label" Text="Host content" />
                                     <TextBlock Classes="Helper"
-                                               Text="{l10n:Loc Sandbox.Components.Navigation.DrawerPageDesc}"
+                                               Text="The drawer surface uses the current TopView overlay host."
                                                TextWrapping="Wrap" />
                                 </StackPanel>
-                            </DrawerPage>
+                            </lumina:LuminaTopView>
                         </Border>
                     </StackPanel>
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Navigation.TabbedPage}" />
+                        <TextBlock Classes="SectionTitle" Text="TabbedPage" />
                         <Border Height="260"
                                 BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
                                 BorderThickness="1"
                                 CornerRadius="8"
                                 ClipToBounds="True">
                             <TabbedPage TabPlacement="Top">
-                                <ContentPage Header="{l10n:Loc Sandbox.Components.Navigation.Home}">
-                                    <TextBlock Margin="16,64,16,16" Text="{l10n:Loc Sandbox.Components.Navigation.HomePageContent}" />
+                                <ContentPage Header="Home">
+                                    <TextBlock Margin="16,64,16,16" Text="Home page content" />
                                 </ContentPage>
-                                <ContentPage Header="{l10n:Loc Sandbox.Components.Navigation.Search}">
-                                    <TextBlock Margin="16,64,16,16" Text="{l10n:Loc Sandbox.Components.Navigation.SearchPageContent}" />
+                                <ContentPage Header="Search">
+                                    <TextBlock Margin="16,64,16,16" Text="Search page content" />
                                 </ContentPage>
-                                <ContentPage Header="{l10n:Loc Sandbox.Components.Navigation.Profile}">
-                                    <TextBlock Margin="16,64,16,16" Text="{l10n:Loc Sandbox.Components.Navigation.ProfilePageContent}" />
+                                <ContentPage Header="Profile">
+                                    <TextBlock Margin="16,64,16,16" Text="Profile page content" />
                                 </ContentPage>
                             </TabbedPage>
                         </Border>
@@ -207,9 +220,9 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Navigation.Carousel}" />
+                        <TextBlock Classes="SectionTitle" Text="Carousel" />
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
-                            <CheckBox Content="{l10n:Loc Sandbox.Components.Navigation.AutoPlay}"
+                            <CheckBox Content="Auto play"
                                       IsChecked="{Binding IsCarouselAutoPlayEnabled, Mode=TwoWay}" />
                             <TextBlock Grid.Column="1"
                                        Classes="Helper"
@@ -231,8 +244,8 @@
                             <Border Padding="24" Background="#EAF5FF">
                                 <Grid ColumnDefinitions="*,Auto" RowDefinitions="*,Auto">
                                     <StackPanel Spacing="8" VerticalAlignment="Center">
-                                        <TextBlock FontSize="22" FontWeight="SemiBold" Foreground="#122033" Text="{l10n:Loc Sandbox.Components.Navigation.ReleaseDashboard}" />
-                                        <TextBlock TextWrapping="Wrap" Foreground="#526173" Text="{l10n:Loc Sandbox.Components.Navigation.ReleaseDashboardDesc}" />
+                                        <TextBlock FontSize="22" FontWeight="SemiBold" Foreground="#122033" Text="Release dashboard" />
+                                        <TextBlock TextWrapping="Wrap" Foreground="#526173" Text="Track build health, review queue, and component coverage in one compact surface." />
                                     </StackPanel>
                                     <Border Grid.Column="1"
                                             Width="86"
@@ -253,8 +266,8 @@
                             <Border Padding="24" Background="#F7F4FF">
                                 <Grid ColumnDefinitions="*,Auto">
                                     <StackPanel Spacing="8" VerticalAlignment="Center">
-                                        <TextBlock FontSize="22" FontWeight="SemiBold" Foreground="#211A36" Text="{l10n:Loc Sandbox.Components.Navigation.ComponentAudit}" />
-                                        <TextBlock TextWrapping="Wrap" Foreground="#615873" Text="{l10n:Loc Sandbox.Components.Navigation.ComponentAuditDesc}" />
+                                        <TextBlock FontSize="22" FontWeight="SemiBold" Foreground="#211A36" Text="Component audit" />
+                                        <TextBlock TextWrapping="Wrap" Foreground="#615873" Text="Navigation, overlays, pickers, and action controls now have dedicated examples." />
                                     </StackPanel>
                                     <Border Grid.Column="1"
                                             Width="86"
@@ -275,8 +288,8 @@
                             <Border Padding="24" Background="#FFF7E8">
                                 <Grid ColumnDefinitions="*,Auto">
                                     <StackPanel Spacing="8" VerticalAlignment="Center">
-                                        <TextBlock FontSize="22" FontWeight="SemiBold" Foreground="#33240F" Text="{l10n:Loc Sandbox.Components.Navigation.ResponsivePreview}" />
-                                        <TextBlock TextWrapping="Wrap" Foreground="#765C33" Text="{l10n:Loc Sandbox.Components.Navigation.ResponsivePreviewDesc}" />
+                                        <TextBlock FontSize="22" FontWeight="SemiBold" Foreground="#33240F" Text="Responsive preview" />
+                                        <TextBlock TextWrapping="Wrap" Foreground="#765C33" Text="The carousel scales with the card and keeps controls anchored inside the component." />
                                     </StackPanel>
                                     <Border Grid.Column="1"
                                             Width="86"
@@ -300,8 +313,8 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Navigation.TransitioningContentControl}" />
-                        <TransitioningContentControl Content="{l10n:Loc Sandbox.Components.Navigation.UpdatedContentSurface}">
+                        <TextBlock Classes="SectionTitle" Text="TransitioningContentControl" />
+                        <TransitioningContentControl Content="Updated content surface">
                             <TransitioningContentControl.ContentTemplate>
                                 <DataTemplate>
                                     <Border Padding="16"
@@ -317,9 +330,9 @@
 
                 <lumina:LuminaCard>
                     <StackPanel Spacing="16">
-                        <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Navigation.NotificationCards}" />
+                        <TextBlock Classes="SectionTitle" Text="Notification cards" />
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
-                            <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Components.Navigation.NotificationDuration}" />
+                            <TextBlock Classes="Label" Text="Notification duration" />
                             <TextBlock Grid.Column="1"
                                        Classes="Helper"
                                        Text="{Binding NotificationDurationText}"
@@ -331,7 +344,7 @@
                                 IsSnapToTickEnabled="True"
                                 Value="{Binding NotificationDurationSeconds, Mode=TwoWay}" />
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
-                            <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Components.Navigation.NotificationPosition}" />
+                            <TextBlock Classes="Label" Text="Notification position" />
                             <TextBlock Grid.Column="1"
                                        Classes="Helper"
                                        Text="{Binding NotificationPositionText}"
@@ -339,22 +352,22 @@
                         </Grid>
                         <WrapPanel>
                             <Button Classes="Ghost Small"
-                                    Content="{l10n:Loc Sandbox.Components.Navigation.TopLeft}"
+                                    Content="Top left"
                                     Margin="0,0,8,8"
                                     Command="{Binding SetNotificationPositionCommand}"
                                     CommandParameter="{x:Static notifications:NotificationPosition.TopLeft}" />
                             <Button Classes="Ghost Small"
-                                    Content="{l10n:Loc Sandbox.Components.Navigation.TopRight}"
+                                    Content="Top right"
                                     Margin="0,0,8,8"
                                     Command="{Binding SetNotificationPositionCommand}"
                                     CommandParameter="{x:Static notifications:NotificationPosition.TopRight}" />
                             <Button Classes="Ghost Small"
-                                    Content="{l10n:Loc Sandbox.Components.Navigation.BottomLeft}"
+                                    Content="Bottom left"
                                     Margin="0,0,8,8"
                                     Command="{Binding SetNotificationPositionCommand}"
                                     CommandParameter="{x:Static notifications:NotificationPosition.BottomLeft}" />
                             <Button Classes="Ghost Small"
-                                    Content="{l10n:Loc Sandbox.Components.Navigation.BottomRight}"
+                                    Content="Bottom right"
                                     Margin="0,0,8,8"
                                     Command="{Binding SetNotificationPositionCommand}"
                                     CommandParameter="{x:Static notifications:NotificationPosition.BottomRight}" />
@@ -362,17 +375,17 @@
                         <WrapPanel>
                             <Button x:Name="ShowInfoNotificationButton"
                                     Classes="Outline"
-                                    Content="{l10n:Loc Sandbox.Components.Navigation.Information}"
+                                    Content="Information"
                                     Margin="0,0,10,10"
                                     Command="{Binding ShowInfoNotificationCommand}" />
                             <Button x:Name="ShowSuccessNotificationButton"
                                     Classes="Outline Success"
-                                    Content="{l10n:Loc Sandbox.Components.Navigation.Success}"
+                                    Content="Success"
                                     Margin="0,0,10,10"
                                     Command="{Binding ShowSuccessNotificationCommand}" />
                             <Button x:Name="ShowWarningNotificationButton"
                                     Classes="Outline Warning"
-                                    Content="{l10n:Loc Sandbox.Components.Navigation.Warning}"
+                                    Content="Warning"
                                     Margin="0,0,10,10"
                                     Command="{Binding ShowWarningNotificationCommand}" />
                         </WrapPanel>
