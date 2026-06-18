@@ -239,6 +239,7 @@ jobs:
           version="${{ needs.prepare.outputs.package_version }}"
           publish_dir="artifacts/demo/android-aot"
           asset_path="artifacts/LuminaUI.Demo.Android.aot.${version}.zip"
+          apk_asset_path="artifacts/LuminaUI.Demo.Android.aot.${version}.apk"
 
           dotnet publish demo/LuminaUI.Demo.Android/LuminaUI.Demo.Android.csproj \
             --configuration "$CONFIGURATION" \
@@ -248,14 +249,28 @@ jobs:
             /p:RunAOTCompilation=true \
             /p:ContinuousIntegrationBuild=true
 
-          cd "$publish_dir"
-          zip -r "../../LuminaUI.Demo.Android.aot.${version}.zip" .
+          apk_path="$(find "$publish_dir" -type f -name "*-Signed.apk" | sort | head -n 1)"
+          if [ -z "$apk_path" ]; then
+            apk_path="$(find "$publish_dir" -type f -name "*.apk" | sort | head -n 1)"
+          fi
+
+          if [ -z "$apk_path" ]; then
+            echo "No Android APK was produced in $publish_dir."
+            find "$publish_dir" -type f | sort
+            exit 1
+          fi
+
+          cp "$apk_path" "$apk_asset_path"
+
+          (cd "$publish_dir" && zip -r "../../$(basename "$asset_path")" .)
 
       - name: Upload Android demo
         uses: actions/upload-artifact@v4
         with:
           name: demo-android-aot
-          path: artifacts/*.zip
+          path: |
+            artifacts/*.zip
+            artifacts/*.apk
 
   release:
     name: Publish NuGet and GitHub Release
