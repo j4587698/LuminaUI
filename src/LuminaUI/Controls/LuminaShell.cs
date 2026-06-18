@@ -12,7 +12,6 @@ using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
-using Avalonia.Threading;
 using Avalonia.VisualTree;
 using LuminaUI.Extensions;
 
@@ -91,8 +90,6 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     private bool _syncingTopMenuDrawer;
 
     private bool _isTopMenuDrawerMode;
-
-    private int _topMenuDrawerSyncVersion;
 
     private bool _effectiveIsMenuOpen = true;
 
@@ -1307,7 +1304,8 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         bool isShellChromeEffectiveVisible = IsShellChromeVisible && (_activePage?.ShowShellChrome ?? true);
         bool isShellHeaderEffectiveVisible = isShellChromeEffectiveVisible && IsShellHeaderVisible && (_activePage?.ShowShellHeader ?? true);
         bool canUseCompactMenu = CanCompactMenu && Bounds.Width >= SmallScreenBreakpoint;
-        bool useTopMenuDrawer = isShellChromeEffectiveVisible && ShouldUseTopMenuDrawer();
+        LuminaTopView? topMenuDrawerHost = isShellChromeEffectiveVisible && Bounds.Width < SmallScreenBreakpoint ? FindOuterTopViewHost() : null;
+        bool useTopMenuDrawer = topMenuDrawerHost != null;
         SetTopMenuDrawerMode(useTopMenuDrawer);
         bool isMenuEffectiveOpen = isShellChromeEffectiveVisible && IsMenuOpen && !useTopMenuDrawer;
         bool isMenuCompact = isShellChromeEffectiveVisible && canUseCompactMenu && IsCompactMenuEnabled && !IsMenuOpen;
@@ -1321,12 +1319,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         PseudoClasses.Set(":chromeless", !isShellChromeEffectiveVisible);
         PseudoClasses.Set(":headerless", !isShellHeaderEffectiveVisible);
         PseudoClasses.Set(":menucompact", isMenuCompact);
-        SyncTopMenuDrawer();
-    }
-
-    private bool ShouldUseTopMenuDrawer()
-    {
-        return Bounds.Width < SmallScreenBreakpoint && FindOuterTopViewHost() != null;
+        SyncTopMenuDrawer(topMenuDrawerHost);
     }
 
     private void SetTopMenuDrawerMode(bool value)
@@ -1353,7 +1346,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         EffectiveMenuFooter = _isTopMenuDrawerMode ? null : MenuFooter;
     }
 
-    private void SyncTopMenuDrawer()
+    private void SyncTopMenuDrawer(LuminaTopView? host)
     {
         if (_syncingTopMenuDrawer)
         {
@@ -1366,7 +1359,6 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
             return;
         }
 
-        LuminaTopView? host = FindOuterTopViewHost();
         if (host == null)
         {
             CloseTopMenuDrawer(forceClearContent: true);
@@ -1380,18 +1372,12 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
             _topMenuDrawerHost.PropertyChanged += OnTopMenuDrawerHostPropertyChanged;
         }
 
-        QueueOpenTopMenuDrawer(host);
+        OpenTopMenuDrawer(host);
     }
 
-    private void QueueOpenTopMenuDrawer(LuminaTopView host)
+    private void OpenTopMenuDrawer(LuminaTopView host)
     {
-        int version = ++_topMenuDrawerSyncVersion;
-        Dispatcher.UIThread.Post(() => OpenTopMenuDrawer(host, version), DispatcherPriority.Loaded);
-    }
-
-    private void OpenTopMenuDrawer(LuminaTopView host, int version)
-    {
-        if (version != _topMenuDrawerSyncVersion || _syncingTopMenuDrawer || !_isTopMenuDrawerMode || !EffectiveIsShellChromeVisible || !IsMenuOpen || !ReferenceEquals(host, _topMenuDrawerHost))
+        if (_syncingTopMenuDrawer || !_isTopMenuDrawerMode || !EffectiveIsShellChromeVisible || !IsMenuOpen || !ReferenceEquals(host, _topMenuDrawerHost))
         {
             return;
         }
@@ -1401,8 +1387,13 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
             _topMenuDrawer = CreateTopMenuDrawer();
         }
 
-        if (ReferenceEquals(host.DrawerContent, _topMenuDrawer) && host.IsDrawerOpen)
+        if (ReferenceEquals(host.DrawerContent, _topMenuDrawer))
         {
+            _topMenuDrawer.SafeAreaPadding = host.OverlaySafeAreaPadding;
+            if (!host.IsDrawerOpen)
+            {
+                host.IsDrawerOpen = true;
+            }
             return;
         }
 
@@ -1507,7 +1498,6 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private void CloseTopMenuDrawer(bool forceClearContent)
     {
-        _topMenuDrawerSyncVersion++;
         LuminaTopView? host = _topMenuDrawerHost;
         LuminaDrawer? drawer = _topMenuDrawer;
         if (host == null)
