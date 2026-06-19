@@ -282,6 +282,69 @@ jobs:
             artifacts/*.zip
             artifacts/*.apk
 
+  deploy-pages:
+    name: Deploy browser demo to Pages
+    needs:
+      - prepare
+      - demo-browser
+    if: needs.prepare.outputs.should_release == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: true
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Download browser demo artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: demo-browser-wasm-aot
+          path: artifacts/pages/download
+
+      - name: Prepare Pages site
+        shell: bash
+        run: |
+          download_dir="$PWD/artifacts/pages/download"
+          site_dir="$PWD/artifacts/pages/site"
+
+          zip_file="$(find "$download_dir" -maxdepth 1 -type f -name "LuminaUI.Demo.Browser.wasm-aot.*.zip" | sort | head -n 1)"
+          if [ -z "$zip_file" ]; then
+            echo "No browser demo zip was found in $download_dir."
+            find "$download_dir" -maxdepth 2 -type f | sort
+            exit 1
+          fi
+
+          rm -rf "$site_dir"
+          mkdir -p "$site_dir"
+          unzip -q "$zip_file" -d "$site_dir"
+
+          if [ ! -f "$site_dir/index.html" ]; then
+            echo "Browser demo site is missing index.html."
+            find "$site_dir" -maxdepth 4 -type f | sort
+            exit 1
+          fi
+
+          find "$site_dir" -type f -iname "*.pdb" -delete
+          touch "$site_dir/.nojekyll"
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: artifacts/pages/site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
   release:
     name: Publish NuGet and GitHub Release
     needs:

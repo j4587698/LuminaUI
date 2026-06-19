@@ -15,12 +15,7 @@ internal static class Program
     {
         ApplyStartupCulture(args);
 
-        return BuildAvaloniaApp().StartBrowserAppAsync(
-            "out",
-            new BrowserPlatformOptions
-            {
-                RenderingMode = new[] { BrowserRenderingMode.Software2D }
-            });
+        return BuildAvaloniaApp().StartBrowserAppAsync("out");
     }
 
     public static AppBuilder BuildAvaloniaApp()
