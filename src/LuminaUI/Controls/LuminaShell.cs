@@ -1418,14 +1418,8 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
             Content = CreateTopMenuDrawerContent()
         };
         LuminaPickerResources.BindResource(drawer, TemplatedControl.CornerRadiusProperty, "LuminaShellTopMenuDrawerCornerRadius");
-        drawer.Bind(TemplatedControl.BackgroundProperty, new Binding(nameof(PaneBackground))
-        {
-            Source = this
-        });
-        drawer.Bind(LuminaDrawer.DrawerLengthProperty, new Binding(nameof(OpenPaneLength))
-        {
-            Source = this
-        });
+        drawer.Bind(TemplatedControl.BackgroundProperty, this.GetObservable(PaneBackgroundProperty));
+        drawer.Bind(LuminaDrawer.DrawerLengthProperty, this.GetObservable(OpenPaneLengthProperty));
         return drawer;
     }
 
@@ -1442,10 +1436,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
             VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center
         };
         _topMenuDrawerHeaderPresenter = headerPresenter;
-        _topMenuDrawerHeaderBinding = headerPresenter.Bind(ContentPresenter.ContentProperty, new Binding(nameof(MenuHeader))
-        {
-            Source = this
-        });
+        _topMenuDrawerHeaderBinding = headerPresenter.Bind(ContentPresenter.ContentProperty, this.GetObservable(MenuHeaderProperty));
 
         Border header = new Border
         {
@@ -1458,10 +1449,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
         ContentPresenter menuContentPresenter = new ContentPresenter();
         _topMenuDrawerContentPresenter = menuContentPresenter;
-        _topMenuDrawerContentBinding = menuContentPresenter.Bind(ContentPresenter.ContentProperty, new Binding(nameof(MenuContent))
-        {
-            Source = this
-        });
+        _topMenuDrawerContentBinding = menuContentPresenter.Bind(ContentPresenter.ContentProperty, this.GetObservable(MenuContentProperty));
 
         ScrollViewer scrollViewer = new ScrollViewer
         {
@@ -1475,10 +1463,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
         ContentPresenter footerPresenter = new ContentPresenter();
         _topMenuDrawerFooterPresenter = footerPresenter;
-        _topMenuDrawerFooterBinding = footerPresenter.Bind(ContentPresenter.ContentProperty, new Binding(nameof(MenuFooter))
-        {
-            Source = this
-        });
+        _topMenuDrawerFooterBinding = footerPresenter.Bind(ContentPresenter.ContentProperty, this.GetObservable(MenuFooterProperty));
 
         Border footer = new Border
         {

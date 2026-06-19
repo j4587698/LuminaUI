@@ -670,9 +670,9 @@ public class LuminaSettingsOption : Button
         TextBlock label = new TextBlock
         {
             VerticalAlignment = VerticalAlignment.Center,
-            TextTrimming = TextTrimming.CharacterEllipsis
+            TextTrimming = TextTrimming.CharacterEllipsis,
+            Text = option.Text
         };
-        label.Bind(TextBlock.TextProperty, new Binding(nameof(LuminaSettingsSelectOptionItem.Text)) { Source = option });
         LuminaPickerResources.BindBrush(label, TextBlock.ForegroundProperty, "LuminaTextPrimaryBrush");
         PathIcon checkIcon = new PathIcon
         {
@@ -682,7 +682,7 @@ public class LuminaSettingsOption : Button
         };
         LuminaPickerResources.BindResource(checkIcon, Layoutable.WidthProperty, "LuminaSettingsOptionSheetCheckIconSize");
         LuminaPickerResources.BindResource(checkIcon, Layoutable.HeightProperty, "LuminaSettingsOptionSheetCheckIconSize");
-        checkIcon.Bind(IsVisibleProperty, new Binding(nameof(LuminaSettingsSelectOptionItem.IsSelected)) { Source = option });
+        checkIcon.Bind(IsVisibleProperty, option.GetObservable(LuminaSettingsSelectOptionItem.IsSelectedProperty));
         LuminaPickerResources.BindBrush(checkIcon, PathIcon.ForegroundProperty, "LuminaPrimaryBrush");
         Grid grid = new Grid
         {

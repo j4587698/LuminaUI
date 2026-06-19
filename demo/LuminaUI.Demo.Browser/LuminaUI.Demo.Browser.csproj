@@ -11,6 +11,11 @@
     <RunAOTCompilation>true</RunAOTCompilation>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(RunAOTCompilation)' == 'true'">
+    <!-- Avalonia.Controls.DataGrid 12.0.0 emits assembly-level trim summaries; keep concrete LuminaUI IL warnings visible. -->
+    <NoWarn>$(NoWarn);IL2104;IL3053</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Avalonia.Browser" />
   </ItemGroup>
