@@ -1,0 +1,64 @@
+html,
+body,
+#out {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    overflow: hidden;
+    background: #f7f7f8;
+    color: #17181c;
+    font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.lumina-splash {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    background: #f7f7f8;
+}
+
+.lumina-splash-mark {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    border-radius: 10px;
+    background: #2067d4;
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.lumina-splash-title {
+    font-size: 18px;
+    font-weight: 650;
+}
+
+.lumina-splash-subtitle {
+    margin-top: 3px;
+    color: #626772;
+    font-size: 13px;
+}
+
+.avalonia-splash.splash-close {
+    display: none;
+    opacity: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+    body,
+    .lumina-splash {
+        background: #101114;
+        color: #f5f6f8;
+    }
+
+    .lumina-splash-subtitle {
+        color: #a9afba;
+    }
+}

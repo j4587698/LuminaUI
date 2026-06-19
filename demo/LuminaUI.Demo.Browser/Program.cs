@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
 using Avalonia;
@@ -12,11 +13,28 @@ internal static class Program
 {
     private static Task Main(string[] args)
     {
+        ApplyStartupCulture(args);
+
         return BuildAvaloniaApp().StartBrowserAppAsync("out");
     }
 
     public static AppBuilder BuildAvaloniaApp()
     {
-        return AppBuilder.Configure<App>();
+        return AppBuilder.Configure<App>()
+            .WithSourceHanSansCnFont();
+    }
+
+    private static void ApplyStartupCulture(string[] args)
+    {
+        if (args.Length < 2 || string.IsNullOrWhiteSpace(args[1]))
+        {
+            return;
+        }
+
+        CultureInfo culture = CultureInfo.GetCultureInfo(args[1]);
+        CultureInfo.DefaultThreadCurrentCulture = culture;
+        CultureInfo.DefaultThreadCurrentUICulture = culture;
+        CultureInfo.CurrentCulture = culture;
+        CultureInfo.CurrentUICulture = culture;
     }
 }

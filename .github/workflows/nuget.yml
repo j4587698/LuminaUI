@@ -192,17 +192,25 @@ jobs:
       - name: Publish browser WebAssembly AOT demo
         run: |
           version="${{ needs.prepare.outputs.package_version }}"
-          publish_dir="artifacts/demo/browser-wasm-aot"
-          asset_path="artifacts/LuminaUI.Demo.Browser.wasm-aot.${version}.zip"
+          repo_root="$PWD"
+          publish_dir="$repo_root/demo/LuminaUI.Demo.Browser/bin/${CONFIGURATION}/net10.0-browser/publish/wwwroot"
+          asset_path="$repo_root/artifacts/LuminaUI.Demo.Browser.wasm-aot.${version}.zip"
 
           dotnet publish demo/LuminaUI.Demo.Browser/LuminaUI.Demo.Browser.csproj \
             --configuration "$CONFIGURATION" \
-            --output "$publish_dir" \
             /p:RunAOTCompilation=true \
             /p:ContinuousIntegrationBuild=true
 
+          if [ ! -f "$publish_dir/index.html" ]; then
+            echo "Browser publish output is missing index.html in $publish_dir."
+            find "$repo_root/demo/LuminaUI.Demo.Browser/bin/${CONFIGURATION}/net10.0-browser" -maxdepth 4 -type f | sort
+            exit 1
+          fi
+
           find "$publish_dir" -type f -iname "*.pdb" -delete
-          (cd "$publish_dir" && zip -r "../../$(basename "$asset_path")" .)
+          touch "$publish_dir/.nojekyll"
+          mkdir -p "$(dirname "$asset_path")"
+          (cd "$publish_dir" && zip -r "$asset_path" .)
 
       - name: Upload browser demo
         uses: actions/upload-artifact@v4
@@ -273,6 +281,69 @@ jobs:
           path: |
             artifacts/*.zip
             artifacts/*.apk
+
+  deploy-pages:
+    name: Deploy browser demo to Pages
+    needs:
+      - prepare
+      - demo-browser
+    if: needs.prepare.outputs.should_release == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: true
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Download browser demo artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: demo-browser-wasm-aot
+          path: artifacts/pages/download
+
+      - name: Prepare Pages site
+        shell: bash
+        run: |
+          download_dir="$PWD/artifacts/pages/download"
+          site_dir="$PWD/artifacts/pages/site"
+
+          zip_file="$(find "$download_dir" -maxdepth 1 -type f -name "LuminaUI.Demo.Browser.wasm-aot.*.zip" | sort | head -n 1)"
+          if [ -z "$zip_file" ]; then
+            echo "No browser demo zip was found in $download_dir."
+            find "$download_dir" -maxdepth 2 -type f | sort
+            exit 1
+          fi
+
+          rm -rf "$site_dir"
+          mkdir -p "$site_dir"
+          unzip -q "$zip_file" -d "$site_dir"
+
+          if [ ! -f "$site_dir/index.html" ]; then
+            echo "Browser demo site is missing index.html."
+            find "$site_dir" -maxdepth 4 -type f | sort
+            exit 1
+          fi
+
+          find "$site_dir" -type f -iname "*.pdb" -delete
+          touch "$site_dir/.nojekyll"
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: artifacts/pages/site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
   release:
     name: Publish NuGet and GitHub Release

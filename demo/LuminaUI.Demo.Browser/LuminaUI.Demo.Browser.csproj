@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <Nullable>enable</Nullable>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <WasmBuildNative>true</WasmBuildNative>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
@@ -12,8 +13,10 @@
 
   <ItemGroup>
     <PackageReference Include="Avalonia.Browser" />
-    <PackageReference Include="SkiaSharp" />
-    <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets/Fonts/*" />
   </ItemGroup>
 
   <ItemGroup>
