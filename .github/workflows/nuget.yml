@@ -192,17 +192,25 @@ jobs:
       - name: Publish browser WebAssembly AOT demo
         run: |
           version="${{ needs.prepare.outputs.package_version }}"
-          publish_dir="artifacts/demo/browser-wasm-aot"
-          asset_path="artifacts/LuminaUI.Demo.Browser.wasm-aot.${version}.zip"
+          repo_root="$PWD"
+          publish_dir="$repo_root/demo/LuminaUI.Demo.Browser/bin/${CONFIGURATION}/net10.0-browser/publish/wwwroot"
+          asset_path="$repo_root/artifacts/LuminaUI.Demo.Browser.wasm-aot.${version}.zip"
 
           dotnet publish demo/LuminaUI.Demo.Browser/LuminaUI.Demo.Browser.csproj \
             --configuration "$CONFIGURATION" \
-            --output "$publish_dir" \
             /p:RunAOTCompilation=true \
             /p:ContinuousIntegrationBuild=true
 
+          if [ ! -f "$publish_dir/index.html" ]; then
+            echo "Browser publish output is missing index.html in $publish_dir."
+            find "$repo_root/demo/LuminaUI.Demo.Browser/bin/${CONFIGURATION}/net10.0-browser" -maxdepth 4 -type f | sort
+            exit 1
+          fi
+
           find "$publish_dir" -type f -iname "*.pdb" -delete
-          (cd "$publish_dir" && zip -r "../../$(basename "$asset_path")" .)
+          touch "$publish_dir/.nojekyll"
+          mkdir -p "$(dirname "$asset_path")"
+          (cd "$publish_dir" && zip -r "$asset_path" .)
 
       - name: Upload browser demo
         uses: actions/upload-artifact@v4

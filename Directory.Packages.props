@@ -7,7 +7,6 @@
     <TreeDataGridAvaloniaVersion>12.0.0</TreeDataGridAvaloniaVersion>
     <CommunityToolkitMvvmVersion>8.4.2</CommunityToolkitMvvmVersion>
     <DiagnosticsSupportVersion>2.2.2</DiagnosticsSupportVersion>
-    <SkiaSharpVersion>3.119.4</SkiaSharpVersion>
     <AndroidXSplashScreenVersion>1.2.0.2</AndroidXSplashScreenVersion>
     <AndroidXAppCompatVersion>1.7.1.3</AndroidXAppCompatVersion>
     <MicrosoftExtensionsHostingVersion>10.0.8</MicrosoftExtensionsHostingVersion>
@@ -27,8 +26,6 @@
     <PackageVersion Include="TreeDataGrid.Avalonia" Version="$(TreeDataGridAvaloniaVersion)" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="$(CommunityToolkitMvvmVersion)" />
     <PackageVersion Include="AvaloniaUI.DiagnosticsSupport" Version="$(DiagnosticsSupportVersion)" />
-    <PackageVersion Include="SkiaSharp" Version="$(SkiaSharpVersion)" />
-    <PackageVersion Include="SkiaSharp.NativeAssets.WebAssembly" Version="$(SkiaSharpVersion)" />
     <PackageVersion Include="Xamarin.AndroidX.Core.SplashScreen" Version="$(AndroidXSplashScreenVersion)" />
     <PackageVersion Include="Xamarin.AndroidX.AppCompat" Version="$(AndroidXAppCompatVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="$(MicrosoftExtensionsHostingVersion)" />

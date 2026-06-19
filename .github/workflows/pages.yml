@@ -1,0 +1,138 @@
+name: LuminaUI Demo Pages
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Optional release tag to deploy from, for example v0.4.0. Leave empty to build the current ref."
+        required: false
+        type: string
+      run_aot:
+        description: "Build the current ref with WebAssembly AOT when release_tag is empty."
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  CONFIGURATION: Release
+  DOTNET_NOLOGO: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+jobs:
+  prepare:
+    name: Prepare browser demo site
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        if: inputs.release_tag == ''
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        if: inputs.release_tag == ''
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Install WebAssembly workload
+        if: inputs.release_tag == ''
+        run: dotnet workload install wasm-tools
+
+      - name: Build browser demo site
+        if: inputs.release_tag == ''
+        env:
+          RUN_AOT: ${{ inputs.run_aot }}
+        run: |
+          repo_root="$PWD"
+          publish_dir="$repo_root/demo/LuminaUI.Demo.Browser/bin/${CONFIGURATION}/net10.0-browser/publish/wwwroot"
+          site_dir="$repo_root/artifacts/pages/site"
+
+          dotnet publish demo/LuminaUI.Demo.Browser/LuminaUI.Demo.Browser.csproj \
+            --configuration "$CONFIGURATION" \
+            /p:RunAOTCompilation="$RUN_AOT" \
+            /p:ContinuousIntegrationBuild=true
+
+          if [ ! -f "$publish_dir/index.html" ]; then
+            echo "Browser publish output is missing index.html in $publish_dir."
+            find "$repo_root/demo/LuminaUI.Demo.Browser/bin/${CONFIGURATION}/net10.0-browser" -maxdepth 4 -type f | sort
+            exit 1
+          fi
+
+          rm -rf "$site_dir"
+          mkdir -p "$site_dir"
+          find "$publish_dir" -type f -iname "*.pdb" -delete
+          touch "$publish_dir/.nojekyll"
+          cp -a "$publish_dir"/. "$site_dir"/
+
+      - name: Download browser demo from release
+        if: inputs.release_tag != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          repo_root="$PWD"
+          download_dir="$repo_root/artifacts/pages/download"
+          site_dir="$repo_root/artifacts/pages/site"
+
+          rm -rf "$download_dir" "$site_dir"
+          mkdir -p "$download_dir" "$site_dir"
+
+          gh release download "$RELEASE_TAG" \
+            --repo "$GITHUB_REPOSITORY" \
+            --pattern "LuminaUI.Demo.Browser.wasm-aot.*.zip" \
+            --dir "$download_dir"
+
+          zip_file="$(find "$download_dir" -maxdepth 1 -type f -name "*.zip" | sort | head -n 1)"
+          if [ -z "$zip_file" ]; then
+            echo "No browser demo zip was found in release $RELEASE_TAG."
+            exit 1
+          fi
+
+          unzip -q "$zip_file" -d "$site_dir"
+
+          if [ ! -f "$site_dir/index.html" ] && [ -d "$site_dir/wwwroot" ]; then
+            normalized_dir="$repo_root/artifacts/pages/site-normalized"
+            mkdir -p "$normalized_dir"
+            cp -a "$site_dir/wwwroot"/. "$normalized_dir"/
+            rm -rf "$site_dir"
+            mv "$normalized_dir" "$site_dir"
+          fi
+
+          if [ ! -f "$site_dir/index.html" ]; then
+            echo "Browser demo site is missing index.html."
+            find "$site_dir" -maxdepth 4 -type f | sort
+            exit 1
+          fi
+
+          find "$site_dir" -type f -iname "*.pdb" -delete
+          touch "$site_dir/.nojekyll"
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: artifacts/pages/site
+
+  deploy:
+    name: Deploy browser demo to Pages
+    needs: prepare
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
