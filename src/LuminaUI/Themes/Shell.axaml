@@ -1,6 +1,7 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:converters="using:LuminaUI.Converters"
+                    xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
                     xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
 
     <Thickness x:Key="LuminaShellTopMenuDrawerBorderThickness">0,0,1,0</Thickness>
@@ -93,7 +94,7 @@
                                                 HorizontalAlignment="Right"
                                                 VerticalAlignment="Bottom"
                                                 Command="{Binding $parent[lumina:LuminaShell].ToggleCompactModeCommand}"
-                                                ToolTip.Tip="Toggle compact mode">
+                                                ToolTip.Tip="{l10n:Loc Lumina.Shell.ToggleCompactMode}">
                                             <PathIcon Name="PART_MenuCompactToggleIcon"
                                                       Width="{DynamicResource LuminaShellMenuCompactToggleIconSize}"
                                                       Height="{DynamicResource LuminaShellMenuCompactToggleIconSize}"
@@ -131,7 +132,7 @@
                                                                           IsVisible="{TemplateBinding EffectiveIsPaneToggleVisible}"
                                                                           IsOpen="{TemplateBinding IsMenuOpen}"
                                                                           Command="{Binding ToggleMenuCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                                                          ToolTip.Tip="Toggle navigation pane" />
+                                                                          ToolTip.Tip="{l10n:Loc Lumina.Shell.ToggleNavigationPane}" />
 
                                             <StackPanel Grid.Column="1"
                                                         Margin="8,0,0,0"
