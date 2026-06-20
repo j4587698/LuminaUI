@@ -32,6 +32,10 @@ public static class LuminaLocalizationKeys
 
     public const string ActionMenuTitle = "Lumina.ActionMenu.Title";
 
+    public const string ShellToggleCompactMode = "Lumina.Shell.ToggleCompactMode";
+
+    public const string ShellToggleNavigationPane = "Lumina.Shell.ToggleNavigationPane";
+
     public const string PageLoading = "Lumina.Page.Loading";
 
     public const string PageEmpty = "Lumina.Page.Empty";

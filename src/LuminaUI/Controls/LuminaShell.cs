@@ -99,8 +99,6 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private bool _effectiveIsShellHeaderVisible = true;
 
-    private bool _effectiveIsHeaderlessMenuToggleVisible;
-
     private bool _effectiveIsPaneToggleVisible;
 
     private bool _effectiveIsMenuCompact;
@@ -150,8 +148,6 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     public static readonly DirectProperty<LuminaShell, bool> EffectiveIsShellChromeVisibleProperty = AvaloniaProperty.RegisterDirect<LuminaShell, bool>(nameof(EffectiveIsShellChromeVisible), (LuminaShell shell) => shell.EffectiveIsShellChromeVisible, null, unsetValue: false);
 
     public static readonly DirectProperty<LuminaShell, bool> EffectiveIsShellHeaderVisibleProperty = AvaloniaProperty.RegisterDirect<LuminaShell, bool>(nameof(EffectiveIsShellHeaderVisible), (LuminaShell shell) => shell.EffectiveIsShellHeaderVisible, null, unsetValue: false);
-
-    public static readonly DirectProperty<LuminaShell, bool> EffectiveIsHeaderlessMenuToggleVisibleProperty = AvaloniaProperty.RegisterDirect<LuminaShell, bool>(nameof(EffectiveIsHeaderlessMenuToggleVisible), (LuminaShell shell) => shell.EffectiveIsHeaderlessMenuToggleVisible, null, unsetValue: false);
 
     public static readonly DirectProperty<LuminaShell, bool> EffectiveIsPaneToggleVisibleProperty = AvaloniaProperty.RegisterDirect<LuminaShell, bool>(nameof(EffectiveIsPaneToggleVisible), (LuminaShell shell) => shell.EffectiveIsPaneToggleVisible, null, unsetValue: false);
 
@@ -347,18 +343,6 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         private set
         {
             SetAndRaise(EffectiveIsMenuOpenProperty, ref _effectiveIsMenuOpen, value);
-        }
-    }
-
-    public bool EffectiveIsHeaderlessMenuToggleVisible
-    {
-        get
-        {
-            return _effectiveIsHeaderlessMenuToggleVisible;
-        }
-        private set
-        {
-            SetAndRaise(EffectiveIsHeaderlessMenuToggleVisibleProperty, ref _effectiveIsHeaderlessMenuToggleVisible, value);
         }
     }
 
@@ -1395,8 +1379,9 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         LuminaShellPaneDisplayMode paneDisplayMode = isShellChromeEffectiveVisible ? ResolveEffectivePaneDisplayMode() : LuminaShellPaneDisplayMode.Left;
         bool isSmallScreen = Bounds.Width < SmallScreenBreakpoint;
         bool isLeftCompact = paneDisplayMode == LuminaShellPaneDisplayMode.LeftCompact;
+        bool isMenuCompact = isShellChromeEffectiveVisible && !isSmallScreen && isLeftCompact && !IsMenuOpen;
         bool hasMenu = HasHeaderValue(MenuHeader) || HasHeaderValue(MenuContent) || HasHeaderValue(MenuFooter);
-        bool isPaneToggleVisible = isShellChromeEffectiveVisible && hasMenu && isSmallScreen;
+        bool isPaneToggleVisible = isShellChromeEffectiveVisible && hasMenu;
         bool isShellHeaderAllowed = isShellChromeEffectiveVisible && IsShellHeaderVisible && (_activePage?.ShowShellHeader ?? true);
         object? effectiveHeaderTitle = NormalizeHeaderValue(Title) ?? NormalizeHeaderValue(ActivePageTitle);
         bool hasHeaderContent = HasHeaderValue(effectiveHeaderTitle) || HasHeaderValue(ActivePageSubtitle) || HasHeaderValue(ActivePageActions);
@@ -1404,15 +1389,13 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         LuminaTopView? topMenuDrawerHost = isShellChromeEffectiveVisible && isSmallScreen ? FindOuterTopViewHost() : null;
         bool useTopMenuDrawer = topMenuDrawerHost != null;
         SetTopMenuDrawerMode(useTopMenuDrawer);
-        bool isMenuEffectiveOpen = isShellChromeEffectiveVisible && !useTopMenuDrawer && ShouldShowSplitViewMenu(isSmallScreen, paneDisplayMode);
-        bool isMenuCompact = isShellChromeEffectiveVisible && !isSmallScreen && isLeftCompact && !IsMenuOpen;
+        bool isMenuEffectiveOpen = isShellChromeEffectiveVisible && !useTopMenuDrawer && IsMenuOpen;
         EffectiveIsShellChromeVisible = isShellChromeEffectiveVisible;
         EffectiveIsShellHeaderVisible = isShellHeaderEffectiveVisible;
         EffectiveIsMenuOpen = isMenuEffectiveOpen;
         EffectiveIsMenuCompact = isMenuCompact;
         EffectivePaneDisplayMode = paneDisplayMode;
         EffectiveIsPaneToggleVisible = isPaneToggleVisible && isShellHeaderEffectiveVisible;
-        EffectiveIsHeaderlessMenuToggleVisible = isPaneToggleVisible && !isShellHeaderEffectiveVisible;
         EffectiveHeaderTitle = effectiveHeaderTitle;
         EffectivePageContentPadding = ResolveEffectivePageContentPadding(isShellChromeEffectiveVisible, isShellHeaderEffectiveVisible);
         EffectiveOpenPaneLength = isShellChromeEffectiveVisible ? OpenPaneLength : 0.0;
@@ -1451,16 +1434,6 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         }
 
         return CanCompactMenu && IsCompactMenuEnabled ? LuminaShellPaneDisplayMode.LeftCompact : LuminaShellPaneDisplayMode.Left;
-    }
-
-    private bool ShouldShowSplitViewMenu(bool isSmallScreen, LuminaShellPaneDisplayMode paneDisplayMode)
-    {
-        if (isSmallScreen)
-        {
-            return IsMenuOpen;
-        }
-
-        return paneDisplayMode == LuminaShellPaneDisplayMode.Left || IsMenuOpen;
     }
 
     private LuminaShellPaneDisplayMode CoercePaneDisplayMode(LuminaShellPaneDisplayMode paneDisplayMode)

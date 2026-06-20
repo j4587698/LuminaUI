@@ -35,6 +35,8 @@
   <data name="Lumina.Cascader.ChooseOption" xml:space="preserve"><value>请选择一项</value></data>
   <data name="Lumina.Cascader.CurrentFormat" xml:space="preserve"><value>当前：{0}</value></data>
   <data name="Lumina.Cascader.SelectCurrentFormat" xml:space="preserve"><value>选择 {0}</value></data>
+  <data name="Lumina.Shell.ToggleCompactMode" xml:space="preserve"><value>切换紧凑模式</value></data>
+  <data name="Lumina.Shell.ToggleNavigationPane" xml:space="preserve"><value>切换导航窗格</value></data>
   <data name="Lumina.Common.Apply" xml:space="preserve"><value>应用</value></data>
   <data name="Lumina.Common.Cancel" xml:space="preserve"><value>取消</value></data>
   <data name="Lumina.Common.Clear" xml:space="preserve"><value>清除</value></data>

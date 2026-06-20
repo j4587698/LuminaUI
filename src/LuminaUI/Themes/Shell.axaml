@@ -1,5 +1,7 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="using:LuminaUI.Converters"
+                    xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
                     xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
 
     <Thickness x:Key="LuminaShellTopMenuDrawerBorderThickness">0,0,1,0</Thickness>
@@ -20,7 +22,6 @@
     <x:Double x:Key="LuminaShellCompactContentHeaderHeight">40</x:Double>
     <Thickness x:Key="LuminaShellCompactContentHeaderPadding">4,0,12,0</Thickness>
     <x:Double x:Key="LuminaShellCompactContentHeaderFontSize">18</x:Double>
-    <Thickness x:Key="LuminaShellHeaderlessMenuToggleMargin">16</Thickness>
     <Thickness x:Key="LuminaShellTopMenuDrawerHeaderMargin">16,10,16,8</Thickness>
     <x:Double x:Key="LuminaShellTopMenuDrawerHeaderHeight">44</x:Double>
     <Thickness x:Key="LuminaShellTopMenuDrawerScrollMargin">16,0,16,12</Thickness>
@@ -92,7 +93,7 @@
                                                 HorizontalAlignment="Right"
                                                 VerticalAlignment="Bottom"
                                                 Command="{Binding $parent[lumina:LuminaShell].ToggleCompactModeCommand}"
-                                                ToolTip.Tip="Toggle compact mode">
+                                                ToolTip.Tip="{l10n:Loc Lumina.Shell.ToggleCompactMode}">
                                             <PathIcon Name="PART_MenuCompactToggleIcon"
                                                       Width="{DynamicResource LuminaShellMenuCompactToggleIconSize}"
                                                       Height="{DynamicResource LuminaShellMenuCompactToggleIconSize}"
@@ -130,20 +131,29 @@
                                                                           IsVisible="{TemplateBinding EffectiveIsPaneToggleVisible}"
                                                                           IsOpen="{TemplateBinding IsMenuOpen}"
                                                                           Command="{Binding ToggleMenuCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                                                          ToolTip.Tip="Toggle navigation pane" />
+                                                                          ToolTip.Tip="{l10n:Loc Lumina.Shell.ToggleNavigationPane}" />
 
                                             <StackPanel Grid.Column="1"
                                                         Margin="8,0,0,0"
                                                         VerticalAlignment="Center">
+                                                <TextBlock Name="PART_ContentHeaderTitleText"
+                                                           Text="{TemplateBinding EffectiveHeaderTitle, Converter={x:Static converters:LuminaShellHeaderConverters.ToText}}"
+                                                           FontSize="{DynamicResource LuminaShellContentHeaderFontSize}"
+                                                           FontWeight="Bold"
+                                                           TextTrimming="CharacterEllipsis"
+                                                           IsVisible="{TemplateBinding EffectiveHeaderTitle, Converter={x:Static converters:LuminaShellHeaderConverters.IsText}}" />
                                                 <ContentPresenter Name="PART_ContentHeaderTitle"
                                                                   Content="{TemplateBinding EffectiveHeaderTitle}"
-                                                                  TextElement.FontSize="{DynamicResource LuminaShellContentHeaderFontSize}"
-                                                                  TextElement.FontWeight="Bold"
-                                                                  IsVisible="{TemplateBinding EffectiveHeaderTitle, Converter={x:Static ObjectConverters.IsNotNull}}" />
-                                                <ContentPresenter Content="{TemplateBinding ActivePageSubtitle}"
-                                                                  TextElement.FontSize="12"
-                                                                  TextElement.Foreground="{DynamicResource LuminaTextMutedBrush}"
-                                                                  IsVisible="{TemplateBinding ActivePageSubtitle, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                                                                  IsVisible="{TemplateBinding EffectiveHeaderTitle, Converter={x:Static converters:LuminaShellHeaderConverters.IsCustomContent}}" />
+                                                <TextBlock Name="PART_ContentHeaderSubtitleText"
+                                                           Text="{TemplateBinding ActivePageSubtitle, Converter={x:Static converters:LuminaShellHeaderConverters.ToText}}"
+                                                           FontSize="12"
+                                                           Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                                           TextTrimming="CharacterEllipsis"
+                                                           IsVisible="{TemplateBinding ActivePageSubtitle, Converter={x:Static converters:LuminaShellHeaderConverters.IsText}}" />
+                                                <ContentPresenter Name="PART_ContentHeaderSubtitle"
+                                                                  Content="{TemplateBinding ActivePageSubtitle}"
+                                                                  IsVisible="{TemplateBinding ActivePageSubtitle, Converter={x:Static converters:LuminaShellHeaderConverters.IsCustomContent}}" />
                                             </StackPanel>
 
                                             <ContentPresenter Grid.Column="2"
@@ -168,17 +178,6 @@
                             </Border>
                         </SplitView.Content>
                     </SplitView>
-
-                    <lumina:LuminaHamburgerButton Name="PART_HeaderlessMenuToggle"
-                                                  HorizontalAlignment="Left"
-                                                  VerticalAlignment="Top"
-                                                  Margin="{DynamicResource LuminaShellHeaderlessMenuToggleMargin}"
-                                                  ZIndex="900"
-                                                  Background="{DynamicResource LuminaSurfaceBrush}"
-                                                  BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
-                                                  IsVisible="{TemplateBinding EffectiveIsHeaderlessMenuToggleVisible}"
-                                                  IsOpen="{TemplateBinding IsMenuOpen}"
-                                                  Command="{Binding ToggleMenuCommand, RelativeSource={RelativeSource TemplatedParent}}" />
 
                     <!-- ============================================== -->
                     <!-- Dialog Overlay (遮罩层与弹窗容器)                  -->
@@ -324,6 +323,20 @@
             <Setter Property="Margin" Value="{DynamicResource LuminaShellMenuCompactScrollMargin}" />
         </Style>
 
+        <Style Selector="^ /template/ lumina|LuminaHamburgerButton#PART_ContentHeaderMenuToggle">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+
+        <Style Selector="^ /template/ lumina|LuminaHamburgerButton#PART_ContentHeaderMenuToggle:checked">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
+        </Style>
+
+        <Style Selector="^ /template/ lumina|LuminaHamburgerButton#PART_ContentHeaderMenuToggle:pointerover">
+            <Setter Property="Background" Value="{DynamicResource LuminaStateHoverBrush}" />
+        </Style>
+
         <Style Selector="^.WindowGlass">
             <Setter Property="Background" Value="{DynamicResource LuminaWindowGlassBackgroundBrush}" />
             <Setter Property="PaneBackground" Value="{DynamicResource LuminaWindowGlassPaneBrush}" />
@@ -344,8 +357,8 @@
             <Setter Property="Height" Value="{DynamicResource LuminaShellCompactContentHeaderHeight}" />
         </Style>
 
-        <Style Selector="^:small-screen /template/ ContentPresenter#PART_ContentHeaderTitle">
-            <Setter Property="TextElement.FontSize" Value="{DynamicResource LuminaShellCompactContentHeaderFontSize}" />
+        <Style Selector="^:small-screen /template/ TextBlock#PART_ContentHeaderTitleText">
+            <Setter Property="FontSize" Value="{DynamicResource LuminaShellCompactContentHeaderFontSize}" />
         </Style>
 
         <Style Selector="^:small-screen /template/ Border#PART_MenuCompactToggleHost">
