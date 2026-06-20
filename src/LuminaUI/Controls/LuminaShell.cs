@@ -99,8 +99,6 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private bool _effectiveIsShellHeaderVisible = true;
 
-    private bool _effectiveIsHeaderlessMenuToggleVisible;
-
     private bool _effectiveIsPaneToggleVisible;
 
     private bool _effectiveIsMenuCompact;
@@ -150,8 +148,6 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     public static readonly DirectProperty<LuminaShell, bool> EffectiveIsShellChromeVisibleProperty = AvaloniaProperty.RegisterDirect<LuminaShell, bool>(nameof(EffectiveIsShellChromeVisible), (LuminaShell shell) => shell.EffectiveIsShellChromeVisible, null, unsetValue: false);
 
     public static readonly DirectProperty<LuminaShell, bool> EffectiveIsShellHeaderVisibleProperty = AvaloniaProperty.RegisterDirect<LuminaShell, bool>(nameof(EffectiveIsShellHeaderVisible), (LuminaShell shell) => shell.EffectiveIsShellHeaderVisible, null, unsetValue: false);
-
-    public static readonly DirectProperty<LuminaShell, bool> EffectiveIsHeaderlessMenuToggleVisibleProperty = AvaloniaProperty.RegisterDirect<LuminaShell, bool>(nameof(EffectiveIsHeaderlessMenuToggleVisible), (LuminaShell shell) => shell.EffectiveIsHeaderlessMenuToggleVisible, null, unsetValue: false);
 
     public static readonly DirectProperty<LuminaShell, bool> EffectiveIsPaneToggleVisibleProperty = AvaloniaProperty.RegisterDirect<LuminaShell, bool>(nameof(EffectiveIsPaneToggleVisible), (LuminaShell shell) => shell.EffectiveIsPaneToggleVisible, null, unsetValue: false);
 
@@ -347,18 +343,6 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         private set
         {
             SetAndRaise(EffectiveIsMenuOpenProperty, ref _effectiveIsMenuOpen, value);
-        }
-    }
-
-    public bool EffectiveIsHeaderlessMenuToggleVisible
-    {
-        get
-        {
-            return _effectiveIsHeaderlessMenuToggleVisible;
-        }
-        private set
-        {
-            SetAndRaise(EffectiveIsHeaderlessMenuToggleVisibleProperty, ref _effectiveIsHeaderlessMenuToggleVisible, value);
         }
     }
 
@@ -1412,7 +1396,6 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         EffectiveIsMenuCompact = isMenuCompact;
         EffectivePaneDisplayMode = paneDisplayMode;
         EffectiveIsPaneToggleVisible = isPaneToggleVisible && isShellHeaderEffectiveVisible;
-        EffectiveIsHeaderlessMenuToggleVisible = isPaneToggleVisible && !isShellHeaderEffectiveVisible;
         EffectiveHeaderTitle = effectiveHeaderTitle;
         EffectivePageContentPadding = ResolveEffectivePageContentPadding(isShellChromeEffectiveVisible, isShellHeaderEffectiveVisible);
         EffectiveOpenPaneLength = isShellChromeEffectiveVisible ? OpenPaneLength : 0.0;

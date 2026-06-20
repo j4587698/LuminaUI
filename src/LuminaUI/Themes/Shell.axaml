@@ -22,7 +22,6 @@
     <x:Double x:Key="LuminaShellCompactContentHeaderHeight">40</x:Double>
     <Thickness x:Key="LuminaShellCompactContentHeaderPadding">4,0,12,0</Thickness>
     <x:Double x:Key="LuminaShellCompactContentHeaderFontSize">18</x:Double>
-    <Thickness x:Key="LuminaShellHeaderlessMenuToggleMargin">16</Thickness>
     <Thickness x:Key="LuminaShellTopMenuDrawerHeaderMargin">16,10,16,8</Thickness>
     <x:Double x:Key="LuminaShellTopMenuDrawerHeaderHeight">44</x:Double>
     <Thickness x:Key="LuminaShellTopMenuDrawerScrollMargin">16,0,16,12</Thickness>
@@ -179,17 +178,6 @@
                             </Border>
                         </SplitView.Content>
                     </SplitView>
-
-                    <lumina:LuminaHamburgerButton Name="PART_HeaderlessMenuToggle"
-                                                  HorizontalAlignment="Left"
-                                                  VerticalAlignment="Top"
-                                                  Margin="{DynamicResource LuminaShellHeaderlessMenuToggleMargin}"
-                                                  ZIndex="900"
-                                                  Background="{DynamicResource LuminaSurfaceBrush}"
-                                                  BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
-                                                  IsVisible="{TemplateBinding EffectiveIsHeaderlessMenuToggleVisible}"
-                                                  IsOpen="{TemplateBinding IsMenuOpen}"
-                                                  Command="{Binding ToggleMenuCommand, RelativeSource={RelativeSource TemplatedParent}}" />
 
                     <!-- ============================================== -->
                     <!-- Dialog Overlay (遮罩层与弹窗容器)                  -->
