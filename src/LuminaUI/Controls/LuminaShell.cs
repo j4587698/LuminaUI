@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -11,6 +12,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.LogicalTree;
 using Avalonia.Media;
 using Avalonia.VisualTree;
 using LuminaUI.Extensions;
@@ -99,7 +101,13 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private bool _effectiveIsHeaderlessMenuToggleVisible;
 
+    private bool _effectiveIsPaneToggleVisible;
+
     private bool _effectiveIsMenuCompact;
+
+    private LuminaShellPaneDisplayMode _effectivePaneDisplayMode = LuminaShellPaneDisplayMode.Left;
+
+    private object? _effectiveHeaderTitle;
 
     private double _effectiveOpenPaneLength = 220.0;
 
@@ -115,6 +123,8 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private Thickness _overlaySafeAreaPadding;
 
+    private Thickness _effectivePageContentPadding;
+
     public static readonly StyledProperty<bool> IsMenuOpenProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(IsMenuOpen), defaultValue: true);
 
     public static readonly StyledProperty<bool> IsShellChromeVisibleProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(IsShellChromeVisible), defaultValue: true);
@@ -127,6 +137,12 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     public static readonly StyledProperty<bool> IsMenuAutoResponsiveProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(IsMenuAutoResponsive), defaultValue: true);
 
+    public static readonly StyledProperty<LuminaShellPaneDisplayMode> PaneDisplayModeProperty = AvaloniaProperty.Register<LuminaShell, LuminaShellPaneDisplayMode>(nameof(PaneDisplayMode), LuminaShellPaneDisplayMode.Auto);
+
+    public static readonly StyledProperty<Thickness> PageContentPaddingProperty = AvaloniaProperty.Register<LuminaShell, Thickness>(nameof(PageContentPadding));
+
+    public static readonly StyledProperty<Thickness?> HeaderedPageContentPaddingProperty = AvaloniaProperty.Register<LuminaShell, Thickness?>(nameof(HeaderedPageContentPadding));
+
     public static readonly AttachedProperty<bool> IsMenuCompactProperty = AvaloniaProperty.RegisterAttached<LuminaShell, Control, bool>("IsMenuCompact", defaultValue: false, inherits: true);
 
     public static readonly DirectProperty<LuminaShell, bool> EffectiveIsMenuOpenProperty = AvaloniaProperty.RegisterDirect<LuminaShell, bool>(nameof(EffectiveIsMenuOpen), (LuminaShell shell) => shell.EffectiveIsMenuOpen, null, unsetValue: false);
@@ -137,7 +153,13 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     public static readonly DirectProperty<LuminaShell, bool> EffectiveIsHeaderlessMenuToggleVisibleProperty = AvaloniaProperty.RegisterDirect<LuminaShell, bool>(nameof(EffectiveIsHeaderlessMenuToggleVisible), (LuminaShell shell) => shell.EffectiveIsHeaderlessMenuToggleVisible, null, unsetValue: false);
 
+    public static readonly DirectProperty<LuminaShell, bool> EffectiveIsPaneToggleVisibleProperty = AvaloniaProperty.RegisterDirect<LuminaShell, bool>(nameof(EffectiveIsPaneToggleVisible), (LuminaShell shell) => shell.EffectiveIsPaneToggleVisible, null, unsetValue: false);
+
     public static readonly DirectProperty<LuminaShell, bool> EffectiveIsMenuCompactProperty = AvaloniaProperty.RegisterDirect<LuminaShell, bool>(nameof(EffectiveIsMenuCompact), (LuminaShell shell) => shell.EffectiveIsMenuCompact, null, unsetValue: false);
+
+    public static readonly DirectProperty<LuminaShell, LuminaShellPaneDisplayMode> EffectivePaneDisplayModeProperty = AvaloniaProperty.RegisterDirect<LuminaShell, LuminaShellPaneDisplayMode>(nameof(EffectivePaneDisplayMode), (LuminaShell shell) => shell.EffectivePaneDisplayMode, null, LuminaShellPaneDisplayMode.Left);
+
+    public static readonly DirectProperty<LuminaShell, Thickness> EffectivePageContentPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaShell, Thickness>(nameof(EffectivePageContentPadding), shell => shell.EffectivePageContentPadding);
 
     public static readonly StyledProperty<string?> ShellKeyProperty = AvaloniaProperty.Register<LuminaShell, string?>(nameof(ShellKey));
 
@@ -166,6 +188,8 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     public static readonly StyledProperty<object?> ActivePageSubtitleProperty = AvaloniaProperty.Register<LuminaShell, object?>(nameof(ActivePageSubtitle));
 
     public static readonly StyledProperty<object?> ActivePageActionsProperty = AvaloniaProperty.Register<LuminaShell, object?>(nameof(ActivePageActions));
+
+    public static readonly DirectProperty<LuminaShell, object?> EffectiveHeaderTitleProperty = AvaloniaProperty.RegisterDirect<LuminaShell, object?>(nameof(EffectiveHeaderTitle), shell => shell.EffectiveHeaderTitle);
 
     public static readonly StyledProperty<bool> AutoApplyPageMetadataProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(AutoApplyPageMetadata), defaultValue: true);
 
@@ -272,6 +296,24 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         set => SetValue(IsMenuAutoResponsiveProperty, value);
     }
 
+    public LuminaShellPaneDisplayMode PaneDisplayMode
+    {
+        get => GetValue(PaneDisplayModeProperty);
+        set => SetValue(PaneDisplayModeProperty, value);
+    }
+
+    public Thickness PageContentPadding
+    {
+        get => GetValue(PageContentPaddingProperty);
+        set => SetValue(PageContentPaddingProperty, value);
+    }
+
+    public Thickness? HeaderedPageContentPadding
+    {
+        get => GetValue(HeaderedPageContentPaddingProperty);
+        set => SetValue(HeaderedPageContentPaddingProperty, value);
+    }
+
     public bool EffectiveIsShellChromeVisible
     {
         get
@@ -320,6 +362,18 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         }
     }
 
+    public bool EffectiveIsPaneToggleVisible
+    {
+        get
+        {
+            return _effectiveIsPaneToggleVisible;
+        }
+        private set
+        {
+            SetAndRaise(EffectiveIsPaneToggleVisibleProperty, ref _effectiveIsPaneToggleVisible, value);
+        }
+    }
+
     public bool EffectiveIsMenuCompact
     {
         get
@@ -329,6 +383,30 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         private set
         {
             SetAndRaise(EffectiveIsMenuCompactProperty, ref _effectiveIsMenuCompact, value);
+        }
+    }
+
+    public LuminaShellPaneDisplayMode EffectivePaneDisplayMode
+    {
+        get
+        {
+            return _effectivePaneDisplayMode;
+        }
+        private set
+        {
+            SetAndRaise(EffectivePaneDisplayModeProperty, ref _effectivePaneDisplayMode, value);
+        }
+    }
+
+    public Thickness EffectivePageContentPadding
+    {
+        get
+        {
+            return _effectivePageContentPadding;
+        }
+        private set
+        {
+            SetAndRaise(EffectivePageContentPaddingProperty, ref _effectivePageContentPadding, value);
         }
     }
 
@@ -432,6 +510,18 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     {
         get => GetValue(ActivePageActionsProperty);
         set => SetValue(ActivePageActionsProperty, value);
+    }
+
+    public object? EffectiveHeaderTitle
+    {
+        get
+        {
+            return _effectiveHeaderTitle;
+        }
+        private set
+        {
+            SetAndRaise(EffectiveHeaderTitleProperty, ref _effectiveHeaderTitle, value);
+        }
     }
 
     public bool AutoApplyPageMetadata
@@ -936,7 +1026,8 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         {
             _isNavigating = false;
         }
-        if (closeMenuOnNavigate && Bounds.Width < SmallScreenBreakpoint)
+        ApplyActivePageMetadata();
+        if (closeMenuOnNavigate && ShouldCloseMenuOnNavigate())
         {
             IsMenuOpen = false;
         }
@@ -1005,6 +1096,10 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
                     SetActiveNavigationKey(oldKey);
                 }
             }
+            else
+            {
+                ApplyActivePageMetadata();
+            }
         }
         else if (change.Property == AutoApplyPageMetadataProperty)
         {
@@ -1014,13 +1109,18 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         {
             ApplyActivePageMetadata();
         }
-        else if (change.Property == IsMenuOpenProperty || change.Property == IsShellChromeVisibleProperty || change.Property == IsShellHeaderVisibleProperty || change.Property == IsCompactMenuEnabledProperty || change.Property == CanCompactMenuProperty || change.Property == OpenPaneLengthProperty || change.Property == CompactPaneLengthProperty)
+        else if (change.Property == TitleProperty || change.Property == ActivePageTitleProperty || change.Property == ActivePageSubtitleProperty || change.Property == ActivePageActionsProperty)
+        {
+            UpdateEffectiveShellChrome();
+        }
+        else if (change.Property == IsMenuOpenProperty || change.Property == IsShellChromeVisibleProperty || change.Property == IsShellHeaderVisibleProperty || change.Property == IsCompactMenuEnabledProperty || change.Property == CanCompactMenuProperty || change.Property == IsMenuAutoResponsiveProperty || change.Property == PaneDisplayModeProperty || change.Property == PageContentPaddingProperty || change.Property == HeaderedPageContentPaddingProperty || change.Property == OpenPaneLengthProperty || change.Property == CompactPaneLengthProperty)
         {
             UpdateEffectiveShellChrome();
         }
         else if (change.Property == MenuHeaderProperty || change.Property == MenuContentProperty || change.Property == MenuFooterProperty)
         {
             UpdateEffectiveMenuSlots();
+            UpdateEffectiveShellChrome();
         }
         else if (change.Property == SafeAreaModeProperty || change.Property == UseSafeAreaForOverlaysProperty || change.Property == LuminaInsets.SafeAreaPaddingProperty)
         {
@@ -1279,22 +1379,12 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     {
         base.OnSizeChanged(e);
         _overlayInputPaneAvoidance.UpdateOverlayState();
-        PseudoClasses.Set(":small-screen", e.NewSize.Width < SmallScreenBreakpoint);
-        if (!EffectiveIsShellChromeVisible || !IsMenuAutoResponsive)
+        bool isSmallScreen = e.NewSize.Width < SmallScreenBreakpoint;
+        bool wasSmallScreen = e.PreviousSize.Width < SmallScreenBreakpoint && e.PreviousSize.Width > 0.0;
+        PseudoClasses.Set(":small-screen", isSmallScreen);
+        if (IsMenuAutoResponsive && (e.PreviousSize.Width <= 0.0 || wasSmallScreen != isSmallScreen))
         {
-            UpdateEffectiveShellChrome();
-            return;
-        }
-        if (e.NewSize.Width < SmallScreenBreakpoint)
-        {
-            if (e.PreviousSize.Width >= SmallScreenBreakpoint || e.PreviousSize.Width <= 0.0)
-            {
-                IsMenuOpen = false;
-            }
-        }
-        else if (e.PreviousSize.Width < SmallScreenBreakpoint || e.PreviousSize.Width <= 0.0)
-        {
-            IsMenuOpen = !(CanCompactMenu && IsCompactMenuEnabled);
+            IsMenuOpen = isSmallScreen ? false : ShouldKeepMenuOpenOutsideSmallScreen();
         }
         UpdateEffectiveShellChrome();
     }
@@ -1302,24 +1392,95 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     private void UpdateEffectiveShellChrome()
     {
         bool isShellChromeEffectiveVisible = IsShellChromeVisible && (_activePage?.ShowShellChrome ?? true);
-        bool isShellHeaderEffectiveVisible = isShellChromeEffectiveVisible && IsShellHeaderVisible && (_activePage?.ShowShellHeader ?? true);
-        bool canUseCompactMenu = CanCompactMenu && Bounds.Width >= SmallScreenBreakpoint;
-        LuminaTopView? topMenuDrawerHost = isShellChromeEffectiveVisible && Bounds.Width < SmallScreenBreakpoint ? FindOuterTopViewHost() : null;
+        LuminaShellPaneDisplayMode paneDisplayMode = isShellChromeEffectiveVisible ? ResolveEffectivePaneDisplayMode() : LuminaShellPaneDisplayMode.Left;
+        bool isSmallScreen = Bounds.Width < SmallScreenBreakpoint;
+        bool isLeftCompact = paneDisplayMode == LuminaShellPaneDisplayMode.LeftCompact;
+        bool hasMenu = HasHeaderValue(MenuHeader) || HasHeaderValue(MenuContent) || HasHeaderValue(MenuFooter);
+        bool isPaneToggleVisible = isShellChromeEffectiveVisible && hasMenu && isSmallScreen;
+        bool isShellHeaderAllowed = isShellChromeEffectiveVisible && IsShellHeaderVisible && (_activePage?.ShowShellHeader ?? true);
+        object? effectiveHeaderTitle = NormalizeHeaderValue(Title) ?? NormalizeHeaderValue(ActivePageTitle);
+        bool hasHeaderContent = HasHeaderValue(effectiveHeaderTitle) || HasHeaderValue(ActivePageSubtitle) || HasHeaderValue(ActivePageActions);
+        bool isShellHeaderEffectiveVisible = isShellHeaderAllowed && (hasHeaderContent || isPaneToggleVisible);
+        LuminaTopView? topMenuDrawerHost = isShellChromeEffectiveVisible && isSmallScreen ? FindOuterTopViewHost() : null;
         bool useTopMenuDrawer = topMenuDrawerHost != null;
         SetTopMenuDrawerMode(useTopMenuDrawer);
-        bool isMenuEffectiveOpen = isShellChromeEffectiveVisible && IsMenuOpen && !useTopMenuDrawer;
-        bool isMenuCompact = isShellChromeEffectiveVisible && canUseCompactMenu && IsCompactMenuEnabled && !IsMenuOpen;
+        bool isMenuEffectiveOpen = isShellChromeEffectiveVisible && !useTopMenuDrawer && ShouldShowSplitViewMenu(isSmallScreen, paneDisplayMode);
+        bool isMenuCompact = isShellChromeEffectiveVisible && !isSmallScreen && isLeftCompact && !IsMenuOpen;
         EffectiveIsShellChromeVisible = isShellChromeEffectiveVisible;
         EffectiveIsShellHeaderVisible = isShellHeaderEffectiveVisible;
         EffectiveIsMenuOpen = isMenuEffectiveOpen;
         EffectiveIsMenuCompact = isMenuCompact;
-        EffectiveIsHeaderlessMenuToggleVisible = isShellChromeEffectiveVisible && !isShellHeaderEffectiveVisible && !isMenuEffectiveOpen && !isMenuCompact;
+        EffectivePaneDisplayMode = paneDisplayMode;
+        EffectiveIsPaneToggleVisible = isPaneToggleVisible && isShellHeaderEffectiveVisible;
+        EffectiveIsHeaderlessMenuToggleVisible = isPaneToggleVisible && !isShellHeaderEffectiveVisible;
+        EffectiveHeaderTitle = effectiveHeaderTitle;
+        EffectivePageContentPadding = ResolveEffectivePageContentPadding(isShellChromeEffectiveVisible, isShellHeaderEffectiveVisible);
         EffectiveOpenPaneLength = isShellChromeEffectiveVisible ? OpenPaneLength : 0.0;
         EffectiveCompactPaneLength = isShellChromeEffectiveVisible ? CompactPaneLength : 0.0;
         PseudoClasses.Set(":chromeless", !isShellChromeEffectiveVisible);
         PseudoClasses.Set(":headerless", !isShellHeaderEffectiveVisible);
         PseudoClasses.Set(":menucompact", isMenuCompact);
+        PseudoClasses.Set(":pane-left", paneDisplayMode == LuminaShellPaneDisplayMode.Left);
+        PseudoClasses.Set(":pane-left-compact", isLeftCompact);
         SyncTopMenuDrawer(topMenuDrawerHost);
+    }
+
+    private Thickness ResolveEffectivePageContentPadding(bool isShellChromeEffectiveVisible, bool isShellHeaderEffectiveVisible)
+    {
+        if (!isShellChromeEffectiveVisible)
+        {
+            return default;
+        }
+
+        return isShellHeaderEffectiveVisible && HeaderedPageContentPadding is { } headeredPadding
+            ? headeredPadding
+            : PageContentPadding;
+    }
+
+    private LuminaShellPaneDisplayMode ResolveEffectivePaneDisplayMode()
+    {
+        LuminaShellPaneDisplayMode requestedMode = PaneDisplayMode;
+        if (requestedMode != LuminaShellPaneDisplayMode.Auto)
+        {
+            return CoercePaneDisplayMode(requestedMode);
+        }
+
+        if (!IsMenuAutoResponsive)
+        {
+            return CanCompactMenu && IsCompactMenuEnabled ? LuminaShellPaneDisplayMode.LeftCompact : LuminaShellPaneDisplayMode.Left;
+        }
+
+        return CanCompactMenu && IsCompactMenuEnabled ? LuminaShellPaneDisplayMode.LeftCompact : LuminaShellPaneDisplayMode.Left;
+    }
+
+    private bool ShouldShowSplitViewMenu(bool isSmallScreen, LuminaShellPaneDisplayMode paneDisplayMode)
+    {
+        if (isSmallScreen)
+        {
+            return IsMenuOpen;
+        }
+
+        return paneDisplayMode == LuminaShellPaneDisplayMode.Left || IsMenuOpen;
+    }
+
+    private LuminaShellPaneDisplayMode CoercePaneDisplayMode(LuminaShellPaneDisplayMode paneDisplayMode)
+    {
+        return paneDisplayMode == LuminaShellPaneDisplayMode.LeftCompact && !CanCompactMenu ? LuminaShellPaneDisplayMode.Left : paneDisplayMode;
+    }
+
+    private bool ShouldKeepMenuOpenOutsideSmallScreen()
+    {
+        return ResolveEffectivePaneDisplayMode() == LuminaShellPaneDisplayMode.Left;
+    }
+
+    private static object? NormalizeHeaderValue(object? value)
+    {
+        return HasHeaderValue(value) ? value : null;
+    }
+
+    private static bool HasHeaderValue(object? value)
+    {
+        return value != null && (value is not string text || !string.IsNullOrWhiteSpace(text));
     }
 
     private void SetTopMenuDrawerMode(bool value)
@@ -1441,8 +1602,8 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         Border header = new Border
         {
             Name = "PART_TopMenuDrawerHeader",
-            Margin = LuminaPickerResources.Thickness("LuminaShellMenuHeaderMargin", new Thickness(16)),
-            Height = LuminaPickerResources.Double("LuminaShellMenuHeaderHeight", 48),
+            Margin = LuminaPickerResources.Thickness("LuminaShellTopMenuDrawerHeaderMargin", new Thickness(16, 10, 16, 8)),
+            Height = LuminaPickerResources.Double("LuminaShellTopMenuDrawerHeaderHeight", 44),
             ClipToBounds = true,
             Child = headerPresenter
         };
@@ -1454,7 +1615,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         ScrollViewer scrollViewer = new ScrollViewer
         {
             Name = "PART_TopMenuDrawerScrollViewer",
-            Margin = LuminaPickerResources.Thickness("LuminaShellMenuScrollMargin", new Thickness(16, 0, 16, 16)),
+            Margin = LuminaPickerResources.Thickness("LuminaShellTopMenuDrawerScrollMargin", new Thickness(16, 0, 16, 12)),
             BringIntoViewOnFocusChange = false,
             HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
             VerticalScrollBarVisibility = ScrollBarVisibility.Hidden,
@@ -1468,7 +1629,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         Border footer = new Border
         {
             Name = "PART_TopMenuDrawerFooter",
-            Margin = LuminaPickerResources.Thickness("LuminaShellMenuFooterMargin", new Thickness(16)),
+            Margin = LuminaPickerResources.Thickness("LuminaShellTopMenuDrawerFooterMargin", new Thickness(16, 12, 16, 12)),
             Padding = LuminaPickerResources.Thickness("LuminaShellMenuFooterPadding", new Thickness(0, 16, 0, 0)),
             ClipToBounds = false,
             Child = footerPresenter
@@ -1660,7 +1821,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
             ApplyDefaultPageMetadata();
             return;
         }
-        ActivePageTitle = _activePage.ShellTitle ?? _activePage.Header ?? DefaultPageTitle;
+        ActivePageTitle = _activePage.ShellTitle ?? _activePage.Header ?? ResolveNavigationItemHeader(ActiveNavigationKey) ?? DefaultPageTitle;
         ActivePageSubtitle = _activePage.ShellSubtitle ?? DefaultPageSubtitle;
         ActivePageActions = _activePage.ShellActions ?? DefaultPageActions;
         UpdateEffectiveShellChrome();
@@ -1668,7 +1829,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         {
             SetActiveNavigationKey(_activePage.NavigationKey);
         }
-        if (EffectiveIsShellChromeVisible && _activePage.CloseShellMenuOnNavigate && Bounds.Width < SmallScreenBreakpoint)
+        if (EffectiveIsShellChromeVisible && _activePage.CloseShellMenuOnNavigate && ShouldCloseMenuOnNavigate())
         {
             IsMenuOpen = false;
         }
@@ -1676,10 +1837,109 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private void ApplyDefaultPageMetadata()
     {
-        ActivePageTitle = DefaultPageTitle;
+        ActivePageTitle = ResolveNavigationItemHeader(ActiveNavigationKey) ?? DefaultPageTitle;
         ActivePageSubtitle = DefaultPageSubtitle;
         ActivePageActions = DefaultPageActions;
         UpdateEffectiveShellChrome();
+    }
+
+    private bool ShouldCloseMenuOnNavigate()
+    {
+        return Bounds.Width < SmallScreenBreakpoint;
+    }
+
+    private object? ResolveNavigationItemHeader(string? navigationKey)
+    {
+        if (string.IsNullOrWhiteSpace(navigationKey))
+        {
+            return null;
+        }
+
+        if (TryFindNavigationItem(MenuContent, navigationKey, out LuminaNavigationItem? item) && item != null)
+        {
+            return NormalizeHeaderValue(item.Header);
+        }
+
+        return null;
+    }
+
+    private static bool TryFindNavigationItem(object? source, string navigationKey, out LuminaNavigationItem? item)
+    {
+        item = null;
+        if (source is LuminaNavigationItem navigationItem)
+        {
+            if (string.Equals(GetNavigationItemKey(navigationItem), navigationKey, StringComparison.Ordinal))
+            {
+                item = navigationItem;
+                return true;
+            }
+
+            return TryFindNavigationItemInItems(navigationItem, navigationKey, out item);
+        }
+
+        if (source is ItemsControl itemsControl && TryFindNavigationItemInItems(itemsControl, navigationKey, out item))
+        {
+            return true;
+        }
+
+        if (source is Control control)
+        {
+            foreach (LuminaNavigationItem descendant in control.GetLogicalDescendants().OfType<LuminaNavigationItem>())
+            {
+                if (string.Equals(GetNavigationItemKey(descendant), navigationKey, StringComparison.Ordinal))
+                {
+                    item = descendant;
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private static bool TryFindNavigationItemInItems(ItemsControl owner, string navigationKey, out LuminaNavigationItem? item)
+    {
+        foreach (object? candidate in EnumerateNavigationSources(owner))
+        {
+            if (TryFindNavigationItem(candidate, navigationKey, out item))
+            {
+                return true;
+            }
+        }
+
+        item = null;
+        return false;
+    }
+
+    private static IEnumerable<object?> EnumerateNavigationSources(ItemsControl owner)
+    {
+        foreach (object? item in EnumerateItems(owner.Items))
+        {
+            yield return item;
+        }
+
+        if (owner.ItemsSource == null)
+        {
+            yield break;
+        }
+
+        foreach (object? item in EnumerateItems(owner.ItemsSource))
+        {
+            yield return item;
+        }
+    }
+
+    private static IEnumerable<object?> EnumerateItems(IEnumerable source)
+    {
+        foreach (object? item in source)
+        {
+            yield return item;
+        }
+    }
+
+    private static string? GetNavigationItemKey(LuminaNavigationItem item)
+    {
+        return string.IsNullOrWhiteSpace(item.NavigationKey) ? item.Name : item.NavigationKey;
     }
 
     private Control GetRouteContent(string navigationKey, Func<Control> factory)

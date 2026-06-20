@@ -12,10 +12,19 @@
     <Thickness x:Key="LuminaShellMenuCompactToggleHostMargin">16,0,16,16</Thickness>
     <x:Double x:Key="LuminaShellMenuCompactToggleSize">36</x:Double>
     <x:Double x:Key="LuminaShellMenuCompactToggleIconSize">14</x:Double>
+    <Thickness x:Key="LuminaShellPageContentPadding">0</Thickness>
     <x:Double x:Key="LuminaShellContentHeaderHeight">48</x:Double>
-    <Thickness x:Key="LuminaShellContentHeaderMargin">16</Thickness>
-    <x:Double x:Key="LuminaShellContentHeaderFontSize">24</x:Double>
+    <Thickness x:Key="LuminaShellContentHeaderMargin">0</Thickness>
+    <Thickness x:Key="LuminaShellContentHeaderPadding">0,0,16,0</Thickness>
+    <x:Double x:Key="LuminaShellContentHeaderFontSize">20</x:Double>
+    <x:Double x:Key="LuminaShellCompactContentHeaderHeight">40</x:Double>
+    <Thickness x:Key="LuminaShellCompactContentHeaderPadding">4,0,12,0</Thickness>
+    <x:Double x:Key="LuminaShellCompactContentHeaderFontSize">18</x:Double>
     <Thickness x:Key="LuminaShellHeaderlessMenuToggleMargin">16</Thickness>
+    <Thickness x:Key="LuminaShellTopMenuDrawerHeaderMargin">16,10,16,8</Thickness>
+    <x:Double x:Key="LuminaShellTopMenuDrawerHeaderHeight">44</x:Double>
+    <Thickness x:Key="LuminaShellTopMenuDrawerScrollMargin">16,0,16,12</Thickness>
+    <Thickness x:Key="LuminaShellTopMenuDrawerFooterMargin">16,12,16,12</Thickness>
     <x:Double x:Key="LuminaShellOverlayCollapsedOpacity">0</x:Double>
     <x:Double x:Key="LuminaShellOverlayVisibleOpacity">1</x:Double>
     <Thickness x:Key="LuminaShellMenuCompactToggleHostCompactMargin">6</Thickness>
@@ -24,6 +33,7 @@
     <ControlTheme x:Key="{x:Type lumina:LuminaShell}" TargetType="lumina:LuminaShell">
         <Setter Property="Background" Value="{DynamicResource LuminaBackgroundBrush}" />
         <Setter Property="PaneBackground" Value="{DynamicResource LuminaNavigationPaneBrush}" />
+        <Setter Property="PageContentPadding" Value="{DynamicResource LuminaShellPageContentPadding}" />
         <Setter Property="Template">
             <ControlTemplate>
                 <Grid Name="PART_Root" Background="{TemplateBinding Background}">
@@ -71,7 +81,6 @@
                                         <ContentPresenter Content="{TemplateBinding EffectiveMenuFooter}" />
                                     </Border>
 
-                                    <!-- 紧凑模式切换按钮 -->
                                     <Border Name="PART_MenuCompactToggleHost"
                                             Grid.Row="3"
                                             Margin="{DynamicResource LuminaShellMenuCompactToggleHostMargin}"
@@ -106,16 +115,49 @@
                             <Border Padding="{TemplateBinding LayoutSafeAreaPadding}">
                                 <Grid RowDefinitions="Auto,*">
                                     <!-- 主区域头部栏插槽 -->
-                                    <Border Grid.Row="0"
-                                            Height="{DynamicResource LuminaShellContentHeaderHeight}"
+                                    <Border Name="PART_ContentHeader"
+                                            Grid.Row="0"
+                                            MinHeight="{DynamicResource LuminaShellContentHeaderHeight}"
                                             Margin="{DynamicResource LuminaShellContentHeaderMargin}"
+                                            Padding="{DynamicResource LuminaShellContentHeaderPadding}"
                                             Background="Transparent"
                                             IsVisible="{TemplateBinding EffectiveIsShellHeaderVisible}">
-                                        <ContentPresenter Content="{TemplateBinding Title}" TextElement.FontSize="{DynamicResource LuminaShellContentHeaderFontSize}" TextElement.FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="0" VerticalAlignment="Center">
+                                            <lumina:LuminaHamburgerButton Name="PART_ContentHeaderMenuToggle"
+                                                                          Grid.Column="0"
+                                                                          Width="{DynamicResource LuminaShellContentHeaderHeight}"
+                                                                          Height="{DynamicResource LuminaShellContentHeaderHeight}"
+                                                                          IsVisible="{TemplateBinding EffectiveIsPaneToggleVisible}"
+                                                                          IsOpen="{TemplateBinding IsMenuOpen}"
+                                                                          Command="{Binding ToggleMenuCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                          ToolTip.Tip="Toggle navigation pane" />
+
+                                            <StackPanel Grid.Column="1"
+                                                        Margin="8,0,0,0"
+                                                        VerticalAlignment="Center">
+                                                <ContentPresenter Name="PART_ContentHeaderTitle"
+                                                                  Content="{TemplateBinding EffectiveHeaderTitle}"
+                                                                  TextElement.FontSize="{DynamicResource LuminaShellContentHeaderFontSize}"
+                                                                  TextElement.FontWeight="Bold"
+                                                                  IsVisible="{TemplateBinding EffectiveHeaderTitle, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                                                <ContentPresenter Content="{TemplateBinding ActivePageSubtitle}"
+                                                                  TextElement.FontSize="12"
+                                                                  TextElement.Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                                                  IsVisible="{TemplateBinding ActivePageSubtitle, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                                            </StackPanel>
+
+                                            <ContentPresenter Grid.Column="2"
+                                                              Content="{TemplateBinding ActivePageActions}"
+                                                              VerticalAlignment="Center"
+                                                              IsVisible="{TemplateBinding ActivePageActions, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                                        </Grid>
                                     </Border>
                                 
                                 <!-- 主视图内容投射器 (添加了平滑切页动画) -->
-                                <Border Grid.Row="1" ClipToBounds="True">
+                                <Border Name="PART_PageHost"
+                                        Grid.Row="1"
+                                        ClipToBounds="True"
+                                        Padding="{TemplateBinding EffectivePageContentPadding}">
                                     <TransitioningContentControl Content="{TemplateBinding Content}">
                                         <TransitioningContentControl.PageTransition>
                                             <CrossFade Duration="0:0:0.25" />
@@ -254,7 +296,7 @@
             <Setter Property="DisplayMode" Value="Inline" />
         </Style>
 
-        <Style Selector="^:menucompact /template/ SplitView#PART_SplitView">
+        <Style Selector="^:pane-left-compact /template/ SplitView#PART_SplitView">
             <Setter Property="DisplayMode" Value="CompactInline" />
         </Style>
 
@@ -287,9 +329,23 @@
             <Setter Property="PaneBackground" Value="{DynamicResource LuminaWindowGlassPaneBrush}" />
         </Style>
 
-        <!-- 小屏幕模式：激活伪类 :small-screen，侧边栏变为浮动抽屉 (覆盖主内容) -->
+        <!-- 小屏幕模式：侧边栏变为浮动抽屉 (覆盖主内容) -->
         <Style Selector="^:small-screen /template/ SplitView#PART_SplitView">
             <Setter Property="DisplayMode" Value="Overlay" />
+        </Style>
+
+        <Style Selector="^:small-screen /template/ Border#PART_ContentHeader">
+            <Setter Property="MinHeight" Value="{DynamicResource LuminaShellCompactContentHeaderHeight}" />
+            <Setter Property="Padding" Value="{DynamicResource LuminaShellCompactContentHeaderPadding}" />
+        </Style>
+
+        <Style Selector="^:small-screen /template/ lumina|LuminaHamburgerButton#PART_ContentHeaderMenuToggle">
+            <Setter Property="Width" Value="{DynamicResource LuminaShellCompactContentHeaderHeight}" />
+            <Setter Property="Height" Value="{DynamicResource LuminaShellCompactContentHeaderHeight}" />
+        </Style>
+
+        <Style Selector="^:small-screen /template/ ContentPresenter#PART_ContentHeaderTitle">
+            <Setter Property="TextElement.FontSize" Value="{DynamicResource LuminaShellCompactContentHeaderFontSize}" />
         </Style>
 
         <Style Selector="^:small-screen /template/ Border#PART_MenuCompactToggleHost">
