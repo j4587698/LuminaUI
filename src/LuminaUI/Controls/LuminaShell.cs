@@ -1395,8 +1395,9 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         LuminaShellPaneDisplayMode paneDisplayMode = isShellChromeEffectiveVisible ? ResolveEffectivePaneDisplayMode() : LuminaShellPaneDisplayMode.Left;
         bool isSmallScreen = Bounds.Width < SmallScreenBreakpoint;
         bool isLeftCompact = paneDisplayMode == LuminaShellPaneDisplayMode.LeftCompact;
+        bool isMenuCompact = isShellChromeEffectiveVisible && !isSmallScreen && isLeftCompact && !IsMenuOpen;
         bool hasMenu = HasHeaderValue(MenuHeader) || HasHeaderValue(MenuContent) || HasHeaderValue(MenuFooter);
-        bool isPaneToggleVisible = isShellChromeEffectiveVisible && hasMenu && isSmallScreen;
+        bool isPaneToggleVisible = isShellChromeEffectiveVisible && hasMenu;
         bool isShellHeaderAllowed = isShellChromeEffectiveVisible && IsShellHeaderVisible && (_activePage?.ShowShellHeader ?? true);
         object? effectiveHeaderTitle = NormalizeHeaderValue(Title) ?? NormalizeHeaderValue(ActivePageTitle);
         bool hasHeaderContent = HasHeaderValue(effectiveHeaderTitle) || HasHeaderValue(ActivePageSubtitle) || HasHeaderValue(ActivePageActions);
@@ -1405,7 +1406,6 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         bool useTopMenuDrawer = topMenuDrawerHost != null;
         SetTopMenuDrawerMode(useTopMenuDrawer);
         bool isMenuEffectiveOpen = isShellChromeEffectiveVisible && !useTopMenuDrawer && ShouldShowSplitViewMenu(isSmallScreen, paneDisplayMode);
-        bool isMenuCompact = isShellChromeEffectiveVisible && !isSmallScreen && isLeftCompact && !IsMenuOpen;
         EffectiveIsShellChromeVisible = isShellChromeEffectiveVisible;
         EffectiveIsShellHeaderVisible = isShellHeaderEffectiveVisible;
         EffectiveIsMenuOpen = isMenuEffectiveOpen;
