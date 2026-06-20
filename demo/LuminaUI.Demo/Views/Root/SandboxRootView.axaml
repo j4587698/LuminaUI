@@ -2,6 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:material="clr-namespace:Material.Icons;assembly=Material.Icons"
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.SandboxRootView"
              x:Name="RootView">
@@ -50,93 +52,103 @@
                 <lumina:LuminaShell.MenuContent>
                     <lumina:LuminaNavigationView Name="AppNavView"
                                                  SelectedKey="{Binding #AppShell.ActiveNavigationKey, Mode=TwoWay}">
-                        <lumina:LuminaNavigationItem Name="NavDesignSystem" Header="{l10n:Loc Sandbox.Nav.DesignSystem}" Icon="DS" />
-                        <lumina:LuminaNavigationItem Name="NavLocalizationResources" Header="{l10n:Loc Sandbox.Nav.LocalizationResources}" Icon="LR" />
-                        <lumina:LuminaNavigationItem Name="NavColors" Header="{l10n:Loc Sandbox.Nav.Colors}" Icon="CL" />
+                        <lumina:LuminaNavigationView.DataTemplates>
+                            <DataTemplate DataType="material:MaterialIconKind" x:DataType="material:MaterialIconKind">
+                                <icons:MaterialIcon Kind="{Binding}"
+                                                    Width="20"
+                                                    Height="20"
+                                                    Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                            </DataTemplate>
+                        </lumina:LuminaNavigationView.DataTemplates>
+                        <lumina:LuminaNavigationItem Name="NavDesignSystem" Header="{l10n:Loc Sandbox.Nav.DesignSystem}" Icon="{x:Static material:MaterialIconKind.ViewDashboard}" />
+                        <lumina:LuminaNavigationItem Name="NavLocalizationResources" Header="{l10n:Loc Sandbox.Nav.LocalizationResources}" Icon="{x:Static material:MaterialIconKind.Translate}" />
+                        <lumina:LuminaNavigationItem Name="NavColors" Header="{l10n:Loc Sandbox.Nav.Colors}" Icon="{x:Static material:MaterialIconKind.Palette}" />
 
-                        <lumina:LuminaNavigationItem Name="NavFoundationGroup" Header="{l10n:Loc Sandbox.Nav.FoundationGroup}" Icon="Aa" IsExpanded="True">
-                            <lumina:LuminaNavigationItem Name="NavFoundation" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Foundation}" Icon="Aa" />
-                            <lumina:LuminaNavigationItem Name="NavCards" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Cards}" Icon="CA" />
-                            <lumina:LuminaNavigationItem Name="NavGroupBox" Classes="Child" Header="{l10n:Loc Sandbox.Nav.GroupBox}" Icon="GB" />
-                            <lumina:LuminaNavigationItem Name="NavImages" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Images}" Icon="IM" />
-                            <lumina:LuminaNavigationItem Name="NavAvatarBadge" Classes="Child" Header="{l10n:Loc Sandbox.Nav.AvatarBadge}" Icon="AB" />
-                            <lumina:LuminaNavigationItem Name="NavButtons" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Buttons}" Icon="BT" />
-                            <lumina:LuminaNavigationItem Name="NavButtonGroup" Classes="Child" Header="{l10n:Loc Sandbox.Nav.ButtonGroup}" Icon="BG" />
-                            <lumina:LuminaNavigationItem Name="NavAutoCompleteBox" Classes="Child" Header="{l10n:Loc Sandbox.Nav.AutoCompleteBox}" Icon="AB" />
-                            <lumina:LuminaNavigationItem Name="NavDropDownButton" Classes="Child" Header="{l10n:Loc Sandbox.Nav.DropDownButton}" Icon="DB" />
-                            <lumina:LuminaNavigationItem Name="NavSplitButton" Classes="Child" Header="{l10n:Loc Sandbox.Nav.SplitButton}" Icon="SB" />
-                            <lumina:LuminaNavigationItem Name="NavCommandBar" Classes="Child" Header="{l10n:Loc Sandbox.Nav.CommandBar}" Icon="CB" />
+                        <lumina:LuminaNavigationItem Name="NavFoundationGroup" Header="{l10n:Loc Sandbox.Nav.FoundationGroup}" Icon="{x:Static material:MaterialIconKind.FormatFont}" IsExpanded="True">
+                            <lumina:LuminaNavigationItem Name="NavFoundation" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Foundation}" Icon="{x:Static material:MaterialIconKind.FormatText}" />
+                            <lumina:LuminaNavigationItem Name="NavCards" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Cards}" Icon="{x:Static material:MaterialIconKind.CardTextOutline}" />
+                            <lumina:LuminaNavigationItem Name="NavGroupBox" Classes="Child" Header="{l10n:Loc Sandbox.Nav.GroupBox}" Icon="{x:Static material:MaterialIconKind.Group}" />
+                            <lumina:LuminaNavigationItem Name="NavImages" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Images}" Icon="{x:Static material:MaterialIconKind.Image}" />
+                            <lumina:LuminaNavigationItem Name="NavAvatarBadge" Classes="Child" Header="{l10n:Loc Sandbox.Nav.AvatarBadge}" Icon="{x:Static material:MaterialIconKind.AccountBadge}" />
+                            <lumina:LuminaNavigationItem Name="NavActionsGroup" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Actions}" Icon="{x:Static material:MaterialIconKind.GestureTapButton}" IsExpanded="True">
+                                <lumina:LuminaNavigationItem Name="NavButtons" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Buttons}" Icon="{x:Static material:MaterialIconKind.GestureTapButton}" />
+                                <lumina:LuminaNavigationItem Name="NavButtonGroup" Classes="Child" Header="{l10n:Loc Sandbox.Nav.ButtonGroup}" Icon="{x:Static material:MaterialIconKind.Group}" />
+                                <lumina:LuminaNavigationItem Name="NavAutoCompleteBox" Classes="Child" Header="{l10n:Loc Sandbox.Nav.AutoCompleteBox}" Icon="{x:Static material:MaterialIconKind.TextSearch}" />
+                                <lumina:LuminaNavigationItem Name="NavDropDownButton" Classes="Child" Header="{l10n:Loc Sandbox.Nav.DropDownButton}" Icon="{x:Static material:MaterialIconKind.MenuDown}" />
+                                <lumina:LuminaNavigationItem Name="NavSplitButton" Classes="Child" Header="{l10n:Loc Sandbox.Nav.SplitButton}" Icon="{x:Static material:MaterialIconKind.CallSplit}" />
+                                <lumina:LuminaNavigationItem Name="NavCommandBar" Classes="Child" Header="{l10n:Loc Sandbox.Nav.CommandBar}" Icon="{x:Static material:MaterialIconKind.ApplicationCog}" />
+                            </lumina:LuminaNavigationItem>
                         </lumina:LuminaNavigationItem>
 
-                        <lumina:LuminaNavigationItem Name="NavLayoutGroup" Header="{l10n:Loc Sandbox.Nav.LayoutGroup}" Icon="LY">
-                            <lumina:LuminaNavigationItem Name="NavHeaderedContentControl" Classes="Child" Header="{l10n:Loc Sandbox.Nav.HeaderedContentControl}" Icon="HC" />
-                            <lumina:LuminaNavigationItem Name="NavItemsControl" Classes="Child" Header="{l10n:Loc Sandbox.Nav.ItemsControl}" Icon="IC" />
-                            <lumina:LuminaNavigationItem Name="NavVirtualizingWrapView" Classes="Child" Header="{l10n:Loc Sandbox.Nav.VirtualizingWrapView}" Icon="VW" />
-                            <lumina:LuminaNavigationItem Name="NavSplitView" Classes="Child" Header="{l10n:Loc Sandbox.Nav.SplitView}" Icon="SV" />
-                            <lumina:LuminaNavigationItem Name="NavNavigationPage" Classes="Child" Header="{l10n:Loc Sandbox.Nav.NavigationPage}" Icon="NP" />
-                            <lumina:LuminaNavigationItem Name="NavDrawerPage" Classes="Child" Header="{l10n:Loc Sandbox.Nav.DrawerPage}" Icon="DP" />
-                            <lumina:LuminaNavigationItem Name="NavTabbedPage" Classes="Child" Header="{l10n:Loc Sandbox.Nav.TabbedPage}" Icon="TP" />
-                            <lumina:LuminaNavigationItem Name="NavCarousel" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Carousel}" Icon="CR" />
-                            <lumina:LuminaNavigationItem Name="NavTransitioningContentControl" Classes="Child" Header="{l10n:Loc Sandbox.Nav.TransitioningContentControl}" Icon="TC" />
-                            <lumina:LuminaNavigationItem Name="NavBreadcrumb" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Breadcrumb}" Icon="BR" />
-                            <lumina:LuminaNavigationItem Name="NavTabStrip" Classes="Child" Header="{l10n:Loc Sandbox.Nav.TabStrip}" Icon="TS" />
-                            <lumina:LuminaNavigationItem Name="NavTabControl" Classes="Child" Header="{l10n:Loc Sandbox.Nav.TabControl}" Icon="TC" />
-                            <lumina:LuminaNavigationItem Name="NavTabsExpanders" Classes="Child" Header="{l10n:Loc Sandbox.Nav.TabsExpanders}" Icon="TE" />
+                        <lumina:LuminaNavigationItem Name="NavLayoutGroup" Header="{l10n:Loc Sandbox.Nav.LayoutGroup}" Icon="{x:Static material:MaterialIconKind.ViewQuilt}">
+                            <lumina:LuminaNavigationItem Name="NavHeaderedContentControl" Classes="Child" Header="{l10n:Loc Sandbox.Nav.HeaderedContentControl}" Icon="{x:Static material:MaterialIconKind.PageLayoutHeader}" />
+                            <lumina:LuminaNavigationItem Name="NavItemsControl" Classes="Child" Header="{l10n:Loc Sandbox.Nav.ItemsControl}" Icon="{x:Static material:MaterialIconKind.FormatListBulleted}" />
+                            <lumina:LuminaNavigationItem Name="NavVirtualizingWrapView" Classes="Child" Header="{l10n:Loc Sandbox.Nav.VirtualizingWrapView}" Icon="{x:Static material:MaterialIconKind.ViewGrid}" />
+                            <lumina:LuminaNavigationItem Name="NavSplitView" Classes="Child" Header="{l10n:Loc Sandbox.Nav.SplitView}" Icon="{x:Static material:MaterialIconKind.ViewSplitVertical}" />
+                            <lumina:LuminaNavigationItem Name="NavNavigationPage" Classes="Child" Header="{l10n:Loc Sandbox.Nav.NavigationPage}" Icon="{x:Static material:MaterialIconKind.Navigation}" />
+                            <lumina:LuminaNavigationItem Name="NavDrawerPage" Classes="Child" Header="{l10n:Loc Sandbox.Nav.DrawerPage}" Icon="{x:Static material:MaterialIconKind.DockLeft}" />
+                            <lumina:LuminaNavigationItem Name="NavTabbedPage" Classes="Child" Header="{l10n:Loc Sandbox.Nav.TabbedPage}" Icon="{x:Static material:MaterialIconKind.Tab}" />
+                            <lumina:LuminaNavigationItem Name="NavCarousel" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Carousel}" Icon="{x:Static material:MaterialIconKind.ViewCarousel}" />
+                            <lumina:LuminaNavigationItem Name="NavTransitioningContentControl" Classes="Child" Header="{l10n:Loc Sandbox.Nav.TransitioningContentControl}" Icon="{x:Static material:MaterialIconKind.SwapHorizontal}" />
+                            <lumina:LuminaNavigationItem Name="NavBreadcrumb" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Breadcrumb}" Icon="{x:Static material:MaterialIconKind.ChevronRight}" />
+                            <lumina:LuminaNavigationItem Name="NavTabStrip" Classes="Child" Header="{l10n:Loc Sandbox.Nav.TabStrip}" Icon="{x:Static material:MaterialIconKind.Tab}" />
+                            <lumina:LuminaNavigationItem Name="NavTabControl" Classes="Child" Header="{l10n:Loc Sandbox.Nav.TabControl}" Icon="{x:Static material:MaterialIconKind.TabPlus}" />
+                            <lumina:LuminaNavigationItem Name="NavTabsExpanders" Classes="Child" Header="{l10n:Loc Sandbox.Nav.TabsExpanders}" Icon="{x:Static material:MaterialIconKind.UnfoldMoreHorizontal}" />
                         </lumina:LuminaNavigationItem>
 
-                        <lumina:LuminaNavigationItem Name="NavDataEntryGroup" Header="{l10n:Loc Sandbox.Nav.DataEntryGroup}" Icon="TX">
-                            <lumina:LuminaNavigationItem Name="NavTextInputs" Classes="Child" Header="{l10n:Loc Sandbox.Nav.TextInputs}" Icon="TX" />
-                            <lumina:LuminaNavigationItem Name="NavInputOtp" Classes="Child" Header="{l10n:Loc Sandbox.Nav.InputOtp}" Icon="OTP" />
-                            <lumina:LuminaNavigationItem Name="NavForm" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Form}" Icon="FM" />
-                            <lumina:LuminaNavigationItem Name="NavMultiSelect" Classes="Child" Header="{l10n:Loc Sandbox.Nav.MultiSelect}" Icon="MS" />
-                            <lumina:LuminaNavigationItem Name="NavTagInput" Classes="Child" Header="{l10n:Loc Sandbox.Nav.TagInput}" Icon="TI" />
-                            <lumina:LuminaNavigationItem Name="NavCascader" Classes="Child" Header="{l10n:Loc Sandbox.Text.1134}" Icon="CA" />
-                            <lumina:LuminaNavigationItem Name="NavSelection" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Selection}" Icon="SE" />
-                            <lumina:LuminaNavigationItem Name="NavPickers" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Pickers}" Icon="PK" />
-                            <lumina:LuminaNavigationItem Name="NavColorPicker" Classes="Child" Header="{l10n:Loc Sandbox.Nav.ColorPicker}" Icon="CP" />
-                            <lumina:LuminaNavigationItem Name="NavDateRangePicker" Classes="Child" Header="{l10n:Loc Sandbox.Nav.DateRangePicker}" Icon="DR" />
-                            <lumina:LuminaNavigationItem Name="NavRange" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Range}" Icon="RG" />
-                            <lumina:LuminaNavigationItem Name="NavRangeSlider" Classes="Child" Header="{l10n:Loc Sandbox.Nav.RangeSlider}" Icon="RS" />
-                            <lumina:LuminaNavigationItem Name="NavRating" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Rating}" Icon="RT" />
+                        <lumina:LuminaNavigationItem Name="NavDataEntryGroup" Header="{l10n:Loc Sandbox.Nav.DataEntryGroup}" Icon="{x:Static material:MaterialIconKind.FormTextbox}">
+                            <lumina:LuminaNavigationItem Name="NavTextInputs" Classes="Child" Header="{l10n:Loc Sandbox.Nav.TextInputs}" Icon="{x:Static material:MaterialIconKind.FormTextbox}" />
+                            <lumina:LuminaNavigationItem Name="NavInputOtp" Classes="Child" Header="{l10n:Loc Sandbox.Nav.InputOtp}" Icon="{x:Static material:MaterialIconKind.Numeric}" />
+                            <lumina:LuminaNavigationItem Name="NavForm" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Form}" Icon="{x:Static material:MaterialIconKind.FormSelect}" />
+                            <lumina:LuminaNavigationItem Name="NavMultiSelect" Classes="Child" Header="{l10n:Loc Sandbox.Nav.MultiSelect}" Icon="{x:Static material:MaterialIconKind.CheckboxMultipleMarkedOutline}" />
+                            <lumina:LuminaNavigationItem Name="NavTagInput" Classes="Child" Header="{l10n:Loc Sandbox.Nav.TagInput}" Icon="{x:Static material:MaterialIconKind.Tag}" />
+                            <lumina:LuminaNavigationItem Name="NavCascader" Classes="Child" Header="{l10n:Loc Sandbox.Text.1134}" Icon="{x:Static material:MaterialIconKind.FamilyTree}" />
+                            <lumina:LuminaNavigationItem Name="NavSelection" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Selection}" Icon="{x:Static material:MaterialIconKind.CheckboxMarkedCircleOutline}" />
+                            <lumina:LuminaNavigationItem Name="NavPickers" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Pickers}" Icon="{x:Static material:MaterialIconKind.CursorPointer}" />
+                            <lumina:LuminaNavigationItem Name="NavColorPicker" Classes="Child" Header="{l10n:Loc Sandbox.Nav.ColorPicker}" Icon="{x:Static material:MaterialIconKind.Palette}" />
+                            <lumina:LuminaNavigationItem Name="NavDateRangePicker" Classes="Child" Header="{l10n:Loc Sandbox.Nav.DateRangePicker}" Icon="{x:Static material:MaterialIconKind.CalendarRange}" />
+                            <lumina:LuminaNavigationItem Name="NavRange" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Range}" Icon="{x:Static material:MaterialIconKind.TuneVariant}" />
+                            <lumina:LuminaNavigationItem Name="NavRangeSlider" Classes="Child" Header="{l10n:Loc Sandbox.Nav.RangeSlider}" Icon="{x:Static material:MaterialIconKind.Tune}" />
+                            <lumina:LuminaNavigationItem Name="NavRating" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Rating}" Icon="{x:Static material:MaterialIconKind.Star}" />
                         </lumina:LuminaNavigationItem>
 
-                        <lumina:LuminaNavigationItem Name="NavDataDisplayGroup" Header="{l10n:Loc Sandbox.Nav.DataDisplayGroup}" Icon="DG">
-                            <lumina:LuminaNavigationItem Name="NavDescriptions" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Descriptions}" Icon="DE" />
-                            <lumina:LuminaNavigationItem Name="NavProperties" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Properties}" Icon="PR" />
-                            <lumina:LuminaNavigationItem Name="NavCollections" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Collections}" Icon="CO" />
-                            <lumina:LuminaNavigationItem Name="NavDataGrid" Classes="Child" Header="{l10n:Loc Sandbox.Nav.DataGrid}" Icon="DG" />
-                            <lumina:LuminaNavigationItem Name="NavTreeDataGrid" Classes="Child" Header="{l10n:Loc Sandbox.Nav.TreeDataGrid}" Icon="TG" />
-                            <lumina:LuminaNavigationItem Name="NavAutoScrollText" Classes="Child" Header="{l10n:Loc Sandbox.Nav.AutoScrollText}" Icon="AT" />
-                            <lumina:LuminaNavigationItem Name="NavIndexedList" Classes="Child" Header="{l10n:Loc Sandbox.Nav.IndexedList}" Icon="IL" />
-                            <lumina:LuminaNavigationItem Name="NavLinkedCategory" Classes="Child" Header="{l10n:Loc Sandbox.Nav.LinkedCategory}" Icon="LC" />
-                            <lumina:LuminaNavigationItem Name="NavPagination" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Pagination}" Icon="PG" />
-                            <lumina:LuminaNavigationItem Name="NavTimeline" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Timeline}" Icon="TL" />
-                            <lumina:LuminaNavigationItem Name="NavSteps" Classes="Child" Header="{l10n:Loc Sandbox.Text.1248}" Icon="ST" />
-                            <lumina:LuminaNavigationItem Name="NavEmpty" Classes="Child" Header="{l10n:Loc Sandbox.Text.0808}" Icon="EM" />
+                        <lumina:LuminaNavigationItem Name="NavDataDisplayGroup" Header="{l10n:Loc Sandbox.Nav.DataDisplayGroup}" Icon="{x:Static material:MaterialIconKind.Database}">
+                            <lumina:LuminaNavigationItem Name="NavDescriptions" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Descriptions}" Icon="{x:Static material:MaterialIconKind.TextBox}" />
+                            <lumina:LuminaNavigationItem Name="NavProperties" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Properties}" Icon="{x:Static material:MaterialIconKind.TableCog}" />
+                            <lumina:LuminaNavigationItem Name="NavCollections" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Collections}" Icon="{x:Static material:MaterialIconKind.FormatListBulletedSquare}" />
+                            <lumina:LuminaNavigationItem Name="NavDataGrid" Classes="Child" Header="{l10n:Loc Sandbox.Nav.DataGrid}" Icon="{x:Static material:MaterialIconKind.Table}" />
+                            <lumina:LuminaNavigationItem Name="NavTreeDataGrid" Classes="Child" Header="{l10n:Loc Sandbox.Nav.TreeDataGrid}" Icon="{x:Static material:MaterialIconKind.FileTree}" />
+                            <lumina:LuminaNavigationItem Name="NavAutoScrollText" Classes="Child" Header="{l10n:Loc Sandbox.Nav.AutoScrollText}" Icon="{x:Static material:MaterialIconKind.TextLong}" />
+                            <lumina:LuminaNavigationItem Name="NavIndexedList" Classes="Child" Header="{l10n:Loc Sandbox.Nav.IndexedList}" Icon="{x:Static material:MaterialIconKind.SortAlphabeticalAscending}" />
+                            <lumina:LuminaNavigationItem Name="NavLinkedCategory" Classes="Child" Header="{l10n:Loc Sandbox.Nav.LinkedCategory}" Icon="{x:Static material:MaterialIconKind.LinkVariant}" />
+                            <lumina:LuminaNavigationItem Name="NavPagination" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Pagination}" Icon="{x:Static material:MaterialIconKind.PageNextOutline}" />
+                            <lumina:LuminaNavigationItem Name="NavTimeline" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Timeline}" Icon="{x:Static material:MaterialIconKind.Timeline}" />
+                            <lumina:LuminaNavigationItem Name="NavSteps" Classes="Child" Header="{l10n:Loc Sandbox.Text.1248}" Icon="{x:Static material:MaterialIconKind.Stairs}" />
+                            <lumina:LuminaNavigationItem Name="NavEmpty" Classes="Child" Header="{l10n:Loc Sandbox.Text.0808}" Icon="{x:Static material:MaterialIconKind.Inbox}" />
                         </lumina:LuminaNavigationItem>
 
-                        <lumina:LuminaNavigationItem Name="NavFeedbackGroup" Header="{l10n:Loc Sandbox.Nav.FeedbackGroup}" Icon="PC">
-                            <lumina:LuminaNavigationItem Name="NavLoading" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Loading}" Icon="LD" />
-                            <lumina:LuminaNavigationItem Name="NavLoadingContainer" Classes="Child" Header="{l10n:Loc Sandbox.Nav.LoadingContainer}" Icon="LC" />
-                            <lumina:LuminaNavigationItem Name="NavBanner" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Banner}" Icon="BN" />
-                            <lumina:LuminaNavigationItem Name="NavPopConfirm" Classes="Child" Header="{l10n:Loc Sandbox.Nav.PopConfirm}" Icon="PC" />
-                            <lumina:LuminaNavigationItem Name="NavNotificationCard" Classes="Child" Header="{l10n:Loc Sandbox.Nav.NotificationCard}" Icon="PC" />
+                        <lumina:LuminaNavigationItem Name="NavFeedbackGroup" Header="{l10n:Loc Sandbox.Nav.FeedbackGroup}" Icon="{x:Static material:MaterialIconKind.MessageAlert}">
+                            <lumina:LuminaNavigationItem Name="NavLoading" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Loading}" Icon="{x:Static material:MaterialIconKind.Loading}" />
+                            <lumina:LuminaNavigationItem Name="NavLoadingContainer" Classes="Child" Header="{l10n:Loc Sandbox.Nav.LoadingContainer}" Icon="{x:Static material:MaterialIconKind.ProgressClock}" />
+                            <lumina:LuminaNavigationItem Name="NavBanner" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Banner}" Icon="{x:Static material:MaterialIconKind.CardText}" />
+                            <lumina:LuminaNavigationItem Name="NavPopConfirm" Classes="Child" Header="{l10n:Loc Sandbox.Nav.PopConfirm}" Icon="{x:Static material:MaterialIconKind.AlertCircle}" />
+                            <lumina:LuminaNavigationItem Name="NavNotificationCard" Classes="Child" Header="{l10n:Loc Sandbox.Nav.NotificationCard}" Icon="{x:Static material:MaterialIconKind.Bell}" />
                         </lumina:LuminaNavigationItem>
 
-                        <lumina:LuminaNavigationItem Name="NavPatternsGroup" Header="{l10n:Loc Sandbox.Nav.Patterns}" Icon="PT">
-                            <lumina:LuminaNavigationItem Name="NavShell" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Shell}" Icon="SH" />
-                            <lumina:LuminaNavigationItem Name="NavMenus" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Menus}" Icon="MN" />
-                            <lumina:LuminaNavigationItem Name="NavOverlays" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Overlays}" Icon="OV" />
-                            <lumina:LuminaNavigationItem Name="NavOverlayScope" Classes="Child" Header="{l10n:Loc Sandbox.Nav.OverlayScope}" Icon="OS" />
-                            <lumina:LuminaNavigationItem Name="NavWindowDialogs" Classes="Child" Header="{l10n:Loc Sandbox.Nav.WindowDialogs}" Icon="WD" />
-                            <lumina:LuminaNavigationItem Name="NavLayout" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Layout}" Icon="LY" />
-                            <lumina:LuminaNavigationItem Name="NavMotion" Classes="Child" Header="{l10n:Loc Sandbox.Text.1313}" Icon="HM" />
-                            <lumina:LuminaNavigationItem Name="NavMobileRoot" Classes="Child" Header="{l10n:Loc Sandbox.Text.0836}" Icon="MO" />
-                            <lumina:LuminaNavigationItem Name="NavLogin" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Login}" Icon="LG" />
+                        <lumina:LuminaNavigationItem Name="NavPatternsGroup" Header="{l10n:Loc Sandbox.Nav.Patterns}" Icon="{x:Static material:MaterialIconKind.Shape}">
+                            <lumina:LuminaNavigationItem Name="NavShell" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Shell}" Icon="{x:Static material:MaterialIconKind.Application}" />
+                            <lumina:LuminaNavigationItem Name="NavMenus" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Menus}" Icon="{x:Static material:MaterialIconKind.Menu}" />
+                            <lumina:LuminaNavigationItem Name="NavOverlays" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Overlays}" Icon="{x:Static material:MaterialIconKind.Layers}" />
+                            <lumina:LuminaNavigationItem Name="NavOverlayScope" Classes="Child" Header="{l10n:Loc Sandbox.Nav.OverlayScope}" Icon="{x:Static material:MaterialIconKind.SelectGroup}" />
+                            <lumina:LuminaNavigationItem Name="NavWindowDialogs" Classes="Child" Header="{l10n:Loc Sandbox.Nav.WindowDialogs}" Icon="{x:Static material:MaterialIconKind.WindowOpen}" />
+                            <lumina:LuminaNavigationItem Name="NavLayout" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Layout}" Icon="{x:Static material:MaterialIconKind.ViewDashboard}" />
+                            <lumina:LuminaNavigationItem Name="NavMotion" Classes="Child" Header="{l10n:Loc Sandbox.Text.1313}" Icon="{x:Static material:MaterialIconKind.MotionPlay}" />
+                            <lumina:LuminaNavigationItem Name="NavMobileRoot" Classes="Child" Header="{l10n:Loc Sandbox.Text.0836}" Icon="{x:Static material:MaterialIconKind.Cellphone}" />
+                            <lumina:LuminaNavigationItem Name="NavLogin" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Login}" Icon="{x:Static material:MaterialIconKind.Login}" />
                         </lumina:LuminaNavigationItem>
 
                         <Separator Margin="0,6" />
-                        <lumina:LuminaNavigationItem Name="NavSettings" Header="{l10n:Loc Sandbox.Nav.Settings}" Icon="ST" />
+                        <lumina:LuminaNavigationItem Name="NavSettings" Header="{l10n:Loc Sandbox.Nav.Settings}" Icon="{x:Static material:MaterialIconKind.Cog}" />
                     </lumina:LuminaNavigationView>
                 </lumina:LuminaShell.MenuContent>
 
