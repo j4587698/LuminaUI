@@ -5,15 +5,15 @@
     <!-- ======================================================= -->
 
     <!-- 1. Backgrounds & Surfaces (App Level) -->
-    <Color x:Key="LuminaBackground">#F4F4F5</Color>             <!-- Level 0: App Base (Zinc 100) -->
-    <Color x:Key="LuminaNavigationPane">#E7ECF3</Color>         <!-- App navigation pane -->
-    <Color x:Key="LuminaNavigationPaneItem">#F8FAFC</Color>     <!-- Items placed on navigation pane -->
+    <Color x:Key="LuminaBackground">#F9FAFB</Color>             <!-- Level 0: App Base (Gray 50) -->
+    <Color x:Key="LuminaNavigationPane">#F3F4F6</Color>         <!-- App navigation pane -->
+    <Color x:Key="LuminaNavigationPaneItem">#FFFFFF</Color>     <!-- Items placed on navigation pane -->
     <Color x:Key="LuminaNavigationPaneItemSelected">#DBEAFE</Color>
     <Color x:Key="LuminaNavigationPaneItemSelectedForeground">#1D4ED8</Color>
     <Color x:Key="LuminaSurface">#FFFFFF</Color>                <!-- Level 1: Cards (White) -->
     <Color x:Key="LuminaSurfaceElevated">#FFFFFF</Color>        <!-- Level 2: Elevated Cards -->
     <Color x:Key="LuminaPopover">#FFFFFF</Color>                <!-- Level 3: Modals/Dropdowns -->
-    <Color x:Key="LuminaActionDisabledBg">#E4E4E7</Color>       <!-- Disabled surface (Zinc 200) -->
+    <Color x:Key="LuminaActionDisabledBg">#E5E7EB</Color>       <!-- Disabled surface -->
 
     <!-- 2. Typography (Text Hierarchy) -->
     <Color x:Key="LuminaTextPrimary">#09090B</Color>            <!-- Primary Text: Headings (Zinc 950) -->
@@ -26,14 +26,14 @@
     <Color x:Key="LuminaTextMuted">#71717A</Color>      
 
     <!-- 3. Borders & Dividers -->
-    <Color x:Key="LuminaBorderSubtle">#F4F4F5</Color>           <!-- Subtle dividers (Zinc 100) -->
-    <Color x:Key="LuminaBorderDefault">#E4E4E7</Color>          <!-- Default Component Border (Zinc 200) -->
-    <Color x:Key="LuminaBorderStrong">#A1A1AA</Color>           <!-- Strong/Hover Border (Zinc 400) -->
-    <Color x:Key="LuminaBorderDisabled">#E4E4E7</Color>         <!-- Disabled Border -->
+    <Color x:Key="LuminaBorderSubtle">#F3F4F6</Color>           <!-- Subtle dividers -->
+    <Color x:Key="LuminaBorderDefault">#E5E7EB</Color>          <!-- Default Component Border -->
+    <Color x:Key="LuminaBorderStrong">#D1D5DB</Color>           <!-- Strong/Hover Border -->
+    <Color x:Key="LuminaBorderDisabled">#E5E7EB</Color>         <!-- Disabled Border -->
 
     <!-- Legacy aliases -->
-    <Color x:Key="LuminaBorder">#E4E4E7</Color>
-    <Color x:Key="LuminaDivider">#F4F4F5</Color>
+    <Color x:Key="LuminaBorder">#E5E7EB</Color>
+    <Color x:Key="LuminaDivider">#F3F4F6</Color>
     
     <!-- 4. Semantic: Primary (Brand) -->
     <Color x:Key="LuminaPrimary">#2563EB</Color>                <!-- Brand Base -->
@@ -68,12 +68,12 @@
     <Color x:Key="LuminaOrange">#EA580C</Color>
 
     <!-- 7. Action / Interactive states -->
-    <Color x:Key="LuminaHoverBackground">#F4F4F5</Color>
-    <Color x:Key="LuminaGhostHover">#E4E4E7</Color>
+    <Color x:Key="LuminaHoverBackground">#E5E7EB</Color>
+    <Color x:Key="LuminaGhostHover">#E5E7EB</Color>
     <Color x:Key="LuminaMenuItemHover">#05000000</Color>
-    <Color x:Key="LuminaStateHover">#08000000</Color>
-    <Color x:Key="LuminaStatePressed">#0D000000</Color>
-    <Color x:Key="LuminaSkeleton">#E2E8F0</Color>
+    <Color x:Key="LuminaStateHover">#0A000000</Color>
+    <Color x:Key="LuminaStatePressed">#15000000</Color>
+    <Color x:Key="LuminaSkeleton">#E5E7EB</Color>
 
     <!-- ======================================================= -->
     <!-- BRUSH GENERATION (Mapping Colors to Brushes)            -->
@@ -89,7 +89,7 @@
     <SolidColorBrush x:Key="LuminaSurfaceElevatedBrush" Color="{StaticResource LuminaSurfaceElevated}" />
     <SolidColorBrush x:Key="LuminaPopoverBrush" Color="{StaticResource LuminaPopover}" />
     <SolidColorBrush x:Key="LuminaActionDisabledBgBrush" Color="{StaticResource LuminaActionDisabledBg}" />
-    <SolidColorBrush x:Key="LuminaWindowGlassBackgroundBrush" Color="#CCF4F4F5" />
+    <SolidColorBrush x:Key="LuminaWindowGlassBackgroundBrush" Color="#CCF9FAFB" />
     <SolidColorBrush x:Key="LuminaWindowGlassPaneBrush" Color="{StaticResource LuminaNavigationPane}" />
     <SolidColorBrush x:Key="LuminaLoadingOverlayBackgroundBrush" Color="#B8FFFFFF" />
     <SolidColorBrush x:Key="LuminaOverlayScrimBrush" Color="#7A000000" />
@@ -164,7 +164,7 @@
     <x:Double x:Key="LuminaCardGlassBorderOpacity">0.34</x:Double>
     <x:Double x:Key="LuminaCardGlassBackgroundOpacity">0.40</x:Double>
     <SolidColorBrush x:Key="LuminaCardPseudoGlassBrush" Color="{StaticResource LuminaSurface}" Opacity="{StaticResource LuminaCardPseudoGlassOpacity}" />
-    <SolidColorBrush x:Key="LuminaCardGlassBorderBrush" Color="{StaticResource LuminaBorderDefault}" Opacity="{StaticResource LuminaCardGlassBorderOpacity}" />
+    <SolidColorBrush x:Key="LuminaCardGlassBorderBrush" Color="#E4E4E7" Opacity="{StaticResource LuminaCardGlassBorderOpacity}" />
     
     <SolidColorBrush x:Key="LuminaCardGlassBackgroundBrush" Color="#FFFFFF" Opacity="{StaticResource LuminaCardGlassBackgroundOpacity}" />
     <SolidColorBrush x:Key="LuminaCardGlassTintBrush" Color="#33FFFFFF" />

@@ -1,6 +1,6 @@
 # LuminaUI Design System
 
-LuminaUI is built on a modern, high-contrast, and deeply semantic color palette inspired by the best practices of Tailwind CSS (Zinc palette) and Apple/Vercel design guidelines.
+LuminaUI is built on a modern, high-contrast, and deeply semantic color palette inspired by the best practices of Tailwind CSS neutral palettes and Apple/Vercel design guidelines.
 
 ## Core Philosophy
 
@@ -11,11 +11,11 @@ LuminaUI is built on a modern, high-contrast, and deeply semantic color palette 
 
 ## 1. Neutral Palette (Light Mode)
 
-*   `LuminaBackground` (`#FAFAFA`): The absolute bottom layer of the application window.
+*   `LuminaBackground` (`#F9FAFB`): The absolute bottom layer of the application window.
 *   `LuminaSurface` (`#FFFFFF`): The background of standard cards and content areas.
-*   `LuminaSurfaceElevated` (`#FFFFFF`): The background of floating elements (popovers, dropdowns). Relies heavily on Drop Shadow.
-*   `LuminaBorder` (`#E4E4E7`): Subtle 1px dividers and card outlines.
-*   `LuminaTextForeground` (`#18181B`): Primary text (headings, body).
+*   `LuminaSurfaceElevated` (`#FFFFFF`): The background of raised cards and elevated panels.
+*   `LuminaBorder` (`#E5E7EB`): Subtle 1px dividers and card outlines.
+*   `LuminaTextForeground` (`#09090B`): Primary text (headings, body).
 *   `LuminaTextMuted` (`#71717A`): Secondary text (captions, placeholders).
 
 ## 2. Neutral Palette (Dark Mode)
@@ -29,7 +29,7 @@ LuminaUI is built on a modern, high-contrast, and deeply semantic color palette 
 
 ## 3. Semantic Colors (Light / Dark)
 
-*   **Primary (Brand)**: `#2563EB` (Blue 600) / `#3B82F6` (Blue 500). Used for primary actions, active states.
+*   **Primary (Brand)**: `#2563EB` (Blue 600) / `#3B82F6` (Blue 500). Used for primary actions, active states and runtime accent theming.
 *   **Success**: `#16A34A` (Green 600) / `#22C55E` (Green 500). Success messages, confirmations.
 *   **Warning**: `#F59E0B` (Amber 500) / `#FBBF24` (Amber 400). Alerts, pending states.
 *   **Danger**: `#EF4444` (Red 500) / `#F87171` (Red 400). Destructive actions, errors.
