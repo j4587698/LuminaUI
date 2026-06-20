@@ -64,6 +64,7 @@
                                   Height="420"
                                   OpenPaneLength="150"
                                   CompactPaneLength="44"
+                                  PaneDisplayMode="Left"
                                   IsMenuOpen="True"
                                   CanCompactMenu="False"
                                   CloseMenuOnNavigate="False"
@@ -96,12 +97,6 @@
                              FontWeight="SemiBold"
                              Foreground="{DynamicResource LuminaTextMutedBrush}" />
                 </lumina:LuminaShell.MenuFooter>
-
-                <lumina:LuminaShell.Title>
-                  <TextBlock Text="{l10n:Loc Sandbox.Overlays.HostScope.ShellLayer}"
-                             FontSize="18"
-                             FontWeight="SemiBold" />
-                </lumina:LuminaShell.Title>
 
                 <Grid Margin="18"
                       RowDefinitions="Auto,*,Auto"

@@ -165,23 +165,10 @@
                                     </Border>
                                 </lumina:LuminaShell.MenuFooter>
 
-                                <lumina:LuminaShell.Title>
-                                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
-                                        <lumina:LuminaHamburgerButton Grid.Column="0"
-                                                                      IsOpen="{Binding #PreviewShell.IsMenuOpen, Mode=TwoWay}" />
-                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                            <TextBlock Text="{Binding #PreviewShell.ActivePageTitle}"
-                                                       FontSize="20"
-                                                       FontWeight="Bold" />
-                                            <TextBlock Text="{Binding #PreviewShell.ActivePageSubtitle}"
-                                                       FontSize="12"
-                                                       Foreground="{DynamicResource LuminaTextMutedBrush}" />
-                                        </StackPanel>
-                                        <Button Grid.Column="2"
-                                                Classes="Small Outline"
-                                                Content="{l10n:Loc Sandbox.ShellShowcase.Action}" />
-                                    </Grid>
-                                </lumina:LuminaShell.Title>
+                                <lumina:LuminaShell.DefaultPageActions>
+                                    <Button Classes="Small Outline"
+                                            Content="{l10n:Loc Sandbox.ShellShowcase.Action}" />
+                                </lumina:LuminaShell.DefaultPageActions>
                             </lumina:LuminaShell>
                         </Border>
                     </Grid>

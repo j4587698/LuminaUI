@@ -140,27 +140,6 @@
                     </lumina:LuminaNavigationView>
                 </lumina:LuminaShell.MenuContent>
 
-                <lumina:LuminaShell.Title>
-                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="16">
-                        <lumina:LuminaHamburgerButton Grid.Column="0"
-                                                       IsOpen="{Binding #AppShell.IsMenuOpen}"
-                                                       IsVisible="{Binding #AppShell.EffectiveIsMenuCompact, Converter={x:Static BoolConverters.Not}}" />
-                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding #AppShell.ActivePageTitle}"
-                                       FontSize="24"
-                                       FontWeight="Bold"
-                                       VerticalAlignment="Center" />
-                            <TextBlock Text="{Binding #AppShell.ActivePageSubtitle}"
-                                       FontSize="12"
-                                       Foreground="{DynamicResource LuminaTextMutedBrush}"
-                                       IsVisible="{Binding #AppShell.ActivePageSubtitle, Converter={x:Static ObjectConverters.IsNotNull}}" />
-                        </StackPanel>
-                        <ContentPresenter Grid.Column="2"
-                                          Content="{Binding #AppShell.ActivePageActions}"
-                                          VerticalAlignment="Center"
-                                          IsVisible="{Binding #AppShell.ActivePageActions, Converter={x:Static ObjectConverters.IsNotNull}}" />
-                    </Grid>
-                </lumina:LuminaShell.Title>
             </lumina:LuminaShell>
 
             <ItemsControl ItemsSource="{Binding #RootView.NotificationCenter.Notifications}"
