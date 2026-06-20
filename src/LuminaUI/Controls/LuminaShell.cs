@@ -93,6 +93,12 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private bool _isTopMenuDrawerMode;
 
+    private bool _hasWideScreenMenuStateBeforeSmallScreen;
+
+    private bool _wideScreenMenuWasOpen;
+
+    private bool _wideScreenCompactMenuWasEnabled;
+
     private bool _effectiveIsMenuOpen = true;
 
     private bool _effectiveIsShellChromeVisible = true;
@@ -1368,9 +1374,46 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         PseudoClasses.Set(":small-screen", isSmallScreen);
         if (IsMenuAutoResponsive && (e.PreviousSize.Width <= 0.0 || wasSmallScreen != isSmallScreen))
         {
-            IsMenuOpen = isSmallScreen ? false : ShouldKeepMenuOpenOutsideSmallScreen();
+            ApplyAutoResponsiveMenuState(isSmallScreen, wasSmallScreen, e.PreviousSize.Width > 0.0);
         }
         UpdateEffectiveShellChrome();
+    }
+
+    private void ApplyAutoResponsiveMenuState(bool isSmallScreen, bool wasSmallScreen, bool hasPreviousSize)
+    {
+        if (isSmallScreen)
+        {
+            if (hasPreviousSize && !wasSmallScreen)
+            {
+                _hasWideScreenMenuStateBeforeSmallScreen = true;
+                _wideScreenMenuWasOpen = IsMenuOpen;
+                _wideScreenCompactMenuWasEnabled = IsCompactMenuEnabled;
+            }
+
+            IsMenuOpen = false;
+            return;
+        }
+
+        if (wasSmallScreen)
+        {
+            RestoreWideScreenMenuState();
+            return;
+        }
+
+        IsMenuOpen = ShouldKeepMenuOpenOutsideSmallScreen();
+    }
+
+    private void RestoreWideScreenMenuState()
+    {
+        if (!_hasWideScreenMenuStateBeforeSmallScreen)
+        {
+            IsMenuOpen = ShouldKeepMenuOpenOutsideSmallScreen();
+            return;
+        }
+
+        IsCompactMenuEnabled = _wideScreenCompactMenuWasEnabled;
+        IsMenuOpen = _wideScreenMenuWasOpen;
+        _hasWideScreenMenuStateBeforeSmallScreen = false;
     }
 
     private void UpdateEffectiveShellChrome()
