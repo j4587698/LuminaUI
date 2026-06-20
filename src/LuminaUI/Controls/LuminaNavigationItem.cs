@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using Avalonia;
@@ -6,6 +8,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
+using Avalonia.Controls.Templates;
 using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -53,6 +56,8 @@ public class LuminaNavigationItem : ItemsControl
 
     public static readonly StyledProperty<object?> IconProperty = AvaloniaProperty.Register<LuminaNavigationItem, object?>(nameof(Icon));
 
+    public static readonly StyledProperty<IDataTemplate?> IconTemplateProperty = AvaloniaProperty.Register<LuminaNavigationItem, IDataTemplate?>(nameof(IconTemplate));
+
     public static readonly StyledProperty<string?> NavigationKeyProperty = AvaloniaProperty.Register<LuminaNavigationItem, string?>(nameof(NavigationKey));
 
     public static readonly StyledProperty<bool> IsSelectedProperty = AvaloniaProperty.Register<LuminaNavigationItem, bool>(nameof(IsSelected), defaultValue: false, inherits: false, BindingMode.TwoWay);
@@ -75,6 +80,12 @@ public class LuminaNavigationItem : ItemsControl
     {
         get => GetValue(IconProperty);
         set => SetValue(IconProperty, value);
+    }
+
+    public IDataTemplate? IconTemplate
+    {
+        get => GetValue(IconTemplateProperty);
+        set => SetValue(IconTemplateProperty, value);
     }
 
     public string? NavigationKey
@@ -240,28 +251,27 @@ public class LuminaNavigationItem : ItemsControl
 
     private void InvokeOrToggle()
     {
-        // 紧凑模式下，点击图标展开菜单
-        if (LuminaShell.GetIsMenuCompact(this))
+        bool hasNavigationChildren = HasNavigationChildren();
+        // 紧凑模式下，父级项通过浮层展示子项，不展开整个菜单。
+        if (LuminaShell.GetIsMenuCompact(this) && hasNavigationChildren)
         {
-            LuminaShell? shell = LuminaShell.FindFor(this);
-            if (shell != null)
-            {
-                shell.IsMenuOpen = true;
-                // 有子项的，展开子项
-                if (HasNavigationChildren())
-                {
-                    IsExpanded = true;
-                }
-                return;
-            }
+            IsExpanded = true;
+            ShowCompactSubMenu();
+            return;
         }
 
-        if (HasNavigationChildren())
+        if (hasNavigationChildren)
         {
             LockScrollOffset();
             IsExpanded = !IsExpanded;
             return;
         }
+
+        InvokeLeaf();
+    }
+
+    private void InvokeLeaf()
+    {
         object parameter = CommandParameter ?? this;
         ICommand? command = Command;
         if (command != null && command.CanExecute(parameter))
@@ -269,6 +279,132 @@ public class LuminaNavigationItem : ItemsControl
             command.Execute(parameter);
         }
         RaiseEvent(new RoutedEventArgs(InvokedEvent, this));
+    }
+
+    private void ShowCompactSubMenu()
+    {
+        IReadOnlyList<MenuItem> items = CreateCompactSubMenuItems(this);
+        if (items.Count == 0)
+        {
+            return;
+        }
+
+        MenuFlyout flyout = new MenuFlyout
+        {
+            Placement = PlacementMode.RightEdgeAlignedTop,
+            HorizontalOffset = 4,
+            ItemsSource = items
+        };
+        flyout.ShowAt(_headerElement ?? this);
+    }
+
+    private static IReadOnlyList<MenuItem> CreateCompactSubMenuItems(LuminaNavigationItem owner)
+    {
+        return EnumerateDirectNavigationItems(owner).Select(CreateCompactSubMenuItem).ToArray();
+    }
+
+    private static MenuItem CreateCompactSubMenuItem(LuminaNavigationItem navigationItem)
+    {
+        MenuItem menuItem = new MenuItem
+        {
+            Header = CreateMenuFlyoutContent(navigationItem.Header, navigationItem.Name),
+            Icon = CreateMenuFlyoutIcon(navigationItem),
+            IsEnabled = navigationItem.IsEnabled
+        };
+
+        IReadOnlyList<MenuItem> children = CreateCompactSubMenuItems(navigationItem);
+        if (children.Count > 0)
+        {
+            menuItem.ItemsSource = children;
+        }
+        else if (navigationItem.HasNavigationChildren())
+        {
+            menuItem.IsEnabled = false;
+        }
+        else
+        {
+            menuItem.Click += (_, _) => navigationItem.InvokeLeaf();
+        }
+
+        return menuItem;
+    }
+
+    private static object? CreateMenuFlyoutContent(object? value, object? fallback = null)
+    {
+        return value is Control ? fallback : value ?? fallback;
+    }
+
+    private static object? CreateMenuFlyoutIcon(LuminaNavigationItem navigationItem)
+    {
+        object? icon = navigationItem.Icon;
+        if (icon == null || icon is Control)
+        {
+            return null;
+        }
+
+        ContentControl iconHost = new ContentControl
+        {
+            Content = icon,
+            ContentTemplate = navigationItem.IconTemplate,
+            IsHitTestVisible = false,
+            HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
+            VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center
+        };
+        CopyDataTemplates(iconHost, navigationItem);
+        return iconHost;
+    }
+
+    private static void CopyDataTemplates(Control target, Control source)
+    {
+        foreach (Control control in EnumerateSelfAndLogicalAncestorControls(source))
+        {
+            foreach (IDataTemplate dataTemplate in control.DataTemplates)
+            {
+                target.DataTemplates.Add(dataTemplate);
+            }
+        }
+    }
+
+    private static IEnumerable<Control> EnumerateSelfAndLogicalAncestorControls(Control source)
+    {
+        yield return source;
+        foreach (ILogical ancestor in source.GetLogicalAncestors())
+        {
+            if (ancestor is Control control)
+            {
+                yield return control;
+            }
+        }
+    }
+
+    private static IEnumerable<LuminaNavigationItem> EnumerateDirectNavigationItems(ItemsControl owner)
+    {
+        foreach (object? item in EnumerateItems(owner.Items))
+        {
+            if (item is LuminaNavigationItem navigationItem)
+            {
+                yield return navigationItem;
+            }
+        }
+        if (owner.ItemsSource == null)
+        {
+            yield break;
+        }
+        foreach (object? item in EnumerateItems(owner.ItemsSource))
+        {
+            if (item is LuminaNavigationItem navigationItem)
+            {
+                yield return navigationItem;
+            }
+        }
+    }
+
+    private static IEnumerable<object?> EnumerateItems(IEnumerable source)
+    {
+        foreach (object? item in source)
+        {
+            yield return item;
+        }
     }
 
     public bool HasNavigationChildren()

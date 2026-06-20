@@ -55,6 +55,7 @@
                                                   HorizontalAlignment="Center"
                                                   VerticalAlignment="Center"
                                                   Content="{TemplateBinding Icon}"
+                                                  ContentTemplate="{TemplateBinding IconTemplate}"
                                                   TextElement.FontSize="{DynamicResource LuminaNavigationItemFontSize}"
                                                   TextElement.Foreground="{DynamicResource LuminaTextMutedBrush}" />
 
@@ -89,6 +90,7 @@
                                               HorizontalAlignment="Center"
                                               VerticalAlignment="Center"
                                               Content="{TemplateBinding Icon}"
+                                              ContentTemplate="{TemplateBinding IconTemplate}"
                                               TextElement.FontSize="{DynamicResource LuminaNavigationItemFontSize}"
                                               TextElement.Foreground="{DynamicResource LuminaTextMutedBrush}" />
                         </Grid>

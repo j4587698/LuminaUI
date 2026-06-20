@@ -4,6 +4,7 @@
              xmlns:colorPicker="clr-namespace:LuminaUI.ColorPicker;assembly=LuminaUI.ColorPicker"
              xmlns:dataGrid="clr-namespace:LuminaUI.DataGrid;assembly=LuminaUI.DataGrid"
              xmlns:treeDataGrid="clr-namespace:LuminaUI.TreeDataGrid;assembly=LuminaUI.TreeDataGrid"
+             xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              x:Class="LuminaUI.Demo.App"
              Name="LuminaUI Demo"
              RequestedThemeVariant="Default">
@@ -12,6 +13,7 @@
     <Application.Styles>
         <FluentTheme />
         <lumina:LuminaTheme />
+        <icons:MaterialIconStyles />
         <colorPicker:LuminaColorPickerTheme />
         <dataGrid:LuminaDataGridTheme />
         <treeDataGrid:LuminaTreeDataGridTheme />
