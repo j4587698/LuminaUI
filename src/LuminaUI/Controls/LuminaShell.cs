@@ -1405,7 +1405,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         LuminaTopView? topMenuDrawerHost = isShellChromeEffectiveVisible && isSmallScreen ? FindOuterTopViewHost() : null;
         bool useTopMenuDrawer = topMenuDrawerHost != null;
         SetTopMenuDrawerMode(useTopMenuDrawer);
-        bool isMenuEffectiveOpen = isShellChromeEffectiveVisible && !useTopMenuDrawer && ShouldShowSplitViewMenu(isSmallScreen, paneDisplayMode);
+        bool isMenuEffectiveOpen = isShellChromeEffectiveVisible && !useTopMenuDrawer && IsMenuOpen;
         EffectiveIsShellChromeVisible = isShellChromeEffectiveVisible;
         EffectiveIsShellHeaderVisible = isShellHeaderEffectiveVisible;
         EffectiveIsMenuOpen = isMenuEffectiveOpen;
@@ -1451,16 +1451,6 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         }
 
         return CanCompactMenu && IsCompactMenuEnabled ? LuminaShellPaneDisplayMode.LeftCompact : LuminaShellPaneDisplayMode.Left;
-    }
-
-    private bool ShouldShowSplitViewMenu(bool isSmallScreen, LuminaShellPaneDisplayMode paneDisplayMode)
-    {
-        if (isSmallScreen)
-        {
-            return IsMenuOpen;
-        }
-
-        return paneDisplayMode == LuminaShellPaneDisplayMode.Left || IsMenuOpen;
     }
 
     private LuminaShellPaneDisplayMode CoercePaneDisplayMode(LuminaShellPaneDisplayMode paneDisplayMode)
