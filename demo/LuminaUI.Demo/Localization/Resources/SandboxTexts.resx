@@ -4164,6 +4164,75 @@
   <data name="Sandbox.ShellShowcase.RouteHint" xml:space="preserve">
     <value>Resize the window below 768px, toggle the menu, and switch Shell options from the left panel.</value>
   </data>
+  <data name="Sandbox.ShellShowcase.ShellStack" xml:space="preserve">
+    <value>Shell stack</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.PushShellPage" xml:space="preserve">
+    <value>Push Shell page</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.PopShellPage" xml:space="preserve">
+    <value>Pop</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.PopShellRoot" xml:space="preserve">
+    <value>Pop to root</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.HeaderButtonPresets" xml:space="preserve">
+    <value>Header button presets</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.HeaderButtonsStandard" xml:space="preserve">
+    <value>Auto</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.HeaderButtonsBackMenu" xml:space="preserve">
+    <value>Back + menu</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.HeaderButtonsBackOnly" xml:space="preserve">
+    <value>Back only</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.HeaderButtonsMenuOnly" xml:space="preserve">
+    <value>Menu only</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.HeaderButtonsHideOnBack" xml:space="preserve">
+    <value>Hide menu on back</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.HeaderButtonsNone" xml:space="preserve">
+    <value>Hide both</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OptionCollapseMenuWhenBack" xml:space="preserve">
+    <value>Collapse menu button while back is available</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StateBackVisibility" xml:space="preserve">
+    <value>Back visibility</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StateMenuVisibility" xml:space="preserve">
+    <value>Menu visibility</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StateCanGoBack" xml:space="preserve">
+    <value>Can go back</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StateStackDepth" xml:space="preserve">
+    <value>Stack depth</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StateBackButton" xml:space="preserve">
+    <value>Back button</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StateMenuButton" xml:space="preserve">
+    <value>Menu button</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StateLeadingGroup" xml:space="preserve">
+    <value>Leading group</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StateSeparator" xml:space="preserve">
+    <value>Button separator</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StackPageTitle" xml:space="preserve">
+    <value>Shell stack page {0}</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StackPageSubtitle" xml:space="preserve">
+    <value>This page was pushed through LuminaShell.PushAsync.</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StackPageHint" xml:space="preserve">
+    <value>The Shell header back button, hamburger button, and stack state all belong to the outer PreviewShell.</value>
+  </data>
   <data name="Sandbox.Popups.WindowDialogs.Title" xml:space="preserve">
     <value>Window Dialogs</value>
   </data>

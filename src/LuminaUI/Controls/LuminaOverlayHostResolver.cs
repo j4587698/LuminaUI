@@ -8,7 +8,7 @@ internal static class LuminaOverlayHostResolver
 {
     public static ILuminaOverlayHost? FindDefault()
     {
-        return (ILuminaOverlayHost?)LuminaTopView.Current ?? LuminaShell.Current;
+        return (ILuminaOverlayHost?)LuminaShell.Current ?? LuminaTopView.Current;
     }
 
     public static ILuminaOverlayHost? FindFor(Control? owner)

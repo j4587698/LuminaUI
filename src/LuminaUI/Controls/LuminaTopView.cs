@@ -379,6 +379,7 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
         if (_topLevel != null)
         {
             _topLevel.ScalingChanged += OnTopLevelScalingChanged;
+            _topLevel.BackRequested += OnTopLevelBackRequested;
         }
     }
 
@@ -397,6 +398,7 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
         if (_topLevel != null)
         {
             _topLevel.ScalingChanged -= OnTopLevelScalingChanged;
+            _topLevel.BackRequested -= OnTopLevelBackRequested;
         }
         _topLevel = null;
         _overlayInputPaneAvoidance.DetachFromVisualTree();
@@ -435,6 +437,37 @@ public class LuminaTopView : ContentControl, ILuminaOverlayHost
             e.NameScope.FindRequired<Control>("PART_DrawerContainer"));
         ApplyBottomSheetSafeAreaPadding();
         ApplyDrawerSafeAreaPadding();
+    }
+
+    internal bool TryHandleSystemBackRequested()
+    {
+        if (IsDialogOpen)
+        {
+            CloseDialog();
+            return true;
+        }
+
+        if (IsBottomSheetOpen)
+        {
+            CloseBottomSheet();
+            return true;
+        }
+
+        if (IsDrawerOpen)
+        {
+            CloseDrawer();
+            return true;
+        }
+
+        return false;
+    }
+
+    private void OnTopLevelBackRequested(object? sender, RoutedEventArgs e)
+    {
+        if (!e.Handled && TryHandleSystemBackRequested())
+        {
+            e.Handled = true;
+        }
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
