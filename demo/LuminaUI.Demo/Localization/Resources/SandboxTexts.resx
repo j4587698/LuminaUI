@@ -3907,7 +3907,7 @@
     <value>Me</value>
   </data>
   <data name="Sandbox.Text.1312" xml:space="preserve">
-    <value>&amp;lt;lumina:LuminaTopView&amp;gt;&amp;#x0a;  &amp;lt;lumina:LuminaShell x:Name=&amp;quot;AppShell&amp;quot;&amp;gt;&amp;#x0a;    &amp;lt;!-- pages, routes, menu, overlays --&amp;gt;&amp;#x0a;  &amp;lt;/lumina:LuminaShell&amp;gt;&amp;#x0a;&amp;lt;/lumina:LuminaTopView&amp;gt;</value>
+    <value>&amp;lt;lumina:LuminaShell x:Name=&amp;quot;AppShell&amp;quot;&amp;gt;&amp;#x0a;  &amp;lt;!-- pages, routes, menu, overlays --&amp;gt;&amp;#x0a;&amp;lt;/lumina:LuminaShell&amp;gt;</value>
   </data>
   <data name="Sandbox.Text.1313" xml:space="preserve">
     <value>Helpers &amp;amp; Motion</value>

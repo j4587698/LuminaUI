@@ -7,14 +7,11 @@
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.SandboxRootView"
              x:Name="RootView">
-    <!-- Root TopView provides safe-area insets and application-level overlays for the shell. -->
-    <lumina:LuminaTopView x:Name="RootTopView"
-                           TopViewKey="SandboxRoot">
-        <Grid>
-            <lumina:LuminaShell x:Name="AppShell"
-                                ShellKey="Sandbox"
-                                DefaultPageTitle="{l10n:Loc Sandbox.Shell.Title}"
-                                IsWindowGlassEnabled="{Binding $parent[lumina:LuminaWindow].IsWindowGlassEnabled, FallbackValue=False}">
+    <Grid>
+        <lumina:LuminaShell x:Name="AppShell"
+                            ShellKey="Sandbox"
+                            DefaultPageTitle="{l10n:Loc Sandbox.Shell.Title}"
+                            IsWindowGlassEnabled="{Binding $parent[lumina:LuminaWindow].IsWindowGlassEnabled, FallbackValue=False}">
                 <lumina:LuminaShell.MenuHeader>
                     <StackPanel Orientation="Horizontal" Spacing="16">
                         <StackPanel Orientation="Horizontal" Spacing="8">
@@ -152,59 +149,58 @@
                     </lumina:LuminaNavigationView>
                 </lumina:LuminaShell.MenuContent>
 
-            </lumina:LuminaShell>
+        </lumina:LuminaShell>
 
-            <ItemsControl ItemsSource="{Binding #RootView.NotificationCenter.Notifications}"
-                          HorizontalAlignment="{Binding #RootView.NotificationCenter.HorizontalAlignment}"
-                          VerticalAlignment="{Binding #RootView.NotificationCenter.VerticalAlignment}"
-                          Margin="24,56,24,24"
-                          MaxWidth="360"
-                          ZIndex="2500">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Spacing="14" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="vm:SandboxNotificationItem">
-                        <Border MinWidth="280"
-                                MaxWidth="360"
-                                Padding="14"
-                                Background="{DynamicResource LuminaPopoverBrush}"
-                                BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
-                                BorderThickness="1"
-                                CornerRadius="10"
-                                BoxShadow="{DynamicResource LuminaShadowNotification}"
-                                Cursor="Hand"
-                                lumina:LuminaCommand.TappedCommand="{Binding CloseCommand}"
-                                lumina:LuminaCommand.MarkHandled="True">
-                            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
-                                <Border Width="10"
-                                        Height="10"
-                                        CornerRadius="5"
-                                        Background="{Binding AccentBrush}"
-                                        VerticalAlignment="Top"
-                                        Margin="0,5,0,0" />
-                                <StackPanel Grid.Column="1" Spacing="4">
-                                    <TextBlock Text="{Binding Title}"
-                                               FontWeight="SemiBold"
-                                               Foreground="{DynamicResource LuminaTextPrimaryBrush}" />
-                                    <TextBlock Text="{Binding Message}"
-                                               TextWrapping="Wrap"
-                                               Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
-                                </StackPanel>
-                                <PathIcon Grid.Column="2"
-                                          Width="14"
-                                          Height="14"
-                                          Margin="8,3,0,0"
-                                          VerticalAlignment="Top"
-                                          Data="M6,6 L18,18 M18,6 L6,18"
-                                          Foreground="{DynamicResource LuminaTextMutedBrush}" />
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </Grid>
-    </lumina:LuminaTopView>
+        <ItemsControl ItemsSource="{Binding #RootView.NotificationCenter.Notifications}"
+                      HorizontalAlignment="{Binding #RootView.NotificationCenter.HorizontalAlignment}"
+                      VerticalAlignment="{Binding #RootView.NotificationCenter.VerticalAlignment}"
+                      Margin="24,56,24,24"
+                      MaxWidth="360"
+                      ZIndex="2500">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Spacing="14" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="vm:SandboxNotificationItem">
+                    <Border MinWidth="280"
+                            MaxWidth="360"
+                            Padding="14"
+                            Background="{DynamicResource LuminaPopoverBrush}"
+                            BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="10"
+                            BoxShadow="{DynamicResource LuminaShadowNotification}"
+                            Cursor="Hand"
+                            lumina:LuminaCommand.TappedCommand="{Binding CloseCommand}"
+                            lumina:LuminaCommand.MarkHandled="True">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                            <Border Width="10"
+                                    Height="10"
+                                    CornerRadius="5"
+                                    Background="{Binding AccentBrush}"
+                                    VerticalAlignment="Top"
+                                    Margin="0,5,0,0" />
+                            <StackPanel Grid.Column="1" Spacing="4">
+                                <TextBlock Text="{Binding Title}"
+                                           FontWeight="SemiBold"
+                                           Foreground="{DynamicResource LuminaTextPrimaryBrush}" />
+                                <TextBlock Text="{Binding Message}"
+                                           TextWrapping="Wrap"
+                                           Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                            </StackPanel>
+                            <PathIcon Grid.Column="2"
+                                      Width="14"
+                                      Height="14"
+                                      Margin="8,3,0,0"
+                                      VerticalAlignment="Top"
+                                      Data="M6,6 L18,18 M18,6 L6,18"
+                                      Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
 </UserControl>

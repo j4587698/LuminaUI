@@ -29,6 +29,25 @@ internal static class LuminaOverlayHostResolver
 
     public static ILuminaOverlayHost? FindTopFor(Control? owner)
     {
-        return LuminaTopView.FindOuterFor(owner) ?? LuminaTopView.Current;
+        return (ILuminaOverlayHost?)LuminaTopView.FindOuterFor(owner)
+            ?? LuminaTopView.Current
+            ?? (ILuminaOverlayHost?)FindOuterShellFor(owner)
+            ?? LuminaShell.Current;
+    }
+
+    private static LuminaShell? FindOuterShellFor(Control? owner)
+    {
+        if (owner == null)
+        {
+            return null;
+        }
+
+        LuminaShell? outerShell = owner.GetVisualAncestors().OfType<LuminaShell>().LastOrDefault();
+        if (outerShell != null)
+        {
+            return outerShell;
+        }
+
+        return owner as LuminaShell;
     }
 }

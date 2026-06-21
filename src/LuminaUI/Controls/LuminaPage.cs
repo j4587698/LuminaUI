@@ -154,47 +154,47 @@ public class LuminaPage : ContentPage
 
     public void ShowTopToast(object? content)
     {
-        LuminaTopView.FindOuterFor(this)?.ShowToast(content);
+        LuminaOverlayHostResolver.FindTopFor(this)?.ShowToast(content);
     }
 
     public void ShowTopToast(object? content, TimeSpan duration)
     {
-        LuminaTopView.FindOuterFor(this)?.ShowToast(content, duration);
+        LuminaOverlayHostResolver.FindTopFor(this)?.ShowToast(content, duration);
     }
 
     public void ClearTopToast()
     {
-        LuminaTopView.FindOuterFor(this)?.ClearToast();
+        LuminaOverlayHostResolver.FindTopFor(this)?.ClearToast();
     }
 
     public void ShowTopDialog(object? content)
     {
-        LuminaTopView.FindOuterFor(this)?.ShowDialog(content);
+        LuminaOverlayHostResolver.FindTopFor(this)?.ShowDialog(content);
     }
 
     public void CloseTopDialog()
     {
-        LuminaTopView.FindOuterFor(this)?.CloseDialog();
+        LuminaOverlayHostResolver.FindTopFor(this)?.CloseDialog();
     }
 
     public void ShowTopBottomSheet(object? content)
     {
-        LuminaTopView.FindOuterFor(this)?.ShowBottomSheet(content);
+        LuminaOverlayHostResolver.FindTopFor(this)?.ShowBottomSheet(content);
     }
 
     public void CloseTopBottomSheet()
     {
-        LuminaTopView.FindOuterFor(this)?.CloseBottomSheet();
+        LuminaOverlayHostResolver.FindTopFor(this)?.CloseBottomSheet();
     }
 
     public void ShowTopDrawer(object? content)
     {
-        LuminaTopView.FindOuterFor(this)?.ShowDrawer(content);
+        LuminaOverlayHostResolver.FindTopFor(this)?.ShowDrawer(content);
     }
 
     public void CloseTopDrawer()
     {
-        LuminaTopView.FindOuterFor(this)?.CloseDrawer();
+        LuminaOverlayHostResolver.FindTopFor(this)?.CloseDrawer();
     }
 
     private LuminaShell? FindShell()
