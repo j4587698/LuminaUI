@@ -1,4 +1,4 @@
-<ContentPage xmlns="https://github.com/avaloniaui"
+<lumina:LuminaPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
@@ -6,7 +6,7 @@
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.OverlaysShowcasePage"
              x:DataType="vm:OverlaysShowcaseViewModel">
-  <ContentPage.Resources>
+  <lumina:LuminaPage.Resources>
     <lumina:LuminaDialog x:Key="InlineStatusDialog" Title="{l10n:Loc Sandbox.Text.0594}">
       <StackPanel Spacing="16" MinWidth="320" MaxWidth="440">
         <StackPanel Spacing="6">
@@ -52,7 +52,7 @@
         </StackPanel>
       </StackPanel>
     </lumina:LuminaDialog>
-  </ContentPage.Resources>
+  </lumina:LuminaPage.Resources>
 
   <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
     <StackPanel Spacing="24"
@@ -182,4 +182,4 @@
       </lumina:LuminaResponsivePanel>
     </StackPanel>
   </ScrollViewer>
-</ContentPage>
+</lumina:LuminaPage>

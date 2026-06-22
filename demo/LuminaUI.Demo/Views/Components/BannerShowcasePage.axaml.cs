@@ -1,8 +1,9 @@
 using Avalonia.Controls;
+using LuminaUI.Controls;
 
 namespace LuminaUI.Demo.Views;
 
-public partial class BannerShowcasePage : ContentPage
+public partial class BannerShowcasePage : LuminaPage
 {
     public BannerShowcasePage()
     {

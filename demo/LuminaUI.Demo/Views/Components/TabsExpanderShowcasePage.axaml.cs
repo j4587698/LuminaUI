@@ -1,9 +1,10 @@
 using Avalonia.Controls;
+using LuminaUI.Controls;
 using LuminaUI.Demo.ViewModels;
 
 namespace LuminaUI.Demo.Views;
 
-public partial class TabsExpanderShowcasePage : ContentPage
+public partial class TabsExpanderShowcasePage : LuminaPage
 {
     public TabsExpanderShowcasePage()
     {

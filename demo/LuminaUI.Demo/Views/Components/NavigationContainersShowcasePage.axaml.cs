@@ -1,9 +1,10 @@
 using Avalonia.Controls;
+using LuminaUI.Controls;
 using LuminaUI.Demo.ViewModels;
 
 namespace LuminaUI.Demo.Views;
 
-public partial class NavigationContainersShowcasePage : ContentPage
+public partial class NavigationContainersShowcasePage : LuminaPage
 {
     public NavigationContainersShowcasePage()
         : this(new SandboxNotificationCenter())
