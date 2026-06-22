@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Avalonia;
+using Avalonia.Animation;
 using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
@@ -34,6 +36,8 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     private readonly Dictionary<string, Control> _routeCache = new Dictionary<string, Control>(StringComparer.Ordinal);
 
     private readonly Dictionary<string, Page> _routePageCache = new Dictionary<string, Page>(StringComparer.Ordinal);
+
+    private readonly ConditionalWeakTable<Page, LuminaShellPushOptions> _pushOptions = new ConditionalWeakTable<Page, LuminaShellPushOptions>();
 
     private TopLevel? _backRequestedTopLevel;
 
@@ -1634,15 +1638,36 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     public Task PushAsync(Control content)
     {
-        ArgumentNullException.ThrowIfNull(content, "content");
-        Page page = content as Page ?? new ContentPage { Content = content };
-        return PushAsync(page);
+        return PushAsync(content, options: null);
     }
 
-    public async Task PushAsync(Page page)
+    public Task PushAsync(Control content, IPageTransition? pageTransition)
+    {
+        return PushAsync(content, new LuminaShellPushOptions(pageTransition));
+    }
+
+    public Task PushAsync(Control content, LuminaShellPushOptions? options)
+    {
+        ArgumentNullException.ThrowIfNull(content, "content");
+        Page page = content as Page ?? new ContentPage { Content = content };
+        return PushAsync(page, options);
+    }
+
+    public Task PushAsync(Page page)
+    {
+        return PushAsync(page, options: null);
+    }
+
+    public Task PushAsync(Page page, IPageTransition? pageTransition)
+    {
+        return PushAsync(page, new LuminaShellPushOptions(pageTransition));
+    }
+
+    public async Task PushAsync(Page page, LuminaShellPushOptions? options)
     {
         ArgumentNullException.ThrowIfNull(page, "page");
         NavigationPage navigationHost = GetNavigationHostForStackOperation();
+        StorePushOptions(page, options);
         ConfigureShellHostedPage(page);
         if (!await WaitForNavigationHostReadyAsync(navigationHost))
         {
@@ -1658,10 +1683,30 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
             return;
         }
 
-        await navigationHost.PushAsync(page);
+        await PushWithOptionsAsync(navigationHost, page, options);
         await WaitForNavigationHostReadyAsync(navigationHost);
         SetActivePage(navigationHost.CurrentPage ?? page);
         UpdateNavigationStackState();
+    }
+
+    private async Task PushWithOptionsAsync(NavigationPage navigationHost, Page page, LuminaShellPushOptions? options)
+    {
+        if (options?.HasPageTransitionOverride != true)
+        {
+            await navigationHost.PushAsync(page);
+            return;
+        }
+
+        IPageTransition? previousTransition = navigationHost.PageTransition;
+        navigationHost.PageTransition = options.PageTransition;
+        try
+        {
+            await navigationHost.PushAsync(page);
+        }
+        finally
+        {
+            navigationHost.PageTransition = previousTransition;
+        }
     }
 
     public async Task PopAsync()
@@ -1903,24 +1948,29 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private void UpdateEffectiveShellChrome()
     {
-        bool isShellChromeEffectiveVisible = IsShellChromeVisible && (_activePage?.ShowShellChrome ?? true);
-        LuminaShellPaneDisplayMode paneDisplayMode = isShellChromeEffectiveVisible ? ResolveEffectivePaneDisplayMode() : LuminaShellPaneDisplayMode.Left;
+        LuminaShellPushOptions? activePushOptions = GetPushOptions(ActiveRouteContent as Page);
+        bool showShellChrome = activePushOptions?.ShowShellChrome ?? (_activePage?.ShowShellChrome ?? true);
+        bool showShellHeader = activePushOptions?.ShowShellHeader ?? (_activePage?.ShowShellHeader ?? true);
+        bool showShellMenu = activePushOptions?.ShowShellMenu ?? true;
+        bool isShellChromeEffectiveVisible = IsShellChromeVisible && showShellChrome;
+        bool isShellMenuAllowed = isShellChromeEffectiveVisible && showShellMenu;
+        LuminaShellPaneDisplayMode paneDisplayMode = isShellMenuAllowed ? ResolveEffectivePaneDisplayMode() : LuminaShellPaneDisplayMode.Left;
         bool isSmallScreen = Bounds.Width < SmallScreenBreakpoint;
         bool isLeftCompact = paneDisplayMode == LuminaShellPaneDisplayMode.LeftCompact;
-        bool isMenuCompact = isShellChromeEffectiveVisible && !isSmallScreen && isLeftCompact && !IsMenuOpen;
+        bool isMenuCompact = isShellMenuAllowed && !isSmallScreen && isLeftCompact && !IsMenuOpen;
         bool hasMenu = HasHeaderValue(MenuHeader) || HasHeaderValue(MenuContent) || HasHeaderValue(MenuFooter);
-        bool isPaneToggleVisible = isShellChromeEffectiveVisible && hasMenu;
-        bool isShellHeaderAllowed = isShellChromeEffectiveVisible && IsShellHeaderVisible && (_activePage?.ShowShellHeader ?? true);
+        bool isPaneToggleVisible = isShellMenuAllowed && hasMenu;
+        bool isShellHeaderAllowed = isShellChromeEffectiveVisible && IsShellHeaderVisible && showShellHeader;
         object? effectiveHeaderTitle = NormalizeHeaderValue(Title) ?? NormalizeHeaderValue(ActivePageTitle);
         bool hasHeaderContent = HasHeaderValue(effectiveHeaderTitle) || HasHeaderValue(ActivePageSubtitle) || HasHeaderValue(ActivePageActions);
         bool canGoBack = CanGoBack || _navigationHost?.CanGoBack == true;
         bool isHeaderBackButtonVisible = ResolveHeaderBackButtonVisible(isShellHeaderAllowed, canGoBack);
         bool isHeaderPaneToggleButtonVisible = ResolveHeaderPaneToggleButtonVisible(isShellHeaderAllowed, isPaneToggleVisible, canGoBack);
         bool isShellHeaderEffectiveVisible = isShellHeaderAllowed && (hasHeaderContent || isHeaderBackButtonVisible || isHeaderPaneToggleButtonVisible);
-        LuminaOverlayHost? menuDrawerHost = isShellChromeEffectiveVisible && isSmallScreen ? FindMenuOverlayHost() : null;
+        LuminaOverlayHost? menuDrawerHost = isShellMenuAllowed && isSmallScreen ? FindMenuOverlayHost() : null;
         bool useMenuDrawer = menuDrawerHost != null;
         SetMenuDrawerMode(useMenuDrawer);
-        bool isMenuEffectiveOpen = isShellChromeEffectiveVisible && !useMenuDrawer && IsMenuOpen;
+        bool isMenuEffectiveOpen = isShellMenuAllowed && !useMenuDrawer && IsMenuOpen;
         EffectiveIsShellChromeVisible = isShellChromeEffectiveVisible;
         EffectiveIsShellHeaderVisible = isShellHeaderEffectiveVisible;
         EffectiveIsMenuOpen = isMenuEffectiveOpen;
@@ -1932,8 +1982,8 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         UpdateEffectiveHeaderLeadingButtons();
         EffectiveHeaderTitle = effectiveHeaderTitle;
         EffectivePageContentPadding = ResolveEffectivePageContentPadding(isShellChromeEffectiveVisible, isShellHeaderEffectiveVisible);
-        EffectiveOpenPaneLength = isShellChromeEffectiveVisible ? OpenPaneLength : 0.0;
-        EffectiveCompactPaneLength = isShellChromeEffectiveVisible ? CompactPaneLength : 0.0;
+        EffectiveOpenPaneLength = isShellMenuAllowed ? OpenPaneLength : 0.0;
+        EffectiveCompactPaneLength = isShellMenuAllowed ? CompactPaneLength : 0.0;
         PseudoClasses.Set(":chromeless", !isShellChromeEffectiveVisible);
         PseudoClasses.Set(":headerless", !isShellHeaderEffectiveVisible);
         PseudoClasses.Set(":menucompact", isMenuCompact);
@@ -2052,15 +2102,39 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         NavigationPage.SetHasBackButton(page, false);
     }
 
+    private void StorePushOptions(Page page, LuminaShellPushOptions? options)
+    {
+        _pushOptions.Remove(page);
+        if (options != null)
+        {
+            _pushOptions.Add(page, options);
+        }
+    }
+
+    private void ClearPushOptions(Page page)
+    {
+        _pushOptions.Remove(page);
+    }
+
+    private LuminaShellPushOptions? GetPushOptions(Page? page)
+    {
+        return page != null && _pushOptions.TryGetValue(page, out LuminaShellPushOptions? options) ? options : null;
+    }
+
     private void SetDirectContentPage(object? content)
     {
         Page? page = CreateDirectContentPage(content);
+        if (page != null)
+        {
+            ClearPushOptions(page);
+        }
         _activeRoutePage = page;
         SyncNavigationHostContent();
     }
 
     private void SetRoutePage(Page page)
     {
+        ClearPushOptions(page);
         _activeRoutePage = page;
         SyncNavigationHostContent();
     }
