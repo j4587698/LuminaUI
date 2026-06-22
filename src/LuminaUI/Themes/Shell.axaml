@@ -28,10 +28,14 @@
     <x:Double x:Key="LuminaShellCompactContentHeaderLeadingButtonSize">34</x:Double>
     <Thickness x:Key="LuminaShellCompactContentHeaderPadding">4,0,12,0</Thickness>
     <x:Double x:Key="LuminaShellCompactContentHeaderFontSize">18</x:Double>
-    <x:Double x:Key="LuminaShellOverlayCollapsedOpacity">0</x:Double>
-    <x:Double x:Key="LuminaShellOverlayVisibleOpacity">1</x:Double>
     <Thickness x:Key="LuminaShellMenuCompactToggleHostCompactMargin">6</Thickness>
     <Thickness x:Key="LuminaShellMenuCompactScrollMargin">6,0,6,16</Thickness>
+    <Thickness x:Key="LuminaShellTopMenuDrawerBorderThickness">0,0,1,0</Thickness>
+    <CornerRadius x:Key="LuminaShellTopMenuDrawerCornerRadius">0,8,8,0</CornerRadius>
+    <Thickness x:Key="LuminaShellTopMenuDrawerHeaderMargin">16,10,16,8</Thickness>
+    <x:Double x:Key="LuminaShellTopMenuDrawerHeaderHeight">44</x:Double>
+    <Thickness x:Key="LuminaShellTopMenuDrawerScrollMargin">16,0,16,12</Thickness>
+    <Thickness x:Key="LuminaShellTopMenuDrawerFooterMargin">16,12,16,12</Thickness>
 
     <ControlTheme x:Key="LuminaShellNavigationPage" TargetType="NavigationPage" BasedOn="{StaticResource {x:Type NavigationPage}}">
         <Setter Property="Background" Value="Transparent" />
@@ -51,12 +55,17 @@
         <Setter Property="Template">
             <ControlTemplate>
                 <Grid Name="PART_Root" Background="{TemplateBinding Background}">
-                    <SplitView Name="PART_SplitView" 
-                               IsPaneOpen="{TemplateBinding EffectiveIsMenuOpen}" 
-                               OpenPaneLength="{TemplateBinding EffectiveOpenPaneLength}"
-                               CompactPaneLength="{TemplateBinding EffectiveCompactPaneLength}"
-                               PaneBackground="{TemplateBinding PaneBackground}"
-                               Background="Transparent">
+                    <lumina:LuminaOverlayHost Name="PART_OverlayHost"
+                                               Background="Transparent"
+                                               SafeAreaMode="{TemplateBinding SafeAreaMode}"
+                                               UseSafeAreaForOverlays="{TemplateBinding UseSafeAreaForOverlays}"
+                                               HandlesSystemBackRequested="False">
+                        <SplitView Name="PART_SplitView"
+                                   IsPaneOpen="{TemplateBinding EffectiveIsMenuOpen}"
+                                   OpenPaneLength="{TemplateBinding EffectiveOpenPaneLength}"
+                                   CompactPaneLength="{TemplateBinding EffectiveCompactPaneLength}"
+                                   PaneBackground="{TemplateBinding PaneBackground}"
+                                   Background="Transparent">
                         
                         <SplitView.Pane>
                             <!-- Menu pane is separated by surface tone, not by an extra border. -->
@@ -65,7 +74,6 @@
                                     Padding="{TemplateBinding LayoutSafeAreaPadding}"
                                     lumina:LuminaShell.IsMenuCompact="{TemplateBinding EffectiveIsMenuCompact}">
                                 <Grid RowDefinitions="Auto,*,Auto,Auto">
-                                    <!-- 菜单头部插槽 -->
                                     <Border Name="PART_MenuHeader"
                                             Grid.Row="0"
                                             Margin="{DynamicResource LuminaShellMenuHeaderMargin}"
@@ -74,8 +82,7 @@
                                             IsVisible="{TemplateBinding EffectiveIsMenuOpen}">
                                         <ContentPresenter Content="{TemplateBinding EffectiveMenuHeader}" VerticalAlignment="Center" />
                                     </Border>
-                                    
-                                    <!-- 菜单内容投射器 -->
+
                                     <ScrollViewer Name="PART_MenuScrollViewer"
                                                   Grid.Row="1"
                                                   Margin="{DynamicResource LuminaShellMenuScrollMargin}"
@@ -84,8 +91,7 @@
                                                   VerticalScrollBarVisibility="Hidden">
                                         <ContentPresenter Content="{TemplateBinding EffectiveMenuContent}" />
                                     </ScrollViewer>
-                                    
-                                    <!-- 菜单底部插槽 -->
+
                                     <Border Name="PART_MenuFooter"
                                             Grid.Row="2"
                                             Margin="{DynamicResource LuminaShellMenuFooterMargin}"
@@ -225,111 +231,8 @@
                                 </Grid>
                             </Border>
                         </SplitView.Content>
-                    </SplitView>
-
-                    <!-- ============================================== -->
-                    <!-- Dialog Overlay (遮罩层与弹窗容器)                  -->
-                    <!-- ============================================== -->
-                    <Border Name="PART_DialogOverlay"
-                            Background="Transparent"
-                            Opacity="{DynamicResource LuminaShellOverlayCollapsedOpacity}"
-                            IsHitTestVisible="False"
-                            ZIndex="1000">
-                        <Border.Transitions>
-                            <Transitions>
-                                <DoubleTransition Property="Opacity" Duration="0:0:0.2" />
-                            </Transitions>
-                        </Border.Transitions>
-                        
-                        <!-- 对弹窗实体进行缩放滑入动画 -->
-                        <Grid>
-                            <lumina:LuminaBackdropBlur BlurRadius="{DynamicResource LuminaOverlayBackdropBlurRadius}"
-                                                       HorizontalAlignment="Stretch"
-                                                       VerticalAlignment="Stretch" />
-                            <Border Background="{DynamicResource LuminaOverlayScrimBrush}"
-                                    IsHitTestVisible="False" />
-
-                            <Border Padding="{TemplateBinding OverlaySafeAreaPadding}">
-                                <Border Name="PART_DialogContainer">
-                                    <Border.Transitions>
-                                        <Transitions>
-                                            <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25" Easing="CubicEaseOut" />
-                                        </Transitions>
-                                    </Border.Transitions>
-                                    <ContentPresenter Content="{TemplateBinding DialogContent}"
-                                                      Margin="{DynamicResource LuminaOverlayDialogMargin}"
-                                                      HorizontalAlignment="Stretch"
-                                                      VerticalAlignment="Center" />
-                                </Border>
-                            </Border>
-                        </Grid>
-                    </Border>
-
-                    <!-- ============================================== -->
-                    <!-- BottomSheet Overlay (底部抽屉遮罩)                  -->
-                    <!-- ============================================== -->
-                    <Border Name="PART_DrawerOverlay"
-                            Background="Transparent"
-                            Opacity="{DynamicResource LuminaShellOverlayCollapsedOpacity}"
-                            IsHitTestVisible="False"
-                            ZIndex="1400">
-                        <Border.Transitions>
-                            <Transitions>
-                                <DoubleTransition Property="Opacity" Duration="0:0:0.2" />
-                            </Transitions>
-                        </Border.Transitions>
-
-                        <Grid>
-                            <lumina:LuminaBackdropBlur BlurRadius="{DynamicResource LuminaOverlayBackdropBlurRadius}"
-                                                       HorizontalAlignment="Stretch"
-                                                       VerticalAlignment="Stretch" />
-                            <Border Background="{DynamicResource LuminaOverlayScrimBrush}"
-                                    IsHitTestVisible="False" />
-
-                            <ContentPresenter Name="PART_DrawerContainer"
-                                              Content="{TemplateBinding DrawerContent}"
-                                              HorizontalAlignment="Stretch"
-                                              VerticalAlignment="Stretch" />
-                        </Grid>
-                    </Border>
-
-                    <Border Name="PART_BottomSheetOverlay"
-                            Background="Transparent"
-                            Opacity="{DynamicResource LuminaShellOverlayCollapsedOpacity}"
-                            IsHitTestVisible="False"
-                            ZIndex="1500">
-                        <Border.Transitions>
-                            <Transitions>
-                                <DoubleTransition Property="Opacity" Duration="0:0:0.2" />
-                            </Transitions>
-                        </Border.Transitions>
-                        
-                        <!-- 底部容器，默认向下平移 100% 藏在屏幕外 -->
-                        <Grid>
-                            <lumina:LuminaBackdropBlur BlurRadius="{DynamicResource LuminaOverlayBackdropBlurRadius}"
-                                                       HorizontalAlignment="Stretch"
-                                                       VerticalAlignment="Stretch" />
-                            <Border Background="{DynamicResource LuminaOverlayScrimBrush}"
-                                    IsHitTestVisible="False" />
-
-                            <Border Name="PART_BottomSheetContainer"
-                                    VerticalAlignment="Bottom"
-                                    HorizontalAlignment="Stretch">
-                                <ContentPresenter Content="{TemplateBinding BottomSheetContent}" />
-                            </Border>
-                        </Grid>
-                    </Border>
-                    
-                    <!-- ============================================== -->
-                    <!-- Toast Overlay (全局底部通知)                       -->
-                    <!-- ============================================== -->
-                    <Border ZIndex="2000"
-                            Padding="{TemplateBinding OverlaySafeAreaPadding}"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Bottom"
-                            IsHitTestVisible="False">
-                        <ContentPresenter Name="PART_ToastPresenter" />
-                    </Border>
+                        </SplitView>
+                    </lumina:LuminaOverlayHost>
                 </Grid>
             </ControlTemplate>
         </Setter>
@@ -430,7 +333,7 @@
             <Setter Property="PaneBackground" Value="{DynamicResource LuminaWindowGlassPaneBrush}" />
         </Style>
 
-        <!-- 小屏幕模式：侧边栏变为浮动抽屉 (覆盖主内容) -->
+        <!-- 小屏幕菜单由 LuminaShell 交给 LuminaOverlayHost/LuminaDrawer 承载；这里仅避免 SplitView 保留 compact pane 宽度。 -->
         <Style Selector="^:small-screen /template/ SplitView#PART_SplitView">
             <Setter Property="DisplayMode" Value="Overlay" />
         </Style>
@@ -467,33 +370,6 @@
             <Setter Property="IsVisible" Value="False" />
         </Style>
         
-        <!-- Dialog 打开时的动画状态 -->
-        <Style Selector="^[IsDialogOpen=True] /template/ Border#PART_DialogOverlay">
-            <Setter Property="Opacity" Value="{DynamicResource LuminaShellOverlayVisibleOpacity}" />
-            <Setter Property="IsHitTestVisible" Value="True" />
-        </Style>
-        <!-- Dialog 关闭时的卡片缩放偏移 -->
-        <Style Selector="^[IsDialogOpen=False] /template/ Border#PART_DialogContainer">
-            <Setter Property="RenderTransform" Value="scale(0.95) translateY(10px)" />
-        </Style>
-        <!-- Dialog 打开时的卡片正常位置 -->
-        <Style Selector="^[IsDialogOpen=True] /template/ Border#PART_DialogContainer">
-            <Setter Property="RenderTransform" Value="scale(1) translateY(0px)" />
-        </Style>
-
-        <!-- BottomSheet 打开时的动画状态 -->
-        <Style Selector="^[IsBottomSheetOpen=True] /template/ Border#PART_BottomSheetOverlay">
-            <Setter Property="Opacity" Value="{DynamicResource LuminaShellOverlayVisibleOpacity}" />
-            <Setter Property="IsHitTestVisible" Value="True" />
-        </Style>
-
-            <!-- 回到原本位置 -->
-
-        <Style Selector="^[IsDrawerOpen=True] /template/ Border#PART_DrawerOverlay">
-            <Setter Property="Opacity" Value="{DynamicResource LuminaShellOverlayVisibleOpacity}" />
-            <Setter Property="IsHitTestVisible" Value="True" />
-        </Style>
-
     </ControlTheme>
 
 </ResourceDictionary>

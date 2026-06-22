@@ -586,13 +586,13 @@
     <value>Overlay host scope</value>
   </data>
   <data name="Sandbox.Overlays.HostScope.Description" xml:space="preserve">
-    <value>Compare Shell-level and TopView-level drawers and bottom sheets. Shell-level overlays stay inside the app shell; TopView-level overlays cover the application root.</value>
+    <value>Compare Shell-level and OverlayHost-level drawers and bottom sheets. Shell-level overlays stay inside the app shell; OverlayHost-level overlays cover the application root.</value>
   </data>
   <data name="Sandbox.Overlays.HostScope.RootLayer" xml:space="preserve">
     <value>Application root</value>
   </data>
   <data name="Sandbox.Overlays.HostScope.RootBadge" xml:space="preserve">
-    <value>TopView</value>
+    <value>OverlayHost</value>
   </data>
   <data name="Sandbox.Overlays.HostScope.ShellMenu" xml:space="preserve">
     <value>Shell menu</value>
@@ -604,10 +604,10 @@
     <value>Shell layer</value>
   </data>
   <data name="Sandbox.Overlays.HostScope.ShellContentDescription" xml:space="preserve">
-    <value>Shell overlays cover this area; TopView overlays cover the outer root area as well.</value>
+    <value>Shell overlays cover this area; OverlayHost overlays cover the outer root area as well.</value>
   </data>
   <data name="Sandbox.Overlays.HostScope.RootMarker" xml:space="preserve">
-    <value>The root background makes it clear when a TopView-level overlay crosses the Shell boundary.</value>
+    <value>The root background makes it clear when a OverlayHost-level overlay crosses the Shell boundary.</value>
   </data>
   <data name="Sandbox.Overlays.HostScope.MarkerButton" xml:space="preserve">
     <value>Show root marker</value>
@@ -619,22 +619,22 @@
     <value>Shell drawer</value>
   </data>
   <data name="Sandbox.Overlays.HostScope.TopSheetButton" xml:space="preserve">
-    <value>TopView bottom sheet</value>
+    <value>OverlayHost bottom sheet</value>
   </data>
   <data name="Sandbox.Overlays.HostScope.TopDrawerButton" xml:space="preserve">
-    <value>TopView drawer</value>
+    <value>OverlayHost drawer</value>
   </data>
   <data name="Sandbox.Overlays.HostScope.InnerHost" xml:space="preserve">
     <value>Shell-level host</value>
   </data>
   <data name="Sandbox.Overlays.HostScope.OuterHost" xml:space="preserve">
-    <value>TopView-level host</value>
+    <value>OverlayHost-level host</value>
   </data>
   <data name="Sandbox.Overlays.HostScope.InnerHint" xml:space="preserve">
     <value>Stops at the Shell boundary.</value>
   </data>
   <data name="Sandbox.Overlays.HostScope.Hint" xml:space="preserve">
-    <value>Show the root marker, then open Shell-level and TopView-level overlays to compare whether the scrim reaches outside the Shell.</value>
+    <value>Show the root marker, then open Shell-level and OverlayHost-level overlays to compare whether the scrim reaches outside the Shell.</value>
   </data>
   <data name="Sandbox.Overlays.HostScope.RootMarker.Title" xml:space="preserve">
     <value>Root marker</value>
@@ -649,10 +649,10 @@
     <value>Shell-level bottom sheets are scoped to the current app shell.</value>
   </data>
   <data name="Sandbox.Overlays.HostScope.TopSheet.Title" xml:space="preserve">
-    <value>TopView bottom sheet</value>
+    <value>OverlayHost bottom sheet</value>
   </data>
   <data name="Sandbox.Overlays.HostScope.TopSheet.Message" xml:space="preserve">
-    <value>TopView-level bottom sheets are global and sit above the Shell layer.</value>
+    <value>OverlayHost-level bottom sheets are global and sit above the Shell layer.</value>
   </data>
   <data name="Sandbox.Overlays.HostScope.ShellDrawer.Title" xml:space="preserve">
     <value>Shell drawer</value>
@@ -661,10 +661,10 @@
     <value>Shell-level drawers are scoped to the current app shell, so the outer root layer remains outside the overlay.</value>
   </data>
   <data name="Sandbox.Overlays.HostScope.TopDrawer.Title" xml:space="preserve">
-    <value>TopView drawer</value>
+    <value>OverlayHost drawer</value>
   </data>
   <data name="Sandbox.Overlays.HostScope.TopDrawer.Message" xml:space="preserve">
-    <value>TopView-level drawers are global and cover the full application root, including areas outside the Shell.</value>
+    <value>OverlayHost-level drawers are global and cover the full application root, including areas outside the Shell.</value>
   </data>
   <data name="Sandbox.Notifications.SyncFailed" xml:space="preserve">
     <value>Failed to sync the workspace.</value>

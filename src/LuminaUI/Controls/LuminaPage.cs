@@ -98,6 +98,10 @@ public class LuminaPage : ContentPage
 
     public LuminaShell? Shell => FindShell();
 
+    public LuminaOverlayHost? OverlayHost => LuminaOverlayHost.FindFor(this);
+
+    public LuminaOverlayHost? OuterOverlayHost => LuminaOverlayHost.FindOuterFor(this);
+
     public LuminaTopView? TopView => LuminaTopView.FindFor(this);
 
     public LuminaTopView? OuterTopView => LuminaTopView.FindOuterFor(this);

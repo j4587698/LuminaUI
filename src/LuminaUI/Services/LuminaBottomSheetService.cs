@@ -18,6 +18,11 @@ public class LuminaBottomSheetService
         TryShow(shell, content);
     }
 
+    public void Show(LuminaOverlayHost overlayHost, object content)
+    {
+        TryShow(overlayHost, content);
+    }
+
     public void Show(LuminaTopView topView, object content)
     {
         TryShow(topView, content);
@@ -43,6 +48,11 @@ public class LuminaBottomSheetService
         return TryShowCore(shell, content);
     }
 
+    public bool TryShow(LuminaOverlayHost overlayHost, object content)
+    {
+        return TryShowCore(overlayHost, content);
+    }
+
     public bool TryShow(LuminaTopView topView, object content)
     {
         return TryShowCore(topView, content);
@@ -66,6 +76,11 @@ public class LuminaBottomSheetService
     public void Close(LuminaShell shell)
     {
         CloseCore(shell);
+    }
+
+    public void Close(LuminaOverlayHost overlayHost)
+    {
+        CloseCore(overlayHost);
     }
 
     public void Close(LuminaTopView topView)

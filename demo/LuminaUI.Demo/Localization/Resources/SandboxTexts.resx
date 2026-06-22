@@ -2308,7 +2308,7 @@
     <value>A container that provides a header for its content.</value>
   </data>
   <data name="Sandbox.Text.0766" xml:space="preserve">
-    <value>Overlay drawer surface for Shell and TopView hosts.</value>
+    <value>Overlay drawer surface for Shell and OverlayHost hosts.</value>
   </data>
   <data name="Sandbox.Text.0767" xml:space="preserve">
     <value>A container with two views: a pane for navigation and a content area.</value>
@@ -2410,7 +2410,7 @@
     <value>Danger zone</value>
   </data>
   <data name="Sandbox.Text.0800" xml:space="preserve">
-    <value>Desktop and mobile both use TopView + Shell; this page hides shell chrome only.</value>
+    <value>Desktop and mobile both use OverlayHost + Shell; this page hides shell chrome only.</value>
   </data>
   <data name="Sandbox.Text.0801" xml:space="preserve">
     <value>Desktop can wrap the same root view with LuminaWindow. Mobile can use the root view directly as the first visual.</value>
@@ -3892,10 +3892,10 @@
     <value>ContextMenu</value>
   </data>
   <data name="Sandbox.Text.1307" xml:space="preserve">
-    <value>TopView, Shell, login, and mobile composition.</value>
+    <value>OverlayHost, Shell, login, and mobile composition.</value>
   </data>
   <data name="Sandbox.Text.1308" xml:space="preserve">
-    <value>Use one TopView at the visual root, then put Shell inside it. Login and startup pages are routed by Shell and hide shell chrome.</value>
+    <value>Use one OverlayHost at the visual root, then put Shell inside it. Login and startup pages are routed by Shell and hide shell chrome.</value>
   </data>
   <data name="Sandbox.Text.1309" xml:space="preserve">
     <value>$18</value>

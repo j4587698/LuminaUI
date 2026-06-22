@@ -95,7 +95,7 @@ public partial class OverlayScopeShowcaseViewModel : ObservableObject
 
     private ILuminaOverlayHost? FindTopOverlayHost()
     {
-        return (ILuminaOverlayHost?)LuminaTopView.FindOuterFor(_owner) ?? FindOuterShell();
+        return (ILuminaOverlayHost?)_owner.GetVisualAncestors().OfType<LuminaOverlayHost>().LastOrDefault() ?? FindOuterShell();
     }
 
     private LuminaShell? FindOuterShell()

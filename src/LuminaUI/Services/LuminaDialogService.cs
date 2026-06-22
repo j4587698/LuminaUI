@@ -23,6 +23,11 @@ public class LuminaDialogService : ILuminaDialogService
         ShowDialogCore(shell, content, title);
     }
 
+    public void ShowDialog(LuminaOverlayHost overlayHost, object content, string? title = null)
+    {
+        ShowDialogCore(overlayHost, content, title);
+    }
+
     public void ShowDialog(LuminaTopView topView, object content, string? title = null)
     {
         ShowDialogCore(topView, content, title);
@@ -48,6 +53,11 @@ public class LuminaDialogService : ILuminaDialogService
         return ShowConfirmCoreAsync(shell, title, message, confirmText, cancelText, isDanger);
     }
 
+    public Task<bool> ShowConfirmAsync(LuminaOverlayHost overlayHost, string title, string message, string? confirmText = null, string? cancelText = null, bool isDanger = false)
+    {
+        return ShowConfirmCoreAsync(overlayHost, title, message, confirmText, cancelText, isDanger);
+    }
+
     public Task<bool> ShowConfirmAsync(LuminaTopView topView, string title, string message, string? confirmText = null, string? cancelText = null, bool isDanger = false)
     {
         return ShowConfirmCoreAsync(topView, title, message, confirmText, cancelText, isDanger);
@@ -71,6 +81,11 @@ public class LuminaDialogService : ILuminaDialogService
     public void CloseDialog(LuminaShell shell)
     {
         CloseDialogCore(shell);
+    }
+
+    public void CloseDialog(LuminaOverlayHost overlayHost)
+    {
+        CloseDialogCore(overlayHost);
     }
 
     public void CloseDialog(LuminaTopView topView)

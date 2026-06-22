@@ -8,7 +8,7 @@ internal static class LuminaOverlayHostResolver
 {
     public static ILuminaOverlayHost? FindDefault()
     {
-        return (ILuminaOverlayHost?)LuminaShell.Current ?? LuminaTopView.Current;
+        return (ILuminaOverlayHost?)LuminaShell.Current ?? LuminaTopView.Current ?? LuminaOverlayHost.Current;
     }
 
     public static ILuminaOverlayHost? FindFor(Control? owner)
@@ -18,21 +18,42 @@ internal static class LuminaOverlayHostResolver
             return FindDefault();
         }
 
-        LuminaShell? ancestorShell = owner as LuminaShell ?? owner.GetVisualAncestors().OfType<LuminaShell>().FirstOrDefault();
-        if (ancestorShell != null)
+        if (owner is ILuminaOverlayHost directHost)
         {
-            return ancestorShell;
+            return directHost;
         }
 
-        return (ILuminaOverlayHost?)LuminaTopView.FindFor(owner) ?? FindDefault();
+        LuminaOverlayHost? overlayHost = owner.GetVisualAncestors().OfType<LuminaOverlayHost>().FirstOrDefault();
+        if (overlayHost != null)
+        {
+            return overlayHost;
+        }
+
+        return (ILuminaOverlayHost?)LuminaShell.FindFor(owner) ?? FindDefault();
     }
 
     public static ILuminaOverlayHost? FindTopFor(Control? owner)
     {
-        return (ILuminaOverlayHost?)LuminaTopView.FindOuterFor(owner)
-            ?? LuminaTopView.Current
+        return (ILuminaOverlayHost?)FindOuterOverlayHostFor(owner)
             ?? (ILuminaOverlayHost?)FindOuterShellFor(owner)
+            ?? (ILuminaOverlayHost?)LuminaTopView.Current
             ?? LuminaShell.Current;
+    }
+
+    private static LuminaOverlayHost? FindOuterOverlayHostFor(Control? owner)
+    {
+        if (owner == null)
+        {
+            return null;
+        }
+
+        LuminaOverlayHost? outerOverlayHost = owner.GetVisualAncestors().OfType<LuminaOverlayHost>().LastOrDefault();
+        if (outerOverlayHost != null)
+        {
+            return outerOverlayHost;
+        }
+
+        return owner as LuminaOverlayHost;
     }
 
     private static LuminaShell? FindOuterShellFor(Control? owner)

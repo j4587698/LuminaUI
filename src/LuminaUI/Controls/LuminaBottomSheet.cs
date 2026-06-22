@@ -183,6 +183,14 @@ public class LuminaBottomSheet : ContentControl
             ResetOffset();
             return;
         }
+        LuminaOverlayHost? overlayHost = this.GetVisualAncestors().OfType<LuminaOverlayHost>().FirstOrDefault();
+        if (overlayHost != null)
+        {
+            overlayHost.CloseBottomSheet();
+            ResetOffset();
+            return;
+        }
+
         LuminaTopView? topView = this.GetVisualAncestors().OfType<LuminaTopView>().FirstOrDefault();
         if (topView != null)
         {

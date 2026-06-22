@@ -2308,7 +2308,7 @@
     <value>为其内容提供标题的容器。</value>
   </data>
   <data name="Sandbox.Text.0766" xml:space="preserve">
-    <value>用于 Shell 和 TopView 悬浮层宿主的抽屉表面。</value>
+    <value>用于 Shell 和 OverlayHost 悬浮层宿主的抽屉表面。</value>
   </data>
   <data name="Sandbox.Text.0767" xml:space="preserve">
     <value>包含两个视图的容器：导航窗格和内容区域。</value>
@@ -2410,7 +2410,7 @@
     <value>危险区域</value>
   </data>
   <data name="Sandbox.Text.0800" xml:space="preserve">
-    <value>桌面端和移动端都使用 TopView + Shell；此页面仅隐藏 shell 框架。</value>
+    <value>桌面端和移动端都使用 OverlayHost + Shell；此页面仅隐藏 shell 框架。</value>
   </data>
   <data name="Sandbox.Text.0801" xml:space="preserve">
     <value>桌面端可以使用 LuminaWindow 包装相同的根视图。移动端可以直接将根视图用作第一个视觉元素。</value>
@@ -3892,10 +3892,10 @@
     <value>上下文菜单</value>
   </data>
   <data name="Sandbox.Text.1307" xml:space="preserve">
-    <value>TopView、Shell、登录和移动端合成。</value>
+    <value>OverlayHost、Shell、登录和移动端合成。</value>
   </data>
   <data name="Sandbox.Text.1308" xml:space="preserve">
-    <value>在视觉根部使用一个 TopView，然后将 Shell 放入其中。登录和启动页面由 Shell 路由，并隐藏 Shell 框架。</value>
+    <value>在视觉根部使用一个 OverlayHost，然后将 Shell 放入其中。登录和启动页面由 Shell 路由，并隐藏 Shell 框架。</value>
   </data>
   <data name="Sandbox.Text.1309" xml:space="preserve">
     <value>$18</value>

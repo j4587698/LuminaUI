@@ -5,7 +5,7 @@ namespace LuminaUI.Controls;
 
 /// <summary>
 /// Provides inherited safe-area padding to the visual tree.
-/// Set by <see cref="LuminaTopView"/> or the outermost <see cref="LuminaShell"/>, and consumed by shells, pages, and custom controls.
+/// Set by <see cref="LuminaOverlayHost"/>, and consumed by shells, pages, and custom controls.
 /// </summary>
 public static class LuminaInsets
 {

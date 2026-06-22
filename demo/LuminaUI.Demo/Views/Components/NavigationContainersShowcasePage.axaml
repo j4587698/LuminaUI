@@ -157,10 +157,10 @@
                                 BorderThickness="1"
                                 CornerRadius="8"
                                 ClipToBounds="True">
-                            <lumina:LuminaTopView Name="NavigationDrawerPreviewHost"
+                            <lumina:LuminaOverlayHost Name="NavigationDrawerPreviewHost"
                                                   IsDrawerOpen="{Binding IsDrawerOpen, Mode=TwoWay}"
                                                   Background="{DynamicResource LuminaBackgroundBrush}">
-                                <lumina:LuminaTopView.DrawerContent>
+                                <lumina:LuminaOverlayHost.DrawerContent>
                                     <lumina:LuminaDrawer Placement="{Binding DrawerPlacement}"
                                                          DrawerLength="170"
                                                          ContentPadding="14">
@@ -183,14 +183,14 @@
                                                     Command="{Binding CloseDrawerCommand}" />
                                         </Grid>
                                     </lumina:LuminaDrawer>
-                                </lumina:LuminaTopView.DrawerContent>
+                                </lumina:LuminaOverlayHost.DrawerContent>
                                 <StackPanel Margin="16" Spacing="10" Background="{DynamicResource LuminaSurfaceElevatedBrush}">
                                     <TextBlock Classes="Label" Text="Host content" />
                                     <TextBlock Classes="Helper"
-                                               Text="The drawer surface uses the current TopView overlay host."
+                                               Text="The drawer surface uses the current OverlayHost overlay host."
                                                TextWrapping="Wrap" />
                                 </StackPanel>
-                            </lumina:LuminaTopView>
+                            </lumina:LuminaOverlayHost>
                         </Border>
                     </StackPanel>
                 </lumina:LuminaCard>

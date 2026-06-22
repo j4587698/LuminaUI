@@ -16,7 +16,7 @@
         <ResourceInclude Source="avares://LuminaUI/Themes/GroupBox.axaml" />
         <ResourceInclude Source="avares://LuminaUI/Themes/Image.axaml" />
         <ResourceInclude Source="avares://LuminaUI/Themes/TitleBar.axaml" />
-        <ResourceInclude Source="avares://LuminaUI/Themes/TopView.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/OverlayHost.axaml" />
         <ResourceInclude Source="avares://LuminaUI/Themes/Shell.axaml" />
         <ResourceInclude Source="avares://LuminaUI/Themes/Navigation.axaml" />
         <ResourceInclude Source="avares://LuminaUI/Themes/Page.axaml" />

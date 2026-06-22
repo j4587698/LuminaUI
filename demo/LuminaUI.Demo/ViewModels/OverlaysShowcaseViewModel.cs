@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Threading;
+using Avalonia.VisualTree;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LuminaUI.Controls;
@@ -81,7 +82,7 @@ public partial class OverlaysShowcaseViewModel : ObservableObject
     private void CloseDialog()
     {
         GetShell()?.CloseDialog();
-        GetTopView()?.CloseDialog();
+        GetTopOverlayHost()?.CloseDialog();
     }
 
     [RelayCommand]
@@ -138,9 +139,9 @@ public partial class OverlaysShowcaseViewModel : ObservableObject
         return LuminaShell.FindFor(_owner);
     }
 
-    private LuminaTopView? GetTopView()
+    private ILuminaOverlayHost? GetTopOverlayHost()
     {
-        return LuminaTopView.FindOuterFor(_owner);
+        return _owner.GetVisualAncestors().OfType<LuminaOverlayHost>().LastOrDefault();
     }
 
     private static Control CreateToastContent(string title, string message)
