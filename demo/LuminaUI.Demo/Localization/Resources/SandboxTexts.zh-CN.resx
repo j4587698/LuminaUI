@@ -4170,6 +4170,21 @@
   <data name="Sandbox.ShellShowcase.PushShellPage" xml:space="preserve">
     <value>压入 Shell 页</value>
   </data>
+  <data name="Sandbox.ShellShowcase.PushShellPageSlide" xml:space="preserve">
+    <value>滑动压入</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.PushShellPageNoAnimation" xml:space="preserve">
+    <value>无动画压入</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.PushShellPageNoHeader" xml:space="preserve">
+    <value>隐藏 Header 压入</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.PushShellPageNoMenu" xml:space="preserve">
+    <value>隐藏菜单压入</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.PushShellPageFullScreen" xml:space="preserve">
+    <value>全屏压入</value>
+  </data>
   <data name="Sandbox.ShellShowcase.PopShellPage" xml:space="preserve">
     <value>弹出</value>
   </data>
@@ -4232,6 +4247,73 @@
   </data>
   <data name="Sandbox.ShellShowcase.StackPageHint" xml:space="preserve">
     <value>Shell 顶部的返回按钮、汉堡菜单按钮和堆栈状态都来自外层 PreviewShell。</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.PushOptionsExamples" xml:space="preserve">
+    <value>Push 参数示例</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.PushOptionsExamplesSnippet" xml:space="preserve">
+    <value>using System;
+using Avalonia.Animation;
+using Avalonia.Controls;
+using LuminaUI.Controls;
+
+LuminaShell? shell = LuminaShell.FindFor(this);
+// 也可以操作指定 Shell：
+// LuminaShell? shell = LuminaShell.GetShell("App");
+
+if (shell == null)
+{
+    return;
+}
+
+Control CreateDetailsContent()
+{
+    return new DetailsView();
+}
+
+// 使用 Shell 默认切页动画。
+await shell.PushAsync(CreateDetailsContent());
+
+// 只覆盖本次 Push 的动画。
+await shell.PushAsync(
+    CreateDetailsContent(),
+    new PageSlide(TimeSpan.FromMilliseconds(240), PageSlide.SlideAxis.Horizontal));
+
+// 本次 Push 不播放动画。
+await shell.PushAsync(
+    CreateDetailsContent(),
+    LuminaShellPushOptions.WithoutPageTransition());
+
+// 保留 Header，但隐藏菜单和汉堡按钮。
+await shell.PushAsync(
+    CreateDetailsContent(),
+    new LuminaShellPushOptions
+    {
+        ShowShellMenu = false
+    });
+
+// 隐藏 Header，但保留菜单布局。
+await shell.PushAsync(
+    CreateDetailsContent(),
+    new LuminaShellPushOptions
+    {
+        ShowShellHeader = false
+    });
+
+// 完全覆盖 Shell：无 Header、无菜单，内容从顶部开始。
+await shell.PushAsync(
+    CreateDetailsContent(),
+    LuminaShellPushOptions.FullScreen());
+
+// 同时指定动画和覆盖策略。
+await shell.PushAsync(
+    CreateDetailsContent(),
+    new LuminaShellPushOptions
+    {
+        PageTransition = new CrossFade(TimeSpan.FromMilliseconds(180)),
+        ShowShellHeader = false,
+        ShowShellMenu = false
+    });</value>
   </data>
   <data name="Sandbox.Popups.WindowDialogs.Title" xml:space="preserve">
     <value>窗口对话框</value>

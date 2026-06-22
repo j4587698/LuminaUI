@@ -4170,6 +4170,21 @@
   <data name="Sandbox.ShellShowcase.PushShellPage" xml:space="preserve">
     <value>Push Shell page</value>
   </data>
+  <data name="Sandbox.ShellShowcase.PushShellPageSlide" xml:space="preserve">
+    <value>Push slide</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.PushShellPageNoAnimation" xml:space="preserve">
+    <value>Push no animation</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.PushShellPageNoHeader" xml:space="preserve">
+    <value>Push no header</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.PushShellPageNoMenu" xml:space="preserve">
+    <value>Push no menu</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.PushShellPageFullScreen" xml:space="preserve">
+    <value>Push full screen</value>
+  </data>
   <data name="Sandbox.ShellShowcase.PopShellPage" xml:space="preserve">
     <value>Pop</value>
   </data>
@@ -4232,6 +4247,73 @@
   </data>
   <data name="Sandbox.ShellShowcase.StackPageHint" xml:space="preserve">
     <value>The Shell header back button, hamburger button, and stack state all belong to the outer PreviewShell.</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.PushOptionsExamples" xml:space="preserve">
+    <value>Push options examples</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.PushOptionsExamplesSnippet" xml:space="preserve">
+    <value>using System;
+using Avalonia.Animation;
+using Avalonia.Controls;
+using LuminaUI.Controls;
+
+LuminaShell? shell = LuminaShell.FindFor(this);
+// Or target a known shell:
+// LuminaShell? shell = LuminaShell.GetShell("App");
+
+if (shell == null)
+{
+    return;
+}
+
+Control CreateDetailsContent()
+{
+    return new DetailsView();
+}
+
+// Default shell transition.
+await shell.PushAsync(CreateDetailsContent());
+
+// Override only this Push animation.
+await shell.PushAsync(
+    CreateDetailsContent(),
+    new PageSlide(TimeSpan.FromMilliseconds(240), PageSlide.SlideAxis.Horizontal));
+
+// Disable animation for this Push.
+await shell.PushAsync(
+    CreateDetailsContent(),
+    LuminaShellPushOptions.WithoutPageTransition());
+
+// Keep the header, but hide the menu and hamburger for this page.
+await shell.PushAsync(
+    CreateDetailsContent(),
+    new LuminaShellPushOptions
+    {
+        ShowShellMenu = false
+    });
+
+// Hide the header, but keep the menu layout.
+await shell.PushAsync(
+    CreateDetailsContent(),
+    new LuminaShellPushOptions
+    {
+        ShowShellHeader = false
+    });
+
+// Fully cover Shell chrome: no header, no menu, content starts at the top.
+await shell.PushAsync(
+    CreateDetailsContent(),
+    LuminaShellPushOptions.FullScreen());
+
+// Combine animation and chrome options.
+await shell.PushAsync(
+    CreateDetailsContent(),
+    new LuminaShellPushOptions
+    {
+        PageTransition = new CrossFade(TimeSpan.FromMilliseconds(180)),
+        ShowShellHeader = false,
+        ShowShellMenu = false
+    });</value>
   </data>
   <data name="Sandbox.Popups.WindowDialogs.Title" xml:space="preserve">
     <value>Window Dialogs</value>

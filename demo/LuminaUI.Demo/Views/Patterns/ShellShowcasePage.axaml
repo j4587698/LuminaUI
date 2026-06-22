@@ -51,6 +51,31 @@
                                         Margin="0,0,8,8"
                                         Content="{l10n:Loc Sandbox.ShellShowcase.PushShellPage}"
                                         Click="OnPushPreviewShellPageClicked" />
+                                <Button x:Name="PushShellStackSlideButton"
+                                        Classes="Small Outline"
+                                        Margin="0,0,8,8"
+                                        Content="{l10n:Loc Sandbox.ShellShowcase.PushShellPageSlide}"
+                                        Click="OnPushPreviewShellPageSlideClicked" />
+                                <Button x:Name="PushShellStackNoAnimationButton"
+                                        Classes="Small Outline"
+                                        Margin="0,0,8,8"
+                                        Content="{l10n:Loc Sandbox.ShellShowcase.PushShellPageNoAnimation}"
+                                        Click="OnPushPreviewShellPageNoAnimationClicked" />
+                                <Button x:Name="PushShellStackNoHeaderButton"
+                                        Classes="Small Outline"
+                                        Margin="0,0,8,8"
+                                        Content="{l10n:Loc Sandbox.ShellShowcase.PushShellPageNoHeader}"
+                                        Click="OnPushPreviewShellPageNoHeaderClicked" />
+                                <Button x:Name="PushShellStackNoMenuButton"
+                                        Classes="Small Outline"
+                                        Margin="0,0,8,8"
+                                        Content="{l10n:Loc Sandbox.ShellShowcase.PushShellPageNoMenu}"
+                                        Click="OnPushPreviewShellPageNoMenuClicked" />
+                                <Button x:Name="PushShellStackFullScreenButton"
+                                        Classes="Small Outline"
+                                        Margin="0,0,8,8"
+                                        Content="{l10n:Loc Sandbox.ShellShowcase.PushShellPageFullScreen}"
+                                        Click="OnPushPreviewShellPageFullScreenClicked" />
                                 <Button x:Name="PopShellStackButton"
                                         Classes="Small Outline"
                                         Margin="0,0,8,8"
@@ -282,6 +307,25 @@
                     </Grid>
                 </lumina:LuminaCard>
             </Grid>
+
+            <lumina:LuminaCard Padding="16">
+                <StackPanel Spacing="12">
+                    <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.ShellShowcase.PushOptionsExamples}" />
+                    <Border Background="{DynamicResource LuminaSurfaceBrush}"
+                            BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            ClipToBounds="True">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                      VerticalScrollBarVisibility="Auto"
+                                      MaxHeight="360">
+                            <SelectableTextBlock Classes="Code"
+                                                 Text="{l10n:Loc Sandbox.ShellShowcase.PushOptionsExamplesSnippet}"
+                                                 TextWrapping="NoWrap" />
+                        </ScrollViewer>
+                    </Border>
+                </StackPanel>
+            </lumina:LuminaCard>
         </StackPanel>
     </ScrollViewer>
 </lumina:LuminaPage>

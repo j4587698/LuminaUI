@@ -1,4 +1,6 @@
+using System;
 using System.Threading.Tasks;
+using Avalonia.Animation;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
@@ -64,6 +66,37 @@ public partial class ShellShowcasePage : LuminaPage
         await PushPreviewShellPageAsync();
     }
 
+    private async void OnPushPreviewShellPageSlideClicked(object? sender, RoutedEventArgs e)
+    {
+        await PushPreviewShellPageAsync(new PageSlide(TimeSpan.FromMilliseconds(240), PageSlide.SlideAxis.Horizontal));
+    }
+
+    private async void OnPushPreviewShellPageNoAnimationClicked(object? sender, RoutedEventArgs e)
+    {
+        await PushPreviewShellPageAsync(LuminaShellPushOptions.WithoutPageTransition());
+    }
+
+    private async void OnPushPreviewShellPageNoHeaderClicked(object? sender, RoutedEventArgs e)
+    {
+        await PushPreviewShellPageAsync(new LuminaShellPushOptions
+        {
+            ShowShellHeader = false
+        });
+    }
+
+    private async void OnPushPreviewShellPageNoMenuClicked(object? sender, RoutedEventArgs e)
+    {
+        await PushPreviewShellPageAsync(new LuminaShellPushOptions
+        {
+            ShowShellMenu = false
+        });
+    }
+
+    private async void OnPushPreviewShellPageFullScreenClicked(object? sender, RoutedEventArgs e)
+    {
+        await PushPreviewShellPageAsync(LuminaShellPushOptions.FullScreen());
+    }
+
     private async void OnPopPreviewShellPageClicked(object? sender, RoutedEventArgs e)
     {
         await PreviewShell.PopAsync();
@@ -115,6 +148,18 @@ public partial class ShellShowcasePage : LuminaPage
     {
         int pageNumber = _nextStackPageNumber++;
         await PreviewShell.PushAsync(CreatePreviewStackPage(pageNumber));
+    }
+
+    private async Task PushPreviewShellPageAsync(IPageTransition? pageTransition)
+    {
+        int pageNumber = _nextStackPageNumber++;
+        await PreviewShell.PushAsync(CreatePreviewStackPage(pageNumber), pageTransition);
+    }
+
+    private async Task PushPreviewShellPageAsync(LuminaShellPushOptions options)
+    {
+        int pageNumber = _nextStackPageNumber++;
+        await PreviewShell.PushAsync(CreatePreviewStackPage(pageNumber), options);
     }
 
     private static LuminaPage CreatePreviewPage(string navigationKey, string titleKey, string subtitleKey)
