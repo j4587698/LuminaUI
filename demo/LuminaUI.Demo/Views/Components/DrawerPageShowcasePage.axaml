@@ -62,10 +62,10 @@
                                 BorderThickness="1"
                                 CornerRadius="8"
                                 ClipToBounds="False">
-                            <lumina:LuminaTopView Name="DrawerPreviewHost"
+                            <lumina:LuminaOverlayHost Name="DrawerPreviewHost"
                                                   IsDrawerOpen="{Binding IsDrawerOpen, Mode=TwoWay}"
                                                   Background="{DynamicResource LuminaBackgroundBrush}">
-                                <lumina:LuminaTopView.DrawerContent>
+                                <lumina:LuminaOverlayHost.DrawerContent>
                                     <lumina:LuminaDrawer Placement="{Binding DrawerPlacement}"
                                                          DrawerLength="{Binding DrawerLength}"
                                                          ContentPadding="18">
@@ -90,7 +90,7 @@
                                                     Command="{Binding CloseDrawerCommand}" />
                                         </Grid>
                                     </lumina:LuminaDrawer>
-                                </lumina:LuminaTopView.DrawerContent>
+                                </lumina:LuminaOverlayHost.DrawerContent>
 
                                 <Grid RowDefinitions="Auto,*" Background="{DynamicResource LuminaSurfaceElevatedBrush}">
                                     <Border Background="{DynamicResource LuminaSurfaceBrush}"
@@ -111,7 +111,7 @@
                                                 CommandParameter="{Binding DrawerPlacement}" />
                                     </StackPanel>
                                 </Grid>
-                            </lumina:LuminaTopView>
+                            </lumina:LuminaOverlayHost>
                         </Border>
                     </StackPanel>
                 </lumina:LuminaCard>

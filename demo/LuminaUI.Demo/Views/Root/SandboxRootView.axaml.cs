@@ -112,7 +112,7 @@ public partial class SandboxRootView : UserControl
 
     public void ShowAboutDialog()
     {
-        RootTopView.ShowDialog(new LuminaDialog
+        AppShell.ShowDialog(new LuminaDialog
         {
             Title = LuminaLocalization.Get(SandboxLocalization.MenuAbout),
             Content = new LuminaUI.Demo.Views.Popups.AboutDialogView()

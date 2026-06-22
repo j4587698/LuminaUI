@@ -19,6 +19,11 @@ public class LuminaToastService : ILuminaToastService
         ShowCore(shell, content, duration);
     }
 
+    public void Show(LuminaOverlayHost overlayHost, string content, TimeSpan? duration = null)
+    {
+        ShowCore(overlayHost, content, duration);
+    }
+
     public void Show(LuminaTopView topView, string content, TimeSpan? duration = null)
     {
         ShowCore(topView, content, duration);

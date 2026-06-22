@@ -5,8 +5,10 @@
                    x:Class="LuminaUI.Demo.Views.ShellShowcasePage"
                    ShellTitle="{l10n:Loc Sandbox.ShellShowcase.Title}"
                    ShellSubtitle="{l10n:Loc Sandbox.ShellShowcase.Subtitle}">
-    <ScrollViewer HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="20">
+    <ScrollViewer x:Name="PageScroll"
+                  HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="20"
+                    Width="{Binding #PageScroll.Bounds.Width}">
             <StackPanel Spacing="4">
                 <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.ShellShowcase.Title}" />
                 <TextBlock Text="{l10n:Loc Sandbox.ShellShowcase.Description}"
@@ -14,8 +16,13 @@
                            TextWrapping="Wrap" />
             </StackPanel>
 
-            <Grid ColumnDefinitions="320,*" ColumnSpacing="16">
-                <lumina:LuminaCard Padding="16">
+            <Grid x:Name="ShellShowcaseLayout"
+                  ColumnDefinitions="320,*"
+                  RowDefinitions="Auto"
+                  ColumnSpacing="16">
+                <lumina:LuminaCard x:Name="ShellOptionsCard"
+                                   Padding="16"
+                                   VerticalAlignment="Top">
                     <StackPanel Spacing="16">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.ShellShowcase.Options}" />
 
@@ -32,6 +39,79 @@
                                       IsChecked="{Binding #PreviewShell.IsMenuAutoResponsive, Mode=TwoWay}" />
                             <CheckBox Content="{l10n:Loc Sandbox.ShellShowcase.OptionCloseMenuOnNavigate}"
                                       IsChecked="{Binding #PreviewShell.CloseMenuOnNavigate, Mode=TwoWay}" />
+                        </StackPanel>
+
+                        <Separator />
+
+                        <StackPanel Spacing="8">
+                            <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.ShellShowcase.ShellStack}" />
+                            <WrapPanel>
+                                <Button x:Name="PushShellStackButton"
+                                        Classes="Small Primary"
+                                        Margin="0,0,8,8"
+                                        Content="{l10n:Loc Sandbox.ShellShowcase.PushShellPage}"
+                                        Click="OnPushPreviewShellPageClicked" />
+                                <Button x:Name="PopShellStackButton"
+                                        Classes="Small Outline"
+                                        Margin="0,0,8,8"
+                                        Content="{l10n:Loc Sandbox.ShellShowcase.PopShellPage}"
+                                        IsEnabled="{Binding #PreviewShell.CanGoBack}"
+                                        Click="OnPopPreviewShellPageClicked" />
+                                <Button x:Name="PopShellRootButton"
+                                        Classes="Small Outline"
+                                        Margin="0,0,8,8"
+                                        Content="{l10n:Loc Sandbox.ShellShowcase.PopShellRoot}"
+                                        IsEnabled="{Binding #PreviewShell.CanGoBack}"
+                                        Click="OnPopPreviewShellRootClicked" />
+                            </WrapPanel>
+                        </StackPanel>
+
+                        <Separator />
+
+                        <StackPanel Spacing="8">
+                            <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.ShellShowcase.HeaderButtonPresets}" />
+                            <WrapPanel>
+                                <Button x:Name="ShellHeaderStandardPresetButton"
+                                        Classes="Small Outline"
+                                        Margin="0,0,8,8"
+                                        Content="{l10n:Loc Sandbox.ShellShowcase.HeaderButtonsStandard}"
+                                        Click="OnHeaderButtonsStandardClicked" />
+                                <Button x:Name="ShellHeaderBackMenuPresetButton"
+                                        Classes="Small Outline"
+                                        Margin="0,0,8,8"
+                                        Content="{l10n:Loc Sandbox.ShellShowcase.HeaderButtonsBackMenu}"
+                                        Click="OnHeaderButtonsBackMenuClicked" />
+                                <Button x:Name="ShellHeaderBackOnlyPresetButton"
+                                        Classes="Small Outline"
+                                        Margin="0,0,8,8"
+                                        Content="{l10n:Loc Sandbox.ShellShowcase.HeaderButtonsBackOnly}"
+                                        Click="OnHeaderButtonsBackOnlyClicked" />
+                                <Button x:Name="ShellHeaderMenuOnlyPresetButton"
+                                        Classes="Small Outline"
+                                        Margin="0,0,8,8"
+                                        Content="{l10n:Loc Sandbox.ShellShowcase.HeaderButtonsMenuOnly}"
+                                        Click="OnHeaderButtonsMenuOnlyClicked" />
+                                <Button x:Name="ShellHeaderHideOnBackPresetButton"
+                                        Classes="Small Outline"
+                                        Margin="0,0,8,8"
+                                        Content="{l10n:Loc Sandbox.ShellShowcase.HeaderButtonsHideOnBack}"
+                                        Click="OnHeaderButtonsHideOnBackClicked" />
+                                <Button x:Name="ShellHeaderNonePresetButton"
+                                        Classes="Small Outline"
+                                        Margin="0,0,8,8"
+                                        Content="{l10n:Loc Sandbox.ShellShowcase.HeaderButtonsNone}"
+                                        Click="OnHeaderButtonsNoneClicked" />
+                            </WrapPanel>
+                            <CheckBox Content="{l10n:Loc Sandbox.ShellShowcase.OptionCollapseMenuWhenBack}"
+                                      IsChecked="{Binding #PreviewShell.CollapseHeaderPaneToggleWhenCanGoBack, Mode=TwoWay}" />
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Text="{l10n:Loc Sandbox.ShellShowcase.StateBackVisibility}" />
+                                <TextBlock Grid.Column="1" Text="{Binding #PreviewShell.HeaderBackButtonVisibility}" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Text="{l10n:Loc Sandbox.ShellShowcase.StateMenuVisibility}" />
+                                <TextBlock Grid.Column="1" Text="{Binding #PreviewShell.HeaderPaneToggleButtonVisibility}" />
+                            </Grid>
                         </StackPanel>
 
                         <Separator />
@@ -80,11 +160,39 @@
                                 <TextBlock Text="{l10n:Loc Sandbox.ShellShowcase.StateMenuCompact}" />
                                 <TextBlock Grid.Column="1" Text="{Binding #PreviewShell.EffectiveIsMenuCompact}" />
                             </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Text="{l10n:Loc Sandbox.ShellShowcase.StateCanGoBack}" />
+                                <TextBlock Grid.Column="1" Text="{Binding #PreviewShell.CanGoBack}" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Text="{l10n:Loc Sandbox.ShellShowcase.StateStackDepth}" />
+                                <TextBlock Grid.Column="1" Text="{Binding #PreviewShell.NavigationStackDepth}" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Text="{l10n:Loc Sandbox.ShellShowcase.StateBackButton}" />
+                                <TextBlock Grid.Column="1" Text="{Binding #PreviewShell.EffectiveIsHeaderBackButtonVisible}" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Text="{l10n:Loc Sandbox.ShellShowcase.StateMenuButton}" />
+                                <TextBlock Grid.Column="1" Text="{Binding #PreviewShell.EffectiveIsHeaderMenuToggleVisible}" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Text="{l10n:Loc Sandbox.ShellShowcase.StateLeadingGroup}" />
+                                <TextBlock Grid.Column="1" Text="{Binding #PreviewShell.EffectiveHasHeaderLeadingButtons}" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Text="{l10n:Loc Sandbox.ShellShowcase.StateSeparator}" />
+                                <TextBlock Grid.Column="1" Text="{Binding #PreviewShell.EffectiveIsHeaderLeadingButtonSeparatorVisible}" />
+                            </Grid>
                         </StackPanel>
                     </StackPanel>
                 </lumina:LuminaCard>
 
-                <lumina:LuminaCard Grid.Column="1" Padding="0" ClipToBounds="True">
+                <lumina:LuminaCard x:Name="ShellPreviewCard"
+                                   Grid.Column="1"
+                                   Padding="0"
+                                   ClipToBounds="True"
+                                   VerticalAlignment="Top">
                     <Grid RowDefinitions="Auto,*">
                         <Border Grid.Row="0"
                                 Padding="14"
@@ -110,12 +218,12 @@
                             </Grid>
                         </Border>
 
-                        <Border Grid.Row="1"
-                                Height="520"
+                        <Border x:Name="PreviewShellHost"
+                                Grid.Row="1"
+                                MinHeight="420"
                                 Background="{DynamicResource LuminaBackgroundBrush}">
-                            <!-- Embedded preview shells can use LuminaShell directly; app roots should wrap it in LuminaTopView. -->
                             <lumina:LuminaShell x:Name="PreviewShell"
-                                                 DefaultPageTitle="{l10n:Loc Sandbox.ShellShowcase.PreviewShellTitle}"
+                                                DefaultPageTitle="{l10n:Loc Sandbox.ShellShowcase.PreviewShellTitle}"
                                                 DefaultPageSubtitle="{l10n:Loc Sandbox.ShellShowcase.PreviewShellSubtitle}"
                                                 OpenPaneLength="220"
                                                 CompactPaneLength="56"

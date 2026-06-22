@@ -41,6 +41,7 @@
   <data name="Lumina.Cascader.SelectCurrentFormat" xml:space="preserve"><value>Select {0}</value></data>
   <data name="Lumina.Shell.ToggleCompactMode" xml:space="preserve"><value>Toggle compact mode</value></data>
   <data name="Lumina.Shell.ToggleNavigationPane" xml:space="preserve"><value>Toggle navigation pane</value></data>
+  <data name="Lumina.Shell.NavigateBack" xml:space="preserve"><value>Navigate back</value></data>
   <data name="Lumina.Picker.SelectOption" xml:space="preserve"><value>Select option</value></data>
   <data name="Lumina.Picker.Year" xml:space="preserve"><value>Year</value></data>
   <data name="Lumina.Picker.Hour" xml:space="preserve"><value>Hour</value></data>

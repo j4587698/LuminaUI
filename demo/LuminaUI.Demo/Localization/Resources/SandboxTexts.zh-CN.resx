@@ -2308,7 +2308,7 @@
     <value>为其内容提供标题的容器。</value>
   </data>
   <data name="Sandbox.Text.0766" xml:space="preserve">
-    <value>用于 Shell 和 TopView 悬浮层宿主的抽屉表面。</value>
+    <value>用于 Shell 和 OverlayHost 悬浮层宿主的抽屉表面。</value>
   </data>
   <data name="Sandbox.Text.0767" xml:space="preserve">
     <value>包含两个视图的容器：导航窗格和内容区域。</value>
@@ -2410,7 +2410,7 @@
     <value>危险区域</value>
   </data>
   <data name="Sandbox.Text.0800" xml:space="preserve">
-    <value>桌面端和移动端都使用 TopView + Shell；此页面仅隐藏 shell 框架。</value>
+    <value>桌面端和移动端都使用 OverlayHost + Shell；此页面仅隐藏 shell 框架。</value>
   </data>
   <data name="Sandbox.Text.0801" xml:space="preserve">
     <value>桌面端可以使用 LuminaWindow 包装相同的根视图。移动端可以直接将根视图用作第一个视觉元素。</value>
@@ -3892,10 +3892,10 @@
     <value>上下文菜单</value>
   </data>
   <data name="Sandbox.Text.1307" xml:space="preserve">
-    <value>TopView、Shell、登录和移动端合成。</value>
+    <value>OverlayHost、Shell、登录和移动端合成。</value>
   </data>
   <data name="Sandbox.Text.1308" xml:space="preserve">
-    <value>在视觉根部使用一个 TopView，然后将 Shell 放入其中。登录和启动页面由 Shell 路由，并隐藏 Shell 框架。</value>
+    <value>在视觉根部使用一个 OverlayHost，然后将 Shell 放入其中。登录和启动页面由 Shell 路由，并隐藏 Shell 框架。</value>
   </data>
   <data name="Sandbox.Text.1309" xml:space="preserve">
     <value>$18</value>
@@ -3907,7 +3907,7 @@
     <value>我</value>
   </data>
   <data name="Sandbox.Text.1312" xml:space="preserve">
-    <value>&amp;lt;lumina:LuminaTopView&amp;gt;&amp;#x0a;  &amp;lt;lumina:LuminaShell x:Name=&amp;quot;AppShell&amp;quot;&amp;gt;&amp;#x0a;    &amp;lt;!-- pages, routes, menu, overlays --&amp;gt;&amp;#x0a;  &amp;lt;/lumina:LuminaShell&amp;gt;&amp;#x0a;&amp;lt;/lumina:LuminaTopView&amp;gt;</value>
+    <value>&amp;lt;lumina:LuminaShell x:Name=&amp;quot;AppShell&amp;quot;&amp;gt;&amp;#x0a;  &amp;lt;!-- pages, routes, menu, overlays --&amp;gt;&amp;#x0a;&amp;lt;/lumina:LuminaShell&amp;gt;</value>
   </data>
   <data name="Sandbox.Text.1313" xml:space="preserve">
     <value>辅助类与动画</value>
@@ -4163,6 +4163,75 @@
   </data>
   <data name="Sandbox.ShellShowcase.RouteHint" xml:space="preserve">
     <value>将窗口缩小到 768px 以下，切换菜单，并从左侧面板切换 Shell 选项。</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.ShellStack" xml:space="preserve">
+    <value>Shell 堆栈</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.PushShellPage" xml:space="preserve">
+    <value>压入 Shell 页</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.PopShellPage" xml:space="preserve">
+    <value>弹出</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.PopShellRoot" xml:space="preserve">
+    <value>回到根页</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.HeaderButtonPresets" xml:space="preserve">
+    <value>顶部 leading 按钮预设</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.HeaderButtonsStandard" xml:space="preserve">
+    <value>自动</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.HeaderButtonsBackMenu" xml:space="preserve">
+    <value>返回 + 菜单</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.HeaderButtonsBackOnly" xml:space="preserve">
+    <value>仅返回</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.HeaderButtonsMenuOnly" xml:space="preserve">
+    <value>仅菜单</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.HeaderButtonsHideOnBack" xml:space="preserve">
+    <value>返回时隐藏菜单</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.HeaderButtonsNone" xml:space="preserve">
+    <value>隐藏两个</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OptionCollapseMenuWhenBack" xml:space="preserve">
+    <value>可返回时收起菜单按钮</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StateBackVisibility" xml:space="preserve">
+    <value>返回可见性</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StateMenuVisibility" xml:space="preserve">
+    <value>菜单可见性</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StateCanGoBack" xml:space="preserve">
+    <value>可返回</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StateStackDepth" xml:space="preserve">
+    <value>堆栈深度</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StateBackButton" xml:space="preserve">
+    <value>返回按钮</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StateMenuButton" xml:space="preserve">
+    <value>菜单按钮</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StateLeadingGroup" xml:space="preserve">
+    <value>leading 组</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StateSeparator" xml:space="preserve">
+    <value>按钮分隔线</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StackPageTitle" xml:space="preserve">
+    <value>Shell 堆栈页 {0}</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StackPageSubtitle" xml:space="preserve">
+    <value>该页通过 LuminaShell.PushAsync 压入。</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.StackPageHint" xml:space="preserve">
+    <value>Shell 顶部的返回按钮、汉堡菜单按钮和堆栈状态都来自外层 PreviewShell。</value>
   </data>
   <data name="Sandbox.Popups.WindowDialogs.Title" xml:space="preserve">
     <value>窗口对话框</value>

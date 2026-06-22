@@ -36,6 +36,8 @@ public static class LuminaLocalizationKeys
 
     public const string ShellToggleNavigationPane = "Lumina.Shell.ToggleNavigationPane";
 
+    public const string ShellNavigateBack = "Lumina.Shell.NavigateBack";
+
     public const string PageLoading = "Lumina.Page.Loading";
 
     public const string PageEmpty = "Lumina.Page.Empty";

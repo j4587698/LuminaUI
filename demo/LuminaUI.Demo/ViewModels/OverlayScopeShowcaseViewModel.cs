@@ -52,20 +52,20 @@ public partial class OverlayScopeShowcaseViewModel : ObservableObject
     [RelayCommand]
     private void OpenTopDrawer()
     {
-        var topView = LuminaTopView.FindOuterFor(_owner);
-        if (topView == null)
+        ILuminaOverlayHost? host = FindTopOverlayHost();
+        if (host == null)
         {
             return;
         }
 
-        topView.ShowDrawer(new LuminaDrawer
+        host.ShowDrawer(new LuminaDrawer
         {
             Placement = DrawerPlacement.Right,
             DrawerLength = 380,
             Content = CreateScopeContent(
                 "Sandbox.Overlays.HostScope.TopDrawer.Title",
                 "Sandbox.Overlays.HostScope.TopDrawer.Message",
-                topView.CloseDrawer)
+                host.CloseDrawer)
         });
     }
 
@@ -81,16 +81,26 @@ public partial class OverlayScopeShowcaseViewModel : ObservableObject
     [RelayCommand]
     private void OpenTopBottomSheet()
     {
-        var topView = LuminaTopView.FindOuterFor(_owner);
-        if (topView == null)
+        ILuminaOverlayHost? host = FindTopOverlayHost();
+        if (host == null)
         {
             return;
         }
 
-        topView.ShowBottomSheet(CreateScopeContent(
+        host.ShowBottomSheet(CreateScopeContent(
             "Sandbox.Overlays.HostScope.TopSheet.Title",
             "Sandbox.Overlays.HostScope.TopSheet.Message",
-            topView.CloseBottomSheet));
+            host.CloseBottomSheet));
+    }
+
+    private ILuminaOverlayHost? FindTopOverlayHost()
+    {
+        return (ILuminaOverlayHost?)_owner.GetVisualAncestors().OfType<LuminaOverlayHost>().LastOrDefault() ?? FindOuterShell();
+    }
+
+    private LuminaShell? FindOuterShell()
+    {
+        return (_owner as LuminaShell) ?? _owner.GetVisualAncestors().OfType<LuminaShell>().LastOrDefault();
     }
 
     private static Control CreateScopeContent(string titleKey, string messageKey, Action close)

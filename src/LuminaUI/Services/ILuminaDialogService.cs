@@ -10,6 +10,8 @@ public interface ILuminaDialogService
 
     void ShowDialog(LuminaShell shell, object content, string? title = null);
 
+    void ShowDialog(LuminaOverlayHost overlayHost, object content, string? title = null);
+
     void ShowDialog(LuminaTopView topView, object content, string? title = null);
 
     void ShowDialog(Control owner, object content, string? title = null);
@@ -20,6 +22,8 @@ public interface ILuminaDialogService
 
     Task<bool> ShowConfirmAsync(LuminaShell shell, string title, string message, string? confirmText = null, string? cancelText = null, bool isDanger = false);
 
+    Task<bool> ShowConfirmAsync(LuminaOverlayHost overlayHost, string title, string message, string? confirmText = null, string? cancelText = null, bool isDanger = false);
+
     Task<bool> ShowConfirmAsync(LuminaTopView topView, string title, string message, string? confirmText = null, string? cancelText = null, bool isDanger = false);
 
     Task<bool> ShowConfirmAsync(Control owner, string title, string message, string? confirmText = null, string? cancelText = null, bool isDanger = false);
@@ -29,6 +33,8 @@ public interface ILuminaDialogService
     void CloseDialog();
 
     void CloseDialog(LuminaShell shell);
+
+    void CloseDialog(LuminaOverlayHost overlayHost);
 
     void CloseDialog(LuminaTopView topView);
 
