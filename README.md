@@ -21,7 +21,7 @@ The NuGet packages target `.NET 8`, `.NET 9`, and `.NET 10`. Demo hosts remain o
 ## Features
 
 - Light and dark theme dictionaries with semantic color, border, surface, glass, and shadow tokens.
-- Application shell primitives: `LuminaWindow`, `LuminaTopView`, `LuminaShell`, `LuminaPage`, dialogs, bottom sheets, and toast surfaces.
+- Application shell primitives: `LuminaWindow`, `LuminaShell`, `LuminaOverlayHost`, `LuminaPage`, dialogs, bottom sheets, and toast surfaces.
 - Foundation controls: cards, glass surfaces, group boxes, images, avatars, badges, loading states, skeletons, empty states, and disabled containers.
 - Action controls: buttons, toggle buttons, repeat buttons, button groups, drop-down buttons, split buttons, command bars, and pop confirmations.
 - Navigation and layout: navigation view, navigation pages, drawer pages, tab pages, tab strips, tab controls, carousel, breadcrumb, split view, and transitioning content.
@@ -63,24 +63,22 @@ Use controls with the Lumina namespace:
 </lumina:LuminaCard>
 ```
 
-For applications that use `LuminaShell`, global overlays, or mobile safe-area handling, wrap the shell in a root `LuminaTopView`. `LuminaTopView` owns platform safe-area collection and publishes those insets to the visual tree; `LuminaShell` consumes them for shell chrome and scoped overlays.
+For applications that use `LuminaShell`, make the shell the root view. `LuminaShell` hosts an internal `LuminaOverlayHost` that collects platform safe-area insets, applies them to shell chrome, and scopes dialogs, bottom sheets, drawers, and toasts.
 
 ```xml
-<lumina:LuminaTopView TopViewKey="Root">
-  <lumina:LuminaShell ShellKey="App"
-                      DefaultPageTitle="Dashboard">
-    <lumina:LuminaShell.MenuContent>
-      <lumina:LuminaNavigationView />
-    </lumina:LuminaShell.MenuContent>
+<lumina:LuminaShell ShellKey="App"
+                    DefaultPageTitle="Dashboard">
+  <lumina:LuminaShell.MenuContent>
+    <lumina:LuminaNavigationView />
+  </lumina:LuminaShell.MenuContent>
 
-    <lumina:LuminaPage Header="Dashboard">
-      <TextBlock Text="Content" />
-    </lumina:LuminaPage>
-  </lumina:LuminaShell>
-</lumina:LuminaTopView>
+  <lumina:LuminaPage Header="Dashboard">
+    <TextBlock Text="Content" />
+  </lumina:LuminaPage>
+</lumina:LuminaShell>
 ```
 
-Use `LuminaShell` directly only for previews, embedded shells, or desktop-only surfaces where platform safe-area insets are not required.
+Use `LuminaOverlayHost` directly only when an application does not use `LuminaShell` but still needs global overlays or platform safe-area handling.
 
 ## Repository Layout
 
