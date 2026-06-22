@@ -131,6 +131,10 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private Thickness _layoutSafeAreaPadding;
 
+    private Thickness _menuLayoutSafeAreaPadding;
+
+    private Thickness _contentLayoutSafeAreaPadding;
+
     private Thickness _overlaySafeAreaPadding;
 
     private Thickness _effectivePageContentPadding;
@@ -265,6 +269,10 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     public static readonly StyledProperty<bool> UseSafeAreaForOverlaysProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(UseSafeAreaForOverlays), defaultValue: true);
 
     public static readonly DirectProperty<LuminaShell, Thickness> LayoutSafeAreaPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaShell, Thickness>(nameof(LayoutSafeAreaPadding), shell => shell.LayoutSafeAreaPadding);
+
+    public static readonly DirectProperty<LuminaShell, Thickness> MenuLayoutSafeAreaPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaShell, Thickness>(nameof(MenuLayoutSafeAreaPadding), shell => shell.MenuLayoutSafeAreaPadding);
+
+    public static readonly DirectProperty<LuminaShell, Thickness> ContentLayoutSafeAreaPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaShell, Thickness>(nameof(ContentLayoutSafeAreaPadding), shell => shell.ContentLayoutSafeAreaPadding);
 
     public static readonly DirectProperty<LuminaShell, Thickness> OverlaySafeAreaPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaShell, Thickness>(nameof(OverlaySafeAreaPadding), shell => shell.OverlaySafeAreaPadding);
 
@@ -809,7 +817,34 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         }
         private set
         {
-            SetAndRaise(LayoutSafeAreaPaddingProperty, ref _layoutSafeAreaPadding, value);
+            if (SetAndRaise(LayoutSafeAreaPaddingProperty, ref _layoutSafeAreaPadding, value))
+            {
+                UpdateLayoutSafeAreaPartitions();
+            }
+        }
+    }
+
+    public Thickness MenuLayoutSafeAreaPadding
+    {
+        get
+        {
+            return _menuLayoutSafeAreaPadding;
+        }
+        private set
+        {
+            SetAndRaise(MenuLayoutSafeAreaPaddingProperty, ref _menuLayoutSafeAreaPadding, value);
+        }
+    }
+
+    public Thickness ContentLayoutSafeAreaPadding
+    {
+        get
+        {
+            return _contentLayoutSafeAreaPadding;
+        }
+        private set
+        {
+            SetAndRaise(ContentLayoutSafeAreaPaddingProperty, ref _contentLayoutSafeAreaPadding, value);
         }
     }
 
@@ -1989,7 +2024,16 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         PseudoClasses.Set(":menucompact", isMenuCompact);
         PseudoClasses.Set(":pane-left", paneDisplayMode == LuminaShellPaneDisplayMode.Left);
         PseudoClasses.Set(":pane-left-compact", isLeftCompact);
+        UpdateLayoutSafeAreaPartitions();
         SyncMenuDrawer(menuDrawerHost);
+    }
+
+    private void UpdateLayoutSafeAreaPartitions()
+    {
+        Thickness safeAreaPadding = LayoutSafeAreaPadding;
+        bool menuConsumesLeftInset = EffectiveIsShellChromeVisible && (EffectiveIsMenuOpen || EffectiveIsMenuCompact);
+        MenuLayoutSafeAreaPadding = menuConsumesLeftInset ? new Thickness(safeAreaPadding.Left, safeAreaPadding.Top, 0.0, safeAreaPadding.Bottom) : default;
+        ContentLayoutSafeAreaPadding = menuConsumesLeftInset ? new Thickness(0.0, safeAreaPadding.Top, safeAreaPadding.Right, safeAreaPadding.Bottom) : safeAreaPadding;
     }
 
     private Thickness ResolveEffectivePageContentPadding(bool isShellChromeEffectiveVisible, bool isShellHeaderEffectiveVisible)

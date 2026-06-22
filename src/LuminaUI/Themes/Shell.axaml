@@ -71,7 +71,7 @@
                             <!-- Menu pane is separated by surface tone, not by an extra border. -->
                             <Border Background="{TemplateBinding PaneBackground}"
                                     IsVisible="{TemplateBinding EffectiveIsShellChromeVisible}"
-                                    Padding="{TemplateBinding LayoutSafeAreaPadding}"
+                                    Padding="{TemplateBinding MenuLayoutSafeAreaPadding}"
                                     lumina:LuminaShell.IsMenuCompact="{TemplateBinding EffectiveIsMenuCompact}">
                                 <Grid RowDefinitions="Auto,*,Auto,Auto">
                                     <Border Name="PART_MenuHeader"
@@ -132,7 +132,7 @@
                         </SplitView.Pane>
                         
                         <SplitView.Content>
-                            <Border Padding="{TemplateBinding LayoutSafeAreaPadding}">
+                            <Border Padding="{TemplateBinding ContentLayoutSafeAreaPadding}">
                                 <Grid RowDefinitions="Auto,*">
                                     <!-- 主区域头部栏插槽 -->
                                     <Border Name="PART_ContentHeader"

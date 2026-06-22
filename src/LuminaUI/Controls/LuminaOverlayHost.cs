@@ -25,6 +25,12 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
 
     private static readonly Dictionary<string, WeakReference<LuminaOverlayHost>> OverlayHostRegistry = new Dictionary<string, WeakReference<LuminaOverlayHost>>(StringComparer.Ordinal);
 
+    private static readonly object SafeAreaOverrideLock = new object();
+
+    private static readonly Dictionary<Control, AutoSafeAreaOverrideState> AutoSafeAreaOverrideStates = new Dictionary<Control, AutoSafeAreaOverrideState>();
+
+    private static readonly Dictionary<IInsetsManager, EdgeToEdgeOverrideState> EdgeToEdgeOverrideStates = new Dictionary<IInsetsManager, EdgeToEdgeOverrideState>();
+
     private static readonly TimeSpan BottomSheetClearDelay = TimeSpan.FromMilliseconds(360);
 
     private static readonly TimeSpan DrawerClearDelay = TimeSpan.FromMilliseconds(360);
@@ -61,13 +67,11 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
 
     private IInsetsManager? _insetsManager;
 
-    private bool _previousDisplayEdgeToEdgePreference;
+    private IInsetsManager? _edgeToEdgeInsetsManager;
 
-    private bool _hasDisplayEdgeToEdgePreferenceOverride;
+    private bool _hasEdgeToEdgePreferenceOverride;
 
     private Control? _autoSafeAreaTarget;
-
-    private bool _autoSafeAreaPreviousValue;
 
     private bool _hasAutoSafeAreaOverride;
 
@@ -102,7 +106,7 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
 
     public static readonly StyledProperty<bool> UseSafeAreaProperty = AvaloniaProperty.Register<LuminaOverlayHost, bool>(nameof(UseSafeArea), defaultValue: true);
 
-    public static readonly StyledProperty<LuminaSafeAreaMode> SafeAreaModeProperty = AvaloniaProperty.Register<LuminaOverlayHost, LuminaSafeAreaMode>(nameof(SafeAreaMode), LuminaSafeAreaMode.Enabled);
+    public static readonly StyledProperty<LuminaSafeAreaMode> SafeAreaModeProperty = AvaloniaProperty.Register<LuminaOverlayHost, LuminaSafeAreaMode>(nameof(SafeAreaMode), LuminaSafeAreaMode.Auto);
 
     public static readonly StyledProperty<bool> UseSafeAreaForOverlaysProperty = AvaloniaProperty.Register<LuminaOverlayHost, bool>(nameof(UseSafeAreaForOverlays), defaultValue: true);
 
@@ -123,6 +127,20 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
     public ICommand ClearToastCommand { get; }
 
     public static LuminaOverlayHost? Current { get; private set; }
+
+    private sealed class AutoSafeAreaOverrideState
+    {
+        public int Count { get; set; }
+
+        public bool PreviousValue { get; set; }
+    }
+
+    private sealed class EdgeToEdgeOverrideState
+    {
+        public int Count { get; set; }
+
+        public bool PreviousValue { get; set; }
+    }
 
     public string? OverlayHostKey
     {
@@ -648,9 +666,7 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
         }
 
         _insetsManager = insetsManager;
-        _previousDisplayEdgeToEdgePreference = insetsManager.DisplayEdgeToEdgePreference;
-        _hasDisplayEdgeToEdgePreferenceOverride = true;
-        _insetsManager.DisplayEdgeToEdgePreference = true;
+        AcquireInsetsManagerEdgeToEdgePreference(insetsManager);
         _insetsManager.SafeAreaChanged += OnSafeAreaChanged;
     }
 
@@ -659,20 +675,56 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
         if (_insetsManager != null)
         {
             _insetsManager.SafeAreaChanged -= OnSafeAreaChanged;
-            RestoreInsetsManagerEdgeToEdgePreference();
+            ReleaseInsetsManagerEdgeToEdgePreference();
             _insetsManager = null;
         }
     }
 
-    private void RestoreInsetsManagerEdgeToEdgePreference()
+    private void AcquireInsetsManagerEdgeToEdgePreference(IInsetsManager insetsManager)
     {
-        if (_hasDisplayEdgeToEdgePreferenceOverride && _insetsManager != null)
+        ReleaseInsetsManagerEdgeToEdgePreference();
+        lock (SafeAreaOverrideLock)
         {
-            _insetsManager.DisplayEdgeToEdgePreference = _previousDisplayEdgeToEdgePreference;
+            if (!EdgeToEdgeOverrideStates.TryGetValue(insetsManager, out EdgeToEdgeOverrideState? state))
+            {
+                state = new EdgeToEdgeOverrideState
+                {
+                    PreviousValue = insetsManager.DisplayEdgeToEdgePreference
+                };
+                EdgeToEdgeOverrideStates.Add(insetsManager, state);
+                insetsManager.DisplayEdgeToEdgePreference = true;
+            }
+
+            state.Count++;
         }
 
-        _previousDisplayEdgeToEdgePreference = false;
-        _hasDisplayEdgeToEdgePreferenceOverride = false;
+        _edgeToEdgeInsetsManager = insetsManager;
+        _hasEdgeToEdgePreferenceOverride = true;
+    }
+
+    private void ReleaseInsetsManagerEdgeToEdgePreference()
+    {
+        if (!_hasEdgeToEdgePreferenceOverride || _edgeToEdgeInsetsManager == null)
+        {
+            return;
+        }
+
+        IInsetsManager insetsManager = _edgeToEdgeInsetsManager;
+        lock (SafeAreaOverrideLock)
+        {
+            if (EdgeToEdgeOverrideStates.TryGetValue(insetsManager, out EdgeToEdgeOverrideState? state))
+            {
+                state.Count--;
+                if (state.Count <= 0)
+                {
+                    insetsManager.DisplayEdgeToEdgePreference = state.PreviousValue;
+                    EdgeToEdgeOverrideStates.Remove(insetsManager);
+                }
+            }
+        }
+
+        _edgeToEdgeInsetsManager = null;
+        _hasEdgeToEdgePreferenceOverride = false;
     }
 
     private void OnSafeAreaChanged(object? sender, SafeAreaChangedArgs e)
@@ -711,7 +763,7 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
             return false;
         }
 
-        return SafeAreaMode == LuminaSafeAreaMode.Enabled || !this.GetVisualAncestors().OfType<LuminaOverlayHost>().Any();
+        return SafeAreaMode == LuminaSafeAreaMode.Enabled || IsRootSafeAreaBoundary();
     }
 
     private bool ShouldApplyLayoutSafeArea()
@@ -720,7 +772,7 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
         {
             LuminaSafeAreaMode.Enabled => UseSafeArea,
             LuminaSafeAreaMode.Disabled => false,
-            _ => UseSafeArea && !this.GetVisualAncestors().OfType<LuminaOverlayHost>().Any()
+            _ => UseSafeArea && IsRootSafeAreaBoundary()
         };
     }
 
@@ -730,8 +782,23 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
         {
             LuminaSafeAreaMode.Enabled => UseSafeArea,
             LuminaSafeAreaMode.Disabled => false,
-            _ => UseSafeArea && !this.GetVisualAncestors().OfType<LuminaOverlayHost>().Any()
+            _ => UseSafeArea && IsRootSafeAreaBoundary()
         };
+    }
+
+    private bool ShouldOverrideTopLevelAutoSafeAreaPadding()
+    {
+        if (_topLevel == null)
+        {
+            return false;
+        }
+
+        return ShouldProvideSafeArea() || (IsRootSafeAreaBoundary() && (!UseSafeArea || SafeAreaMode == LuminaSafeAreaMode.Disabled));
+    }
+
+    private bool IsRootSafeAreaBoundary()
+    {
+        return !this.GetVisualAncestors().OfType<LuminaOverlayHost>().Any();
     }
 
     private void ApplyBottomSheetSafeAreaPadding()
@@ -753,15 +820,34 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
     private void SyncTopLevelSafeAreaMode()
     {
         RestoreTopLevelAutoSafeAreaPadding();
-        if (!ShouldProvideSafeArea() || _topLevel?.Content is not Control content)
+        if (!ShouldOverrideTopLevelAutoSafeAreaPadding() || _topLevel?.Content is not Control content)
         {
             return;
         }
 
-        _autoSafeAreaTarget = content;
-        _autoSafeAreaPreviousValue = TopLevel.GetAutoSafeAreaPadding(content);
+        AcquireTopLevelAutoSafeAreaPaddingOverride(content);
+    }
+
+    private void AcquireTopLevelAutoSafeAreaPaddingOverride(Control target)
+    {
+        RestoreTopLevelAutoSafeAreaPadding();
+        lock (SafeAreaOverrideLock)
+        {
+            if (!AutoSafeAreaOverrideStates.TryGetValue(target, out AutoSafeAreaOverrideState? state))
+            {
+                state = new AutoSafeAreaOverrideState
+                {
+                    PreviousValue = TopLevel.GetAutoSafeAreaPadding(target)
+                };
+                AutoSafeAreaOverrideStates.Add(target, state);
+                TopLevel.SetAutoSafeAreaPadding(target, value: false);
+            }
+
+            state.Count++;
+        }
+
+        _autoSafeAreaTarget = target;
         _hasAutoSafeAreaOverride = true;
-        TopLevel.SetAutoSafeAreaPadding(content, value: false);
     }
 
     private void RestoreTopLevelAutoSafeAreaPadding()
@@ -771,9 +857,21 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
             return;
         }
 
-        TopLevel.SetAutoSafeAreaPadding(_autoSafeAreaTarget, _autoSafeAreaPreviousValue);
+        Control target = _autoSafeAreaTarget;
+        lock (SafeAreaOverrideLock)
+        {
+            if (AutoSafeAreaOverrideStates.TryGetValue(target, out AutoSafeAreaOverrideState? state))
+            {
+                state.Count--;
+                if (state.Count <= 0)
+                {
+                    TopLevel.SetAutoSafeAreaPadding(target, state.PreviousValue);
+                    AutoSafeAreaOverrideStates.Remove(target);
+                }
+            }
+        }
+
         _autoSafeAreaTarget = null;
-        _autoSafeAreaPreviousValue = false;
         _hasAutoSafeAreaOverride = false;
     }
 

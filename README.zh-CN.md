@@ -21,7 +21,7 @@ NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NE
 ## 功能概览
 
 - 浅色和深色主题字典，包含语义色、边框、表面、玻璃效果和阴影 Token。
-- 应用壳层基础设施：`LuminaWindow`、`LuminaTopView`、`LuminaShell`、`LuminaPage`、对话框、底部 Sheet 和轻提示表面。
+- 应用壳层基础设施：`LuminaWindow`、`LuminaShell`、`LuminaOverlayHost`、`LuminaPage`、对话框、底部 Sheet 和轻提示表面。
 - 基础控件：卡片、玻璃表面、分组框、图片、头像、徽章、加载状态、骨架屏、空状态和禁用容器。
 - 操作控件：按钮、切换按钮、重复按钮、按钮组、下拉按钮、拆分按钮、命令栏和弹出确认。
 - 导航与布局：导航视图、导航页、抽屉页、标签页容器、标签条、标签页、轮播、面包屑、拆分视图和过渡内容。
@@ -63,24 +63,22 @@ NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NE
 </lumina:LuminaCard>
 ```
 
-如果应用使用 `LuminaShell`、全局覆盖层，或需要移动端安全区处理，推荐把 Shell 放在根 `LuminaTopView` 内。`LuminaTopView` 负责采集平台 safe area，并把 inset 继承传递给视觉树；`LuminaShell` 负责消费这些 inset，用于 Shell chrome 和局部覆盖层。
+如果应用使用 `LuminaShell`，推荐直接把 Shell 作为根视图。`LuminaShell` 内部承载 `LuminaOverlayHost`，负责采集平台 safe area、应用到 Shell chrome，并为对话框、底部 Sheet、抽屉和轻提示提供局部覆盖层。
 
 ```xml
-<lumina:LuminaTopView TopViewKey="Root">
-  <lumina:LuminaShell ShellKey="App"
-                      DefaultPageTitle="仪表盘">
-    <lumina:LuminaShell.MenuContent>
-      <lumina:LuminaNavigationView />
-    </lumina:LuminaShell.MenuContent>
+<lumina:LuminaShell ShellKey="App"
+                    DefaultPageTitle="仪表盘">
+  <lumina:LuminaShell.MenuContent>
+    <lumina:LuminaNavigationView />
+  </lumina:LuminaShell.MenuContent>
 
-    <lumina:LuminaPage Header="仪表盘">
-      <TextBlock Text="内容" />
-    </lumina:LuminaPage>
-  </lumina:LuminaShell>
-</lumina:LuminaTopView>
+  <lumina:LuminaPage Header="仪表盘">
+    <TextBlock Text="内容" />
+  </lumina:LuminaPage>
+</lumina:LuminaShell>
 ```
 
-仅在预览、嵌入式 Shell，或不需要平台安全区 inset 的桌面专用界面中，才建议直接使用 `LuminaShell` 作为根容器。
+仅在不使用 `LuminaShell`、但仍需要全局覆盖层或平台安全区处理时，才直接使用 `LuminaOverlayHost`。
 
 ## 目录结构
 
