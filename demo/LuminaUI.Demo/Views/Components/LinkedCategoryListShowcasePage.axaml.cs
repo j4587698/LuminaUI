@@ -1,9 +1,10 @@
 using Avalonia.Controls;
+using LuminaUI.Controls;
 using LuminaUI.Demo.ViewModels;
 
 namespace LuminaUI.Demo.Views;
 
-public partial class LinkedCategoryListShowcasePage : ContentPage
+public partial class LinkedCategoryListShowcasePage : LuminaPage
 {
     public LinkedCategoryListShowcasePage()
     {

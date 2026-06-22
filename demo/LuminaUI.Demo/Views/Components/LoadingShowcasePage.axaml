@@ -1,4 +1,4 @@
-<ContentPage xmlns="https://github.com/avaloniaui"
+<lumina:LuminaPage xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
@@ -86,4 +86,4 @@
             </lumina:LuminaResponsivePanel>
         </StackPanel>
     </ScrollViewer>
-</ContentPage>
+</lumina:LuminaPage>

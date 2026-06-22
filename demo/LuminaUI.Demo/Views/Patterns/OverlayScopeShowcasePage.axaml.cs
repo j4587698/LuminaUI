@@ -1,10 +1,11 @@
 using Avalonia.Controls;
 using Avalonia.Threading;
+using LuminaUI.Controls;
 using LuminaUI.Demo.ViewModels;
 
 namespace LuminaUI.Demo.Views;
 
-public partial class OverlayScopeShowcasePage : ContentPage
+public partial class OverlayScopeShowcasePage : LuminaPage
 {
     public OverlayScopeShowcasePage()
     {
