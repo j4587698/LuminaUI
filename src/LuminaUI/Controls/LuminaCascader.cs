@@ -534,7 +534,7 @@ public class LuminaCascader : TemplatedControl
                 await ActivateNodeAsync(node, loadChildren: true);
             }
         }
-        catch (TaskCanceledException)
+        catch (OperationCanceledException)
         {
         }
         finally
@@ -549,9 +549,12 @@ public class LuminaCascader : TemplatedControl
 
     private void CancelHoverExpand()
     {
-        _hoverExpandCancellation?.Cancel();
-        _hoverExpandCancellation?.Dispose();
+        // Only cancel here; disposal is owned by the pending OnNodePointerEntered's finally block.
+        // Disposing a token source that an in-flight Task.Delay is still observing can surface an
+        // ObjectDisposedException instead of the expected cancellation, so we never dispose it here.
+        CancellationTokenSource? cancellation = _hoverExpandCancellation;
         _hoverExpandCancellation = null;
+        cancellation?.Cancel();
     }
 
     private async Task ActivateNodeAsync(LuminaCascaderNode node, bool loadChildren)
@@ -1064,19 +1067,43 @@ public class LuminaCascader : TemplatedControl
         };
         button.Classes.Set("active", node.IsActive);
         label[!TextBlock.ForegroundProperty] = button[!TemplatedControl.ForegroundProperty];
-        button.PointerEntered += async (_, _) => await OnNodePointerEntered(node);
+        button.PointerEntered += async (_, _) =>
+        {
+            try
+            {
+                await OnNodePointerEntered(node);
+            }
+            catch (Exception ex) when (ex is not OperationCanceledException)
+            {
+                System.Diagnostics.Debug.WriteLine($"LuminaCascader hover expand failed: {ex}");
+            }
+        };
         button.AddHandler(InputElement.PointerPressedEvent, async (object? _, PointerPressedEventArgs e) =>
         {
             if (CanSelectNode(node) && IsExpandable(node) && e.GetCurrentPoint(button).Properties.IsLeftButtonPressed)
             {
                 e.Handled = true;
-                await OnNodeClick(node);
+                try
+                {
+                    await OnNodeClick(node);
+                }
+                catch (Exception ex) when (ex is not OperationCanceledException)
+                {
+                    System.Diagnostics.Debug.WriteLine($"LuminaCascader node activation failed: {ex}");
+                }
             }
         }, RoutingStrategies.Tunnel);
         button.Click += async (_, e) =>
         {
             e.Handled = true;
-            await OnNodeClick(node);
+            try
+            {
+                await OnNodeClick(node);
+            }
+            catch (Exception ex) when (ex is not OperationCanceledException)
+            {
+                System.Diagnostics.Debug.WriteLine($"LuminaCascader node activation failed: {ex}");
+            }
         };
         return button;
     }

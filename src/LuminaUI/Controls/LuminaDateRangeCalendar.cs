@@ -16,8 +16,6 @@ namespace LuminaUI.Controls;
 
 public class LuminaDateRangeCalendar : TemplatedControl
 {
-    private const string DayButtonThemeKey = "LuminaDateRangeCalendarDayButtonTheme";
-
     private Grid? _daysGrid;
 
     private Button? _previousButton;

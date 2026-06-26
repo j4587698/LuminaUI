@@ -29,8 +29,6 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private const double SmallScreenBreakpoint = 768.0;
 
-    private const string WindowGlassClass = "WindowGlass";
-
     private readonly Dictionary<string, Func<Control>> _routeFactories = new Dictionary<string, Func<Control>>(StringComparer.Ordinal);
 
     private readonly Dictionary<string, Control> _routeCache = new Dictionary<string, Control>(StringComparer.Ordinal);
@@ -226,6 +224,14 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     public static readonly StyledProperty<bool> AutoNavigateProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(AutoNavigate), defaultValue: true);
 
     public static readonly StyledProperty<bool> CachePagesProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(CachePages), defaultValue: true);
+
+    /// <summary>
+    /// 根页面切换时使用的过渡动画。默认是一段较短的淡入淡出（移动端更跟手）。
+    /// 设为 <c>null</c> 可完全关闭过渡，在低端设备上能进一步提升切换响应速度。
+    /// </summary>
+    public static readonly StyledProperty<IPageTransition?> PageTransitionProperty = AvaloniaProperty.Register<LuminaShell, IPageTransition?>(
+        nameof(PageTransition),
+        defaultValue: new CrossFade(TimeSpan.FromMilliseconds(150)));
 
     public static readonly StyledProperty<bool> CloseMenuOnNavigateProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(CloseMenuOnNavigate), defaultValue: true);
 
@@ -661,6 +667,12 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     {
         get => GetValue(CachePagesProperty);
         set => SetValue(CachePagesProperty, value);
+    }
+
+    public IPageTransition? PageTransition
+    {
+        get => GetValue(PageTransitionProperty);
+        set => SetValue(PageTransitionProperty, value);
     }
 
     public bool CloseMenuOnNavigate

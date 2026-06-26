@@ -14,22 +14,6 @@ namespace LuminaUI.Controls;
 
 public class LuminaWindow : Window
 {
-    private const double DefaultTitleBarHeight = 40.0;
-
-    private const double DefaultNativeSystemButtonReservedWidth = 72.0;
-
-    private const int DefaultFullScreenTitleBarAutoHideDelay = 1000;
-
-    private const int DefaultFullScreenTitleBarAutoShowDelay = 160;
-
-    private const double FullScreenTitleBarShowEdge = 10.0;
-
-    private const double FullScreenTitleBarHideEdge = 56.0;
-
-    private const string SolidBackgroundResourceKey = "LuminaBackgroundBrush";
-
-    private const string GlassBackgroundResourceKey = "LuminaWindowGlassBackgroundBrush";
-
     private const string AvaloniaDefaultApplicationName = "Avalonia Application";
 
     private readonly Grid _rootSurface;

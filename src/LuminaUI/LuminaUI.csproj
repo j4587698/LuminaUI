@@ -12,11 +12,4 @@
     <PackageReference Include="Avalonia.Skia" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="Controls/LuminaIconPlacement.cs" />
-    <Compile Remove="Controls/LuminaStepsEnums.cs" />
-    <Compile Remove="Controls/LuminaTimelineEnums.cs" />
-    <Compile Remove="Controls/LuminaWheelPickerSheet.cs" />
-  </ItemGroup>
-
 </Project>

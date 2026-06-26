@@ -68,8 +68,11 @@ public sealed class LuminaImageCache : ILuminaImageCache
         {
             await WriteCacheFileAtomicAsync(cacheFile, bytes, cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
         }
-        catch
+        catch (Exception ex) when (ex is not OperationCanceledException)
         {
+            // Writing to the disk cache is best-effort: an IO failure (disk full, permissions, etc.)
+            // must not break image loading, but it should not be silently swallowed either.
+            System.Diagnostics.Debug.WriteLine($"LuminaImageCache: failed to write cache file '{cacheFile}': {ex}");
         }
         finally
         {
@@ -97,6 +100,10 @@ public sealed class LuminaImageCache : ILuminaImageCache
         {
             byte[] bytes = await File.ReadAllBytesAsync(cacheFile, cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
             return (bytes.Length != 0) ? bytes : null;
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch
         {

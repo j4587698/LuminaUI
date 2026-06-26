@@ -1023,21 +1023,22 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
         try
         {
             await Task.Delay(BottomSheetClearDelay, cancellation.Token).ConfigureAwait(continueOnCapturedContext: false);
+            await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
+                if (_bottomSheetClearCancellation == cancellation && !IsBottomSheetOpen && _ownsBottomSheetContent)
+                {
+                    _bottomSheetClearCancellation = null;
+                    _ownsBottomSheetContent = false;
+                    BottomSheetContent = null;
+                }
+            });
         }
-        catch (TaskCanceledException)
+        catch (OperationCanceledException)
+        {
+        }
+        finally
         {
             cancellation.Dispose();
-            return;
         }
-        await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
-            if (_bottomSheetClearCancellation == cancellation && !IsBottomSheetOpen && _ownsBottomSheetContent)
-            {
-                _bottomSheetClearCancellation = null;
-                _ownsBottomSheetContent = false;
-                BottomSheetContent = null;
-            }
-            cancellation.Dispose();
-        });
     }
 
     private async Task ClearDrawerContentAsync(CancellationTokenSource cancellation)
@@ -1045,21 +1046,22 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
         try
         {
             await Task.Delay(DrawerClearDelay, cancellation.Token).ConfigureAwait(continueOnCapturedContext: false);
+            await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
+                if (_drawerClearCancellation == cancellation && !IsDrawerOpen && _ownsDrawerContent)
+                {
+                    _drawerClearCancellation = null;
+                    _ownsDrawerContent = false;
+                    DrawerContent = null;
+                }
+            });
         }
-        catch (TaskCanceledException)
+        catch (OperationCanceledException)
+        {
+        }
+        finally
         {
             cancellation.Dispose();
-            return;
         }
-        await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
-            if (_drawerClearCancellation == cancellation && !IsDrawerOpen && _ownsDrawerContent)
-            {
-                _drawerClearCancellation = null;
-                _ownsDrawerContent = false;
-                DrawerContent = null;
-            }
-            cancellation.Dispose();
-        });
     }
 
     private void RegisterAttachedOverlayHost()
