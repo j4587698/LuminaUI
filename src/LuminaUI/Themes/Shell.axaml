@@ -222,11 +222,8 @@
                                         ClipToBounds="True"
                                         Padding="{TemplateBinding EffectivePageContentPadding}">
                                     <NavigationPage Name="PART_NavigationHost"
-                                                    Theme="{StaticResource LuminaShellNavigationPage}">
-                                        <NavigationPage.PageTransition>
-                                            <CrossFade Duration="0:0:0.25" />
-                                        </NavigationPage.PageTransition>
-                                    </NavigationPage>
+                                                    Theme="{StaticResource LuminaShellNavigationPage}"
+                                                    PageTransition="{TemplateBinding PageTransition}" />
                                 </Border>
                                 </Grid>
                             </Border>

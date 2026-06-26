@@ -23,6 +23,11 @@ public sealed class LuminaImageLoader : ILuminaImageLoader
 
     public ILuminaImageCache Cache { get; set; }
 
+    /// <summary>
+    /// 已解码位图的内存缓存。命中后直接复用，无需重新解码，是大列表滚动性能的关键。
+    /// </summary>
+    public LuminaDecodedImageCache DecodedCache { get; } = new LuminaDecodedImageCache();
+
     public static LuminaImageLoader WithHttpClient(HttpClient httpClient)
     {
         ArgumentNullException.ThrowIfNull(httpClient, "httpClient");
@@ -53,6 +58,17 @@ public sealed class LuminaImageLoader : ILuminaImageLoader
         Cache = cache ?? new LuminaImageCache();
     }
 
+    public IImage? TryGetCachedImage(object? source, LuminaImageLoadOptions options)
+    {
+        if (!TryGetCacheableSource(source, out string sourceText))
+        {
+            return null;
+        }
+
+        string key = LuminaDecodedImageCache.BuildKey(sourceText, options.DecodePixelWidth, options.DecodePixelHeight);
+        return DecodedCache.TryGet(key, out IImage image) ? image : null;
+    }
+
     public async Task<IImage?> LoadAsync(object? source, LuminaImageLoadOptions options, CancellationToken cancellationToken)
     {
         if (source == null)
@@ -65,7 +81,7 @@ public sealed class LuminaImageLoader : ILuminaImageLoader
         }
         if (source is byte[] bytes)
         {
-            return Decode(bytes);
+            return Decode(bytes, options);
         }
         string? sourceText = source switch
         {
@@ -78,25 +94,48 @@ public sealed class LuminaImageLoader : ILuminaImageLoader
             return null;
         }
         sourceText = sourceText.Trim();
+
+        // 先查已解码位图缓存：命中则零解码直接返回（base64 较大时跳过该缓存，避免长 key）。
+        bool useDecodedCache = !sourceText.StartsWith("data:", StringComparison.OrdinalIgnoreCase);
+        string decodedKey = useDecodedCache
+            ? LuminaDecodedImageCache.BuildKey(sourceText, options.DecodePixelWidth, options.DecodePixelHeight)
+            : string.Empty;
+        if (useDecodedCache && DecodedCache.TryGet(decodedKey, out IImage cachedImage))
+        {
+            return cachedImage;
+        }
+
+        IImage? decoded;
         if (TryDecodeBase64(sourceText, out byte[] base64Bytes))
         {
-            return Decode(base64Bytes);
+            decoded = Decode(base64Bytes, options);
         }
-        if (IsWebUri(sourceText))
+        else if (IsWebUri(sourceText))
         {
-            return await LoadWebImageAsync(sourceText, options, cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
+            decoded = await LoadWebImageAsync(sourceText, options, cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
         }
-        return LoadLocalImage(sourceText);
+        else
+        {
+            decoded = LoadLocalImage(sourceText, options);
+        }
+
+        if (useDecodedCache && decoded != null)
+        {
+            DecodedCache.Set(decodedKey, decoded);
+        }
+
+        return decoded;
     }
 
     public void ClearMemoryCache()
     {
         Cache.Clear();
+        DecodedCache.Clear();
     }
 
     private async Task<IImage?> LoadWebImageAsync(string url, LuminaImageLoadOptions options, CancellationToken cancellationToken)
     {
-        return Decode(await ReadWebBytesAsync(url, options, cancellationToken).ConfigureAwait(continueOnCapturedContext: false));
+        return Decode(await ReadWebBytesAsync(url, options, cancellationToken).ConfigureAwait(continueOnCapturedContext: false), options);
     }
 
     private async Task<byte[]> ReadWebBytesAsync(string url, LuminaImageLoadOptions options, CancellationToken cancellationToken)
@@ -129,41 +168,76 @@ public sealed class LuminaImageLoader : ILuminaImageLoader
         }
     }
 
-    private static IImage? LoadLocalImage(string source)
+    private static IImage? LoadLocalImage(string source, LuminaImageLoadOptions options)
     {
         if (Uri.TryCreate(source, UriKind.Absolute, out Uri? uri) && (uri.Scheme.Equals("avares", StringComparison.OrdinalIgnoreCase) || uri.Scheme.Equals("resm", StringComparison.OrdinalIgnoreCase)))
         {
             using (Stream stream = AssetLoader.Open(uri))
             {
-                return Decode(stream);
+                return Decode(stream, options);
             }
         }
         if (File.Exists(source))
         {
             using (FileStream stream = File.OpenRead(source))
             {
-                return Decode(stream);
+                return Decode(stream, options);
             }
         }
         if (Uri.TryCreate(source, UriKind.Absolute, out uri) && uri.IsFile && File.Exists(uri.LocalPath))
         {
             using (FileStream stream = File.OpenRead(uri.LocalPath))
             {
-                return Decode(stream);
+                return Decode(stream, options);
             }
         }
         return null;
     }
 
-    private static Bitmap? Decode(byte[] bytes)
+    private static Bitmap? Decode(byte[] bytes, LuminaImageLoadOptions options)
     {
         using MemoryStream stream = new MemoryStream(bytes);
-        return Decode(stream);
+        return Decode(stream, options);
     }
 
-    private static Bitmap? Decode(Stream stream)
+    private static Bitmap? Decode(Stream stream, LuminaImageLoadOptions options)
     {
+        // 按目标显示尺寸降采样解码：只把图片解到实际需要的像素，
+        // 大幅降低内存占用、解码耗时与 GPU 纹理上传成本（大列表卡顿主因）。
+        int width = options.DecodePixelWidth;
+        int height = options.DecodePixelHeight;
+
+        if (width > 0)
+        {
+            return Bitmap.DecodeToWidth(stream, width, BitmapInterpolationMode.MediumQuality);
+        }
+        if (height > 0)
+        {
+            return Bitmap.DecodeToHeight(stream, height, BitmapInterpolationMode.MediumQuality);
+        }
         return new Bitmap(stream);
+    }
+
+    private static bool TryGetCacheableSource(object? source, out string sourceText)
+    {
+        sourceText = string.Empty;
+        string? text = source switch
+        {
+            Uri uri => uri.ToString(),
+            string s => s,
+            _ => null
+        };
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            return false;
+        }
+        text = text.Trim();
+        if (text.StartsWith("data:", StringComparison.OrdinalIgnoreCase))
+        {
+            return false;
+        }
+        sourceText = text;
+        return true;
     }
 
     private static bool TryDecodeBase64(string source, out byte[] bytes)
