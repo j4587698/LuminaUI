@@ -47,9 +47,17 @@ public class LuminaImage : TemplatedControl
 
     private int _loadVersion;
 
+    private bool _pendingAutoSizeLoad;
+
     public static readonly StyledProperty<ILuminaImageLoader?> LoaderProperty = AvaloniaProperty.Register<LuminaImage, ILuminaImageLoader?>(nameof(Loader));
 
     public static readonly StyledProperty<object?> SourceProperty = AvaloniaProperty.Register<LuminaImage, object?>(nameof(Source));
+
+    public static readonly StyledProperty<int> DecodeWidthProperty = AvaloniaProperty.Register<LuminaImage, int>(nameof(DecodeWidth));
+
+    public static readonly StyledProperty<int> DecodeHeightProperty = AvaloniaProperty.Register<LuminaImage, int>(nameof(DecodeHeight));
+
+    public static readonly StyledProperty<bool> AutoDecodeToDisplaySizeProperty = AvaloniaProperty.Register<LuminaImage, bool>(nameof(AutoDecodeToDisplaySize), defaultValue: true);
 
     public static readonly StyledProperty<LuminaImageCacheMode> ImageCacheModeProperty = AvaloniaProperty.Register<LuminaImage, LuminaImageCacheMode>(nameof(ImageCacheMode), LuminaImageCacheMode.MemoryAndDisk);
 
@@ -121,6 +129,35 @@ public class LuminaImage : TemplatedControl
     {
         get => GetValue(SourceProperty);
         set => SetValue(SourceProperty, value);
+    }
+
+    /// <summary>
+    /// 目标解码像素宽度。&gt;0 时按该宽度降采样解码（保持宽高比），显著降低大图内存与解码开销。
+    /// 为 0 且 <see cref="AutoDecodeToDisplaySize"/> 为 true 时，将按控件实际显示尺寸自动推断。
+    /// </summary>
+    public int DecodeWidth
+    {
+        get => GetValue(DecodeWidthProperty);
+        set => SetValue(DecodeWidthProperty, value);
+    }
+
+    /// <summary>
+    /// 目标解码像素高度。&gt;0 时按该高度降采样解码（保持宽高比）。仅在 <see cref="DecodeWidth"/> 未设置时生效。
+    /// </summary>
+    public int DecodeHeight
+    {
+        get => GetValue(DecodeHeightProperty);
+        set => SetValue(DecodeHeightProperty, value);
+    }
+
+    /// <summary>
+    /// 是否在未显式指定 <see cref="DecodeWidth"/>/<see cref="DecodeHeight"/> 时，
+    /// 自动按控件的显示尺寸降采样解码。默认 true，建议在固定尺寸的列表封面场景保持开启。
+    /// </summary>
+    public bool AutoDecodeToDisplaySize
+    {
+        get => GetValue(AutoDecodeToDisplaySizeProperty);
+        set => SetValue(AutoDecodeToDisplaySizeProperty, value);
     }
 
     public LuminaImageCacheMode ImageCacheMode
@@ -389,7 +426,7 @@ public class LuminaImage : TemplatedControl
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
-        if (change.Property == SourceProperty || change.Property == LoaderProperty || change.Property == ImageCacheModeProperty || change.Property == CacheDurationProperty || change.Property == CacheDirectoryProperty)
+        if (change.Property == SourceProperty || change.Property == LoaderProperty || change.Property == ImageCacheModeProperty || change.Property == CacheDurationProperty || change.Property == CacheDirectoryProperty || change.Property == DecodeWidthProperty || change.Property == DecodeHeightProperty || change.Property == AutoDecodeToDisplaySizeProperty)
         {
             BeginLoad();
         }
@@ -426,22 +463,63 @@ public class LuminaImage : TemplatedControl
     {
         int version = ++_loadVersion;
         CancelLoad();
+        _pendingAutoSizeLoad = false;
         if (Source == null)
         {
             SetIdle(version);
             return;
         }
+
+        // 自动按显示尺寸降采样时，若布局尚未完成（Bounds 为 0）则推迟加载，
+        // 待 ArrangeOverride 拿到真实尺寸后再解码，避免退化为全分辨率解码。
+        bool wantsAutoSize = DecodeWidth <= 0 && DecodeHeight <= 0 && AutoDecodeToDisplaySize;
+        LuminaImageLoadOptions options = ResolveLoadOptions();
+        if (wantsAutoSize && options.DecodePixelWidth <= 0 && options.DecodePixelHeight <= 0)
+        {
+            _pendingAutoSizeLoad = true;
+            SetLoading();
+            return;
+        }
+
+        ILuminaImageLoader loader = Loader ?? ImageLoader;
+
+        // 虚拟化关键路径：列表项被回收复用时会反复 detach/attach。
+        // 若已解码位图缓存命中，则同步直接复用，避免每次都走异步加载 + 重新解码，
+        // 既消除滚动闪烁（先 Loading 再出图），也消除重复解码开销。
+        IImage? cached = loader.TryGetCachedImage(Source, options);
+        if (cached != null)
+        {
+            ImageSource = cached;
+            Status = LuminaImageStatus.Loaded;
+            ErrorMessage = null;
+            UpdateContentState();
+            return;
+        }
+
         _loadCancellation = new CancellationTokenSource();
         CancellationToken token = _loadCancellation.Token;
         SetLoading();
-        _ = LoadAsync(Source, version, token);
+        _ = LoadAsync(Source, options, version, token);
     }
 
-    private async Task LoadAsync(object? source, int version, CancellationToken cancellationToken)
+    protected override Size ArrangeOverride(Size finalSize)
+    {
+        Size result = base.ArrangeOverride(finalSize);
+
+        // 布局完成后若有因尺寸未就绪而推迟的加载，此时用真实尺寸触发降采样解码。
+        if (_pendingAutoSizeLoad && finalSize.Width > 0 && finalSize.Height > 0)
+        {
+            _pendingAutoSizeLoad = false;
+            BeginLoad();
+        }
+
+        return result;
+    }
+
+    private async Task LoadAsync(object? source, LuminaImageLoadOptions options, int version, CancellationToken cancellationToken)
     {
         try
         {
-            LuminaImageLoadOptions options = new LuminaImageLoadOptions(ImageCacheMode, CacheDuration, CacheDirectory);
             ILuminaImageLoader loader = Loader ?? ImageLoader;
             IImage? image = await loader.LoadAsync(source, options, cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
             await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
@@ -472,6 +550,82 @@ public class LuminaImage : TemplatedControl
                     SetFailed(ex.Message);
                 }
             });
+        }
+    }
+
+    private LuminaImageLoadOptions ResolveLoadOptions()
+    {
+        int decodeWidth = DecodeWidth;
+        int decodeHeight = DecodeHeight;
+
+        if (decodeWidth <= 0 && decodeHeight <= 0 && AutoDecodeToDisplaySize)
+        {
+            (decodeWidth, decodeHeight) = ResolveAutoDecodeSize();
+        }
+
+        return new LuminaImageLoadOptions(ImageCacheMode, CacheDuration, CacheDirectory, decodeWidth, decodeHeight);
+    }
+
+    private (int width, int height) ResolveAutoDecodeSize()
+    {
+        // 优先用显式宽/高；否则用已测量的 Bounds；再乘以渲染缩放(DPI)得到物理像素，避免高分屏下解码过小而模糊。
+        double scaling = TryGetRenderScaling();
+
+        double width = ResolveDimension(Width, Bounds.Width);
+        double height = ResolveDimension(Height, Bounds.Height);
+
+        int pixelWidth = ToDecodePixels(width, scaling);
+        int pixelHeight = ToDecodePixels(height, scaling);
+
+        // DecodeToWidth 优先；只有在没有有效宽度时才用高度。
+        if (pixelWidth > 0)
+        {
+            return (pixelWidth, 0);
+        }
+        if (pixelHeight > 0)
+        {
+            return (0, pixelHeight);
+        }
+        return (0, 0);
+    }
+
+    private static double ResolveDimension(double explicitValue, double boundsValue)
+    {
+        if (!double.IsNaN(explicitValue) && explicitValue > 0 && !double.IsInfinity(explicitValue))
+        {
+            return explicitValue;
+        }
+        if (boundsValue > 0 && !double.IsInfinity(boundsValue))
+        {
+            return boundsValue;
+        }
+        return 0;
+    }
+
+    private static int ToDecodePixels(double logicalSize, double scaling)
+    {
+        if (logicalSize <= 0)
+        {
+            return 0;
+        }
+        double pixels = logicalSize * scaling;
+        if (pixels <= 0 || double.IsInfinity(pixels))
+        {
+            return 0;
+        }
+        return (int)Math.Ceiling(pixels);
+    }
+
+    private double TryGetRenderScaling()
+    {
+        try
+        {
+            double scaling = Avalonia.Controls.TopLevel.GetTopLevel(this)?.RenderScaling ?? 1.0;
+            return scaling > 0 ? scaling : 1.0;
+        }
+        catch
+        {
+            return 1.0;
         }
     }
 
