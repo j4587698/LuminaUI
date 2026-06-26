@@ -7,8 +7,6 @@ namespace LuminaUI.Controls;
 
 public sealed class LuminaButton
 {
-    private const string IconOnlyClass = "LuminaIconOnly";
-
     public static readonly AttachedProperty<bool> IsLoadingProperty;
 
     public static readonly AttachedProperty<LuminaLoadingKind> LoadingKindProperty;

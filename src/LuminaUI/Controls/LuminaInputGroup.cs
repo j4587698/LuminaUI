@@ -8,16 +8,6 @@ namespace LuminaUI.Controls;
 
 public class LuminaInputGroup : Grid
 {
-    private const string ItemClass = "LuminaInputGroupItem";
-
-    private const string FirstClass = "LuminaInputGroupFirst";
-
-    private const string MiddleClass = "LuminaInputGroupMiddle";
-
-    private const string LastClass = "LuminaInputGroupLast";
-
-    private const string SingleClass = "LuminaInputGroupSingle";
-
     public static readonly StyledProperty<int> FillIndexProperty;
 
     public int FillIndex

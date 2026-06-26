@@ -8,20 +8,6 @@ namespace LuminaUI.Controls;
 [PseudoClasses(":pressed", ":range-start", ":range-end", ":range-between", ":range-selected", ":range-preview-endpoint", ":range-single")]
 public class LuminaDateRangeCalendarDayButton : ContentControl
 {
-    private const string PressedPseudoClass = ":pressed";
-
-    private const string RangeStartPseudoClass = ":range-start";
-
-    private const string RangeEndPseudoClass = ":range-end";
-
-    private const string RangeBetweenPseudoClass = ":range-between";
-
-    private const string RangeSelectedPseudoClass = ":range-selected";
-
-    private const string RangePreviewEndpointPseudoClass = ":range-preview-endpoint";
-
-    private const string RangeSinglePseudoClass = ":range-single";
-
     private bool _isPointerPressedInside;
 
     private bool _isRangeStart;
