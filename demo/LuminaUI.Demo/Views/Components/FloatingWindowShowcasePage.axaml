@@ -1,0 +1,265 @@
+<lumina:LuminaPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:views="using:LuminaUI.Demo.Views"
+             x:Class="LuminaUI.Demo.Views.FloatingWindowShowcasePage"
+             x:Name="Root">
+
+  <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
+    <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+
+      <StackPanel Spacing="4">
+        <TextBlock Classes="Display" Text="LuminaFloatingWindow" />
+        <TextBlock Text="可拖拽、可锁定（鼠标穿透）、支持悬停显示控件的桌面悬浮窗基类"
+                   Foreground="{DynamicResource LuminaTextMutedBrush}"
+                   TextWrapping="Wrap" />
+      </StackPanel>
+
+      <lumina:LuminaResponsivePanel MinItemWidth="320" MaxItemWidth="560" HorizontalSpacing="16" VerticalSpacing="16">
+
+        <!-- Overview -->
+        <lumina:LuminaCard>
+          <StackPanel Spacing="16">
+            <TextBlock Classes="SectionTitle" Text="概述" />
+            <TextBlock TextWrapping="Wrap"
+                       Foreground="{DynamicResource LuminaTextSecondaryBrush}">
+              LuminaFloatingWindow 继承自 Avalonia Window，封装了桌面悬浮窗的通用能力：跨平台鼠标穿透、拖拽、悬停状态跟踪、屏幕定位。
+              适合用于歌词悬浮窗、浮动播放器、桌面工具条等场景。
+            </TextBlock>
+          </StackPanel>
+        </lumina:LuminaCard>
+
+        <!-- Features -->
+        <lumina:LuminaCard>
+          <StackPanel Spacing="16">
+            <TextBlock Classes="SectionTitle" Text="内置能力" />
+            <StackPanel Spacing="8">
+              <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                <Border Width="8" Height="8" CornerRadius="4" Background="{DynamicResource LuminaPrimaryBrush}" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" TextWrapping="Wrap"><Run FontWeight="Bold">IsLocked</Run> — 锁定后鼠标穿透（Windows WS_EX_TRANSPARENT / macOS setIgnoresMouseEvents / Linux XShape Input）</TextBlock>
+              </Grid>
+              <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                <Border Width="8" Height="8" CornerRadius="4" Background="{DynamicResource LuminaPrimaryBrush}" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" TextWrapping="Wrap"><Run FontWeight="Bold">IsHovered</Run> — 自动跟踪鼠标悬停，锁定后自动取消</TextBlock>
+              </Grid>
+              <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                <Border Width="8" Height="8" CornerRadius="4" Background="{DynamicResource LuminaPrimaryBrush}" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" TextWrapping="Wrap"><Run FontWeight="Bold">BeginDrag(e)</Run> — 非锁定状态下拖拽窗口</TextBlock>
+              </Grid>
+              <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                <Border Width="8" Height="8" CornerRadius="4" Background="{DynamicResource LuminaPrimaryBrush}" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" TextWrapping="Wrap"><Run FontWeight="Bold">PositionAtScreenBottom()</Run> / <Run FontWeight="Bold">PositionAtScreenCenter()</Run> — 辅助定位</TextBlock>
+              </Grid>
+            </StackPanel>
+          </StackPanel>
+        </lumina:LuminaCard>
+
+        <!-- Open Demo Button -->
+        <lumina:LuminaCard>
+          <StackPanel Spacing="16">
+            <TextBlock Classes="SectionTitle" Text="打开演示浮动窗" />
+            <TextBlock TextWrapping="Wrap"
+                       Foreground="{DynamicResource LuminaTextSecondaryBrush}">
+              点击下方按钮打开一个基于 LuminaFloatingWindow 的演示窗口。
+              窗口支持拖拽、锁定（鼠标穿透）、悬停显示 UI。
+            </TextBlock>
+            <Button Classes="Primary" x:Name="OpenDemoButton" Click="OnOpenDemo">
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <icons:MaterialIcon Kind="WindowRestore" Width="18" Height="18" Foreground="{DynamicResource LuminaPrimaryForegroundBrush}" />
+                <TextBlock Text="打开演示窗口" />
+              </StackPanel>
+            </Button>
+          </StackPanel>
+        </lumina:LuminaCard>
+
+        <!-- Code Example -->
+        <lumina:LuminaCard>
+          <StackPanel Spacing="16">
+            <TextBlock Classes="SectionTitle" Text="使用方式" />
+            <Border Padding="16"
+                    Background="{DynamicResource LuminaSurfaceBrush}"
+                    BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
+                    BorderThickness="1"
+                    CornerRadius="10">
+              <StackPanel Spacing="8">
+                <TextBlock FontWeight="Bold" Text="1. 继承 LuminaFloatingWindow 创建你的窗口：" />
+                <Border Padding="12"
+                        Background="{DynamicResource LuminaHoverBackgroundBrush}"
+                        CornerRadius="6">
+                  <StackPanel Spacing="2" TextElement.FontFamily="Consolas" TextElement.FontSize="12">
+                    <TextBlock Text="&lt;lumina:LuminaFloatingWindow" />
+                    <TextBlock Text="    Width=&quot;800&quot; Height=&quot;160&quot;" />
+                    <TextBlock Text="    WindowDecorations=&quot;None&quot;" />
+                    <TextBlock Text="    Topmost=&quot;True&quot;" />
+                    <TextBlock Text="    ShowInTaskbar=&quot;False&quot;" />
+                    <TextBlock Text="    TransparencyLevelHint=&quot;Transparent&quot;" />
+                    <TextBlock Text="    x:Class=&quot;MyApp.LyricsWindow&quot;&gt;" />
+                    <TextBlock Text="  &lt;!-- 你的内容 --&gt;" />
+                    <TextBlock Text="&lt;/lumina:LuminaFloatingWindow&gt;" />
+                  </StackPanel>
+                </Border>
+                <TextBlock FontWeight="Bold" Text="2. 在代码后置中使用拖拽和定位：" />
+                <Border Padding="12"
+                        Background="{DynamicResource LuminaHoverBackgroundBrush}"
+                        CornerRadius="6">
+                    <StackPanel Spacing="2" TextElement.FontFamily="Consolas" TextElement.FontSize="12">
+                      <TextBlock Text="// 开窗时定位到底部" />
+                      <TextBlock Text="protected override void OnOpened(EventArgs e)" />
+                      <TextBlock Text="{} {" />
+                      <TextBlock Text="    base.OnOpened(e);" />
+                      <TextBlock Text="    PositionAtScreenBottom();" />
+                      <TextBlock Text="    UpdatePassthroughState();" />
+                      <TextBlock Text="{} }" />
+                      <TextBlock Text="" />
+                      <TextBlock Text="// 拖拽事件中调用" />
+                      <TextBlock Text="private void OnDrag(object? s, PointerPressedEventArgs e)" />
+                      <TextBlock Text="{} {" />
+                      <TextBlock Text="    BeginDrag(e);" />
+                      <TextBlock Text="{} }" />
+                  </StackPanel>
+                </Border>
+              </StackPanel>
+            </Border>
+          </StackPanel>
+        </lumina:LuminaCard>
+
+      </lumina:LuminaResponsivePanel>
+
+      <!-- KaraokeTextBlock Section -->
+      <StackPanel Spacing="4" Margin="0,12,0,0">
+        <TextBlock Classes="Display" Text="LuminaKaraokeTextBlock" />
+        <TextBlock Text="逐字卡拉OK歌词渲染控件，附带 LuminaKaraokeWord 数据模型"
+                   Foreground="{DynamicResource LuminaTextMutedBrush}"
+                   TextWrapping="Wrap" />
+      </StackPanel>
+
+      <lumina:LuminaResponsivePanel MinItemWidth="320" MaxItemWidth="560" HorizontalSpacing="16" VerticalSpacing="16">
+        <lumina:LuminaCard>
+          <StackPanel Spacing="16">
+            <TextBlock Classes="SectionTitle" Text="逐字动效演示" />
+            <Border Padding="20"
+                    Background="{DynamicResource LuminaSurfaceBrush}"
+                    BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
+                    BorderThickness="1"
+                    CornerRadius="10"
+                    MinHeight="80">
+              <lumina:LuminaKaraokeTextBlock x:Name="KaraokeDemo"
+                                             Words="{Binding KaraokeWords, ElementName=Root}"
+                                             PlaybackPosition="{Binding KaraokePosition, ElementName=Root}"
+                                             FontSize="36"
+                                             FontWeight="Black"
+                                             SungBrush="{DynamicResource LuminaPrimaryBrush}"
+                                             UnsungBrush="{DynamicResource LuminaTextMutedBrush}"
+                                             StrokeBrush="#66000000"
+                                             StrokeThickness="1.5"
+                                             TextAlignment="Center"
+                                             HorizontalAlignment="Stretch" />
+            </Border>
+            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+              <Button x:Name="KaraokePlayButton" Classes="Primary Icon" Width="36" Height="36" Padding="0"
+                      Click="OnKaraokeToggle" lumina:LuminaButton.IconSize="20"
+                      ToolTip.Tip="播放/暂停">
+                <lumina:LuminaButton.Icon>
+                  <icons:MaterialIcon x:Name="KaraokePlayIcon" Kind="Play" Width="20" Height="20"
+                                      Foreground="{DynamicResource LuminaPrimaryForegroundBrush}" />
+                </lumina:LuminaButton.Icon>
+              </Button>
+              <Slider Grid.Column="1" x:Name="KaraokeSlider" Minimum="0" Maximum="4" Value="{Binding KaraokePosition, ElementName=Root}"
+                      VerticalAlignment="Center" />
+              <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="4" VerticalAlignment="Center">
+                <Button Classes="Ghost Icon" Width="28" Height="28" Padding="0" Click="OnKaraokeReset"
+                        ToolTip.Tip="重置" lumina:LuminaButton.IconSize="16">
+                  <lumina:LuminaButton.Icon>
+                    <icons:MaterialIcon Kind="Restart" Width="16" Height="16" Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                  </lumina:LuminaButton.Icon>
+                </Button>
+              </StackPanel>
+            </Grid>
+            <TextBlock Text="🎤 欢迎使用 LuminaUI"
+                       FontSize="12"
+                       Foreground="{DynamicResource LuminaTextMutedBrush}"
+                       TextAlignment="Center" />
+          </StackPanel>
+        </lumina:LuminaCard>
+
+        <lumina:LuminaCard>
+          <StackPanel Spacing="16">
+            <TextBlock Classes="SectionTitle" Text="属性" />
+            <StackPanel Spacing="6">
+              <TextBlock><Run FontWeight="Bold">Words</Run> — IReadOnlyList&lt;LuminaKaraokeWord&gt;</TextBlock>
+              <TextBlock><Run FontWeight="Bold">PlaybackPosition</Run> — 当前播放位置（秒）</TextBlock>
+              <TextBlock><Run FontWeight="Bold">SungBrush / UnsungBrush</Run> — 已唱/未唱颜色</TextBlock>
+              <TextBlock><Run FontWeight="Bold">StrokeBrush / StrokeThickness</Run> — 描边</TextBlock>
+              <TextBlock><Run FontWeight="Bold">FontSize / FontWeight / FontFamily</Run> — 文字样式</TextBlock>
+            </StackPanel>
+          </StackPanel>
+        </lumina:LuminaCard>
+
+        <lumina:LuminaCard>
+          <StackPanel Spacing="16">
+            <TextBlock Classes="SectionTitle" Text="数据模型" />
+            <Border Padding="12"
+                    Background="{DynamicResource LuminaHoverBackgroundBrush}"
+                    CornerRadius="6">
+              <StackPanel Spacing="2" TextElement.FontFamily="Consolas" TextElement.FontSize="12">
+                <TextBlock Text="public class LuminaKaraokeWord" />
+                <TextBlock Text="{} {" />
+                <TextBlock Text="{}     public string Text { get; }" />
+                <TextBlock Text="{}     public double StartTime { get; }" />
+                <TextBlock Text="{}     public double Duration { get; }" />
+                <TextBlock Text="{} }" />
+              </StackPanel>
+            </Border>
+          </StackPanel>
+        </lumina:LuminaCard>
+      </lumina:LuminaResponsivePanel>
+
+      <!-- OutlinedTextBlock Section -->
+      <StackPanel Spacing="4" Margin="0,12,0,0">
+        <TextBlock Classes="Display" Text="LuminaOutlinedTextBlock" />
+        <TextBlock Text="带描边的文字控件，支持文本换行和行数限制"
+                   Foreground="{DynamicResource LuminaTextMutedBrush}"
+                   TextWrapping="Wrap" />
+      </StackPanel>
+
+      <lumina:LuminaResponsivePanel MinItemWidth="320" MaxItemWidth="560" HorizontalSpacing="16" VerticalSpacing="16">
+        <lumina:LuminaCard>
+          <StackPanel Spacing="16">
+            <TextBlock Classes="SectionTitle" Text="示例" />
+            <Border Padding="16"
+                    Background="{DynamicResource LuminaSurfaceBrush}"
+                    BorderBrush="{DynamicResource LuminaBorderSubtleBrush}"
+                    BorderThickness="1"
+                    CornerRadius="10">
+              <StackPanel Spacing="16">
+                <lumina:LuminaOutlinedTextBlock Text="带描边的标题文字"
+                                                FontSize="32"
+                                                FontWeight="Bold"
+                                                Foreground="{DynamicResource LuminaPrimaryBrush}"
+                                                Stroke="#66000000"
+                                                StrokeThickness="1.5"
+                                                TextAlignment="Center" />
+                <lumina:LuminaOutlinedTextBlock Text="描边细一点，颜色淡一点"
+                                                FontSize="20"
+                                                Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                                                Stroke="#44000000"
+                                                StrokeThickness="1"
+                                                TextAlignment="Center" />
+                <lumina:LuminaOutlinedTextBlock Text="多行文本换行示例，LuminaOutlinedTextBlock 支持 TextWrapping 和 MaxLines 参数，可以控制文字换行行为"
+                                                FontSize="16"
+                                                Foreground="{DynamicResource LuminaTextForegroundBrush}"
+                                                Stroke="#33000000"
+                                                StrokeThickness="0.8"
+                                                TextWrapping="Wrap"
+                                                MaxLines="3" />
+              </StackPanel>
+            </Border>
+          </StackPanel>
+        </lumina:LuminaCard>
+      </lumina:LuminaResponsivePanel>
+
+    </StackPanel>
+  </ScrollViewer>
+</lumina:LuminaPage>
