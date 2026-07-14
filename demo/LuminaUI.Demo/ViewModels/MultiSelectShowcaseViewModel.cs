@@ -4,25 +4,14 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace LuminaUI.Demo.ViewModels;
 
-public class MemberModel
+public record MemberModel(string Name, string Initials, string Role)
 {
-    public string Name { get; }
-    public string Initials { get; }
-    public string Role { get; }
-
-    public MemberModel(string name, string initials, string role)
-    {
-        Name = name;
-        Initials = initials;
-        Role = role;
-    }
-
     public override string ToString() => Name;
 }
 
 public partial class MultiSelectShowcaseViewModel : ObservableObject
 {
-    public ObservableCollection<string> Priorities { get; } =
+    public IReadOnlyList<string> Priorities { get; } =
     [
         "Normal",
         "High",
@@ -34,7 +23,7 @@ public partial class MultiSelectShowcaseViewModel : ObservableObject
         "High"
     ];
 
-    public ObservableCollection<string> TeamMembers { get; } =
+    public IReadOnlyList<string> TeamMembers { get; } =
     [
         "Ava Chen",
         "Noah Smith",
@@ -49,7 +38,7 @@ public partial class MultiSelectShowcaseViewModel : ObservableObject
         "Mia Johnson"
     ];
 
-    public ObservableCollection<MemberModel> ComplexMembers { get; } =
+    public IReadOnlyList<MemberModel> ComplexMembers { get; } =
     [
         new MemberModel("Ava Chen", "AC", "Designer"),
         new MemberModel("Noah Smith", "NS", "Developer"),

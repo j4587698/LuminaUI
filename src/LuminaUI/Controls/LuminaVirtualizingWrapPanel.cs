@@ -24,6 +24,8 @@ public class LuminaVirtualizingWrapPanel : VirtualizingPanel
 
     private readonly Dictionary<object, Stack<Control>> _recyclePool = new Dictionary<object, Stack<Control>>();
 
+    private readonly List<int> _recycleIndicesBuffer = new List<int>();
+
     private readonly List<double> _itemHeights = new List<double>();
 
     private readonly List<ItemLayout> _layouts = new List<ItemLayout>();
@@ -429,8 +431,16 @@ public class LuminaVirtualizingWrapPanel : VirtualizingPanel
 
     private void RecycleElementsOutside(HashSet<int> targetIndices)
     {
-        var indexesToRecycle = _realizedElements.Keys.Where(index => !targetIndices.Contains(index)).ToArray();
-        foreach (var index in indexesToRecycle)
+        _recycleIndicesBuffer.Clear();
+        foreach (var index in _realizedElements.Keys)
+        {
+            if (!targetIndices.Contains(index))
+            {
+                _recycleIndicesBuffer.Add(index);
+            }
+        }
+
+        foreach (var index in _recycleIndicesBuffer)
         {
             RecycleElement(index);
         }
@@ -474,7 +484,9 @@ public class LuminaVirtualizingWrapPanel : VirtualizingPanel
 
     private void RecycleAllElements(bool clearItemHeightCache)
     {
-        foreach (var index in _realizedElements.Keys.ToArray())
+        _recycleIndicesBuffer.Clear();
+        _recycleIndicesBuffer.AddRange(_realizedElements.Keys);
+        foreach (var index in _recycleIndicesBuffer)
         {
             RecycleElement(index);
         }
@@ -496,9 +508,9 @@ public class LuminaVirtualizingWrapPanel : VirtualizingPanel
 
     private void RemoveRemainingInternalChildren()
     {
-        var children = Children.ToArray();
-        foreach (var child in children)
+        for (int i = Children.Count - 1; i >= 0; i--)
         {
+            var child = Children[i];
             if (!ReferenceEquals(child.GetValue(RecycleKeyProperty), ItemIsOwnContainerKey))
             {
                 GetRequiredItemContainerGenerator().ClearItemContainer(child);

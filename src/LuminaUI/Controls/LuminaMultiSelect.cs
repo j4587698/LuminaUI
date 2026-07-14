@@ -539,14 +539,17 @@ public class LuminaMultiSelect : TemplatedControl
 
     private void RebuildOptions()
     {
-        _options.Clear();
+        var newOptions = new List<LuminaMultiSelectOption>();
         if (ItemsSource != null)
         {
             foreach (object item in ItemsSource)
             {
-                _options.Add(new LuminaMultiSelectOption(item, IsSelected(item)));
+                newOptions.Add(new LuminaMultiSelectOption(item, IsSelected(item)));
             }
         }
+        
+        _options.Clear();
+        _options.AddRange(newOptions);
         UpdateSelectionState();
     }
 
@@ -579,18 +582,7 @@ public class LuminaMultiSelect : TemplatedControl
 
     private bool IsSelected(object? item)
     {
-        if (SelectedItems == null)
-        {
-            return false;
-        }
-        foreach (object selectedItem in SelectedItems)
-        {
-            if (object.Equals(selectedItem, item))
-            {
-                return true;
-            }
-        }
-        return false;
+        return SelectedItems?.Contains(item) == true;
     }
 
     private void UpdateSelectionState()
@@ -604,7 +596,6 @@ public class LuminaMultiSelect : TemplatedControl
             0 => Watermark ?? string.Empty, 
             _ => $"{count} selected", 
         };
-        SyncOptionSelection();
     }
 
     private void ExecuteSelectionChangedCommand()

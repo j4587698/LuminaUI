@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -27,9 +28,9 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
 
     private static readonly object SafeAreaOverrideLock = new object();
 
-    private static readonly Dictionary<Control, AutoSafeAreaOverrideState> AutoSafeAreaOverrideStates = new Dictionary<Control, AutoSafeAreaOverrideState>();
+    private static readonly ConditionalWeakTable<Control, AutoSafeAreaOverrideState> AutoSafeAreaOverrideStates = new ConditionalWeakTable<Control, AutoSafeAreaOverrideState>();
 
-    private static readonly Dictionary<IInsetsManager, EdgeToEdgeOverrideState> EdgeToEdgeOverrideStates = new Dictionary<IInsetsManager, EdgeToEdgeOverrideState>();
+    private static readonly ConditionalWeakTable<IInsetsManager, EdgeToEdgeOverrideState> EdgeToEdgeOverrideStates = new ConditionalWeakTable<IInsetsManager, EdgeToEdgeOverrideState>();
 
     private static readonly TimeSpan BottomSheetClearDelay = TimeSpan.FromMilliseconds(360);
 
