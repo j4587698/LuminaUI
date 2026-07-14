@@ -49,6 +49,8 @@ public class LuminaCascader : TemplatedControl
     private ContentControl? _sheetHeaderHost;
 
     private readonly List<LuminaCascaderNode> _activePath = new List<LuminaCascaderNode>();
+    
+    private readonly List<LuminaCascaderNode> _currentlyActiveNodes = new List<LuminaCascaderNode>();
 
     private readonly List<LuminaCascaderNode> _selectedPath = new List<LuminaCascaderNode>();
 
@@ -888,11 +890,21 @@ public class LuminaCascader : TemplatedControl
             };
             list.Children.Add(selectCurrent);
         }
-        foreach (LuminaCascaderNode node in current)
+
+        ItemsControl itemsControl = new ItemsControl
         {
-            list.Children.Add(CreateSheetNodeButton(node));
-        }
-        if (list.Children.Count == 0)
+            ItemsSource = current,
+            ItemTemplate = new FuncDataTemplate<LuminaCascaderNode>((node, _) => CreateSheetNodeButton(node)),
+            ItemsPanel = new FuncTemplate<Panel?>(() =>
+            {
+                StackPanel sp = new StackPanel();
+                LuminaPickerResources.BindResource(sp, StackPanel.SpacingProperty, "LuminaCascaderSheetListSpacing");
+                return sp;
+            })
+        };
+        list.Children.Add(itemsControl);
+
+        if (current.Count == 0 && list.Children.Count == 1) // Only ItemsControl is in list
         {
             list.Children.Add(CreateSheetEmptyText());
         }
@@ -993,12 +1005,17 @@ public class LuminaCascader : TemplatedControl
 
     private Control CreatePanel(LuminaCascaderPanel panel)
     {
-        StackPanel list = new StackPanel();
-        LuminaPickerResources.BindResource(list, StackPanel.SpacingProperty, "LuminaCascaderPanelListSpacing");
-        foreach (LuminaCascaderNode node in panel.Nodes)
+        ItemsControl list = new ItemsControl
         {
-            list.Children.Add(CreateNodeButton(node));
-        }
+            ItemsSource = panel.Nodes,
+            ItemTemplate = new FuncDataTemplate<LuminaCascaderNode>((node, _) => CreateNodeButton(node)),
+            ItemsPanel = new FuncTemplate<Panel?>(() =>
+            {
+                StackPanel sp = new StackPanel();
+                LuminaPickerResources.BindResource(sp, StackPanel.SpacingProperty, "LuminaCascaderPanelListSpacing");
+                return sp;
+            })
+        };
         Border panelFrame = new Border
         {
             Width = panel.Width,
@@ -1163,28 +1180,16 @@ public class LuminaCascader : TemplatedControl
 
     private void MarkActive()
     {
-        ClearActive(_roots);
-        for (int i = 0; i < _activePath.Count; i++)
-        {
-            LuminaCascaderNode target = _activePath[i];
-            AvaloniaList<LuminaCascaderNode> source = (i == 0) ? _roots : _activePath[i - 1].Children;
-            foreach (LuminaCascaderNode n in source)
-            {
-                if (object.Equals(n.Value, target.Value))
-                {
-                    n.IsActive = true;
-                    break;
-                }
-            }
-        }
-    }
-
-    private static void ClearActive(IEnumerable<LuminaCascaderNode> nodes)
-    {
-        foreach (LuminaCascaderNode node in nodes)
+        foreach (LuminaCascaderNode node in _currentlyActiveNodes)
         {
             node.IsActive = false;
-            ClearActive(node.Children);
+        }
+        _currentlyActiveNodes.Clear();
+
+        foreach (LuminaCascaderNode node in _activePath)
+        {
+            node.IsActive = true;
+            _currentlyActiveNodes.Add(node);
         }
     }
 

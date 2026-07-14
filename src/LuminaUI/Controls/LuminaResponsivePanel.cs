@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
@@ -11,6 +12,10 @@ public class LuminaResponsivePanel : Panel
     {
         public double RowWidth => (double)Columns * ItemWidth + (double)Math.Max(0, Columns - 1) * HorizontalSpacing;
     }
+
+    private readonly List<Control> _visibleChildrenBuffer = new List<Control>();
+
+    private readonly List<double> _rowHeightsBuffer = new List<double>();
 
     public static readonly StyledProperty<double> MinItemWidthProperty = AvaloniaProperty.Register<LuminaResponsivePanel, double>(nameof(MinItemWidth), 220.0);
 
@@ -54,53 +59,66 @@ public class LuminaResponsivePanel : Panel
 
     protected override Size MeasureOverride(Size availableSize)
     {
-        Control[] visibleChildren = Children.Where(control => control.IsVisible).ToArray();
-        if (visibleChildren.Length == 0)
+        _visibleChildrenBuffer.Clear();
+        for (int i = 0; i < Children.Count; i++)
+        {
+            var control = Children[i];
+            if (control.IsVisible)
+            {
+                _visibleChildrenBuffer.Add(control);
+            }
+        }
+
+        if (_visibleChildrenBuffer.Count == 0)
         {
             return default;
         }
-        ResponsiveLayout layout = CalculateLayout(availableSize.Width, visibleChildren.Length);
-        int rowCount = (int)Math.Ceiling((double)visibleChildren.Length / (double)layout.Columns);
-        double[] rowHeights = new double[rowCount];
-        for (int index = 0; index < visibleChildren.Length; index++)
+        ResponsiveLayout layout = CalculateLayout(availableSize.Width, _visibleChildrenBuffer.Count);
+        int rowCount = (int)Math.Ceiling((double)_visibleChildrenBuffer.Count / (double)layout.Columns);
+        EnsureRowHeightsBuffer(rowCount);
+        for (int index = 0; index < _visibleChildrenBuffer.Count; index++)
         {
-            Control child = visibleChildren[index];
+            Control child = _visibleChildrenBuffer[index];
             child.Measure(new Size(layout.ItemWidth, availableSize.Height));
             int row = index / layout.Columns;
-            rowHeights[row] = Math.Max(rowHeights[row], child.DesiredSize.Height);
+            _rowHeightsBuffer[row] = Math.Max(_rowHeightsBuffer[row], child.DesiredSize.Height);
         }
-        double desiredHeight = rowHeights.Sum() + (double)Math.Max(0, rowHeights.Length - 1) * layout.VerticalSpacing;
+        double sumHeights = 0.0;
+        for (int i = 0; i < rowCount; i++)
+        {
+            sumHeights += _rowHeightsBuffer[i];
+        }
+        double desiredHeight = sumHeights + (double)Math.Max(0, rowCount - 1) * layout.VerticalSpacing;
         double desiredWidth = double.IsInfinity(availableSize.Width) ? layout.RowWidth : availableSize.Width;
         return new Size(desiredWidth, desiredHeight);
     }
 
     protected override Size ArrangeOverride(Size finalSize)
     {
-        Control[] visibleChildren = Children.Where(control => control.IsVisible).ToArray();
-        if (visibleChildren.Length == 0)
+        if (_visibleChildrenBuffer.Count == 0)
         {
             return finalSize;
         }
-        ResponsiveLayout layout = CalculateLayout(finalSize.Width, visibleChildren.Length);
-        int rowCount = (int)Math.Ceiling((double)visibleChildren.Length / (double)layout.Columns);
-        double[] rowHeights = new double[rowCount];
-        for (int index = 0; index < visibleChildren.Length; index++)
+        ResponsiveLayout layout = CalculateLayout(finalSize.Width, _visibleChildrenBuffer.Count);
+        int rowCount = (int)Math.Ceiling((double)_visibleChildrenBuffer.Count / (double)layout.Columns);
+        EnsureRowHeightsBuffer(rowCount);
+        for (int index = 0; index < _visibleChildrenBuffer.Count; index++)
         {
             int row = index / layout.Columns;
-            rowHeights[row] = Math.Max(rowHeights[row], visibleChildren[index].DesiredSize.Height);
+            _rowHeightsBuffer[row] = Math.Max(_rowHeightsBuffer[row], _visibleChildrenBuffer[index].DesiredSize.Height);
         }
         double y = 0.0;
         for (int row = 0; row < rowCount; row++)
         {
-            int childrenInRow = Math.Min(layout.Columns, visibleChildren.Length - row * layout.Columns);
+            int childrenInRow = Math.Min(layout.Columns, _visibleChildrenBuffer.Count - row * layout.Columns);
             double x = 0.0;
             for (int column = 0; column < childrenInRow; column++)
             {
-                Control child = visibleChildren[row * layout.Columns + column];
-                child.Arrange(new Rect(x, y, layout.ItemWidth, rowHeights[row]));
+                Control child = _visibleChildrenBuffer[row * layout.Columns + column];
+                child.Arrange(new Rect(x, y, layout.ItemWidth, _rowHeightsBuffer[row]));
                 x += layout.ItemWidth + layout.HorizontalSpacing;
             }
-            y += rowHeights[row] + layout.VerticalSpacing;
+            y += _rowHeightsBuffer[row] + layout.VerticalSpacing;
         }
         return finalSize;
     }
@@ -138,5 +156,14 @@ public class LuminaResponsivePanel : Panel
         double minItemWidth = Math.Max(1.0, MinItemWidth);
         double maxItemWidth = (MaxItemWidth <= 0.0) ? double.PositiveInfinity : MaxItemWidth;
         return Math.Max(1.0, Math.Min(Math.Max(minItemWidth, itemWidth), maxItemWidth));
+    }
+
+    private void EnsureRowHeightsBuffer(int rowCount)
+    {
+        _rowHeightsBuffer.Clear();
+        for (int i = 0; i < rowCount; i++)
+        {
+            _rowHeightsBuffer.Add(0.0);
+        }
     }
 }

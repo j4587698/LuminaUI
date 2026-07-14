@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -17,7 +18,7 @@ public class LuminaCarouselOptions : AvaloniaObject
         public bool IsPointerOver { get; set; }
     }
 
-    private static readonly Dictionary<Carousel, AutoPlayState> AutoPlayStates;
+    private static readonly ConditionalWeakTable<Carousel, AutoPlayState> AutoPlayStates;
 
     public static readonly AttachedProperty<bool> IsAutoPlayEnabledProperty;
 
@@ -31,7 +32,7 @@ public class LuminaCarouselOptions : AvaloniaObject
 
     static LuminaCarouselOptions()
     {
-        AutoPlayStates = new Dictionary<Carousel, AutoPlayState>();
+        AutoPlayStates = new ConditionalWeakTable<Carousel, AutoPlayState>();
         IsAutoPlayEnabledProperty = AvaloniaProperty.RegisterAttached<LuminaCarouselOptions, Carousel, bool>("IsAutoPlayEnabled", defaultValue: false);
         AutoPlayIntervalProperty = AvaloniaProperty.RegisterAttached<LuminaCarouselOptions, Carousel, TimeSpan>("AutoPlayInterval", TimeSpan.FromSeconds(3));
         PauseOnPointerOverProperty = AvaloniaProperty.RegisterAttached<LuminaCarouselOptions, Carousel, bool>("PauseOnPointerOver", defaultValue: false);
@@ -129,7 +130,7 @@ public class LuminaCarouselOptions : AvaloniaObject
 
     private static void AttachAutoPlay(Carousel carousel)
     {
-        if (AutoPlayStates.ContainsKey(carousel))
+        if (AutoPlayStates.TryGetValue(carousel, out _))
         {
             UpdateAutoPlayInterval(carousel);
             return;
@@ -138,7 +139,7 @@ public class LuminaCarouselOptions : AvaloniaObject
         state.Timer.Tick += (_, _) => {
             Advance(carousel, state);
         };
-        AutoPlayStates[carousel] = state;
+        AutoPlayStates.Add(carousel, state);
         carousel.AttachedToVisualTree += OnCarouselAttachedToVisualTree;
         carousel.DetachedFromVisualTree += OnCarouselDetachedFromVisualTree;
         carousel.PointerEntered += OnCarouselPointerEntered;
@@ -149,8 +150,9 @@ public class LuminaCarouselOptions : AvaloniaObject
 
     private static void DetachAutoPlay(Carousel carousel)
     {
-        if (AutoPlayStates.Remove(carousel, out AutoPlayState? state))
+        if (AutoPlayStates.TryGetValue(carousel, out AutoPlayState? state))
         {
+            AutoPlayStates.Remove(carousel);
             carousel.AttachedToVisualTree -= OnCarouselAttachedToVisualTree;
             carousel.DetachedFromVisualTree -= OnCarouselDetachedFromVisualTree;
             carousel.PointerEntered -= OnCarouselPointerEntered;
