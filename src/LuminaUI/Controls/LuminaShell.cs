@@ -69,6 +69,10 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private bool _isResettingNavigationHost;
 
+    // 事件驱动的导航空闲等待：替代 Task.Delay 轮询。
+    // 当 NavigationPage.IsNavigating 变为 false 时，在属性变更回调中完成该 TCS。
+    private TaskCompletionSource<bool>? _navigationIdleCompletion;
+
     private LuminaPage? _activePage;
 
     private object? _toastContent;
@@ -1417,7 +1421,20 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         else if (e.Property == NavigationPage.CanGoBackProperty || e.Property == NavigationPage.IsNavigatingProperty)
         {
             UpdateNavigationStackState();
+
+            // 导航结束时唤醒所有等待空闲的任务，实现事件驱动等待（替代轮询）。
+            if (e.Property == NavigationPage.IsNavigatingProperty && _navigationHost?.IsNavigating == false)
+            {
+                CompleteNavigationIdleWaiters();
+            }
         }
+    }
+
+    private void CompleteNavigationIdleWaiters()
+    {
+        TaskCompletionSource<bool>? completion = _navigationIdleCompletion;
+        _navigationIdleCompletion = null;
+        completion?.TrySetResult(true);
     }
 
     private void AttachBackRequestedHandler()
@@ -2307,6 +2324,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
             if (version == _navigationHostResetVersion)
             {
                 _isResettingNavigationHost = false;
+                CompleteNavigationIdleWaiters();
                 UpdateNavigationStackState();
             }
         }
@@ -2314,9 +2332,14 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private async Task WaitForNavigationHostIdleAsync(NavigationPage navigationHost, int version)
     {
+        // 事件驱动等待：导航进行中时挂起，待 IsNavigating 变为 false 由属性回调唤醒。
+        // 保留一个超时兜底，避免任何竞态下永久挂起（正常路径不会触发超时）。
         while (IsCurrentNavigationHostReset(navigationHost, version) && navigationHost.IsNavigating)
         {
-            await Task.Delay(16);
+            if (!await WaitForNavigationSignalAsync())
+            {
+                return;
+            }
         }
     }
 
@@ -2324,10 +2347,31 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     {
         while (ReferenceEquals(navigationHost, _navigationHost) && (_isResettingNavigationHost || navigationHost.IsNavigating))
         {
-            await Task.Delay(16);
+            if (!await WaitForNavigationSignalAsync())
+            {
+                break;
+            }
         }
 
         return ReferenceEquals(navigationHost, _navigationHost);
+    }
+
+    private async Task<bool> WaitForNavigationSignalAsync()
+    {
+        TaskCompletionSource<bool> completion = _navigationIdleCompletion ??=
+            new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+
+        // 超时兜底：万一唤醒信号因竞态丢失，最长 2 秒后重新检查循环条件，避免死等。
+        Task delay = Task.Delay(2000);
+        Task finished = await Task.WhenAny(completion.Task, delay).ConfigureAwait(true);
+        if (finished == delay && ReferenceEquals(_navigationIdleCompletion, completion))
+        {
+            // 超时：丢弃旧的等待源，让调用方按最新状态重新评估。
+            _navigationIdleCompletion = null;
+            completion.TrySetResult(false);
+        }
+
+        return true;
     }
 
     private bool IsCurrentNavigationHostReset(NavigationPage navigationHost, int version)
