@@ -22,25 +22,26 @@
                 <lumina:LuminaCard>
                     <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0060}" />
-                        <lumina:LuminaImage x:Name="WebImage"
-                                            Height="190"
-                                            Source="{Binding WebImageUrl}"
-                                            ImageCacheMode="MemoryAndDisk"
-                                            CacheDuration="7.00:00:00"
-                                            Classes="Framed">
-                            <lumina:LuminaImage.PlaceholderContent>
-                                <Grid Background="{DynamicResource LuminaStateHoverBrush}">
-                                    <StackPanel Spacing="8"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center">
-                                        <ProgressBar Width="96" Height="4" IsIndeterminate="True" />
-                                        <TextBlock Text="{l10n:Loc Sandbox.Text.0061}"
-                                                   FontSize="12"
-                                                   Foreground="{DynamicResource LuminaTextMutedBrush}" />
-                                    </StackPanel>
-                                </Grid>
-                            </lumina:LuminaImage.PlaceholderContent>
-                        </lumina:LuminaImage>
+                        <Grid Height="190">
+                            <lumina:LuminaImage x:Name="WebImage"
+                                                Source="{Binding WebImageUrl}"
+                                                ImageCacheMode="MemoryAndDisk"
+                                                CacheDuration="7.00:00:00"
+                                                Classes="Framed">
+                                <lumina:LuminaImage.PlaceholderContent>
+                                    <Grid Background="{DynamicResource LuminaStateHoverBrush}">
+                                        <StackPanel Spacing="8"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center">
+                                            <ProgressBar Width="96" Height="4" IsIndeterminate="True" />
+                                            <TextBlock Text="{l10n:Loc Sandbox.Text.0061}"
+                                                       FontSize="12"
+                                                       Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </lumina:LuminaImage.PlaceholderContent>
+                            </lumina:LuminaImage>
+                        </Grid>
                         <TextBlock Text="{Binding #WebImage.Status, StringFormat='Status: {0}'}"
                                    Classes="Helper" />
                     </StackPanel>
