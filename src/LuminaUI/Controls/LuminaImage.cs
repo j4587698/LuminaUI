@@ -459,7 +459,7 @@ public class LuminaImage : TemplatedControl
         base.OnDetachedFromVisualTree(e);
     }
 
-    private void BeginLoad()
+    private void BeginLoad(Size? arrangedSize = null)
     {
         int version = ++_loadVersion;
         CancelLoad();
@@ -473,7 +473,7 @@ public class LuminaImage : TemplatedControl
         // 自动按显示尺寸降采样时，若布局尚未完成（Bounds 为 0）则推迟加载，
         // 待 ArrangeOverride 拿到真实尺寸后再解码，避免退化为全分辨率解码。
         bool wantsAutoSize = DecodeWidth <= 0 && DecodeHeight <= 0 && AutoDecodeToDisplaySize;
-        LuminaImageLoadOptions options = ResolveLoadOptions();
+        LuminaImageLoadOptions options = ResolveLoadOptions(arrangedSize);
         if (wantsAutoSize && options.DecodePixelWidth <= 0 && options.DecodePixelHeight <= 0)
         {
             _pendingAutoSizeLoad = true;
@@ -506,11 +506,11 @@ public class LuminaImage : TemplatedControl
     {
         Size result = base.ArrangeOverride(finalSize);
 
-        // 布局完成后若有因尺寸未就绪而推迟的加载，此时用真实尺寸触发降采样解码。
-        if (_pendingAutoSizeLoad && finalSize.Width > 0 && finalSize.Height > 0)
+        // ArrangeOverride 执行时 Bounds 尚未提交，直接使用当前布局分配的尺寸触发降采样解码。
+        if (_pendingAutoSizeLoad && (finalSize.Width > 0 || finalSize.Height > 0))
         {
             _pendingAutoSizeLoad = false;
-            BeginLoad();
+            BeginLoad(finalSize);
         }
 
         return result;
@@ -553,26 +553,27 @@ public class LuminaImage : TemplatedControl
         }
     }
 
-    private LuminaImageLoadOptions ResolveLoadOptions()
+    private LuminaImageLoadOptions ResolveLoadOptions(Size? arrangedSize = null)
     {
         int decodeWidth = DecodeWidth;
         int decodeHeight = DecodeHeight;
 
         if (decodeWidth <= 0 && decodeHeight <= 0 && AutoDecodeToDisplaySize)
         {
-            (decodeWidth, decodeHeight) = ResolveAutoDecodeSize();
+            (decodeWidth, decodeHeight) = ResolveAutoDecodeSize(arrangedSize);
         }
 
         return new LuminaImageLoadOptions(ImageCacheMode, CacheDuration, CacheDirectory, decodeWidth, decodeHeight);
     }
 
-    private (int width, int height) ResolveAutoDecodeSize()
+    private (int width, int height) ResolveAutoDecodeSize(Size? arrangedSize = null)
     {
-        // 优先用显式宽/高；否则用已测量的 Bounds；再乘以渲染缩放(DPI)得到物理像素，避免高分屏下解码过小而模糊。
+        // 优先用显式宽/高；首次布局使用当前分配尺寸，其他场景回退到 Bounds；
+        // 再乘以渲染缩放(DPI)得到物理像素，避免高分屏下解码过小而模糊。
         double scaling = TryGetRenderScaling();
 
-        double width = ResolveDimension(Width, Bounds.Width);
-        double height = ResolveDimension(Height, Bounds.Height);
+        double width = ResolveDimension(Width, arrangedSize?.Width ?? Bounds.Width);
+        double height = ResolveDimension(Height, arrangedSize?.Height ?? Bounds.Height);
 
         int pixelWidth = ToDecodePixels(width, scaling);
         int pixelHeight = ToDecodePixels(height, scaling);
