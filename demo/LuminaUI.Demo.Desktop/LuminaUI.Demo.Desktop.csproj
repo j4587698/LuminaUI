@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
@@ -8,21 +8,16 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(PublishAot)' == 'true'">
-    <!-- Avalonia.Controls.DataGrid 12.0.0 emits assembly-level trim/AOT summaries; keep concrete LuminaUI IL warnings visible. -->
     <NoWarn>$(NoWarn);IL2104;IL3053</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Avalonia.Desktop" />
     <PackageReference Include="Avalonia.Fonts.Inter" />
-    <PackageReference Include="AvaloniaUI.DiagnosticsSupport">
-      <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
-      <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
-    </PackageReference>
+    <PackageReference Include="LuminaUI.Diagnostics" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\LuminaUI.Demo\LuminaUI.Demo.csproj" />
-    <ProjectReference Include="..\..\src\LuminaUI.Diagnostics\LuminaUI.Diagnostics.csproj" Condition="'$(Configuration)' == 'Debug'" />
   </ItemGroup>
 </Project>
