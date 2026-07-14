@@ -28,14 +28,10 @@ internal static class Program
             .UsePlatformDetect()
             .UseSkia()
             .UseHarfBuzz()
-#if DEBUG
-            .WithDeveloperTools()
-#endif
             .WithInterFont()
             .LogToTrace()
 #if DEBUG
-            .UseLuminaUIDiagnostics();
-#else
-            ;
+            .UseLuminaUIDiagnostics()
 #endif
+            ;
 }

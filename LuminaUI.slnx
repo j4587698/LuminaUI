@@ -3,8 +3,6 @@
   <Project Path="src/LuminaUI.ColorPicker/LuminaUI.ColorPicker.csproj" />
   <Project Path="src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj" />
   <Project Path="src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj" />
-  <Project Path="src/LuminaUI.Diagnostics.Abstractions/LuminaUI.Diagnostics.Abstractions.csproj" />
-  <Project Path="src/LuminaUI.Diagnostics/LuminaUI.Diagnostics.csproj" />
   <Project Path="demo/LuminaUI.Demo/LuminaUI.Demo.csproj" />
   <Project Path="demo/LuminaUI.Demo.Desktop/LuminaUI.Demo.Desktop.csproj" />
   <Project Path="demo/LuminaUI.Demo.Browser/LuminaUI.Demo.Browser.csproj" />
@@ -12,5 +10,4 @@
     <Deploy Solution="Debug|*" />
   </Project>
   <Project Path="demo/LuminaUI.Demo.iOS/LuminaUI.Demo.iOS.csproj" />
-  <Project Path="tools/LuminaUI.Diagnostics.Mcp/LuminaUI.Diagnostics.Mcp.csproj" />
 </Solution>

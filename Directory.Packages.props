@@ -1,17 +1,19 @@
 <Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-
     <AvaloniaVersion>12.0.1</AvaloniaVersion>
     <AvaloniaControlsVersion>12.0.0</AvaloniaControlsVersion>
     <TreeDataGridAvaloniaVersion>12.0.0</TreeDataGridAvaloniaVersion>
     <CommunityToolkitMvvmVersion>8.4.2</CommunityToolkitMvvmVersion>
-    <DiagnosticsSupportVersion>2.2.2</DiagnosticsSupportVersion>
+    <LuminaUIDiagnosticsVersion>0.2.0</LuminaUIDiagnosticsVersion>
     <AndroidXSplashScreenVersion>1.2.0.2</AndroidXSplashScreenVersion>
     <AndroidXAppCompatVersion>1.7.1.3</AndroidXAppCompatVersion>
     <MicrosoftExtensionsHostingVersion>10.0.8</MicrosoftExtensionsHostingVersion>
     <ModelContextProtocolVersion>1.4.0</ModelContextProtocolVersion>
     <MaterialIconsAvaloniaVersion>3.0.2</MaterialIconsAvaloniaVersion>
+    <MicrosoftNETTestSdkVersion>17.12.0</MicrosoftNETTestSdkVersion>
+    <XunitVersion>2.9.2</XunitVersion>
+    <XunitRunnerVisualStudioVersion>2.8.2</XunitRunnerVisualStudioVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Avalonia" Version="$(AvaloniaVersion)" />
@@ -20,17 +22,21 @@
     <PackageVersion Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.iOS" Version="$(AvaloniaVersion)" />
+    <PackageVersion Include="Avalonia.Markup.Xaml.Loader" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Skia" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Controls.ColorPicker" Version="$(AvaloniaControlsVersion)" />
     <PackageVersion Include="Avalonia.Controls.DataGrid" Version="$(AvaloniaControlsVersion)" />
     <PackageVersion Include="TreeDataGrid.Avalonia" Version="$(TreeDataGridAvaloniaVersion)" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="$(CommunityToolkitMvvmVersion)" />
-    <PackageVersion Include="AvaloniaUI.DiagnosticsSupport" Version="$(DiagnosticsSupportVersion)" />
     <PackageVersion Include="Xamarin.AndroidX.Core.SplashScreen" Version="$(AndroidXSplashScreenVersion)" />
     <PackageVersion Include="Xamarin.AndroidX.AppCompat" Version="$(AndroidXAppCompatVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="$(MicrosoftExtensionsHostingVersion)" />
     <PackageVersion Include="ModelContextProtocol" Version="$(ModelContextProtocolVersion)" />
     <PackageVersion Include="Material.Icons.Avalonia" Version="$(MaterialIconsAvaloniaVersion)" />
+    <PackageVersion Include="LuminaUI.Diagnostics" Version="$(LuminaUIDiagnosticsVersion)" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkVersion)" />
+    <PackageVersion Include="xunit" Version="$(XunitVersion)" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="$(XunitRunnerVisualStudioVersion)" />
   </ItemGroup>
 </Project>
