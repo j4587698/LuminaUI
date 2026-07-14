@@ -1,0 +1,108 @@
+<lumina:LuminaFloatingWindow xmlns="https://github.com/avaloniaui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                       xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+                       xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+                       x:Class="LuminaUI.Demo.Views.DemoFloatingWindow"
+                       x:Name="Root"
+                       Width="700"
+                       Height="140"
+                       MinWidth="360"
+                       MinHeight="100"
+                       CanResize="True"
+                       Topmost="True"
+                       ShowInTaskbar="False"
+                       WindowDecorations="None"
+                       Background="Transparent"
+                       TransparencyLevelHint="Transparent">
+
+  <Window.Styles>
+    <Style Selector=":is(Control).hover-bg">
+      <Setter Property="Opacity" Value="0"/>
+      <Setter Property="Transitions">
+        <Transitions>
+          <DoubleTransition Property="Opacity" Duration="0:0:0.25"/>
+        </Transitions>
+      </Setter>
+    </Style>
+    <Style Selector=":is(Control).hover-bg.show">
+      <Setter Property="Opacity" Value="1"/>
+    </Style>
+  </Window.Styles>
+
+  <Grid>
+    <!-- Background overlay when hovered -->
+    <Border Classes="hover-bg"
+            Classes.show="{Binding #Root.IsHovered}"
+            CornerRadius="14"
+            Background="#CC1C1C1E"
+            BorderBrush="#33FFFFFF"
+            BorderThickness="1"
+            PointerPressed="OnDrag" />
+
+    <!-- Content -->
+    <Grid Margin="20,10">
+      <Grid RowDefinitions="Auto,*,Auto">
+
+        <!-- Top Bar (visible on hover) -->
+        <Grid Classes="hover-bg"
+              Classes.show="{Binding #Root.IsHovered}"
+              ColumnDefinitions="Auto,*,Auto"
+              ColumnSpacing="10"
+              IsHitTestVisible="{Binding #Root.IsHovered}">
+          <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+            <Border Width="8" Height="8" CornerRadius="4" Background="{DynamicResource LuminaPrimaryBrush}" />
+            <TextBlock Text="Demo Floating Window" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource LuminaTextForegroundBrush}" />
+          </StackPanel>
+          <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="6">
+            <Button Classes="Ghost Icon" Width="26" Height="26" Padding="0" x:Name="LockButton" Click="OnToggleLock"
+                    ToolTip.Tip="锁定（鼠标穿透）" lumina:LuminaButton.IconSize="14">
+              <lumina:LuminaButton.Icon>
+                <Grid>
+                  <icons:MaterialIcon Kind="LockOpenOutline" Width="14" Height="14"
+                                      Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                      IsVisible="True" />
+                  <icons:MaterialIcon IsVisible="{Binding #Root.IsLocked}"
+                                      Kind="Lock" Width="14" Height="14" Foreground="{DynamicResource LuminaPrimaryBrush}" />
+                </Grid>
+              </lumina:LuminaButton.Icon>
+            </Button>
+            <Button Classes="Ghost Icon" Width="26" Height="26" Padding="0" Click="OnClose"
+                    ToolTip.Tip="关闭" lumina:LuminaButton.IconSize="16">
+              <lumina:LuminaButton.Icon>
+                <icons:MaterialIcon Kind="Close" Width="16" Height="16" Foreground="{DynamicResource LuminaTextMutedBrush}" />
+              </lumina:LuminaButton.Icon>
+            </Button>
+          </StackPanel>
+        </Grid>
+
+        <!-- Main content (always visible) -->
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="4" IsHitTestVisible="False">
+          <lumina:LuminaOutlinedTextBlock Text="LuminaFloatingWindow"
+                                          FontSize="28"
+                                          FontWeight="Black"
+                                          Foreground="{DynamicResource LuminaPrimaryBrush}"
+                                          Stroke="#CC000000"
+                                          StrokeThickness="1.5"
+                                          TextAlignment="Center" />
+          <TextBlock Text="悬停显示控制栏 · 点击锁图标开启鼠标穿透"
+                     FontSize="12"
+                     Foreground="{DynamicResource LuminaTextMutedBrush}"
+                     TextAlignment="Center" />
+          <TextBlock Text="已锁定，鼠标已穿透"
+                     FontSize="12"
+                     Foreground="{DynamicResource LuminaPrimaryBrush}"
+                     TextAlignment="Center"
+                     IsVisible="{Binding #Root.IsLocked}" />
+        </StackPanel>
+
+        <!-- Progress bar (visible on hover) -->
+        <Border Grid.Row="2" Classes="hover-bg" Classes.show="{Binding #Root.IsHovered}"
+                Height="2" CornerRadius="1" Background="{DynamicResource LuminaDividerBrush}" IsHitTestVisible="False">
+          <ProgressBar Minimum="0" Maximum="100" Value="66" Height="2" Background="Transparent"
+                       Foreground="{DynamicResource LuminaPrimaryBrush}" />
+        </Border>
+
+      </Grid>
+    </Grid>
+  </Grid>
+</lumina:LuminaFloatingWindow>

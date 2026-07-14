@@ -116,6 +116,7 @@
                             <lumina:LuminaNavigationItem Name="NavDataGrid" Classes="Child" Header="{l10n:Loc Sandbox.Nav.DataGrid}" Icon="{x:Static material:MaterialIconKind.Table}" />
                             <lumina:LuminaNavigationItem Name="NavTreeDataGrid" Classes="Child" Header="{l10n:Loc Sandbox.Nav.TreeDataGrid}" Icon="{x:Static material:MaterialIconKind.FileTree}" />
                             <lumina:LuminaNavigationItem Name="NavAutoScrollText" Classes="Child" Header="{l10n:Loc Sandbox.Nav.AutoScrollText}" Icon="{x:Static material:MaterialIconKind.TextLong}" />
+                            <lumina:LuminaNavigationItem Name="NavFloatingWindow" Classes="Child" Header="FloatingWindow" Icon="{x:Static material:MaterialIconKind.WindowRestore}" />
                             <lumina:LuminaNavigationItem Name="NavIndexedList" Classes="Child" Header="{l10n:Loc Sandbox.Nav.IndexedList}" Icon="{x:Static material:MaterialIconKind.SortAlphabeticalAscending}" />
                             <lumina:LuminaNavigationItem Name="NavLinkedCategory" Classes="Child" Header="{l10n:Loc Sandbox.Nav.LinkedCategory}" Icon="{x:Static material:MaterialIconKind.LinkVariant}" />
                             <lumina:LuminaNavigationItem Name="NavPagination" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Pagination}" Icon="{x:Static material:MaterialIconKind.PageNextOutline}" />
