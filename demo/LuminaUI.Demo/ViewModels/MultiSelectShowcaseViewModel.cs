@@ -69,10 +69,10 @@ public partial class MultiSelectShowcaseViewModel : ObservableObject
         SelectedMembers.Clear();
         SelectedMembers.Add("Ava Chen");
         SelectedMembers.Add("Mia Johnson");
-        
+
         SelectedPriorities.Clear();
         SelectedPriorities.Add("High");
-        
+
         SelectedComplexMembers.Clear();
 
         StatusText = "Selection reset";
