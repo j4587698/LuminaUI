@@ -5131,4 +5131,148 @@ await shell.PushAsync(
   <data name="Sandbox.Components.CommandBar.Delete" xml:space="preserve">
     <value>删除</value>
   </data>
+  <data name="Sandbox.Nav.FloatingWindow" xml:space="preserve">
+    <value>悬浮窗</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.Title" xml:space="preserve">
+    <value>LuminaFloatingWindow</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.Subtitle" xml:space="preserve">
+    <value>可拖拽、可锁定（鼠标穿透）、支持悬停显示控件的桌面悬浮窗基类</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.Overview" xml:space="preserve">
+    <value>概述</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.OverviewDesc" xml:space="preserve">
+    <value>LuminaFloatingWindow 继承自 Avalonia Window，封装了桌面悬浮窗的通用能力：跨平台鼠标穿透、拖拽、悬停状态跟踪、屏幕定位。适合用于歌词悬浮窗、浮动播放器、桌面工具条等场景。</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.Features" xml:space="preserve">
+    <value>内置能力</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.FeatureLockedName" xml:space="preserve">
+    <value>IsLocked</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.FeatureLockedDesc" xml:space="preserve">
+    <value> — 锁定后鼠标穿透（Windows WS_EX_TRANSPARENT / macOS setIgnoresMouseEvents / Linux XShape Input）</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.FeatureHoveredName" xml:space="preserve">
+    <value>IsHovered</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.FeatureHoveredDesc" xml:space="preserve">
+    <value> — 自动跟踪鼠标悬停，锁定后自动取消</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.FeatureDragName" xml:space="preserve">
+    <value>BeginDrag(e)</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.FeatureDragDesc" xml:space="preserve">
+    <value> — 非锁定状态下拖拽窗口</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.FeaturePositionName" xml:space="preserve">
+    <value>PositionAtScreenBottom() / PositionAtScreenCenter()</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.FeaturePositionDesc" xml:space="preserve">
+    <value> — 辅助定位</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.DemoSection" xml:space="preserve">
+    <value>打开演示浮动窗</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.DemoDesc" xml:space="preserve">
+    <value>点击下方按钮打开一个基于 LuminaFloatingWindow 的演示窗口。窗口支持拖拽、锁定（鼠标穿透）、悬停显示 UI。</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.OpenDemo" xml:space="preserve">
+    <value>打开演示窗口</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.Usage" xml:space="preserve">
+    <value>使用方式</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.Step1" xml:space="preserve">
+    <value>1. 继承 LuminaFloatingWindow 创建你的窗口：</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.Step2" xml:space="preserve">
+    <value>2. 在代码后置中使用拖拽和定位：</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.KaraokeTitle" xml:space="preserve">
+    <value>LuminaKaraokeTextBlock</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.KaraokeSubtitle" xml:space="preserve">
+    <value>逐字卡拉OK歌词渲染控件，附带 LuminaKaraokeWord 数据模型</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.KaraokeDemo" xml:space="preserve">
+    <value>逐字动效演示</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.PlayPause" xml:space="preserve">
+    <value>播放/暂停</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.Reset" xml:space="preserve">
+    <value>重置</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.KaraokeText" xml:space="preserve">
+    <value>🎤 欢迎使用 LuminaUI</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.Properties" xml:space="preserve">
+    <value>属性</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.PropWordsName" xml:space="preserve">
+    <value>Words</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.PropWordsDesc" xml:space="preserve">
+    <value> — IReadOnlyList&lt;LuminaKaraokeWord&gt;</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.PropPositionName" xml:space="preserve">
+    <value>PlaybackPosition</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.PropPositionDesc" xml:space="preserve">
+    <value> — 当前播放位置（秒）</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.PropBrushesName" xml:space="preserve">
+    <value>SungBrush / UnsungBrush</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.PropBrushesDesc" xml:space="preserve">
+    <value> — 已唱/未唱颜色</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.PropStrokeName" xml:space="preserve">
+    <value>StrokeBrush / StrokeThickness</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.PropStrokeDesc" xml:space="preserve">
+    <value> — 描边</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.PropFontName" xml:space="preserve">
+    <value>FontSize / FontWeight / FontFamily</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.PropFontDesc" xml:space="preserve">
+    <value> — 文字样式</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.DataModel" xml:space="preserve">
+    <value>数据模型</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.OutlinedTitle" xml:space="preserve">
+    <value>LuminaOutlinedTextBlock</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.OutlinedSubtitle" xml:space="preserve">
+    <value>带描边的文字控件，支持文本换行和行数限制</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.OutlinedDemo" xml:space="preserve">
+    <value>示例</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.OutlinedSample1" xml:space="preserve">
+    <value>带描边的标题文字</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.OutlinedSample2" xml:space="preserve">
+    <value>描边细一点，颜色淡一点</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.OutlinedSample3" xml:space="preserve">
+    <value>多行文本换行示例，LuminaOutlinedTextBlock 支持 TextWrapping 和 MaxLines 参数，可以控制文字换行行为</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.LockTooltip" xml:space="preserve">
+    <value>锁定（鼠标穿透）</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.CloseTooltip" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.DemoSubtitle1" xml:space="preserve">
+    <value>悬停显示控制栏 · 点击锁图标开启鼠标穿透</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.DemoLocked" xml:space="preserve">
+    <value>已锁定，鼠标已穿透</value>
+  </data>
 </root>

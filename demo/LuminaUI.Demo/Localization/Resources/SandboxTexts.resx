@@ -5131,4 +5131,148 @@ await shell.PushAsync(
   <data name="Sandbox.Components.CommandBar.Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="Sandbox.Nav.FloatingWindow" xml:space="preserve">
+    <value>Floating Windows</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.Title" xml:space="preserve">
+    <value>LuminaFloatingWindow</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.Subtitle" xml:space="preserve">
+    <value>Draggable, lockable (mouse passthrough), hover-reveal desktop floating window base class</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.Overview" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.OverviewDesc" xml:space="preserve">
+    <value>LuminaFloatingWindow inherits from the Avalonia Window and encapsulates common capabilities for desktop floating windows: cross-platform mouse passthrough, dragging, hover-state tracking, and screen positioning. Suitable for lyrics windows, floating players, desktop toolbars, etc.</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.Features" xml:space="preserve">
+    <value>Built-in Capabilities</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.FeatureLockedName" xml:space="preserve">
+    <value>IsLocked</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.FeatureLockedDesc" xml:space="preserve">
+    <value> — locks to enable mouse passthrough (Windows WS_EX_TRANSPARENT / macOS setIgnoresMouseEvents / Linux XShape Input)</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.FeatureHoveredName" xml:space="preserve">
+    <value>IsHovered</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.FeatureHoveredDesc" xml:space="preserve">
+    <value> — automatically tracks mouse hover, auto-clears when locked</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.FeatureDragName" xml:space="preserve">
+    <value>BeginDrag(e)</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.FeatureDragDesc" xml:space="preserve">
+    <value> — drags the window when unlocked</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.FeaturePositionName" xml:space="preserve">
+    <value>PositionAtScreenBottom() / PositionAtScreenCenter()</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.FeaturePositionDesc" xml:space="preserve">
+    <value> — positioning helpers</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.DemoSection" xml:space="preserve">
+    <value>Open Demo Window</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.DemoDesc" xml:space="preserve">
+    <value>Click the button below to open a demo window based on LuminaFloatingWindow. The window supports dragging, locking (mouse passthrough), and hover-reveal UI.</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.OpenDemo" xml:space="preserve">
+    <value>Open Demo Window</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.Usage" xml:space="preserve">
+    <value>Usage</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.Step1" xml:space="preserve">
+    <value>1. Inherit from LuminaFloatingWindow to create your window:</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.Step2" xml:space="preserve">
+    <value>2. Use drag and positioning in code-behind:</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.KaraokeTitle" xml:space="preserve">
+    <value>LuminaKaraokeTextBlock</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.KaraokeSubtitle" xml:space="preserve">
+    <value>Word-by-word karaoke lyrics rendering control with LuminaKaraokeWord data model</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.KaraokeDemo" xml:space="preserve">
+    <value>Word-by-word Animation</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.PlayPause" xml:space="preserve">
+    <value>Play/Pause</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.KaraokeText" xml:space="preserve">
+    <value>🎤 Welcome to LuminaUI</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.Properties" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.PropWordsName" xml:space="preserve">
+    <value>Words</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.PropWordsDesc" xml:space="preserve">
+    <value> — IReadOnlyList&lt;LuminaKaraokeWord&gt;</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.PropPositionName" xml:space="preserve">
+    <value>PlaybackPosition</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.PropPositionDesc" xml:space="preserve">
+    <value> — current playback position (seconds)</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.PropBrushesName" xml:space="preserve">
+    <value>SungBrush / UnsungBrush</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.PropBrushesDesc" xml:space="preserve">
+    <value> — sung/unsung colors</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.PropStrokeName" xml:space="preserve">
+    <value>StrokeBrush / StrokeThickness</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.PropStrokeDesc" xml:space="preserve">
+    <value> — stroke settings</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.PropFontName" xml:space="preserve">
+    <value>FontSize / FontWeight / FontFamily</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.PropFontDesc" xml:space="preserve">
+    <value> — text styling</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.DataModel" xml:space="preserve">
+    <value>Data Model</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.OutlinedTitle" xml:space="preserve">
+    <value>LuminaOutlinedTextBlock</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.OutlinedSubtitle" xml:space="preserve">
+    <value>Text control with stroke, supporting text wrapping and line limits</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.OutlinedDemo" xml:space="preserve">
+    <value>Examples</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.OutlinedSample1" xml:space="preserve">
+    <value>Title text with stroke</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.OutlinedSample2" xml:space="preserve">
+    <value>Thinner stroke, lighter color</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.OutlinedSample3" xml:space="preserve">
+    <value>Multi-line text wrapping example. LuminaOutlinedTextBlock supports TextWrapping and MaxLines to control line-breaking behavior.</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.LockTooltip" xml:space="preserve">
+    <value>Lock (mouse passthrough)</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.CloseTooltip" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.DemoSubtitle1" xml:space="preserve">
+    <value>Hover to show controls · Click lock icon for mouse passthrough</value>
+  </data>
+  <data name="Sandbox.FloatingWindow.DemoLocked" xml:space="preserve">
+    <value>Locked — mouse passthrough active</value>
+  </data>
 </root>

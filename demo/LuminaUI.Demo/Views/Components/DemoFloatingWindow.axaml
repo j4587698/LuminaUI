@@ -1,7 +1,8 @@
 <lumina:LuminaFloatingWindow xmlns="https://github.com/avaloniaui"
-                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                       xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
-                       xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
+                        xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+                        xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
                        x:Class="LuminaUI.Demo.Views.DemoFloatingWindow"
                        x:Name="Root"
                        Width="700"
@@ -55,7 +56,7 @@
           </StackPanel>
           <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="6">
             <Button Classes="Ghost Icon" Width="26" Height="26" Padding="0" x:Name="LockButton" Click="OnToggleLock"
-                    ToolTip.Tip="锁定（鼠标穿透）" lumina:LuminaButton.IconSize="14">
+                    ToolTip.Tip="{l10n:Loc Sandbox.FloatingWindow.LockTooltip}" lumina:LuminaButton.IconSize="14">
               <lumina:LuminaButton.Icon>
                 <Grid>
                   <icons:MaterialIcon Kind="LockOpenOutline" Width="14" Height="14"
@@ -67,7 +68,7 @@
               </lumina:LuminaButton.Icon>
             </Button>
             <Button Classes="Ghost Icon" Width="26" Height="26" Padding="0" Click="OnClose"
-                    ToolTip.Tip="关闭" lumina:LuminaButton.IconSize="16">
+                    ToolTip.Tip="{l10n:Loc Sandbox.FloatingWindow.CloseTooltip}" lumina:LuminaButton.IconSize="16">
               <lumina:LuminaButton.Icon>
                 <icons:MaterialIcon Kind="Close" Width="16" Height="16" Foreground="{DynamicResource LuminaTextMutedBrush}" />
               </lumina:LuminaButton.Icon>
@@ -84,11 +85,11 @@
                                           Stroke="#CC000000"
                                           StrokeThickness="1.5"
                                           TextAlignment="Center" />
-          <TextBlock Text="悬停显示控制栏 · 点击锁图标开启鼠标穿透"
+          <TextBlock Text="{l10n:Loc Sandbox.FloatingWindow.DemoSubtitle1}"
                      FontSize="12"
                      Foreground="{DynamicResource LuminaTextMutedBrush}"
                      TextAlignment="Center" />
-          <TextBlock Text="已锁定，鼠标已穿透"
+          <TextBlock Text="{l10n:Loc Sandbox.FloatingWindow.DemoLocked}"
                      FontSize="12"
                      Foreground="{DynamicResource LuminaPrimaryBrush}"
                      TextAlignment="Center"
