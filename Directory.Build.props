@@ -1,10 +1,10 @@
 <Project>
   <PropertyGroup>
-    <LuminaUIVersion>0.5.0</LuminaUIVersion>
+    <LuminaUIVersion>0.6.0</LuminaUIVersion>
 
     <Version>$(LuminaUIVersion)</Version>
     <PackageVersion>$(LuminaUIVersion)</PackageVersion>
-    <LuminaUIAssemblyVersion>0.5.0.0</LuminaUIAssemblyVersion>
+    <LuminaUIAssemblyVersion>0.6.0.0</LuminaUIAssemblyVersion>
     <AssemblyVersion>$(LuminaUIAssemblyVersion)</AssemblyVersion>
     <FileVersion>$(LuminaUIAssemblyVersion)</FileVersion>
     <InformationalVersion>$(LuminaUIVersion)</InformationalVersion>
