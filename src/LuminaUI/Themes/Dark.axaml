@@ -171,4 +171,17 @@
     <SolidColorBrush x:Key="LuminaCardGlassEdgeBrush" Color="#30FFFFFF" />
     <SolidColorBrush x:Key="LuminaBlurBackgroundTintBrush" Color="#180B0F17" />
     <SolidColorBrush x:Key="LuminaBlurBackgroundEdgeBrush" Color="#30FFFFFF" />
+    <x:Double x:Key="LuminaPseudoGlassNoiseOpacity">0.025</x:Double>
+    <LinearGradientBrush x:Key="LuminaPseudoGlassHighlightBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+        <GradientStop Offset="0" Color="#26FFFFFF" />
+        <GradientStop Offset="0.38" Color="#0AFFFFFF" />
+        <GradientStop Offset="0.62" Color="#00000000" />
+        <GradientStop Offset="1" Color="#16000000" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="LuminaPseudoGlassEdgeBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+        <GradientStop Offset="0" Color="#70FFFFFF" />
+        <GradientStop Offset="0.42" Color="#24FFFFFF" />
+        <GradientStop Offset="0.68" Color="#16FFFFFF" />
+        <GradientStop Offset="1" Color="#38000000" />
+    </LinearGradientBrush>
 </ResourceDictionary>

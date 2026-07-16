@@ -14,6 +14,7 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
+using LuminaUI.Enums;
 using LuminaUI.Extensions;
 
 namespace LuminaUI.Controls;
@@ -43,6 +44,12 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
     private Control? _bottomSheetOverlay;
 
     private Control? _drawerOverlay;
+
+    private LuminaBackdropBlur? _dialogBackdropBlur;
+
+    private LuminaBackdropBlur? _bottomSheetBackdropBlur;
+
+    private LuminaBackdropBlur? _drawerBackdropBlur;
 
     private ContentPresenter? _toastPresenter;
 
@@ -85,6 +92,10 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
     private Thickness _overlaySafeAreaPadding;
 
     public static readonly StyledProperty<string?> OverlayHostKeyProperty = AvaloniaProperty.Register<LuminaOverlayHost, string?>(nameof(OverlayHostKey));
+
+    public static readonly StyledProperty<LuminaGlassMode> GlassModeProperty = AvaloniaProperty.Register<LuminaOverlayHost, LuminaGlassMode>(
+        nameof(GlassMode),
+        LuminaGlassMode.AcrylicDynamic);
 
     public static readonly StyledProperty<bool> IsDialogOpenProperty = AvaloniaProperty.Register<LuminaOverlayHost, bool>(nameof(IsDialogOpen), defaultValue: false);
 
@@ -147,6 +158,12 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
     {
         get => GetValue(OverlayHostKeyProperty);
         set => SetValue(OverlayHostKeyProperty, value);
+    }
+
+    public LuminaGlassMode GlassMode
+    {
+        get => GetValue(GlassModeProperty);
+        set => SetValue(GlassModeProperty, value);
     }
 
     public bool IsDialogOpen
@@ -427,6 +444,13 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
         IsDrawerOpen = false;
     }
 
+    public void RefreshBackdrop()
+    {
+        _dialogBackdropBlur?.RefreshBackdrop();
+        _bottomSheetBackdropBlur?.RefreshBackdrop();
+        _drawerBackdropBlur?.RefreshBackdrop();
+    }
+
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
@@ -473,16 +497,19 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
         base.OnApplyTemplate(e);
         DetachOverlayHandlers();
         _dialogOverlay = e.NameScope.FindRequired<Control>("PART_DialogOverlay");
+        _dialogBackdropBlur = e.NameScope.FindRequired<LuminaBackdropBlur>("PART_DialogBackdropBlur");
         if (_dialogOverlay != null)
         {
             _dialogOverlay.AddHandler(InputElement.PointerPressedEvent, OnDialogOverlayPointerPressed, RoutingStrategies.Tunnel, handledEventsToo: true);
         }
         _bottomSheetOverlay = e.NameScope.FindRequired<Control>("PART_BottomSheetOverlay");
+        _bottomSheetBackdropBlur = e.NameScope.FindRequired<LuminaBackdropBlur>("PART_BottomSheetBackdropBlur");
         if (_bottomSheetOverlay != null)
         {
             _bottomSheetOverlay.AddHandler(InputElement.PointerPressedEvent, OnBottomSheetOverlayPointerPressed, RoutingStrategies.Tunnel, handledEventsToo: true);
         }
         _drawerOverlay = e.NameScope.FindRequired<Control>("PART_DrawerOverlay");
+        _drawerBackdropBlur = e.NameScope.FindRequired<LuminaBackdropBlur>("PART_DrawerBackdropBlur");
         if (_drawerOverlay != null)
         {
             _drawerOverlay.AddHandler(InputElement.PointerPressedEvent, OnDrawerOverlayPointerPressed, RoutingStrategies.Tunnel, handledEventsToo: true);
@@ -589,6 +616,10 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
         }
         else if (change.Property == IsDialogOpenProperty)
         {
+            if (change.GetNewValue<bool>())
+            {
+                _dialogBackdropBlur?.RefreshBackdrop();
+            }
             _overlayInputPaneAvoidance.UpdateOverlayState();
         }
         else if (change.Property == IsBottomSheetOpenProperty)
@@ -596,6 +627,7 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
             if (change.GetNewValue<bool>())
             {
                 CancelBottomSheetContentClear();
+                _bottomSheetBackdropBlur?.RefreshBackdrop();
             }
             else
             {
@@ -608,12 +640,17 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
             if (change.GetNewValue<bool>())
             {
                 CancelDrawerContentClear();
+                _drawerBackdropBlur?.RefreshBackdrop();
             }
             else
             {
                 ScheduleDrawerContentClear();
             }
             _overlayInputPaneAvoidance.UpdateOverlayState();
+        }
+        else if (change.Property == GlassModeProperty)
+        {
+            RefreshBackdrop();
         }
         else if (change.Property == BottomSheetContentProperty)
         {

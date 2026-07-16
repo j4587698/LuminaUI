@@ -7,7 +7,7 @@ LuminaUI is built on a modern, high-contrast, and deeply semantic color palette 
 1.  **Stop Relying on Muddiness (Muddy Grays)**: In Dark Mode, do not use `#2x2x2x` gray backgrounds to indicate elevation. The background must be pure black (`#000000`) or deep slate (`#09090B`).
 2.  **Lines over Blocks**: Use sharp 1px borders (`#27272A`) to define card boundaries and popups instead of large gray backgrounds.
 3.  **High Contrast Text**: Text should pop. Use `#FAFAFA` for dark mode text, not `#CCCCCC`.
-4.  **Pseudo Glass**: Hardware-accelerated blur is prone to cross-platform failure (e.g., missing GPU contexts). LuminaUI uses 0% CPU "Pseudo Glass" (opacity blending + liquid gradient borders) as its primary aesthetic.
+4.  **Selectable Glass**: Use `GlassMode` to choose no glass, zero-cost pseudo glass, a one-time cached acrylic snapshot, or dynamic acrylic according to the surface's performance requirements.
 
 ## 1. Neutral Palette (Light Mode)
 
@@ -40,7 +40,7 @@ LuminaUI defines 3 levels of elevation for the `LuminaCard` component:
 
 1.  **Solid (Default)**: Flat against the background. Uses `LuminaSurface` and a 1px `LuminaBorder`. Shadow is extremely faint (`0 1 3`).
 2.  **Elevated (IsElevated="True")**: Floating above the surface. Uses `LuminaSurfaceElevated`. Casts a distinct drop shadow (`0 4 12`). Ideal for forms and important distinct regions.
-3.  **Glass (Classes="Glass")**: The signature Lumina look. Uses a translucent background (`0.40` to `0.85` opacity), a strong drop shadow, and a `LiquidBorderBrush` (a linear gradient that mimics light reflecting off the edge of a glass pane). Zero CPU cost.
+3.  **Glass (`GlassMode`)**: `Pseudo` uses a translucent tint, static noise texture, gradient highlight, and gradient edge without backdrop sampling; `AcrylicCached` samples and blurs once, automatically refreshes after a theme-variant change, and can be manually refreshed with `RefreshBackdrop()`; `AcrylicDynamic` performs live backdrop blur. A plain translucent surface uses `Off` with an alpha `Background`. `Classes="Glass"`, `Classes="CachedGlass"`, and `Classes="PseudoGlass"` remain concise aliases for cards.
 
 ## 5. Typography
 

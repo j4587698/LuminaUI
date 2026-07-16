@@ -11,6 +11,7 @@
         <ResourceInclude Source="avares://LuminaUI/Themes/Button.axaml" />
         <ResourceInclude Source="avares://LuminaUI/Themes/HamburgerButton.axaml" />
         <ResourceInclude Source="avares://LuminaUI/Themes/ActionControls.axaml" />
+        <ResourceInclude Source="avares://LuminaUI/Themes/PseudoGlass.axaml" />
         <ResourceInclude Source="avares://LuminaUI/Themes/Card.axaml" />
         <ResourceInclude Source="avares://LuminaUI/Themes/BlurBackground.axaml" />
         <ResourceInclude Source="avares://LuminaUI/Themes/GroupBox.axaml" />
