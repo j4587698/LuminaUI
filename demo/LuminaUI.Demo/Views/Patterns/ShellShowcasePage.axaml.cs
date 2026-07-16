@@ -1,10 +1,12 @@
 using System;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Avalonia.Animation;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Media;
+using CommunityToolkit.Mvvm.Input;
 using LuminaUI.Controls;
 using LuminaUI.Localization;
 
@@ -26,12 +28,25 @@ public partial class ShellShowcasePage : LuminaPage
 
     private int _nextStackPageNumber = 2;
 
+    public ICommand CloseBackHandlerOverlayCommand { get; }
+
     public ShellShowcasePage()
     {
+        CloseBackHandlerOverlayCommand = new RelayCommand(CloseBackHandlerOverlay);
         InitializeComponent();
         RegisterPreviewRoutes();
         PreviewShell.NavigateTo("PreviewHome", closeMenuOnNavigate: false);
         ShellShowcaseLayout.SizeChanged += OnShellShowcaseLayoutSizeChanged;
+    }
+
+    private void OnOpenBackHandlerOverlayClicked(object? sender, RoutedEventArgs e)
+    {
+        BackHandlerOverlay.IsVisible = true;
+    }
+
+    private void CloseBackHandlerOverlay()
+    {
+        BackHandlerOverlay.IsVisible = false;
     }
 
     private void OnShellShowcaseLayoutSizeChanged(object? sender, SizeChangedEventArgs e)

@@ -4167,8 +4167,29 @@
   <data name="Sandbox.ShellShowcase.ShellStack" xml:space="preserve">
     <value>Shell 堆栈</value>
   </data>
+  <data name="Sandbox.ShellShowcase.BackHandler" xml:space="preserve">
+    <value>自定义返回处理</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OpenBackHandlerOverlay" xml:space="preserve">
+    <value>打开普通浮层</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.BackHandlerHint" xml:space="preserve">
+    <value>该浮层是通过 LuminaBack 注册的普通 Grid，不是导航 Page。</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.BackHandlerOverlayTitle" xml:space="preserve">
+    <value>返回栈中的普通控件</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.BackHandlerOverlayDescription" xml:space="preserve">
+    <value>按平台返回键会先关闭这个 Grid，然后才处理 Shell 菜单或导航栈。</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.CloseBackHandlerOverlay" xml:space="preserve">
+    <value>关闭浮层</value>
+  </data>
   <data name="Sandbox.ShellShowcase.PushShellPage" xml:space="preserve">
     <value>压入 Shell 页</value>
+  </data>
+  <data name="Sandbox.Back.ExitHint" xml:space="preserve">
+    <value>再按一次返回退出</value>
   </data>
   <data name="Sandbox.ShellShowcase.PushShellPageSlide" xml:space="preserve">
     <value>滑动压入</value>

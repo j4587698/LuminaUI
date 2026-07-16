@@ -10,8 +10,12 @@ namespace LuminaUI.Demo.Views;
 
 public partial class SandboxRootView : UserControl
 {
+    private static readonly TimeSpan AndroidBackExitWindow = TimeSpan.FromSeconds(2);
+
     private const string StaticShowcaseViewModel = "StaticShowcaseViewModel";
     private bool _hasNavigated;
+
+    private DateTimeOffset _lastUnhandledAndroidBackRequestedAt;
 
     private static readonly string[] RouteKeys =
     [
@@ -92,7 +96,31 @@ public partial class SandboxRootView : UserControl
         InitializeComponent();
         RegisterRoutes();
 
+        AppShell.UnhandledBackRequested += OnUnhandledBackRequested;
         Loaded += OnLoaded;
+    }
+
+    private void OnUnhandledBackRequested(object? sender, LuminaBackRequestedEventArgs e)
+    {
+        if (!OperatingSystem.IsAndroid())
+        {
+            return;
+        }
+
+        DateTimeOffset now = DateTimeOffset.UtcNow;
+        if (now - _lastUnhandledAndroidBackRequestedAt <= AndroidBackExitWindow)
+        {
+            _lastUnhandledAndroidBackRequestedAt = default;
+            return;
+        }
+
+        _lastUnhandledAndroidBackRequestedAt = now;
+        e.Handled = true;
+        NotificationCenter.Show(
+            LuminaLocalization.Get(SandboxLocalization.AppTitle),
+            LuminaLocalization.Get("Sandbox.Back.ExitHint"),
+            NotificationType.Information,
+            AndroidBackExitWindow);
     }
 
     public void NavigateToRoute(string routeKey, bool closeMenuOnNavigate = false)

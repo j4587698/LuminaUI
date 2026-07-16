@@ -1,9 +1,10 @@
 <lumina:LuminaPage xmlns="https://github.com/avaloniaui"
-                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                   xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
-                   xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
-                   x:Class="LuminaUI.Demo.Views.ShellShowcasePage"
-                   ShellTitle="{l10n:Loc Sandbox.ShellShowcase.Title}"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
+                    xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+                    x:Class="LuminaUI.Demo.Views.ShellShowcasePage"
+                    x:Name="ShellShowcasePageRoot"
+                    ShellTitle="{l10n:Loc Sandbox.ShellShowcase.Title}"
                    ShellSubtitle="{l10n:Loc Sandbox.ShellShowcase.Subtitle}">
     <ScrollViewer x:Name="PageScroll"
                   HorizontalScrollBarVisibility="Disabled">
@@ -39,6 +40,19 @@
                                       IsChecked="{Binding #PreviewShell.IsMenuAutoResponsive, Mode=TwoWay}" />
                             <CheckBox Content="{l10n:Loc Sandbox.ShellShowcase.OptionCloseMenuOnNavigate}"
                                       IsChecked="{Binding #PreviewShell.CloseMenuOnNavigate, Mode=TwoWay}" />
+                        </StackPanel>
+
+                        <Separator />
+
+                        <StackPanel Spacing="8">
+                            <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.ShellShowcase.BackHandler}" />
+                            <Button Classes="Small Outline"
+                                    HorizontalAlignment="Left"
+                                    Content="{l10n:Loc Sandbox.ShellShowcase.OpenBackHandlerOverlay}"
+                                    Click="OnOpenBackHandlerOverlayClicked" />
+                            <TextBlock Text="{l10n:Loc Sandbox.ShellShowcase.BackHandlerHint}"
+                                       Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                       TextWrapping="Wrap" />
                         </StackPanel>
 
                         <Separator />
@@ -244,11 +258,12 @@
                         </Border>
 
                         <Border x:Name="PreviewShellHost"
-                                Grid.Row="1"
-                                MinHeight="420"
-                                Background="{DynamicResource LuminaBackgroundBrush}">
-                            <lumina:LuminaShell x:Name="PreviewShell"
-                                                DefaultPageTitle="{l10n:Loc Sandbox.ShellShowcase.PreviewShellTitle}"
+                                 Grid.Row="1"
+                                 MinHeight="420"
+                                 Background="{DynamicResource LuminaBackgroundBrush}">
+                            <Grid>
+                                <lumina:LuminaShell x:Name="PreviewShell"
+                                                 DefaultPageTitle="{l10n:Loc Sandbox.ShellShowcase.PreviewShellTitle}"
                                                 DefaultPageSubtitle="{l10n:Loc Sandbox.ShellShowcase.PreviewShellSubtitle}"
                                                 OpenPaneLength="220"
                                                 CompactPaneLength="56"
@@ -302,7 +317,34 @@
                                     <Button Classes="Small Outline"
                                             Content="{l10n:Loc Sandbox.ShellShowcase.Action}" />
                                 </lumina:LuminaShell.DefaultPageActions>
-                            </lumina:LuminaShell>
+                                </lumina:LuminaShell>
+
+                                <Grid x:Name="BackHandlerOverlay"
+                                      IsVisible="False"
+                                      ZIndex="100"
+                                      Background="#B0000000"
+                                      lumina:LuminaBack.IsEnabled="{Binding #BackHandlerOverlay.IsVisible}"
+                                      lumina:LuminaBack.Command="{Binding #ShellShowcasePageRoot.CloseBackHandlerOverlayCommand}">
+                                    <lumina:LuminaCard Width="360"
+                                                       MaxWidth="{Binding #PreviewShellHost.Bounds.Width}"
+                                                       Margin="24"
+                                                       Padding="24"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center">
+                                        <StackPanel Spacing="14">
+                                            <TextBlock Classes="SectionTitle"
+                                                       Text="{l10n:Loc Sandbox.ShellShowcase.BackHandlerOverlayTitle}" />
+                                            <TextBlock Text="{l10n:Loc Sandbox.ShellShowcase.BackHandlerOverlayDescription}"
+                                                       TextWrapping="Wrap"
+                                                       Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                                            <Button Classes="Primary"
+                                                    HorizontalAlignment="Left"
+                                                    Content="{l10n:Loc Sandbox.ShellShowcase.CloseBackHandlerOverlay}"
+                                                    Command="{Binding #ShellShowcasePageRoot.CloseBackHandlerOverlayCommand}" />
+                                        </StackPanel>
+                                    </lumina:LuminaCard>
+                                </Grid>
+                            </Grid>
                         </Border>
                     </Grid>
                 </lumina:LuminaCard>

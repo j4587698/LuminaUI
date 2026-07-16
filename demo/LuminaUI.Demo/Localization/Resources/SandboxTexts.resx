@@ -4167,8 +4167,29 @@
   <data name="Sandbox.ShellShowcase.ShellStack" xml:space="preserve">
     <value>Shell stack</value>
   </data>
+  <data name="Sandbox.ShellShowcase.BackHandler" xml:space="preserve">
+    <value>Custom back handler</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OpenBackHandlerOverlay" xml:space="preserve">
+    <value>Open ordinary overlay</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.BackHandlerHint" xml:space="preserve">
+    <value>The overlay is a regular Grid registered with LuminaBack, not a navigation Page.</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.BackHandlerOverlayTitle" xml:space="preserve">
+    <value>Ordinary control in the back stack</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.BackHandlerOverlayDescription" xml:space="preserve">
+    <value>Press the platform back button to close this Grid before the Shell menu or navigation stack is handled.</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.CloseBackHandlerOverlay" xml:space="preserve">
+    <value>Close overlay</value>
+  </data>
   <data name="Sandbox.ShellShowcase.PushShellPage" xml:space="preserve">
     <value>Push Shell page</value>
+  </data>
+  <data name="Sandbox.Back.ExitHint" xml:space="preserve">
+    <value>Press back again to exit</value>
   </data>
   <data name="Sandbox.ShellShowcase.PushShellPageSlide" xml:space="preserve">
     <value>Push slide</value>
