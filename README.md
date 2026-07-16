@@ -77,6 +77,20 @@ For applications that use `LuminaShell`, make the shell the root view. `LuminaSh
 
 Use `LuminaOverlayHost` directly only when an application does not use `LuminaShell` but still needs global overlays or platform safe-area handling.
 
+### System back handling
+
+`LuminaShell` handles system back requests in this order: modal overlays, ordinary control handlers, the shell menu, and the navigation page stack. An ordinary overlay does not need to become a `Page`; register its existing close command directly:
+
+```xml
+<Grid IsVisible="{Binding IsPanelOpen}"
+      lumina:LuminaBack.IsEnabled="{Binding IsPanelOpen}"
+      lumina:LuminaBack.Command="{Binding ClosePanelCommand}">
+  <!-- Overlay content -->
+</Grid>
+```
+
+Handlers at the same priority run from the deepest visual owner outward, then in last-in-first-out order at the same depth. When no handler consumes the request, the shell raises `UnhandledBackRequested`. If the event remains unhandled, the request is passed to the platform, which enables application policies such as “press back again to exit.”
+
 ## Repository Layout
 
 ```text

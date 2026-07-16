@@ -76,7 +76,7 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
 
     private bool _hasAutoSafeAreaOverride;
 
-    private bool _isBackRequestedSubscribed;
+    private IDisposable? _backRegistration;
 
     private Thickness _safeAreaPadding;
 
@@ -523,44 +523,27 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
         return false;
     }
 
-    private void OnTopLevelBackRequested(object? sender, RoutedEventArgs e)
-    {
-        if (!e.Handled && TryHandleSystemBackRequested())
-        {
-            e.Handled = true;
-        }
-    }
-
     private void SyncBackRequestedSubscription()
     {
+        DetachBackRequestedSubscription();
         if (_topLevel == null)
         {
-            _isBackRequestedSubscribed = false;
             return;
         }
 
         if (HandlesSystemBackRequested)
         {
-            if (!_isBackRequestedSubscribed)
-            {
-                _topLevel.BackRequested += OnTopLevelBackRequested;
-                _isBackRequestedSubscribed = true;
-            }
-        }
-        else
-        {
-            DetachBackRequestedSubscription();
+            _backRegistration = LuminaBackDispatcher.GetFor(_topLevel).Register(
+                this,
+                TryHandleSystemBackRequested,
+                LuminaBackDispatcher.ModalPriority);
         }
     }
 
     private void DetachBackRequestedSubscription()
     {
-        if (_topLevel != null && _isBackRequestedSubscribed)
-        {
-            _topLevel.BackRequested -= OnTopLevelBackRequested;
-        }
-
-        _isBackRequestedSubscribed = false;
+        _backRegistration?.Dispose();
+        _backRegistration = null;
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)

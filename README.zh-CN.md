@@ -77,6 +77,20 @@ NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NE
 
 仅在不使用 `LuminaShell`、但仍需要全局覆盖层或平台安全区处理时，才直接使用 `LuminaOverlayHost`。
 
+### 系统返回处理
+
+`LuminaShell` 会按“模态覆盖层、普通控件返回项、菜单、页面导航栈”的顺序处理系统返回。普通浮层无需改造成 `Page`，可以直接注册现有的关闭命令：
+
+```xml
+<Grid IsVisible="{Binding IsPanelOpen}"
+      lumina:LuminaBack.IsEnabled="{Binding IsPanelOpen}"
+      lumina:LuminaBack.Command="{Binding ClosePanelCommand}">
+  <!-- 浮层内容 -->
+</Grid>
+```
+
+同一优先级的返回项先按视觉树从内向外处理，同一深度再按后注册先处理。没有任何返回项可处理时，Shell 会触发 `UnhandledBackRequested`；事件仍未标记为已处理时，请求将继续交给平台，可用于实现“再按一次退出”等应用级策略。
+
 ## 目录结构
 
 ```text

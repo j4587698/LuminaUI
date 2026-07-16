@@ -37,7 +37,11 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private readonly ConditionalWeakTable<Page, LuminaShellPushOptions> _pushOptions = new ConditionalWeakTable<Page, LuminaShellPushOptions>();
 
-    private TopLevel? _backRequestedTopLevel;
+    private LuminaBackDispatcher? _backDispatcher;
+
+    private IDisposable? _overlayBackRegistration;
+
+    private IDisposable? _navigationBackRegistration;
 
     private NavigationPage? _navigationHost;
 
@@ -297,6 +301,12 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     public ICommand ToggleMenuCommand { get; }
 
     public ICommand ToggleCompactModeCommand { get; }
+
+    /// <summary>
+    /// Raised when no overlay, custom back handler, menu, or navigation page consumes a system back request.
+    /// Leave <see cref="LuminaBackRequestedEventArgs.Handled"/> false to pass the request to the platform.
+    /// </summary>
+    public event EventHandler<LuminaBackRequestedEventArgs>? UnhandledBackRequested;
 
     public ICommand CloseDialogCommand { get; }
 
@@ -1440,31 +1450,37 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     private void AttachBackRequestedHandler()
     {
         DetachBackRequestedHandler();
-        _backRequestedTopLevel = TopLevel.GetTopLevel(this);
-        if (_backRequestedTopLevel != null)
+        TopLevel? topLevel = TopLevel.GetTopLevel(this);
+        if (topLevel != null)
         {
-            _backRequestedTopLevel.BackRequested += OnTopLevelBackRequested;
+            _backDispatcher = LuminaBackDispatcher.GetFor(topLevel);
+            _overlayBackRegistration = _backDispatcher.Register(
+                this,
+                TryHandleOverlayBackRequested,
+                LuminaBackDispatcher.ModalPriority);
+            _navigationBackRegistration = _backDispatcher.Register(
+                this,
+                TryHandleNavigationBackRequested,
+                LuminaBackDispatcher.ShellNavigationPriority);
+            _backDispatcher.UnhandledBackRequested += OnUnhandledBackRequested;
         }
     }
 
     private void DetachBackRequestedHandler()
     {
-        if (_backRequestedTopLevel != null)
+        if (_backDispatcher != null)
         {
-            _backRequestedTopLevel.BackRequested -= OnTopLevelBackRequested;
-            _backRequestedTopLevel = null;
+            _backDispatcher.UnhandledBackRequested -= OnUnhandledBackRequested;
+            _backDispatcher = null;
         }
+
+        _overlayBackRegistration?.Dispose();
+        _overlayBackRegistration = null;
+        _navigationBackRegistration?.Dispose();
+        _navigationBackRegistration = null;
     }
 
-    private void OnTopLevelBackRequested(object? sender, RoutedEventArgs e)
-    {
-        if (!e.Handled && TryHandleSystemBackRequested())
-        {
-            e.Handled = true;
-        }
-    }
-
-    private bool TryHandleSystemBackRequested()
+    private bool TryHandleOverlayBackRequested()
     {
         if (_overlayHost?.TryHandleSystemBackRequested() == true)
         {
@@ -1489,13 +1505,33 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
             return true;
         }
 
+        return false;
+    }
+
+    private bool TryHandleNavigationBackRequested()
+    {
         if (ShouldCloseMenuOnSystemBack())
         {
             IsMenuOpen = false;
             return true;
         }
 
+        if (CanGoBack)
+        {
+            if (NavigateBackCommand.CanExecute(null))
+            {
+                NavigateBackCommand.Execute(null);
+            }
+
+            return true;
+        }
+
         return false;
+    }
+
+    private void OnUnhandledBackRequested(object? sender, LuminaBackRequestedEventArgs e)
+    {
+        UnhandledBackRequested?.Invoke(this, e);
     }
 
     public LuminaShell()
