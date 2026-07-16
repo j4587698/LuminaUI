@@ -28,11 +28,17 @@
                         </Border.Transitions>
 
                         <Grid>
-                            <lumina:LuminaBackdropBlur BlurRadius="{DynamicResource LuminaOverlayBackdropBlurRadius}"
+                            <lumina:LuminaBackdropBlur Name="PART_DialogBackdropBlur"
+                                                       BlurRadius="{DynamicResource LuminaOverlayBackdropBlurRadius}"
+                                                       Mode="Off"
                                                        HorizontalAlignment="Stretch"
                                                        VerticalAlignment="Stretch" />
                             <Border Background="{DynamicResource LuminaOverlayScrimBrush}"
                                     IsHitTestVisible="False" />
+                            <lumina:LuminaPseudoGlass Name="PART_DialogPseudoGlass"
+                                                      TintBrush="Transparent"
+                                                      EdgeThickness="0"
+                                                      IsVisible="False" />
 
                             <Border Padding="{TemplateBinding OverlaySafeAreaPadding}">
                                 <Border Name="PART_DialogContainer">
@@ -62,11 +68,17 @@
                         </Border.Transitions>
 
                         <Grid>
-                            <lumina:LuminaBackdropBlur BlurRadius="{DynamicResource LuminaOverlayBackdropBlurRadius}"
+                            <lumina:LuminaBackdropBlur Name="PART_DrawerBackdropBlur"
+                                                       BlurRadius="{DynamicResource LuminaOverlayBackdropBlurRadius}"
+                                                       Mode="Off"
                                                        HorizontalAlignment="Stretch"
                                                        VerticalAlignment="Stretch" />
                             <Border Background="{DynamicResource LuminaOverlayScrimBrush}"
                                     IsHitTestVisible="False" />
+                            <lumina:LuminaPseudoGlass Name="PART_DrawerPseudoGlass"
+                                                      TintBrush="Transparent"
+                                                      EdgeThickness="0"
+                                                      IsVisible="False" />
 
                             <ContentPresenter Name="PART_DrawerContainer"
                                               Content="{TemplateBinding DrawerContent}"
@@ -87,11 +99,17 @@
                         </Border.Transitions>
 
                         <Grid>
-                            <lumina:LuminaBackdropBlur BlurRadius="{DynamicResource LuminaOverlayBackdropBlurRadius}"
+                            <lumina:LuminaBackdropBlur Name="PART_BottomSheetBackdropBlur"
+                                                       BlurRadius="{DynamicResource LuminaOverlayBackdropBlurRadius}"
+                                                       Mode="Off"
                                                        HorizontalAlignment="Stretch"
                                                        VerticalAlignment="Stretch" />
                             <Border Background="{DynamicResource LuminaOverlayScrimBrush}"
                                     IsHitTestVisible="False" />
+                            <lumina:LuminaPseudoGlass Name="PART_BottomSheetPseudoGlass"
+                                                      TintBrush="Transparent"
+                                                      EdgeThickness="0"
+                                                      IsVisible="False" />
 
                             <Border Name="PART_BottomSheetContainer"
                                      VerticalAlignment="Bottom"
@@ -134,6 +152,36 @@
         <Style Selector="^[IsDrawerOpen=True] /template/ Border#PART_DrawerOverlay">
             <Setter Property="Opacity" Value="{DynamicResource LuminaTopViewOverlayVisibleOpacity}" />
             <Setter Property="IsHitTestVisible" Value="True" />
+        </Style>
+
+        <Style Selector="^[GlassMode=AcrylicCached] /template/ lumina|LuminaBackdropBlur#PART_DialogBackdropBlur">
+            <Setter Property="Mode" Value="Cached" />
+        </Style>
+
+        <Style Selector="^[GlassMode=Pseudo] /template/ lumina|LuminaPseudoGlass#PART_DialogPseudoGlass">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+        <Style Selector="^[GlassMode=Pseudo] /template/ lumina|LuminaPseudoGlass#PART_DrawerPseudoGlass">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+        <Style Selector="^[GlassMode=Pseudo] /template/ lumina|LuminaPseudoGlass#PART_BottomSheetPseudoGlass">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+        <Style Selector="^[GlassMode=AcrylicCached] /template/ lumina|LuminaBackdropBlur#PART_DrawerBackdropBlur">
+            <Setter Property="Mode" Value="Cached" />
+        </Style>
+        <Style Selector="^[GlassMode=AcrylicCached] /template/ lumina|LuminaBackdropBlur#PART_BottomSheetBackdropBlur">
+            <Setter Property="Mode" Value="Cached" />
+        </Style>
+
+        <Style Selector="^[GlassMode=AcrylicDynamic] /template/ lumina|LuminaBackdropBlur#PART_DialogBackdropBlur">
+            <Setter Property="Mode" Value="Dynamic" />
+        </Style>
+        <Style Selector="^[GlassMode=AcrylicDynamic] /template/ lumina|LuminaBackdropBlur#PART_DrawerBackdropBlur">
+            <Setter Property="Mode" Value="Dynamic" />
+        </Style>
+        <Style Selector="^[GlassMode=AcrylicDynamic] /template/ lumina|LuminaBackdropBlur#PART_BottomSheetBackdropBlur">
+            <Setter Property="Mode" Value="Dynamic" />
         </Style>
 
     </ControlTheme>

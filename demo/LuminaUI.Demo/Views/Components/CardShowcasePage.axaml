@@ -189,6 +189,158 @@
                 </Grid>
             </StackPanel>
 
+            <StackPanel Spacing="10">
+                <StackPanel Spacing="8">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="{l10n:Loc Sandbox.Card.GlassComparisonTitle}"
+                                   Classes="SectionTitle" />
+                        <TextBlock Text="{l10n:Loc Sandbox.Card.GlassComparisonDescription}"
+                                   Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                    <WrapPanel HorizontalAlignment="Right">
+                        <Button Margin="0,0,8,0"
+                                Content="{l10n:Loc Sandbox.Card.MoveBackdrop}"
+                                Command="{Binding MoveGlassBackdropCommand}" />
+                        <Button Classes="Primary"
+                                Content="{l10n:Loc Sandbox.Card.RefreshCached}"
+                                Command="{Binding RefreshCachedGlassCommand}"
+                                CommandParameter="{Binding #CachedGlassCard}" />
+                    </WrapPanel>
+                </StackPanel>
+
+                <Border x:Name="GlassComparisonPanel"
+                        CornerRadius="16"
+                        ClipToBounds="True"
+                        BorderBrush="{DynamicResource LuminaBorderBrush}"
+                        BorderThickness="1">
+                    <Grid>
+                        <Grid Margin="-96,0"
+                              IsHitTestVisible="False">
+                            <Grid.RenderTransform>
+                                <TranslateTransform X="{Binding GlassBackdropOffset}" />
+                            </Grid.RenderTransform>
+                            <Grid.Background>
+                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                    <GradientStop Offset="0" Color="#FF2563EB" />
+                                    <GradientStop Offset="0.34" Color="#FF14B8A6" />
+                                    <GradientStop Offset="0.68" Color="#FFF59E0B" />
+                                    <GradientStop Offset="1" Color="#FFDB2777" />
+                                </LinearGradientBrush>
+                            </Grid.Background>
+
+                            <Canvas Opacity="0.72">
+                                <TextBlock Canvas.Left="28"
+                                           Canvas.Top="18"
+                                           Text="LUMINA · GLASS · LUMINA · GLASS"
+                                           FontSize="34"
+                                           FontWeight="Black"
+                                           Foreground="#B3FFFFFF" />
+                                <TextBlock Canvas.Left="176"
+                                           Canvas.Top="150"
+                                           Text="OFF   PSEUDO   CACHED   DYNAMIC"
+                                           FontSize="28"
+                                           FontWeight="Black"
+                                           Foreground="#99000000" />
+                                <Border Canvas.Left="12" Canvas.Top="82" Width="1400" Height="8" Background="#99FFFFFF" />
+                                <Border Canvas.Left="12" Canvas.Top="108" Width="1400" Height="8" Background="#73000000" />
+                                <Border Canvas.Left="12" Canvas.Top="224" Width="1400" Height="8" Background="#99FFFFFF" />
+                                <Border Canvas.Left="12" Canvas.Top="250" Width="1400" Height="8" Background="#73000000" />
+                            </Canvas>
+                        </Grid>
+
+                        <lumina:LuminaResponsivePanel Margin="16"
+                                                     MinItemWidth="190"
+                                                     MaxItemWidth="320"
+                                                     HorizontalSpacing="12"
+                                                     VerticalSpacing="12">
+                            <lumina:LuminaCard x:Name="SolidSurfaceCard"
+                                               GlassMode="Off"
+                                               MinHeight="176"
+                                               Padding="16">
+                                <StackPanel Spacing="9">
+                                    <TextBlock Text="Off" FontSize="18" FontWeight="Bold" />
+                                    <TextBlock Text="{l10n:Loc Sandbox.Card.GlassOffDescription}"
+                                               Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                               TextWrapping="Wrap" />
+                                    <TextBlock Text="GlassMode=&quot;Off&quot;"
+                                               FontSize="12"
+                                               TextWrapping="Wrap"
+                                               Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                                </StackPanel>
+                            </lumina:LuminaCard>
+
+                            <lumina:LuminaCard x:Name="TranslucentSurfaceCard"
+                                               GlassMode="Off"
+                                               Background="{DynamicResource LuminaCardGlassBackgroundBrush}"
+                                               BorderBrush="{DynamicResource LuminaCardGlassBorderBrush}"
+                                               MinHeight="176"
+                                               Padding="16">
+                                <StackPanel Spacing="9">
+                                    <TextBlock Text="Off + alpha brush" FontSize="18" FontWeight="Bold" />
+                                    <TextBlock Text="{l10n:Loc Sandbox.Card.TranslucentDescription}"
+                                               Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                               TextWrapping="Wrap" />
+                                    <TextBlock Text="GlassMode=&quot;Off&quot; + Background"
+                                               FontSize="12"
+                                               TextWrapping="Wrap"
+                                               Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                                </StackPanel>
+                            </lumina:LuminaCard>
+
+                            <lumina:LuminaCard x:Name="PseudoGlassCard"
+                                               GlassMode="Pseudo"
+                                               MinHeight="176"
+                                               Padding="16">
+                                <StackPanel Spacing="9">
+                                    <TextBlock Text="Pseudo" FontSize="18" FontWeight="Bold" />
+                                    <TextBlock Text="{l10n:Loc Sandbox.Card.GlassPseudoDescription}"
+                                               Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                               TextWrapping="Wrap" />
+                                    <TextBlock Text="GlassMode=&quot;Pseudo&quot;"
+                                               FontSize="12"
+                                               TextWrapping="Wrap"
+                                               Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                                </StackPanel>
+                            </lumina:LuminaCard>
+
+                            <lumina:LuminaCard x:Name="CachedGlassCard"
+                                               GlassMode="AcrylicCached"
+                                               BackdropBlurRadius="18"
+                                               MinHeight="176"
+                                               Padding="16">
+                                <StackPanel Spacing="9">
+                                    <TextBlock Text="AcrylicCached" FontSize="18" FontWeight="Bold" />
+                                    <TextBlock Text="{l10n:Loc Sandbox.Card.GlassCachedDescription}"
+                                               Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                               TextWrapping="Wrap" />
+                                    <TextBlock Text="GlassMode=&quot;AcrylicCached&quot;"
+                                               FontSize="12"
+                                               TextWrapping="Wrap"
+                                               Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                                </StackPanel>
+                            </lumina:LuminaCard>
+
+                            <lumina:LuminaCard GlassMode="AcrylicDynamic"
+                                               BackdropBlurRadius="18"
+                                               MinHeight="176"
+                                               Padding="16">
+                                <StackPanel Spacing="9">
+                                    <TextBlock Text="AcrylicDynamic" FontSize="18" FontWeight="Bold" />
+                                    <TextBlock Text="{l10n:Loc Sandbox.Card.GlassDynamicDescription}"
+                                               Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                               TextWrapping="Wrap" />
+                                    <TextBlock Text="GlassMode=&quot;AcrylicDynamic&quot;"
+                                               FontSize="12"
+                                               TextWrapping="Wrap"
+                                               Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
+                                </StackPanel>
+                            </lumina:LuminaCard>
+                        </lumina:LuminaResponsivePanel>
+                    </Grid>
+                </Border>
+            </StackPanel>
+
             <lumina:LuminaCard Classes="Glass" Padding="20">
                 <lumina:LuminaResponsivePanel MinItemWidth="220" HorizontalSpacing="20" VerticalSpacing="20">
                     <StackPanel Spacing="14">

@@ -5296,4 +5296,31 @@ await shell.PushAsync(
   <data name="Sandbox.FloatingWindow.DemoLocked" xml:space="preserve">
     <value>Locked — mouse passthrough active</value>
   </data>
+  <data name="Sandbox.Card.GlassComparisonTitle" xml:space="preserve">
+    <value>Glass mode comparison</value>
+  </data>
+  <data name="Sandbox.Card.GlassComparisonDescription" xml:space="preserve">
+    <value>All surfaces share the same high-contrast backdrop. Move it to compare plain transparency, static pseudo glass, live blur, and a frozen cached snapshot.</value>
+  </data>
+  <data name="Sandbox.Card.MoveBackdrop" xml:space="preserve">
+    <value>Move backdrop</value>
+  </data>
+  <data name="Sandbox.Card.RefreshCached" xml:space="preserve">
+    <value>Refresh cached</value>
+  </data>
+  <data name="Sandbox.Card.GlassOffDescription" xml:space="preserve">
+    <value>Solid surface with no translucent glass layers or backdrop sampling.</value>
+  </data>
+  <data name="Sandbox.Card.GlassPseudoDescription" xml:space="preserve">
+    <value>Static translucent tint, noise texture, gradient highlight, and edge. No backdrop sampling or blur.</value>
+  </data>
+  <data name="Sandbox.Card.TranslucentDescription" xml:space="preserve">
+    <value>A regular surface using an alpha brush. It needs no additional glass mode or effect layers.</value>
+  </data>
+  <data name="Sandbox.Card.GlassCachedDescription" xml:space="preserve">
+    <value>Samples and blurs the real backdrop once, then keeps that frozen image until refreshed.</value>
+  </data>
+  <data name="Sandbox.Card.GlassDynamicDescription" xml:space="preserve">
+    <value>Continuously blurs the current backdrop. It follows changes immediately but costs more to render.</value>
+  </data>
 </root>

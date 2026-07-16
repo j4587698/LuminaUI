@@ -1,7 +1,14 @@
+using System;
+
 namespace LuminaUI.Enums;
 
 public enum LuminaGlassMode
 {
+    Off,
     Pseudo,
-    Acrylic
+    AcrylicCached,
+    AcrylicDynamic,
+
+    [Obsolete("Use AcrylicDynamic instead.")]
+    Acrylic = AcrylicDynamic
 }

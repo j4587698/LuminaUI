@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using LuminaUI.Controls;
 using LuminaUI.Localization;
 
 namespace LuminaUI.Demo.ViewModels;
@@ -23,6 +24,21 @@ public partial class CardShowcaseViewModel : ObservableObject
 
     [ObservableProperty]
     private string _cardGlassStatusText;
+
+    [ObservableProperty]
+    private double _glassBackdropOffset = -48.0;
+
+    [RelayCommand]
+    private void MoveGlassBackdrop()
+    {
+        GlassBackdropOffset = GlassBackdropOffset < 0.0 ? 48.0 : -48.0;
+    }
+
+    [RelayCommand]
+    private static void RefreshCachedGlass(LuminaCard? card)
+    {
+        card?.RefreshBackdrop();
+    }
 
     [RelayCommand]
     private void RefreshGlass(object? parameter)

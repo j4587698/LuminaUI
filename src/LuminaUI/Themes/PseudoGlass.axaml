@@ -1,0 +1,31 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
+
+    <ControlTheme x:Key="{x:Type lumina:LuminaPseudoGlass}" TargetType="lumina:LuminaPseudoGlass">
+        <Setter Property="HighlightBrush" Value="{DynamicResource LuminaPseudoGlassHighlightBrush}" />
+        <Setter Property="EdgeBrush" Value="{DynamicResource LuminaPseudoGlassEdgeBrush}" />
+        <Setter Property="NoiseOpacity" Value="{DynamicResource LuminaPseudoGlassNoiseOpacity}" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid IsHitTestVisible="False">
+                    <Border Background="{TemplateBinding TintBrush}"
+                            CornerRadius="{TemplateBinding CornerRadius}" />
+
+                    <Border CornerRadius="{TemplateBinding CornerRadius}"
+                            ClipToBounds="True">
+                        <lumina:LuminaNoiseTexture Opacity="{TemplateBinding NoiseOpacity}" />
+                    </Border>
+
+                    <Border Background="{TemplateBinding HighlightBrush}"
+                            CornerRadius="{TemplateBinding CornerRadius}" />
+
+                    <Border BorderBrush="{TemplateBinding EdgeBrush}"
+                            BorderThickness="{TemplateBinding EdgeThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}" />
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+</ResourceDictionary>

@@ -7,33 +7,50 @@
         <Setter Property="BlurRadius" Value="128" />
         <Setter Property="CornerRadius" Value="16" />
         <Setter Property="TintBrush" Value="{DynamicResource LuminaBlurBackgroundTintBrush}" />
+        <Setter Property="PseudoTintBrush" Value="{DynamicResource LuminaCardPseudoGlassBrush}" />
         <Setter Property="EdgeBrush" Value="{DynamicResource LuminaBlurBackgroundEdgeBrush}" />
         <Setter Property="EdgeThickness" Value="1" />
         <Setter Property="Template">
             <ControlTemplate>
                 <Grid>
-                    <Border CornerRadius="{TemplateBinding CornerRadius}"
+                    <Border Name="PART_BackdropBlurClip"
+                            CornerRadius="{TemplateBinding CornerRadius}"
                             ClipToBounds="False"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             IsHitTestVisible="False">
-                        <lumina:LuminaBackdropBlur BlurRadius="{TemplateBinding BlurRadius}"
+                        <lumina:LuminaBackdropBlur Name="PART_BackdropBlur"
+                                                   BlurRadius="{TemplateBinding BlurRadius}"
                                                    CornerRadius="{TemplateBinding CornerRadius}"
+                                                   Mode="Off"
                                                    HorizontalAlignment="Stretch"
                                                    VerticalAlignment="Stretch" />
                     </Border>
 
-                    <Border CornerRadius="{TemplateBinding CornerRadius}"
+                    <lumina:LuminaPseudoGlass Name="PART_PseudoGlassLayer"
+                                              TintBrush="{TemplateBinding PseudoTintBrush}"
+                                              EdgeThickness="{TemplateBinding EdgeThickness}"
+                                              CornerRadius="{TemplateBinding CornerRadius}"
+                                              HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Stretch"
+                                              IsVisible="False"
+                                              IsHitTestVisible="False" />
+
+                    <Border Name="PART_TintLayer"
+                            CornerRadius="{TemplateBinding CornerRadius}"
                             Background="{TemplateBinding TintBrush}"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
+                            IsVisible="False"
                             IsHitTestVisible="False" />
 
-                    <Border CornerRadius="{TemplateBinding CornerRadius}"
+                    <Border Name="PART_EdgeLayer"
+                            CornerRadius="{TemplateBinding CornerRadius}"
                             BorderBrush="{TemplateBinding EdgeBrush}"
                             BorderThickness="{TemplateBinding EdgeThickness}"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
+                            IsVisible="False"
                             IsHitTestVisible="False" />
 
                     <ContentPresenter Content="{TemplateBinding Content}"
@@ -44,6 +61,30 @@
                 </Grid>
             </ControlTemplate>
         </Setter>
+
+        <Style Selector="^[GlassMode=Pseudo] /template/ lumina|LuminaPseudoGlass#PART_PseudoGlassLayer">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+
+        <Style Selector="^[GlassMode=AcrylicCached] /template/ lumina|LuminaBackdropBlur#PART_BackdropBlur">
+            <Setter Property="Mode" Value="Cached" />
+        </Style>
+        <Style Selector="^[GlassMode=AcrylicCached] /template/ Border#PART_TintLayer">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+        <Style Selector="^[GlassMode=AcrylicCached] /template/ Border#PART_EdgeLayer">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+
+        <Style Selector="^[GlassMode=AcrylicDynamic] /template/ lumina|LuminaBackdropBlur#PART_BackdropBlur">
+            <Setter Property="Mode" Value="Dynamic" />
+        </Style>
+        <Style Selector="^[GlassMode=AcrylicDynamic] /template/ Border#PART_TintLayer">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+        <Style Selector="^[GlassMode=AcrylicDynamic] /template/ Border#PART_EdgeLayer">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
     </ControlTheme>
 
 </ResourceDictionary>

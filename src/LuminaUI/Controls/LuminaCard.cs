@@ -1,11 +1,18 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Media;
+using LuminaUI.Enums;
 
 namespace LuminaUI.Controls;
 
 public class LuminaCard : ContentControl
 {
+    private LuminaBackdropBlur? _backdropBlur;
+
+    public static readonly StyledProperty<LuminaGlassMode> GlassModeProperty =
+        AvaloniaProperty.Register<LuminaCard, LuminaGlassMode>(nameof(GlassMode), LuminaGlassMode.Off);
+
     public static readonly StyledProperty<bool> IsElevatedProperty =
         AvaloniaProperty.Register<LuminaCard, bool>(nameof(IsElevated), defaultValue: false);
 
@@ -15,6 +22,9 @@ public class LuminaCard : ContentControl
     public static readonly StyledProperty<IBrush?> GlassTintBrushProperty =
         AvaloniaProperty.Register<LuminaCard, IBrush?>(nameof(GlassTintBrush));
 
+    public static readonly StyledProperty<IBrush?> PseudoGlassBrushProperty =
+        AvaloniaProperty.Register<LuminaCard, IBrush?>(nameof(PseudoGlassBrush));
+
     public static readonly StyledProperty<IBrush?> GlassEdgeBrushProperty =
         AvaloniaProperty.Register<LuminaCard, IBrush?>(nameof(GlassEdgeBrush));
 
@@ -22,6 +32,12 @@ public class LuminaCard : ContentControl
     {
         get => GetValue(IsElevatedProperty);
         set => SetValue(IsElevatedProperty, value);
+    }
+
+    public LuminaGlassMode GlassMode
+    {
+        get => GetValue(GlassModeProperty);
+        set => SetValue(GlassModeProperty, value);
     }
 
     public double BackdropBlurRadius
@@ -36,9 +52,26 @@ public class LuminaCard : ContentControl
         set => SetValue(GlassTintBrushProperty, value);
     }
 
+    public IBrush? PseudoGlassBrush
+    {
+        get => GetValue(PseudoGlassBrushProperty);
+        set => SetValue(PseudoGlassBrushProperty, value);
+    }
+
     public IBrush? GlassEdgeBrush
     {
         get => GetValue(GlassEdgeBrushProperty);
         set => SetValue(GlassEdgeBrushProperty, value);
+    }
+
+    public void RefreshBackdrop()
+    {
+        _backdropBlur?.RefreshBackdrop();
+    }
+
+    protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
+    {
+        base.OnApplyTemplate(e);
+        _backdropBlur = e.NameScope.Find<LuminaBackdropBlur>("PART_BackdropBlur");
     }
 }

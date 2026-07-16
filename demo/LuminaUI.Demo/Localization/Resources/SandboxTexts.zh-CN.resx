@@ -5296,4 +5296,31 @@ await shell.PushAsync(
   <data name="Sandbox.FloatingWindow.DemoLocked" xml:space="preserve">
     <value>已锁定，鼠标已穿透</value>
   </data>
+  <data name="Sandbox.Card.GlassComparisonTitle" xml:space="preserve">
+    <value>玻璃模式对比</value>
+  </data>
+  <data name="Sandbox.Card.GlassComparisonDescription" xml:space="preserve">
+    <value>所有表面使用同一组高对比背景。移动背景可以比较普通半透明、静态伪玻璃、实时模糊与冻结快照。</value>
+  </data>
+  <data name="Sandbox.Card.MoveBackdrop" xml:space="preserve">
+    <value>移动背景</value>
+  </data>
+  <data name="Sandbox.Card.RefreshCached" xml:space="preserve">
+    <value>刷新 Cached</value>
+  </data>
+  <data name="Sandbox.Card.GlassOffDescription" xml:space="preserve">
+    <value>普通实体表面，不使用半透明玻璃层，也不采样背景。</value>
+  </data>
+  <data name="Sandbox.Card.GlassPseudoDescription" xml:space="preserve">
+    <value>使用静态半透明底色、噪点纹理、渐变高光和边缘，不采样背景，也不计算模糊。</value>
+  </data>
+  <data name="Sandbox.Card.TranslucentDescription" xml:space="preserve">
+    <value>普通表面直接使用带 Alpha 的画刷，不需要新增玻璃模式或效果层。</value>
+  </data>
+  <data name="Sandbox.Card.GlassCachedDescription" xml:space="preserve">
+    <value>真实采样并模糊背景一次，此后保持冻结，直到显式刷新。</value>
+  </data>
+  <data name="Sandbox.Card.GlassDynamicDescription" xml:space="preserve">
+    <value>持续模糊当前背景，能立即跟随变化，但渲染开销更高。</value>
+  </data>
 </root>
