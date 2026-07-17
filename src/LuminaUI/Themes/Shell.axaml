@@ -235,13 +235,12 @@
                                 </SplitView>
 
                                 <!-- Persistent app overlays share the safe content area and stop above the footer. -->
-                                <Border Grid.Row="0"
-                                        Padding="{TemplateBinding OverlayContentLayoutSafeAreaPadding}">
-                                    <ContentPresenter Name="PART_OverlayContentPresenter"
-                                                      Content="{TemplateBinding OverlayContent}"
-                                                      HorizontalAlignment="Stretch"
-                                                      VerticalAlignment="Stretch" />
-                                </Border>
+                                <lumina:LuminaInputPassThroughContentPresenter Name="PART_OverlayContentPresenter"
+                                                                                Grid.Row="0"
+                                                                                Content="{TemplateBinding OverlayContent}"
+                                                                                Padding="{TemplateBinding OverlayContentLayoutSafeAreaPadding}"
+                                                                                HorizontalAlignment="Stretch"
+                                                                                VerticalAlignment="Stretch" />
 
                                 <!-- Shell footer participates in layout and owns the bottom safe area. -->
                                 <Border Name="PART_Footer"
