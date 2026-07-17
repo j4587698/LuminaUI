@@ -111,6 +111,7 @@ public partial class SandboxRootView : UserControl
         if (now - _lastUnhandledAndroidBackRequestedAt <= AndroidBackExitWindow)
         {
             _lastUnhandledAndroidBackRequestedAt = default;
+            e.Handled = DemoPlatformServices.TryExitApplication();
             return;
         }
 

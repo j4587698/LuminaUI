@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Views;
 using AndroidX.Core.SplashScreen;
 using Avalonia.Android;
+using LuminaUI.Demo;
 
 namespace LuminaUI.Demo.Android;
 
@@ -20,5 +21,12 @@ public class MainActivity : AvaloniaMainActivity
     protected override void OnCreate(Bundle? savedInstanceState)
     {
         base.OnCreate(savedInstanceState);
+        DemoPlatformServices.ExitApplication = FinishAndRemoveTask;
+    }
+
+    protected override void OnDestroy()
+    {
+        DemoPlatformServices.ExitApplication = null;
+        base.OnDestroy();
     }
 }
