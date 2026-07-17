@@ -51,6 +51,8 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private LuminaOverlayHost? _observedOverlayHost;
 
+    private Control? _observedFooterContent;
+
     private LuminaOverlayHost? _menuDrawerHost;
 
     private LuminaDrawer? _menuDrawer;
@@ -984,6 +986,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
+        ObserveFooterContent(FooterContent as Control);
         RegisterAttachedShell();
         AttachBackRequestedHandler();
         SyncNavigationHostContent();
@@ -993,6 +996,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         DetachBackRequestedHandler();
+        ObserveFooterContent(null);
         ObserveOverlayHost(null);
         _overlayHost = null;
         CloseMenuDrawer(forceClearContent: true);
@@ -1040,6 +1044,33 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         if (_observedOverlayHost != null)
         {
             _observedOverlayHost.PropertyChanged += OnOverlayHostPropertyChanged;
+        }
+    }
+
+    private void ObserveFooterContent(Control? footerContent)
+    {
+        if (ReferenceEquals(_observedFooterContent, footerContent))
+        {
+            return;
+        }
+
+        if (_observedFooterContent != null)
+        {
+            _observedFooterContent.PropertyChanged -= OnFooterContentPropertyChanged;
+        }
+
+        _observedFooterContent = footerContent;
+        if (_observedFooterContent != null)
+        {
+            _observedFooterContent.PropertyChanged += OnFooterContentPropertyChanged;
+        }
+    }
+
+    private void OnFooterContentPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
+    {
+        if (e.Property == Visual.IsVisibleProperty)
+        {
+            UpdateLayoutSafeAreaPartitions();
         }
     }
 
@@ -2017,7 +2048,12 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         {
             UpdateEffectiveShellChrome();
         }
-        else if (change.Property == IsMenuOpenProperty || change.Property == IsShellChromeVisibleProperty || change.Property == IsShellHeaderVisibleProperty || change.Property == IsCompactMenuEnabledProperty || change.Property == CanCompactMenuProperty || change.Property == IsMenuAutoResponsiveProperty || change.Property == PaneDisplayModeProperty || change.Property == HeaderBackButtonVisibilityProperty || change.Property == HeaderPaneToggleButtonVisibilityProperty || change.Property == CollapseHeaderPaneToggleWhenCanGoBackProperty || change.Property == PageContentPaddingProperty || change.Property == HeaderedPageContentPaddingProperty || change.Property == OpenPaneLengthProperty || change.Property == CompactPaneLengthProperty || change.Property == PaneBackgroundProperty || change.Property == FooterContentProperty)
+        else if (change.Property == FooterContentProperty)
+        {
+            ObserveFooterContent(change.GetNewValue<object>() as Control);
+            UpdateEffectiveShellChrome();
+        }
+        else if (change.Property == IsMenuOpenProperty || change.Property == IsShellChromeVisibleProperty || change.Property == IsShellHeaderVisibleProperty || change.Property == IsCompactMenuEnabledProperty || change.Property == CanCompactMenuProperty || change.Property == IsMenuAutoResponsiveProperty || change.Property == PaneDisplayModeProperty || change.Property == HeaderBackButtonVisibilityProperty || change.Property == HeaderPaneToggleButtonVisibilityProperty || change.Property == CollapseHeaderPaneToggleWhenCanGoBackProperty || change.Property == PageContentPaddingProperty || change.Property == HeaderedPageContentPaddingProperty || change.Property == OpenPaneLengthProperty || change.Property == CompactPaneLengthProperty || change.Property == PaneBackgroundProperty)
         {
             UpdateEffectiveShellChrome();
         }
@@ -2176,7 +2212,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     {
         Thickness safeAreaPadding = LayoutSafeAreaPadding;
         bool menuConsumesLeftInset = EffectiveIsShellChromeVisible && (EffectiveIsMenuOpen || EffectiveIsMenuCompact);
-        bool footerConsumesBottomInset = EffectiveIsShellChromeVisible && HasHeaderValue(FooterContent);
+        bool footerConsumesBottomInset = EffectiveIsShellChromeVisible && HasVisibleFooterContent();
         double contentBottomInset = footerConsumesBottomInset ? 0.0 : safeAreaPadding.Bottom;
         MenuLayoutSafeAreaPadding = menuConsumesLeftInset ? new Thickness(safeAreaPadding.Left, safeAreaPadding.Top, 0.0, contentBottomInset) : default;
         ContentLayoutSafeAreaPadding = menuConsumesLeftInset
@@ -2190,6 +2226,11 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
             safeAreaPadding.Top,
             safeAreaPadding.Right,
             contentBottomInset);
+    }
+
+    private bool HasVisibleFooterContent()
+    {
+        return HasHeaderValue(FooterContent) && (FooterContent is not Control footerContent || footerContent.IsVisible);
     }
 
     private Thickness ResolveEffectivePageContentPadding(bool isShellChromeEffectiveVisible, bool isShellHeaderEffectiveVisible)
