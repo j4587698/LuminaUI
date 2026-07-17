@@ -6,6 +6,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
 using Avalonia.Media;
 using Avalonia.Threading;
+using Avalonia.VisualTree;
 using LuminaUI.Localization;
 using LuminaUI.Services;
 
@@ -489,10 +490,8 @@ public class LuminaImage : TemplatedControl
         IImage? cached = loader.TryGetCachedImage(Source, options);
         if (cached != null)
         {
-            ImageSource = cached;
-            Status = LuminaImageStatus.Loaded;
-            ErrorMessage = null;
-            UpdateContentState();
+            SetLoading();
+            LuminaImagePresentationQueue.Enqueue(this, cached, Source, version, CancellationToken.None);
             return;
         }
 
@@ -527,22 +526,19 @@ public class LuminaImage : TemplatedControl
                 return;
             }
 
-            await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
-                if (!cancellationToken.IsCancellationRequested && version == _loadVersion)
-                {
-                    if (image == null)
+            if (image != null)
+            {
+                LuminaImagePresentationQueue.Enqueue(this, image, source, version, cancellationToken);
+            }
+            else
+            {
+                await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
+                    if (!cancellationToken.IsCancellationRequested && version == _loadVersion)
                     {
                         SetFailed("Image source could not be decoded.");
                     }
-                    else
-                    {
-                        ImageSource = image;
-                        Status = LuminaImageStatus.Loaded;
-                        ErrorMessage = null;
-                        UpdateContentState();
-                    }
-                }
-            });
+                });
+            }
         }
         catch (OperationCanceledException)
         {
@@ -556,6 +552,28 @@ public class LuminaImage : TemplatedControl
                 }
             });
         }
+    }
+
+    internal bool CanPresentImage(object? source, int version, CancellationToken cancellationToken)
+    {
+        return !cancellationToken.IsCancellationRequested
+            && version == _loadVersion
+            && Equals(Source, source)
+            && this.IsAttachedToVisualTree();
+    }
+
+    internal bool TryPresentImage(IImage image, object? source, int version, CancellationToken cancellationToken)
+    {
+        if (!CanPresentImage(source, version, cancellationToken))
+        {
+            return false;
+        }
+
+        ImageSource = image;
+        Status = LuminaImageStatus.Loaded;
+        ErrorMessage = null;
+        UpdateContentState();
+        return true;
     }
 
     private LuminaImageLoadOptions ResolveLoadOptions(Size? arrangedSize = null)
