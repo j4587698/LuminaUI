@@ -64,16 +64,33 @@ For applications that use `LuminaShell`, make the shell the root view. `LuminaSh
 
 ```xml
 <lumina:LuminaShell ShellKey="App"
-                    DefaultPageTitle="Dashboard">
+                    DefaultPageTitle="Dashboard"
+                    FooterBackground="{DynamicResource LuminaSurfaceBrush}">
   <lumina:LuminaShell.MenuContent>
     <lumina:LuminaNavigationView />
   </lumina:LuminaShell.MenuContent>
+
+  <lumina:LuminaShell.FooterContent>
+    <TextBlock Text="Persistent footer" Padding="16,12" />
+  </lumina:LuminaShell.FooterContent>
+
+  <lumina:LuminaShell.OverlayContent>
+    <Border HorizontalAlignment="Stretch"
+            VerticalAlignment="Bottom"
+            Margin="16">
+      <TextBlock Text="Persistent non-modal overlay" />
+    </Border>
+  </lumina:LuminaShell.OverlayContent>
 
   <lumina:LuminaPage Header="Dashboard">
     <TextBlock Text="Content" />
   </lumina:LuminaPage>
 </lumina:LuminaShell>
 ```
+
+`FooterContent` participates in layout, owns the bottom safe-area inset, and follows shell chrome visibility. `OverlayContent` fills the safe content area above the footer, so its children can position themselves with the standard Avalonia alignment and margin properties without manually calculating safe-area or footer offsets. It remains below shell dialogs, drawers, bottom sheets, and toasts.
+
+Root shells use transparent system-bar backgrounds by default while drawing edge to edge. Set `UseTransparentSystemBars="False"` to preserve a platform-defined system-bar color. Platform hosts should still synchronize system-bar icon brightness when an application theme changes independently of the operating-system theme; the Android demo shows this integration.
 
 Use `LuminaOverlayHost` directly only when an application does not use `LuminaShell` but still needs global overlays or platform safe-area handling.
 

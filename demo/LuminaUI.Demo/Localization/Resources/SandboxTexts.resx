@@ -4095,6 +4095,12 @@
   <data name="Sandbox.ShellShowcase.OptionCloseMenuOnNavigate" xml:space="preserve">
     <value>Close on navigate (CloseMenuOnNavigate)</value>
   </data>
+  <data name="Sandbox.ShellShowcase.OptionFooterContent" xml:space="preserve">
+    <value>Footer content (FooterContent)</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OptionOverlayContent" xml:space="preserve">
+    <value>Persistent overlay (OverlayContent)</value>
+  </data>
   <data name="Sandbox.ShellShowcase.OpenPaneLength" xml:space="preserve">
     <value>Open pane length</value>
   </data>
@@ -4130,6 +4136,30 @@
   </data>
   <data name="Sandbox.ShellShowcase.MenuFooter" xml:space="preserve">
     <value>Menu footer</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.FooterContentLabel" xml:space="preserve">
+    <value>FooterContent · participates in layout</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OpenFooterBottomSheet" xml:space="preserve">
+    <value>Open bottom sheet</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OverlayContentLabel" xml:space="preserve">
+    <value>OverlayContent · bottom right</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.ShowOverlayToast" xml:space="preserve">
+    <value>Show toast</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OverlayToastMessage" xml:space="preserve">
+    <value>Toast is rendered above OverlayContent.</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.FooterBottomSheetTitle" xml:space="preserve">
+    <value>FooterContent example</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.FooterBottomSheetMessage" xml:space="preserve">
+    <value>This bottom sheet covers both FooterContent and OverlayContent.</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.CloseFooterBottomSheet" xml:space="preserve">
+    <value>Close</value>
   </data>
   <data name="Sandbox.ShellShowcase.Action" xml:space="preserve">
     <value>Action</value>

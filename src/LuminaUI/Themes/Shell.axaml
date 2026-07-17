@@ -59,13 +59,17 @@
                                                Background="Transparent"
                                                SafeAreaMode="{TemplateBinding SafeAreaMode}"
                                                UseSafeAreaForOverlays="{TemplateBinding UseSafeAreaForOverlays}"
+                                               UseTransparentSystemBars="{TemplateBinding UseTransparentSystemBars}"
                                                HandlesSystemBackRequested="False">
-                        <SplitView Name="PART_SplitView"
-                                   IsPaneOpen="{TemplateBinding EffectiveIsMenuOpen}"
-                                   OpenPaneLength="{TemplateBinding EffectiveOpenPaneLength}"
-                                   CompactPaneLength="{TemplateBinding EffectiveCompactPaneLength}"
-                                   PaneBackground="{TemplateBinding PaneBackground}"
-                                   Background="Transparent">
+                        <Grid>
+                            <Grid RowDefinitions="*,Auto">
+                                <SplitView Name="PART_SplitView"
+                                           Grid.Row="0"
+                                           IsPaneOpen="{TemplateBinding EffectiveIsMenuOpen}"
+                                           OpenPaneLength="{TemplateBinding EffectiveOpenPaneLength}"
+                                           CompactPaneLength="{TemplateBinding EffectiveCompactPaneLength}"
+                                           PaneBackground="{TemplateBinding PaneBackground}"
+                                           Background="Transparent">
                         
                         <SplitView.Pane>
                             <!-- Menu pane is separated by surface tone, not by an extra border. -->
@@ -227,8 +231,31 @@
                                 </Border>
                                 </Grid>
                             </Border>
-                        </SplitView.Content>
-                        </SplitView>
+                                </SplitView.Content>
+                                </SplitView>
+
+                                <!-- Persistent app overlays share the safe content area and stop above the footer. -->
+                                <Border Grid.Row="0"
+                                        Padding="{TemplateBinding OverlayContentLayoutSafeAreaPadding}">
+                                    <ContentPresenter Name="PART_OverlayContentPresenter"
+                                                      Content="{TemplateBinding OverlayContent}"
+                                                      HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Stretch" />
+                                </Border>
+
+                                <!-- Shell footer participates in layout and owns the bottom safe area. -->
+                                <Border Name="PART_Footer"
+                                        Grid.Row="1"
+                                        Background="{TemplateBinding FooterBackground}"
+                                        Padding="{TemplateBinding FooterLayoutSafeAreaPadding}"
+                                        IsVisible="{TemplateBinding EffectiveIsShellChromeVisible}">
+                                    <ContentPresenter Name="PART_FooterPresenter"
+                                                      Content="{TemplateBinding FooterContent}"
+                                                      HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Stretch" />
+                                </Border>
+                            </Grid>
+                        </Grid>
                     </lumina:LuminaOverlayHost>
                 </Grid>
             </ControlTemplate>
