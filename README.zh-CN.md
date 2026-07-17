@@ -64,16 +64,33 @@ NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NE
 
 ```xml
 <lumina:LuminaShell ShellKey="App"
-                    DefaultPageTitle="仪表盘">
+                    DefaultPageTitle="仪表盘"
+                    FooterBackground="{DynamicResource LuminaSurfaceBrush}">
   <lumina:LuminaShell.MenuContent>
     <lumina:LuminaNavigationView />
   </lumina:LuminaShell.MenuContent>
+
+  <lumina:LuminaShell.FooterContent>
+    <TextBlock Text="常驻底栏" Padding="16,12" />
+  </lumina:LuminaShell.FooterContent>
+
+  <lumina:LuminaShell.OverlayContent>
+    <Border HorizontalAlignment="Stretch"
+            VerticalAlignment="Bottom"
+            Margin="16">
+      <TextBlock Text="常驻非模态浮层" />
+    </Border>
+  </lumina:LuminaShell.OverlayContent>
 
   <lumina:LuminaPage Header="仪表盘">
     <TextBlock Text="内容" />
   </lumina:LuminaPage>
 </lumina:LuminaShell>
 ```
+
+`FooterContent` 参与布局、接管底部安全区，并跟随 Shell chrome 的可见性；`OverlayContent` 铺满 Footer 上方的安全内容区域，其子控件可通过 Avalonia 标准的对齐与边距属性自行定位，无需手动计算安全区或 Footer 偏移，同时始终位于 Shell 的对话框、抽屉、底部 Sheet 和轻提示之下。
+
+根 Shell 在 edge-to-edge 模式下默认使用透明系统栏背景；如需保留平台定义的系统栏颜色，可设置 `UseTransparentSystemBars="False"`。如果应用主题可以脱离操作系统主题独立切换，平台宿主仍需同步系统栏图标明暗，Android Demo 已提供对应实现。
 
 仅在不使用 `LuminaShell`、但仍需要全局覆盖层或平台安全区处理时，才直接使用 `LuminaOverlayHost`。
 

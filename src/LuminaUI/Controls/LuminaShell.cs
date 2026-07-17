@@ -141,6 +141,10 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private Thickness _contentLayoutSafeAreaPadding;
 
+    private Thickness _footerLayoutSafeAreaPadding;
+
+    private Thickness _overlayContentLayoutSafeAreaPadding;
+
     private Thickness _overlaySafeAreaPadding;
 
     private Thickness _effectivePageContentPadding;
@@ -204,6 +208,18 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     public static readonly StyledProperty<object?> MenuHeaderProperty = AvaloniaProperty.Register<LuminaShell, object?>(nameof(MenuHeader));
 
     public static readonly StyledProperty<object?> MenuFooterProperty = AvaloniaProperty.Register<LuminaShell, object?>(nameof(MenuFooter));
+
+    /// <summary>
+    /// Gets or sets persistent footer content that participates in shell layout.
+    /// The footer is treated as shell chrome and is hidden with <see cref="IsShellChromeVisible"/>.
+    /// </summary>
+    public static readonly StyledProperty<object?> FooterContentProperty = AvaloniaProperty.Register<LuminaShell, object?>(nameof(FooterContent));
+
+    /// <summary>
+    /// Gets or sets persistent non-modal content rendered in the safe content area above the footer
+    /// and below modal overlays.
+    /// </summary>
+    public static readonly StyledProperty<object?> OverlayContentProperty = AvaloniaProperty.Register<LuminaShell, object?>(nameof(OverlayContent));
 
     public static readonly DirectProperty<LuminaShell, object?> EffectiveMenuHeaderProperty = AvaloniaProperty.RegisterDirect<LuminaShell, object?>(nameof(EffectiveMenuHeader), shell => shell.EffectiveMenuHeader);
 
@@ -270,6 +286,11 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     public static readonly StyledProperty<IBrush?> PaneBackgroundProperty = AvaloniaProperty.Register<LuminaShell, IBrush?>(nameof(PaneBackground));
 
+    /// <summary>
+    /// Gets or sets the background painted behind <see cref="FooterContent"/>, including the bottom safe area.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> FooterBackgroundProperty = AvaloniaProperty.Register<LuminaShell, IBrush?>(nameof(FooterBackground));
+
     public static readonly StyledProperty<double> OpenPaneLengthProperty = AvaloniaProperty.Register<LuminaShell, double>(nameof(OpenPaneLength), 220.0);
 
     public static readonly DirectProperty<LuminaShell, double> EffectiveOpenPaneLengthProperty = AvaloniaProperty.RegisterDirect<LuminaShell, double>(nameof(EffectiveOpenPaneLength), (LuminaShell shell) => shell.EffectiveOpenPaneLength, null, 0.0);
@@ -282,11 +303,21 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     public static readonly StyledProperty<bool> UseSafeAreaForOverlaysProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(UseSafeAreaForOverlays), defaultValue: true);
 
+    public static readonly StyledProperty<bool> UseTransparentSystemBarsProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(UseTransparentSystemBars), defaultValue: true);
+
     public static readonly DirectProperty<LuminaShell, Thickness> LayoutSafeAreaPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaShell, Thickness>(nameof(LayoutSafeAreaPadding), shell => shell.LayoutSafeAreaPadding);
 
     public static readonly DirectProperty<LuminaShell, Thickness> MenuLayoutSafeAreaPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaShell, Thickness>(nameof(MenuLayoutSafeAreaPadding), shell => shell.MenuLayoutSafeAreaPadding);
 
     public static readonly DirectProperty<LuminaShell, Thickness> ContentLayoutSafeAreaPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaShell, Thickness>(nameof(ContentLayoutSafeAreaPadding), shell => shell.ContentLayoutSafeAreaPadding);
+
+    public static readonly DirectProperty<LuminaShell, Thickness> FooterLayoutSafeAreaPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaShell, Thickness>(nameof(FooterLayoutSafeAreaPadding), shell => shell.FooterLayoutSafeAreaPadding);
+
+    /// <summary>
+    /// Gets the safe-area padding applied to <see cref="OverlayContent"/>.
+    /// The bottom inset is omitted while a visible footer owns that inset.
+    /// </summary>
+    public static readonly DirectProperty<LuminaShell, Thickness> OverlayContentLayoutSafeAreaPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaShell, Thickness>(nameof(OverlayContentLayoutSafeAreaPadding), shell => shell.OverlayContentLayoutSafeAreaPadding);
 
     public static readonly DirectProperty<LuminaShell, Thickness> OverlaySafeAreaPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaShell, Thickness>(nameof(OverlaySafeAreaPadding), shell => shell.OverlaySafeAreaPadding);
 
@@ -575,6 +606,18 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         set => SetValue(MenuFooterProperty, value);
     }
 
+    public object? FooterContent
+    {
+        get => GetValue(FooterContentProperty);
+        set => SetValue(FooterContentProperty, value);
+    }
+
+    public object? OverlayContent
+    {
+        get => GetValue(OverlayContentProperty);
+        set => SetValue(OverlayContentProperty, value);
+    }
+
     public object? EffectiveMenuHeader
     {
         get
@@ -787,6 +830,12 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         set => SetValue(PaneBackgroundProperty, value);
     }
 
+    public IBrush? FooterBackground
+    {
+        get => GetValue(FooterBackgroundProperty);
+        set => SetValue(FooterBackgroundProperty, value);
+    }
+
     public double OpenPaneLength
     {
         get => GetValue(OpenPaneLengthProperty);
@@ -835,6 +884,12 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         set => SetValue(UseSafeAreaForOverlaysProperty, value);
     }
 
+    public bool UseTransparentSystemBars
+    {
+        get => GetValue(UseTransparentSystemBarsProperty);
+        set => SetValue(UseTransparentSystemBarsProperty, value);
+    }
+
     public Thickness LayoutSafeAreaPadding
     {
         get
@@ -871,6 +926,30 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         private set
         {
             SetAndRaise(ContentLayoutSafeAreaPaddingProperty, ref _contentLayoutSafeAreaPadding, value);
+        }
+    }
+
+    public Thickness FooterLayoutSafeAreaPadding
+    {
+        get
+        {
+            return _footerLayoutSafeAreaPadding;
+        }
+        private set
+        {
+            SetAndRaise(FooterLayoutSafeAreaPaddingProperty, ref _footerLayoutSafeAreaPadding, value);
+        }
+    }
+
+    public Thickness OverlayContentLayoutSafeAreaPadding
+    {
+        get
+        {
+            return _overlayContentLayoutSafeAreaPadding;
+        }
+        private set
+        {
+            SetAndRaise(OverlayContentLayoutSafeAreaPaddingProperty, ref _overlayContentLayoutSafeAreaPadding, value);
         }
     }
 
@@ -1938,7 +2017,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         {
             UpdateEffectiveShellChrome();
         }
-        else if (change.Property == IsMenuOpenProperty || change.Property == IsShellChromeVisibleProperty || change.Property == IsShellHeaderVisibleProperty || change.Property == IsCompactMenuEnabledProperty || change.Property == CanCompactMenuProperty || change.Property == IsMenuAutoResponsiveProperty || change.Property == PaneDisplayModeProperty || change.Property == HeaderBackButtonVisibilityProperty || change.Property == HeaderPaneToggleButtonVisibilityProperty || change.Property == CollapseHeaderPaneToggleWhenCanGoBackProperty || change.Property == PageContentPaddingProperty || change.Property == HeaderedPageContentPaddingProperty || change.Property == OpenPaneLengthProperty || change.Property == CompactPaneLengthProperty || change.Property == PaneBackgroundProperty)
+        else if (change.Property == IsMenuOpenProperty || change.Property == IsShellChromeVisibleProperty || change.Property == IsShellHeaderVisibleProperty || change.Property == IsCompactMenuEnabledProperty || change.Property == CanCompactMenuProperty || change.Property == IsMenuAutoResponsiveProperty || change.Property == PaneDisplayModeProperty || change.Property == HeaderBackButtonVisibilityProperty || change.Property == HeaderPaneToggleButtonVisibilityProperty || change.Property == CollapseHeaderPaneToggleWhenCanGoBackProperty || change.Property == PageContentPaddingProperty || change.Property == HeaderedPageContentPaddingProperty || change.Property == OpenPaneLengthProperty || change.Property == CompactPaneLengthProperty || change.Property == PaneBackgroundProperty || change.Property == FooterContentProperty)
         {
             UpdateEffectiveShellChrome();
         }
@@ -2097,8 +2176,20 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     {
         Thickness safeAreaPadding = LayoutSafeAreaPadding;
         bool menuConsumesLeftInset = EffectiveIsShellChromeVisible && (EffectiveIsMenuOpen || EffectiveIsMenuCompact);
-        MenuLayoutSafeAreaPadding = menuConsumesLeftInset ? new Thickness(safeAreaPadding.Left, safeAreaPadding.Top, 0.0, safeAreaPadding.Bottom) : default;
-        ContentLayoutSafeAreaPadding = menuConsumesLeftInset ? new Thickness(0.0, safeAreaPadding.Top, safeAreaPadding.Right, safeAreaPadding.Bottom) : safeAreaPadding;
+        bool footerConsumesBottomInset = EffectiveIsShellChromeVisible && HasHeaderValue(FooterContent);
+        double contentBottomInset = footerConsumesBottomInset ? 0.0 : safeAreaPadding.Bottom;
+        MenuLayoutSafeAreaPadding = menuConsumesLeftInset ? new Thickness(safeAreaPadding.Left, safeAreaPadding.Top, 0.0, contentBottomInset) : default;
+        ContentLayoutSafeAreaPadding = menuConsumesLeftInset
+            ? new Thickness(0.0, safeAreaPadding.Top, safeAreaPadding.Right, contentBottomInset)
+            : new Thickness(safeAreaPadding.Left, safeAreaPadding.Top, safeAreaPadding.Right, contentBottomInset);
+        FooterLayoutSafeAreaPadding = footerConsumesBottomInset
+            ? new Thickness(safeAreaPadding.Left, 0.0, safeAreaPadding.Right, safeAreaPadding.Bottom)
+            : default;
+        OverlayContentLayoutSafeAreaPadding = new Thickness(
+            safeAreaPadding.Left,
+            safeAreaPadding.Top,
+            safeAreaPadding.Right,
+            contentBottomInset);
     }
 
     private Thickness ResolveEffectivePageContentPadding(bool isShellChromeEffectiveVisible, bool isShellHeaderEffectiveVisible)

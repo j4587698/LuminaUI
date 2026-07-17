@@ -4095,6 +4095,12 @@
   <data name="Sandbox.ShellShowcase.OptionCloseMenuOnNavigate" xml:space="preserve">
     <value>导航后关闭菜单 (CloseMenuOnNavigate)</value>
   </data>
+  <data name="Sandbox.ShellShowcase.OptionFooterContent" xml:space="preserve">
+    <value>底部内容 (FooterContent)</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OptionOverlayContent" xml:space="preserve">
+    <value>常驻浮层 (OverlayContent)</value>
+  </data>
   <data name="Sandbox.ShellShowcase.OpenPaneLength" xml:space="preserve">
     <value>展开菜单宽度</value>
   </data>
@@ -4130,6 +4136,30 @@
   </data>
   <data name="Sandbox.ShellShowcase.MenuFooter" xml:space="preserve">
     <value>菜单底部</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.FooterContentLabel" xml:space="preserve">
+    <value>FooterContent · 参与布局</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OpenFooterBottomSheet" xml:space="preserve">
+    <value>打开底部 Sheet</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OverlayContentLabel" xml:space="preserve">
+    <value>OverlayContent · 右下角定位</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.ShowOverlayToast" xml:space="preserve">
+    <value>显示 Toast</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.OverlayToastMessage" xml:space="preserve">
+    <value>Toast 会显示在 OverlayContent 上方。</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.FooterBottomSheetTitle" xml:space="preserve">
+    <value>FooterContent 示例</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.FooterBottomSheetMessage" xml:space="preserve">
+    <value>这个底部 Sheet 会覆盖 FooterContent 和 OverlayContent。</value>
+  </data>
+  <data name="Sandbox.ShellShowcase.CloseFooterBottomSheet" xml:space="preserve">
+    <value>关闭</value>
   </data>
   <data name="Sandbox.ShellShowcase.Action" xml:space="preserve">
     <value>操作</value>

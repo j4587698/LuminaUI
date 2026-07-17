@@ -40,6 +40,10 @@
                                       IsChecked="{Binding #PreviewShell.IsMenuAutoResponsive, Mode=TwoWay}" />
                             <CheckBox Content="{l10n:Loc Sandbox.ShellShowcase.OptionCloseMenuOnNavigate}"
                                       IsChecked="{Binding #PreviewShell.CloseMenuOnNavigate, Mode=TwoWay}" />
+                            <CheckBox Content="{l10n:Loc Sandbox.ShellShowcase.OptionFooterContent}"
+                                      IsChecked="{Binding #PreviewFooterContent.IsVisible, Mode=TwoWay}" />
+                            <CheckBox Content="{l10n:Loc Sandbox.ShellShowcase.OptionOverlayContent}"
+                                      IsChecked="{Binding #PreviewOverlayContent.IsVisible, Mode=TwoWay}" />
                         </StackPanel>
 
                         <Separator />
@@ -262,10 +266,11 @@
                                  MinHeight="420"
                                  Background="{DynamicResource LuminaBackgroundBrush}">
                             <Grid>
-                                <lumina:LuminaShell x:Name="PreviewShell"
-                                                 DefaultPageTitle="{l10n:Loc Sandbox.ShellShowcase.PreviewShellTitle}"
-                                                DefaultPageSubtitle="{l10n:Loc Sandbox.ShellShowcase.PreviewShellSubtitle}"
-                                                OpenPaneLength="220"
+                                 <lumina:LuminaShell x:Name="PreviewShell"
+                                                  DefaultPageTitle="{l10n:Loc Sandbox.ShellShowcase.PreviewShellTitle}"
+                                                 DefaultPageSubtitle="{l10n:Loc Sandbox.ShellShowcase.PreviewShellSubtitle}"
+                                                 FooterBackground="{DynamicResource LuminaSurfaceBrush}"
+                                                 OpenPaneLength="220"
                                                 CompactPaneLength="56"
                                                 lumina:LuminaShortcut.Gesture="Ctrl+H"
                                                 lumina:LuminaShortcut.Command="{Binding #PreviewShell.NavigateCommand}"
@@ -312,6 +317,48 @@
                                                    Foreground="{DynamicResource LuminaTextMutedBrush}" />
                                     </Border>
                                 </lumina:LuminaShell.MenuFooter>
+
+                                <lumina:LuminaShell.FooterContent>
+                                    <Border x:Name="PreviewFooterContent"
+                                            Padding="10,8"
+                                            BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                                            BorderThickness="0,1,0,0">
+                                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                                            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                                <Border Width="8"
+                                                        Height="8"
+                                                        CornerRadius="4"
+                                                        Background="{DynamicResource LuminaSuccessBrush}" />
+                                                <TextBlock Text="{l10n:Loc Sandbox.ShellShowcase.FooterContentLabel}"
+                                                           FontWeight="SemiBold"
+                                                           VerticalAlignment="Center" />
+                                            </StackPanel>
+                                            <Button Grid.Column="1"
+                                                    Classes="Small Outline"
+                                                    Content="{l10n:Loc Sandbox.ShellShowcase.OpenFooterBottomSheet}"
+                                                    Click="OnOpenPreviewFooterBottomSheetClicked" />
+                                        </Grid>
+                                    </Border>
+                                </lumina:LuminaShell.FooterContent>
+
+                                <lumina:LuminaShell.OverlayContent>
+                                    <lumina:LuminaCard x:Name="PreviewOverlayContent"
+                                                       Classes="Floating"
+                                                       Margin="12"
+                                                       Padding="10"
+                                                       HorizontalAlignment="Right"
+                                                       VerticalAlignment="Bottom"
+                                                       Background="{DynamicResource LuminaSurfaceBrush}">
+                                        <StackPanel Orientation="Horizontal" Spacing="10">
+                                            <TextBlock Text="{l10n:Loc Sandbox.ShellShowcase.OverlayContentLabel}"
+                                                       FontWeight="SemiBold"
+                                                       VerticalAlignment="Center" />
+                                            <Button Classes="Small Primary"
+                                                    Content="{l10n:Loc Sandbox.ShellShowcase.ShowOverlayToast}"
+                                                    Click="OnShowPreviewOverlayToastClicked" />
+                                        </StackPanel>
+                                    </lumina:LuminaCard>
+                                </lumina:LuminaShell.OverlayContent>
 
                                 <lumina:LuminaShell.DefaultPageActions>
                                     <Button Classes="Small Outline"

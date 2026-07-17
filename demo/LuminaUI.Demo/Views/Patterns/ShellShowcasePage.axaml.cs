@@ -49,6 +49,48 @@ public partial class ShellShowcasePage : LuminaPage
         BackHandlerOverlay.IsVisible = false;
     }
 
+    private void OnShowPreviewOverlayToastClicked(object? sender, RoutedEventArgs e)
+    {
+        PreviewShell.ShowToast(new LuminaToast
+        {
+            Classes = { "Success" },
+            Content = new TextBlock
+            {
+                Text = LuminaLocalization.Get("Sandbox.ShellShowcase.OverlayToastMessage")
+            }
+        });
+    }
+
+    private void OnOpenPreviewFooterBottomSheetClicked(object? sender, RoutedEventArgs e)
+    {
+        var closeButton = new Button
+        {
+            Classes = { "Primary" },
+            Content = LuminaLocalization.Get("Sandbox.ShellShowcase.CloseFooterBottomSheet"),
+            HorizontalAlignment = HorizontalAlignment.Left
+        };
+        closeButton.Click += (_, _) => PreviewShell.CloseBottomSheet();
+
+        PreviewShell.ShowBottomSheet(new StackPanel
+        {
+            Spacing = 12,
+            Children =
+            {
+                new TextBlock
+                {
+                    Classes = { "SectionTitle" },
+                    Text = LuminaLocalization.Get("Sandbox.ShellShowcase.FooterBottomSheetTitle")
+                },
+                new TextBlock
+                {
+                    Text = LuminaLocalization.Get("Sandbox.ShellShowcase.FooterBottomSheetMessage"),
+                    TextWrapping = TextWrapping.Wrap
+                },
+                closeButton
+            }
+        });
+    }
+
     private void OnShellShowcaseLayoutSizeChanged(object? sender, SizeChangedEventArgs e)
     {
         UpdateShellShowcaseLayout(e.NewSize.Width);

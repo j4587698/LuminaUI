@@ -12,6 +12,7 @@ using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Media;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
 using LuminaUI.Enums;
@@ -79,6 +80,8 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
 
     private bool _hasEdgeToEdgePreferenceOverride;
 
+    private bool _hasTransparentSystemBarColorOverride;
+
     private Control? _autoSafeAreaTarget;
 
     private bool _hasAutoSafeAreaOverride;
@@ -122,6 +125,12 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
 
     public static readonly StyledProperty<bool> UseSafeAreaForOverlaysProperty = AvaloniaProperty.Register<LuminaOverlayHost, bool>(nameof(UseSafeAreaForOverlays), defaultValue: true);
 
+    /// <summary>
+    /// Gets or sets whether edge-to-edge system bars use a transparent background.
+    /// This also disables the Android navigation-bar contrast scrim where supported.
+    /// </summary>
+    public static readonly StyledProperty<bool> UseTransparentSystemBarsProperty = AvaloniaProperty.Register<LuminaOverlayHost, bool>(nameof(UseTransparentSystemBars), defaultValue: true);
+
     public static readonly StyledProperty<bool> HandlesSystemBackRequestedProperty = AvaloniaProperty.Register<LuminaOverlayHost, bool>(nameof(HandlesSystemBackRequested), defaultValue: true);
 
     public static readonly DirectProperty<LuminaOverlayHost, Thickness> SafeAreaPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaOverlayHost, Thickness>(nameof(SafeAreaPadding), (LuminaOverlayHost overlayHost) => overlayHost.SafeAreaPadding);
@@ -151,7 +160,11 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
     {
         public int Count { get; set; }
 
+        public int TransparentSystemBarCount { get; set; }
+
         public bool PreviousValue { get; set; }
+
+        public Color? PreviousSystemBarColor { get; set; }
     }
 
     public string? OverlayHostKey
@@ -236,6 +249,12 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
     {
         get => GetValue(UseSafeAreaForOverlaysProperty);
         set => SetValue(UseSafeAreaForOverlaysProperty, value);
+    }
+
+    public bool UseTransparentSystemBars
+    {
+        get => GetValue(UseTransparentSystemBarsProperty);
+        set => SetValue(UseTransparentSystemBarsProperty, value);
     }
 
     public bool HandlesSystemBackRequested
@@ -580,7 +599,7 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
         {
             UpdateOverlayHostKey(change.GetOldValue<string>(), change.GetNewValue<string>());
         }
-        else if (change.Property == UseSafeAreaProperty || change.Property == SafeAreaModeProperty || change.Property == UseSafeAreaForOverlaysProperty)
+        else if (change.Property == UseSafeAreaProperty || change.Property == SafeAreaModeProperty || change.Property == UseSafeAreaForOverlaysProperty || change.Property == UseTransparentSystemBarsProperty)
         {
             SyncTopLevelSafeAreaMode();
             SyncInsetsManagerSubscription();
@@ -706,13 +725,31 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
         ReleaseInsetsManagerEdgeToEdgePreference();
         lock (SafeAreaOverrideLock)
         {
+            bool isFirstOverride = false;
             if (!EdgeToEdgeOverrideStates.TryGetValue(insetsManager, out EdgeToEdgeOverrideState? state))
             {
                 state = new EdgeToEdgeOverrideState
                 {
-                    PreviousValue = insetsManager.DisplayEdgeToEdgePreference
+                    PreviousValue = insetsManager.DisplayEdgeToEdgePreference,
+                    PreviousSystemBarColor = insetsManager.SystemBarColor
                 };
                 EdgeToEdgeOverrideStates.Add(insetsManager, state);
+                isFirstOverride = true;
+            }
+
+            if (UseTransparentSystemBars)
+            {
+                if (state.TransparentSystemBarCount == 0)
+                {
+                    insetsManager.SystemBarColor = Colors.Transparent;
+                }
+
+                state.TransparentSystemBarCount++;
+                _hasTransparentSystemBarColorOverride = true;
+            }
+
+            if (isFirstOverride)
+            {
                 insetsManager.DisplayEdgeToEdgePreference = true;
             }
 
@@ -735,6 +772,16 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
         {
             if (EdgeToEdgeOverrideStates.TryGetValue(insetsManager, out EdgeToEdgeOverrideState? state))
             {
+                if (_hasTransparentSystemBarColorOverride)
+                {
+                    state.TransparentSystemBarCount--;
+                    if (state.TransparentSystemBarCount <= 0)
+                    {
+                        state.TransparentSystemBarCount = 0;
+                        insetsManager.SystemBarColor = state.PreviousSystemBarColor;
+                    }
+                }
+
                 state.Count--;
                 if (state.Count <= 0)
                 {
@@ -746,6 +793,7 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
 
         _edgeToEdgeInsetsManager = null;
         _hasEdgeToEdgePreferenceOverride = false;
+        _hasTransparentSystemBarColorOverride = false;
     }
 
     private void OnSafeAreaChanged(object? sender, SafeAreaChangedArgs e)
