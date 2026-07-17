@@ -522,6 +522,11 @@ public class LuminaImage : TemplatedControl
         {
             ILuminaImageLoader loader = Loader ?? ImageLoader;
             IImage? image = await loader.LoadAsync(source, options, cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
+            if (cancellationToken.IsCancellationRequested || version != _loadVersion)
+            {
+                return;
+            }
+
             await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
                 if (!cancellationToken.IsCancellationRequested && version == _loadVersion)
                 {

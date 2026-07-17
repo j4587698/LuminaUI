@@ -25,9 +25,14 @@ public sealed class LuminaDecodedImageCache
 
     private int _capacity;
 
-    public LuminaDecodedImageCache(int capacity = 256)
+    private long _capacityBytes;
+
+    private long _sizeBytes;
+
+    public LuminaDecodedImageCache(int capacity = 256, long? capacityBytes = null)
     {
         _capacity = capacity < 1 ? 1 : capacity;
+        _capacityBytes = Math.Max(1, capacityBytes ?? GetDefaultCapacityBytes());
     }
 
     /// <summary>
@@ -42,6 +47,23 @@ public sealed class LuminaDecodedImageCache
             lock (_gate)
             {
                 _capacity = normalized;
+                TrimToCapacity();
+            }
+        }
+    }
+
+    /// <summary>
+    /// 已解码像素的估算内存上限。桌面默认 64MB，移动端和浏览器默认 32MB。
+    /// </summary>
+    public long CapacityBytes
+    {
+        get => _capacityBytes;
+        set
+        {
+            long normalized = Math.Max(1, value);
+            lock (_gate)
+            {
+                _capacityBytes = normalized;
                 TrimToCapacity();
             }
         }
@@ -81,14 +103,17 @@ public sealed class LuminaDecodedImageCache
             if (_map.TryGetValue(key, out LinkedListNode<Entry>? existing))
             {
                 _lru.Remove(existing);
-                existing.Value = new Entry(key, image);
+                _sizeBytes -= existing.Value.SizeBytes;
+                existing.Value = new Entry(key, image, EstimateSizeBytes(image));
+                _sizeBytes += existing.Value.SizeBytes;
                 _lru.AddFirst(existing);
             }
             else
             {
-                LinkedListNode<Entry> node = new(new Entry(key, image));
+                LinkedListNode<Entry> node = new(new Entry(key, image, EstimateSizeBytes(image)));
                 _lru.AddFirst(node);
                 _map[key] = node;
+                _sizeBytes += node.Value.SizeBytes;
             }
 
             TrimToCapacity();
@@ -101,28 +126,58 @@ public sealed class LuminaDecodedImageCache
         {
             _map.Clear();
             _lru.Clear();
+            _sizeBytes = 0;
         }
     }
 
     private void TrimToCapacity()
     {
-        while (_lru.Count > _capacity && _lru.Last is { } last)
+        while ((_lru.Count > _capacity || _sizeBytes > _capacityBytes) && _lru.Last is { } last)
         {
             _lru.RemoveLast();
             _map.Remove(last.Value.Key);
+            _sizeBytes -= last.Value.SizeBytes;
         }
+    }
+
+    private static long EstimateSizeBytes(IImage image)
+    {
+        if (image is not Bitmap bitmap)
+        {
+            return 1;
+        }
+
+        try
+        {
+            return Math.Max(1, checked((long)bitmap.PixelSize.Width * bitmap.PixelSize.Height * 4L));
+        }
+        catch (OverflowException)
+        {
+            return long.MaxValue;
+        }
+    }
+
+    private static long GetDefaultCapacityBytes()
+    {
+        const long megabyte = 1024L * 1024L;
+        return OperatingSystem.IsAndroid() || OperatingSystem.IsIOS() || OperatingSystem.IsBrowser()
+            ? 32L * megabyte
+            : 64L * megabyte;
     }
 
     private struct Entry
     {
-        public Entry(string key, IImage image)
+        public Entry(string key, IImage image, long sizeBytes)
         {
             Key = key;
             Image = image;
+            SizeBytes = sizeBytes;
         }
 
         public string Key { get; }
 
         public IImage Image { get; }
+
+        public long SizeBytes { get; }
     }
 }
