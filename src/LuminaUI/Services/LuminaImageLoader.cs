@@ -17,11 +17,21 @@ public sealed class LuminaImageLoader : ILuminaImageLoader
 
     private static readonly LuminaAsyncLockStripes WebLoadLocks = new LuminaAsyncLockStripes(64);
 
+    private static readonly LuminaAsyncLockStripes DecodedLoadLocks = new LuminaAsyncLockStripes(128);
+
+    private static readonly SemaphoreSlim DecodeGate = new SemaphoreSlim(GetDefaultDecodeConcurrency());
+
     public static LuminaImageLoader Shared { get; } = new LuminaImageLoader();
 
     public HttpClient HttpClient { get; set; }
 
     public ILuminaImageCache Cache { get; set; }
+
+    /// <summary>
+    /// 当前使用的 LuminaUI 内置缓存。使用自定义 <see cref="ILuminaImageCache"/> 时为 null。
+    /// 可通过此属性统一配置物理缓存开关、容量和清理操作。
+    /// </summary>
+    public LuminaImageCache? BuiltInCache => Cache as LuminaImageCache;
 
     /// <summary>
     /// 已解码位图的内存缓存。命中后直接复用，无需重新解码，是大列表滚动性能的关键。
@@ -71,6 +81,7 @@ public sealed class LuminaImageLoader : ILuminaImageLoader
 
     public async Task<IImage?> LoadAsync(object? source, LuminaImageLoadOptions options, CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
         if (source == null)
         {
             return null;
@@ -81,7 +92,7 @@ public sealed class LuminaImageLoader : ILuminaImageLoader
         }
         if (source is byte[] bytes)
         {
-            return Decode(bytes, options);
+            return await DecodeAsync(bytes, options, cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
         }
         string? sourceText = source switch
         {
@@ -105,26 +116,32 @@ public sealed class LuminaImageLoader : ILuminaImageLoader
             return cachedImage;
         }
 
-        IImage? decoded;
-        if (TryDecodeBase64(sourceText, out byte[] base64Bytes))
+        if (!useDecodedCache)
         {
-            decoded = Decode(base64Bytes, options);
-        }
-        else if (IsWebUri(sourceText))
-        {
-            decoded = await LoadWebImageAsync(sourceText, options, cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
-        }
-        else
-        {
-            decoded = LoadLocalImage(sourceText, options);
+            return await DecodeBase64Async(sourceText, options, cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
         }
 
-        if (useDecodedCache && decoded != null)
+        SemaphoreSlim decodedLoadLock = DecodedLoadLocks.GetLock(decodedKey);
+        await decodedLoadLock.WaitAsync(cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
+        try
         {
-            DecodedCache.Set(decodedKey, decoded);
-        }
+            if (DecodedCache.TryGet(decodedKey, out cachedImage))
+            {
+                return cachedImage;
+            }
 
-        return decoded;
+            IImage? decoded = await LoadSourceTextAsync(sourceText, options, cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
+            if (decoded != null)
+            {
+                DecodedCache.Set(decodedKey, decoded);
+            }
+
+            return decoded;
+        }
+        finally
+        {
+            decodedLoadLock.Release();
+        }
     }
 
     public void ClearMemoryCache()
@@ -135,7 +152,8 @@ public sealed class LuminaImageLoader : ILuminaImageLoader
 
     private async Task<IImage?> LoadWebImageAsync(string url, LuminaImageLoadOptions options, CancellationToken cancellationToken)
     {
-        return Decode(await ReadWebBytesAsync(url, options, cancellationToken).ConfigureAwait(continueOnCapturedContext: false), options);
+        byte[] bytes = await ReadWebBytesAsync(url, options, cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
+        return await DecodeAsync(bytes, options, cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
     }
 
     private async Task<byte[]> ReadWebBytesAsync(string url, LuminaImageLoadOptions options, CancellationToken cancellationToken)
@@ -166,6 +184,27 @@ public sealed class LuminaImageLoader : ILuminaImageLoader
         {
             webLock.Release();
         }
+    }
+
+    private async Task<IImage?> LoadSourceTextAsync(string source, LuminaImageLoadOptions options, CancellationToken cancellationToken)
+    {
+        if (IsPotentialBase64(source))
+        {
+            IImage? base64Image = await DecodeBase64Async(source, options, cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
+            if (base64Image != null || source.StartsWith("data:", StringComparison.OrdinalIgnoreCase))
+            {
+                return base64Image;
+            }
+        }
+
+        if (IsWebUri(source))
+        {
+            return await LoadWebImageAsync(source, options, cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
+        }
+
+        return await RunDecodeWorkAsync(
+            () => LoadLocalImage(source, options),
+            cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
     }
 
     private static IImage? LoadLocalImage(string source, LuminaImageLoadOptions options)
@@ -216,6 +255,59 @@ public sealed class LuminaImageLoader : ILuminaImageLoader
             return Bitmap.DecodeToHeight(stream, height, BitmapInterpolationMode.MediumQuality);
         }
         return new Bitmap(stream);
+    }
+
+    private static async Task<Bitmap?> DecodeAsync(
+        byte[] bytes,
+        LuminaImageLoadOptions options,
+        CancellationToken cancellationToken)
+    {
+        return await RunDecodeWorkAsync(
+            () => Decode(bytes, options),
+            cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
+    }
+
+    private static async Task<IImage?> DecodeBase64Async(
+        string source,
+        LuminaImageLoadOptions options,
+        CancellationToken cancellationToken)
+    {
+        return await RunDecodeWorkAsync(
+            () => TryDecodeBase64(source, out byte[] bytes) ? Decode(bytes, options) : null,
+            cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
+    }
+
+    private static async Task<T> RunDecodeWorkAsync<T>(Func<T> work, CancellationToken cancellationToken)
+    {
+        await DecodeGate.WaitAsync(cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
+        try
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            return await Task.Run(work, CancellationToken.None).ConfigureAwait(continueOnCapturedContext: false);
+        }
+        finally
+        {
+            DecodeGate.Release();
+        }
+    }
+
+    private static int GetDefaultDecodeConcurrency()
+    {
+        if (OperatingSystem.IsAndroid() || OperatingSystem.IsIOS() || OperatingSystem.IsBrowser())
+        {
+            return 1;
+        }
+
+        return Math.Clamp(Environment.ProcessorCount / 2, 1, 2);
+    }
+
+    private static bool IsPotentialBase64(string source)
+    {
+        return source.StartsWith("data:", StringComparison.OrdinalIgnoreCase) ||
+               (!source.Contains("://", StringComparison.Ordinal) &&
+                !source.StartsWith("avares:", StringComparison.OrdinalIgnoreCase) &&
+                !source.StartsWith("resm:", StringComparison.OrdinalIgnoreCase) &&
+                source.Length >= 32);
     }
 
     private static bool TryGetCacheableSource(object? source, out string sourceText)
