@@ -277,6 +277,10 @@
             <Setter Property="IsVisible" Value="False" />
         </Style>
 
+        <Style Selector="^:menu-footer-empty /template/ Border#PART_MenuFooter">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+
         <Style Selector="^:menucompact /template/ Border#PART_MenuCompactToggleHost">
             <Setter Property="Margin" Value="{DynamicResource LuminaShellMenuCompactToggleHostCompactMargin}" />
         </Style>
