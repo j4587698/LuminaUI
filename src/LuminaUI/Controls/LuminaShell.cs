@@ -53,6 +53,8 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private Control? _observedFooterContent;
 
+    private Control? _observedMenuFooter;
+
     private LuminaOverlayHost? _menuDrawerHost;
 
     private LuminaDrawer? _menuDrawer;
@@ -62,6 +64,8 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     private ContentPresenter? _menuDrawerContentPresenter;
 
     private ContentPresenter? _menuDrawerFooterPresenter;
+
+    private Border? _menuDrawerFooter;
 
     private IDisposable? _menuDrawerHeaderBinding;
 
@@ -987,6 +991,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     {
         base.OnAttachedToVisualTree(e);
         ObserveFooterContent(FooterContent as Control);
+        ObserveMenuFooter(MenuFooter as Control);
         RegisterAttachedShell();
         AttachBackRequestedHandler();
         SyncNavigationHostContent();
@@ -997,6 +1002,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     {
         DetachBackRequestedHandler();
         ObserveFooterContent(null);
+        ObserveMenuFooter(null);
         ObserveOverlayHost(null);
         _overlayHost = null;
         CloseMenuDrawer(forceClearContent: true);
@@ -1071,6 +1077,33 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         if (e.Property == Visual.IsVisibleProperty)
         {
             UpdateLayoutSafeAreaPartitions();
+        }
+    }
+
+    private void ObserveMenuFooter(Control? menuFooter)
+    {
+        if (ReferenceEquals(_observedMenuFooter, menuFooter))
+        {
+            return;
+        }
+
+        if (_observedMenuFooter != null)
+        {
+            _observedMenuFooter.PropertyChanged -= OnMenuFooterPropertyChanged;
+        }
+
+        _observedMenuFooter = menuFooter;
+        if (_observedMenuFooter != null)
+        {
+            _observedMenuFooter.PropertyChanged += OnMenuFooterPropertyChanged;
+        }
+    }
+
+    private void OnMenuFooterPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
+    {
+        if (e.Property == Visual.IsVisibleProperty)
+        {
+            UpdateMenuFooterVisibility();
         }
     }
 
@@ -1370,8 +1403,10 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
             Margin = LuminaPickerResources.Thickness("LuminaShellTopMenuDrawerFooterMargin", new Thickness(16, 12, 16, 12)),
             Padding = LuminaPickerResources.Thickness("LuminaShellMenuFooterPadding", new Thickness(0, 16, 0, 0)),
             ClipToBounds = false,
+            IsVisible = HasVisibleMenuFooter(),
             Child = footerPresenter
         };
+        _menuDrawerFooter = footer;
         Grid.SetRow(scrollViewer, 1);
         Grid.SetRow(footer, 2);
 
@@ -1457,6 +1492,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
             _menuDrawerFooterPresenter.Content = null;
             _menuDrawerFooterPresenter = null;
         }
+        _menuDrawerFooter = null;
         if (_menuDrawer != null)
         {
             _menuDrawer.Content = null;
@@ -2057,7 +2093,13 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         {
             UpdateEffectiveShellChrome();
         }
-        else if (change.Property == MenuHeaderProperty || change.Property == MenuContentProperty || change.Property == MenuFooterProperty)
+        else if (change.Property == MenuFooterProperty)
+        {
+            ObserveMenuFooter(change.GetNewValue<object>() as Control);
+            UpdateEffectiveMenuSlots();
+            UpdateEffectiveShellChrome();
+        }
+        else if (change.Property == MenuHeaderProperty || change.Property == MenuContentProperty)
         {
             UpdateEffectiveMenuSlots();
             UpdateEffectiveShellChrome();
@@ -2203,6 +2245,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         PseudoClasses.Set(":chromeless", !isShellChromeEffectiveVisible);
         PseudoClasses.Set(":headerless", !isShellHeaderEffectiveVisible);
         PseudoClasses.Set(":menucompact", isMenuCompact);
+        UpdateMenuFooterVisibility();
         PseudoClasses.Set(":pane-left", paneDisplayMode == LuminaShellPaneDisplayMode.Left);
         PseudoClasses.Set(":pane-left-compact", isLeftCompact);
         UpdateLayoutSafeAreaPartitions();
@@ -2327,6 +2370,22 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         EffectiveMenuHeader = _isMenuDrawerMode ? null : MenuHeader;
         EffectiveMenuContent = _isMenuDrawerMode ? null : MenuContent;
         EffectiveMenuFooter = _isMenuDrawerMode ? null : MenuFooter;
+        UpdateMenuFooterVisibility();
+    }
+
+    private void UpdateMenuFooterVisibility()
+    {
+        bool isVisible = HasVisibleMenuFooter();
+        PseudoClasses.Set(":menu-footer-empty", !isVisible);
+        if (_menuDrawerFooter != null)
+        {
+            _menuDrawerFooter.IsVisible = isVisible;
+        }
+    }
+
+    private bool HasVisibleMenuFooter()
+    {
+        return HasHeaderValue(MenuFooter) && (MenuFooter is not Control menuFooter || menuFooter.IsVisible);
     }
 
     private static void DisablePageAutoSafeArea(Page? page)
