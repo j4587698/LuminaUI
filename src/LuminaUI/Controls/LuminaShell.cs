@@ -902,7 +902,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         {
             if (SetAndRaise(LayoutSafeAreaPaddingProperty, ref _layoutSafeAreaPadding, value))
             {
-                UpdateLayoutSafeAreaPartitions();
+                UpdateEffectiveShellChrome();
             }
         }
     }
@@ -2173,6 +2173,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         bool isSmallScreen = Bounds.Width < SmallScreenBreakpoint;
         bool isLeftCompact = paneDisplayMode == LuminaShellPaneDisplayMode.LeftCompact;
         bool isMenuCompact = isShellMenuAllowed && !isSmallScreen && isLeftCompact && !IsMenuOpen;
+        double compactPaneSafeAreaInset = isMenuCompact ? Math.Max(0.0, LayoutSafeAreaPadding.Left) : 0.0;
         bool hasMenu = HasHeaderValue(MenuHeader) || HasHeaderValue(MenuContent) || HasHeaderValue(MenuFooter);
         bool isPaneToggleVisible = isShellMenuAllowed && hasMenu;
         bool isShellHeaderAllowed = isShellChromeEffectiveVisible && IsShellHeaderVisible && showShellHeader;
@@ -2198,7 +2199,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         EffectiveHeaderTitle = effectiveHeaderTitle;
         EffectivePageContentPadding = ResolveEffectivePageContentPadding(isShellChromeEffectiveVisible, isShellHeaderEffectiveVisible);
         EffectiveOpenPaneLength = isShellMenuAllowed ? OpenPaneLength : 0.0;
-        EffectiveCompactPaneLength = isShellMenuAllowed ? CompactPaneLength : 0.0;
+        EffectiveCompactPaneLength = isShellMenuAllowed ? CompactPaneLength + compactPaneSafeAreaInset : 0.0;
         PseudoClasses.Set(":chromeless", !isShellChromeEffectiveVisible);
         PseudoClasses.Set(":headerless", !isShellHeaderEffectiveVisible);
         PseudoClasses.Set(":menucompact", isMenuCompact);
