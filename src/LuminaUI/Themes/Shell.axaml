@@ -7,8 +7,8 @@
     <Thickness x:Key="LuminaShellMenuHeaderMargin">16</Thickness>
     <x:Double x:Key="LuminaShellMenuHeaderHeight">48</x:Double>
     <Thickness x:Key="LuminaShellMenuScrollMargin">16,0,16,16</Thickness>
-    <Thickness x:Key="LuminaShellMenuFooterMargin">16</Thickness>
-    <Thickness x:Key="LuminaShellMenuFooterPadding">0,16,0,0</Thickness>
+    <Thickness x:Key="LuminaShellMenuFooterMargin">0</Thickness>
+    <Thickness x:Key="LuminaShellMenuFooterPadding">0</Thickness>
     <Thickness x:Key="LuminaShellMenuCompactToggleHostMargin">16,0,16,16</Thickness>
     <x:Double x:Key="LuminaShellMenuCompactToggleSize">36</x:Double>
     <x:Double x:Key="LuminaShellMenuCompactToggleIconSize">14</x:Double>
@@ -35,7 +35,7 @@
     <Thickness x:Key="LuminaShellTopMenuDrawerHeaderMargin">16,10,16,8</Thickness>
     <x:Double x:Key="LuminaShellTopMenuDrawerHeaderHeight">44</x:Double>
     <Thickness x:Key="LuminaShellTopMenuDrawerScrollMargin">16,0,16,12</Thickness>
-    <Thickness x:Key="LuminaShellTopMenuDrawerFooterMargin">16,12,16,12</Thickness>
+    <Thickness x:Key="LuminaShellTopMenuDrawerFooterMargin">0</Thickness>
 
     <ControlTheme x:Key="LuminaShellNavigationPage" TargetType="NavigationPage" BasedOn="{StaticResource {x:Type NavigationPage}}">
         <Setter Property="Background" Value="Transparent" />
