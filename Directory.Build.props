@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <LuminaUIVersion>0.6.5</LuminaUIVersion>
+    <LuminaUIVersion>0.6.6</LuminaUIVersion>
 
     <Version>$(LuminaUIVersion)</Version>
     <PackageVersion>$(LuminaUIVersion)</PackageVersion>
