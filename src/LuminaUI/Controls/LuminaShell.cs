@@ -19,6 +19,23 @@ using LuminaUI.Extensions;
 
 namespace LuminaUI.Controls;
 
+/// <summary>
+/// Controls where the shell footer is rendered.
+/// </summary>
+public enum LuminaShellFooterPlacement
+{
+    /// <summary>
+    /// Footer is rendered at the shell root level, spanning the full width below the SplitView.
+    /// </summary>
+    Normal,
+
+    /// <summary>
+    /// Footer is rendered inside the content area, below the page content,
+    /// allowing the side menu to extend the full window height.
+    /// </summary>
+    ContentArea,
+}
+
 public class LuminaShell : ContentControl, ILuminaOverlayHost
 {
     private static readonly object ShellRegistryLock = new object();
@@ -155,6 +172,12 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private Thickness _effectivePageContentPadding;
 
+    private Border? _footerBorder;
+
+    private Panel? _footerOriginalParent;
+
+    private Thickness _footerSavedPadding;
+
     public static readonly StyledProperty<bool> IsMenuOpenProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(IsMenuOpen), defaultValue: true);
 
     public static readonly StyledProperty<bool> IsShellChromeVisibleProperty = AvaloniaProperty.Register<LuminaShell, bool>(nameof(IsShellChromeVisible), defaultValue: true);
@@ -220,6 +243,21 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     /// The footer is treated as shell chrome and is hidden with <see cref="IsShellChromeVisible"/>.
     /// </summary>
     public static readonly StyledProperty<object?> FooterContentProperty = AvaloniaProperty.Register<LuminaShell, object?>(nameof(FooterContent));
+
+    /// <summary>
+    /// Gets or sets the footer placement mode.
+    /// <see cref="LuminaShellFooterPlacement.Normal"/> renders the footer at the shell root level (full width).
+    /// <see cref="LuminaShellFooterPlacement.ContentArea"/> places the footer inside the content area,
+    /// below the page content, allowing the side menu to extend full height.
+    /// </summary>
+    public static readonly StyledProperty<LuminaShellFooterPlacement> FooterPlacementProperty =
+        AvaloniaProperty.Register<LuminaShell, LuminaShellFooterPlacement>(nameof(FooterPlacement), LuminaShellFooterPlacement.Normal);
+
+    public LuminaShellFooterPlacement FooterPlacement
+    {
+        get => GetValue(FooterPlacementProperty);
+        set => SetValue(FooterPlacementProperty, value);
+    }
 
     /// <summary>
     /// Gets or sets persistent non-modal content rendered in the safe content area above the footer
@@ -1032,6 +1070,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         ObserveNavigationHost(_navigationHost);
         SyncNavigationHostContent();
         UpdateNavigationStackState();
+        _footerBorder = e.NameScope.Find<Border>("PART_Footer");
     }
 
     private void ObserveOverlayHost(LuminaOverlayHost? overlayHost)
@@ -2089,6 +2128,10 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
             ObserveFooterContent(change.GetNewValue<object>() as Control);
             UpdateEffectiveShellChrome();
         }
+        else if (change.Property == FooterPlacementProperty)
+        {
+            UpdateEffectiveShellChrome();
+        }
         else if (change.Property == IsMenuOpenProperty || change.Property == IsShellChromeVisibleProperty || change.Property == IsShellHeaderVisibleProperty || change.Property == IsCompactMenuEnabledProperty || change.Property == CanCompactMenuProperty || change.Property == IsMenuAutoResponsiveProperty || change.Property == PaneDisplayModeProperty || change.Property == HeaderBackButtonVisibilityProperty || change.Property == HeaderPaneToggleButtonVisibilityProperty || change.Property == CollapseHeaderPaneToggleWhenCanGoBackProperty || change.Property == PageContentPaddingProperty || change.Property == HeaderedPageContentPaddingProperty || change.Property == OpenPaneLengthProperty || change.Property == CompactPaneLengthProperty || change.Property == PaneBackgroundProperty)
         {
             UpdateEffectiveShellChrome();
@@ -2248,6 +2291,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         UpdateMenuFooterVisibility();
         PseudoClasses.Set(":pane-left", paneDisplayMode == LuminaShellPaneDisplayMode.Left);
         PseudoClasses.Set(":pane-left-compact", isLeftCompact);
+        UpdateFooterPlacement();
         UpdateLayoutSafeAreaPartitions();
         SyncMenuDrawer(menuDrawerHost);
     }
@@ -2255,16 +2299,20 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     private void UpdateLayoutSafeAreaPartitions()
     {
         Thickness safeAreaPadding = LayoutSafeAreaPadding;
-        bool menuConsumesLeftInset = EffectiveIsShellChromeVisible && (EffectiveIsMenuOpen || EffectiveIsMenuCompact);
-        bool footerConsumesBottomInset = EffectiveIsShellChromeVisible && HasVisibleFooterContent();
+        bool isChromeVisible = EffectiveIsShellChromeVisible;
+        bool menuConsumesLeftInset = isChromeVisible && (EffectiveIsMenuOpen || EffectiveIsMenuCompact);
+        bool isContentAreaPlacement = isChromeVisible && FooterPlacement == LuminaShellFooterPlacement.ContentArea && HasVisibleFooterContent();
+        bool footerConsumesBottomInset = isChromeVisible && HasVisibleFooterContent() && !isContentAreaPlacement;
         double contentBottomInset = footerConsumesBottomInset ? 0.0 : safeAreaPadding.Bottom;
         MenuLayoutSafeAreaPadding = menuConsumesLeftInset ? new Thickness(safeAreaPadding.Left, safeAreaPadding.Top, 0.0, contentBottomInset) : default;
         ContentLayoutSafeAreaPadding = menuConsumesLeftInset
             ? new Thickness(0.0, safeAreaPadding.Top, safeAreaPadding.Right, contentBottomInset)
             : new Thickness(safeAreaPadding.Left, safeAreaPadding.Top, safeAreaPadding.Right, contentBottomInset);
-        FooterLayoutSafeAreaPadding = footerConsumesBottomInset
-            ? new Thickness(safeAreaPadding.Left, 0.0, safeAreaPadding.Right, safeAreaPadding.Bottom)
-            : default;
+        FooterLayoutSafeAreaPadding = isContentAreaPlacement
+            ? default
+            : footerConsumesBottomInset
+                ? new Thickness(safeAreaPadding.Left, 0.0, safeAreaPadding.Right, safeAreaPadding.Bottom)
+                : default;
         OverlayContentLayoutSafeAreaPadding = new Thickness(
             safeAreaPadding.Left,
             safeAreaPadding.Top,
@@ -2275,6 +2323,65 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     private bool HasVisibleFooterContent()
     {
         return HasHeaderValue(FooterContent) && (FooterContent is not Control footerContent || footerContent.IsVisible);
+    }
+
+    private void UpdateFooterPlacement()
+    {
+        if (_footerBorder == null) return;
+        if (!EffectiveIsShellChromeVisible || !HasVisibleFooterContent())
+        {
+            RestoreFooter();
+            return;
+        }
+
+        bool shouldBeInContent = FooterPlacement == LuminaShellFooterPlacement.ContentArea;
+        bool isCurrentlyInContent = _footerOriginalParent != null && _footerOriginalParent != _footerBorder.Parent;
+
+        if (shouldBeInContent && !isCurrentlyInContent)
+        {
+            MoveFooterToContentArea();
+        }
+        else if (!shouldBeInContent && isCurrentlyInContent)
+        {
+            RestoreFooter();
+        }
+    }
+
+    private void MoveFooterToContentArea()
+    {
+        if (_footerBorder == null) return;
+        if (_footerBorder.Parent is not Panel parentPanel) return;
+        // PART_SplitView is a sibling of PART_Footer in the outer Grid
+        var splitView = parentPanel.Children.OfType<SplitView>().FirstOrDefault();
+        if (splitView?.Content is not Border contentBorder) return;
+        if (contentBorder.Child is not Grid contentGrid) return;
+
+        _footerOriginalParent = parentPanel;
+        _footerSavedPadding = _footerBorder.Padding;
+        parentPanel.Children.Remove(_footerBorder);
+        contentGrid.RowDefinitions.Add(new RowDefinition(GridLength.Auto));
+        Grid.SetRow(_footerBorder, contentGrid.RowDefinitions.Count - 1);
+        contentGrid.Children.Add(_footerBorder);
+        _footerBorder.Padding = default;
+    }
+
+    private void RestoreFooter()
+    {
+        if (_footerBorder == null || _footerOriginalParent == null) return;
+        var currentParent = _footerBorder.Parent as Panel;
+        if (currentParent == _footerOriginalParent) return;
+
+        if (currentParent != null)
+        {
+            currentParent.Children.Remove(_footerBorder);
+            if (currentParent is Grid oldGrid && oldGrid.RowDefinitions.Count > 0)
+            {
+                oldGrid.RowDefinitions.RemoveAt(oldGrid.RowDefinitions.Count - 1);
+            }
+        }
+        _footerBorder.Padding = _footerSavedPadding;
+        Grid.SetRow(_footerBorder, 1);
+        _footerOriginalParent.Children.Add(_footerBorder);
     }
 
     private Thickness ResolveEffectivePageContentPadding(bool isShellChromeEffectiveVisible, bool isShellHeaderEffectiveVisible)
