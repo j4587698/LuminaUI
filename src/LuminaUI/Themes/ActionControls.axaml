@@ -1,6 +1,7 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:converters="using:Avalonia.Controls.Converters"
+                    xmlns:theming="clr-namespace:LuminaUI.Theming;assembly=LuminaUI"
                     xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
 
     <converters:CornerRadiusFilterConverter x:Key="LuminaSplitButtonLeftCornerRadiusFilter"
@@ -98,7 +99,7 @@
             <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBgBrush}" />
         </Style>
 
-        <Style Selector="^.Small">
+        <Style Selector="^.Small, ^[(theming|LuminaDensity.Mode)=Compact]">
             <Setter Property="Padding" Value="10,4" />
             <Setter Property="FontSize" Value="12" />
             <Setter Property="CornerRadius" Value="5" />
@@ -106,7 +107,7 @@
             <Setter Property="MinHeight" Value="28" />
         </Style>
 
-        <Style Selector="^.Large">
+        <Style Selector="^.Large, ^[(theming|LuminaDensity.Mode)=Loose]">
             <Setter Property="Padding" Value="24,12" />
             <Setter Property="FontSize" Value="16" />
             <Setter Property="CornerRadius" Value="8" />
@@ -397,7 +398,7 @@
             <Setter Property="Opacity" Value="{DynamicResource LuminaSplitButtonDisabledOpacity}" />
         </Style>
 
-        <Style Selector="^.Small">
+        <Style Selector="^.Small, ^[(theming|LuminaDensity.Mode)=Compact]">
             <Setter Property="Padding" Value="10,4" />
             <Setter Property="FontSize" Value="12" />
             <Setter Property="CornerRadius" Value="5" />
@@ -405,7 +406,7 @@
             <Setter Property="MinHeight" Value="28" />
         </Style>
 
-        <Style Selector="^.Large">
+        <Style Selector="^.Large, ^[(theming|LuminaDensity.Mode)=Loose]">
             <Setter Property="Padding" Value="24,12" />
             <Setter Property="FontSize" Value="16" />
             <Setter Property="CornerRadius" Value="8" />

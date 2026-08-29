@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "LuminaUI.Mcp": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:8509;http://localhost:8510"
+    }
+  }
+}

@@ -13,6 +13,7 @@ public static class LuminaThemeManager
 
     public static Color CurrentAccentColor { get; private set; } = Color.Parse("#2563EB");
     public static LuminaThemeMode CurrentThemeMode { get; private set; } = LuminaThemeMode.System;
+    public static LuminaDensityMode CurrentDensity { get; private set; } = LuminaDensityMode.Normal;
     public static bool IsDarkThemeActive => Application.Current != null && IsDarkTheme(Application.Current);
 
     public static IReadOnlyList<LuminaThemeAccentPreset> AccentPresets { get; } =
@@ -27,6 +28,13 @@ public static class LuminaThemeManager
     ];
 
     public static event EventHandler? ThemeModeChanged;
+    public static event EventHandler? DensityChanged;
+
+    public static void SetDensity(LuminaDensityMode densityMode)
+    {
+        CurrentDensity = densityMode;
+        DensityChanged?.Invoke(null, EventArgs.Empty);
+    }
 
     public static void SetAccentColor(Color accentColor)
     {
