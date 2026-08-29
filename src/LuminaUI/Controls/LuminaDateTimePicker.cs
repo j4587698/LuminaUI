@@ -19,6 +19,7 @@ namespace LuminaUI.Controls;
 [TemplatePart("PART_TextBox", typeof(TextBox))]
 [TemplatePart("PART_Button", typeof(Button))]
 [TemplatePart("PART_Popup", typeof(Popup))]
+[TemplatePart("PART_Calendar", typeof(LuminaDateRangeCalendar))]
 [TemplatePart("PART_HoursList", typeof(ListBox))]
 [TemplatePart("PART_MinutesList", typeof(ListBox))]
 [TemplatePart("PART_SecondsList", typeof(ListBox))]
@@ -26,7 +27,7 @@ namespace LuminaUI.Controls;
 [TemplatePart("PART_ClearButton", typeof(Button))]
 [TemplatePart("PART_ConfirmButton", typeof(Button))]
 [PseudoClasses(":has-value", ":dropdownopen")]
-public class LuminaTimePicker : TemplatedControl
+public class LuminaDateTimePicker : TemplatedControl
 {
     private static readonly List<string> HoursSource = Enumerable.Range(0, 24).Select(i => i.ToString("D2")).ToList();
     private static readonly List<string> MinutesSource = Enumerable.Range(0, 60).Select(i => i.ToString("D2")).ToList();
@@ -35,6 +36,7 @@ public class LuminaTimePicker : TemplatedControl
     private TextBox? _textBox;
     private Button? _button;
     private Popup? _popup;
+    private LuminaDateRangeCalendar? _calendar;
     private ListBox? _hoursList;
     private ListBox? _minutesList;
     private ListBox? _secondsList;
@@ -45,67 +47,75 @@ public class LuminaTimePicker : TemplatedControl
     private bool _isUpdatingInternally;
     private bool _isDropDownOpen;
 
-    public static readonly StyledProperty<TimeSpan?> SelectedTimeProperty =
-        AvaloniaProperty.Register<LuminaTimePicker, TimeSpan?>(
-            nameof(SelectedTime),
+    public static readonly StyledProperty<DateTime?> SelectedDateTimeProperty =
+        AvaloniaProperty.Register<LuminaDateTimePicker, DateTime?>(
+            nameof(SelectedDateTime),
             defaultBindingMode: BindingMode.TwoWay);
 
-    public static readonly StyledProperty<string> TimeFormatProperty =
-        AvaloniaProperty.Register<LuminaTimePicker, string>(
-            nameof(TimeFormat),
-            "HH:mm:ss");
+    public static readonly StyledProperty<string> DateTimeFormatProperty =
+        AvaloniaProperty.Register<LuminaDateTimePicker, string>(
+            nameof(DateTimeFormat),
+            "yyyy-MM-dd HH:mm:ss");
 
     public static readonly StyledProperty<string> PlaceholderTextProperty =
-        AvaloniaProperty.Register<LuminaTimePicker, string>(
+        AvaloniaProperty.Register<LuminaDateTimePicker, string>(
             nameof(PlaceholderText),
-            "Select time");
+            "Select date and time");
 
     public static readonly StyledProperty<bool> UseSecondsProperty =
-        AvaloniaProperty.Register<LuminaTimePicker, bool>(
+        AvaloniaProperty.Register<LuminaDateTimePicker, bool>(
             nameof(UseSeconds),
             defaultValue: true);
 
     public static readonly StyledProperty<bool> ShowNowButtonProperty =
-        AvaloniaProperty.Register<LuminaTimePicker, bool>(
+        AvaloniaProperty.Register<LuminaDateTimePicker, bool>(
             nameof(ShowNowButton),
             defaultValue: true);
 
     public static readonly StyledProperty<bool> ShowClearButtonProperty =
-        AvaloniaProperty.Register<LuminaTimePicker, bool>(
+        AvaloniaProperty.Register<LuminaDateTimePicker, bool>(
             nameof(ShowClearButton),
             defaultValue: true);
 
     public static readonly StyledProperty<LuminaPopupType> PopupTypeProperty =
-        AvaloniaProperty.Register<LuminaTimePicker, LuminaPopupType>(
+        AvaloniaProperty.Register<LuminaDateTimePicker, LuminaPopupType>(
             nameof(PopupType),
             LuminaPopupType.Auto);
 
-    public static readonly DirectProperty<LuminaTimePicker, bool> IsDropDownOpenProperty =
-        AvaloniaProperty.RegisterDirect<LuminaTimePicker, bool>(
+    public static readonly DirectProperty<LuminaDateTimePicker, bool> IsDropDownOpenProperty =
+        AvaloniaProperty.RegisterDirect<LuminaDateTimePicker, bool>(
             nameof(IsDropDownOpen),
             o => o.IsDropDownOpen,
             (o, v) => o.IsDropDownOpen = v,
             defaultBindingMode: BindingMode.TwoWay);
 
+    public static readonly StyledProperty<DateTime?> DisplayDateStartProperty =
+        AvaloniaProperty.Register<LuminaDateTimePicker, DateTime?>(
+            nameof(DisplayDateStart));
+
+    public static readonly StyledProperty<DateTime?> DisplayDateEndProperty =
+        AvaloniaProperty.Register<LuminaDateTimePicker, DateTime?>(
+            nameof(DisplayDateEnd));
+
     public static readonly StyledProperty<ICommand?> SelectionChangedCommandProperty =
-        AvaloniaProperty.Register<LuminaTimePicker, ICommand?>(
+        AvaloniaProperty.Register<LuminaDateTimePicker, ICommand?>(
             nameof(SelectionChangedCommand));
 
-    public static readonly RoutedEvent<RoutedEventArgs> SelectedTimeChangedEvent =
-        RoutedEvent.Register<LuminaTimePicker, RoutedEventArgs>(
-            nameof(SelectedTimeChanged),
+    public static readonly RoutedEvent<RoutedEventArgs> SelectedDateTimeChangedEvent =
+        RoutedEvent.Register<LuminaDateTimePicker, RoutedEventArgs>(
+            nameof(SelectedDateTimeChanged),
             RoutingStrategies.Bubble);
 
-    public TimeSpan? SelectedTime
+    public DateTime? SelectedDateTime
     {
-        get => GetValue(SelectedTimeProperty);
-        set => SetValue(SelectedTimeProperty, value);
+        get => GetValue(SelectedDateTimeProperty);
+        set => SetValue(SelectedDateTimeProperty, value);
     }
 
-    public string TimeFormat
+    public string DateTimeFormat
     {
-        get => GetValue(TimeFormatProperty);
-        set => SetValue(TimeFormatProperty, value);
+        get => GetValue(DateTimeFormatProperty);
+        set => SetValue(DateTimeFormatProperty, value);
     }
 
     public string PlaceholderText
@@ -154,21 +164,33 @@ public class LuminaTimePicker : TemplatedControl
         }
     }
 
+    public DateTime? DisplayDateStart
+    {
+        get => GetValue(DisplayDateStartProperty);
+        set => SetValue(DisplayDateStartProperty, value);
+    }
+
+    public DateTime? DisplayDateEnd
+    {
+        get => GetValue(DisplayDateEndProperty);
+        set => SetValue(DisplayDateEndProperty, value);
+    }
+
     public ICommand? SelectionChangedCommand
     {
         get => GetValue(SelectionChangedCommandProperty);
         set => SetValue(SelectionChangedCommandProperty, value);
     }
 
-    public event EventHandler<RoutedEventArgs>? SelectedTimeChanged
+    public event EventHandler<RoutedEventArgs>? SelectedDateTimeChanged
     {
-        add => AddHandler(SelectedTimeChangedEvent, value);
-        remove => RemoveHandler(SelectedTimeChangedEvent, value);
+        add => AddHandler(SelectedDateTimeChangedEvent, value);
+        remove => RemoveHandler(SelectedDateTimeChangedEvent, value);
     }
 
-    static LuminaTimePicker()
+    static LuminaDateTimePicker()
     {
-        FocusableProperty.OverrideDefaultValue<LuminaTimePicker>(true);
+        FocusableProperty.OverrideDefaultValue<LuminaDateTimePicker>(true);
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
@@ -184,6 +206,7 @@ public class LuminaTimePicker : TemplatedControl
         if (_nowButton != null) _nowButton.Click -= OnNowButtonClick;
         if (_clearButton != null) _clearButton.Click -= OnClearButtonClick;
         if (_confirmButton != null) _confirmButton.Click -= OnConfirmButtonClick;
+        if (_calendar != null) _calendar.DateSelected -= OnCalendarDateSelected;
         if (_hoursList != null) _hoursList.SelectionChanged -= OnTimeListSelectionChanged;
         if (_minutesList != null) _minutesList.SelectionChanged -= OnTimeListSelectionChanged;
         if (_secondsList != null) _secondsList.SelectionChanged -= OnTimeListSelectionChanged;
@@ -191,6 +214,7 @@ public class LuminaTimePicker : TemplatedControl
         _textBox = e.NameScope.Find<TextBox>("PART_TextBox");
         _button = e.NameScope.Find<Button>("PART_Button");
         _popup = e.NameScope.Find<Popup>("PART_Popup");
+        _calendar = e.NameScope.Find<LuminaDateRangeCalendar>("PART_Calendar");
         _hoursList = e.NameScope.Find<ListBox>("PART_HoursList");
         _minutesList = e.NameScope.Find<ListBox>("PART_MinutesList");
         _secondsList = e.NameScope.Find<ListBox>("PART_SecondsList");
@@ -211,34 +235,35 @@ public class LuminaTimePicker : TemplatedControl
         if (_nowButton != null) _nowButton.Click += OnNowButtonClick;
         if (_clearButton != null) _clearButton.Click += OnClearButtonClick;
         if (_confirmButton != null) _confirmButton.Click += OnConfirmButtonClick;
+        if (_calendar != null) _calendar.DateSelected += OnCalendarDateSelected;
         if (_hoursList != null) _hoursList.SelectionChanged += OnTimeListSelectionChanged;
         if (_minutesList != null) _minutesList.SelectionChanged += OnTimeListSelectionChanged;
         if (_secondsList != null) _secondsList.SelectionChanged += OnTimeListSelectionChanged;
 
-        SyncControlsFromValue(SelectedTime);
+        SyncControlsFromValue(SelectedDateTime);
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
 
-        if (change.Property == SelectedTimeProperty)
+        if (change.Property == SelectedDateTimeProperty)
         {
-            var newVal = change.GetNewValue<TimeSpan?>();
+            var newVal = change.GetNewValue<DateTime?>();
             PseudoClasses.Set(":has-value", newVal.HasValue);
             if (!_isUpdatingInternally)
             {
                 SyncControlsFromValue(newVal);
             }
-            RaiseEvent(new RoutedEventArgs(SelectedTimeChangedEvent, this));
+            RaiseEvent(new RoutedEventArgs(SelectedDateTimeChangedEvent, this));
             if (SelectionChangedCommand?.CanExecute(newVal) == true)
             {
                 SelectionChangedCommand.Execute(newVal);
             }
         }
-        else if (change.Property == TimeFormatProperty)
+        else if (change.Property == DateTimeFormatProperty)
         {
-            SyncTextBoxFromValue(SelectedTime);
+            SyncTextBoxFromValue(SelectedDateTime);
         }
     }
 
@@ -249,13 +274,21 @@ public class LuminaTimePicker : TemplatedControl
 
     private void OnDropDownOpened()
     {
-        var current = SelectedTime ?? DateTime.Now.TimeOfDay;
+        var current = SelectedDateTime ?? DateTime.Now;
         _isUpdatingInternally = true;
         try
         {
-            if (_hoursList != null) _hoursList.SelectedIndex = Math.Clamp(current.Hours, 0, 23);
-            if (_minutesList != null) _minutesList.SelectedIndex = Math.Clamp(current.Minutes, 0, 59);
-            if (_secondsList != null) _secondsList.SelectedIndex = Math.Clamp(current.Seconds, 0, 59);
+            if (_calendar != null)
+            {
+                _calendar.DisplayMonth = current;
+                _calendar.RangeStart = SelectedDateTime.HasValue ? current.Date : null;
+                _calendar.RangeEnd = SelectedDateTime.HasValue ? current.Date : null;
+                _calendar.RefreshSelection();
+            }
+
+            if (_hoursList != null) _hoursList.SelectedIndex = Math.Clamp(current.Hour, 0, 23);
+            if (_minutesList != null) _minutesList.SelectedIndex = Math.Clamp(current.Minute, 0, 59);
+            if (_secondsList != null) _secondsList.SelectedIndex = Math.Clamp(current.Second, 0, 59);
 
             Dispatcher.UIThread.Post(() =>
             {
@@ -270,19 +303,58 @@ public class LuminaTimePicker : TemplatedControl
         }
     }
 
-    private void OnTimeListSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    private void OnCalendarDateSelected(object? sender, LuminaDateRangeCalendarDateEventArgs e)
     {
-        if (_isUpdatingInternally) return;
+        if (_isUpdatingInternally || !e.Date.HasValue) return;
 
-        int h = _hoursList?.SelectedIndex >= 0 ? _hoursList.SelectedIndex : DateTime.Now.Hour;
-        int m = _minutesList?.SelectedIndex >= 0 ? _minutesList.SelectedIndex : DateTime.Now.Minute;
-        int s = (UseSeconds && _secondsList?.SelectedIndex >= 0) ? _secondsList.SelectedIndex : (SelectedTime?.Seconds ?? 0);
+        var date = e.Date.Value;
+        var currentTime = SelectedDateTime?.TimeOfDay ?? DateTime.Now.TimeOfDay;
+        if (_hoursList?.SelectedIndex >= 0 && _minutesList?.SelectedIndex >= 0)
+        {
+            int h = _hoursList.SelectedIndex;
+            int m = _minutesList.SelectedIndex;
+            int s = (UseSeconds && _secondsList?.SelectedIndex >= 0) ? _secondsList.SelectedIndex : 0;
+            currentTime = new TimeSpan(h, m, s);
+        }
 
         _isUpdatingInternally = true;
         try
         {
-            SelectedTime = new TimeSpan(h, m, s);
-            SyncTextBoxFromValue(SelectedTime);
+            SelectedDateTime = date.Date + currentTime;
+            if (_calendar != null)
+            {
+                _calendar.RangeStart = date.Date;
+                _calendar.RangeEnd = date.Date;
+                _calendar.RefreshSelection();
+            }
+            SyncTextBoxFromValue(SelectedDateTime);
+        }
+        finally
+        {
+            _isUpdatingInternally = false;
+        }
+    }
+
+    private void OnTimeListSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if (_isUpdatingInternally) return;
+
+        var baseDate = SelectedDateTime?.Date ?? DateTime.Today;
+        int h = _hoursList?.SelectedIndex >= 0 ? _hoursList.SelectedIndex : DateTime.Now.Hour;
+        int m = _minutesList?.SelectedIndex >= 0 ? _minutesList.SelectedIndex : DateTime.Now.Minute;
+        int s = (UseSeconds && _secondsList?.SelectedIndex >= 0) ? _secondsList.SelectedIndex : (SelectedDateTime?.Second ?? 0);
+
+        _isUpdatingInternally = true;
+        try
+        {
+            SelectedDateTime = baseDate.Add(new TimeSpan(h, m, s));
+            if (_calendar != null && !SelectedDateTime.HasValue)
+            {
+                _calendar.RangeStart = baseDate;
+                _calendar.RangeEnd = baseDate;
+                _calendar.RefreshSelection();
+            }
+            SyncTextBoxFromValue(SelectedDateTime);
         }
         finally
         {
@@ -292,29 +364,29 @@ public class LuminaTimePicker : TemplatedControl
 
     private void OnNowButtonClick(object? sender, RoutedEventArgs e)
     {
-        var now = DateTime.Now.TimeOfDay;
-        SelectedTime = UseSeconds ? new TimeSpan(now.Hours, now.Minutes, now.Seconds) : new TimeSpan(now.Hours, now.Minutes, 0);
-        SyncControlsFromValue(SelectedTime);
+        SelectedDateTime = DateTime.Now;
+        SyncControlsFromValue(SelectedDateTime);
         IsDropDownOpen = false;
     }
 
     private void OnClearButtonClick(object? sender, RoutedEventArgs e)
     {
-        SelectedTime = null;
+        SelectedDateTime = null;
         SyncControlsFromValue(null);
         IsDropDownOpen = false;
     }
 
     private void OnConfirmButtonClick(object? sender, RoutedEventArgs e)
     {
-        if (!SelectedTime.HasValue)
+        if (!SelectedDateTime.HasValue)
         {
+            var baseDate = _calendar?.RangeStart ?? DateTime.Today;
             int h = _hoursList?.SelectedIndex >= 0 ? _hoursList.SelectedIndex : DateTime.Now.Hour;
             int m = _minutesList?.SelectedIndex >= 0 ? _minutesList.SelectedIndex : DateTime.Now.Minute;
             int s = (UseSeconds && _secondsList?.SelectedIndex >= 0) ? _secondsList.SelectedIndex : 0;
-            SelectedTime = new TimeSpan(h, m, s);
+            SelectedDateTime = baseDate.Date + new TimeSpan(h, m, s);
         }
-        SyncTextBoxFromValue(SelectedTime);
+        SyncTextBoxFromValue(SelectedDateTime);
         IsDropDownOpen = false;
     }
 
@@ -344,31 +416,41 @@ public class LuminaTimePicker : TemplatedControl
 
         if (string.IsNullOrWhiteSpace(text))
         {
-            SelectedTime = null;
+            SelectedDateTime = null;
             return;
         }
 
-        if (TimeSpan.TryParse(text, CultureInfo.CurrentCulture, out var parsed) ||
-            TimeSpan.TryParse(text, CultureInfo.InvariantCulture, out parsed) ||
-            (DateTime.TryParse(text, out var dt) && (parsed = dt.TimeOfDay) != default))
+        if (DateTime.TryParse(text, CultureInfo.CurrentCulture, DateTimeStyles.None, out var parsed) ||
+            DateTime.TryParse(text, CultureInfo.InvariantCulture, DateTimeStyles.None, out parsed))
         {
-            SelectedTime = parsed;
+            SelectedDateTime = parsed;
         }
         else
         {
-            SyncTextBoxFromValue(SelectedTime);
+            SyncTextBoxFromValue(SelectedDateTime);
         }
     }
 
-    private void SyncControlsFromValue(TimeSpan? time)
+    private void SyncControlsFromValue(DateTime? dt)
     {
-        SyncTextBoxFromValue(time);
+        SyncTextBoxFromValue(dt);
 
-        if (time.HasValue)
+        if (_calendar != null)
         {
-            if (_hoursList != null) _hoursList.SelectedIndex = time.Value.Hours;
-            if (_minutesList != null) _minutesList.SelectedIndex = time.Value.Minutes;
-            if (_secondsList != null) _secondsList.SelectedIndex = time.Value.Seconds;
+            _calendar.RangeStart = dt?.Date;
+            _calendar.RangeEnd = dt?.Date;
+            if (dt.HasValue)
+            {
+                _calendar.DisplayMonth = dt.Value.Date;
+            }
+            _calendar.RefreshSelection();
+        }
+
+        if (dt.HasValue)
+        {
+            if (_hoursList != null) _hoursList.SelectedIndex = dt.Value.Hour;
+            if (_minutesList != null) _minutesList.SelectedIndex = dt.Value.Minute;
+            if (_secondsList != null) _secondsList.SelectedIndex = dt.Value.Second;
         }
         else
         {
@@ -378,18 +460,11 @@ public class LuminaTimePicker : TemplatedControl
         }
     }
 
-    private void SyncTextBoxFromValue(TimeSpan? time)
+    private void SyncTextBoxFromValue(DateTime? dt)
     {
         if (_textBox != null)
         {
-            if (!time.HasValue)
-            {
-                _textBox.Text = string.Empty;
-                return;
-            }
-
-            DateTime dummy = DateTime.Today.Add(time.Value);
-            _textBox.Text = dummy.ToString(TimeFormat);
+            _textBox.Text = dt.HasValue ? dt.Value.ToString(DateTimeFormat) : string.Empty;
         }
     }
 

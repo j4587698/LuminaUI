@@ -1,59 +1,153 @@
 <lumina:LuminaPage xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
-             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
-             x:Class="LuminaUI.Demo.Views.PickerShowcasePage">
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
+              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+              x:Class="LuminaUI.Demo.Views.PickerShowcasePage">
 
     <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
-            <StackPanel Spacing="4">
-                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Picker.Title}" />
-                <TextBlock Text="{l10n:Loc Sandbox.Picker.Description}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
+        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,24,0,40">
+            <!-- 页面标题 -->
+            <StackPanel Spacing="6">
+                <TextBlock Classes="Display" Text="选择器组件 (Pickers &amp; Time)" />
+                <TextBlock Text="现代化的日期时间复合选择器、独立时间选择器、日期选择器及自适应下拉选择框。" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
             </StackPanel>
 
-            <lumina:LuminaResponsivePanel MinItemWidth="280" MaxItemWidth="460" HorizontalSpacing="16" VerticalSpacing="16">
-            <lumina:LuminaCard>
-                <StackPanel Spacing="16">
-                    <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Picker.ComboAdaptive}" />
-                    
-                    <TextBlock Text="{l10n:Loc Sandbox.Picker.ModeDropdown}" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}"/>
-                    <ComboBox SelectedIndex="0" HorizontalAlignment="Stretch" lumina:LuminaOptions.PopupType="Dropdown">
-                        <ComboBoxItem Content="{l10n:Loc Sandbox.Picker.Item1}" />
-                        <ComboBoxItem Content="{l10n:Loc Sandbox.Picker.Item2}" />
-                        <ComboBoxItem Content="{l10n:Loc Sandbox.Picker.Item3}" />
-                    </ComboBox>
-                    
-                    <TextBlock Text="{l10n:Loc Sandbox.Picker.ModeSheet}" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}" Margin="0,8,0,0"/>
-                    <ComboBox SelectedIndex="0" HorizontalAlignment="Stretch" lumina:LuminaOptions.PopupType="Sheet">
-                        <ComboBoxItem Content="{l10n:Loc Sandbox.Picker.Item1}" />
-                        <ComboBoxItem Content="{l10n:Loc Sandbox.Picker.Item2}" />
-                        <ComboBoxItem Content="{l10n:Loc Sandbox.Picker.Item3}" />
-                    </ComboBox>
-                </StackPanel>
-            </lumina:LuminaCard>
+            <lumina:LuminaResponsivePanel MinItemWidth="340" MaxItemWidth="560" HorizontalSpacing="16" VerticalSpacing="16">
+                
+                <!-- 卡片 1: LuminaDateTimePicker (日期时间复合选择器) -->
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <StackPanel Spacing="4">
+                            <TextBlock Classes="SectionTitle" Text="LuminaDateTimePicker (日期时间一体化)" />
+                            <TextBlock Text="支持年月日与时分秒一体化选择，支持直接键盘手动输入与下拉面板直选列点选。" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap"/>
+                        </StackPanel>
 
-            <lumina:LuminaCard>
-                <StackPanel Spacing="16">
-                    <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Picker.DateTimeAdaptive}" />
-                    
-                    <TextBlock Text="{l10n:Loc Sandbox.Picker.ModeDropdown}" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}"/>
-                    <lumina:LuminaResponsivePanel MinItemWidth="160" HorizontalSpacing="12" VerticalSpacing="12">
-                        <lumina:LuminaDatePicker DateFormat="yyyy-MM-dd" lumina:LuminaOptions.PopupType="Dropdown" />
-                        <lumina:LuminaTimePicker TimeFormat="HH:mm:ss" lumina:LuminaOptions.PopupType="Dropdown" />
-                        <CalendarDatePicker PlaceholderText="{l10n:Loc Sandbox.Picker.CalendarDate}"
-                                            lumina:LuminaOptions.DateFormat="yyyy/MM/dd"
-                                            lumina:LuminaOptions.PopupType="Dropdown" />
-                    </lumina:LuminaResponsivePanel>
-                    
-                    <TextBlock Text="{l10n:Loc Sandbox.Picker.ModeSheet}" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}" Margin="0,8,0,0"/>
-                    <lumina:LuminaResponsivePanel MinItemWidth="160" HorizontalSpacing="12" VerticalSpacing="12">
-                        <lumina:LuminaDatePicker DateFormat="dd/MM/yyyy" lumina:LuminaOptions.PopupType="Sheet" />
-                        <lumina:LuminaTimePicker TimeFormat="HH:mm" lumina:LuminaOptions.PopupType="Sheet" />
-                        <DatePicker lumina:LuminaOptions.DateFormat="yyyy-MM-dd" lumina:LuminaOptions.PopupType="Sheet" />
-                        <TimePicker lumina:LuminaOptions.TimeFormat="hh:mm tt" lumina:LuminaOptions.PopupType="Sheet" />
-                    </lumina:LuminaResponsivePanel>
-                </StackPanel>
-            </lumina:LuminaCard>
+                        <!-- 基础默认 (精确到秒) -->
+                        <StackPanel Spacing="6">
+                            <TextBlock Text="默认精确到秒 (yyyy-MM-dd HH:mm:ss)" FontSize="12" Foreground="{DynamicResource LuminaTextSecondaryBrush}"/>
+                            <lumina:LuminaDateTimePicker DateTimeFormat="yyyy-MM-dd HH:mm:ss" 
+                                                         HorizontalAlignment="Stretch" />
+                        </StackPanel>
+
+                        <!-- 不带秒 (精确到分) -->
+                        <StackPanel Spacing="6">
+                            <TextBlock Text="仅精确到分 (yyyy-MM-dd HH:mm)" FontSize="12" Foreground="{DynamicResource LuminaTextSecondaryBrush}"/>
+                            <lumina:LuminaDateTimePicker DateTimeFormat="yyyy-MM-dd HH:mm" 
+                                                         UseSeconds="False"
+                                                         HorizontalAlignment="Stretch" />
+                        </StackPanel>
+
+                        <!-- 尺寸规范 (Small / Large) -->
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="尺寸规范 (Small / Large)" FontSize="12" Foreground="{DynamicResource LuminaTextSecondaryBrush}"/>
+                            <Grid ColumnDefinitions="*, 8, *">
+                                <lumina:LuminaDateTimePicker Grid.Column="0" 
+                                                             Classes="Small"
+                                                             PlaceholderText="Small (28px)"
+                                                             HorizontalAlignment="Stretch" />
+                                <lumina:LuminaDateTimePicker Grid.Column="2" 
+                                                             Classes="Large"
+                                                             PlaceholderText="Large (44px)"
+                                                             HorizontalAlignment="Stretch" />
+                            </Grid>
+                        </StackPanel>
+
+                        <!-- 禁用状态 -->
+                        <StackPanel Spacing="6">
+                            <TextBlock Text="禁用状态 (Disabled)" FontSize="12" Foreground="{DynamicResource LuminaTextSecondaryBrush}"/>
+                            <lumina:LuminaDateTimePicker IsEnabled="False" 
+                                                         PlaceholderText="禁用状态不可点击"
+                                                         HorizontalAlignment="Stretch" />
+                        </StackPanel>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <!-- 卡片 2: LuminaTimePicker (全新纯时间选择器) -->
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <StackPanel Spacing="4">
+                            <TextBlock Classes="SectionTitle" Text="LuminaTimePicker (独立纯时间选择器)" />
+                            <TextBlock Text="现代化的纯时间选择器，支持键盘手动输入，下拉面板提供时/分/秒独立直选滚动列。" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap"/>
+                        </StackPanel>
+
+                        <!-- 基础默认 (精确到秒) -->
+                        <StackPanel Spacing="6">
+                            <TextBlock Text="默认精确到秒 (HH:mm:ss)" FontSize="12" Foreground="{DynamicResource LuminaTextSecondaryBrush}"/>
+                            <lumina:LuminaTimePicker TimeFormat="HH:mm:ss" 
+                                                     HorizontalAlignment="Stretch" />
+                        </StackPanel>
+
+                        <!-- 仅分秒 (不带秒) -->
+                        <StackPanel Spacing="6">
+                            <TextBlock Text="仅精确到分 (HH:mm)" FontSize="12" Foreground="{DynamicResource LuminaTextSecondaryBrush}"/>
+                            <lumina:LuminaTimePicker TimeFormat="HH:mm" 
+                                                     UseSeconds="False"
+                                                     HorizontalAlignment="Stretch" />
+                        </StackPanel>
+
+                        <!-- 尺寸规范 (Small / Large) -->
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="尺寸规范 (Small / Large)" FontSize="12" Foreground="{DynamicResource LuminaTextSecondaryBrush}"/>
+                            <Grid ColumnDefinitions="*, 8, *">
+                                <lumina:LuminaTimePicker Grid.Column="0" 
+                                                         Classes="Small"
+                                                         PlaceholderText="Small (28px)"
+                                                         HorizontalAlignment="Stretch" />
+                                <lumina:LuminaTimePicker Grid.Column="2" 
+                                                         Classes="Large"
+                                                         PlaceholderText="Large (44px)"
+                                                         HorizontalAlignment="Stretch" />
+                            </Grid>
+                        </StackPanel>
+
+                        <!-- 禁用状态 -->
+                        <StackPanel Spacing="6">
+                            <TextBlock Text="禁用状态 (Disabled)" FontSize="12" Foreground="{DynamicResource LuminaTextSecondaryBrush}"/>
+                            <lumina:LuminaTimePicker IsEnabled="False" 
+                                                     PlaceholderText="禁用状态不可点击"
+                                                     HorizontalAlignment="Stretch" />
+                        </StackPanel>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <!-- 卡片 3: LuminaDatePicker & ComboBox -->
+                <lumina:LuminaCard>
+                    <StackPanel Spacing="16">
+                        <StackPanel Spacing="4">
+                            <TextBlock Classes="SectionTitle" Text="LuminaDatePicker &amp; ComboBox" />
+                            <TextBlock Text="日期选择器及自适应下拉选择框。" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap"/>
+                        </StackPanel>
+
+                        <!-- 日期选择器 -->
+                        <StackPanel Spacing="6">
+                            <TextBlock Text="日期选择器 (LuminaDatePicker - yyyy-MM-dd)" FontSize="12" Foreground="{DynamicResource LuminaTextSecondaryBrush}"/>
+                            <lumina:LuminaDatePicker DateFormat="yyyy-MM-dd" 
+                                                     lumina:LuminaOptions.PopupType="Dropdown" 
+                                                     HorizontalAlignment="Stretch" />
+                        </StackPanel>
+
+                        <!-- 桌面下拉模式 ComboBox -->
+                        <StackPanel Spacing="6">
+                            <TextBlock Text="桌面下拉模式 (PopupType=Dropdown)" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}"/>
+                            <ComboBox SelectedIndex="0" HorizontalAlignment="Stretch" lumina:LuminaOptions.PopupType="Dropdown">
+                                <ComboBoxItem Content="选项 1: 生产环境主库 (Production)" />
+                                <ComboBoxItem Content="选项 2: 预发环境测试库 (Staging)" />
+                                <ComboBoxItem Content="选项 3: 本地开发环境 (Localhost)" />
+                            </ComboBox>
+                        </StackPanel>
+
+                        <!-- 抽屉模式 ComboBox -->
+                        <StackPanel Spacing="6">
+                            <TextBlock Text="抽屉模式 (PopupType=Sheet)" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}" Margin="0,8,0,0"/>
+                            <ComboBox SelectedIndex="0" HorizontalAlignment="Stretch" lumina:LuminaOptions.PopupType="Sheet">
+                                <ComboBoxItem Content="选项 1: 生产环境主库 (Production)" />
+                                <ComboBoxItem Content="选项 2: 预发环境测试库 (Staging)" />
+                                <ComboBoxItem Content="选项 3: 本地开发环境 (Localhost)" />
+                            </ComboBox>
+                        </StackPanel>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
             </lumina:LuminaResponsivePanel>
         </StackPanel>
     </ScrollViewer>

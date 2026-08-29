@@ -95,4 +95,13 @@
   <data name="Lumina.Picker.EndDate" xml:space="preserve">
     <value>结束日期</value>
   </data>
+  <data name="Lumina.Picker.SelectDateTime" xml:space="preserve">
+    <value>选择日期和时间</value>
+  </data>
+  <data name="Lumina.Picker.Time" xml:space="preserve">
+    <value>时间</value>
+  </data>
+  <data name="Lumina.Common.Now" xml:space="preserve">
+    <value>此刻</value>
+  </data>
 </root>

@@ -1,6 +1,7 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:converters="using:Avalonia.Controls.Converters"
+                    xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
                     xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
 
     <converters:PlatformKeyGestureConverter x:Key="LuminaShortcutGestureConverter" />
@@ -39,11 +40,11 @@
     <x:Double x:Key="LuminaDateRangeCalendarDayMinWidth">0</x:Double>
     <Thickness x:Key="LuminaDateRangeCalendarDayPadding">0</Thickness>
     <x:Double x:Key="LuminaDateRangeCalendarMinWidth">286</x:Double>
-    <x:Double x:Key="LuminaDateRangeCalendarMinHeight">318</x:Double>
+    <x:Double x:Key="LuminaDateRangeCalendarMinHeight">292</x:Double>
     <x:Double x:Key="LuminaDateRangeCalendarHeaderButtonSize">30</x:Double>
     <Thickness x:Key="LuminaDateRangeCalendarHeaderButtonPadding">0</Thickness>
     <x:Double x:Key="LuminaDateRangeCalendarTitleFontSize">14</x:Double>
-    <x:Double x:Key="LuminaDateRangeCalendarDaysGridMinHeight">264</x:Double>
+    <x:Double x:Key="LuminaDateRangeCalendarDaysGridMinHeight">252</x:Double>
     <x:Double x:Key="LuminaDateRangePickerTextBoxMinHeight">36</x:Double>
     <Thickness x:Key="LuminaDateRangePickerTextBoxPadding">12,6</Thickness>
     <Thickness x:Key="LuminaDateRangePickerTextBoxBorderThickness">0</Thickness>
@@ -810,16 +811,13 @@
                           VerticalAlignment="Center">
                         <TextBox Name="PART_StartTextBox"
                                  Grid.Column="0"
-                                 MinHeight="{TemplateBinding MinHeight}"
-                                 Padding="{DynamicResource LuminaDateRangePickerTextBoxPadding}"
-                                 Background="Transparent"
-                                 BorderBrush="Transparent"
-                                 BorderThickness="{DynamicResource LuminaDateRangePickerTextBoxBorderThickness}"
-                                 CornerRadius="{TemplateBinding CornerRadius}"
+                                 HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Stretch"
                                  Foreground="{DynamicResource LuminaTextForegroundBrush}"
                                  PlaceholderForeground="{DynamicResource LuminaTextMutedBrush}"
                                  PlaceholderText="{TemplateBinding StartPlaceholder}"
-                                 Theme="{StaticResource LuminaDateRangePickerTextBoxTheme}"
+                                 Theme="{StaticResource LuminaPickerTextBoxTheme}"
+                                 HorizontalContentAlignment="Center"
                                  VerticalContentAlignment="Center" />
 
                         <TextBlock Grid.Column="1"
@@ -830,45 +828,36 @@
 
                         <TextBox Name="PART_EndTextBox"
                                  Grid.Column="2"
-                                 MinHeight="{TemplateBinding MinHeight}"
-                                 Padding="{DynamicResource LuminaDateRangePickerTextBoxPadding}"
-                                 Background="Transparent"
-                                 BorderBrush="Transparent"
-                                 BorderThickness="{DynamicResource LuminaDateRangePickerTextBoxBorderThickness}"
-                                 CornerRadius="{TemplateBinding CornerRadius}"
+                                 HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Stretch"
                                  Foreground="{DynamicResource LuminaTextForegroundBrush}"
                                  PlaceholderForeground="{DynamicResource LuminaTextMutedBrush}"
                                  PlaceholderText="{TemplateBinding EndPlaceholder}"
-                                 Theme="{StaticResource LuminaDateRangePickerTextBoxTheme}"
+                                 Theme="{StaticResource LuminaPickerTextBoxTheme}"
+                                 HorizontalContentAlignment="Center"
                                  VerticalContentAlignment="Center" />
 
                         <Button Name="PART_Button"
                                 Grid.Column="3"
-                                Classes="Ghost Icon"
+                                Theme="{StaticResource LuminaPickerIconButtonTheme}"
                                 Width="{DynamicResource LuminaDateRangePickerButtonSize}"
-                                Height="{DynamicResource LuminaDateRangePickerButtonSize}"
-                                MinWidth="{DynamicResource LuminaDateRangePickerButtonSize}"
-                                Margin="{DynamicResource LuminaDateRangePickerButtonMargin}"
-                                Padding="{DynamicResource LuminaDateRangePickerButtonPadding}"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                Focusable="False">
+                                Height="{DynamicResource LuminaDateRangePickerButtonSize}">
                             <Viewbox Width="{DynamicResource LuminaDateRangePickerIconSize}" Height="{DynamicResource LuminaDateRangePickerIconSize}">
                                 <Canvas Width="{DynamicResource LuminaDateRangePickerIconCanvasSize}" Height="{DynamicResource LuminaDateRangePickerIconCanvasSize}">
                                     <Path Data="M8 2L8 6"
-                                          Stroke="{DynamicResource LuminaTextMutedBrush}"
+                                          Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
                                           StrokeThickness="{DynamicResource LuminaDateRangePickerIconStrokeThickness}"
                                           StrokeLineCap="Round" />
                                     <Path Data="M16 2L16 6"
-                                          Stroke="{DynamicResource LuminaTextMutedBrush}"
+                                          Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
                                           StrokeThickness="{DynamicResource LuminaDateRangePickerIconStrokeThickness}"
                                           StrokeLineCap="Round" />
                                     <Path Data="M3 10L21 10"
-                                          Stroke="{DynamicResource LuminaTextMutedBrush}"
+                                          Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
                                           StrokeThickness="{DynamicResource LuminaDateRangePickerIconStrokeThickness}"
                                           StrokeLineCap="Round" />
                                     <Path Data="M5 4L19 4C20.1 4 21 4.9 21 6L21 20C21 21.1 20.1 22 19 22L5 22C3.9 22 3 21.1 3 20L3 6C3 4.9 3.9 4 5 4Z"
-                                          Stroke="{DynamicResource LuminaTextMutedBrush}"
+                                          Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
                                           StrokeThickness="{DynamicResource LuminaDateRangePickerIconStrokeThickness}" />
                                 </Canvas>
                             </Viewbox>
@@ -922,6 +911,7 @@
 
         <Style Selector="^:focus-within /template/ Border#PART_Root">
             <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryBrush}" />
+            <Setter Property="BoxShadow" Value="0 0 0 3 #332563EB" />
         </Style>
 
         <Style Selector="^.Small">
@@ -1095,6 +1085,426 @@
 
         <Style Selector="^.Navigation">
             <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+        </Style>
+    </ControlTheme>
+
+    <!-- Time Column ListBox Item Theme -->
+    <ControlTheme x:Key="LuminaTimeColumnListBoxItemTheme" TargetType="ListBoxItem">
+        <Setter Property="MinHeight" Value="34" />
+        <Setter Property="Height" Value="34" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="2,2" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="ListBoxItem">
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                    <ContentPresenter Name="PART_ContentPresenter"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:pointerover /template/ Border#PART_Border">
+            <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
+        </Style>
+        <Style Selector="^:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="^:selected /template/ Border#PART_Border">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBrush}" />
+        </Style>
+        <Style Selector="^:selected">
+            <Setter Property="Foreground" Value="#FFFFFF" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+
+        <Style Selector="^:selected:pointerover /template/ Border#PART_Border">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBrush}" />
+        </Style>
+        <Style Selector="^:selected:pointerover">
+            <Setter Property="Foreground" Value="#FFFFFF" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+    </ControlTheme>
+
+    <!-- Time Column ListBox Theme -->
+    <ControlTheme x:Key="LuminaTimeColumnListBoxTheme" TargetType="ListBox">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
+        <Setter Property="ItemContainerTheme" Value="{StaticResource LuminaTimeColumnListBoxItemTheme}" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="ListBox">
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                    <ScrollViewer Name="PART_ScrollViewer"
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  VerticalScrollBarVisibility="Hidden">
+                        <ItemsPresenter Name="PART_ItemsPresenter"
+                                        ItemsPanel="{TemplateBinding ItemsPanel}"
+                                        Margin="{TemplateBinding Padding}" />
+                    </ScrollViewer>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+    <!-- LuminaDateTimePicker -->
+    <ControlTheme x:Key="{x:Type lumina:LuminaDateTimePicker}" TargetType="lumina:LuminaDateTimePicker">
+        <Setter Property="MinHeight" Value="{DynamicResource LuminaCalendarDatePickerMinHeight}" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaCalendarDatePickerPadding}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaCalendarDatePickerCornerRadius}" />
+        <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderBrush}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaCalendarDatePickerBorderThickness}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaDateTimePicker">
+                <DataValidationErrors>
+                    <Grid Name="LayoutRoot">
+                        <Border Name="Background"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding CornerRadius}" />
+
+                        <Grid ColumnDefinitions="*,Auto" Margin="{TemplateBinding Padding}">
+                            <TextBox Name="PART_TextBox"
+                                     Grid.Column="0"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Stretch"
+                                     HorizontalContentAlignment="Left"
+                                     VerticalContentAlignment="Center"
+                                     Theme="{StaticResource LuminaPickerTextBoxTheme}"
+                                     Foreground="{TemplateBinding Foreground}"
+                                     PlaceholderForeground="{DynamicResource LuminaTextMutedBrush}"
+                                     PlaceholderText="{TemplateBinding PlaceholderText}" />
+
+                            <Button Name="PART_Button"
+                                    Grid.Column="1"
+                                    Theme="{StaticResource LuminaPickerIconButtonTheme}"
+                                    Width="{DynamicResource LuminaCalendarDatePickerButtonSize}"
+                                    Height="{DynamicResource LuminaCalendarDatePickerButtonSize}">
+                                <Viewbox Width="{DynamicResource LuminaCalendarDatePickerIconSize}"
+                                         Height="{DynamicResource LuminaCalendarDatePickerIconSize}">
+                                    <Canvas Width="{DynamicResource LuminaCalendarDatePickerIconCanvasSize}"
+                                            Height="{DynamicResource LuminaCalendarDatePickerIconCanvasSize}">
+                                        <Path Data="M8 2L8 6"
+                                              Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                              StrokeThickness="2"
+                                              StrokeLineCap="Round" />
+                                        <Path Data="M16 2L16 6"
+                                              Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                              StrokeThickness="2"
+                                              StrokeLineCap="Round" />
+                                        <Path Data="M3 10L21 10"
+                                              Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                              StrokeThickness="2"
+                                              StrokeLineCap="Round" />
+                                        <Path Data="M5 4L19 4C20.1 4 21 4.9 21 6L21 20C21 21.1 20.1 22 19 22L5 22C3.9 22 3 21.1 3 20L3 6C3 4.9 3.9 4 5 4Z"
+                                              Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                              StrokeThickness="2" />
+                                    </Canvas>
+                                </Viewbox>
+                            </Button>
+
+                            <Popup Name="PART_Popup"
+                                   Grid.Column="0"
+                                   InheritsTransform="True"
+                                   IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                   IsLightDismissEnabled="True"
+                                   Placement="BottomEdgeAlignedLeft"
+                                   PlacementTarget="{TemplateBinding}">
+                                <Panel Margin="{DynamicResource LuminaCalendarDatePickerPopupMargin}" ClipToBounds="False">
+                                    <Border Background="{DynamicResource LuminaPopoverBrush}"
+                                            BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                                            BorderThickness="{DynamicResource LuminaDateRangePickerPopupBorderThickness}"
+                                            CornerRadius="{DynamicResource LuminaDateRangePickerPopupCornerRadius}"
+                                            BoxShadow="{DynamicResource LuminaShadowPopup}" />
+                                    <Border Padding="12"
+                                            Background="{DynamicResource LuminaPopoverBrush}"
+                                            BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                                            BorderThickness="{DynamicResource LuminaDateRangePickerPopupBorderThickness}"
+                                            CornerRadius="{DynamicResource LuminaDateRangePickerPopupCornerRadius}"
+                                            ClipToBounds="True">
+                                        <StackPanel Spacing="10">
+                                            <!-- 主内容区: 左侧日历 + 垂直主分隔线 + 右侧严格四级对齐的时间选择列 -->
+                                            <Grid ColumnDefinitions="Auto, Auto, Auto">
+                                                <!-- 左侧日历 (LuminaDateRangeCalendar: 30px 导航, 10px 间距, 24px 星期, 228px 6行日期) -->
+                                                <lumina:LuminaDateRangeCalendar Name="PART_Calendar"
+                                                                                Grid.Column="0"
+                                                                                ShowPreviousButton="True"
+                                                                                ShowNextButton="True"
+                                                                                DisplayDateStart="{TemplateBinding DisplayDateStart}"
+                                                                                DisplayDateEnd="{TemplateBinding DisplayDateEnd}" />
+
+                                                <!-- 垂直主分隔线 (独立分配 28px 列宽，1px 居中竖线，左右各 14px 安全呼吸区，绝对不与高亮重叠) -->
+                                                <Border Grid.Column="1"
+                                                        Width="1"
+                                                        Margin="14,0"
+                                                        Background="{DynamicResource LuminaBorderDefaultBrush}"
+                                                        VerticalAlignment="Stretch" />
+
+                                                <!-- 右侧直选时间列 (与左侧四级严格行对齐：30px 标题, 10px 间距, 24px 表头, 228px 6行滚动列表) -->
+                                                <Grid Grid.Column="2" RowDefinitions="30, 10, 24, 228">
+                                                    <!-- Row 0: 顶部标题 (与左侧 < 2026年8月 > 月份导航栏等高居中水平对齐) -->
+                                                    <TextBlock Grid.Row="0"
+                                                               Text="{l10n:Loc Lumina.Picker.SelectTime}"
+                                                               FontSize="13"
+                                                               FontWeight="SemiBold"
+                                                               Foreground="{DynamicResource LuminaTextForegroundBrush}"
+                                                               HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center" />
+
+                                                    <!-- Row 1: 间距 10px (与左侧日历 10px 间距完全等高) -->
+
+                                                    <!-- Row 2: 时 / 分 / 秒 表头 (与左侧 日 一 二 三 四 五 六 严格处于同一水平线) -->
+                                                    <Grid Grid.Row="2" ColumnDefinitions="56, 56, 56">
+                                                        <TextBlock Grid.Column="0" Text="{l10n:Loc Lumina.Picker.Hour}" FontSize="12" FontWeight="DemiBold" Foreground="{DynamicResource LuminaTextMutedBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,6"/>
+                                                        <TextBlock Grid.Column="1" Text="{l10n:Loc Lumina.Picker.Minute}" FontSize="12" FontWeight="DemiBold" Foreground="{DynamicResource LuminaTextMutedBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,6"/>
+                                                        <TextBlock Grid.Column="2" Text="{l10n:Loc Lumina.Picker.Second}" FontSize="12" FontWeight="DemiBold" Foreground="{DynamicResource LuminaTextMutedBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,6" IsVisible="{TemplateBinding UseSeconds}"/>
+                                                    </Grid>
+
+                                                    <!-- Row 3: 6 行时间滚动列 (与左侧 6 行日期按钮高度严格相等 228px，底部完全平齐) -->
+                                                    <Grid Grid.Row="3" ColumnDefinitions="56, 56, 56">
+                                                        <ListBox Name="PART_HoursList"
+                                                                 Grid.Column="0"
+                                                                 Theme="{StaticResource LuminaTimeColumnListBoxTheme}" />
+                                                        <ListBox Name="PART_MinutesList"
+                                                                 Grid.Column="1"
+                                                                 Theme="{StaticResource LuminaTimeColumnListBoxTheme}" />
+                                                        <ListBox Name="PART_SecondsList"
+                                                                 Grid.Column="2"
+                                                                 IsVisible="{TemplateBinding UseSeconds}"
+                                                                 Theme="{StaticResource LuminaTimeColumnListBoxTheme}" />
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+
+                                            <!-- 底部快捷工具栏 -->
+                                            <Border BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                                                    BorderThickness="0,1,0,0"
+                                                    Padding="0,10,0,0">
+                                                <Grid ColumnDefinitions="Auto, *, Auto, 8, Auto">
+                                                    <Button Name="PART_NowButton"
+                                                            Grid.Column="0"
+                                                            Classes="Ghost Small"
+                                                            Content="{l10n:Loc Lumina.Common.Now}"
+                                                            IsVisible="{TemplateBinding ShowNowButton}" />
+
+                                                    <Button Name="PART_ClearButton"
+                                                            Grid.Column="2"
+                                                            Classes="Ghost Small"
+                                                            Content="{l10n:Loc Lumina.Common.Clear}"
+                                                            IsVisible="{TemplateBinding ShowClearButton}" />
+
+                                                    <Button Name="PART_ConfirmButton"
+                                                            Grid.Column="4"
+                                                            Classes="Primary Small"
+                                                            Content="{l10n:Loc Lumina.Common.Confirm}" />
+                                                </Grid>
+                                            </Border>
+                                        </StackPanel>
+                                    </Border>
+                                </Panel>
+                            </Popup>
+                        </Grid>
+                    </Grid>
+                </DataValidationErrors>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:pointerover /template/ Border#Background">
+            <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryHoverBrush}" />
+        </Style>
+
+        <Style Selector="^:focus-within /template/ Border#Background">
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryBrush}" />
+            <Setter Property="BoxShadow" Value="0 0 0 3 #332563EB" />
+        </Style>
+
+        <Style Selector="^.Small">
+            <Setter Property="MinHeight" Value="28" />
+            <Setter Property="Padding" Value="8,2" />
+        </Style>
+
+        <Style Selector="^.Large">
+            <Setter Property="MinHeight" Value="44" />
+            <Setter Property="Padding" Value="14,8" />
+        </Style>
+    </ControlTheme>
+
+    <!-- LuminaTimePicker -->
+    <ControlTheme x:Key="{x:Type lumina:LuminaTimePicker}" TargetType="lumina:LuminaTimePicker">
+        <Setter Property="MinHeight" Value="{DynamicResource LuminaCalendarDatePickerMinHeight}" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaCalendarDatePickerPadding}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaCalendarDatePickerCornerRadius}" />
+        <Setter Property="Background" Value="{DynamicResource LuminaSurfaceBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextForegroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderBrush}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaCalendarDatePickerBorderThickness}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="lumina:LuminaTimePicker">
+                <DataValidationErrors>
+                    <Grid Name="LayoutRoot">
+                        <Border Name="Background"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding CornerRadius}" />
+
+                        <Grid ColumnDefinitions="*,Auto" Margin="{TemplateBinding Padding}">
+                            <TextBox Name="PART_TextBox"
+                                     Grid.Column="0"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Stretch"
+                                     HorizontalContentAlignment="Left"
+                                     VerticalContentAlignment="Center"
+                                     Theme="{StaticResource LuminaPickerTextBoxTheme}"
+                                     Foreground="{TemplateBinding Foreground}"
+                                     PlaceholderForeground="{DynamicResource LuminaTextMutedBrush}"
+                                     PlaceholderText="{TemplateBinding PlaceholderText}" />
+
+                            <Button Name="PART_Button"
+                                    Grid.Column="1"
+                                    Theme="{StaticResource LuminaPickerIconButtonTheme}"
+                                    Width="{DynamicResource LuminaCalendarDatePickerButtonSize}"
+                                    Height="{DynamicResource LuminaCalendarDatePickerButtonSize}">
+                                <PathIcon Width="16" Height="16"
+                                          Data="M12,20 C16.41,20 20,16.41 20,12 C20,7.59 16.41,4 12,4 C7.59,4 4,7.59 4,12 C4,16.41 7.59,20 12,20 Z M12.5,7 L11,7 L11,13 L16.25,16.15 L17,14.92 L12.5,12.25 Z"
+                                          Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+                            </Button>
+
+                            <Popup Name="PART_Popup"
+                                   Grid.Column="0"
+                                   InheritsTransform="True"
+                                   IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                   IsLightDismissEnabled="True"
+                                   Placement="BottomEdgeAlignedLeft"
+                                   PlacementTarget="{TemplateBinding}">
+                                <Panel Margin="{DynamicResource LuminaCalendarDatePickerPopupMargin}" ClipToBounds="False">
+                                    <Border Background="{DynamicResource LuminaPopoverBrush}"
+                                            BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                                            BorderThickness="{DynamicResource LuminaDateRangePickerPopupBorderThickness}"
+                                            CornerRadius="{DynamicResource LuminaDateRangePickerPopupCornerRadius}"
+                                            BoxShadow="{DynamicResource LuminaShadowPopup}" />
+                                    <Border Padding="12"
+                                            Background="{DynamicResource LuminaPopoverBrush}"
+                                            BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                                            BorderThickness="{DynamicResource LuminaDateRangePickerPopupBorderThickness}"
+                                            CornerRadius="{DynamicResource LuminaDateRangePickerPopupCornerRadius}"
+                                            ClipToBounds="True">
+                                        <StackPanel Spacing="10">
+                                            <!-- 时间滚动直选列 (时/分/秒) -->
+                                            <Grid RowDefinitions="30, 10, 24, 228">
+                                                <!-- Row 0: 顶部标题 -->
+                                                <TextBlock Grid.Row="0"
+                                                           Text="{l10n:Loc Lumina.Picker.SelectTime}"
+                                                           FontSize="13"
+                                                           FontWeight="SemiBold"
+                                                           Foreground="{DynamicResource LuminaTextForegroundBrush}"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center" />
+
+                                                <!-- Row 1: 间距 10px -->
+
+                                                <!-- Row 2: 列标题 -->
+                                                <Grid Grid.Row="2" ColumnDefinitions="56, 56, 56">
+                                                    <TextBlock Grid.Column="0" Text="{l10n:Loc Lumina.Picker.Hour}" FontSize="12" FontWeight="DemiBold" Foreground="{DynamicResource LuminaTextMutedBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,6"/>
+                                                    <TextBlock Grid.Column="1" Text="{l10n:Loc Lumina.Picker.Minute}" FontSize="12" FontWeight="DemiBold" Foreground="{DynamicResource LuminaTextMutedBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,6"/>
+                                                    <TextBlock Grid.Column="2" Text="{l10n:Loc Lumina.Picker.Second}" FontSize="12" FontWeight="DemiBold" Foreground="{DynamicResource LuminaTextMutedBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,6" IsVisible="{TemplateBinding UseSeconds}"/>
+                                                </Grid>
+
+                                                <!-- Row 3: 滚动列 -->
+                                                <Grid Grid.Row="3" ColumnDefinitions="56, 56, 56">
+                                                    <ListBox Name="PART_HoursList"
+                                                             Grid.Column="0"
+                                                             Theme="{StaticResource LuminaTimeColumnListBoxTheme}" />
+                                                    <ListBox Name="PART_MinutesList"
+                                                             Grid.Column="1"
+                                                             Theme="{StaticResource LuminaTimeColumnListBoxTheme}" />
+                                                    <ListBox Name="PART_SecondsList"
+                                                             Grid.Column="2"
+                                                             IsVisible="{TemplateBinding UseSeconds}"
+                                                             Theme="{StaticResource LuminaTimeColumnListBoxTheme}" />
+                                                </Grid>
+                                            </Grid>
+
+                                            <!-- 底部快捷工具栏 -->
+                                            <Border BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
+                                                    BorderThickness="0,1,0,0"
+                                                    Padding="0,10,0,0">
+                                                <Grid ColumnDefinitions="Auto, *, Auto, 8, Auto">
+                                                    <Button Name="PART_NowButton"
+                                                            Grid.Column="0"
+                                                            Classes="Ghost Small"
+                                                            Content="{l10n:Loc Lumina.Common.Now}"
+                                                            IsVisible="{TemplateBinding ShowNowButton}" />
+
+                                                    <Button Name="PART_ClearButton"
+                                                            Grid.Column="2"
+                                                            Classes="Ghost Small"
+                                                            Content="{l10n:Loc Lumina.Common.Clear}"
+                                                            IsVisible="{TemplateBinding ShowClearButton}" />
+
+                                                    <Button Name="PART_ConfirmButton"
+                                                            Grid.Column="4"
+                                                            Classes="Primary Small"
+                                                            Content="{l10n:Loc Lumina.Common.Confirm}" />
+                                                </Grid>
+                                            </Border>
+                                        </StackPanel>
+                                    </Border>
+                                </Panel>
+                            </Popup>
+                        </Grid>
+                    </Grid>
+                </DataValidationErrors>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:pointerover /template/ Border#Background">
+            <Setter Property="Background" Value="{DynamicResource LuminaHoverBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryHoverBrush}" />
+        </Style>
+
+        <Style Selector="^:focus-within /template/ Border#Background">
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryBrush}" />
+            <Setter Property="BoxShadow" Value="0 0 0 3 #332563EB" />
+        </Style>
+
+        <Style Selector="^.Small">
+            <Setter Property="MinHeight" Value="28" />
+            <Setter Property="Padding" Value="8,2" />
+        </Style>
+
+        <Style Selector="^.Large">
+            <Setter Property="MinHeight" Value="44" />
+            <Setter Property="Padding" Value="14,8" />
         </Style>
     </ControlTheme>
 </ResourceDictionary>
