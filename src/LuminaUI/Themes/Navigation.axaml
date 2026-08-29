@@ -4,8 +4,8 @@
 
     <Thickness x:Key="LuminaNavigationItemHeaderBorderThickness">1</Thickness>
     <CornerRadius x:Key="LuminaNavigationItemHeaderCornerRadius">8</CornerRadius>
-    <Thickness x:Key="LuminaNavigationItemHeaderPadding">10,8</Thickness>
-    <x:Double x:Key="LuminaNavigationItemHeaderColumnSpacing">8</x:Double>
+    <Thickness x:Key="LuminaNavigationItemHeaderPadding">8,6</Thickness>
+    <x:Double x:Key="LuminaNavigationItemHeaderColumnSpacing">6</x:Double>
     <x:Double x:Key="LuminaNavigationItemIndicatorWidth">3</x:Double>
     <CornerRadius x:Key="LuminaNavigationItemIndicatorCornerRadius">2</CornerRadius>
     <x:Double x:Key="LuminaNavigationItemIndicatorCollapsedOpacity">0</x:Double>
@@ -18,10 +18,15 @@
     <x:Double x:Key="LuminaNavigationItemChevronVisibleOpacity">0.85</x:Double>
     <x:Double x:Key="LuminaNavigationItemItemsContainerCollapsedHeight">0</x:Double>
     <x:Double x:Key="LuminaNavigationItemItemsContainerCollapsedOpacity">0</x:Double>
-    <Thickness x:Key="LuminaNavigationItemItemsPresenterMargin">14,4,0,0</Thickness>
+    <Thickness x:Key="LuminaNavigationItemItemsPresenterMargin">10,2,0,0</Thickness>
     <Thickness x:Key="LuminaNavigationItemCompactPadding">6,8</Thickness>
-    <Thickness x:Key="LuminaNavigationItemChildPadding">8,7</Thickness>
+    <Thickness x:Key="LuminaNavigationItemChildPadding">6,5</Thickness>
     <x:Double x:Key="LuminaNavigationItemChildFontSize">13</x:Double>
+    <Thickness x:Key="LuminaNavigationItemDenseHeaderPadding">6,4</Thickness>
+    <Thickness x:Key="LuminaNavigationItemDenseChildPadding">5,3</Thickness>
+    <x:Double x:Key="LuminaNavigationItemDenseFontSize">13</x:Double>
+    <x:Double x:Key="LuminaNavigationItemDenseChildFontSize">12</x:Double>
+    <x:Double x:Key="LuminaNavigationItemDenseIconWidth">18</x:Double>
     <Thickness x:Key="LuminaContentPagePadding">16</Thickness>
     <Thickness x:Key="LuminaContentPageHeaderMargin">0,0,0,16</Thickness>
     <x:Double x:Key="LuminaContentPageHeaderFontSize">28</x:Double>
@@ -37,6 +42,7 @@
                             BorderThickness="{DynamicResource LuminaNavigationItemHeaderBorderThickness}"
                             CornerRadius="{DynamicResource LuminaNavigationItemHeaderCornerRadius}"
                             Padding="{DynamicResource LuminaNavigationItemHeaderPadding}"
+                            ToolTip.Tip="{TemplateBinding Header}"
                             Cursor="Hand">
                         <Grid>
                             <Grid Name="PART_HeaderLayout"
@@ -63,12 +69,14 @@
                                                   Grid.Column="2"
                                                   VerticalAlignment="Center"
                                                   Content="{TemplateBinding Header}"
+                                                  ContentTemplate="{TemplateBinding HeaderTemplate}"
                                                   TextElement.FontSize="{DynamicResource LuminaNavigationItemFontSize}"
                                                   TextElement.FontWeight="SemiBold"
                                                   TextElement.Foreground="{DynamicResource LuminaTextForegroundBrush}" />
 
                                 <PathIcon Name="PART_Chevron"
                                           Grid.Column="3"
+                                          IsVisible="False"
                                           Data="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"
                                           Width="{DynamicResource LuminaNavigationItemChevronSize}"
                                           Height="{DynamicResource LuminaNavigationItemChevronSize}"
@@ -101,6 +109,12 @@
                             Opacity="{DynamicResource LuminaNavigationItemItemsContainerCollapsedOpacity}"
                             ClipToBounds="True"
                             IsVisible="False">
+                        <Border.Transitions>
+                            <Transitions>
+                                <DoubleTransition Property="Height" Duration="0:0:0.15" Easing="CubicEaseOut" />
+                                <DoubleTransition Property="Opacity" Duration="0:0:0.15" Easing="CubicEaseOut" />
+                            </Transitions>
+                        </Border.Transitions>
                         <ItemsPresenter Name="PART_ItemsPresenter" Margin="{DynamicResource LuminaNavigationItemItemsPresenterMargin}" />
                     </Border>
                 </StackPanel>
@@ -149,6 +163,7 @@
         </Style>
 
         <Style Selector="^:hasitems /template/ PathIcon#PART_Chevron">
+            <Setter Property="IsVisible" Value="True" />
             <Setter Property="Opacity" Value="{DynamicResource LuminaNavigationItemChevronVisibleOpacity}" />
         </Style>
 
@@ -162,6 +177,7 @@
 
         <Style Selector="^:compact /template/ Border#PART_Header">
             <Setter Property="Padding" Value="{DynamicResource LuminaNavigationItemCompactPadding}" />
+            <Setter Property="ToolTip.Tip" Value="{Binding Header, RelativeSource={RelativeSource TemplatedParent}}" />
         </Style>
 
         <Style Selector="^:compact /template/ Grid#PART_HeaderLayout">
@@ -172,13 +188,34 @@
             <Setter Property="IsVisible" Value="True" />
         </Style>
 
-        <Style Selector="^.Child /template/ Border#PART_Header">
+        <Style Selector="^.Child /template/ Border#PART_Header, ^:child /template/ Border#PART_Header">
             <Setter Property="Padding" Value="{DynamicResource LuminaNavigationItemChildPadding}" />
         </Style>
 
-        <Style Selector="^.Child /template/ ContentPresenter#PART_HeaderPresenter">
+        <Style Selector="^.Child /template/ ContentPresenter#PART_HeaderPresenter, ^:child /template/ ContentPresenter#PART_HeaderPresenter">
             <Setter Property="TextElement.FontSize" Value="{DynamicResource LuminaNavigationItemChildFontSize}" />
             <Setter Property="TextElement.FontWeight" Value="Medium" />
+        </Style>
+
+        <!-- Density Support -->
+        <Style Selector="^.Dense /template/ Border#PART_Header, ^:dense /template/ Border#PART_Header">
+            <Setter Property="Padding" Value="{DynamicResource LuminaNavigationItemDenseHeaderPadding}" />
+        </Style>
+
+        <Style Selector="^.Dense /template/ ContentPresenter#PART_HeaderPresenter, ^:dense /template/ ContentPresenter#PART_HeaderPresenter">
+            <Setter Property="TextElement.FontSize" Value="{DynamicResource LuminaNavigationItemDenseFontSize}" />
+        </Style>
+
+        <Style Selector="^.Dense /template/ ContentPresenter#PART_IconPresenter, ^:dense /template/ ContentPresenter#PART_IconPresenter">
+            <Setter Property="Width" Value="{DynamicResource LuminaNavigationItemDenseIconWidth}" />
+        </Style>
+
+        <Style Selector="^.Dense.Child /template/ Border#PART_Header, ^:dense:child /template/ Border#PART_Header, ^:dense.Child /template/ Border#PART_Header">
+            <Setter Property="Padding" Value="{DynamicResource LuminaNavigationItemDenseChildPadding}" />
+        </Style>
+
+        <Style Selector="^.Dense.Child /template/ ContentPresenter#PART_HeaderPresenter, ^:dense:child /template/ ContentPresenter#PART_HeaderPresenter, ^:dense.Child /template/ ContentPresenter#PART_HeaderPresenter">
+            <Setter Property="TextElement.FontSize" Value="{DynamicResource LuminaNavigationItemDenseChildFontSize}" />
         </Style>
     </ControlTheme>
 

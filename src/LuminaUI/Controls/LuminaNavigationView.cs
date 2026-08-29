@@ -19,6 +19,8 @@ public class LuminaNavigationView : ItemsControl
 
     public static readonly StyledProperty<string?> SelectedKeyProperty = AvaloniaProperty.Register<LuminaNavigationView, string?>(nameof(SelectedKey), null, inherits: false, BindingMode.TwoWay);
 
+    public static readonly StyledProperty<bool> IsDenseProperty = AvaloniaProperty.Register<LuminaNavigationView, bool>(nameof(IsDense), defaultValue: false);
+
     protected override Type StyleKeyOverride => typeof(ItemsControl);
 
     public object? SelectedItem
@@ -33,11 +35,53 @@ public class LuminaNavigationView : ItemsControl
         set => SetValue(SelectedKeyProperty, value);
     }
 
+    public bool IsDense
+    {
+        get => GetValue(IsDenseProperty);
+        set => SetValue(IsDenseProperty, value);
+    }
+
     public event EventHandler<RoutedEventArgs>? SelectionChanged;
+
+    protected override bool NeedsContainerOverride(object? item, int index, out object? recycleKey)
+    {
+        recycleKey = null;
+        return item is not LuminaNavigationItem;
+    }
+
+    protected override Control CreateContainerForItemOverride(object? item, int index, object? recycleKey)
+    {
+        return (item as LuminaNavigationItem) ?? new LuminaNavigationItem();
+    }
+
+    protected override void PrepareContainerForItemOverride(Control container, object? item, int index)
+    {
+        base.PrepareContainerForItemOverride(container, item, index);
+        if (container is LuminaNavigationItem navItem)
+        {
+            navItem.SetCurrentValue(LuminaNavigationItem.LevelProperty, 0);
+            if (item is not LuminaNavigationItem)
+            {
+                if (!navItem.IsSet(LuminaNavigationItem.HeaderProperty))
+                {
+                    navItem.SetCurrentValue(LuminaNavigationItem.HeaderProperty, item);
+                }
+                if (!navItem.IsSet(LuminaNavigationItem.HeaderTemplateProperty) && ItemTemplate != null)
+                {
+                    navItem.SetCurrentValue(LuminaNavigationItem.HeaderTemplateProperty, ItemTemplate);
+                }
+            }
+            if (IsDense && !navItem.IsSet(LuminaNavigationItem.IsDenseProperty))
+            {
+                navItem.SetCurrentValue(LuminaNavigationItem.IsDenseProperty, true);
+            }
+        }
+    }
 
     protected override void OnAttachedToLogicalTree(LogicalTreeAttachmentEventArgs e)
     {
         base.OnAttachedToLogicalTree(e);
+        PseudoClasses.Set(":dense", IsDense);
         AddHandler(LuminaNavigationItem.InvokedEvent, OnItemInvoked, RoutingStrategies.Bubble);
         Avalonia.Threading.Dispatcher.UIThread.Post(ApplySelectedKey, DispatcherPriority.Loaded);
     }
@@ -51,6 +95,17 @@ public class LuminaNavigationView : ItemsControl
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
+        if (change.Property == IsDenseProperty)
+        {
+            PseudoClasses.Set(":dense", change.GetNewValue<bool>());
+            foreach (LuminaNavigationItem item in EnumerateNavigationItems(this))
+            {
+                if (!item.IsSet(LuminaNavigationItem.IsDenseProperty))
+                {
+                    item.SetCurrentValue(LuminaNavigationItem.IsDenseProperty, change.GetNewValue<bool>());
+                }
+            }
+        }
         if (!_updatingSelection)
         {
             if (change.Property == SelectedKeyProperty)
