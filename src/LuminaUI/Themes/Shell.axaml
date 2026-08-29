@@ -4,12 +4,12 @@
                     xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
                     xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
 
-    <Thickness x:Key="LuminaShellMenuHeaderMargin">16</Thickness>
+    <Thickness x:Key="LuminaShellMenuHeaderMargin">12,12,12,8</Thickness>
     <x:Double x:Key="LuminaShellMenuHeaderHeight">48</x:Double>
-    <Thickness x:Key="LuminaShellMenuScrollMargin">16,0,16,16</Thickness>
+    <Thickness x:Key="LuminaShellMenuScrollMargin">8,0,8,12</Thickness>
     <Thickness x:Key="LuminaShellMenuFooterMargin">0</Thickness>
     <Thickness x:Key="LuminaShellMenuFooterPadding">0</Thickness>
-    <Thickness x:Key="LuminaShellMenuCompactToggleHostMargin">16,0,16,16</Thickness>
+    <Thickness x:Key="LuminaShellMenuCompactToggleHostMargin">8,0,8,12</Thickness>
     <x:Double x:Key="LuminaShellMenuCompactToggleSize">36</x:Double>
     <x:Double x:Key="LuminaShellMenuCompactToggleIconSize">14</x:Double>
     <Thickness x:Key="LuminaShellPageContentPadding">0</Thickness>
@@ -29,12 +29,12 @@
     <Thickness x:Key="LuminaShellCompactContentHeaderPadding">4,0,12,0</Thickness>
     <x:Double x:Key="LuminaShellCompactContentHeaderFontSize">18</x:Double>
     <Thickness x:Key="LuminaShellMenuCompactToggleHostCompactMargin">6</Thickness>
-    <Thickness x:Key="LuminaShellMenuCompactScrollMargin">6,0,6,16</Thickness>
+    <Thickness x:Key="LuminaShellMenuCompactScrollMargin">6,0,6,12</Thickness>
     <Thickness x:Key="LuminaShellTopMenuDrawerBorderThickness">0,0,1,0</Thickness>
     <CornerRadius x:Key="LuminaShellTopMenuDrawerCornerRadius">0,8,8,0</CornerRadius>
-    <Thickness x:Key="LuminaShellTopMenuDrawerHeaderMargin">16,10,16,8</Thickness>
+    <Thickness x:Key="LuminaShellTopMenuDrawerHeaderMargin">12,10,12,8</Thickness>
     <x:Double x:Key="LuminaShellTopMenuDrawerHeaderHeight">44</x:Double>
-    <Thickness x:Key="LuminaShellTopMenuDrawerScrollMargin">16,0,16,12</Thickness>
+    <Thickness x:Key="LuminaShellTopMenuDrawerScrollMargin">8,0,8,12</Thickness>
     <Thickness x:Key="LuminaShellTopMenuDrawerFooterMargin">0</Thickness>
 
     <ControlTheme x:Key="LuminaShellNavigationPage" TargetType="NavigationPage" BasedOn="{StaticResource {x:Type NavigationPage}}">
