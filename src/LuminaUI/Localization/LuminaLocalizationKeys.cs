@@ -89,4 +89,7 @@ public static class LuminaLocalizationKeys
     public const string CascaderCurrentFormat = "Lumina.Cascader.CurrentFormat";
 
     public const string CascaderSelectCurrentFormat = "Lumina.Cascader.SelectCurrentFormat";
+    public const string CommonNow = "Lumina.Common.Now";
+    public const string PickerSelectDateTime = "Lumina.Picker.SelectDateTime";
+    public const string PickerTime = "Lumina.Picker.Time";
 }

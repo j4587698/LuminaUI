@@ -91,4 +91,13 @@
   <data name="Lumina.Picker.EndDate" xml:space="preserve">
     <value>End date</value>
   </data>
+  <data name="Lumina.Picker.SelectDateTime" xml:space="preserve">
+    <value>Select date and time</value>
+  </data>
+  <data name="Lumina.Picker.Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="Lumina.Common.Now" xml:space="preserve">
+    <value>Now</value>
+  </data>
 </root>
