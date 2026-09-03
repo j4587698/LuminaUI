@@ -1,7 +1,6 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
-                    xmlns:theming="clr-namespace:LuminaUI.Theming;assembly=LuminaUI">
+                    xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
 
     <x:Double x:Key="LuminaButtonLoadingStrokeThickness">2</x:Double>
     <x:Double x:Key="LuminaButtonDisabledOpacity">0.5</x:Double>
@@ -132,7 +131,7 @@
         <!-- ========================================== -->
         <!-- 1. Sizes -->
         <!-- ========================================== -->
-        <Style Selector="^.Small, ^[(theming|LuminaDensity.Mode)=Compact]">
+        <Style Selector="^.Small">
             <Setter Property="Padding" Value="10,4" />
             <Setter Property="FontSize" Value="12" />
             <Setter Property="CornerRadius" Value="5" />
@@ -141,7 +140,7 @@
             <Setter Property="(lumina:LuminaButton.IconSize)" Value="14" />
         </Style>
         
-        <Style Selector="^.Large, ^[(theming|LuminaDensity.Mode)=Loose]">
+        <Style Selector="^.Large">
             <Setter Property="Padding" Value="24,12" />
             <Setter Property="FontSize" Value="16" />
             <Setter Property="CornerRadius" Value="8" />

@@ -43,7 +43,6 @@
                 <ResourceInclude Source="avares://LuminaUI/Themes/CompositeControls.axaml" />
                 <ResourceInclude Source="avares://LuminaUI/Themes/SystemOverlays.axaml" />
                 <ResourceInclude Source="avares://LuminaUI/Themes/Overlays.axaml" />
-                <ResourceInclude Source="avares://LuminaUI/Themes/Density.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Styles.Resources>

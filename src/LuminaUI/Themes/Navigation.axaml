@@ -1,7 +1,6 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
-                    xmlns:theming="clr-namespace:LuminaUI.Theming;assembly=LuminaUI">
+                    xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
 
     <Thickness x:Key="LuminaNavigationItemHeaderBorderThickness">1</Thickness>
     <CornerRadius x:Key="LuminaNavigationItemHeaderCornerRadius">8</CornerRadius>
@@ -199,23 +198,23 @@
         </Style>
 
         <!-- Density Support -->
-        <Style Selector="^.Dense /template/ Border#PART_Header, ^:dense /template/ Border#PART_Header, ^[(theming|LuminaDensity.Mode)=Compact] /template/ Border#PART_Header">
+        <Style Selector="^.Dense /template/ Border#PART_Header, ^:dense /template/ Border#PART_Header">
             <Setter Property="Padding" Value="{DynamicResource LuminaNavigationItemDenseHeaderPadding}" />
         </Style>
 
-        <Style Selector="^.Dense /template/ ContentPresenter#PART_HeaderPresenter, ^:dense /template/ ContentPresenter#PART_HeaderPresenter, ^[(theming|LuminaDensity.Mode)=Compact] /template/ ContentPresenter#PART_HeaderPresenter">
+        <Style Selector="^.Dense /template/ ContentPresenter#PART_HeaderPresenter, ^:dense /template/ ContentPresenter#PART_HeaderPresenter">
             <Setter Property="TextElement.FontSize" Value="{DynamicResource LuminaNavigationItemDenseFontSize}" />
         </Style>
 
-        <Style Selector="^.Dense /template/ ContentPresenter#PART_IconPresenter, ^:dense /template/ ContentPresenter#PART_IconPresenter, ^[(theming|LuminaDensity.Mode)=Compact] /template/ ContentPresenter#PART_IconPresenter">
+        <Style Selector="^.Dense /template/ ContentPresenter#PART_IconPresenter, ^:dense /template/ ContentPresenter#PART_IconPresenter">
             <Setter Property="Width" Value="{DynamicResource LuminaNavigationItemDenseIconWidth}" />
         </Style>
 
-        <Style Selector="^.Dense.Child /template/ Border#PART_Header, ^:dense:child /template/ Border#PART_Header, ^:dense.Child /template/ Border#PART_Header, ^[(theming|LuminaDensity.Mode)=Compact]:child /template/ Border#PART_Header">
+        <Style Selector="^.Dense.Child /template/ Border#PART_Header, ^:dense:child /template/ Border#PART_Header, ^:dense.Child /template/ Border#PART_Header">
             <Setter Property="Padding" Value="{DynamicResource LuminaNavigationItemDenseChildPadding}" />
         </Style>
 
-        <Style Selector="^.Dense.Child /template/ ContentPresenter#PART_HeaderPresenter, ^:dense:child /template/ ContentPresenter#PART_HeaderPresenter, ^:dense.Child /template/ ContentPresenter#PART_HeaderPresenter, ^[(theming|LuminaDensity.Mode)=Compact]:child /template/ ContentPresenter#PART_HeaderPresenter">
+        <Style Selector="^.Dense.Child /template/ ContentPresenter#PART_HeaderPresenter, ^:dense:child /template/ ContentPresenter#PART_HeaderPresenter, ^:dense.Child /template/ ContentPresenter#PART_HeaderPresenter">
             <Setter Property="TextElement.FontSize" Value="{DynamicResource LuminaNavigationItemDenseChildFontSize}" />
         </Style>
     </ControlTheme>

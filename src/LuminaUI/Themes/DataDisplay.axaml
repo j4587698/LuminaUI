@@ -1,7 +1,6 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:lumina="using:LuminaUI.Controls"
-                    xmlns:theming="clr-namespace:LuminaUI.Theming;assembly=LuminaUI">
+                    xmlns:lumina="using:LuminaUI.Controls">
 
     <x:Double x:Key="LuminaDescriptionsItemColumnSpacing">14</x:Double>
     <x:Double x:Key="LuminaDescriptionsItemTopSpacing">4</x:Double>
@@ -136,12 +135,12 @@
             <Setter Property="HorizontalAlignment" Value="Right" />
         </Style>
 
-        <Style Selector="^.Small, ^[(theming|LuminaDensity.Mode)=Compact]">
+        <Style Selector="^.Small">
             <Setter Property="Margin" Value="0,0,18,8" />
             <Setter Property="FontSize" Value="12" />
         </Style>
 
-        <Style Selector="^.Large, ^[(theming|LuminaDensity.Mode)=Loose]">
+        <Style Selector="^.Large">
             <Setter Property="Margin" Value="0,0,32,18" />
             <Setter Property="FontSize" Value="16" />
         </Style>
@@ -286,11 +285,11 @@
             </ControlTemplate>
         </Setter>
 
-        <Style Selector="^.Small, ^[(theming|LuminaDensity.Mode)=Compact]">
+        <Style Selector="^.Small">
             <Setter Property="Size" Value="18" />
         </Style>
 
-        <Style Selector="^.Large, ^[(theming|LuminaDensity.Mode)=Loose]">
+        <Style Selector="^.Large">
             <Setter Property="Size" Value="32" />
         </Style>
     </ControlTheme>
