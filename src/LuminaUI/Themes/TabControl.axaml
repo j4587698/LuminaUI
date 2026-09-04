@@ -32,7 +32,7 @@
     <x:Double x:Key="LuminaLineTabContentSpacing">8</x:Double>
     <x:Double x:Key="LuminaTabItemDisabledOpacity">0.45</x:Double>
     <Thickness x:Key="LuminaChromeTabItemMargin">2,2,0,0</Thickness>
-    <Thickness x:Key="LuminaChromeTabItemPadding">14,8</Thickness>
+    <Thickness x:Key="LuminaChromeTabItemPadding">14,6</Thickness>
     <Thickness x:Key="LuminaChromeTabItemBorderThickness">1,1,1,0</Thickness>
     <CornerRadius x:Key="LuminaChromeTabItemCornerRadius">7,7,0,0</CornerRadius>
     <x:Double x:Key="LuminaChromeTabItemMinHeight">36</x:Double>
@@ -40,10 +40,10 @@
     <Thickness x:Key="LuminaChromeTabItemBottomBorderThickness">1,0,1,1</Thickness>
     <CornerRadius x:Key="LuminaChromeTabItemBottomCornerRadius">0,0,7,7</CornerRadius>
     <Thickness x:Key="LuminaPillTabItemMargin">2</Thickness>
-    <Thickness x:Key="LuminaPillTabItemPadding">13,7</Thickness>
+    <Thickness x:Key="LuminaPillTabItemPadding">12,6</Thickness>
     <CornerRadius x:Key="LuminaPillTabItemCornerRadius">999</CornerRadius>
     <x:Double x:Key="LuminaPillTabItemMinHeight">32</x:Double>
-    <Thickness x:Key="LuminaVerticalTabItemPadding">12,9</Thickness>
+    <Thickness x:Key="LuminaVerticalTabItemPadding">12,8</Thickness>
     <Thickness x:Key="LuminaCompactTabItemPadding">9,5</Thickness>
     <x:Double x:Key="LuminaCompactTabItemMinHeight">30</x:Double>
     <CornerRadius x:Key="LuminaCompactTabItemCornerRadius">5</CornerRadius>

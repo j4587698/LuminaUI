@@ -6,7 +6,7 @@
              x:Class="LuminaUI.Demo.Views.TransitioningContentControlShowcasePage"
              x:DataType="vm:TransitioningContentControlShowcaseViewModel">
     <ScrollViewer Margin="16" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+        <StackPanel Spacing="24" HorizontalAlignment="Stretch" Margin="0,4,0,24">
             <StackPanel Spacing="4">
                 <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.1295}" />
                 <TextBlock Classes="Body" Text="{l10n:Loc Sandbox.Text.0768}" TextWrapping="Wrap" />
@@ -14,7 +14,7 @@
 
             <lumina:LuminaResponsivePanel MinItemWidth="300" MaxItemWidth="640" HorizontalSpacing="16" VerticalSpacing="16">
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <Grid ColumnDefinitions="*,220" ColumnSpacing="16">
                             <StackPanel Spacing="4">
                                 <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.TransitioningContentControl.ContentTransition}" />

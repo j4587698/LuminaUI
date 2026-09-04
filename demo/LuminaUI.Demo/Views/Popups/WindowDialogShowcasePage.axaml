@@ -7,7 +7,7 @@
              x:DataType="vm:WindowDialogShowcaseViewModel">
 
   <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
-    <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" Margin="0,0,0,24">
+    <StackPanel Spacing="14" Width="{Binding #PageScroll.Bounds.Width}" Margin="0,0,0,24">
       
       <!-- Header -->
       <StackPanel Spacing="8" MaxWidth="760">
@@ -20,7 +20,7 @@
         
         <!-- Standard Message Boxes -->
         <lumina:LuminaCard Padding="18" Classes="Glass">
-          <StackPanel Spacing="16">
+          <StackPanel Spacing="12">
             <StackPanel Spacing="6">
               <TextBlock Text="{l10n:Loc Sandbox.Popups.WindowDialogs.StandardMessageBox}" FontSize="20" FontWeight="SemiBold"/>
               <TextBlock Text="{l10n:Loc Sandbox.Popups.WindowDialogs.StandardMessageBoxDesc}"
@@ -44,7 +44,7 @@
 
         <!-- Custom Content / Form Input -->
         <lumina:LuminaCard Padding="18" Classes="Glass">
-          <StackPanel Spacing="16">
+          <StackPanel Spacing="12">
             <StackPanel Spacing="6">
               <TextBlock Text="{l10n:Loc Sandbox.Popups.WindowDialogs.FormInputSelect}" FontSize="20" FontWeight="SemiBold"/>
               <TextBlock Text="{l10n:Loc Sandbox.Popups.WindowDialogs.FormInputSelectDesc}"
@@ -64,7 +64,7 @@
 
         <!-- Fully Custom Footer & No Footer -->
         <lumina:LuminaCard Padding="18" Classes="Glass">
-          <StackPanel Spacing="16">
+          <StackPanel Spacing="12">
             <StackPanel Spacing="6">
               <TextBlock Text="{l10n:Loc Sandbox.Popups.WindowDialogs.CustomFooter}" FontSize="20" FontWeight="SemiBold"/>
               <TextBlock Text="{l10n:Loc Sandbox.Popups.WindowDialogs.CustomFooterDesc}"

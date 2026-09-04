@@ -6,11 +6,11 @@
              x:Class="LuminaUI.Demo.Views.IndexedListShowcasePage"
              x:DataType="vm:IndexedListShowcaseViewModel">
 
-    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24"
+    <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="14"
                     Width="{Binding #PageScroll.Bounds.Width}"
                     HorizontalAlignment="Stretch"
-                    Margin="0,36,0,40">
+                    Margin="0,4,0,24">
             <StackPanel Spacing="4">
                 <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.0241}" />
                 <TextBlock Classes="Body"
@@ -18,7 +18,7 @@
             </StackPanel>
 
             <lumina:LuminaCard MaxWidth="720" HorizontalAlignment="Stretch">
-                <StackPanel Spacing="16">
+                <StackPanel Spacing="12">
                     <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0243}" />
                     <lumina:LuminaIndexedList Height="420">
                         <lumina:LuminaIndexedSection Header="{l10n:Loc Sandbox.Text.1117}">
@@ -54,7 +54,7 @@
             </lumina:LuminaCard>
 
             <lumina:LuminaCard MaxWidth="720" HorizontalAlignment="Stretch">
-                <StackPanel Spacing="16">
+                <StackPanel Spacing="12">
                     <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1200}" />
                     <TextBlock Text="{l10n:Loc Sandbox.Text.0792}" Foreground="{DynamicResource LuminaTextMutedBrush}" FontSize="12" Margin="0,-8,0,0" TextWrapping="Wrap"/>
                     <lumina:LuminaIndexedList Height="380">
@@ -83,7 +83,7 @@
             </lumina:LuminaCard>
 
             <lumina:LuminaCard MaxWidth="720" HorizontalAlignment="Stretch">
-                <StackPanel Spacing="16">
+                <StackPanel Spacing="12">
                     <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0805}" />
                     <TextBlock Text="{l10n:Loc Sandbox.Text.0787}" Foreground="{DynamicResource LuminaTextMutedBrush}" FontSize="12" Margin="0,-8,0,0" TextWrapping="Wrap"/>
                     <lumina:LuminaIndexedList Name="PART_DynamicList"

@@ -6,15 +6,15 @@
              x:Class="LuminaUI.Demo.Views.TextInputShowcasePage"
              x:DataType="vm:TextInputShowcaseViewModel">
 
-    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+    <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="14" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,4,0,24">
             <StackPanel Spacing="4">
                 <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.0451}" />
                 <TextBlock Text="{l10n:Loc Sandbox.Text.0452}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
             </StackPanel>
 
             <lumina:LuminaCard>
-                <StackPanel Spacing="16">
+                <StackPanel Spacing="12">
                     <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1287}" />
                     <TextBox PlaceholderText="{l10n:Loc Sandbox.Text.0453}" />
                     <TextBox Text="{l10n:Loc Sandbox.Text.0454}" IsReadOnly="True" />
@@ -24,7 +24,7 @@
             </lumina:LuminaCard>
 
             <lumina:LuminaCard>
-                <StackPanel Spacing="16">
+                <StackPanel Spacing="12">
                     <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0855}" />
                     <TextBox Classes="Pill"
                              PlaceholderText="{l10n:Loc Sandbox.Text.0871}" />
@@ -109,7 +109,7 @@
             </lumina:LuminaCard>
 
             <lumina:LuminaCard>
-                <StackPanel Spacing="16">
+                <StackPanel Spacing="12">
                     <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.TextInputs.ShortcutInput}" />
                     <lumina:LuminaResponsivePanel MinItemWidth="220"
                                                   MaxItemWidth="360"
@@ -182,7 +182,7 @@
             </lumina:LuminaCard>
 
             <lumina:LuminaCard>
-                <StackPanel Spacing="16">
+                <StackPanel Spacing="12">
                     <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0457}" />
                     <lumina:LuminaInputGroup>
                         <lumina:LuminaInputGroupAddon Content="{l10n:Loc Sandbox.Text.1176}" />
@@ -216,7 +216,7 @@
             </lumina:LuminaCard>
 
             <lumina:LuminaCard>
-                <StackPanel Spacing="16">
+                <StackPanel Spacing="12">
                     <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0851}" />
                     <TextBox PlaceholderText="{l10n:Loc Sandbox.Text.0462}" Text="{l10n:Loc Sandbox.Text.1293}" PasswordChar="*" />
                     <TextBox PlaceholderText="{l10n:Loc Sandbox.Text.0463}" PasswordChar="*" IsEnabled="False" />
@@ -224,7 +224,7 @@
             </lumina:LuminaCard>
 
             <lumina:LuminaCard>
-                <StackPanel Spacing="16">
+                <StackPanel Spacing="12">
                     <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1294}" />
                     <lumina:LuminaResponsivePanel MinItemWidth="160" HorizontalSpacing="12" VerticalSpacing="12">
                         <NumericUpDown Minimum="0" Maximum="100" Increment="1" Value="42" />

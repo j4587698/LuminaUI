@@ -6,8 +6,8 @@
              x:Class="LuminaUI.Demo.Views.StepsShowcasePage"
              x:DataType="vm:StepsShowcaseViewModel">
 
-    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+    <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="14" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,4,0,24">
             <StackPanel Spacing="4">
                 <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.1248}" />
                 <TextBlock Text="{l10n:Loc Sandbox.Text.1249}"
@@ -18,7 +18,7 @@
             <StackPanel Spacing="16">
                 <!-- Basic horizontal steps -->
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1250}" />
                         <lumina:LuminaSteps Current="{Binding CurrentStep}">
                             <lumina:LuminaStepItem Header="{l10n:Loc Sandbox.Text.1251}"
@@ -35,7 +35,7 @@
 
                 <!-- ItemsSource binding -->
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1258}" />
                         <lumina:LuminaSteps Current="1"
                                            ItemsSource="{Binding Steps}"
@@ -47,7 +47,7 @@
 
                 <!-- Error state -->
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1259}" />
                         <lumina:LuminaSteps Current="1"
                                            ItemsSource="{Binding ErrorSteps}"
@@ -59,7 +59,7 @@
 
                 <!-- Small size -->
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1260}" />
                         <lumina:LuminaSteps Current="2" Size="Small">
                             <lumina:LuminaStepItem Header="{l10n:Loc Sandbox.Text.1261}" />
@@ -72,7 +72,7 @@
 
                 <!-- Vertical direction -->
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1265}" />
                         <lumina:LuminaSteps Current="{Binding CurrentVerticalStep}"
                                            Direction="Vertical">
@@ -88,7 +88,7 @@
 
                 <!-- Interactive steps -->
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0210}" />
                         <lumina:LuminaSteps Current="{Binding CurrentInteractiveStep}">
                             <lumina:LuminaStepItem Header="{l10n:Loc Sandbox.Text.1271}"

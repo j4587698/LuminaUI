@@ -6,11 +6,11 @@
              x:DataType="vm:EventToCommandDemoViewModel"
              x:Class="LuminaUI.Demo.Views.ActionControlsShowcasePage">
 
-    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24"
+    <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="14"
                     Width="{Binding #PageScroll.Bounds.Width}"
                     HorizontalAlignment="Stretch"
-                    Margin="0,36,0,40">
+                    Margin="0,4,0,24">
             <StackPanel Spacing="4">
                 <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Components.Actions.Title}" />
                 <TextBlock Classes="Body" Text="{l10n:Loc Sandbox.Components.Actions.Description}" />
@@ -21,7 +21,7 @@
                                           HorizontalSpacing="16"
                                           VerticalSpacing="16">
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Actions.AutoCompleteBox}" />
                         <AutoCompleteBox x:Name="ComponentSearch"
                                          PlaceholderText="{l10n:Loc Sandbox.Components.Actions.SearchComponent}"
@@ -32,7 +32,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Actions.DropDownButton}" />
                         <WrapPanel>
                             <DropDownButton Content="{l10n:Loc Sandbox.Components.Actions.ViewOptions}" Margin="0,0,12,12">
@@ -95,7 +95,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Actions.SplitButton}" />
                         <WrapPanel>
                             <SplitButton Content="{l10n:Loc Sandbox.Components.Actions.Export}" Margin="0,0,12,12">
@@ -143,7 +143,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Actions.CommandBar}" />
                         <CommandBar lumina:LuminaOptions.PopupType="Sheet">
                             <CommandBar.PrimaryCommands>
@@ -181,7 +181,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <StackPanel Spacing="4">
                             <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Actions.LuminaCommand}" />
                             <TextBlock Classes="Body"
@@ -220,7 +220,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Actions.ButtonSpinner}" />
                         <ButtonSpinner>
                             <TextBox Text="24" BorderThickness="0" Background="Transparent" />
@@ -229,7 +229,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Actions.PipsPager}" />
                         <PipsPager NumberOfPages="7"
                                    SelectedPageIndex="2"
@@ -238,7 +238,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Actions.RefreshContainer}" />
                         <RefreshContainer>
                             <ScrollViewer Height="120"

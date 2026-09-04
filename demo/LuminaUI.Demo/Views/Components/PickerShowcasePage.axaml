@@ -4,8 +4,8 @@
               xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
               x:Class="LuminaUI.Demo.Views.PickerShowcasePage">
 
-    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,24,0,40">
+    <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="14" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,4,0,24">
             <!-- 页面标题 -->
             <StackPanel Spacing="6">
                 <TextBlock Classes="Display" Text="选择器组件 (Pickers &amp; Time)" />
@@ -16,7 +16,7 @@
                 
                 <!-- 卡片 1: LuminaDateTimePicker (日期时间复合选择器) -->
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <StackPanel Spacing="4">
                             <TextBlock Classes="SectionTitle" Text="LuminaDateTimePicker (日期时间一体化)" />
                             <TextBlock Text="支持年月日与时分秒一体化选择，支持直接键盘手动输入与下拉面板直选列点选。" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap"/>
@@ -64,7 +64,7 @@
 
                 <!-- 卡片 2: LuminaTimePicker (全新纯时间选择器) -->
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <StackPanel Spacing="4">
                             <TextBlock Classes="SectionTitle" Text="LuminaTimePicker (独立纯时间选择器)" />
                             <TextBlock Text="现代化的纯时间选择器，支持键盘手动输入，下拉面板提供时/分/秒独立直选滚动列。" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap"/>
@@ -112,7 +112,7 @@
 
                 <!-- 卡片 3: LuminaDatePicker & ComboBox -->
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <StackPanel Spacing="4">
                             <TextBlock Classes="SectionTitle" Text="LuminaDatePicker &amp; ComboBox" />
                             <TextBlock Text="日期选择器及自适应下拉选择框。" FontSize="12" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap"/>

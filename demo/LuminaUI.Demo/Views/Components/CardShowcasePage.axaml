@@ -9,13 +9,12 @@
              lumina:LuminaCommand.PassEventArgsToCommand="True">
 
     <ScrollViewer x:Name="PageScroll"
-                  Margin="16"
                   BringIntoViewOnFocusChange="False"
                   HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24"
+        <StackPanel Spacing="14"
                     Width="{Binding #PageScroll.Bounds.Width}"
                     HorizontalAlignment="Stretch"
-                    Margin="0,28,0,40">
+                    Margin="0,4,0,24">
 
             <StackPanel Spacing="6">
                 <TextBlock Text="{l10n:Loc Sandbox.Text.0204}"

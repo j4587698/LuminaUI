@@ -4,8 +4,8 @@
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              x:Class="LuminaUI.Demo.Views.MenuFlyoutShowcasePage">
 
-    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+    <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="14" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,4,0,24">
             <StackPanel Spacing="4">
                 <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.1305}" />
                 <TextBlock Text="{l10n:Loc Sandbox.Text.0576}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
@@ -13,7 +13,7 @@
 
             <lumina:LuminaResponsivePanel MinItemWidth="280" MaxItemWidth="460" HorizontalSpacing="16" VerticalSpacing="16">
             <lumina:LuminaCard>
-                <StackPanel Spacing="16">
+                <StackPanel Spacing="12">
                     <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0833}" />
                     <Menu>
                         <MenuItem Header="{l10n:Loc Sandbox.Text.0577}">
@@ -31,7 +31,7 @@
             </lumina:LuminaCard>
 
             <lumina:LuminaCard>
-                <StackPanel Spacing="16">
+                <StackPanel Spacing="12">
                     <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0814}" />
                     <WrapPanel>
                         <Button Name="OpenFlyoutButton" Content="{l10n:Loc Sandbox.Text.0583}" Classes="Primary" Margin="0,0,12,12">
@@ -63,7 +63,7 @@
             </lumina:LuminaCard>
 
             <lumina:LuminaCard>
-                <StackPanel Spacing="16">
+                <StackPanel Spacing="12">
                     <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1306}" />
                     <Border Name="ContextMenuSurface" Padding="20" CornerRadius="8" BorderBrush="{DynamicResource LuminaBorderBrush}" BorderThickness="1" Background="{DynamicResource LuminaSurfaceBrush}">
                         <TextBlock Text="{l10n:Loc Sandbox.Text.0591}" Foreground="{DynamicResource LuminaTextSecondaryBrush}" />

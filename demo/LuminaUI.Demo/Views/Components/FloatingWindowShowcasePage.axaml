@@ -7,8 +7,8 @@
              x:Class="LuminaUI.Demo.Views.FloatingWindowShowcasePage"
              x:Name="Root">
 
-  <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
-    <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+  <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+    <StackPanel Spacing="14" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,4,0,24">
 
       <StackPanel Spacing="4">
         <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.FloatingWindow.Title}" />
@@ -21,7 +21,7 @@
 
         <!-- Overview -->
         <lumina:LuminaCard>
-          <StackPanel Spacing="16">
+          <StackPanel Spacing="12">
             <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.FloatingWindow.Overview}" />
             <TextBlock Text="{l10n:Loc Sandbox.FloatingWindow.OverviewDesc}"
                        TextWrapping="Wrap"
@@ -31,7 +31,7 @@
 
         <!-- Features -->
         <lumina:LuminaCard>
-          <StackPanel Spacing="16">
+          <StackPanel Spacing="12">
             <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.FloatingWindow.Features}" />
             <StackPanel Spacing="8">
               <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
@@ -56,7 +56,7 @@
 
         <!-- Open Demo Button -->
         <lumina:LuminaCard>
-          <StackPanel Spacing="16">
+          <StackPanel Spacing="12">
             <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.FloatingWindow.DemoSection}" />
             <TextBlock Text="{l10n:Loc Sandbox.FloatingWindow.DemoDesc}"
                        TextWrapping="Wrap"
@@ -72,7 +72,7 @@
 
         <!-- Code Example -->
         <lumina:LuminaCard>
-          <StackPanel Spacing="16">
+          <StackPanel Spacing="12">
             <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.FloatingWindow.Usage}" />
             <Border Padding="16"
                     Background="{DynamicResource LuminaSurfaceBrush}"
@@ -133,7 +133,7 @@
 
       <lumina:LuminaResponsivePanel MinItemWidth="320" MaxItemWidth="560" HorizontalSpacing="16" VerticalSpacing="16">
         <lumina:LuminaCard>
-          <StackPanel Spacing="16">
+          <StackPanel Spacing="12">
             <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.FloatingWindow.KaraokeDemo}" />
             <Border Padding="20"
                     Background="{DynamicResource LuminaSurfaceBrush}"
@@ -181,7 +181,7 @@
         </lumina:LuminaCard>
 
         <lumina:LuminaCard>
-          <StackPanel Spacing="16">
+          <StackPanel Spacing="12">
             <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.FloatingWindow.Properties}" />
             <StackPanel Spacing="6">
               <TextBlock><Run FontWeight="Bold" Text="{l10n:Loc Sandbox.FloatingWindow.PropWordsName}" /><Run Text="{l10n:Loc Sandbox.FloatingWindow.PropWordsDesc}" /></TextBlock>
@@ -194,7 +194,7 @@
         </lumina:LuminaCard>
 
         <lumina:LuminaCard>
-          <StackPanel Spacing="16">
+          <StackPanel Spacing="12">
             <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.FloatingWindow.DataModel}" />
             <Border Padding="12"
                     Background="{DynamicResource LuminaHoverBackgroundBrush}"
@@ -222,7 +222,7 @@
 
       <lumina:LuminaResponsivePanel MinItemWidth="320" MaxItemWidth="560" HorizontalSpacing="16" VerticalSpacing="16">
         <lumina:LuminaCard>
-          <StackPanel Spacing="16">
+          <StackPanel Spacing="12">
             <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.FloatingWindow.OutlinedDemo}" />
             <Border Padding="16"
                     Background="{DynamicResource LuminaSurfaceBrush}"

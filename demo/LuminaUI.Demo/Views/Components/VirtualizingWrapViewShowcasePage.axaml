@@ -5,8 +5,8 @@
              xmlns:vm="using:LuminaUI.Demo.ViewModels"
              x:Class="LuminaUI.Demo.Views.VirtualizingWrapViewShowcasePage"
              x:DataType="vm:VirtualizingWrapViewShowcaseViewModel">
-    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+    <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="14" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,4,0,24">
             <StackPanel Spacing="4">
                 <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Nav.VirtualizingWrapView}" />
                 <TextBlock Classes="Body" Text="{l10n:Loc Sandbox.VirtualFlow.Body}" TextWrapping="Wrap" />
@@ -14,7 +14,7 @@
 
             <lumina:LuminaResponsivePanel MinItemWidth="300" MaxItemWidth="680" HorizontalSpacing="16" VerticalSpacing="16">
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
                             <StackPanel Spacing="4">
                                 <TextBlock Classes="SectionTitle" Text="LuminaVirtualizingWrapView" />
@@ -76,7 +76,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <StackPanel Spacing="4">
                             <TextBlock Classes="SectionTitle" Text="LuminaVirtualizingWrapView" />
                             <TextBlock Text="{l10n:Loc Sandbox.VirtualFlow.MasonryMode}" Classes="Helper" />

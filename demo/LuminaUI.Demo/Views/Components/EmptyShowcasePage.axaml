@@ -6,8 +6,8 @@
              x:Class="LuminaUI.Demo.Views.EmptyShowcasePage"
              x:DataType="vm:EmptyShowcaseViewModel">
 
-    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+    <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="14" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,4,0,24">
             <StackPanel Spacing="4">
                 <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.0808}" />
                 <TextBlock Text="{l10n:Loc Sandbox.Text.1157}"
@@ -17,14 +17,14 @@
 
             <lumina:LuminaResponsivePanel MinItemWidth="300" MaxItemWidth="560" HorizontalSpacing="16" VerticalSpacing="16">
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1158}" />
                         <lumina:LuminaEmpty MinHeight="200" />
                     </StackPanel>
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1159}" />
                         <lumina:LuminaEmpty Title="{l10n:Loc Sandbox.Text.1160}"
                                            Description="{l10n:Loc Sandbox.Text.1161}"
@@ -33,7 +33,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1162}" />
                         <lumina:LuminaEmpty Title="{l10n:Loc Sandbox.Text.1163}"
                                            Description="{l10n:Loc Sandbox.Text.1164}"
@@ -48,7 +48,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1166}" />
                         <lumina:LuminaEmpty Classes="Compact"
                                            Title="{l10n:Loc Sandbox.Text.1167}"
@@ -63,7 +63,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0751}" />
                         <lumina:LuminaEmpty MinHeight="200">
                             <lumina:LuminaEmpty.CustomContent>

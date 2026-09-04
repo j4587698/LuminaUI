@@ -6,11 +6,11 @@
              x:Class="LuminaUI.Demo.Views.MotionShowcasePage"
              x:DataType="vm:MotionShowcaseViewModel">
 
-    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24"
+    <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="14"
                     Width="{Binding #PageScroll.Bounds.Width}"
                     HorizontalAlignment="Stretch"
-                    Margin="0,36,0,40">
+                    Margin="0,4,0,24">
             <StackPanel Spacing="4">
                 <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.1313}" />
                 <TextBlock Text="{l10n:Loc Sandbox.Text.0778}"
@@ -23,7 +23,7 @@
                                           HorizontalSpacing="16"
                                           VerticalSpacing="16">
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <StackPanel Spacing="4">
                             <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0839}" />
                             <TextBlock Classes="Caption"
@@ -90,7 +90,7 @@ lumina:LuminaMotion.Duration="360"</TextBlock>
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <StackPanel Spacing="4">
                             <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0870}" />
                             <TextBlock Classes="Caption"
@@ -165,7 +165,7 @@ lumina:LuminaMotion.Duration="420"</TextBlock>
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
                             <StackPanel Grid.Column="0" Spacing="4">
                                 <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0819}" />
@@ -216,7 +216,7 @@ lumina:LuminaMotion.Duration="420"</TextBlock>
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <StackPanel Spacing="4">
                             <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0812}" />
                             <TextBlock Classes="Caption"
@@ -301,7 +301,7 @@ lumina:LuminaMotion.DisabledOpacity="0.45"</TextBlock>
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <StackPanel Spacing="4">
                             <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0883}" />
                             <TextBlock Classes="Caption"
@@ -374,7 +374,7 @@ lumina:LuminaMotion.SquishIntensity="1.35"</TextBlock>
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
                             <StackPanel Grid.Column="0" Spacing="4">
                                 <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0880}" />
@@ -433,7 +433,7 @@ lumina:LuminaMotion.Duration="320"</TextBlock>
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
                             <StackPanel Grid.Column="0" Spacing="4">
                                 <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0777}" />
@@ -472,7 +472,7 @@ lumina:LuminaMotion.Duration="320"</TextBlock>
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1320}" />
                         <TextBlock Classes="Caption"
                                    Text="{l10n:Loc Sandbox.Text.1321}" />

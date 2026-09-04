@@ -8,7 +8,7 @@
   <ScrollViewer x:Name="PageScroll"
                 HorizontalScrollBarVisibility="Disabled"
                 BringIntoViewOnFocusChange="False">
-    <StackPanel Spacing="24"
+    <StackPanel Spacing="14"
                 Width="{Binding #PageScroll.Bounds.Width}"
                 Margin="0,0,0,24">
       <StackPanel Spacing="8" MaxWidth="860">
@@ -135,7 +135,7 @@
 
         <StackPanel Spacing="16" MaxWidth="430">
           <lumina:LuminaCard Padding="18" Classes="Glass">
-            <StackPanel Spacing="16">
+            <StackPanel Spacing="12">
               <TextBlock Text="{l10n:Loc Sandbox.Overlays.HostScope.InnerHost}"
                          FontWeight="SemiBold" />
               <Button Name="OpenShellDrawerScopeButton"
@@ -152,7 +152,7 @@
           </lumina:LuminaCard>
 
           <lumina:LuminaCard Padding="18" Classes="Glass">
-            <StackPanel Spacing="16">
+            <StackPanel Spacing="12">
               <TextBlock Text="{l10n:Loc Sandbox.Overlays.HostScope.OuterHost}"
                          FontWeight="SemiBold" />
               <Button Name="ShowRootOverlayMarkerButton"

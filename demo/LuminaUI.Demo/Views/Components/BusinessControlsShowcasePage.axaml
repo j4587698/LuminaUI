@@ -6,11 +6,11 @@
              x:Class="LuminaUI.Demo.Views.BusinessControlsShowcasePage"
              x:DataType="vm:BusinessControlsShowcaseViewModel">
 
-    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24"
+    <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="14"
                     Width="{Binding #PageScroll.Bounds.Width}"
                     HorizontalAlignment="Stretch"
-                    Margin="0,36,0,40">
+                    Margin="0,4,0,24">
             <StackPanel Spacing="4">
                 <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Components.Business.Title}" />
                 <TextBlock Text="{l10n:Loc Sandbox.Components.Business.Description}"
@@ -23,7 +23,7 @@
                                           HorizontalSpacing="16"
                                           VerticalSpacing="16">
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Business.FormLayout}" />
                         <lumina:LuminaForm LabelPosition="Left" LabelWidth="120">
                             <TextBox lumina:LuminaForm.Label="{l10n:Loc Sandbox.Components.Business.Project}"
@@ -60,7 +60,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Business.MultiSelect}" />
                         <lumina:LuminaMultiSelect Watermark="{l10n:Loc Sandbox.Components.Business.SelectPriority}"
                                                   lumina:LuminaOptions.PopupType="Sheet"
@@ -112,7 +112,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Business.LoadingAndSkeleton}" />
                         <TextBlock Classes="Label" Text="{l10n:Loc Sandbox.Components.Business.LoadingOverlay}" />
                         <lumina:LuminaLoadingContainer IsLoading="{Binding IsLoading}"

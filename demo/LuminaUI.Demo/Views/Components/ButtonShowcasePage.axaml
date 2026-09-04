@@ -6,8 +6,8 @@
              x:Class="LuminaUI.Demo.Views.ButtonShowcasePage"
              x:DataType="vm:ButtonShowcaseViewModel">
 
-    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+    <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="14" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,4,0,24">
             <StackPanel Spacing="4">
                 <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.0188}" />
                 <TextBlock Text="{l10n:Loc Sandbox.Text.0189}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
@@ -15,7 +15,7 @@
 
             <lumina:LuminaResponsivePanel MinItemWidth="280" MaxItemWidth="420" HorizontalSpacing="16" VerticalSpacing="16">
             <lumina:LuminaCard>
-                <StackPanel Spacing="16">
+                <StackPanel Spacing="12">
                     <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1126}" />
                     <WrapPanel>
                         <Button Content="{l10n:Loc Sandbox.Text.0190}" Classes="Primary" Margin="0,0,12,12" />
@@ -38,7 +38,7 @@
             </lumina:LuminaCard>
 
             <lumina:LuminaCard>
-                <StackPanel Spacing="16">
+                <StackPanel Spacing="12">
                     <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0822}" />
                     <WrapPanel>
                         <Button Content="{l10n:Loc Sandbox.Text.0046}" Classes="Outline" Margin="0,0,12,12">
@@ -61,7 +61,7 @@
             </lumina:LuminaCard>
 
             <lumina:LuminaCard>
-                <StackPanel Spacing="16">
+                <StackPanel Spacing="12">
                     <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1127}" />
                     <WrapPanel>
                         <ToggleButton Content="{l10n:Loc Sandbox.Text.0200}" Margin="0,0,12,12" />
@@ -73,7 +73,7 @@
             </lumina:LuminaCard>
 
             <lumina:LuminaCard>
-                <StackPanel Spacing="16">
+                <StackPanel Spacing="12">
                     <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1128}" />
                     <WrapPanel>
                         <RepeatButton Content="{l10n:Loc Sandbox.Text.1129}" Width="44" Margin="0,0,8,12" />
@@ -84,7 +84,7 @@
             </lumina:LuminaCard>
 
             <lumina:LuminaCard>
-                <StackPanel Spacing="16">
+                <StackPanel Spacing="12">
                     <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0646}" />
                     <WrapPanel>
                         <Button Content="{l10n:Loc Sandbox.Text.0647}"
@@ -132,7 +132,7 @@
             </lumina:LuminaCard>
 
             <lumina:LuminaCard>
-                <StackPanel Spacing="16">
+                <StackPanel Spacing="12">
                     <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0650}" />
                     <StackPanel Orientation="Horizontal" Spacing="12">
                         <lumina:LuminaHamburgerButton IsOpen="{Binding IsMenuOpen}" />

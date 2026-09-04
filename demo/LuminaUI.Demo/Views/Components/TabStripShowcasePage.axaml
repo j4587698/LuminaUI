@@ -4,11 +4,11 @@
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              x:Class="LuminaUI.Demo.Views.TabStripShowcasePage">
 
-    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24"
+    <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="14"
                     Width="{Binding #PageScroll.Bounds.Width}"
                     HorizontalAlignment="Stretch"
-                    Margin="0,36,0,40">
+                    Margin="0,4,0,24">
             <StackPanel Spacing="4">
                 <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.0420}" />
                 <TextBlock Classes="Body"
@@ -21,7 +21,7 @@
                                           HorizontalSpacing="16"
                                           VerticalSpacing="16">
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0422}" />
                         <TabStrip x:Name="LineTabStrip" SelectedIndex="1">
                             <TabStripItem Content="{l10n:Loc Sandbox.Text.0230}" />
@@ -37,7 +37,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0425}" />
                         <TabStrip x:Name="ChromeTabStrip" Classes="Chrome" SelectedIndex="0">
                             <TabStripItem Content="{l10n:Loc Sandbox.Text.0351}" />
@@ -55,7 +55,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0429}" />
                         <TabStrip x:Name="PillTabStrip" Classes="Pills" SelectedIndex="2">
                             <TabStripItem Content="{l10n:Loc Sandbox.Text.0430}" />
@@ -71,7 +71,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0155}" />
                         <TabStrip x:Name="CompactTabStrip" Classes="Compact" SelectedIndex="0">
                             <TabStripItem Content="{l10n:Loc Sandbox.Text.0434}" />
@@ -88,7 +88,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0361}" />
                         <Border Padding="14"
                                 Background="{DynamicResource LuminaHoverBackgroundBrush}"
@@ -129,7 +129,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0444}" />
                         <TabStrip x:Name="RichTabStrip" Classes="Chrome" SelectedIndex="1">
                             <TabStripItem>
@@ -162,7 +162,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0449}" />
                         <TabStrip x:Name="MobileTabStrip" Classes="Mobile" SelectedIndex="0">
                             <TabStripItem>
