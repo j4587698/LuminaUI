@@ -55,7 +55,7 @@
   </lumina:LuminaPage.Resources>
 
   <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
-    <StackPanel Spacing="24"
+    <StackPanel Spacing="14"
                 Width="{Binding #PageScroll.Bounds.Width}"
                 Margin="0,0,0,24">
       <StackPanel Spacing="8" MaxWidth="760">
@@ -69,7 +69,7 @@
 
       <lumina:LuminaResponsivePanel MinItemWidth="280" MaxItemWidth="520" HorizontalSpacing="16" VerticalSpacing="16">
         <lumina:LuminaCard Padding="18" Classes="Glass">
-          <StackPanel Spacing="16">
+          <StackPanel Spacing="12">
             <StackPanel Spacing="6">
               <TextBlock Text="{l10n:Loc Sandbox.Text.0603}"
                          FontSize="20"
@@ -101,7 +101,7 @@
         </lumina:LuminaCard>
 
         <lumina:LuminaCard Padding="18" Classes="Glass">
-          <StackPanel Spacing="16">
+          <StackPanel Spacing="12">
             <StackPanel Spacing="6">
               <TextBlock Text="{l10n:Loc Sandbox.Text.0607}"
                          FontSize="20"
@@ -145,7 +145,7 @@
         </lumina:LuminaCard>
 
         <lumina:LuminaCard Padding="18" Classes="Glass">
-          <StackPanel Spacing="16">
+          <StackPanel Spacing="12">
             <StackPanel Spacing="6">
               <TextBlock Text="{l10n:Loc Sandbox.Text.0609}"
                          FontSize="20"

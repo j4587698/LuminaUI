@@ -2,17 +2,17 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
 
-    <x:Double x:Key="LuminaMultiSelectOptionMinHeight">34</x:Double>
-    <Thickness x:Key="LuminaMultiSelectOptionPadding">9,7</Thickness>
+    <x:Double x:Key="LuminaMultiSelectOptionMinHeight">30</x:Double>
+    <Thickness x:Key="LuminaMultiSelectOptionPadding">8,5</Thickness>
     <Thickness x:Key="LuminaMultiSelectOptionBorderThickness">0</Thickness>
     <CornerRadius x:Key="LuminaMultiSelectOptionCornerRadius">7</CornerRadius>
-    <x:Double x:Key="LuminaFormItemsSpacing">14</x:Double>
-    <x:Double x:Key="LuminaFormGroupItemsSpacing">14</x:Double>
-    <x:Double x:Key="LuminaFormGroupLayoutSpacing">12</x:Double>
+    <x:Double x:Key="LuminaFormItemsSpacing">10</x:Double>
+    <x:Double x:Key="LuminaFormGroupItemsSpacing">10</x:Double>
+    <x:Double x:Key="LuminaFormGroupLayoutSpacing">10</x:Double>
     <x:Double x:Key="LuminaFormGroupHeaderSpacing">3</x:Double>
     <x:Double x:Key="LuminaFormGroupHeaderFontSize">14</x:Double>
-    <x:Double x:Key="LuminaFormItemColumnSpacing">12</x:Double>
-    <x:Double x:Key="LuminaFormItemRowSpacing">6</x:Double>
+    <x:Double x:Key="LuminaFormItemColumnSpacing">10</x:Double>
+    <x:Double x:Key="LuminaFormItemRowSpacing">4</x:Double>
     <x:Double x:Key="LuminaFormItemLabelSpacing">4</x:Double>
     <x:Double x:Key="LuminaFormItemLabelFontSize">13</x:Double>
     <Thickness x:Key="LuminaMultiSelectSurfacePadding">10,5</Thickness>

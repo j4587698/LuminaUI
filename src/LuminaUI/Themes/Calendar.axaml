@@ -3,7 +3,7 @@
                     xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
 
     <x:Double x:Key="LuminaCalendarDatePickerMinHeight">36</x:Double>
-    <Thickness x:Key="LuminaCalendarDatePickerPadding">12,6</Thickness>
+    <Thickness x:Key="LuminaCalendarDatePickerPadding">10,5</Thickness>
     <CornerRadius x:Key="LuminaCalendarDatePickerCornerRadius">6</CornerRadius>
     <Thickness x:Key="LuminaCalendarDatePickerBorderThickness">1</Thickness>
     <Thickness x:Key="LuminaCalendarDatePickerTextBoxBorderThickness">0</Thickness>

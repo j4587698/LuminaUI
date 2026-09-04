@@ -4,8 +4,8 @@
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              x:Class="LuminaUI.Demo.Views.CollectionShowcasePage">
 
-    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+    <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="14" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,4,0,24">
             <StackPanel Spacing="4">
                 <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.0228}" />
                 <TextBlock Text="{l10n:Loc Sandbox.Text.0229}" Foreground="{DynamicResource LuminaTextMutedBrush}" TextWrapping="Wrap" />
@@ -13,7 +13,7 @@
 
             <lumina:LuminaResponsivePanel MinItemWidth="280" MaxItemWidth="460" HorizontalSpacing="16" VerticalSpacing="16">
             <lumina:LuminaCard>
-                <StackPanel Spacing="16">
+                <StackPanel Spacing="12">
                     <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1148}" />
                     <ListBox SelectedIndex="1" MaxHeight="180">
                         <ListBoxItem Content="{l10n:Loc Sandbox.Text.0230}" />
@@ -26,7 +26,7 @@
             </lumina:LuminaCard>
 
             <lumina:LuminaCard>
-                <StackPanel Spacing="16">
+                <StackPanel Spacing="12">
                     <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1149}" />
                     <TreeView MaxHeight="220">
                         <TreeViewItem Header="{l10n:Loc Sandbox.Text.0084}" IsExpanded="True">
@@ -45,7 +45,7 @@
             </lumina:LuminaCard>
 
             <lumina:LuminaCard>
-                <StackPanel Spacing="16">
+                <StackPanel Spacing="12">
                     <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1150}" />
                     <ItemsControl>
                         <ItemsControl.ItemsPanel>

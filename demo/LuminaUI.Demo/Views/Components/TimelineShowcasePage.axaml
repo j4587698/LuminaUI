@@ -6,8 +6,8 @@
              x:Class="LuminaUI.Demo.Views.TimelineShowcasePage"
              x:DataType="vm:TimelineShowcaseViewModel">
 
-    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+    <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="14" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,4,0,24">
             <StackPanel Spacing="4">
                 <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.0407}" />
                 <TextBlock Text="{l10n:Loc Sandbox.Text.0668}"
@@ -17,7 +17,7 @@
 
             <lumina:LuminaResponsivePanel MinItemWidth="320" MaxItemWidth="640" HorizontalSpacing="16" VerticalSpacing="16">
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0669}" />
                         <lumina:LuminaTimeline ItemsSource="{Binding Events}"
                                                 HeaderMemberBinding="{Binding Header}"
@@ -30,7 +30,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0670}" />
                         <lumina:LuminaTimeline Mode="Alternate">
                             <lumina:LuminaTimelineItem Header="{l10n:Loc Sandbox.Text.0672}"
@@ -54,7 +54,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0671}" />
                         <lumina:LuminaTimeline Mode="Center">
                             <lumina:LuminaTimelineItem Header="{l10n:Loc Sandbox.Text.0679}"

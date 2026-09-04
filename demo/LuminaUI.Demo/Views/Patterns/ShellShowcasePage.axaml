@@ -24,7 +24,7 @@
                 <lumina:LuminaCard x:Name="ShellOptionsCard"
                                    Padding="16"
                                    VerticalAlignment="Top">
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.ShellShowcase.Options}" />
 
                         <StackPanel Spacing="10">

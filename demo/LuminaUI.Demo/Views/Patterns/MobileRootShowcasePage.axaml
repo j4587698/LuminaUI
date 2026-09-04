@@ -19,7 +19,7 @@
                                           HorizontalSpacing="16"
                                           VerticalSpacing="16">
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0853}" />
                         <Border Width="340"
                                 Height="640"

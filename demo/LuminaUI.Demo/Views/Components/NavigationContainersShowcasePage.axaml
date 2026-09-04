@@ -8,11 +8,11 @@
              x:Class="LuminaUI.Demo.Views.NavigationContainersShowcasePage"
              x:DataType="vm:NavigationContainersShowcaseViewModel">
 
-    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24"
+    <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="14"
                     Width="{Binding #PageScroll.Bounds.Width}"
                     HorizontalAlignment="Stretch"
-                    Margin="0,36,0,40">
+                    Margin="0,4,0,24">
             <StackPanel Spacing="4">
                 <TextBlock Classes="Display" Text="Navigation &amp; Containers" />
                 <TextBlock Classes="Body"
@@ -25,7 +25,7 @@
                                           HorizontalSpacing="16"
                                           VerticalSpacing="16">
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="HeaderedContentControl" />
                         <HeaderedContentControl Header="Service status">
                             <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="8">
@@ -41,7 +41,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="ItemsControl" />
                         <ItemsControl Classes="Surface">
                             <ItemsControl.ItemsPanel>
@@ -58,7 +58,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
                             <TextBlock Classes="SectionTitle" Text="SplitView" />
                             <ToggleButton x:Name="SplitPaneToggle"
@@ -97,7 +97,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="NavigationPage" />
                         <Border Height="240"
                                 BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
@@ -122,7 +122,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
                             <TextBlock Classes="SectionTitle" Text="LuminaDrawer" />
                             <ToggleButton Grid.Column="1"
@@ -196,7 +196,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="TabbedPage" />
                         <Border Height="260"
                                 BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"
@@ -219,7 +219,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="Carousel" />
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
                             <CheckBox Content="Auto play"
@@ -312,7 +312,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="TransitioningContentControl" />
                         <TransitioningContentControl Content="Updated content surface">
                             <TransitioningContentControl.ContentTemplate>
@@ -329,7 +329,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="Notification cards" />
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
                             <TextBlock Classes="Label" Text="Notification duration" />

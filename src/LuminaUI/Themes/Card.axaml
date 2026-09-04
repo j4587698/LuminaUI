@@ -3,9 +3,10 @@
                     xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI">
 
     <Thickness x:Key="LuminaCardGlassBorderThickness">1.5</Thickness>
+    <Thickness x:Key="LuminaCardPadding">14</Thickness>
 
     <ControlTheme x:Key="{x:Type lumina:LuminaCard}" TargetType="lumina:LuminaCard">
-        <Setter Property="Padding" Value="16" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaCardPadding}" />
         <Setter Property="CornerRadius" Value="12" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="ClipToBounds" Value="False" />

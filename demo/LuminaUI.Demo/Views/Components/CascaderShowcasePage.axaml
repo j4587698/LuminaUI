@@ -6,8 +6,8 @@
              x:Class="LuminaUI.Demo.Views.CascaderShowcasePage"
              x:DataType="vm:CascaderShowcaseViewModel">
 
-    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,36,0,40">
+    <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="14" Width="{Binding #PageScroll.Bounds.Width}" HorizontalAlignment="Stretch" Margin="0,4,0,24">
             <StackPanel Spacing="4">
                 <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.1134}" />
                 <TextBlock Text="{l10n:Loc Sandbox.Text.1135}"
@@ -17,7 +17,7 @@
 
             <lumina:LuminaResponsivePanel MinItemWidth="320" MaxItemWidth="640" HorizontalSpacing="16" VerticalSpacing="16">
                  <lumina:LuminaCard>
-                     <StackPanel Spacing="16">
+                     <StackPanel Spacing="12">
                          <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1136}" />
                           <lumina:LuminaCascader ItemsSource="{Binding RegionData}"
                                                  SelectedValue="{Binding SelectedRegion}"
@@ -29,7 +29,7 @@
                  </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1138}" />
                         <TextBlock Text="{l10n:Loc Sandbox.Text.1139}" Classes="Caption" TextWrapping="Wrap" />
                         <lumina:LuminaCascader ItemsSource="{Binding RegionData}"
@@ -43,7 +43,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1141}" />
                         <lumina:LuminaCascader ItemsSource="{Binding CategoryData}"
                                                SelectedValue="{Binding SelectedCategory}"
@@ -55,7 +55,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1143}" />
                          <lumina:LuminaCascader ItemsSource="{Binding LazyRegionData}"
                                                 SelectedValue="{Binding SelectedLazyRegion}"
@@ -69,7 +69,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1145}" />
                         <lumina:LuminaCascader ItemsSource="{Binding LongListData}"
                                                SelectedValue="{Binding SelectedLongList}"
@@ -82,7 +82,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0119}" />
                         <lumina:LuminaCascader ItemsSource="{Binding RegionData}"
                                                SelectedValue="{Binding SelectedSheetRegion}"

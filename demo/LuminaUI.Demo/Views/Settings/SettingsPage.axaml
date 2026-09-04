@@ -59,7 +59,7 @@
                        Text="{Binding MobileSettingsStatusText}" />
             
             <lumina:LuminaCard IsElevated="True">
-                <StackPanel Spacing="16">
+                <StackPanel Spacing="12">
                     <TextBlock Text="{l10n:Loc Sandbox.Settings.Appearance}" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource LuminaTextForegroundBrush}"/>
                     <TextBlock Text="{l10n:Loc Sandbox.Settings.AppearanceDescription}" Foreground="{DynamicResource LuminaTextMutedBrush}" Margin="0,-8,0,16"/>
                     
@@ -132,7 +132,7 @@
             </lumina:LuminaCard>
             
             <lumina:LuminaCard>
-                <StackPanel Spacing="16">
+                <StackPanel Spacing="12">
                     <TextBlock Text="{l10n:Loc Sandbox.Settings.Account}" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource LuminaTextForegroundBrush}"/>
                     <TextBlock Text="{l10n:Loc Sandbox.Settings.AccountDescription}" Foreground="{DynamicResource LuminaTextMutedBrush}" Margin="0,-8,0,16"/>
                     

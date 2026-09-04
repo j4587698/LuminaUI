@@ -46,7 +46,7 @@
     <x:Double x:Key="LuminaDateRangeCalendarTitleFontSize">14</x:Double>
     <x:Double x:Key="LuminaDateRangeCalendarDaysGridMinHeight">252</x:Double>
     <x:Double x:Key="LuminaDateRangePickerTextBoxMinHeight">36</x:Double>
-    <Thickness x:Key="LuminaDateRangePickerTextBoxPadding">12,6</Thickness>
+    <Thickness x:Key="LuminaDateRangePickerTextBoxPadding">10,5</Thickness>
     <Thickness x:Key="LuminaDateRangePickerTextBoxBorderThickness">0</Thickness>
     <x:Double x:Key="LuminaDateRangePickerMinHeight">36</x:Double>
     <Thickness x:Key="LuminaDateRangePickerBorderThickness">1</Thickness>
@@ -70,7 +70,7 @@
     <Thickness x:Key="LuminaPaginationButtonPadding">0</Thickness>
     <Thickness x:Key="LuminaPaginationButtonBorderThickness">0</Thickness>
     <x:Double x:Key="LuminaShortcutInputMinHeight">36</x:Double>
-    <Thickness x:Key="LuminaShortcutInputPadding">12,6</Thickness>
+    <Thickness x:Key="LuminaShortcutInputPadding">10,5</Thickness>
     <Thickness x:Key="LuminaShortcutInputBorderThickness">1</Thickness>
     <CornerRadius x:Key="LuminaShortcutInputCornerRadius">6</CornerRadius>
     <x:Double x:Key="LuminaShortcutInputClearButtonSize">28</x:Double>

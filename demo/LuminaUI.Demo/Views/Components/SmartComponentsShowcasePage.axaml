@@ -4,11 +4,11 @@
              xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
              x:Class="LuminaUI.Demo.Views.SmartComponentsShowcasePage">
 
-    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24"
+    <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="14"
                     Width="{Binding #PageScroll.Bounds.Width}"
                     HorizontalAlignment="Stretch"
-                    Margin="0,36,0,40">
+                    Margin="0,4,0,24">
             <StackPanel Spacing="4">
                 <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Components.Smart.Title}" />
                 <TextBlock Classes="Body"
@@ -20,7 +20,7 @@
                                           HorizontalSpacing="16"
                                           VerticalSpacing="16">
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Smart.AutoScrollText}" />
                         <Border Padding="14"
                                 Background="{DynamicResource LuminaHoverBackgroundBrush}"
@@ -43,7 +43,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Smart.AlphabetIndexList}" />
                         <lumina:LuminaIndexedList Height="360">
                             <lumina:LuminaIndexedSection Header="A">
@@ -79,7 +79,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Components.Smart.LinkedCategoryList}" />
                         <lumina:LuminaLinkedCategoryList Height="420">
                             <lumina:LuminaLinkedCategorySection Header="{l10n:Loc Sandbox.Components.Smart.Popular}">

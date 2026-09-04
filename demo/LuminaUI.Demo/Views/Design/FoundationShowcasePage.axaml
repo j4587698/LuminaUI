@@ -6,11 +6,11 @@
              x:Class="LuminaUI.Demo.Views.FoundationShowcasePage"
              x:DataType="vm:FoundationShowcaseViewModel">
 
-    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24"
+    <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="14"
                     Width="{Binding #PageScroll.Bounds.Width}"
                     HorizontalAlignment="Stretch"
-                    Margin="0,36,0,40">
+                    Margin="0,4,0,24">
             <StackPanel Spacing="4">
                 <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.0477}" />
                 <TextBlock Classes="Body" Text="{l10n:Loc Sandbox.Text.0478}" />
@@ -21,7 +21,7 @@
                                           HorizontalSpacing="16"
                                           VerticalSpacing="16">
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1297}" />
                         <StackPanel Spacing="10">
                             <TextBlock Classes="Title" Text="{l10n:Loc Sandbox.Text.0479}" />
@@ -45,7 +45,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0824}" />
                         <StackPanel Spacing="12">
                             <WrapPanel>
@@ -66,7 +66,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0489}" />
                         <lumina:LuminaResponsivePanel MinItemWidth="140"
                                                       MaxItemWidth="220"
@@ -101,7 +101,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1298}" />
                         <StackPanel Spacing="10" HorizontalAlignment="Left">
                             <HyperlinkButton Content="{l10n:Loc Sandbox.Text.0496}" NavigateUri="https://example.com" />
@@ -112,7 +112,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1299}" />
                         <SelectableTextBlock Classes="Code"
                                              TextWrapping="Wrap"
@@ -121,7 +121,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1300}" />
                         <TextBox x:Name="InvalidField"
                                  Text="{Binding InvalidEmail}"
@@ -130,7 +130,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1301}" />
                         <WrapPanel>
                             <Border Classes="Subtle" Width="44" Height="44" Padding="12" Margin="0,0,10,10">
@@ -147,7 +147,7 @@
                 </lumina:LuminaCard>
 
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.1302}" />
                         <ScrollViewer Height="150"
                                       BorderBrush="{DynamicResource LuminaBorderDefaultBrush}"

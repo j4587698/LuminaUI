@@ -108,11 +108,11 @@
         </Style>
     </UserControl.Styles>
 
-    <ScrollViewer x:Name="PageScroll" Margin="16" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24"
+    <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="14"
                     Width="{Binding #PageScroll.Bounds.Width}"
                     HorizontalAlignment="Stretch"
-                    Margin="0,28,0,40">
+                    Margin="0,4,0,24">
 
             <StackPanel Spacing="8">
                 <TextBlock Text="{Binding Title}"

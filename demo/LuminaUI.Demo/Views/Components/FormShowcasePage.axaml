@@ -9,7 +9,7 @@
     <lumina:LuminaInputPanel Margin="16">
         <StackPanel Spacing="24"
                     HorizontalAlignment="Stretch"
-                    Margin="0,36,0,40">
+                    Margin="0,4,0,24">
             <StackPanel Spacing="4">
                 <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.1172}" />
                 <TextBlock Text="{l10n:Loc Sandbox.Text.0817}"
@@ -22,7 +22,7 @@
                                           HorizontalSpacing="16"
                                           VerticalSpacing="16">
                 <lumina:LuminaCard>
-                    <StackPanel Spacing="16">
+                    <StackPanel Spacing="12">
                         <TextBlock Classes="SectionTitle" Text="{l10n:Loc Sandbox.Text.0816}" />
                         <lumina:LuminaForm LabelPosition="Left" LabelWidth="120">
                             <TextBox lumina:LuminaForm.Label="{l10n:Loc Sandbox.Components.Form.Project}"
