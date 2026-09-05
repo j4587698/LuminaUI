@@ -23,7 +23,7 @@
     <ControlTheme x:Key="{x:Type lumina:LuminaPage}" TargetType="lumina:LuminaPage">
         <Setter Property="AutomaticallyApplySafeAreaPadding" Value="True" />
         <Setter Property="Background" Value="{DynamicResource LuminaBackgroundBrush}" />
-        <Setter Property="Padding" Value="16" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaContentPagePadding}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="Template">

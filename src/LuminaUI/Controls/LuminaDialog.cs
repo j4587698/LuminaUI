@@ -1,8 +1,11 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Metadata;
 
 namespace LuminaUI.Controls;
 
+[TemplatePart("PART_DialogRoot", typeof(Border))]
+[TemplatePart("PART_TitleText", typeof(TextBlock))]
 public class LuminaDialog : ContentControl
 {
     public static readonly StyledProperty<string?> TitleProperty =

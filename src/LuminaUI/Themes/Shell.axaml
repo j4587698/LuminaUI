@@ -6,7 +6,7 @@
 
     <Thickness x:Key="LuminaShellMenuHeaderMargin">12,12,12,8</Thickness>
     <x:Double x:Key="LuminaShellMenuHeaderHeight">48</x:Double>
-    <Thickness x:Key="LuminaShellMenuScrollMargin">8,0,8,12</Thickness>
+    <Thickness x:Key="LuminaShellMenuScrollMargin">10,8,10,12</Thickness>
     <Thickness x:Key="LuminaShellMenuFooterMargin">0</Thickness>
     <Thickness x:Key="LuminaShellMenuFooterPadding">0</Thickness>
     <Thickness x:Key="LuminaShellMenuCompactToggleHostMargin">8,0,8,12</Thickness>
@@ -83,7 +83,7 @@
                                             Margin="{DynamicResource LuminaShellMenuHeaderMargin}"
                                             Height="{DynamicResource LuminaShellMenuHeaderHeight}"
                                             ClipToBounds="True"
-                                            IsVisible="{TemplateBinding EffectiveIsMenuOpen}">
+                                            IsVisible="{TemplateBinding EffectiveIsMenuHeaderVisible}">
                                         <ContentPresenter Content="{TemplateBinding EffectiveMenuHeader}" VerticalAlignment="Center" />
                                     </Border>
 
@@ -273,12 +273,27 @@
             <Setter Property="DisplayMode" Value="CompactInline" />
         </Style>
 
-        <Style Selector="^:menucompact /template/ Border#PART_MenuHeader">
+        <Style Selector="^:menucompact /template/ Border#PART_MenuHeader, ^:menu-header-empty /template/ Border#PART_MenuHeader, ^ /template/ Border#PART_MenuHeader[IsVisible=False]">
             <Setter Property="IsVisible" Value="False" />
+            <Setter Property="Height" Value="0" />
+            <Setter Property="MinHeight" Value="0" />
+            <Setter Property="Margin" Value="0" />
         </Style>
 
-        <Style Selector="^:menu-footer-empty /template/ Border#PART_MenuFooter">
+        <Style Selector="^:headerless /template/ Border#PART_ContentHeader, ^ /template/ Border#PART_ContentHeader[IsVisible=False]">
             <Setter Property="IsVisible" Value="False" />
+            <Setter Property="Height" Value="0" />
+            <Setter Property="MinHeight" Value="0" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+
+        <Style Selector="^:menu-footer-empty /template/ Border#PART_MenuFooter, ^ /template/ Border#PART_MenuFooter[IsVisible=False]">
+            <Setter Property="IsVisible" Value="False" />
+            <Setter Property="Height" Value="0" />
+            <Setter Property="MinHeight" Value="0" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="0" />
         </Style>
 
         <Style Selector="^:menucompact /template/ Border#PART_MenuCompactToggleHost">

@@ -6,6 +6,7 @@
     <Thickness x:Key="LuminaGroupBoxFrameBorderThickness">1</Thickness>
     <CornerRadius x:Key="LuminaGroupBoxFrameCornerRadius">6</CornerRadius>
     <x:Double x:Key="LuminaGroupBoxContentRowSpacing">12</x:Double>
+    <Thickness x:Key="LuminaGroupBoxDescriptionMargin">0,0,0,12</Thickness>
     <x:Double x:Key="LuminaGroupBoxDescriptionFontSize">12</x:Double>
     <Thickness x:Key="LuminaGroupBoxHeaderLineMargin">12,0,12,0</Thickness>
     <x:Double x:Key="LuminaGroupBoxHeaderColumnSpacing">8</x:Double>
@@ -28,13 +29,13 @@
                             BorderThickness="{DynamicResource LuminaGroupBoxFrameBorderThickness}"
                             CornerRadius="{DynamicResource LuminaGroupBoxFrameCornerRadius}"
                             Padding="{TemplateBinding Padding}">
-                        <Grid RowDefinitions="Auto,*"
-                              RowSpacing="{DynamicResource LuminaGroupBoxContentRowSpacing}">
+                        <Grid RowDefinitions="Auto,*">
                             <TextBlock Name="PART_DescriptionText"
                                        Text="{TemplateBinding Description}"
                                        FontSize="{DynamicResource LuminaGroupBoxDescriptionFontSize}"
                                        Foreground="{DynamicResource LuminaTextMutedBrush}"
                                        TextWrapping="Wrap"
+                                       Margin="{DynamicResource LuminaGroupBoxDescriptionMargin}"
                                        IsVisible="{TemplateBinding HasDescription}" />
                             <ContentPresenter Grid.Row="1"
                                               Content="{TemplateBinding Content}"
@@ -125,6 +126,10 @@
 
         <Style Selector="^.Compact">
             <Setter Property="Padding" Value="12,14,12,12" />
+        </Style>
+
+        <Style Selector="^ /template/ TextBlock#PART_DescriptionText[IsVisible=False]">
+            <Setter Property="Margin" Value="0" />
         </Style>
     </ControlTheme>
 

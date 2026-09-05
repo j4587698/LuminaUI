@@ -72,11 +72,15 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private Control? _observedMenuFooter;
 
+    private Control? _observedMenuHeader;
+
     private LuminaOverlayHost? _menuDrawerHost;
 
     private LuminaDrawer? _menuDrawer;
 
     private ContentPresenter? _menuDrawerHeaderPresenter;
+
+    private Border? _menuDrawerHeader;
 
     private ContentPresenter? _menuDrawerContentPresenter;
 
@@ -144,6 +148,8 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
 
     private bool _effectiveIsMenuCompact;
 
+    private bool _effectiveIsMenuHeaderVisible;
+
     private LuminaShellPaneDisplayMode _effectivePaneDisplayMode = LuminaShellPaneDisplayMode.Left;
 
     private object? _effectiveHeaderTitle;
@@ -205,6 +211,8 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
     public static readonly AttachedProperty<bool> IsMenuCompactProperty = AvaloniaProperty.RegisterAttached<LuminaShell, Control, bool>("IsMenuCompact", defaultValue: false, inherits: true);
 
     public static readonly DirectProperty<LuminaShell, bool> EffectiveIsMenuOpenProperty = AvaloniaProperty.RegisterDirect<LuminaShell, bool>(nameof(EffectiveIsMenuOpen), (LuminaShell shell) => shell.EffectiveIsMenuOpen, null, unsetValue: false);
+
+    public static readonly DirectProperty<LuminaShell, bool> EffectiveIsMenuHeaderVisibleProperty = AvaloniaProperty.RegisterDirect<LuminaShell, bool>(nameof(EffectiveIsMenuHeaderVisible), (LuminaShell shell) => shell.EffectiveIsMenuHeaderVisible, null, unsetValue: false);
 
     public static readonly DirectProperty<LuminaShell, bool> EffectiveIsShellChromeVisibleProperty = AvaloniaProperty.RegisterDirect<LuminaShell, bool>(nameof(EffectiveIsShellChromeVisible), (LuminaShell shell) => shell.EffectiveIsShellChromeVisible, null, unsetValue: false);
 
@@ -496,6 +504,18 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         private set
         {
             SetAndRaise(EffectiveIsMenuOpenProperty, ref _effectiveIsMenuOpen, value);
+        }
+    }
+
+    public bool EffectiveIsMenuHeaderVisible
+    {
+        get
+        {
+            return _effectiveIsMenuHeaderVisible;
+        }
+        private set
+        {
+            SetAndRaise(EffectiveIsMenuHeaderVisibleProperty, ref _effectiveIsMenuHeaderVisible, value);
         }
     }
 
@@ -1146,6 +1166,34 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         }
     }
 
+    private void ObserveMenuHeader(Control? menuHeader)
+    {
+        if (ReferenceEquals(_observedMenuHeader, menuHeader))
+        {
+            return;
+        }
+
+        if (_observedMenuHeader != null)
+        {
+            _observedMenuHeader.PropertyChanged -= OnMenuHeaderPropertyChanged;
+        }
+
+        _observedMenuHeader = menuHeader;
+        if (_observedMenuHeader != null)
+        {
+            _observedMenuHeader.PropertyChanged += OnMenuHeaderPropertyChanged;
+        }
+    }
+
+    private void OnMenuHeaderPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
+    {
+        if (e.Property == Visual.IsVisibleProperty)
+        {
+            UpdateMenuHeaderVisibility();
+            UpdateEffectiveShellChrome();
+        }
+    }
+
     private void OnOverlayHostPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
     {
         if (!ReferenceEquals(sender, _overlayHost) || _syncingOverlayHostFromShell)
@@ -1415,8 +1463,10 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
             Margin = LuminaPickerResources.Thickness("LuminaShellTopMenuDrawerHeaderMargin", new Thickness(16, 10, 16, 8)),
             Height = LuminaPickerResources.Double("LuminaShellTopMenuDrawerHeaderHeight", 44),
             ClipToBounds = true,
+            IsVisible = HasVisibleMenuHeader(),
             Child = headerPresenter
         };
+        _menuDrawerHeader = header;
 
         ContentPresenter menuContentPresenter = new ContentPresenter();
         _menuDrawerContentPresenter = menuContentPresenter;
@@ -2142,7 +2192,13 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
             UpdateEffectiveMenuSlots();
             UpdateEffectiveShellChrome();
         }
-        else if (change.Property == MenuHeaderProperty || change.Property == MenuContentProperty)
+        else if (change.Property == MenuHeaderProperty)
+        {
+            ObserveMenuHeader(change.GetNewValue<object>() as Control);
+            UpdateEffectiveMenuSlots();
+            UpdateEffectiveShellChrome();
+        }
+        else if (change.Property == MenuContentProperty)
         {
             UpdateEffectiveMenuSlots();
             UpdateEffectiveShellChrome();
@@ -2272,8 +2328,10 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         bool useMenuDrawer = menuDrawerHost != null;
         SetMenuDrawerMode(useMenuDrawer);
         bool isMenuEffectiveOpen = isShellMenuAllowed && !useMenuDrawer && IsMenuOpen;
+        bool isMenuHeaderEffectiveVisible = isMenuEffectiveOpen && IsShellHeaderVisible && HasVisibleMenuHeader();
         EffectiveIsShellChromeVisible = isShellChromeEffectiveVisible;
         EffectiveIsShellHeaderVisible = isShellHeaderEffectiveVisible;
+        EffectiveIsMenuHeaderVisible = isMenuHeaderEffectiveVisible;
         EffectiveIsMenuOpen = isMenuEffectiveOpen;
         EffectiveIsMenuCompact = isMenuCompact;
         EffectivePaneDisplayMode = paneDisplayMode;
@@ -2288,6 +2346,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         PseudoClasses.Set(":chromeless", !isShellChromeEffectiveVisible);
         PseudoClasses.Set(":headerless", !isShellHeaderEffectiveVisible);
         PseudoClasses.Set(":menucompact", isMenuCompact);
+        UpdateMenuHeaderVisibility();
         UpdateMenuFooterVisibility();
         PseudoClasses.Set(":pane-left", paneDisplayMode == LuminaShellPaneDisplayMode.Left);
         PseudoClasses.Set(":pane-left-compact", isLeftCompact);
@@ -2477,7 +2536,23 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         EffectiveMenuHeader = _isMenuDrawerMode ? null : MenuHeader;
         EffectiveMenuContent = _isMenuDrawerMode ? null : MenuContent;
         EffectiveMenuFooter = _isMenuDrawerMode ? null : MenuFooter;
+        UpdateMenuHeaderVisibility();
         UpdateMenuFooterVisibility();
+    }
+
+    private void UpdateMenuHeaderVisibility()
+    {
+        bool isVisible = HasVisibleMenuHeader();
+        PseudoClasses.Set(":menu-header-empty", !isVisible);
+        if (_menuDrawerHeader != null)
+        {
+            _menuDrawerHeader.IsVisible = isVisible;
+        }
+    }
+
+    private bool HasVisibleMenuHeader()
+    {
+        return HasHeaderValue(MenuHeader) && (MenuHeader is not Control menuHeader || menuHeader.IsVisible);
     }
 
     private void UpdateMenuFooterVisibility()

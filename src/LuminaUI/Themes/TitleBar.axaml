@@ -54,6 +54,8 @@
     <ControlTheme x:Key="{x:Type lumina:LuminaTitleBar}" TargetType="lumina:LuminaTitleBar">
         <Setter Property="Height" Value="{DynamicResource LuminaTitleBarHeight}" />
         <Setter Property="Background" Value="{DynamicResource LuminaBackgroundBrush}" />
+        <Setter Property="LeftContentMargin" Value="{DynamicResource LuminaTitleBarLeftContentMargin}" />
+        <Setter Property="RightContentMargin" Value="{DynamicResource LuminaTitleBarRightContentMargin}" />
         <Setter Property="Template">
             <ControlTemplate>
                 <Grid ColumnDefinitions="Auto,*,Auto,Auto" Background="{TemplateBinding Background}">
@@ -66,9 +68,11 @@
                     
                     <!-- 左侧内容槽 (开放命中测试，以便内部按钮可以被点击) -->
                     <ContentPresenter Grid.Column="0"
+                                      Name="PART_LeftContent"
                                       Content="{TemplateBinding LeftContent}"
                                       VerticalAlignment="Center"
                                       Margin="{TemplateBinding LeftContentMargin}"
+                                      IsVisible="{TemplateBinding LeftContent, Converter={x:Static ObjectConverters.IsNotNull}}"
                                       chrome:WindowDecorationProperties.ElementRole="User" />
                     
                     <!-- 中间内容槽 (通常放居中标题) -->
@@ -76,9 +80,11 @@
                     
                     <!-- 右侧内容槽 -->
                     <ContentPresenter Grid.Column="2"
+                                      Name="PART_RightContent"
                                       Content="{TemplateBinding RightContent}"
                                       VerticalAlignment="Center"
-                                      Margin="{DynamicResource LuminaTitleBarRightContentMargin}"
+                                      Margin="{TemplateBinding RightContentMargin}"
+                                      IsVisible="{TemplateBinding RightContent, Converter={x:Static ObjectConverters.IsNotNull}}"
                                       chrome:WindowDecorationProperties.ElementRole="User" />
 
                     <!-- 右侧窗口按钮 -->
@@ -144,6 +150,12 @@
         </Style>
         <Style Selector="^[IsPinned=True] /template/ Path#PinIcon">
             <Setter Property="Data" Value="M7,3 L17,3 L17,5 L16,5 L16,11.2 L19,14.2 L19,16 L13,16 L13,22 L11,22 L11,16 L5,16 L5,14.2 L8,11.2 L8,5 L7,5 Z" />
+        </Style>
+        <Style Selector="^ /template/ ContentPresenter#PART_LeftContent[IsVisible=False]">
+            <Setter Property="Margin" Value="0" />
+        </Style>
+        <Style Selector="^ /template/ ContentPresenter#PART_RightContent[IsVisible=False]">
+            <Setter Property="Margin" Value="0" />
         </Style>
     </ControlTheme>
 

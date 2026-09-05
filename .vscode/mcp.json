@@ -2,7 +2,7 @@
   "servers": {
     "DotNetCatalog": {
       "type": "http",
-      "url": "http://localhost:3002/mcp"
+      "url": "https://luminamcp.jvxiang.com/mcp"
     },
     "LuminaUI.Diagnostics": {
       "type": "stdio",
