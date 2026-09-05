@@ -8,7 +8,7 @@
     <Thickness x:Key="LuminaItemsControlSurfacePadding">12</Thickness>
     <Thickness x:Key="LuminaHeaderedContentControlBorderThickness">1</Thickness>
     <CornerRadius x:Key="LuminaHeaderedContentControlCornerRadius">8</CornerRadius>
-    <Thickness x:Key="LuminaHeaderedContentControlPadding">0</Thickness>
+    <Thickness x:Key="LuminaHeaderedContentControlPadding">14</Thickness>
     <Thickness x:Key="LuminaHeaderedContentControlHeaderPadding">14,12</Thickness>
     <x:Double x:Key="LuminaHeaderedContentControlDividerHeight">1</x:Double>
     <Thickness x:Key="LuminaHeaderedContentControlContentPadding">14</Thickness>
@@ -65,8 +65,7 @@
                 <Border Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="{TemplateBinding CornerRadius}"
-                        Padding="{TemplateBinding Padding}">
+                        CornerRadius="{TemplateBinding CornerRadius}">
                     <Grid RowDefinitions="Auto,Auto,*">
                         <ContentPresenter Name="PART_HeaderPresenter"
                                           Grid.Row="0"
@@ -83,7 +82,7 @@
                                 IsVisible="{TemplateBinding Header, Converter={x:Static ObjectConverters.IsNotNull}}" />
                         <ContentPresenter Name="PART_ContentPresenter"
                                           Grid.Row="2"
-                                          Padding="{DynamicResource LuminaHeaderedContentControlContentPadding}"
+                                          Padding="{TemplateBinding Padding}"
                                           Content="{TemplateBinding Content}"
                                           ContentTemplate="{TemplateBinding ContentTemplate}"
                                           HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"

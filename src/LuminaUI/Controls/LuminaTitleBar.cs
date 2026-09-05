@@ -3,6 +3,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Chrome;
 using Avalonia.Controls.Metadata;
+using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -16,6 +17,8 @@ namespace LuminaUI.Controls;
 [TemplatePart("PART_FullScreenButton", typeof(Button))]
 [TemplatePart("PART_PinButton", typeof(Button))]
 [TemplatePart("PART_DragArea", typeof(Control))]
+[TemplatePart("PART_LeftContent", typeof(ContentPresenter))]
+[TemplatePart("PART_RightContent", typeof(ContentPresenter))]
 public class LuminaTitleBar : ContentControl
 {
     private readonly List<Button> _decorationButtons = new List<Button>();
@@ -31,6 +34,8 @@ public class LuminaTitleBar : ContentControl
     public static readonly StyledProperty<object?> RightContentProperty = AvaloniaProperty.Register<LuminaTitleBar, object?>(nameof(RightContent));
 
     public static readonly StyledProperty<Thickness> LeftContentMarginProperty = AvaloniaProperty.Register<LuminaTitleBar, Thickness>(nameof(LeftContentMargin), new Thickness(16.0, 0.0, 16.0, 0.0));
+
+    public static readonly StyledProperty<Thickness> RightContentMarginProperty = AvaloniaProperty.Register<LuminaTitleBar, Thickness>(nameof(RightContentMargin), new Thickness(0.0, 0.0, 16.0, 0.0));
 
     public static readonly StyledProperty<bool> ShowSystemButtonsProperty = AvaloniaProperty.Register<LuminaTitleBar, bool>(nameof(ShowSystemButtons), defaultValue: true);
 
@@ -58,6 +63,12 @@ public class LuminaTitleBar : ContentControl
     {
         get => GetValue(RightContentProperty);
         set => SetValue(RightContentProperty, value);
+    }
+
+    public Thickness RightContentMargin
+    {
+        get => GetValue(RightContentMarginProperty);
+        set => SetValue(RightContentMarginProperty, value);
     }
 
     public Thickness LeftContentMargin

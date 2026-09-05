@@ -43,6 +43,7 @@
     <!-- LuminaDialog Theme (Ultra Modern, No Gray, Big Shadow, Deep Black) -->
     <ControlTheme x:Key="{x:Type lumina:LuminaDialog}" TargetType="lumina:LuminaDialog">
         <Setter Property="MaxWidth" Value="{DynamicResource LuminaDialogMaxWidth}" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaDialogContentMargin}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="Template">
             <ControlTemplate>
@@ -56,13 +57,15 @@
                         HorizontalAlignment="Stretch"
                         BoxShadow="{DynamicResource LuminaShadowPopup}">
                     
-                    <StackPanel Margin="{DynamicResource LuminaDialogContentMargin}">
+                    <StackPanel Margin="{TemplateBinding Padding}">
                         <!-- 头部标题区 (去除了陈旧的分割线) -->
-                        <TextBlock Text="{TemplateBinding Title}" 
+                        <TextBlock Name="PART_TitleText"
+                                   Text="{TemplateBinding Title}" 
                                    FontSize="{DynamicResource LuminaDialogTitleFontSize}"
                                    FontWeight="SemiBold" 
                                    Foreground="{DynamicResource LuminaTextPrimaryBrush}" 
-                                   Margin="{DynamicResource LuminaDialogTitleMargin}" />
+                                   Margin="{DynamicResource LuminaDialogTitleMargin}"
+                                   IsVisible="{TemplateBinding Title, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
                         
                         <!-- 身体内容区 -->
                         <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" />
@@ -71,6 +74,9 @@
             </ControlTemplate>
         </Setter>
 
+        <Style Selector="^ /template/ TextBlock#PART_TitleText[IsVisible=False]">
+            <Setter Property="Margin" Value="0" />
+        </Style>
     </ControlTheme>
 
     <!-- LuminaToast Theme (Clean Pill Shape) -->
@@ -181,6 +187,7 @@
         <Setter Property="BorderThickness" Value="{DynamicResource LuminaBottomSheetBorderThickness}" />
         <Setter Property="ContentPadding" Value="{DynamicResource LuminaBottomSheetContentPadding}" />
         <Setter Property="CornerRadius" Value="{DynamicResource LuminaBottomSheetCornerRadius}" />
+        <Setter Property="ShowDragHandle" Value="True" />
         <Setter Property="ClipToBounds" Value="False" />
         <Setter Property="Template">
             <ControlTemplate>
@@ -202,7 +209,8 @@
                                 Background="Transparent" 
                                 Height="{DynamicResource LuminaBottomSheetDragHandleHitHeight}"
                                 HorizontalAlignment="Stretch"
-                                Cursor="SizeAll">
+                                Cursor="SizeAll"
+                                IsVisible="{TemplateBinding ShowDragHandle}">
                             <Border Width="{DynamicResource LuminaBottomSheetDragHandleWidth}"
                                     Height="{DynamicResource LuminaBottomSheetDragHandleHeight}"
                                     CornerRadius="{DynamicResource LuminaBottomSheetDragHandleCornerRadius}"
@@ -219,6 +227,11 @@
                 </Grid>
             </ControlTemplate>
         </Setter>
+
+        <Style Selector="^ /template/ Border#PART_DragHandle[IsVisible=False]">
+            <Setter Property="Height" Value="0" />
+            <Setter Property="MinHeight" Value="0" />
+        </Style>
     </ControlTheme>
 
 </ResourceDictionary>

@@ -52,9 +52,9 @@
                         <lumina:LuminaNavigationView.DataTemplates>
                             <DataTemplate DataType="material:MaterialIconKind" x:DataType="material:MaterialIconKind">
                                 <icons:MaterialIcon Kind="{Binding}"
-                                                    Width="20"
-                                                    Height="20"
-                                                    Foreground="{DynamicResource LuminaTextMutedBrush}" />
+                                                    Width="{Binding $parent[ContentPresenter].Width}"
+                                                    Height="{Binding $parent[ContentPresenter].Width}"
+                                                    Foreground="{Binding $parent[ContentPresenter].(TextElement.Foreground)}" />
                             </DataTemplate>
                         </lumina:LuminaNavigationView.DataTemplates>
                         <lumina:LuminaNavigationItem Name="NavDesignSystem" Header="{l10n:Loc Sandbox.Nav.DesignSystem}" Icon="{x:Static material:MaterialIconKind.ViewDashboard}" />

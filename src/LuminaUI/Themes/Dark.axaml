@@ -8,8 +8,8 @@
     <Color x:Key="LuminaBackground">#070708</Color>             <!-- Level 0: App base -->
     <Color x:Key="LuminaNavigationPane">#0D0E11</Color>         <!-- App navigation pane -->
     <Color x:Key="LuminaNavigationPaneItem">#15171C</Color>     <!-- Items placed on navigation pane -->
-    <Color x:Key="LuminaNavigationPaneItemSelected">#172554</Color>
-    <Color x:Key="LuminaNavigationPaneItemSelectedForeground">#93C5FD</Color>
+    <Color x:Key="LuminaNavigationPaneItemSelected">#1C2A4A</Color>
+    <Color x:Key="LuminaNavigationPaneItemSelectedForeground">#60A5FA</Color>
     <Color x:Key="LuminaSurface">#0D0E11</Color>                <!-- Level 1: Cards -->
     <Color x:Key="LuminaSurfaceElevated">#20242C</Color>        <!-- Level 2: Raised cards, made lighter for visibility -->
     <Color x:Key="LuminaPopover">#16171C</Color>                <!-- Level 3: Menus, dialogs, popups -->

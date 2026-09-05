@@ -30,6 +30,8 @@ public class LuminaBottomSheet : ContentControl
 
     public static readonly StyledProperty<Thickness> SafeAreaPaddingProperty = AvaloniaProperty.Register<LuminaBottomSheet, Thickness>(nameof(SafeAreaPadding));
 
+    public static readonly StyledProperty<bool> ShowDragHandleProperty = AvaloniaProperty.Register<LuminaBottomSheet, bool>(nameof(ShowDragHandle), defaultValue: true);
+
     public static readonly DirectProperty<LuminaBottomSheet, Thickness> EffectiveContentPaddingProperty = AvaloniaProperty.RegisterDirect<LuminaBottomSheet, Thickness>(nameof(EffectiveContentPadding), (LuminaBottomSheet sheet) => sheet.EffectiveContentPadding);
 
     public Thickness ContentPadding
@@ -42,6 +44,12 @@ public class LuminaBottomSheet : ContentControl
     {
         get => GetValue(SafeAreaPaddingProperty);
         set => SetValue(SafeAreaPaddingProperty, value);
+    }
+
+    public bool ShowDragHandle
+    {
+        get => GetValue(ShowDragHandleProperty);
+        set => SetValue(ShowDragHandleProperty, value);
     }
 
     public Thickness EffectiveContentPadding

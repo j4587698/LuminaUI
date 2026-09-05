@@ -65,3 +65,4 @@ secrets.json
 # Tooling-generated artifacts (should never be committed)
 .playwright-mcp/
 .spec-workflow/
+.mcp.json
