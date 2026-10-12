@@ -1,0 +1,31 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:luminaCharts="using:LuminaUI.Charts">
+  <Styles.Resources>
+    <ResourceDictionary>
+      <SolidColorBrush x:Key="LuminaChartGridLineBrush" Color="{DynamicResource LuminaDivider}" />
+      <SolidColorBrush x:Key="LuminaChartAxisLabelBrush" Color="{DynamicResource LuminaTextMuted}" />
+      <SolidColorBrush x:Key="LuminaChartCrosshairBrush" Color="{DynamicResource LuminaTextMuted}" />
+      <SolidColorBrush x:Key="LuminaChartTooltipBackgroundBrush" Color="{DynamicResource LuminaSurfaceElevated}" />
+      <SolidColorBrush x:Key="LuminaChartTooltipTextBrush" Color="{DynamicResource LuminaTextPrimary}" />
+
+      <SolidColorBrush x:Key="LuminaChartColor1" Color="{DynamicResource LuminaPrimary}" />
+      <SolidColorBrush x:Key="LuminaChartColor2" Color="{DynamicResource LuminaTeal}" />
+      <SolidColorBrush x:Key="LuminaChartColor3" Color="{DynamicResource LuminaOrange}" />
+      <SolidColorBrush x:Key="LuminaChartColor4" Color="{DynamicResource LuminaPink}" />
+      <SolidColorBrush x:Key="LuminaChartColor5" Color="{DynamicResource LuminaIndigo}" />
+      <SolidColorBrush x:Key="LuminaChartColor6" Color="{DynamicResource LuminaSuccess}" />
+      <SolidColorBrush x:Key="LuminaChartColor7" Color="{DynamicResource LuminaWarning}" />
+      <SolidColorBrush x:Key="LuminaChartColor8" Color="{DynamicResource LuminaDanger}" />
+    </ResourceDictionary>
+  </Styles.Resources>
+
+  <Style Selector="luminaCharts|LuminaLineChart">
+    <Setter Property="GridLineBrush" Value="{DynamicResource LuminaChartGridLineBrush}" />
+    <Setter Property="AxisLabelBrush" Value="{DynamicResource LuminaChartAxisLabelBrush}" />
+    <Setter Property="CrosshairBrush" Value="{DynamicResource LuminaChartCrosshairBrush}" />
+    <Setter Property="TooltipBackgroundBrush" Value="{DynamicResource LuminaChartTooltipBackgroundBrush}" />
+    <Setter Property="TooltipTextBrush" Value="{DynamicResource LuminaChartTooltipTextBrush}" />
+    <Setter Property="LegendTextBrush" Value="{DynamicResource LuminaChartAxisLabelBrush}" />
+  </Style>
+</Styles>

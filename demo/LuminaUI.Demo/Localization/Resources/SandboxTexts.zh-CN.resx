@@ -5353,4 +5353,164 @@ await shell.PushAsync(
   <data name="Sandbox.Card.GlassDynamicDescription" xml:space="preserve">
     <value>持续模糊当前背景，能立即跟随变化，但渲染开销更高。</value>
   </data>
+<data name="Sandbox.Charts.LineTitle" xml:space="preserve">
+    <value>图表</value>
+  </data>
+  <data name="Sandbox.Charts.LineSubtitle" xml:space="preserve">
+    <value>基于 Lumina 设计系统、主题感知的手绘笛卡尔图表。</value>
+  </data>
+  <data name="Sandbox.Charts.AreaLineTitle" xml:space="preserve">
+    <value>面积与折线</value>
+  </data>
+  <data name="Sandbox.Charts.AreaLineDescription" xml:space="preserve">
+    <value>绑定到 ViewModel；序列颜色使用内置调色板。</value>
+  </data>
+  <data name="Sandbox.Charts.MultiTitle" xml:space="preserve">
+    <value>多序列</value>
+  </data>
+  <data name="Sandbox.Charts.MultiDescription" xml:space="preserve">
+    <value>序列在 XAML 中内联声明；描边来自主题调色板。</value>
+  </data>
+  <data name="Sandbox.Charts.CompactTitle" xml:space="preserve">
+    <value>精简</value>
+  </data>
+  <data name="Sandbox.Charts.CompactDescription" xml:space="preserve">
+    <value>已关闭坐标轴标签与网格，启用数据标记。</value>
+  </data>
+  <data name="Sandbox.Charts.PerformanceTitle" xml:space="preserve">
+    <value>性能</value>
+  </data>
+  <data name="Sandbox.Charts.PerformanceDescription" xml:space="preserve">
+    <value>20 万个样本的序列。图表将其降采样为约每像素列一个点并缓存几何；悬停时只重绘叠加层。</value>
+  </data>
+  <data name="Sandbox.Charts.LoadStress" xml:space="preserve">
+    <value>加载 20 万</value>
+  </data>
+  <data name="Sandbox.Charts.Reset" xml:space="preserve">
+    <value>重置</value>
+  </data>
+  <data name="Sandbox.Charts.PerfInitial" xml:space="preserve">
+    <value>构建: - ms · 渲染: - ms · 移动: - ms</value>
+  </data>
+  <data name="Sandbox.Charts.PerfFormat" xml:space="preserve">
+    <value>构建: {0:F2} ms · 渲染: {1:F3} ms · 移动: {2:F3} ms</value>
+  </data>
+  <data name="Sandbox.Charts.LiveTitle" xml:space="preserve">
+    <value>实时流</value>
+  </data>
+  <data name="Sandbox.Charts.LiveDescription" xml:space="preserve">
+    <value>每 250 毫秒向 ObservableCollection 追加数据。图表响应变化并平滑过渡到新曲线（TransitionDuration）。</value>
+  </data>
+  <data name="Sandbox.Charts.Start" xml:space="preserve">
+    <value>开始</value>
+  </data>
+  <data name="Sandbox.Charts.Stop" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="Sandbox.Charts.LiveStatusInitial" xml:space="preserve">
+    <value>0 个点</value>
+  </data>
+  <data name="Sandbox.Charts.LiveStatusFormat" xml:space="preserve">
+    <value>{0} 个点 · x={1}</value>
+  </data>
+  <data name="Sandbox.Charts.LatestInitial" xml:space="preserve">
+    <value>最新: -</value>
+  </data>
+  <data name="Sandbox.Charts.LatestFormat" xml:space="preserve">
+    <value>最新: {0}</value>
+  </data>
+  <data name="Sandbox.Charts.BarTitle" xml:space="preserve">
+    <value>柱状图</value>
+  </data>
+  <data name="Sandbox.Charts.BarSubtitle" xml:space="preserve">
+    <value>使用带月份标签的类别 X 轴的分类柱状图。</value>
+  </data>
+  <data name="Sandbox.Charts.BarCardTitle" xml:space="preserve">
+    <value>月度收入</value>
+  </data>
+  <data name="Sandbox.Charts.Month1" xml:space="preserve"><value>一月</value></data>
+  <data name="Sandbox.Charts.Month2" xml:space="preserve"><value>二月</value></data>
+  <data name="Sandbox.Charts.Month3" xml:space="preserve"><value>三月</value></data>
+  <data name="Sandbox.Charts.Month4" xml:space="preserve"><value>四月</value></data>
+  <data name="Sandbox.Charts.Month5" xml:space="preserve"><value>五月</value></data>
+  <data name="Sandbox.Charts.Month6" xml:space="preserve"><value>六月</value></data>
+  <data name="Sandbox.Charts.Month7" xml:space="preserve"><value>七月</value></data>
+  <data name="Sandbox.Charts.Month8" xml:space="preserve"><value>八月</value></data>
+  <data name="Sandbox.Charts.Month9" xml:space="preserve"><value>九月</value></data>
+  <data name="Sandbox.Charts.Month10" xml:space="preserve"><value>十月</value></data>
+  <data name="Sandbox.Charts.ScatterTitle" xml:space="preserve">
+    <value>散点图</value>
+  </data>
+  <data name="Sandbox.Charts.ScatterSubtitle" xml:space="preserve">
+    <value>无连线的离散点标记。</value>
+  </data>
+  <data name="Sandbox.Charts.ScatterCardTitle" xml:space="preserve">
+    <value>两个簇</value>
+  </data>
+  <data name="Sandbox.Charts.SplineTitle" xml:space="preserve">
+    <value>样条曲线</value>
+  </data>
+  <data name="Sandbox.Charts.SplineSubtitle" xml:space="preserve">
+    <value>通过数据点的平滑 Catmull-Rom 曲线。</value>
+  </data>
+  <data name="Sandbox.Charts.SplineCardTitle" xml:space="preserve">
+    <value>需求预测</value>
+  </data>
+  <data name="Sandbox.Charts.ComboTitle" xml:space="preserve">
+    <value>组合与混合</value>
+  </data>
+  <data name="Sandbox.Charts.ComboSubtitle" xml:space="preserve">
+    <value>不同序列类型共享同一绘图区：柱状图 + 折线，以及面积 + 样条 + 散点。</value>
+  </data>
+  <data name="Sandbox.Charts.ComboBarsTitle" xml:space="preserve">
+    <value>柱状 + 折线</value>
+  </data>
+  <data name="Sandbox.Charts.ComboBarsDescription" xml:space="preserve">
+    <value>分组柱状序列叠加一条移动平均线。</value>
+  </data>
+  <data name="Sandbox.Charts.ComboMixedTitle" xml:space="preserve">
+    <value>面积 + 样条 + 散点</value>
+  </data>
+  <data name="Sandbox.Charts.ComboMixedDescription" xml:space="preserve">
+    <value>三种序列类型绘制在同一坐标轴上。</value>
+  </data>
+<data name="Sandbox.Charts.StepTitle" xml:space="preserve">
+    <value>阶梯折线</value>
+  </data>
+  <data name="Sandbox.Charts.StepDescription" xml:space="preserve">
+    <value>以水平-垂直的阶梯方式连接数据点，适合表示离散状态变化。</value>
+  </data>
+  <data name="Sandbox.Charts.SparkTitle" xml:space="preserve">
+    <value>迷你图</value>
+  </data>
+  <data name="Sandbox.Charts.SparkDescription" xml:space="preserve">
+    <value>紧凑、无坐标轴的迷你趋势线，适合快速概览。</value>
+  </data>
+<data name="Sandbox.Charts.HistogramTitle" xml:space="preserve">
+    <value>直方图</value>
+  </data>
+  <data name="Sandbox.Charts.HistogramDescription" xml:space="preserve">
+    <value>把连续数值分箱成柱状分布。</value>
+  </data>
+  <data name="Sandbox.Charts.ParetoTitle" xml:space="preserve">
+    <value>帕累托图</value>
+  </data>
+  <data name="Sandbox.Charts.ParetoDescription" xml:space="preserve">
+    <value>按量排序的柱状图叠加累计百分比曲线。</value>
+  </data>
+<data name="Sandbox.Charts.PieRadarTitle" xml:space="preserve">
+    <value>饼图与雷达图</value>
+  </data>
+  <data name="Sandbox.Charts.PieRadarSubtitle" xml:space="preserve">
+    <value>环形/饼图展示占比，雷达图做多维对比。</value>
+  </data>
+  <data name="Sandbox.Charts.DonutTitle" xml:space="preserve">
+    <value>流量来源环图</value>
+  </data>
+  <data name="Sandbox.Charts.PieTitle" xml:space="preserve">
+    <value>区域占比饼图</value>
+  </data>
+  <data name="Sandbox.Charts.RadarTitle" xml:space="preserve">
+    <value>型号对比</value>
+  </data>
 </root>

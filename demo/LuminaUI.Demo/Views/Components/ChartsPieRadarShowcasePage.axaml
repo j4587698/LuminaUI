@@ -1,0 +1,62 @@
+<lumina:LuminaPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:charts="using:LuminaUI.Charts"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.ChartsPieRadarShowcasePage"
+             x:DataType="vm:ChartsPieRadarShowcaseViewModel">
+
+    <ScrollViewer x:Name="PageScroll"
+                  BringIntoViewOnFocusChange="False"
+                  HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="14"
+                    Width="{Binding #PageScroll.Bounds.Width}"
+                    HorizontalAlignment="Stretch"
+                    Margin="0,4,0,24">
+
+            <StackPanel Spacing="6">
+                <TextBlock Text="{l10n:Loc Sandbox.Charts.PieRadarTitle}" Classes="Display" />
+                <TextBlock Text="{l10n:Loc Sandbox.Charts.PieRadarSubtitle}"
+                           Foreground="{DynamicResource LuminaTextMutedBrush}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="320" HorizontalSpacing="16" VerticalSpacing="16">
+                <lumina:LuminaCard Padding="20">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="{l10n:Loc Sandbox.Charts.DonutTitle}" Classes="SectionTitle" />
+                        <charts:LuminaPieChart Slices="{Binding DonutSlices}"
+                                               InnerRadiusRatio="0.62"
+                                               ShowLabels="True"
+                                               ShowLegend="True"
+                                               Height="300"
+                                               HorizontalAlignment="Stretch" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard Padding="20">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="{l10n:Loc Sandbox.Charts.PieTitle}" Classes="SectionTitle" />
+                        <charts:LuminaPieChart Slices="{Binding PieSlices}"
+                                               InnerRadiusRatio="0"
+                                               ShowLabels="True"
+                                               ShowLegend="True"
+                                               Height="300"
+                                               HorizontalAlignment="Stretch" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard Padding="20">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="{l10n:Loc Sandbox.Charts.RadarTitle}" Classes="SectionTitle" />
+                        <charts:LuminaRadarChart Series="{Binding RadarSeries}"
+                                                 Categories="{Binding RadarCategories}"
+                                                 Height="300"
+                                                 HorizontalAlignment="Stretch" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+        </StackPanel>
+    </ScrollViewer>
+</lumina:LuminaPage>

@@ -1,0 +1,205 @@
+<lumina:LuminaPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:charts="using:LuminaUI.Charts"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.ChartsShowcasePage"
+             x:DataType="vm:ChartsShowcaseViewModel">
+
+    <ScrollViewer x:Name="PageScroll"
+                  BringIntoViewOnFocusChange="False"
+                  HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="14"
+                    Width="{Binding #PageScroll.Bounds.Width}"
+                    HorizontalAlignment="Stretch"
+                    Margin="0,4,0,24">
+
+            <StackPanel Spacing="6">
+                <TextBlock Text="{l10n:Loc Sandbox.Charts.LineTitle}" Classes="Display" />
+                <TextBlock Text="{l10n:Loc Sandbox.Charts.LineSubtitle}"
+                           Foreground="{DynamicResource LuminaTextMutedBrush}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaResponsivePanel MinItemWidth="420" HorizontalSpacing="16" VerticalSpacing="16">
+                <lumina:LuminaCard Padding="20">
+                    <StackPanel Spacing="14">
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="{l10n:Loc Sandbox.Charts.AreaLineTitle}" Classes="SectionTitle" />
+                            <TextBlock Text="{l10n:Loc Sandbox.Charts.AreaLineDescription}"
+                                       Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                       FontSize="12"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                        <charts:LuminaLineChart Series="{Binding AreaSeries}"
+                                               Height="280"
+                                               ShowLegend="True"
+                                               HorizontalAlignment="Stretch" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard Padding="20">
+                    <StackPanel Spacing="14">
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="{l10n:Loc Sandbox.Charts.MultiTitle}" Classes="SectionTitle" />
+                            <TextBlock Text="{l10n:Loc Sandbox.Charts.MultiDescription}"
+                                       Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                       FontSize="12"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                        <charts:LuminaLineChart Height="280"
+                                                ShowLegend="True"
+                                                HorizontalAlignment="Stretch">
+                            <charts:LuminaLineChart.Series>
+                                <charts:LuminaChartSeries Title="Primary" StrokeThickness="2">
+                                    <charts:LuminaChartSeries.Points>
+                                        <charts:LuminaChartPoint X="1" Y="18" />
+                                        <charts:LuminaChartPoint X="2" Y="32" />
+                                        <charts:LuminaChartPoint X="3" Y="26" />
+                                        <charts:LuminaChartPoint X="4" Y="41" />
+                                        <charts:LuminaChartPoint X="5" Y="36" />
+                                        <charts:LuminaChartPoint X="6" Y="52" />
+                                        <charts:LuminaChartPoint X="7" Y="47" />
+                                        <charts:LuminaChartPoint X="8" Y="61" />
+                                    </charts:LuminaChartSeries.Points>
+                                </charts:LuminaChartSeries>
+                                <charts:LuminaChartSeries Title="Secondary" ShowArea="True">
+                                    <charts:LuminaChartSeries.Points>
+                                        <charts:LuminaChartPoint X="1" Y="24" />
+                                        <charts:LuminaChartPoint X="2" Y="28" />
+                                        <charts:LuminaChartPoint X="3" Y="34" />
+                                        <charts:LuminaChartPoint X="4" Y="31" />
+                                        <charts:LuminaChartPoint X="5" Y="44" />
+                                        <charts:LuminaChartPoint X="6" Y="39" />
+                                        <charts:LuminaChartPoint X="7" Y="48" />
+                                        <charts:LuminaChartPoint X="8" Y="42" />
+                                    </charts:LuminaChartSeries.Points>
+                                </charts:LuminaChartSeries>
+                            </charts:LuminaLineChart.Series>
+                        </charts:LuminaLineChart>
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard Padding="20">
+                    <StackPanel Spacing="14">
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="{l10n:Loc Sandbox.Charts.CompactTitle}" Classes="SectionTitle" />
+                            <TextBlock Text="{l10n:Loc Sandbox.Charts.CompactDescription}"
+                                       Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                       FontSize="12"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                        <charts:LuminaLineChart Series="{Binding CompactSeries}"
+                                               Height="160"
+                                               ShowGridLines="False"
+                                               ShowAxisLabels="False"
+                                               HorizontalAlignment="Stretch" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard Padding="20">
+                    <StackPanel Spacing="14">
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="{l10n:Loc Sandbox.Charts.StepTitle}" Classes="SectionTitle" />
+                            <TextBlock Text="{l10n:Loc Sandbox.Charts.StepDescription}"
+                                       Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                       FontSize="12"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                        <charts:LuminaLineChart Series="{Binding StepSeries}"
+                                               Height="200"
+                                               ShowLegend="True"
+                                               HorizontalAlignment="Stretch" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+
+                <lumina:LuminaCard Padding="20">
+                    <StackPanel Spacing="14">
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="{l10n:Loc Sandbox.Charts.SparkTitle}" Classes="SectionTitle" />
+                            <TextBlock Text="{l10n:Loc Sandbox.Charts.SparkDescription}"
+                                       Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                       FontSize="12"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                        <charts:LuminaLineChart Series="{Binding SparkSeries}"
+                                               Height="72"
+                                               ShowGridLines="False"
+                                               ShowAxisLabels="False"
+                                               HorizontalAlignment="Stretch" />
+                    </StackPanel>
+                </lumina:LuminaCard>
+            </lumina:LuminaResponsivePanel>
+
+            <lumina:LuminaCard Padding="20">
+                <StackPanel Spacing="14">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="{l10n:Loc Sandbox.Charts.PerformanceTitle}" Classes="SectionTitle" />
+                        <TextBlock Text="{l10n:Loc Sandbox.Charts.PerformanceDescription}"
+                                   Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                   FontSize="12"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <WrapPanel>
+                        <Button x:Name="LoadStressButton" Classes="Primary" Content="{l10n:Loc Sandbox.Charts.LoadStress}" Margin="0,0,8,0" />
+                        <Button x:Name="ResetStressButton" Classes="Ghost" Content="{l10n:Loc Sandbox.Charts.Reset}" />
+                    </WrapPanel>
+
+                    <TextBlock x:Name="PerfText"
+                               Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                               FontSize="12"
+                               MaxLines="1"
+                               TextTrimming="CharacterEllipsis"
+                               Text="{l10n:Loc Sandbox.Charts.PerfInitial}" />
+
+                    <charts:LuminaLineChart x:Name="StressChart"
+                                            Series="{Binding AreaSeries}"
+                                            Height="260"
+                                            ShowLegend="True"
+                                            HorizontalAlignment="Stretch" />
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard Padding="20">
+                <StackPanel Spacing="14">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="{l10n:Loc Sandbox.Charts.LiveTitle}" Classes="SectionTitle" />
+                        <TextBlock Text="{l10n:Loc Sandbox.Charts.LiveDescription}"
+                                   Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                   FontSize="12"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <WrapPanel>
+                        <Button x:Name="LiveStartButton" Classes="Primary" Content="{l10n:Loc Sandbox.Charts.Start}" Margin="0,0,8,0" />
+                        <Button x:Name="LiveStopButton" Classes="Ghost" Content="{l10n:Loc Sandbox.Charts.Stop}" />
+                    </WrapPanel>
+
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                        <TextBlock x:Name="LiveStatusText"
+                                   VerticalAlignment="Center"
+                                   Foreground="{DynamicResource LuminaTextSecondaryBrush}"
+                                   FontSize="12"
+                                   Text="{l10n:Loc Sandbox.Charts.LiveStatusInitial}" />
+                        <TextBlock x:Name="LiveLatestText"
+                                   Grid.Column="1"
+                                   VerticalAlignment="Center"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource LuminaPrimaryBrush}"
+                                   FontSize="12"
+                                   Text="{l10n:Loc Sandbox.Charts.LatestInitial}" />
+                    </Grid>
+
+                    <charts:LuminaLineChart x:Name="LiveChart"
+                                            Series="{Binding LiveSeries}"
+                                            Height="230"
+                                            TransitionDuration="300"
+                                            ShowLegend="True"
+                                            HorizontalAlignment="Stretch" />
+                </StackPanel>
+            </lumina:LuminaCard>
+        </StackPanel>
+    </ScrollViewer>
+</lumina:LuminaPage>

@@ -125,6 +125,15 @@
                             <lumina:LuminaNavigationItem Name="NavEmpty" Classes="Child" Header="{l10n:Loc Sandbox.Text.0808}" Icon="{x:Static material:MaterialIconKind.Inbox}" />
                         </lumina:LuminaNavigationItem>
 
+                        <lumina:LuminaNavigationItem Name="NavChartsGroup" Header="{l10n:Loc Sandbox.Nav.ChartsGroup}" Icon="{x:Static material:MaterialIconKind.ChartLine}" IsExpanded="True">
+                            <lumina:LuminaNavigationItem Name="NavCharts" Classes="Child" Header="{l10n:Loc Sandbox.Nav.ChartsLine}" Icon="{x:Static material:MaterialIconKind.ChartLine}" />
+                            <lumina:LuminaNavigationItem Name="NavChartsBar" Classes="Child" Header="{l10n:Loc Sandbox.Nav.ChartsBar}" Icon="{x:Static material:MaterialIconKind.ChartBar}" />
+                            <lumina:LuminaNavigationItem Name="NavChartsScatter" Classes="Child" Header="{l10n:Loc Sandbox.Nav.ChartsScatter}" Icon="{x:Static material:MaterialIconKind.ChartScatterPlot}" />
+                            <lumina:LuminaNavigationItem Name="NavChartsSpline" Classes="Child" Header="{l10n:Loc Sandbox.Nav.ChartsSpline}" Icon="{x:Static material:MaterialIconKind.ChartTimelineVariantShimmer}" />
+                            <lumina:LuminaNavigationItem Name="NavChartsCombo" Classes="Child" Header="{l10n:Loc Sandbox.Nav.ChartsCombo}" Icon="{x:Static material:MaterialIconKind.ChartMultiple}" />
+                            <lumina:LuminaNavigationItem Name="NavChartsPieRadar" Classes="Child" Header="{l10n:Loc Sandbox.Nav.ChartsPieRadar}" Icon="{x:Static material:MaterialIconKind.ChartPie}" />
+                        </lumina:LuminaNavigationItem>
+
                         <lumina:LuminaNavigationItem Name="NavFeedbackGroup" Header="{l10n:Loc Sandbox.Nav.FeedbackGroup}" Icon="{x:Static material:MaterialIconKind.MessageAlert}">
                             <lumina:LuminaNavigationItem Name="NavLoading" Classes="Child" Header="{l10n:Loc Sandbox.Nav.Loading}" Icon="{x:Static material:MaterialIconKind.Loading}" />
                             <lumina:LuminaNavigationItem Name="NavLoadingContainer" Classes="Child" Header="{l10n:Loc Sandbox.Nav.LoadingContainer}" Icon="{x:Static material:MaterialIconKind.ProgressClock}" />
