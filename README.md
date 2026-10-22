@@ -2,7 +2,7 @@
 
 [中文说明](README.zh-CN.md)
 
-LuminaUI is an Avalonia 12 component library for desktop, browser, and mobile-style application shells. It provides a shared visual system, reusable controls, navigation primitives, overlays, localization support, and optional themed integrations for ColorPicker, DataGrid, and TreeDataGrid.
+LuminaUI is an Avalonia 12 component library for desktop, browser, and mobile-style application shells. It provides a shared visual system, reusable controls, navigation primitives, overlays, localization support, optional themed integrations for ColorPicker, DataGrid, and TreeDataGrid, and a themed chart package.
 
 The NuGet packages target `.NET 8`, `.NET 9`, and `.NET 10`. Demo hosts remain on `.NET 10`. The current Avalonia version is `12.0.4`.
 
@@ -14,7 +14,7 @@ The NuGet packages target `.NET 8`, `.NET 9`, and `.NET 10`. Demo hosts remain o
 | `LuminaUI.ColorPicker` | Lumina theme integration for Avalonia ColorPicker and ColorView. |
 | `LuminaUI.DataGrid` | Lumina theme integration for Avalonia DataGrid. |
 | `LuminaUI.TreeDataGrid` | Lumina theme integration for TreeDataGrid.Avalonia. |
-| `LuminaUI.Charts` | Lumina-themed, custom-drawn cartesian chart controls. |
+| `LuminaUI.Charts` | Lumina-themed, custom-drawn chart controls: line/area, bar, scatter, pie/donut, and radar. |
 
 ## Features
 
@@ -24,7 +24,7 @@ The NuGet packages target `.NET 8`, `.NET 9`, and `.NET 10`. Demo hosts remain o
 - Action controls: buttons, toggle buttons, repeat buttons, button groups, drop-down buttons, split buttons, command bars, and pop confirmations.
 - Navigation and layout: navigation view, navigation pages, drawer pages, tab pages, tab strips, tab controls, carousel, breadcrumb, split view, and transitioning content.
 - Data entry and display: text inputs, OTP input, forms, selection controls, pickers, date range picker, range slider, pagination, descriptions, properties, timeline, steps, indexed lists, and linked categories.
-- Charts: a themable chart family including Cartesian line/area, grouped bar, scatter, spline, step-line, combo/mixed series, histograms, Pareto, and sparklines; plus pie/donut and radar charts. Configurable numeric/category axes, custom tick steps and label formatters, per-pixel decimation for large series, hover crosshairs and slice/polygon tooltips, reactive live data via observable collections, animated data-change transitions (including continuous live-stream morph), and fixed-axis viewports for real-time dashboards.
+- Charts: a themable chart family including Cartesian line/area, grouped bar, scatter, spline, step-line, and combo/mixed series; plus pie/donut and radar charts. Configurable numeric/category axes, custom tick steps and label formatters, per-pixel decimation for large series, hover crosshairs and slice/polygon tooltips, reactive live data via observable collections, animated data-change transitions (including continuous live-stream morph), and fixed-axis viewports for real-time dashboards.
 - Localization resources with application-level override support.
 - Shared demo project with Desktop, Browser, Android, and iOS hosts.
 
@@ -120,6 +120,7 @@ src/
   LuminaUI.ColorPicker/  Optional ColorPicker theme package.
   LuminaUI.DataGrid/     Optional DataGrid theme package.
   LuminaUI.TreeDataGrid/ Optional TreeDataGrid theme package.
+  LuminaUI.Charts/       Optional chart controls package.
 
 demo/
   LuminaUI.Demo/         Shared demo views and view models.
@@ -215,6 +216,7 @@ dotnet pack src/LuminaUI/LuminaUI.csproj -c Release
 dotnet pack src/LuminaUI.ColorPicker/LuminaUI.ColorPicker.csproj -c Release
 dotnet pack src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj -c Release
 dotnet pack src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj -c Release
+dotnet pack src/LuminaUI.Charts/LuminaUI.Charts.csproj -c Release
 ```
 
 ## Versioning

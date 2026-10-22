@@ -2,7 +2,7 @@
 
 [English README](README.md)
 
-LuminaUI 是一套面向 Avalonia 12 的组件库，覆盖桌面、浏览器和移动端风格的应用壳层。它提供统一的视觉体系、可复用控件、导航基础设施、覆盖层、本地化支持，以及 ColorPicker、DataGrid、TreeDataGrid 的可选主题集成。
+LuminaUI 是一套面向 Avalonia 12 的组件库，覆盖桌面、浏览器和移动端风格的应用壳层。它提供统一的视觉体系、可复用控件、导航基础设施、覆盖层、本地化支持，ColorPicker、DataGrid、TreeDataGrid 的可选主题集成，以及一套主题化图表包。
 
 NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NET 10`。Avalonia 版本为 `12.0.4`。
 
@@ -14,7 +14,7 @@ NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NE
 | `LuminaUI.ColorPicker` | Avalonia ColorPicker 和 ColorView 的 Lumina 主题集成。 |
 | `LuminaUI.DataGrid` | Avalonia DataGrid 的 Lumina 主题集成。 |
 | `LuminaUI.TreeDataGrid` | TreeDataGrid.Avalonia 的 Lumina 主题集成。 |
-| `LuminaUI.Charts` | 基于 Lumina 主题的手绘笛卡尔图表控件。 |
+| `LuminaUI.Charts` | 基于 Lumina 主题的手绘图表控件：折线/面积、柱状、散点、饼图/环形图与雷达图。 |
 
 ## 功能概览
 
@@ -24,7 +24,7 @@ NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NE
 - 操作控件：按钮、切换按钮、重复按钮、按钮组、下拉按钮、拆分按钮、命令栏和弹出确认。
 - 导航与布局：导航视图、导航页、抽屉页、标签页容器、标签条、标签页、轮播、面包屑、拆分视图和过渡内容。
 - 数据录入与展示：文本输入、验证码输入、表单、选择控件、选择器、日期范围、范围滑块、分页、描述列表、属性列表、时间线、步骤条、索引列表和联动分类。
-- 图表：一个可主题化的图表家族，包含笛卡尔折线/面积、分组柱状、散点、样条、阶梯折线、组合/混合序列、直方图、帕累托与迷你图；以及饼图/环形图和雷达图。支持可配置的数值/类别轴、自定义刻度步长与标签格式化、大数据逐像素降采样、悬停十字线与扇区/多边形提示框、基于可观察集合的响应式实时数据、数据变化过渡动画（含连续实时流动形变）、固定轴实时仪表盘视口。
+- 图表：一个可主题化的图表家族，包含笛卡尔折线/面积、分组柱状、散点、样条、阶梯折线、组合/混合序列；以及饼图/环形图和雷达图。支持可配置的数值/类别轴、自定义刻度步长与标签格式化、大数据逐像素降采样、悬停十字线与扇区/多边形提示框、基于可观察集合的响应式实时数据、数据变化过渡动画（含连续实时流动形变）、固定轴实时仪表盘视口。
 - 支持应用层覆盖的本地化资源。
 - 共享 Demo 项目，并提供 Desktop、Browser、Android 和 iOS 宿主。
 
@@ -120,6 +120,7 @@ src/
   LuminaUI.ColorPicker/  可选 ColorPicker 主题包。
   LuminaUI.DataGrid/     可选 DataGrid 主题包。
   LuminaUI.TreeDataGrid/ 可选 TreeDataGrid 主题包。
+  LuminaUI.Charts/       可选图表控件包。
 
 demo/
   LuminaUI.Demo/         共享 Demo 视图和 ViewModel。
@@ -215,6 +216,7 @@ dotnet pack src/LuminaUI/LuminaUI.csproj -c Release
 dotnet pack src/LuminaUI.ColorPicker/LuminaUI.ColorPicker.csproj -c Release
 dotnet pack src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj -c Release
 dotnet pack src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj -c Release
+dotnet pack src/LuminaUI.Charts/LuminaUI.Charts.csproj -c Release
 ```
 
 ## 版本策略
