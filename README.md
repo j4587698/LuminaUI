@@ -14,6 +14,7 @@ The NuGet packages target `.NET 8`, `.NET 9`, and `.NET 10`. Demo hosts remain o
 | `LuminaUI.ColorPicker` | Lumina theme integration for Avalonia ColorPicker and ColorView. |
 | `LuminaUI.DataGrid` | Lumina theme integration for Avalonia DataGrid. |
 | `LuminaUI.TreeDataGrid` | Lumina theme integration for TreeDataGrid.Avalonia. |
+| `LuminaUI.Charts` | Lumina-themed, custom-drawn cartesian chart controls. |
 
 ## Features
 
@@ -23,6 +24,7 @@ The NuGet packages target `.NET 8`, `.NET 9`, and `.NET 10`. Demo hosts remain o
 - Action controls: buttons, toggle buttons, repeat buttons, button groups, drop-down buttons, split buttons, command bars, and pop confirmations.
 - Navigation and layout: navigation view, navigation pages, drawer pages, tab pages, tab strips, tab controls, carousel, breadcrumb, split view, and transitioning content.
 - Data entry and display: text inputs, OTP input, forms, selection controls, pickers, date range picker, range slider, pagination, descriptions, properties, timeline, steps, indexed lists, and linked categories.
+- Charts: a themable chart family including Cartesian line/area, grouped bar, scatter, spline, step-line, combo/mixed series, histograms, Pareto, and sparklines; plus pie/donut and radar charts. Configurable numeric/category axes, custom tick steps and label formatters, per-pixel decimation for large series, hover crosshairs and slice/polygon tooltips, reactive live data via observable collections, animated data-change transitions (including continuous live-stream morph), and fixed-axis viewports for real-time dashboards.
 - Localization resources with application-level override support.
 - Shared demo project with Desktop, Browser, Android, and iOS hosts.
 
@@ -36,7 +38,8 @@ Reference the packages or projects you need, then register the theme in `App.axa
              xmlns:lumina="clr-namespace:LuminaUI;assembly=LuminaUI"
              xmlns:luminaColorPicker="using:LuminaUI.ColorPicker"
              xmlns:luminaDataGrid="using:LuminaUI.DataGrid"
-             xmlns:luminaTreeDataGrid="using:LuminaUI.TreeDataGrid">
+             xmlns:luminaTreeDataGrid="using:LuminaUI.TreeDataGrid"
+             xmlns:luminaCharts="using:LuminaUI.Charts">
   <Application.Styles>
     <FluentTheme />
     <lumina:LuminaTheme />
@@ -45,6 +48,7 @@ Reference the packages or projects you need, then register the theme in `App.axa
     <luminaColorPicker:LuminaColorPickerTheme />
     <luminaDataGrid:LuminaDataGridTheme />
     <luminaTreeDataGrid:LuminaTreeDataGridTheme />
+    <luminaCharts:LuminaChartsTheme />
   </Application.Styles>
 </Application>
 ```

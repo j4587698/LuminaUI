@@ -675,4 +675,25 @@
   <data name="Sandbox.Notifications.SystemUpdate.Message" xml:space="preserve">
     <value>A new version of the workspace is available for download. This update includes several bug fixes and performance improvements.</value>
   </data>
+<data name="Sandbox.Nav.ChartsGroup" xml:space="preserve">
+    <value>Charts</value>
+  </data>
+  <data name="Sandbox.Nav.ChartsLine" xml:space="preserve">
+    <value>Line &amp; area</value>
+  </data>
+  <data name="Sandbox.Nav.ChartsBar" xml:space="preserve">
+    <value>Bar &amp; column</value>
+  </data>
+  <data name="Sandbox.Nav.ChartsScatter" xml:space="preserve">
+    <value>Scatter</value>
+  </data>
+  <data name="Sandbox.Nav.ChartsSpline" xml:space="preserve">
+    <value>Spline</value>
+  </data>
+  <data name="Sandbox.Nav.ChartsCombo" xml:space="preserve">
+    <value>Combo &amp; mixed</value>
+  </data>
+  <data name="Sandbox.Nav.ChartsPieRadar" xml:space="preserve">
+    <value>Pie &amp; radar</value>
+  </data>
 </root>

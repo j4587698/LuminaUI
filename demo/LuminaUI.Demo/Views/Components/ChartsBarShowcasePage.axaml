@@ -1,0 +1,69 @@
+<lumina:LuminaPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:charts="using:LuminaUI.Charts"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.ChartsBarShowcasePage"
+             x:DataType="vm:ChartsBarShowcaseViewModel">
+
+    <ScrollViewer x:Name="PageScroll"
+                  BringIntoViewOnFocusChange="False"
+                  HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="14"
+                    Width="{Binding #PageScroll.Bounds.Width}"
+                    HorizontalAlignment="Stretch"
+                    Margin="0,4,0,24">
+
+            <StackPanel Spacing="6">
+                <TextBlock Text="{l10n:Loc Sandbox.Charts.BarTitle}" Classes="Display" />
+                <TextBlock Text="{l10n:Loc Sandbox.Charts.BarSubtitle}"
+                           Foreground="{DynamicResource LuminaTextMutedBrush}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaCard Padding="20">
+                <StackPanel Spacing="14">
+                    <TextBlock Text="{l10n:Loc Sandbox.Charts.BarCardTitle}" Classes="SectionTitle" />
+                    <charts:LuminaLineChart x:Name="Chart"
+                                            Series="{Binding BarSeries}"
+                                            Height="300"
+                                            ShowLegend="True"
+                                            HorizontalAlignment="Stretch" />
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard Padding="20">
+                <StackPanel Spacing="14">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="{l10n:Loc Sandbox.Charts.HistogramTitle}" Classes="SectionTitle" />
+                        <TextBlock Text="{l10n:Loc Sandbox.Charts.HistogramDescription}"
+                                   Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                   FontSize="12"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                    <charts:LuminaLineChart Series="{Binding HistogramSeries}"
+                                            Height="280"
+                                            ShowLegend="True"
+                                            HorizontalAlignment="Stretch" />
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard Padding="20">
+                <StackPanel Spacing="14">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="{l10n:Loc Sandbox.Charts.ParetoTitle}" Classes="SectionTitle" />
+                        <TextBlock Text="{l10n:Loc Sandbox.Charts.ParetoDescription}"
+                                   Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                   FontSize="12"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                    <charts:LuminaLineChart Series="{Binding ParetoSeries}"
+                                            Height="280"
+                                            ShowLegend="True"
+                                            HorizontalAlignment="Stretch" />
+                </StackPanel>
+            </lumina:LuminaCard>
+        </StackPanel>
+    </ScrollViewer>
+</lumina:LuminaPage>

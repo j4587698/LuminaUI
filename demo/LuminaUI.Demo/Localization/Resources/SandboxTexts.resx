@@ -5353,4 +5353,166 @@ await shell.PushAsync(
   <data name="Sandbox.Card.GlassDynamicDescription" xml:space="preserve">
     <value>Continuously blurs the current backdrop. It follows changes immediately but costs more to render.</value>
   </data>
+<data name="Sandbox.Charts.LineTitle" xml:space="preserve">
+    <value>Charts</value>
+  </data>
+  <data name="Sandbox.Charts.LineSubtitle" xml:space="preserve">
+    <value>Theme-aware, custom-drawn cartesian charts built on the Lumina design system.</value>
+  </data>
+  <data name="Sandbox.Charts.AreaLineTitle" xml:space="preserve">
+    <value>Area &amp; line</value>
+  </data>
+  <data name="Sandbox.Charts.AreaLineDescription" xml:space="preserve">
+    <value>Bound to a ViewModel; series colors use the built-in palette.</value>
+  </data>
+  <data name="Sandbox.Charts.MultiTitle" xml:space="preserve">
+    <value>Multi-series</value>
+  </data>
+  <data name="Sandbox.Charts.MultiDescription" xml:space="preserve">
+    <value>Series declared inline in XAML; strokes come from the theme palette.</value>
+  </data>
+  <data name="Sandbox.Charts.CompactTitle" xml:space="preserve">
+    <value>Compact</value>
+  </data>
+  <data name="Sandbox.Charts.CompactDescription" xml:space="preserve">
+    <value>Axis labels and grid disabled, markers enabled.</value>
+  </data>
+  <data name="Sandbox.Charts.PerformanceTitle" xml:space="preserve">
+    <value>Performance</value>
+  </data>
+  <data name="Sandbox.Charts.PerformanceDescription" xml:space="preserve">
+    <value>200,000-sample series. The chart decimates it into ~1 pixel column per point and caches geometry; hovering only repaints the overlay.</value>
+  </data>
+  <data name="Sandbox.Charts.LoadStress" xml:space="preserve">
+    <value>Load 200k</value>
+  </data>
+  <data name="Sandbox.Charts.Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="Sandbox.Charts.PerfInitial" xml:space="preserve">
+    <value>build: - ms · render: - ms · move: - ms</value>
+  </data>
+  <data name="Sandbox.Charts.PerfFormat" xml:space="preserve">
+    <value>build: {0:F2} ms · render: {1:F3} ms · move: {2:F3} ms</value>
+  </data>
+  <data name="Sandbox.Charts.LiveTitle" xml:space="preserve">
+    <value>Live streaming</value>
+  </data>
+  <data name="Sandbox.Charts.LiveDescription" xml:space="preserve">
+    <value>Appends to an ObservableCollection every 250 ms. The chart reacts to the change and morphs to the new line (TransitionDuration).</value>
+  </data>
+  <data name="Sandbox.Charts.Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="Sandbox.Charts.Stop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="Sandbox.Charts.LiveStatusInitial" xml:space="preserve">
+    <value>0 points</value>
+  </data>
+  <data name="Sandbox.Charts.LiveStatusFormat" xml:space="preserve">
+    <value>{0} points · x={1}</value>
+  </data>
+  <data name="Sandbox.Charts.LatestInitial" xml:space="preserve">
+    <value>latest: -</value>
+  </data>
+  <data name="Sandbox.Charts.LatestFormat" xml:space="preserve">
+    <value>latest: {0}</value>
+  </data>
+  <data name="Sandbox.Charts.BarTitle" xml:space="preserve">
+    <value>Bar &amp; column</value>
+  </data>
+  <data name="Sandbox.Charts.BarSubtitle" xml:space="preserve">
+    <value>Categorical bars using a category X axis with month labels.</value>
+  </data>
+  <data name="Sandbox.Charts.BarCardTitle" xml:space="preserve">
+    <value>Monthly revenue</value>
+  </data>
+  <data name="Sandbox.Charts.Month1" xml:space="preserve"><value>Jan</value></data>
+  <data name="Sandbox.Charts.Month2" xml:space="preserve"><value>Feb</value></data>
+  <data name="Sandbox.Charts.Month3" xml:space="preserve"><value>Mar</value></data>
+  <data name="Sandbox.Charts.Month4" xml:space="preserve"><value>Apr</value></data>
+  <data name="Sandbox.Charts.Month5" xml:space="preserve"><value>May</value></data>
+  <data name="Sandbox.Charts.Month6" xml:space="preserve"><value>Jun</value></data>
+  <data name="Sandbox.Charts.Month7" xml:space="preserve"><value>Jul</value></data>
+  <data name="Sandbox.Charts.Month8" xml:space="preserve"><value>Aug</value></data>
+  <data name="Sandbox.Charts.Month9" xml:space="preserve"><value>Sep</value></data>
+  <data name="Sandbox.Charts.Month10" xml:space="preserve"><value>Oct</value></data>
+  <data name="Sandbox.Charts.Month11" xml:space="preserve"><value>Nov</value></data>
+  <data name="Sandbox.Charts.Month12" xml:space="preserve"><value>Dec</value></data>
+  <data name="Sandbox.Charts.ScatterTitle" xml:space="preserve">
+    <value>Scatter</value>
+  </data>
+  <data name="Sandbox.Charts.ScatterSubtitle" xml:space="preserve">
+    <value>Discrete point markers without connecting lines.</value>
+  </data>
+  <data name="Sandbox.Charts.ScatterCardTitle" xml:space="preserve">
+    <value>Two clusters</value>
+  </data>
+  <data name="Sandbox.Charts.SplineTitle" xml:space="preserve">
+    <value>Spline</value>
+  </data>
+  <data name="Sandbox.Charts.SplineSubtitle" xml:space="preserve">
+    <value>Smooth Catmull-Rom curves through the data points.</value>
+  </data>
+  <data name="Sandbox.Charts.SplineCardTitle" xml:space="preserve">
+    <value>Demand forecast</value>
+  </data>
+  <data name="Sandbox.Charts.ComboTitle" xml:space="preserve">
+    <value>Combo &amp; mixed</value>
+  </data>
+  <data name="Sandbox.Charts.ComboSubtitle" xml:space="preserve">
+    <value>Different series types share one plot: bars + line, and area + spline + scatter together.</value>
+  </data>
+  <data name="Sandbox.Charts.ComboBarsTitle" xml:space="preserve">
+    <value>Bars + line</value>
+  </data>
+  <data name="Sandbox.Charts.ComboBarsDescription" xml:space="preserve">
+    <value>A grouped bar series overlaid with a moving-average line.</value>
+  </data>
+  <data name="Sandbox.Charts.ComboMixedTitle" xml:space="preserve">
+    <value>Area + spline + scatter</value>
+  </data>
+  <data name="Sandbox.Charts.ComboMixedDescription" xml:space="preserve">
+    <value>Three series kinds rendered on the same axes.</value>
+  </data>
+<data name="Sandbox.Charts.StepTitle" xml:space="preserve">
+    <value>Step line</value>
+  </data>
+  <data name="Sandbox.Charts.StepDescription" xml:space="preserve">
+    <value>Connects points with horizontal-then-vertical steps, useful for discrete state changes.</value>
+  </data>
+  <data name="Sandbox.Charts.SparkTitle" xml:space="preserve">
+    <value>Sparkline</value>
+  </data>
+  <data name="Sandbox.Charts.SparkDescription" xml:space="preserve">
+    <value>A compact, axis-free trend line for at-a-glance summaries.</value>
+  </data>
+<data name="Sandbox.Charts.HistogramTitle" xml:space="preserve">
+    <value>Histogram</value>
+  </data>
+  <data name="Sandbox.Charts.HistogramDescription" xml:space="preserve">
+    <value>Bins continuous values into a bar distribution.</value>
+  </data>
+  <data name="Sandbox.Charts.ParetoTitle" xml:space="preserve">
+    <value>Pareto</value>
+  </data>
+  <data name="Sandbox.Charts.ParetoDescription" xml:space="preserve">
+    <value>Bars sorted by volume with a cumulative percentage line.</value>
+  </data>
+<data name="Sandbox.Charts.PieRadarTitle" xml:space="preserve">
+    <value>Pie &amp; radar</value>
+  </data>
+  <data name="Sandbox.Charts.PieRadarSubtitle" xml:space="preserve">
+    <value>Part-to-whole donuts and pies, plus a multivariate radar comparison.</value>
+  </data>
+  <data name="Sandbox.Charts.DonutTitle" xml:space="preserve">
+    <value>Traffic donut</value>
+  </data>
+  <data name="Sandbox.Charts.PieTitle" xml:space="preserve">
+    <value>Region pie</value>
+  </data>
+  <data name="Sandbox.Charts.RadarTitle" xml:space="preserve">
+    <value>Model comparison</value>
+  </data>
 </root>

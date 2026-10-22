@@ -387,6 +387,96 @@ internal static class SandboxLocalization
 
 	public const string ActionsRemove = "Sandbox.Actions.Remove";
 
+	public const string NavChartsGroup = "Sandbox.Nav.ChartsGroup";
+
+	public const string NavChartsLine = "Sandbox.Nav.ChartsLine";
+
+	public const string NavChartsBar = "Sandbox.Nav.ChartsBar";
+
+	public const string NavChartsScatter = "Sandbox.Nav.ChartsScatter";
+
+	public const string NavChartsSpline = "Sandbox.Nav.ChartsSpline";
+
+	public const string NavChartsCombo = "Sandbox.Nav.ChartsCombo";
+
+	public const string NavChartsPieRadar = "Sandbox.Nav.ChartsPieRadar";
+
+	public const string ChartsLineTitle = "Sandbox.Charts.LineTitle";
+
+	public const string ChartsLineSubtitle = "Sandbox.Charts.LineSubtitle";
+
+	public const string ChartsAreaLineTitle = "Sandbox.Charts.AreaLineTitle";
+
+	public const string ChartsAreaLineDescription = "Sandbox.Charts.AreaLineDescription";
+
+	public const string ChartsMultiTitle = "Sandbox.Charts.MultiTitle";
+
+	public const string ChartsMultiDescription = "Sandbox.Charts.MultiDescription";
+
+	public const string ChartsCompactTitle = "Sandbox.Charts.CompactTitle";
+
+	public const string ChartsCompactDescription = "Sandbox.Charts.CompactDescription";
+
+	public const string ChartsPerformanceTitle = "Sandbox.Charts.PerformanceTitle";
+
+	public const string ChartsPerformanceDescription = "Sandbox.Charts.PerformanceDescription";
+
+	public const string ChartsLoadStress = "Sandbox.Charts.LoadStress";
+
+	public const string ChartsReset = "Sandbox.Charts.Reset";
+
+	public const string ChartsPerfInitial = "Sandbox.Charts.PerfInitial";
+
+	public const string ChartsPerfFormat = "Sandbox.Charts.PerfFormat";
+
+	public const string ChartsLiveTitle = "Sandbox.Charts.LiveTitle";
+
+	public const string ChartsLiveDescription = "Sandbox.Charts.LiveDescription";
+
+	public const string ChartsStart = "Sandbox.Charts.Start";
+
+	public const string ChartsStop = "Sandbox.Charts.Stop";
+
+	public const string ChartsLiveStatusInitial = "Sandbox.Charts.LiveStatusInitial";
+
+	public const string ChartsLiveStatusFormat = "Sandbox.Charts.LiveStatusFormat";
+
+	public const string ChartsLatestInitial = "Sandbox.Charts.LatestInitial";
+
+	public const string ChartsLatestFormat = "Sandbox.Charts.LatestFormat";
+
+	public const string ChartsBarTitle = "Sandbox.Charts.BarTitle";
+
+	public const string ChartsBarSubtitle = "Sandbox.Charts.BarSubtitle";
+
+	public const string ChartsBarCardTitle = "Sandbox.Charts.BarCardTitle";
+
+	public const string ChartsMonthFormat = "Sandbox.Charts.Month{0}";
+
+	public const string ChartsScatterTitle = "Sandbox.Charts.ScatterTitle";
+
+	public const string ChartsScatterSubtitle = "Sandbox.Charts.ScatterSubtitle";
+
+	public const string ChartsScatterCardTitle = "Sandbox.Charts.ScatterCardTitle";
+
+	public const string ChartsSplineTitle = "Sandbox.Charts.SplineTitle";
+
+	public const string ChartsSplineSubtitle = "Sandbox.Charts.SplineSubtitle";
+
+	public const string ChartsSplineCardTitle = "Sandbox.Charts.SplineCardTitle";
+
+	public const string ChartsComboTitle = "Sandbox.Charts.ComboTitle";
+
+	public const string ChartsComboSubtitle = "Sandbox.Charts.ComboSubtitle";
+
+	public const string ChartsComboBarsTitle = "Sandbox.Charts.ComboBarsTitle";
+
+	public const string ChartsComboBarsDescription = "Sandbox.Charts.ComboBarsDescription";
+
+	public const string ChartsComboMixedTitle = "Sandbox.Charts.ComboMixedTitle";
+
+	public const string ChartsComboMixedDescription = "Sandbox.Charts.ComboMixedDescription";
+
 	public static void Register()
 	{
 		LuminaLocalization.RegisterResourceManager(ResourceManager, 50);

@@ -14,6 +14,7 @@ NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NE
 | `LuminaUI.ColorPicker` | Avalonia ColorPicker 和 ColorView 的 Lumina 主题集成。 |
 | `LuminaUI.DataGrid` | Avalonia DataGrid 的 Lumina 主题集成。 |
 | `LuminaUI.TreeDataGrid` | TreeDataGrid.Avalonia 的 Lumina 主题集成。 |
+| `LuminaUI.Charts` | 基于 Lumina 主题的手绘笛卡尔图表控件。 |
 
 ## 功能概览
 
@@ -23,6 +24,7 @@ NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NE
 - 操作控件：按钮、切换按钮、重复按钮、按钮组、下拉按钮、拆分按钮、命令栏和弹出确认。
 - 导航与布局：导航视图、导航页、抽屉页、标签页容器、标签条、标签页、轮播、面包屑、拆分视图和过渡内容。
 - 数据录入与展示：文本输入、验证码输入、表单、选择控件、选择器、日期范围、范围滑块、分页、描述列表、属性列表、时间线、步骤条、索引列表和联动分类。
+- 图表：一个可主题化的图表家族，包含笛卡尔折线/面积、分组柱状、散点、样条、阶梯折线、组合/混合序列、直方图、帕累托与迷你图；以及饼图/环形图和雷达图。支持可配置的数值/类别轴、自定义刻度步长与标签格式化、大数据逐像素降采样、悬停十字线与扇区/多边形提示框、基于可观察集合的响应式实时数据、数据变化过渡动画（含连续实时流动形变）、固定轴实时仪表盘视口。
 - 支持应用层覆盖的本地化资源。
 - 共享 Demo 项目，并提供 Desktop、Browser、Android 和 iOS 宿主。
 
@@ -36,7 +38,8 @@ NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NE
              xmlns:lumina="clr-namespace:LuminaUI;assembly=LuminaUI"
              xmlns:luminaColorPicker="using:LuminaUI.ColorPicker"
              xmlns:luminaDataGrid="using:LuminaUI.DataGrid"
-             xmlns:luminaTreeDataGrid="using:LuminaUI.TreeDataGrid">
+             xmlns:luminaTreeDataGrid="using:LuminaUI.TreeDataGrid"
+             xmlns:luminaCharts="using:LuminaUI.Charts">
   <Application.Styles>
     <FluentTheme />
     <lumina:LuminaTheme />
@@ -45,6 +48,7 @@ NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NE
     <luminaColorPicker:LuminaColorPickerTheme />
     <luminaDataGrid:LuminaDataGridTheme />
     <luminaTreeDataGrid:LuminaTreeDataGridTheme />
+    <luminaCharts:LuminaChartsTheme />
   </Application.Styles>
 </Application>
 ```

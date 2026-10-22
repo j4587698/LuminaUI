@@ -66,3 +66,4 @@ secrets.json
 .playwright-mcp/
 .spec-workflow/
 .mcp.json
+.workbuddy-ai/

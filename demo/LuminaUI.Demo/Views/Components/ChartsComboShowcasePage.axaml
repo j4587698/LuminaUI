@@ -1,0 +1,58 @@
+<lumina:LuminaPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:charts="using:LuminaUI.Charts"
+             xmlns:vm="using:LuminaUI.Demo.ViewModels"
+             x:Class="LuminaUI.Demo.Views.ChartsComboShowcasePage"
+             x:DataType="vm:ChartsComboShowcaseViewModel">
+
+    <ScrollViewer x:Name="PageScroll"
+                  BringIntoViewOnFocusChange="False"
+                  HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="14"
+                    Width="{Binding #PageScroll.Bounds.Width}"
+                    HorizontalAlignment="Stretch"
+                    Margin="0,4,0,24">
+
+            <StackPanel Spacing="6">
+                <TextBlock Text="{l10n:Loc Sandbox.Charts.ComboTitle}" Classes="Display" />
+                <TextBlock Text="{l10n:Loc Sandbox.Charts.ComboSubtitle}"
+                           Foreground="{DynamicResource LuminaTextMutedBrush}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaCard Padding="20">
+                <StackPanel Spacing="14">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="{l10n:Loc Sandbox.Charts.ComboBarsTitle}" Classes="SectionTitle" />
+                        <TextBlock Text="{l10n:Loc Sandbox.Charts.ComboBarsDescription}"
+                                   Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                   FontSize="12"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                    <charts:LuminaLineChart Series="{Binding ComboSeries}"
+                                            Height="300"
+                                            ShowLegend="True"
+                                            HorizontalAlignment="Stretch" />
+                </StackPanel>
+            </lumina:LuminaCard>
+
+            <lumina:LuminaCard Padding="20">
+                <StackPanel Spacing="14">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="{l10n:Loc Sandbox.Charts.ComboMixedTitle}" Classes="SectionTitle" />
+                        <TextBlock Text="{l10n:Loc Sandbox.Charts.ComboMixedDescription}"
+                                   Foreground="{DynamicResource LuminaTextMutedBrush}"
+                                   FontSize="12"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                    <charts:LuminaLineChart Series="{Binding MixedSeries}"
+                                            Height="300"
+                                            ShowLegend="True"
+                                            HorizontalAlignment="Stretch" />
+                </StackPanel>
+            </lumina:LuminaCard>
+        </StackPanel>
+    </ScrollViewer>
+</lumina:LuminaPage>

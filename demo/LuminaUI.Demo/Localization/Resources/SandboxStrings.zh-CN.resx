@@ -675,4 +675,25 @@
   <data name="Sandbox.Notifications.SystemUpdate.Message" xml:space="preserve">
     <value>工作区有新版本可供下载。本次更新包含多个 bug 修复和性能改进。</value>
   </data>
+<data name="Sandbox.Nav.ChartsGroup" xml:space="preserve">
+    <value>图表</value>
+  </data>
+  <data name="Sandbox.Nav.ChartsLine" xml:space="preserve">
+    <value>折线与面积</value>
+  </data>
+  <data name="Sandbox.Nav.ChartsBar" xml:space="preserve">
+    <value>柱状图</value>
+  </data>
+  <data name="Sandbox.Nav.ChartsScatter" xml:space="preserve">
+    <value>散点图</value>
+  </data>
+  <data name="Sandbox.Nav.ChartsSpline" xml:space="preserve">
+    <value>样条曲线</value>
+  </data>
+  <data name="Sandbox.Nav.ChartsCombo" xml:space="preserve">
+    <value>组合与混合</value>
+  </data>
+  <data name="Sandbox.Nav.ChartsPieRadar" xml:space="preserve">
+    <value>饼图与雷达图</value>
+  </data>
 </root>
