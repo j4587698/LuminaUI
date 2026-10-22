@@ -52,6 +52,7 @@
                         <TextBlock Text="{l10n:Loc Sandbox.Charts.RadarTitle}" Classes="SectionTitle" />
                         <charts:LuminaRadarChart Series="{Binding RadarSeries}"
                                                  Categories="{Binding RadarCategories}"
+                                                 ShowLegend="True"
                                                  Height="300"
                                                  HorizontalAlignment="Stretch" />
                     </StackPanel>

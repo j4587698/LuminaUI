@@ -7,7 +7,9 @@
       <SolidColorBrush x:Key="LuminaChartAxisLabelBrush" Color="{DynamicResource LuminaTextMuted}" />
       <SolidColorBrush x:Key="LuminaChartCrosshairBrush" Color="{DynamicResource LuminaTextMuted}" />
       <SolidColorBrush x:Key="LuminaChartTooltipBackgroundBrush" Color="{DynamicResource LuminaSurfaceElevated}" />
+      <SolidColorBrush x:Key="LuminaChartTooltipBorderBrush" Color="{DynamicResource LuminaBorderStrong}" />
       <SolidColorBrush x:Key="LuminaChartTooltipTextBrush" Color="{DynamicResource LuminaTextPrimary}" />
+      <SolidColorBrush x:Key="LuminaChartSurfaceBrush" Color="{DynamicResource LuminaSurface}" />
 
       <SolidColorBrush x:Key="LuminaChartColor1" Color="{DynamicResource LuminaPrimary}" />
       <SolidColorBrush x:Key="LuminaChartColor2" Color="{DynamicResource LuminaTeal}" />
@@ -24,6 +26,20 @@
     <Setter Property="GridLineBrush" Value="{DynamicResource LuminaChartGridLineBrush}" />
     <Setter Property="AxisLabelBrush" Value="{DynamicResource LuminaChartAxisLabelBrush}" />
     <Setter Property="CrosshairBrush" Value="{DynamicResource LuminaChartCrosshairBrush}" />
+    <Setter Property="TooltipBackgroundBrush" Value="{DynamicResource LuminaChartTooltipBackgroundBrush}" />
+    <Setter Property="TooltipTextBrush" Value="{DynamicResource LuminaChartTooltipTextBrush}" />
+    <Setter Property="LegendTextBrush" Value="{DynamicResource LuminaChartAxisLabelBrush}" />
+  </Style>
+
+  <Style Selector="luminaCharts|LuminaPieChart">
+    <Setter Property="TooltipBackgroundBrush" Value="{DynamicResource LuminaChartTooltipBackgroundBrush}" />
+    <Setter Property="TooltipTextBrush" Value="{DynamicResource LuminaChartTooltipTextBrush}" />
+    <Setter Property="LegendTextBrush" Value="{DynamicResource LuminaChartAxisLabelBrush}" />
+  </Style>
+
+  <Style Selector="luminaCharts|LuminaRadarChart">
+    <Setter Property="GridLineBrush" Value="{DynamicResource LuminaChartGridLineBrush}" />
+    <Setter Property="AxisLabelBrush" Value="{DynamicResource LuminaChartAxisLabelBrush}" />
     <Setter Property="TooltipBackgroundBrush" Value="{DynamicResource LuminaChartTooltipBackgroundBrush}" />
     <Setter Property="TooltipTextBrush" Value="{DynamicResource LuminaChartTooltipTextBrush}" />
     <Setter Property="LegendTextBrush" Value="{DynamicResource LuminaChartAxisLabelBrush}" />

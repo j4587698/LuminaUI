@@ -5438,6 +5438,8 @@ await shell.PushAsync(
   <data name="Sandbox.Charts.Month8" xml:space="preserve"><value>Aug</value></data>
   <data name="Sandbox.Charts.Month9" xml:space="preserve"><value>Sep</value></data>
   <data name="Sandbox.Charts.Month10" xml:space="preserve"><value>Oct</value></data>
+  <data name="Sandbox.Charts.Month11" xml:space="preserve"><value>Nov</value></data>
+  <data name="Sandbox.Charts.Month12" xml:space="preserve"><value>Dec</value></data>
   <data name="Sandbox.Charts.ScatterTitle" xml:space="preserve">
     <value>Scatter</value>
   </data>

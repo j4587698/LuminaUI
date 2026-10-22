@@ -38,7 +38,8 @@ NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NE
              xmlns:lumina="clr-namespace:LuminaUI;assembly=LuminaUI"
              xmlns:luminaColorPicker="using:LuminaUI.ColorPicker"
              xmlns:luminaDataGrid="using:LuminaUI.DataGrid"
-             xmlns:luminaTreeDataGrid="using:LuminaUI.TreeDataGrid">
+             xmlns:luminaTreeDataGrid="using:LuminaUI.TreeDataGrid"
+             xmlns:luminaCharts="using:LuminaUI.Charts">
   <Application.Styles>
     <FluentTheme />
     <lumina:LuminaTheme />
@@ -47,6 +48,7 @@ NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NE
     <luminaColorPicker:LuminaColorPickerTheme />
     <luminaDataGrid:LuminaDataGridTheme />
     <luminaTreeDataGrid:LuminaTreeDataGridTheme />
+    <luminaCharts:LuminaChartsTheme />
   </Application.Styles>
 </Application>
 ```

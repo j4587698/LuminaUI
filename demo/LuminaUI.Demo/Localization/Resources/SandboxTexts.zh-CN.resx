@@ -5438,6 +5438,8 @@ await shell.PushAsync(
   <data name="Sandbox.Charts.Month8" xml:space="preserve"><value>八月</value></data>
   <data name="Sandbox.Charts.Month9" xml:space="preserve"><value>九月</value></data>
   <data name="Sandbox.Charts.Month10" xml:space="preserve"><value>十月</value></data>
+  <data name="Sandbox.Charts.Month11" xml:space="preserve"><value>十一月</value></data>
+  <data name="Sandbox.Charts.Month12" xml:space="preserve"><value>十二月</value></data>
   <data name="Sandbox.Charts.ScatterTitle" xml:space="preserve">
     <value>散点图</value>
   </data>

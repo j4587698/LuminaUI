@@ -14,12 +14,12 @@ public partial class ChartsShowcasePage : LuminaPage
 {
     private const int MaxLivePoints = 80;
 
-    private readonly DispatcherTimer _perfTimer = new() { Interval = TimeSpan.FromMilliseconds(300) };
     private readonly DispatcherTimer _liveTimer = new() { Interval = TimeSpan.FromMilliseconds(250) };
     private readonly Random _random = new(7);
     private ChartsShowcaseViewModel? _viewModel;
     private ObservableCollection<LuminaChartPoint>? _livePoints;
     private int _liveTick;
+    private bool _perfUpdatePending;
 
     public ChartsShowcasePage()
     {
@@ -32,8 +32,8 @@ public partial class ChartsShowcasePage : LuminaPage
         ResetStressButton.Click += OnResetStressClicked;
         LiveStartButton.Click += OnLiveStartClicked;
         LiveStopButton.Click += OnLiveStopClicked;
-        _perfTimer.Tick += OnPerfTimerTick;
-        _liveTimer.Tick += (_, _) => AppendLivePoint();
+        StressChart.RenderCompleted += OnStressChartRenderCompleted;
+        _liveTimer.Tick += OnLiveTimerTick;
         Unloaded += OnUnloaded;
     }
 
@@ -49,14 +49,12 @@ public partial class ChartsShowcasePage : LuminaPage
 
     private void OnLiveStartClicked(object? sender, RoutedEventArgs e)
     {
-        _perfTimer.Start();
         _liveTimer.Start();
     }
 
     private void OnLiveStopClicked(object? sender, RoutedEventArgs e)
     {
         _liveTimer.Stop();
-        _perfTimer.Stop();
     }
 
     private void AppendLivePoint()
@@ -84,8 +82,27 @@ public partial class ChartsShowcasePage : LuminaPage
         LiveLatestText.Text = LuminaLocalization.Format(SandboxLocalization.ChartsLatestFormat, point.Y);
     }
 
-    private void OnPerfTimerTick(object? sender, EventArgs e)
+    private void OnStressChartRenderCompleted(object? sender, EventArgs e)
     {
+        // Coalesce: pointer moves can trigger many render passes per second and there is no
+        // point queueing one dispatcher callback for each of them.
+        if (_perfUpdatePending)
+        {
+            return;
+        }
+
+        _perfUpdatePending = true;
+        Dispatcher.UIThread.Post(UpdatePerfText, DispatcherPriority.Background);
+    }
+
+    private void UpdatePerfText()
+    {
+        _perfUpdatePending = false;
+        if (_viewModel == null)
+        {
+            return;
+        }
+
         PerfText.Text = LuminaLocalization.Format(
             SandboxLocalization.ChartsPerfFormat,
             StressChart.LastBuildMilliseconds,
@@ -93,16 +110,20 @@ public partial class ChartsShowcasePage : LuminaPage
             StressChart.LastMoveRenderMilliseconds);
     }
 
+    private void OnLiveTimerTick(object? sender, EventArgs e)
+    {
+        AppendLivePoint();
+    }
+
     private void OnUnloaded(object? sender, RoutedEventArgs e)
     {
         _liveTimer.Stop();
-        _perfTimer.Stop();
         LoadStressButton.Click -= OnLoadStressClicked;
         ResetStressButton.Click -= OnResetStressClicked;
         LiveStartButton.Click -= OnLiveStartClicked;
         LiveStopButton.Click -= OnLiveStopClicked;
-        _perfTimer.Tick -= OnPerfTimerTick;
-        _liveTimer.Tick -= (_, _) => AppendLivePoint();
+        StressChart.RenderCompleted -= OnStressChartRenderCompleted;
+        _liveTimer.Tick -= OnLiveTimerTick;
         Unloaded -= OnUnloaded;
         _viewModel = null;
         _livePoints = null;

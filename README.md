@@ -38,7 +38,8 @@ Reference the packages or projects you need, then register the theme in `App.axa
              xmlns:lumina="clr-namespace:LuminaUI;assembly=LuminaUI"
              xmlns:luminaColorPicker="using:LuminaUI.ColorPicker"
              xmlns:luminaDataGrid="using:LuminaUI.DataGrid"
-             xmlns:luminaTreeDataGrid="using:LuminaUI.TreeDataGrid">
+             xmlns:luminaTreeDataGrid="using:LuminaUI.TreeDataGrid"
+             xmlns:luminaCharts="using:LuminaUI.Charts">
   <Application.Styles>
     <FluentTheme />
     <lumina:LuminaTheme />
@@ -47,6 +48,7 @@ Reference the packages or projects you need, then register the theme in `App.axa
     <luminaColorPicker:LuminaColorPickerTheme />
     <luminaDataGrid:LuminaDataGridTheme />
     <luminaTreeDataGrid:LuminaTreeDataGridTheme />
+    <luminaCharts:LuminaChartsTheme />
   </Application.Styles>
 </Application>
 ```

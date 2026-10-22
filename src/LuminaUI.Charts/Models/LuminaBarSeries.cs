@@ -5,9 +5,20 @@ namespace LuminaUI.Charts;
 /// </summary>
 public sealed class LuminaBarSeries : LuminaChartSeries
 {
-    /// <summary>Fraction of the slot width occupied by each bar (0..1). Default 0.7.</summary>
-    public double BarWidthRatio { get; set; } = 0.7;
+    private double _barWidthRatio = 0.7;
+    private double _cornerRadius;
 
-    /// <summary>Gets or sets the corner radius used for bar tops (rendering only).</summary>
-    public double CornerRadius { get; set; }
+    /// <summary>Fraction of the slot width occupied by each bar (0..1). Default 0.7.</summary>
+    public double BarWidthRatio
+    {
+        get => _barWidthRatio;
+        set => Set(ref _barWidthRatio, value);
+    }
+
+    /// <summary>Corner radius applied to all four bar corners (rendering only).</summary>
+    public double CornerRadius
+    {
+        get => _cornerRadius;
+        set => Set(ref _cornerRadius, value);
+    }
 }

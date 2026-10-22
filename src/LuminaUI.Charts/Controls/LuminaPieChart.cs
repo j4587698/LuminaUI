@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Globalization;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Documents;
 using Avalonia.Input;
 using Avalonia.Layout;
 using Avalonia.Media;
@@ -18,10 +19,13 @@ public class LuminaPieChart : Control
 {
     private const double TooltipPadding = 8.0;
     private const double TooltipRadius = 6.0;
-    private const double LegendBandHeight = 20.0;
-    private const double LegendBandGap = 6.0;
+    private const double LabelFontSize = 12.0;
 
     private int _hoverSliceIndex = -1;
+    private INotifyCollectionChanged? _slicesSubscription;
+    private HashSet<LuminaPieSlice> _sliceSubscriptions = new();
+    private readonly List<(FormattedText Text, IBrush Color)> _legendItems = new();
+    private Rect _legendRect;
 
     public static readonly StyledProperty<IList<LuminaPieSlice>?> SlicesProperty =
         AvaloniaProperty.Register<LuminaPieChart, IList<LuminaPieSlice>?>(nameof(Slices));
@@ -136,15 +140,7 @@ public class LuminaPieChart : Control
             return;
         }
 
-        double total = 0.0;
-        foreach (LuminaPieSlice slice in slices)
-        {
-            if (double.IsFinite(slice.Value) && slice.Value > 0.0)
-            {
-                total += slice.Value;
-            }
-        }
-
+        double total = SumValues(slices);
         if (total <= 0.0)
         {
             return;
@@ -153,22 +149,23 @@ public class LuminaPieChart : Control
         var (center, outer) = ComputeLayout();
         double inner = outer * Math.Clamp(InnerRadiusRatio, 0.0, 0.98);
         double startAngle = -90.0;
+        Typeface typeface = ChartDrawing.CreateTypeface(this);
 
         for (int index = 0; index < slices.Count; index++)
         {
             LuminaPieSlice slice = slices[index];
-            if (!(slice.Value > 0.0))
+            if (!IsDrawable(slice))
             {
                 continue;
             }
 
             double sweep = slice.Value / total * 360.0;
             StreamGeometry geometry = BuildSlice(center, outer, inner, startAngle, sweep);
-            IBrush fill = slice.Brush ?? Brushes.SlateGray;
+            IBrush fill = slice.Brush ?? ChartDrawing.ResolvePaletteBrush(this, index);
             context.DrawGeometry(fill, null, geometry);
             if (index == _hoverSliceIndex)
             {
-                var hoverPen = new Pen(Brushes.White, 2.0);
+                var hoverPen = new Pen(ChartDrawing.ContrastFor(fill), 2.0);
                 context.DrawGeometry(null, hoverPen, geometry);
             }
 
@@ -184,18 +181,28 @@ public class LuminaPieChart : Control
                     : slice.Label ?? string.Empty;
                 if (!string.IsNullOrEmpty(label))
                 {
-                    var text = new FormattedText(
-                        label,
-                        CultureInfo.CurrentCulture,
-                        FlowDirection.LeftToRight,
-                        new Typeface(TextElement.GetFontFamily(this), FontStyle.Normal, FontWeight.Normal),
-                        12.0,
-                        Brushes.White);
+                    FormattedText text = ChartDrawing.CreateText(label, typeface, ChartDrawing.ContrastFor(fill), LabelFontSize);
                     context.DrawText(text, new Point(labelPoint.X - text.Width / 2.0, labelPoint.Y - text.Height / 2.0));
                 }
             }
 
             startAngle += sweep;
+        }
+
+        if (ShowLegend)
+        {
+            // Measured before the tooltip so the tooltip can be kept clear of the legend band.
+            BuildLegendItems(slices, _legendItems);
+            _legendRect = ChartDrawing.ComputeLegendRect(
+                _legendItems,
+                ChartDrawing.MeasureLegend(_legendItems),
+                LegendPosition,
+                Bounds.Size);
+        }
+        else
+        {
+            _legendItems.Clear();
+            _legendRect = default;
         }
 
         if (_hoverSliceIndex >= 0 && _hoverSliceIndex < slices.Count)
@@ -205,7 +212,117 @@ public class LuminaPieChart : Control
 
         if (ShowLegend)
         {
-            DrawLegend(context, slices);
+            DrawLegend(context);
+        }
+    }
+
+    /// <summary>A slice contributes to the chart only when its value is finite and positive.</summary>
+    private static bool IsDrawable(LuminaPieSlice slice)
+    {
+        return slice != null && double.IsFinite(slice.Value) && slice.Value > 0.0;
+    }
+
+    private static double SumValues(IList<LuminaPieSlice> slices)
+    {
+        double total = 0.0;
+        foreach (LuminaPieSlice slice in slices)
+        {
+            if (IsDrawable(slice))
+            {
+                total += slice.Value;
+            }
+        }
+
+        return total;
+    }
+
+    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnAttachedToVisualTree(e);
+        UpdateSubscriptions();
+    }
+
+    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnDetachedFromVisualTree(e);
+        if (_slicesSubscription != null)
+        {
+            _slicesSubscription.CollectionChanged -= OnSlicesChanged;
+            _slicesSubscription = null;
+        }
+
+        foreach (LuminaPieSlice slice in _sliceSubscriptions)
+        {
+            slice.PropertyChanged -= OnSlicePropertyChanged;
+        }
+
+        _sliceSubscriptions.Clear();
+    }
+
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
+    {
+        base.OnPropertyChanged(change);
+        if (change.Property == SlicesProperty)
+        {
+            UpdateSubscriptions();
+        }
+    }
+
+    private void OnSlicesChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        _hoverSliceIndex = -1;
+        UpdateSubscriptions();
+        InvalidateVisual();
+    }
+
+    private void OnSlicePropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        InvalidateVisual();
+    }
+
+    private void UpdateSubscriptions()
+    {
+        if (_slicesSubscription != null)
+        {
+            _slicesSubscription.CollectionChanged -= OnSlicesChanged;
+            _slicesSubscription = null;
+        }
+
+        var desired = new HashSet<LuminaPieSlice>();
+        IList<LuminaPieSlice>? slices = Slices;
+        if (slices != null)
+        {
+            foreach (LuminaPieSlice slice in slices)
+            {
+                if (slice != null)
+                {
+                    desired.Add(slice);
+                }
+            }
+        }
+
+        foreach (LuminaPieSlice stale in _sliceSubscriptions)
+        {
+            if (!desired.Contains(stale))
+            {
+                stale.PropertyChanged -= OnSlicePropertyChanged;
+            }
+        }
+
+        foreach (LuminaPieSlice add in desired)
+        {
+            if (!_sliceSubscriptions.Contains(add))
+            {
+                add.PropertyChanged += OnSlicePropertyChanged;
+            }
+        }
+
+        _sliceSubscriptions = desired;
+
+        if (slices is INotifyCollectionChanged observable)
+        {
+            _slicesSubscription = observable;
+            _slicesSubscription.CollectionChanged += OnSlicesChanged;
         }
     }
 
@@ -239,15 +356,7 @@ public class LuminaPieChart : Control
             return -1;
         }
 
-        double total = 0.0;
-        foreach (LuminaPieSlice slice in slices)
-        {
-            if (double.IsFinite(slice.Value) && slice.Value > 0.0)
-            {
-                total += slice.Value;
-            }
-        }
-
+        double total = SumValues(slices);
         if (total <= 0.0)
         {
             return -1;
@@ -265,16 +374,24 @@ public class LuminaPieChart : Control
         }
 
         double angle = Math.Atan2(dy, dx) * 180.0 / Math.PI + 90.0;
+        angle %= 360.0;
         if (angle < 0.0)
         {
             angle += 360.0;
         }
 
+        if (angle >= 360.0)
+        {
+            angle = 0.0;
+        }
+
         double start = 0.0;
         for (int index = 0; index < slices.Count; index++)
         {
-            double sweep = slices[index].Value > 0.0 ? slices[index].Value / total * 360.0 : 0.0;
-            if (angle >= start && angle < start + sweep)
+            double sweep = IsDrawable(slices[index]) ? slices[index].Value / total * 360.0 : 0.0;
+            // The epsilon absorbs the accumulated floating point error of the sweep sum, which
+            // otherwise leaves the slice that owns the 0/360 seam unclickable.
+            if (angle >= start && angle < start + sweep + 1e-9)
             {
                 return index;
             }
@@ -289,7 +406,7 @@ public class LuminaPieChart : Control
     {
         bool legendTop = ShowLegend &&
             (LegendPosition is LuminaChartLegendPosition.TopLeft or LuminaChartLegendPosition.TopCenter or LuminaChartLegendPosition.TopRight);
-        double legendSpace = ShowLegend ? LegendBandHeight + LegendBandGap : 0.0;
+        double legendSpace = ShowLegend ? ChartDrawing.LegendBandHeight + ChartDrawing.LegendBandGap : 0.0;
         double topPad = legendTop ? legendSpace : 8.0;
         double bottomPad = (!legendTop && ShowLegend) ? legendSpace : 8.0;
 
@@ -298,85 +415,67 @@ public class LuminaPieChart : Control
         return (center, outer);
     }
 
-    private void DrawLegend(DrawingContext context, IList<LuminaPieSlice> slices)
+    private void DrawLegend(DrawingContext context)
+    {
+        ChartDrawing.DrawLegend(
+            context,
+            _legendItems,
+            ChartDrawing.MeasureLegend(_legendItems),
+            LegendPosition,
+            Bounds.Size);
+    }
+
+    /// <summary>Rebuilds <paramref name="target"/> with one entry per drawable slice.</summary>
+    private void BuildLegendItems(IList<LuminaPieSlice> slices, List<(FormattedText Text, IBrush Color)> target)
     {
         IBrush textBrush = LegendTextBrush ?? Brushes.Gray;
-        const double swatchWidth = 12.0;
-        const double swatchHeight = 3.0;
-        const double swatchGap = 6.0;
-        const double itemGap = 14.0;
-        const double fontSize = 12.0;
-        var typeface = new Typeface(TextElement.GetFontFamily(this), FontStyle.Normal, FontWeight.Normal);
+        Typeface typeface = ChartDrawing.CreateTypeface(this);
+        target.Clear();
 
-        var items = new List<(FormattedText Text, IBrush Color)>(slices.Count);
-        double contentWidth = 0.0;
-        foreach (LuminaPieSlice slice in slices)
+        for (int index = 0; index < slices.Count; index++)
         {
-            if (!(slice.Value > 0.0))
+            LuminaPieSlice slice = slices[index];
+            if (!IsDrawable(slice))
             {
                 continue;
             }
 
-            var text = new FormattedText(
+            FormattedText text = ChartDrawing.CreateText(
                 slice.Label ?? "Slice",
-                CultureInfo.CurrentCulture,
-                FlowDirection.LeftToRight,
                 typeface,
-                fontSize,
-                textBrush);
-            items.Add((text, slice.Brush ?? Brushes.SlateGray));
-            if (items.Count > 1)
-            {
-                contentWidth += itemGap;
-            }
-
-            contentWidth += swatchWidth + swatchGap + text.Width;
-        }
-
-        if (items.Count == 0)
-        {
-            return;
-        }
-
-        if (contentWidth > Bounds.Width - 8.0)
-        {
-            contentWidth = Bounds.Width - 8.0;
-        }
-
-        double x;
-        switch (LegendPosition)
-        {
-            case LuminaChartLegendPosition.TopLeft:
-            case LuminaChartLegendPosition.BottomLeft:
-                x = 4.0;
-                break;
-            case LuminaChartLegendPosition.TopCenter:
-            case LuminaChartLegendPosition.BottomCenter:
-                x = Math.Max(0.0, (Bounds.Width - contentWidth) / 2.0);
-                break;
-            default:
-                x = Math.Max(0.0, Bounds.Width - contentWidth - 4.0);
-                break;
-        }
-
-        bool isTop = LegendPosition is LuminaChartLegendPosition.TopLeft or LuminaChartLegendPosition.TopCenter or LuminaChartLegendPosition.TopRight;
-        double cursorY = isTop
-            ? 2.0 + (LegendBandHeight - fontSize) / 2.0
-            : Bounds.Height - LegendBandHeight - 2.0 + (LegendBandHeight - fontSize) / 2.0;
-
-        double cursorX = x;
-        foreach ((FormattedText Text, IBrush Color) item in items)
-        {
-            var swatchRect = new Rect(cursorX, cursorY + (fontSize - swatchHeight) / 2.0, swatchWidth, swatchHeight);
-            context.DrawRectangle(item.Color, null, swatchRect, 1.5, 1.5);
-            cursorX += swatchWidth + swatchGap;
-            context.DrawText(item.Text, new Point(cursorX, cursorY));
-            cursorX += item.Text.Width + itemGap;
+                textBrush,
+                ChartDrawing.LegendFontSize);
+            target.Add((text, slice.Brush ?? ChartDrawing.ResolvePaletteBrush(this, index)));
         }
     }
 
     private static StreamGeometry BuildSlice(Point center, double outer, double inner, double startAngle, double sweep)
     {
+        if (sweep >= 359.999)
+        {
+            var fullGeometry = new StreamGeometry();
+            using (StreamGeometryContext context = fullGeometry.Open())
+            {
+                var outerTop = new Point(center.X, center.Y - outer);
+                var outerBottom = new Point(center.X, center.Y + outer);
+                context.BeginFigure(outerTop, isFilled: true);
+                context.ArcTo(outerBottom, new Size(outer, outer), 0.0, false, SweepDirection.Clockwise);
+                context.ArcTo(outerTop, new Size(outer, outer), 0.0, false, SweepDirection.Clockwise);
+                if (inner > 0.5)
+                {
+                    var innerTop = new Point(center.X, center.Y - inner);
+                    var innerBottom = new Point(center.X, center.Y + inner);
+                    context.LineTo(innerTop);
+                    context.ArcTo(innerBottom, new Size(inner, inner), 0.0, false, SweepDirection.CounterClockwise);
+                    context.ArcTo(innerTop, new Size(inner, inner), 0.0, false, SweepDirection.CounterClockwise);
+                }
+
+                context.EndFigure(isClosed: true);
+            }
+
+            return fullGeometry;
+        }
+
         bool largeArc = sweep > 180.0;
         double startRad = startAngle * Math.PI / 180.0;
         double endRad = (startAngle + sweep) * Math.PI / 180.0;
@@ -411,22 +510,28 @@ public class LuminaPieChart : Control
     {
         IBrush background = TooltipBackgroundBrush ?? Brushes.SlateGray;
         IBrush textBrush = TooltipTextBrush ?? Brushes.White;
-        var typeface = new Typeface(TextElement.GetFontFamily(this), FontStyle.Normal, FontWeight.Normal);
+        Typeface typeface = ChartDrawing.CreateTypeface(this);
 
         string percent = ShowPercent ? $" ({Math.Round(slice.Value / total * 100.0)}%)" : string.Empty;
         string line = $"{slice.Label ?? "Slice"}: {slice.Value.ToString("0.##", CultureInfo.CurrentCulture)}{percent}";
-        var text = new FormattedText(line, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeface, 12.0, textBrush);
-
-        double boxWidth = text.Width + TooltipPadding * 2.0;
-        double boxHeight = text.Height + TooltipPadding * 2.0;
-        double x = center.X + 12.0;
-        double y = Math.Max(0.0, Bounds.Height / 2.0 - boxHeight / 2.0);
-        if (x + boxWidth > Bounds.Width)
+        var lines = new List<FormattedText>(1)
         {
-            x = Math.Max(0.0, center.X - boxWidth - 12.0);
+            ChartDrawing.CreateText(line, typeface, textBrush, ChartDrawing.LegendFontSize)
+        };
+
+        Size size = ChartDrawing.MeasureTooltip(lines, TooltipPadding);
+        double x = center.X + 12.0;
+        if (x + size.Width > Bounds.Width)
+        {
+            x = Math.Max(0.0, center.X - size.Width - 12.0);
         }
 
-        context.DrawRectangle(background, null, new Rect(x, y, boxWidth, boxHeight), TooltipRadius, TooltipRadius);
-        context.DrawText(text, new Point(x + TooltipPadding, y + TooltipPadding));
+        Point origin = ChartDrawing.PlaceTooltip(
+            size,
+            new Point(x, (Bounds.Height / 2.0) - (size.Height / 2.0)),
+            Bounds.Size,
+            ShowLegend && _legendItems.Count > 0 ? _legendRect : null);
+
+        ChartDrawing.DrawTooltip(context, lines, background, ChartDrawing.ResolveTooltipBorderPen(this), TooltipPadding, TooltipRadius, origin, size);
     }
 }

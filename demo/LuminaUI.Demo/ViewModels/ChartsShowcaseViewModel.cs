@@ -42,7 +42,7 @@ public partial class ChartsShowcaseViewModel : ObservableObject
             {
                 Title = "200k samples",
                 ShowArea = true,
-                Points = BuildStressWave(200_000)
+                Points = StressWave200k
             }
         ];
 
@@ -126,16 +126,25 @@ public partial class ChartsShowcaseViewModel : ObservableObject
         return points;
     }
 
+    /// <summary>
+    /// Shared 200k-point stress sample. Built once per process: the demo page is re-created every
+    /// time it is navigated to, and regenerating the sample there cost tens of milliseconds of
+    /// allocation on each visit.
+    /// </summary>
+    private static IList<LuminaChartPoint> StressWave200k => _stressWave200k ??= BuildStressWave(200_000);
+
+    private static IList<LuminaChartPoint>? _stressWave200k;
+
     private static IList<LuminaChartPoint> BuildStressWave(int count)
     {
         var points = new List<LuminaChartPoint>(count);
         var random = new Random(42);
         for (int i = 0; i < count; i++)
         {
-            double envelope = 1.0 + 0.15 * Math.Sin(i * 0.002);
+            double envelope = 1.0 + (0.15 * Math.Sin(i * 0.002));
             double fast = Math.Sin(i * 0.05) * 12.0;
             double medium = Math.Sin(i * 0.008) * 22.0;
-            double y = 50.0 + (medium + fast) * envelope + (random.NextDouble() - 0.5) * 4.0;
+            double y = 50.0 + ((medium + fast) * envelope) + ((random.NextDouble() - 0.5) * 4.0);
             points.Add(new LuminaChartPoint(i + 1.0, y));
         }
 
