@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  CONFIGURATION: Release
+  DOTNET_NOLOGO: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+jobs:
+  build-and-test:
+    name: Build packages and run tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+            10.0.x
+          cache: true
+          cache-dependency-path: |
+            Directory.Packages.props
+            **/*.csproj
+
+      - name: Install Linux rendering dependencies
+        run: sudo apt-get update && sudo apt-get install -y libfontconfig1
+
+      # Only the packable libraries are built here. The demo hosts pull in the Android,
+      # iOS and WebAssembly workloads, which are slow and irrelevant to a PR gate.
+      - name: Restore
+        run: |
+          dotnet restore src/LuminaUI/LuminaUI.csproj
+          dotnet restore src/LuminaUI.ColorPicker/LuminaUI.ColorPicker.csproj
+          dotnet restore src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj
+          dotnet restore src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj
+          dotnet restore src/LuminaUI.Charts/LuminaUI.Charts.csproj
+          dotnet restore tests/LuminaUI.Tests/LuminaUI.Tests.csproj
+
+      - name: Build
+        run: |
+          dotnet build src/LuminaUI/LuminaUI.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
+          dotnet build src/LuminaUI.ColorPicker/LuminaUI.ColorPicker.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
+          dotnet build src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
+          dotnet build src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
+          dotnet build src/LuminaUI.Charts/LuminaUI.Charts.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
+
+      - name: Test
+        run: |
+          dotnet test tests/LuminaUI.Tests/LuminaUI.Tests.csproj \
+            --configuration "$CONFIGURATION" \
+            --logger "console;verbosity=normal" \
+            /p:ContinuousIntegrationBuild=true

@@ -30,6 +30,11 @@
     <Color x:Key="LuminaBorderDefault">#252731</Color>          <!-- Default Component Border -->
     <Color x:Key="LuminaBorderStrong">#393C48</Color>           <!-- Strong/Hover Border -->
     <Color x:Key="LuminaBorderDisabled">#252731</Color>         <!-- Disabled Border -->
+    <Color x:Key="LuminaBorderFocus">#3B82F6</Color>            <!-- Keyboard focus ring (matches LuminaPrimary) -->
+
+    <!-- 3b. Interaction fills (hover / pressed backgrounds for transparent items) -->
+    <Color x:Key="LuminaFillTertiary">#17181D</Color>           <!-- Hover: barely-there tint -->
+    <Color x:Key="LuminaFillSecondary">#252731</Color>          <!-- Pressed: one step stronger -->
 
     <!-- Legacy aliases -->
     <Color x:Key="LuminaBorder">#252731</Color>
@@ -107,6 +112,9 @@
     <SolidColorBrush x:Key="LuminaBorderDefaultBrush" Color="{StaticResource LuminaBorderDefault}" />
     <SolidColorBrush x:Key="LuminaBorderStrongBrush" Color="{StaticResource LuminaBorderStrong}" />
     <SolidColorBrush x:Key="LuminaBorderDisabledBrush" Color="{StaticResource LuminaBorderDisabled}" />
+    <SolidColorBrush x:Key="LuminaBorderFocusBrush" Color="{StaticResource LuminaBorderFocus}" />
+    <SolidColorBrush x:Key="LuminaFillTertiaryBrush" Color="{StaticResource LuminaFillTertiary}" />
+    <SolidColorBrush x:Key="LuminaFillSecondaryBrush" Color="{StaticResource LuminaFillSecondary}" />
     <SolidColorBrush x:Key="LuminaBorderBrush" Color="{StaticResource LuminaBorder}" />
     <SolidColorBrush x:Key="LuminaDividerBrush" Color="{StaticResource LuminaDivider}" />
     
