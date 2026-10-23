@@ -131,7 +131,7 @@ demo/
   LuminaUI.Demo.iOS/     iOS host.
 
 tests/
-  LuminaUI.Tests/        Headless render smoke tests and XAML/RESX contract tests.
+  LuminaUI.Tests/        Headless smoke, XAML/RESX contract, shell state and image cache tests.
 ```
 
 ## Diagnostics (MCP & DevTools)
@@ -219,7 +219,7 @@ Run the test suite:
 dotnet test tests/LuminaUI.Tests/LuminaUI.Tests.csproj
 ```
 
-The suite runs headless, so it needs no display. It covers three things that fail silently otherwise: every Lumina control instantiates and renders, every `Lumina*` resource key referenced by the XAML is actually defined in both theme variants, and every localization key has a translation in each shipped culture. CI runs it on every pull request.
+The suite runs headless, so it needs no display. It targets the defects that fail silently otherwise: every Lumina control instantiates and renders, every `Lumina*` resource key referenced by the XAML is actually defined in both theme variants, every localization key has a translation in each shipped culture, the shell's responsive menu state survives a narrow/wide transition, and the decoded image cache evicts in the order it promises. CI runs it on every pull request.
 
 Create local packages:
 
