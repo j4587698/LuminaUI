@@ -41,7 +41,6 @@ Reference the packages or projects you need, then register the theme in `App.axa
              xmlns:luminaTreeDataGrid="using:LuminaUI.TreeDataGrid"
              xmlns:luminaCharts="using:LuminaUI.Charts">
   <Application.Styles>
-    <FluentTheme />
     <lumina:LuminaTheme />
 
     <!-- Optional packages -->
@@ -52,6 +51,8 @@ Reference the packages or projects you need, then register the theme in `App.axa
   </Application.Styles>
 </Application>
 ```
+
+`LuminaTheme` already embeds the Fluent base theme it builds on, so it is the only required entry and no `<FluentTheme />` line is needed. If you are upgrading from a version that required one, delete it — keeping it would register the base theme twice, which renders identically but wastes work.
 
 Use controls with the Lumina namespace:
 

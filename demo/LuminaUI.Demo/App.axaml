@@ -12,7 +12,6 @@
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.Styles>
-        <FluentTheme />
         <lumina:LuminaTheme />
         <icons:MaterialIconStyles />
         <colorPicker:LuminaColorPickerTheme />

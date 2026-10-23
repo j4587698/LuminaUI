@@ -1,6 +1,19 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="LuminaUI.LuminaTheme">
+
+    <!--
+        Lumina is a patch layer, not a full theme: most Lumina control themes are declared as
+        <ControlTheme x:Key="{x:Type Foo}" BasedOn="{StaticResource {x:Type Foo}}">, which re-keys
+        the existing default theme and layers Lumina setters on top of it. That only works when a
+        base theme is already registered, so Lumina embeds one and hosts no longer need to write
+        <FluentTheme /> themselves (or get it in the right order).
+
+        This include must stay the first child: the resource dictionaries below are loaded while
+        this file is being parsed and resolve their BasedOn keys against it.
+    -->
+    <StyleInclude Source="avares://Avalonia.Themes.Fluent/FluentTheme.xaml" />
+
     <Styles.Resources>
         <ResourceDictionary>
             <ResourceDictionary.ThemeDictionaries>

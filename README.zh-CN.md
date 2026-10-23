@@ -41,7 +41,6 @@ NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NE
              xmlns:luminaTreeDataGrid="using:LuminaUI.TreeDataGrid"
              xmlns:luminaCharts="using:LuminaUI.Charts">
   <Application.Styles>
-    <FluentTheme />
     <lumina:LuminaTheme />
 
     <!-- 可选包 -->
@@ -52,6 +51,8 @@ NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NE
   </Application.Styles>
 </Application>
 ```
+
+`LuminaTheme` 已经内嵌了它所基于的 Fluent 基础主题，因此它是唯一必需的条目，不再需要 `<FluentTheme />`。如果是从要求手写该行的旧版本升级，请把它删掉——保留会让基础主题被注册两次，渲染结果一致，但会多做一遍无用功。
 
 在页面中使用 Lumina 命名空间下的控件：
 
