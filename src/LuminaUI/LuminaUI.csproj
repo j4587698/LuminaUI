@@ -10,6 +10,8 @@
   <ItemGroup>
     <PackageReference Include="Avalonia" />
     <PackageReference Include="Avalonia.Skia" />
+    <!-- LuminaTheme embeds the Fluent base theme, so hosts only register one Styles entry. -->
+    <PackageReference Include="Avalonia.Themes.Fluent" />
   </ItemGroup>
 
 </Project>
