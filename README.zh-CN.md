@@ -129,6 +129,9 @@ demo/
   LuminaUI.Demo.Browser/ 浏览器宿主。
   LuminaUI.Demo.Android/ Android 宿主。
   LuminaUI.Demo.iOS/     iOS 宿主。
+
+tests/
+  LuminaUI.Tests/        Headless 渲染冒烟测试与 XAML/RESX 契约测试。
 ```
 
 ## 诊断（MCP & DevTools）
@@ -209,6 +212,14 @@ dotnet build demo/LuminaUI.Demo.iOS/LuminaUI.Demo.iOS.csproj
 ```
 
 安装全部平台 workload 后，可以使用 `dotnet build LuminaUI.slnx` 构建整个工作区。
+
+运行测试：
+
+```bash
+dotnet test tests/LuminaUI.Tests/LuminaUI.Tests.csproj
+```
+
+测试全程 headless 运行，不需要显示器。它覆盖三类"出问题时不会报错"的缺陷：每个 Lumina 控件都能实例化并渲染、XAML 中引用的每个 `Lumina*` 资源键在两种主题变体下都确实有定义、每个本地化键在每种随包发布的文化里都有译文。CI 会在每个 pull request 上运行它。
 
 生成本地 NuGet 包：
 

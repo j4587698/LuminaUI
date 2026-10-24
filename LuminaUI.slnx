@@ -4,6 +4,7 @@
   <Project Path="src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj" />
   <Project Path="src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj" />
   <Project Path="src/LuminaUI.Charts/LuminaUI.Charts.csproj" />
+  <Project Path="tests/LuminaUI.Tests/LuminaUI.Tests.csproj" />
   <Project Path="demo/LuminaUI.Demo/LuminaUI.Demo.csproj" />
   <Project Path="demo/LuminaUI.Demo.Desktop/LuminaUI.Demo.Desktop.csproj" />
   <Project Path="demo/LuminaUI.Demo.Browser/LuminaUI.Demo.Browser.csproj" />

@@ -100,6 +100,7 @@ jobs:
           dotnet restore src/LuminaUI.ColorPicker/LuminaUI.ColorPicker.csproj
           dotnet restore src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj
           dotnet restore src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj
+          dotnet restore src/LuminaUI.Charts/LuminaUI.Charts.csproj
 
       - name: Build
         run: |
@@ -107,6 +108,7 @@ jobs:
           dotnet build src/LuminaUI.ColorPicker/LuminaUI.ColorPicker.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
           dotnet build src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
           dotnet build src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
+          dotnet build src/LuminaUI.Charts/LuminaUI.Charts.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
 
       - name: Pack
         run: |
@@ -115,6 +117,7 @@ jobs:
           dotnet pack src/LuminaUI.ColorPicker/LuminaUI.ColorPicker.csproj --configuration "$CONFIGURATION" --no-build --output artifacts/packages /p:ContinuousIntegrationBuild=true
           dotnet pack src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj --configuration "$CONFIGURATION" --no-build --output artifacts/packages /p:ContinuousIntegrationBuild=true
           dotnet pack src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj --configuration "$CONFIGURATION" --no-build --output artifacts/packages /p:ContinuousIntegrationBuild=true
+          dotnet pack src/LuminaUI.Charts/LuminaUI.Charts.csproj --configuration "$CONFIGURATION" --no-build --output artifacts/packages /p:ContinuousIntegrationBuild=true
 
       - name: Upload NuGet artifacts
         uses: actions/upload-artifact@v4
