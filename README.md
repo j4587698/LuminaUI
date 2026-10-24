@@ -131,7 +131,7 @@ demo/
   LuminaUI.Demo.iOS/     iOS host.
 
 tests/
-  LuminaUI.Tests/        Headless render smoke tests and XAML/RESX contract tests.
+  LuminaUI.Tests/        Headless test suite.
 ```
 
 ## Diagnostics (MCP & DevTools)
@@ -213,13 +213,13 @@ dotnet build demo/LuminaUI.Demo.iOS/LuminaUI.Demo.iOS.csproj
 
 After all platform workloads are installed, `dotnet build LuminaUI.slnx` builds the full workspace.
 
-Run the test suite:
+Run the test suite (headless, no display needed):
 
 ```bash
 dotnet test tests/LuminaUI.Tests/LuminaUI.Tests.csproj
 ```
 
-The suite runs headless, so it needs no display. It covers three things that fail silently otherwise: every Lumina control instantiates and renders, every `Lumina*` resource key referenced by the XAML is actually defined in both theme variants, and every localization key has a translation in each shipped culture. CI runs it on every pull request.
+CI runs it on every pull request.
 
 Create local packages:
 
