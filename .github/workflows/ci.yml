@@ -40,8 +40,11 @@ jobs:
       - name: Install Linux rendering dependencies
         run: sudo apt-get update && sudo apt-get install -y libfontconfig1
 
-      # Only the packable libraries are built here. The demo hosts pull in the Android,
-      # iOS and WebAssembly workloads, which are slow and irrelevant to a PR gate.
+      # The Android, iOS and WebAssembly hosts pull in platform workloads that are slow and
+      # irrelevant to a PR gate, so they are skipped. The desktop host and the shared demo UI are
+      # plain net10.0, and they are built here on purpose: the demo is by far the largest consumer
+      # of the library's public API and XAML resources, so building it turns every demo binding and
+      # style into a compile-time check that a breaking change cannot slip past.
       - name: Restore
         run: |
           dotnet restore src/LuminaUI/LuminaUI.csproj
@@ -49,6 +52,7 @@ jobs:
           dotnet restore src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj
           dotnet restore src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj
           dotnet restore src/LuminaUI.Charts/LuminaUI.Charts.csproj
+          dotnet restore demo/LuminaUI.Demo.Desktop/LuminaUI.Demo.Desktop.csproj
           dotnet restore tests/LuminaUI.Tests/LuminaUI.Tests.csproj
 
       - name: Build
@@ -58,6 +62,7 @@ jobs:
           dotnet build src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
           dotnet build src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
           dotnet build src/LuminaUI.Charts/LuminaUI.Charts.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
+          dotnet build demo/LuminaUI.Demo.Desktop/LuminaUI.Demo.Desktop.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
 
       - name: Test
         run: |
