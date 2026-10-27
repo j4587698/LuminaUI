@@ -21,6 +21,7 @@ public class LuminaRadarChart : Control
     private const double TooltipRadius = 6.0;
 
     private (int Series, int Point)? _hover;
+    private bool _isAttached;
     private INotifyCollectionChanged? _seriesSubscription;
     private HashSet<LuminaRadarSeries> _seriesSubscriptions = new();
     private HashSet<INotifyCollectionChanged> _valuesSubscriptions = new();
@@ -82,6 +83,10 @@ public class LuminaRadarChart : Control
     public LuminaRadarChart()
     {
         ClipToBounds = true;
+        // Palette colors and translucent area fills are derived from theme resources; neither a
+        // resource change nor a theme variant switch touches an AffectsRender property.
+        ResourcesChanged += (_, _) => InvalidateVisual();
+        ActualThemeVariantChanged += (_, _) => InvalidateVisual();
     }
 
     public IList<LuminaRadarSeries>? Series
@@ -164,6 +169,11 @@ public class LuminaRadarChart : Control
     {
         base.Render(context);
 
+        // An invisible full-bounds background makes the whole control hit-testable. Without it
+        // only painted pixels (thin grid strokes, the series polygons) receive pointer events,
+        // so HoverThreshold around a vertex mostly never fires.
+        context.FillRectangle(Brushes.Transparent, new Rect(Bounds.Size));
+
         IList<LuminaRadarSeries>? series = Series;
         if (series == null || series.Count == 0)
         {
@@ -235,30 +245,18 @@ public class LuminaRadarChart : Control
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
+        _isAttached = true;
         UpdateSubscriptions();
     }
 
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
-        if (_seriesSubscription != null)
-        {
-            _seriesSubscription.CollectionChanged -= OnSeriesCollectionChanged;
-            _seriesSubscription = null;
-        }
-
-        foreach (LuminaRadarSeries series in _seriesSubscriptions)
-        {
-            series.PropertyChanged -= OnSeriesPropertyChanged;
-        }
-
-        foreach (INotifyCollectionChanged values in _valuesSubscriptions)
-        {
-            values.CollectionChanged -= OnValuesChanged;
-        }
-
-        _seriesSubscriptions.Clear();
-        _valuesSubscriptions.Clear();
+        _isAttached = false;
+        _hover = null;
+        // With _isAttached cleared this releases every subscription, so series owned by a
+        // long-lived view model no longer keep the chart alive.
+        UpdateSubscriptions();
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
@@ -330,7 +328,7 @@ public class LuminaRadarChart : Control
 
         var desiredSeries = new HashSet<LuminaRadarSeries>();
         var desiredValues = new HashSet<INotifyCollectionChanged>();
-        IList<LuminaRadarSeries>? series = Series;
+        IList<LuminaRadarSeries>? series = _isAttached ? Series : null;
         if (series != null)
         {
             foreach (LuminaRadarSeries item in series)
@@ -490,8 +488,8 @@ public class LuminaRadarChart : Control
             return;
         }
 
-        LuminaRadarSeries item = series[hover.Series];
-        IList<double>? values = item.Values;
+        LuminaRadarSeries? item = series[hover.Series];
+        IList<double>? values = item?.Values;
         if (item == null || values == null)
         {
             return;

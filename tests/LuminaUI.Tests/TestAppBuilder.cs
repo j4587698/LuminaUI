@@ -10,9 +10,10 @@ namespace LuminaUI.Tests;
 /// Hosts the headless application every <c>[AvaloniaFact]</c> runs inside.
 /// </summary>
 /// <remarks>
-/// Only <see cref="LuminaTheme"/> is registered, on purpose. LuminaTheme embeds the Fluent base
-/// theme it patches, and the whole suite is meant to fail loudly if that ever stops working —
-/// adding a standalone <c>FluentTheme</c> here would hide exactly the regression we care about.
+/// No standalone <c>FluentTheme</c> is registered, on purpose. LuminaTheme embeds the Fluent base
+/// theme it patches when the host has none, and the whole suite is meant to fail loudly if that
+/// ever stops working — adding a standalone <c>FluentTheme</c> here would hide exactly the
+/// regression we care about. The Charts theme only adds palette resources on top.
 /// </remarks>
 public static class TestAppBuilder
 {
@@ -26,5 +27,9 @@ public static class TestAppBuilder
 public sealed class TestApp : Application
 {
     /// <inheritdoc />
-    public override void Initialize() => Styles.Add(new LuminaTheme());
+    public override void Initialize()
+    {
+        Styles.Add(new LuminaTheme());
+        Styles.Add(new LuminaUI.Charts.LuminaChartsTheme());
+    }
 }
