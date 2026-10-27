@@ -4,6 +4,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Headless.XUnit;
 using Avalonia.Media;
 using Avalonia.Styling;
+using Avalonia.Themes.Fluent;
 using Xunit;
 
 namespace LuminaUI.Tests;
@@ -88,6 +89,48 @@ public class ThemeTests
             + "them:"
             + Environment.NewLine
             + string.Join(", ", missing));
+    }
+
+    [AvaloniaFact]
+    public void LuminaThemeEmbedsFluentWhenTheHostHasNoBaseTheme()
+    {
+        // The suite's application registers no base theme of its own.
+        LuminaTheme theme = Application.Current!.Styles.OfType<LuminaTheme>().Single();
+
+        Assert.True(theme.IncludesBaseTheme);
+        Assert.IsType<FluentTheme>(theme[0]);
+    }
+
+    [AvaloniaFact]
+    public void LuminaThemeReusesAnExistingBaseThemeInsteadOfEmbeddingASecondCopy()
+    {
+        // The application already has a base theme at this point (the one its LuminaTheme
+        // embedded), exactly like a host that declares <FluentTheme /> ahead of LuminaTheme. The
+        // new instance must not stack another Fluent copy on top - and must still load, which
+        // means its BasedOn="{StaticResource {x:Type Foo}}" keys resolved against the app.
+        var theme = new LuminaTheme();
+
+        Assert.False(theme.IncludesBaseTheme);
+        Assert.DoesNotContain(theme, style => style is FluentTheme);
+    }
+
+    [AvaloniaFact]
+    public void HostBaseThemeDensityIsNotOverriddenByLuminaTheme()
+    {
+        // Regression: when LuminaTheme always embedded Fluent, its copy sat after the host's own
+        // <FluentTheme DensityStyle="Compact" /> and won every resource lookup, silently resetting
+        // density (and palettes) to the defaults.
+        const string Key = "TextControlThemePadding";
+        var compactOnly = new Styles { new FluentTheme { DensityStyle = DensityStyle.Compact } };
+        var normalOnly = new Styles { new FluentTheme() };
+        var host = new Styles { new FluentTheme { DensityStyle = DensityStyle.Compact }, new LuminaTheme() };
+
+        Assert.True(compactOnly.TryGetResource(Key, ThemeVariant.Light, out object? compactValue));
+        Assert.True(normalOnly.TryGetResource(Key, ThemeVariant.Light, out object? normalValue));
+        Assert.NotEqual(normalValue, compactValue);
+
+        Assert.True(host.TryGetResource(Key, ThemeVariant.Light, out object? resolved));
+        Assert.Equal(compactValue, resolved);
     }
 
     [AvaloniaFact]

@@ -52,7 +52,7 @@ NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NE
 </Application>
 ```
 
-`LuminaTheme` 已经内嵌了它所基于的 Fluent 基础主题，因此它是唯一必需的条目，不再需要 `<FluentTheme />`。如果是从要求手写该行的旧版本升级，请把它删掉——保留会让基础主题被注册两次，渲染结果一致，但会多做一遍无用功。
+`LuminaTheme` 自带它所基于的 Fluent 基础主题，因此它是唯一必需的条目，不再需要 `<FluentTheme />`。如果应用在 `LuminaTheme` **之前**已经注册了基础主题——例如带自定义调色板的 `<FluentTheme DensityStyle="Compact" />`——Lumina 会直接使用它，而不会再内嵌第二份，因此其密度和调色板设置会被保留。已有的、在 `<lumina:LuminaTheme />` 之前声明了 `<FluentTheme />` 的应用无需任何修改。
 
 在页面中使用 Lumina 命名空间下的控件：
 
