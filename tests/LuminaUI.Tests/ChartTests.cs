@@ -69,7 +69,16 @@ public class ChartTests
             chart.RenderCompleted += (_, _) => completed++;
 
             var stopwatch = Stopwatch.StartNew();
-            Window window = Show(chart);
+            Window window;
+            // A regression here is an endless loop on the UI thread that keeps allocating tick
+            // labels: it cannot be interrupted from the test, and on a machine with plenty of
+            // RAM it grows to tens of GB before OutOfMemoryException. The guard kills the test
+            // host early with a readable message instead.
+            using (RunawayGuard.Start(name, MaxRenderAllocation, MaxRenderDuration))
+            {
+                window = Show(chart);
+            }
+
             try
             {
                 stopwatch.Stop();
@@ -85,6 +94,49 @@ public class ChartTests
                 window.Close();
             }
         }
+    }
+
+    private const long MaxRenderAllocation = 512L * 1024 * 1024;
+    private static readonly TimeSpan MaxRenderDuration = TimeSpan.FromSeconds(30);
+
+    /// <summary>
+    /// Watches allocations and wall time of a block that runs on the UI thread and cannot be
+    /// cancelled. When either budget is exceeded the test host is killed after writing the reason
+    /// to stderr, which the runner reports as a crashed test host.
+    /// </summary>
+    private sealed class RunawayGuard : IDisposable
+    {
+        private readonly Timer _timer;
+
+        private RunawayGuard(string name, long maxAllocatedBytes, TimeSpan maxDuration)
+        {
+            long baseline = GC.GetTotalAllocatedBytes();
+            var stopwatch = Stopwatch.StartNew();
+            _timer = new Timer(
+                _ =>
+                {
+                    long allocated = GC.GetTotalAllocatedBytes() - baseline;
+                    if (allocated > maxAllocatedBytes || stopwatch.Elapsed > maxDuration)
+                    {
+                        // Kill rather than Environment.FailFast: FailFast goes through Windows
+                        // Error Reporting and can stall for a minute writing a crash dump.
+                        Console.Error.WriteLine(
+                            $"ChartTests: '{name}' ran away while rendering "
+                            + $"({allocated / (1024 * 1024)} MB allocated, {stopwatch.Elapsed.TotalSeconds:0}s). "
+                            + "Tick generation most likely no longer terminates. Killing the test host.");
+                        Console.Error.Flush();
+                        Process.GetCurrentProcess().Kill();
+                    }
+                },
+                null,
+                TimeSpan.FromMilliseconds(50),
+                TimeSpan.FromMilliseconds(50));
+        }
+
+        public static RunawayGuard Start(string name, long maxAllocatedBytes, TimeSpan maxDuration) =>
+            new(name, maxAllocatedBytes, maxDuration);
+
+        public void Dispose() => _timer.Dispose();
     }
 
     [AvaloniaFact]
