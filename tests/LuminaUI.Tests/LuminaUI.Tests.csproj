@@ -21,6 +21,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\LuminaUI\LuminaUI.csproj" />
     <ProjectReference Include="..\..\src\LuminaUI.Charts\LuminaUI.Charts.csproj" />
+    <ProjectReference Include="..\..\src\LuminaUI.ColorPicker\LuminaUI.ColorPicker.csproj" />
+    <ProjectReference Include="..\..\src\LuminaUI.DataGrid\LuminaUI.DataGrid.csproj" />
+    <ProjectReference Include="..\..\src\LuminaUI.TreeDataGrid\LuminaUI.TreeDataGrid.csproj" />
   </ItemGroup>
 
 </Project>

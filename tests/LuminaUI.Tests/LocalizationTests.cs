@@ -79,7 +79,7 @@ public class LocalizationTests
             .Where(field => field is { IsLiteral: true } && field.FieldType == typeof(string))
             .Select(field => (string)field.GetRawConstantValue()!);
 
-    private static Dictionary<string, string> ReadResx(string path)
+    internal static Dictionary<string, string> ReadResx(string path)
     {
         // Direct children only: the embedded xsd schema also contains <data>-named elements.
         return XDocument

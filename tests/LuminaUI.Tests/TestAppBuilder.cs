@@ -29,7 +29,11 @@ public sealed class TestApp : Application
     /// <inheritdoc />
     public override void Initialize()
     {
+        // Same registration as the demo app: core theme first, then every optional package.
         Styles.Add(new LuminaTheme());
+        Styles.Add(new LuminaUI.ColorPicker.LuminaColorPickerTheme());
+        Styles.Add(new LuminaUI.DataGrid.LuminaDataGridTheme());
+        Styles.Add(new LuminaUI.TreeDataGrid.LuminaTreeDataGridTheme());
         Styles.Add(new LuminaUI.Charts.LuminaChartsTheme());
     }
 }

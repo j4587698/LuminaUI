@@ -222,7 +222,9 @@ public sealed class DecodedImageCacheTests
     [AvaloniaFact]
     public void ConcurrentUseDoesNotCorruptTheCache()
     {
-        LuminaDecodedImageCache cache = new(capacity: 4);
+        // Byte budget of exactly four bitmaps, matching the entry budget, so a drifting byte
+        // counter shows up as premature evictions below.
+        LuminaDecodedImageCache cache = new(capacity: 4, capacityBytes: 4L * BytesPerBitmap);
         using WriteableBitmap shared = NewBitmap();
 
         Parallel.For(0, 8, worker =>
@@ -240,9 +242,32 @@ public sealed class DecodedImageCacheTests
             }
         });
 
-        cache.Set("final", shared);
-        Assert.True(cache.TryGet("final", out IImage cached));
-        Assert.Same(shared, cached);
+        // After the storm the cache must behave exactly like a fresh one: four new entries fit
+        // (entry count and byte accounting are both consistent) and evict everything older.
+        string[] fresh = ["final-0", "final-1", "final-2", "final-3"];
+        foreach (string key in fresh)
+        {
+            cache.Set(key, shared);
+        }
+
+        foreach (string key in fresh)
+        {
+            Assert.True(cache.TryGet(key, out IImage cached), $"'{key}' was evicted: the size accounting drifted.");
+            Assert.Same(shared, cached);
+        }
+
+        for (int worker = 0; worker < 8; worker++)
+        {
+            for (int i = 0; i < 16; i++)
+            {
+                Assert.False(cache.TryGet($"w{worker}-{i}", out _), $"Stale entry w{worker}-{i} survived past capacity.");
+            }
+        }
+
+        // One more entry evicts exactly the least recently used one.
+        cache.Set("final-4", shared);
+        Assert.False(cache.TryGet("final-0", out _));
+        Assert.True(cache.TryGet("final-4", out _));
     }
 
     private static WriteableBitmap NewBitmap() =>

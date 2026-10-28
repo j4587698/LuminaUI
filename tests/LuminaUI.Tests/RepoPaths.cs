@@ -16,6 +16,8 @@ internal static class RepoPaths
 
     public static string LocalizationDirectory => Path.Combine(CoreThemeDirectory, "Localization");
 
+    public static string DemoDirectory => Path.Combine(Root, "demo", "LuminaUI.Demo");
+
     /// <summary>
     /// Walks up from every plausible starting point until <c>LuminaUI.slnx</c> shows up.
     /// </summary>
