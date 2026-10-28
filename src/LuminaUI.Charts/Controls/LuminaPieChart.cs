@@ -5,9 +5,11 @@ using System.ComponentModel;
 using System.Globalization;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Documents;
 using Avalonia.Input;
 using Avalonia.Layout;
 using Avalonia.Media;
+using Avalonia.Threading;
 
 namespace LuminaUI.Charts;
 
@@ -27,6 +29,7 @@ public class LuminaPieChart : Control
     private HashSet<LuminaPieSlice> _sliceSubscriptions = new();
     private readonly List<(FormattedText Text, IBrush Color)> _legendItems = new();
     private Rect _legendRect;
+    private double _legendHeight;
 
     public static readonly StyledProperty<IList<LuminaPieSlice>?> SlicesProperty =
         AvaloniaProperty.Register<LuminaPieChart, IList<LuminaPieSlice>?>(nameof(Slices));
@@ -66,7 +69,9 @@ public class LuminaPieChart : Control
             LegendPositionProperty,
             TooltipBackgroundBrushProperty,
             TooltipTextBrushProperty,
-            LegendTextBrushProperty);
+            LegendTextBrushProperty,
+            // Labels, legend and tooltip text are all drawn with the inherited font.
+            TextElement.FontFamilyProperty);
     }
 
     public LuminaPieChart()
@@ -136,6 +141,10 @@ public class LuminaPieChart : Control
         set => SetValue(LegendTextBrushProperty, value);
     }
 
+    /// <inheritdoc />
+    protected override Size MeasureOverride(Size availableSize) =>
+        ChartDrawing.MeasureChart(availableSize, 240.0, 240.0);
+
     public override void Render(DrawingContext context)
     {
         base.Render(context);
@@ -143,17 +152,34 @@ public class LuminaPieChart : Control
         IList<LuminaPieSlice>? slices = Slices;
         if (slices == null || slices.Count == 0)
         {
+            _legendHeight = 0.0;
             return;
         }
 
         double total = SumValues(slices);
         if (total <= 0.0)
         {
+            _legendHeight = 0.0;
             return;
         }
 
+        // The legend wraps onto as many rows as it needs, and the pie shrinks to make room, so it
+        // is laid out before the pie geometry.
+        if (ShowLegend)
+        {
+            BuildLegendItems(slices, _legendItems);
+            _legendHeight = ChartDrawing.MeasureLegendHeight(_legendItems, Bounds.Size);
+            _legendRect = ChartDrawing.ComputeLegendRect(_legendItems, LegendPosition, Bounds.Size);
+        }
+        else
+        {
+            _legendItems.Clear();
+            _legendHeight = 0.0;
+            _legendRect = default;
+        }
+
         var (center, outer) = ComputeLayout();
-        double inner = outer * Math.Clamp(InnerRadiusRatio, 0.0, 0.98);
+        double inner = outer * Math.Clamp(ChartDrawing.Finite(InnerRadiusRatio, 0.0), 0.0, 0.98);
         double startAngle = -90.0;
         Typeface typeface = ChartDrawing.CreateTypeface(this);
 
@@ -199,22 +225,6 @@ public class LuminaPieChart : Control
             }
 
             startAngle += sweep;
-        }
-
-        if (ShowLegend)
-        {
-            // Measured before the tooltip so the tooltip can be kept clear of the legend band.
-            BuildLegendItems(slices, _legendItems);
-            _legendRect = ChartDrawing.ComputeLegendRect(
-                _legendItems,
-                ChartDrawing.MeasureLegend(_legendItems),
-                LegendPosition,
-                Bounds.Size);
-        }
-        else
-        {
-            _legendItems.Clear();
-            _legendRect = default;
         }
 
         if (_hoverSliceIndex >= 0 && _hoverSliceIndex < slices.Count && IsDrawable(slices[_hoverSliceIndex]))
@@ -279,6 +289,12 @@ public class LuminaPieChart : Control
 
     private void OnSlicesChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
+        if (!Dispatcher.UIThread.CheckAccess())
+        {
+            Dispatcher.UIThread.Post(() => OnSlicesChanged(sender, e));
+            return;
+        }
+
         _hoverSliceIndex = -1;
         UpdateSubscriptions();
         InvalidateVisual();
@@ -286,6 +302,12 @@ public class LuminaPieChart : Control
 
     private void OnSlicePropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
+        if (!Dispatcher.UIThread.CheckAccess())
+        {
+            Dispatcher.UIThread.Post(() => OnSlicePropertyChanged(sender, e));
+            return;
+        }
+
         InvalidateVisual();
     }
 
@@ -338,7 +360,21 @@ public class LuminaPieChart : Control
     protected override void OnPointerMoved(PointerEventArgs e)
     {
         base.OnPointerMoved(e);
-        Point position = e.GetPosition(this);
+        UpdateHover(e.GetPosition(this));
+    }
+
+    protected override void OnPointerPressed(PointerPressedEventArgs e)
+    {
+        base.OnPointerPressed(e);
+        // Touch and pen produce no move events before the press, so a tap selects by itself.
+        if (e.Pointer.Type != PointerType.Mouse)
+        {
+            UpdateHover(e.GetPosition(this));
+        }
+    }
+
+    private void UpdateHover(Point position)
+    {
         int index = HitTest(position);
         if (index != _hoverSliceIndex)
         {
@@ -350,6 +386,12 @@ public class LuminaPieChart : Control
     protected override void OnPointerExited(PointerEventArgs e)
     {
         base.OnPointerExited(e);
+        // A lifted finger "exits" right after the tap; keep the tooltip until the next tap.
+        if (e.Pointer.Type == PointerType.Touch)
+        {
+            return;
+        }
+
         if (_hoverSliceIndex >= 0)
         {
             _hoverSliceIndex = -1;
@@ -372,7 +414,7 @@ public class LuminaPieChart : Control
         }
 
         var (center, outer) = ComputeLayout();
-        double inner = outer * Math.Clamp(InnerRadiusRatio, 0.0, 0.98);
+        double inner = outer * Math.Clamp(ChartDrawing.Finite(InnerRadiusRatio, 0.0), 0.0, 0.98);
 
         double dx = position.X - center.X;
         double dy = position.Y - center.Y;
@@ -414,11 +456,13 @@ public class LuminaPieChart : Control
 
     private (Point Center, double Outer) ComputeLayout()
     {
-        bool legendTop = ShowLegend &&
+        // _legendHeight is measured in Render; hit testing between renders reuses the last value.
+        bool showLegend = ShowLegend && _legendHeight > 0.0;
+        bool legendTop = showLegend &&
             (LegendPosition is LuminaChartLegendPosition.TopLeft or LuminaChartLegendPosition.TopCenter or LuminaChartLegendPosition.TopRight);
-        double legendSpace = ShowLegend ? ChartDrawing.LegendBandHeight + ChartDrawing.LegendBandGap : 0.0;
+        double legendSpace = showLegend ? _legendHeight + ChartDrawing.LegendBandGap : 0.0;
         double topPad = legendTop ? legendSpace : 8.0;
-        double bottomPad = (!legendTop && ShowLegend) ? legendSpace : 8.0;
+        double bottomPad = (!legendTop && showLegend) ? legendSpace : 8.0;
 
         var center = new Point(Bounds.Width / 2.0, topPad + (Bounds.Height - topPad - bottomPad) / 2.0);
         double outer = Math.Max(2.0, Math.Min(Bounds.Width, Bounds.Height - topPad - bottomPad) / 2.0 - 4.0);
@@ -427,12 +471,7 @@ public class LuminaPieChart : Control
 
     private void DrawLegend(DrawingContext context)
     {
-        ChartDrawing.DrawLegend(
-            context,
-            _legendItems,
-            ChartDrawing.MeasureLegend(_legendItems),
-            LegendPosition,
-            Bounds.Size);
+        ChartDrawing.DrawLegend(context, _legendItems, LegendPosition, Bounds.Size);
     }
 
     /// <summary>Rebuilds <paramref name="target"/> with one entry per drawable slice.</summary>

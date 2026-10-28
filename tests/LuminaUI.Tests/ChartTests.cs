@@ -11,6 +11,7 @@ using Avalonia.Input;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
+using Avalonia.Styling;
 using Avalonia.Threading;
 using LuminaUI.Charts;
 using Xunit;
@@ -300,6 +301,153 @@ public class ChartTests
             Assert.Equal(0, HandlerCount(radarList, nameof(radarList.CollectionChanged)));
             Assert.Equal(0, HandlerCount(radarSeries, nameof(radarSeries.PropertyChanged)));
             Assert.Equal(0, HandlerCount(radarValues, nameof(radarValues.CollectionChanged)));
+        }
+        finally
+        {
+            window.Close();
+        }
+    }
+
+    [AvaloniaFact]
+    public void ChartsGetADefaultSizeInsideUnboundedPanels()
+    {
+        // A custom-drawn control has nothing to measure, so inside a StackPanel (or ScrollViewer,
+        // Auto row) the charts used to collapse to 0px and simply not show up.
+        var line = new LuminaLineChart { Series = Line((0, 1), (1, 2)) };
+        var pie = new LuminaPieChart();
+        var radar = new LuminaRadarChart();
+        var panel = new StackPanel { Children = { line, pie, radar } };
+
+        Window window = Show(new ScrollViewer { Content = panel });
+        try
+        {
+            Assert.Equal(200, line.Bounds.Height);
+            Assert.Equal(240, pie.Bounds.Height);
+            Assert.Equal(240, radar.Bounds.Height);
+            // In a finite slot the charts keep stretching as before.
+            Assert.Equal(Width, line.Bounds.Width, 0.5);
+        }
+        finally
+        {
+            window.Close();
+        }
+    }
+
+    [AvaloniaFact]
+    public void ChartsFollowTheirThemeVariantScope()
+    {
+        var light = new LuminaLineChart();
+        var dark = new LuminaLineChart();
+        var scope = new ThemeVariantScope { RequestedThemeVariant = ThemeVariant.Dark, Child = dark };
+
+        Window window = Show(new StackPanel { Children = { light, scope } });
+        try
+        {
+            Assert.True(Application.Current!.TryFindResource("LuminaDividerBrush", ThemeVariant.Light, out object? lightDivider));
+            Assert.True(Application.Current!.TryFindResource("LuminaDividerBrush", ThemeVariant.Dark, out object? darkDivider));
+
+            // Previously the chart brushes were resolved once against the application variant,
+            // so a chart inside a dark scope of a light app stayed light.
+            Assert.Equal(((ISolidColorBrush)lightDivider!).Color, ((ISolidColorBrush)light.GridLineBrush!).Color);
+            Assert.Equal(((ISolidColorBrush)darkDivider!).Color, ((ISolidColorBrush)dark.GridLineBrush!).Color);
+            // Series colors too (slot 2 = teal; slot 1 follows the app-wide accent override).
+            Assert.NotEqual(
+                ((ISolidColorBrush)ChartDrawing.ResolvePaletteBrush(light, 1)).Color,
+                ((ISolidColorBrush)ChartDrawing.ResolvePaletteBrush(dark, 1)).Color);
+        }
+        finally
+        {
+            window.Close();
+        }
+    }
+
+    [Fact]
+    public void SplineNeverOvershootsOrBendsBackwards()
+    {
+        // A sharp spike between flat runs is where Catmull-Rom overshoots (and with uneven x
+        // spacing loops backwards in x).
+        double[] px = [0, 10, 12, 14, 60, 61, 100];
+        double[] py = [50, 50, 0, 50, 50, 10, 10];
+
+        Avalonia.Point[] curve = LuminaLineChart.BuildSplinePoints(px, py, 16);
+
+        for (int index = 1; index < curve.Length; index++)
+        {
+            Assert.True(curve[index].X >= curve[index - 1].X, $"x goes backwards at sample {index}.");
+        }
+
+        for (int segment = 0; segment < px.Length - 1; segment++)
+        {
+            double low = Math.Min(py[segment], py[segment + 1]) - 1e-9;
+            double high = Math.Max(py[segment], py[segment + 1]) + 1e-9;
+            foreach (Avalonia.Point point in curve.Where(p => p.X >= px[segment] && p.X <= px[segment + 1]))
+            {
+                Assert.InRange(point.Y, low, high);
+            }
+        }
+
+        Assert.Equal(new Avalonia.Point(px[^1], py[^1]), curve[^1]);
+    }
+
+    [AvaloniaFact]
+    public void LongLegendsWrapInsteadOfRunningOffTheChart()
+    {
+        var chart = new LuminaLineChart { Width = 240, Height = 200 };
+        var items = Enumerable.Range(1, 8)
+            .Select(i => (Text: new FormattedText($"Series number {i}", System.Globalization.CultureInfo.InvariantCulture, FlowDirection.LeftToRight, Typeface.Default, 12, Brushes.Black), Color: (IBrush)Brushes.Red))
+            .ToList();
+
+        double height = ChartDrawing.MeasureLegendHeight(items, new Size(240, 200));
+        Rect band = ChartDrawing.ComputeLegendRect(items, LuminaChartLegendPosition.TopLeft, new Size(240, 200));
+
+        Assert.True(height >= 3 * ChartDrawing.LegendBandHeight, $"Expected several rows, got {height}px.");
+        Assert.True(band.Right <= 240, $"Legend band ends at {band.Right}px, past the 240px chart.");
+        Assert.True(band.Height > ChartDrawing.LegendFontSize, "The band should cover every row.");
+    }
+
+    [AvaloniaFact]
+    public void PointChangesFromAWorkerThreadAreMarshalledToTheUIThread()
+    {
+        var points = new ObservableCollection<LuminaChartPoint> { new(0, 1), new(1, 2) };
+        var chart = new LuminaLineChart
+        {
+            TransitionDuration = 0,
+            Series = new List<LuminaChartSeries> { new() { Points = points } },
+        };
+
+        Window window = Show(chart);
+        try
+        {
+            int renders = 0;
+            chart.RenderCompleted += (_, _) => renders++;
+            Assert.False(ReadField<bool>(chart, "_isDirty"));
+
+            // The handler used to mutate the chart's render state on the worker thread, racing
+            // the render pass. Now it only posts to the UI thread, so nothing changes until the
+            // dispatcher runs.
+            // A dedicated thread, not Task.Run(...).Wait(): waiting on a task that has not started
+            // yet may inline it on the waiting (UI) thread, which would test nothing. Exceptions
+            // are captured so a regression fails the test instead of killing the test host.
+            Exception? workerError = null;
+            var worker = new Thread(() =>
+            {
+                try
+                {
+                    points.Add(new LuminaChartPoint(2, 3));
+                }
+                catch (Exception exception)
+                {
+                    workerError = exception;
+                }
+            });
+            worker.Start();
+            worker.Join();
+            Assert.Null(workerError);
+            Assert.False(ReadField<bool>(chart, "_isDirty"), "Chart state was modified on the worker thread.");
+
+            Dispatcher.UIThread.RunJobs();
+            window.CaptureRenderedFrame()?.Dispose();
+            Assert.True(renders > 0);
         }
         finally
         {

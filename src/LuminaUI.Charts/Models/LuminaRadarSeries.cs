@@ -27,6 +27,11 @@ public sealed class LuminaRadarSeries : INotifyPropertyChanged
         set => Set(ref _title, value);
     }
 
+    /// <summary>
+    /// One value per category axis, scaled against the largest value across all series (the
+    /// outer ring). The radar has no negative side: negative and non-finite values are drawn at
+    /// the centre, and a chart whose values are all zero or negative draws no polygons.
+    /// </summary>
     public IList<double>? Values
     {
         get => _values;
