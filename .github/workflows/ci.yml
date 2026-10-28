@@ -11,6 +11,11 @@ on:
 permissions:
   contents: read
 
+# A newer push to the same branch or PR supersedes the run in progress.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 env:
   CONFIGURATION: Release
   DOTNET_NOLOGO: true
@@ -18,8 +23,17 @@ env:
 
 jobs:
   build-and-test:
-    name: Build packages and run tests
-    runs-on: ubuntu-latest
+    name: Build packages and run tests (${{ matrix.os }})
+    # The library has Windows-specific code paths (window chrome, title bar), so it is gated on
+    # Windows as well as Linux.
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
 
     steps:
       - name: Checkout
@@ -38,6 +52,7 @@ jobs:
             **/*.csproj
 
       - name: Install Linux rendering dependencies
+        if: runner.os == 'Linux'
         run: sudo apt-get update && sudo apt-get install -y libfontconfig1
 
       # The Android, iOS and WebAssembly hosts pull in platform workloads that are slow and
