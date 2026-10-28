@@ -19,7 +19,9 @@ public partial class ChartsShowcasePage : LuminaPage
     private readonly ChartsShowcaseViewModel _viewModel;
     private readonly ObservableCollection<LuminaChartPoint> _livePoints;
     private int _liveTick;
+    private double _latestLiveValue;
     private bool _perfUpdatePending;
+    private bool _perfTextShown;
 
     public ChartsShowcasePage()
     {
@@ -37,6 +39,7 @@ public partial class ChartsShowcasePage : LuminaPage
         LiveStopButton.Click += OnLiveStopClicked;
         StressChart.RenderCompleted += OnStressChartRenderCompleted;
         _liveTimer.Tick += OnLiveTimerTick;
+        Loaded += OnLoaded;
         Unloaded += OnUnloaded;
     }
 
@@ -75,9 +78,32 @@ public partial class ChartsShowcasePage : LuminaPage
 
         LiveChart.XAxis.Minimum = _liveTick - (MaxLivePoints - 1);
         LiveChart.XAxis.Maximum = _liveTick;
+        _latestLiveValue = point.Y;
+        UpdateLiveTexts();
+    }
+
+    /// <summary>
+    /// Assigning Text from code replaces the XAML {l10n:Loc} binding, so these labels are
+    /// re-formatted here whenever the data or the language changes.
+    /// </summary>
+    private void UpdateLiveTexts()
+    {
+        if (_liveTick == 0)
+        {
+            return;
+        }
 
         LiveStatusText.Text = LuminaLocalization.Format(SandboxLocalization.ChartsLiveStatusFormat, _livePoints.Count, _liveTick);
-        LiveLatestText.Text = LuminaLocalization.Format(SandboxLocalization.ChartsLatestFormat, point.Y);
+        LiveLatestText.Text = LuminaLocalization.Format(SandboxLocalization.ChartsLatestFormat, _latestLiveValue);
+    }
+
+    private void OnLanguageChanged(object? sender, EventArgs e)
+    {
+        UpdateLiveTexts();
+        if (_perfTextShown)
+        {
+            UpdatePerfText();
+        }
     }
 
     private void OnStressChartRenderCompleted(object? sender, EventArgs e)
@@ -96,6 +122,7 @@ public partial class ChartsShowcasePage : LuminaPage
     private void UpdatePerfText()
     {
         _perfUpdatePending = false;
+        _perfTextShown = true;
         PerfText.Text = LuminaLocalization.Format(
             SandboxLocalization.ChartsPerfFormat,
             StressChart.LastBuildMilliseconds,
@@ -108,10 +135,20 @@ public partial class ChartsShowcasePage : LuminaPage
         AppendLivePoint();
     }
 
+    private void OnLoaded(object? sender, RoutedEventArgs e)
+    {
+        // LanguageChanged is static, so it is only held while the page is shown; the texts are
+        // refreshed on load in case the language changed while the page was cached off-screen.
+        LuminaLocalization.LanguageChanged -= OnLanguageChanged;
+        LuminaLocalization.LanguageChanged += OnLanguageChanged;
+        OnLanguageChanged(this, EventArgs.Empty);
+    }
+
     private void OnUnloaded(object? sender, RoutedEventArgs e)
     {
         // A running DispatcherTimer is rooted by the dispatcher and would keep feeding (and
         // holding on to) a page that is no longer visible.
         _liveTimer.Stop();
+        LuminaLocalization.LanguageChanged -= OnLanguageChanged;
     }
 }

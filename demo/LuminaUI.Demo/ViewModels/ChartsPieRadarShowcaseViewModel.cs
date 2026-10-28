@@ -12,47 +12,49 @@ public partial class ChartsPieRadarShowcaseViewModel : ObservableObject
         // LuminaChartColor1..8 palette, which follows the active light/dark theme.
         DonutSlices =
         [
-            new LuminaPieSlice { Label = "Direct", Value = 38 },
-            new LuminaPieSlice { Label = "Organic", Value = 27 },
-            new LuminaPieSlice { Label = "Referral", Value = 19 },
-            new LuminaPieSlice { Label = "Social", Value = 10 },
-            new LuminaPieSlice { Label = "Other", Value = 6 }
+            new LuminaPieSlice { Value = 38 },
+            new LuminaPieSlice { Value = 27 },
+            new LuminaPieSlice { Value = 19 },
+            new LuminaPieSlice { Value = 10 },
+            new LuminaPieSlice { Value = 6 }
         ];
 
         PieSlices =
         [
-            new LuminaPieSlice { Label = "North", Value = 30 },
-            new LuminaPieSlice { Label = "South", Value = 22 },
-            new LuminaPieSlice { Label = "East", Value = 18 },
-            new LuminaPieSlice { Label = "West", Value = 14 },
-            new LuminaPieSlice { Label = "Central", Value = 16 }
-        ];
-
-        RadarCategories =
-        [
-            "Speed", "Reliability", "Comfort", "Safety", "Efficiency", "Price"
+            new LuminaPieSlice { Value = 30 },
+            new LuminaPieSlice { Value = 22 },
+            new LuminaPieSlice { Value = 18 },
+            new LuminaPieSlice { Value = 14 },
+            new LuminaPieSlice { Value = 16 }
         ];
 
         RadarSeries =
         [
             new LuminaRadarSeries
             {
-                Title = "Model A",
                 Values = [4, 5, 3, 4, 2, 5]
             },
             new LuminaRadarSeries
             {
-                Title = "Model B",
                 Values = [3, 4, 5, 3, 4, 2]
             }
         ];
+
+        _texts.Labels(DonutSlices, "Direct", "Organic", "Referral", "Social", "Other");
+        _texts.Labels(PieSlices, "North", "South", "East", "West", "Central");
+        _texts.Titles(RadarSeries, "ModelA", "ModelB");
+        // A new list each time: the chart repaints when Categories is replaced.
+        _texts.Track(() => RadarCategories = ChartDemoTexts.GetAll("Speed", "Reliability", "Comfort", "Safety", "Efficiency", "Price"));
     }
+
+    private readonly ChartDemoTexts _texts = new();
 
     public IList<LuminaPieSlice> DonutSlices { get; }
 
     public IList<LuminaPieSlice> PieSlices { get; }
 
-    public IList<string> RadarCategories { get; }
+    [ObservableProperty]
+    private IReadOnlyList<string> _radarCategories = [];
 
     public IList<LuminaRadarSeries> RadarSeries { get; }
 }

@@ -11,10 +11,14 @@ public partial class ChartsScatterShowcaseViewModel : ObservableObject
     {
         ScatterSeries =
         [
-            new LuminaScatterSeries { Title = "Cluster A", MarkerSize = 4.0, Points = BuildCluster(60, 30, 14) },
-            new LuminaScatterSeries { Title = "Cluster B", MarkerSize = 4.0, Points = BuildCluster(55, 70, 12) }
+            new LuminaScatterSeries { MarkerSize = 4.0, Points = BuildCluster(60, 30, 14) },
+            new LuminaScatterSeries { MarkerSize = 4.0, Points = BuildCluster(55, 70, 12) }
         ];
+
+        _texts.Titles(ScatterSeries, "ClusterA", "ClusterB");
     }
+
+    private readonly ChartDemoTexts _texts = new();
 
     public IList<LuminaChartSeries> ScatterSeries { get; }
 

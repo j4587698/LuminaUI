@@ -13,12 +13,10 @@ public partial class ChartsComboShowcaseViewModel : ObservableObject
         [
             new LuminaBarSeries
             {
-                Title = "Revenue",
                 Points = ToPoints([12, 18, 15, 24, 21, 30, 26, 35, 31, 40, 36, 44])
             },
             new LuminaChartSeries
             {
-                Title = "Moving average",
                 StrokeThickness = 2.5,
                 ShowMarkers = true,
                 Points = ToPoints([13.0, 16.5, 18.0, 20.0, 23.0, 25.5, 28.5, 30.5, 33.0, 35.5, 38.5, 40.0])
@@ -29,24 +27,26 @@ public partial class ChartsComboShowcaseViewModel : ObservableObject
         [
             new LuminaChartSeries
             {
-                Title = "Signal",
                 ShowArea = true,
                 Points = BuildWave(24.0, 10.0, 0.9)
             },
             new LuminaSplineSeries
             {
-                Title = "Trend",
                 StrokeThickness = 2.0,
                 Points = BuildWave(16.0, 6.0, 1.4)
             },
             new LuminaScatterSeries
             {
-                Title = "Anomalies",
                 MarkerSize = 5.0,
                 Points = BuildBlips(7)
             }
         ];
+
+        _texts.Titles(ComboSeries, "Revenue", "MovingAverage");
+        _texts.Titles(MixedSeries, "Signal", "Trend", "Anomalies");
     }
+
+    private readonly ChartDemoTexts _texts = new();
 
     public IList<LuminaChartSeries> ComboSeries { get; }
 

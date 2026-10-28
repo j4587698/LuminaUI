@@ -4,7 +4,7 @@
 
 LuminaUI 是一套面向 Avalonia 12 的组件库，覆盖桌面、浏览器和移动端风格的应用壳层。它提供统一的视觉体系、可复用控件、导航基础设施、覆盖层、本地化支持，ColorPicker、DataGrid、TreeDataGrid 的可选主题集成，以及一套主题化图表包。
 
-NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NET 10`。Avalonia 版本为 `12.0.4`。
+NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NET 10`。Avalonia 版本为 `12.0.1`。
 
 ## 包结构
 
