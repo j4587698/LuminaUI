@@ -2583,6 +2583,7 @@ public class LuminaShell : ContentControl, ILuminaOverlayHost
         DisablePageAutoSafeArea(page);
         NavigationPage.SetHasNavigationBar(page, false);
         NavigationPage.SetHasBackButton(page, false);
+        CachedPageRestyler.Track(page);
     }
 
     private void StorePushOptions(Page page, LuminaShellPushOptions? options)
