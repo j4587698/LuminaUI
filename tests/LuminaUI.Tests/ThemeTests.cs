@@ -134,6 +134,25 @@ public class ThemeTests
     }
 
     [AvaloniaFact]
+    public void FocusRingFollowsTheAccentColor()
+    {
+        Color original = LuminaUI.Theming.LuminaThemeManager.CurrentAccentColor;
+        try
+        {
+            LuminaUI.Theming.LuminaThemeManager.SetAccentColor(Color.Parse("#E11D48"));
+
+            Assert.True(Application.Current!.TryFindResource("LuminaPrimaryBrush", out object? primary));
+            Assert.True(Application.Current!.TryFindResource("LuminaBorderFocusBrush", out object? focus));
+            // The focus ring is documented as "matches LuminaPrimary" but used to stay blue.
+            Assert.Equal(((ISolidColorBrush)primary!).Color, ((ISolidColorBrush)focus!).Color);
+        }
+        finally
+        {
+            LuminaUI.Theming.LuminaThemeManager.SetAccentColor(original);
+        }
+    }
+
+    [AvaloniaFact]
     public void SemanticTokensResolveInBothVariants()
     {
         List<string> missing = [];
