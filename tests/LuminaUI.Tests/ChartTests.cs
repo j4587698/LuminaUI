@@ -60,6 +60,12 @@ public class ChartTests
                 chart.XAxis.Maximum = 1e12;
                 chart.XAxis.TickStep = 1;
             }),
+            ("huge category range, automatic step", chart =>
+            {
+                chart.Series = Line((0, 1), (1, 2));
+                chart.XAxis.Kind = LuminaChartAxisKind.Category;
+                chart.XAxis.Maximum = 1e12;
+            }),
         };
 
         foreach (var (name, configure) in cases)
@@ -448,6 +454,59 @@ public class ChartTests
             Dispatcher.UIThread.RunJobs();
             window.CaptureRenderedFrame()?.Dispose();
             Assert.True(renders > 0);
+        }
+        finally
+        {
+            window.Close();
+        }
+    }
+
+    [AvaloniaFact]
+    public void HoverFindsTheBarUnderThePointerInGroupedSeries()
+    {
+        static IList<LuminaChartPoint> Values(int count, double offset) =>
+            Enumerable.Range(0, count).Select(i => new LuminaChartPoint(i, 10 + i + offset)).ToList();
+
+        var chart = new LuminaLineChart
+        {
+            TransitionDuration = 0,
+            Series = new List<LuminaChartSeries>
+            {
+                new LuminaBarSeries { Points = Values(12, 0) },
+                new LuminaBarSeries { Points = Values(12, 3) },
+            },
+        };
+        chart.XAxis.Kind = LuminaChartAxisKind.Category;
+
+        Window window = Show(chart);
+        try
+        {
+            var renderSeries = (System.Collections.IList)ReadField<object>(chart, "_renderSeries");
+            foreach ((int seriesIndex, int barIndex) in new[] { (0, 0), (1, 0), (0, 6), (1, 6), (1, 11) })
+            {
+                object target = renderSeries[seriesIndex]!;
+                Rect bar = ((Rect[])target.GetType().GetField("BarRects")!.GetValue(target)!)[barIndex];
+
+                window.MouseMove(new Point(bar.Center.X, bar.Bottom - 2), RawInputModifiers.None);
+                Dispatcher.UIThread.RunJobs();
+                window.CaptureRenderedFrame()?.Dispose();
+
+                var highlights = (System.Collections.IList)ReadField<object>(chart, "_barHighlights");
+                object highlight = Assert.Single(highlights.Cast<object>());
+                Assert.Same(target, highlight.GetType().GetProperty("Series")!.GetValue(highlight));
+                Assert.Equal(barIndex, highlight.GetType().GetProperty("Index")!.GetValue(highlight));
+            }
+
+            // Between two groups (the gap left by BarWidthRatio) nothing is hit.
+            object first = renderSeries[0]!;
+            Rect[] firstBars = (Rect[])first.GetType().GetField("BarRects")!.GetValue(first)!;
+            object second = renderSeries[1]!;
+            Rect[] secondBars = (Rect[])second.GetType().GetField("BarRects")!.GetValue(second)!;
+            double gapX = (secondBars[3].Right + firstBars[4].Left) / 2.0;
+            window.MouseMove(new Point(gapX, firstBars[4].Bottom - 2), RawInputModifiers.None);
+            Dispatcher.UIThread.RunJobs();
+            window.CaptureRenderedFrame()?.Dispose();
+            Assert.Empty((System.Collections.IList)ReadField<object>(chart, "_barHighlights"));
         }
         finally
         {

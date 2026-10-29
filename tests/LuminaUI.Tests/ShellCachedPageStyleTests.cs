@@ -62,7 +62,7 @@ public class ShellCachedPageStyleTests
         {
             Dispatcher.UIThread.RunJobs();
             window.CaptureRenderedFrame()?.Dispose();
-            Thread.Sleep(20);
+            AvaloniaHeadlessPlatform.ForceRenderTimerTick();
         }
     }
 }

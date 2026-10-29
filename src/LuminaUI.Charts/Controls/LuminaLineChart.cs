@@ -76,6 +76,8 @@ public class LuminaLineChart : Control
     private INotifyCollectionChanged? _categoriesSubscription;
     private HashSet<INotifyCollectionChanged> _pointsSubscriptions = new();
     private HashSet<LuminaChartSeries> _seriesItemSubscriptions = new();
+    private HashSet<INotifyCollectionChanged> _spareDesiredPoints = new();
+    private HashSet<LuminaChartSeries> _spareDesiredSeries = new();
     private DispatcherTimer? _transitionTimer;
     private readonly Stopwatch _transitionSw = new();
     private List<(Point[]? Line, Point[]? Area, Point[]? Raw)>? _transitionPrev;
@@ -454,90 +456,90 @@ public class LuminaLineChart : Control
 
         try
         {
-        // An invisible full-bounds background keeps the whole chart hit-testable, so the
-        // crosshair tracks the pointer over empty plot space and not just over painted pixels.
-        context.FillRectangle(Brushes.Transparent, new Rect(Bounds.Size));
+            // An invisible full-bounds background keeps the whole chart hit-testable, so the
+            // crosshair tracks the pointer over empty plot space and not just over painted pixels.
+            context.FillRectangle(Brushes.Transparent, new Rect(Bounds.Size));
 
-        bool didRebuild = false;
-        if (_isDirty)
-        {
-            didRebuild = true;
-            bool wantTransition = _rebuildDueToDataChange && TransitionDuration > 0.0;
-            _transitionPrev = wantTransition ? CaptureTransitionPoints() : _transitionPrev is { Count: > 0 } ? _transitionPrev : null;
-
-            Rebuild();
-            if (_renderSeries.Count == 0)
+            bool didRebuild = false;
+            if (_isDirty)
             {
-                // Nothing to draw. Clear the dirty flag anyway so pointer moves over an empty
-                // chart do not re-scan every series on each frame; data/size changes set it again.
-                _isDirty = false;
+                didRebuild = true;
+                bool wantTransition = _rebuildDueToDataChange && TransitionDuration > 0.0;
+                _transitionPrev = wantTransition ? CaptureTransitionPoints() : null;
+
+                Rebuild();
+                if (_renderSeries.Count == 0)
+                {
+                    // Nothing to draw. Clear the dirty flag anyway so pointer moves over an empty
+                    // chart do not re-scan every series on each frame; data/size changes set it again.
+                    _isDirty = false;
+                    _rebuildDueToDataChange = false;
+                    _inTransition = false;
+                    _transitionPrev = null;
+                    StopTransitionTimer();
+                    _renderStopwatch.Stop();
+                    _lastRenderMilliseconds = _renderStopwatch.Elapsed.TotalMilliseconds;
+                    RenderCompleted?.Invoke(this, EventArgs.Empty);
+                    return;
+                }
+
+                if (wantTransition && _transitionPrev is { Count: > 0 })
+                {
+                    _inTransition = true;
+                    _transitionT = 0.0;
+                    _transitionSw.Restart();
+                    EnsureTransitionTimer();
+                }
+                else
+                {
+                    _inTransition = false;
+                    _transitionPrev = null;
+                    StopTransitionTimer();
+                }
+
                 _rebuildDueToDataChange = false;
-                _inTransition = false;
-                _transitionPrev = null;
-                StopTransitionTimer();
-                _renderStopwatch.Stop();
-                _lastRenderMilliseconds = _renderStopwatch.Elapsed.TotalMilliseconds;
-                RenderCompleted?.Invoke(this, EventArgs.Empty);
-                return;
+                _isDirty = false;
             }
 
-            if (wantTransition && _transitionPrev is { Count: > 0 })
+            if (_inTransition)
             {
-                _inTransition = true;
-                _transitionT = 0.0;
-                _transitionSw.Restart();
-                EnsureTransitionTimer();
+                DrawStaticLayer(context);
             }
             else
             {
-                _inTransition = false;
-                _transitionPrev = null;
-                StopTransitionTimer();
-            }
-
-            _rebuildDueToDataChange = false;
-            _isDirty = false;
-        }
-
-        if (_inTransition)
-        {
-            DrawStaticLayer(context);
-        }
-        else
-        {
-            if (_cachedStaticDrawing == null)
-            {
-                var staticDrawing = new DrawingGroup();
-                using (DrawingContext staticContext = staticDrawing.Open())
+                if (_cachedStaticDrawing == null)
                 {
-                    DrawStaticLayer(staticContext);
+                    var staticDrawing = new DrawingGroup();
+                    using (DrawingContext staticContext = staticDrawing.Open())
+                    {
+                        DrawStaticLayer(staticContext);
+                    }
+
+                    _cachedStaticDrawing = staticDrawing;
                 }
 
-                _cachedStaticDrawing = staticDrawing;
+                _cachedStaticDrawing.Draw(context);
             }
 
-            _cachedStaticDrawing.Draw(context);
-        }
+            if (_hoverPosition is { } hover)
+            {
+                DrawOverlay(context, hover);
+            }
 
-        if (_hoverPosition is { } hover)
-        {
-            DrawOverlay(context, hover);
-        }
+            // The legend stays above the hover overlay so tooltips never cover it.
+            if (ShowLegend && _renderSeries.Count > 0)
+            {
+                DrawLegend(context);
+            }
 
-        // The legend stays above the hover overlay so tooltips never cover it.
-        if (ShowLegend && _renderSeries.Count > 0)
-        {
-            DrawLegend(context);
-        }
+            _renderStopwatch.Stop();
+            _lastRenderMilliseconds = _renderStopwatch.Elapsed.TotalMilliseconds;
+            if (!didRebuild)
+            {
+                _lastMoveRenderMilliseconds = _lastRenderMilliseconds;
+            }
 
-        _renderStopwatch.Stop();
-        _lastRenderMilliseconds = _renderStopwatch.Elapsed.TotalMilliseconds;
-        if (!didRebuild)
-        {
-            _lastMoveRenderMilliseconds = _lastRenderMilliseconds;
-        }
-
-        RenderCompleted?.Invoke(this, EventArgs.Empty);
+            RenderCompleted?.Invoke(this, EventArgs.Empty);
         }
         catch (Exception exception)
         {
@@ -821,8 +823,14 @@ public class LuminaLineChart : Control
     /// </summary>
     private void SyncDataSubscriptions()
     {
-        var desiredPoints = new HashSet<INotifyCollectionChanged>();
-        var desiredSeries = new HashSet<LuminaChartSeries>();
+        // Double-buffered: the previous "current" sets become the next scratch sets, so a
+        // rebuild per live-data tick does not allocate.
+        HashSet<INotifyCollectionChanged> desiredPoints = _spareDesiredPoints;
+        HashSet<LuminaChartSeries> desiredSeries = _spareDesiredSeries;
+        HashSet<INotifyCollectionChanged> stalePoints = _pointsSubscriptions;
+        HashSet<LuminaChartSeries> staleSeries = _seriesItemSubscriptions;
+        desiredPoints.Clear();
+        desiredSeries.Clear();
         IList<LuminaChartSeries>? series = _isAttached ? Series : null;
         if (series != null)
         {
@@ -875,6 +883,10 @@ public class LuminaLineChart : Control
 
         _pointsSubscriptions = desiredPoints;
         _seriesItemSubscriptions = desiredSeries;
+        stalePoints.Clear();
+        staleSeries.Clear();
+        _spareDesiredPoints = stalePoints;
+        _spareDesiredSeries = staleSeries;
     }
 
     private void EnsureTransitionTimer()
@@ -1963,11 +1975,13 @@ public class LuminaLineChart : Control
     /// </summary>
     private double ComputeCategoryStep(double min, double max)
     {
-        int categoryCount = (int)Math.Round(max - min);
-        if (categoryCount <= 1)
+        double span = Math.Round(max - min);
+        if (!(span > 1.0))
         {
             return 1.0;
         }
+
+        int categoryCount = span >= int.MaxValue ? int.MaxValue : (int)span;
 
         double widestLabel = EstimateCategoryLabelWidth(categoryCount);
         // Horizontal budget: control width minus the y-axis label gutter and a little padding.
@@ -2472,6 +2486,37 @@ public class LuminaLineChart : Control
     private int FindBarAt(RenderSeries render, Point hover)
     {
         Rect[] rects = render.BarRects;
+        if (render.Sorted)
+        {
+            // Every bar of a series has the same width and x offset, so with sorted points both
+            // edges grow with the index: skip to the first bar whose right edge is past the
+            // pointer, then only bars that start left of it can contain it.
+            int low = 0;
+            int high = rects.Length;
+            while (low < high)
+            {
+                int middle = (low + high) >> 1;
+                if (rects[middle].Right < hover.X)
+                {
+                    low = middle + 1;
+                }
+                else
+                {
+                    high = middle;
+                }
+            }
+
+            for (int index = low; index < rects.Length && rects[index].Left <= hover.X; index++)
+            {
+                if (rects[index].Contains(hover))
+                {
+                    return index;
+                }
+            }
+
+            return -1;
+        }
+
         for (int index = 0; index < rects.Length; index++)
         {
             Rect rect = rects[index];
