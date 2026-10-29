@@ -12,15 +12,14 @@ public partial class ChartsBarShowcaseViewModel : ObservableObject
     {
         BarSeries =
         [
-            new LuminaBarSeries { Title = "Revenue", Points = ToPoints([8, 14, 11, 19, 16, 22, 18, 27, 24, 31]) },
-            new LuminaBarSeries { Title = "Expenses", Points = ToPoints([5, 9, 8, 12, 11, 14, 13, 17, 16, 19]) }
+            new LuminaBarSeries { Points = ToPoints([8, 14, 11, 19, 16, 22, 18, 27, 24, 31]) },
+            new LuminaBarSeries { Points = ToPoints([5, 9, 8, 12, 11, 14, 13, 17, 16, 19]) }
         ];
 
         HistogramSeries =
         [
             new LuminaBarSeries
             {
-                Title = "Frequency",
                 Points = BuildHistogramBins(new Random(42), sampleCount: 400, binCount: 7)
             }
         ];
@@ -35,7 +34,13 @@ public partial class ChartsBarShowcaseViewModel : ObservableObject
                 ["Toys"] = 58,
                 ["Other"] = 34
             });
+
+        _texts.Titles(BarSeries, "Revenue", "Expenses");
+        _texts.Titles(HistogramSeries, "Frequency");
+        _texts.Titles(ParetoSeries, "Volume", "CumulativePercent");
     }
+
+    private readonly ChartDemoTexts _texts = new();
 
     public IList<LuminaChartSeries> BarSeries { get; }
 
@@ -102,13 +107,11 @@ public partial class ChartsBarShowcaseViewModel : ObservableObject
         [
             new LuminaBarSeries
             {
-                Title = "Volume",
                 Points = barPoints,
                 BarWidthRatio = 0.6
             },
             new LuminaChartSeries
             {
-                Title = "Cumulative %",
                 Stroke = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Color.FromRgb(0xF5, 0x9E, 0x0B)),
                 StrokeThickness = 2.0,
                 ShowMarkers = true,

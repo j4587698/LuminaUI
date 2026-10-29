@@ -5,9 +5,11 @@ using System.ComponentModel;
 using System.Globalization;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Documents;
 using Avalonia.Input;
 using Avalonia.Layout;
 using Avalonia.Media;
+using Avalonia.Threading;
 
 namespace LuminaUI.Charts;
 
@@ -22,10 +24,12 @@ public class LuminaPieChart : Control
     private const double LabelFontSize = 12.0;
 
     private int _hoverSliceIndex = -1;
+    private bool _isAttached;
     private INotifyCollectionChanged? _slicesSubscription;
     private HashSet<LuminaPieSlice> _sliceSubscriptions = new();
     private readonly List<(FormattedText Text, IBrush Color)> _legendItems = new();
     private Rect _legendRect;
+    private double _legendHeight;
 
     public static readonly StyledProperty<IList<LuminaPieSlice>?> SlicesProperty =
         AvaloniaProperty.Register<LuminaPieChart, IList<LuminaPieSlice>?>(nameof(Slices));
@@ -65,12 +69,19 @@ public class LuminaPieChart : Control
             LegendPositionProperty,
             TooltipBackgroundBrushProperty,
             TooltipTextBrushProperty,
-            LegendTextBrushProperty);
+            LegendTextBrushProperty,
+            // Labels, legend and tooltip text are all drawn with the inherited font.
+            TextElement.FontFamilyProperty);
     }
 
     public LuminaPieChart()
     {
         ClipToBounds = true;
+        // Palette colors, label contrast and the tooltip border all come from theme resources,
+        // and neither a resource change nor a theme variant switch touches an AffectsRender
+        // property, so repaint explicitly.
+        ResourcesChanged += (_, _) => InvalidateVisual();
+        ActualThemeVariantChanged += (_, _) => InvalidateVisual();
     }
 
     public IList<LuminaPieSlice>? Slices
@@ -130,6 +141,10 @@ public class LuminaPieChart : Control
         set => SetValue(LegendTextBrushProperty, value);
     }
 
+    /// <inheritdoc />
+    protected override Size MeasureOverride(Size availableSize) =>
+        ChartDrawing.MeasureChart(availableSize, 240.0, 240.0);
+
     public override void Render(DrawingContext context)
     {
         base.Render(context);
@@ -137,17 +152,34 @@ public class LuminaPieChart : Control
         IList<LuminaPieSlice>? slices = Slices;
         if (slices == null || slices.Count == 0)
         {
+            _legendHeight = 0.0;
             return;
         }
 
         double total = SumValues(slices);
         if (total <= 0.0)
         {
+            _legendHeight = 0.0;
             return;
         }
 
+        // The legend wraps onto as many rows as it needs, and the pie shrinks to make room, so it
+        // is laid out before the pie geometry.
+        if (ShowLegend)
+        {
+            BuildLegendItems(slices, _legendItems);
+            _legendHeight = ChartDrawing.MeasureLegendHeight(_legendItems, Bounds.Size);
+            _legendRect = ChartDrawing.ComputeLegendRect(_legendItems, LegendPosition, Bounds.Size);
+        }
+        else
+        {
+            _legendItems.Clear();
+            _legendHeight = 0.0;
+            _legendRect = default;
+        }
+
         var (center, outer) = ComputeLayout();
-        double inner = outer * Math.Clamp(InnerRadiusRatio, 0.0, 0.98);
+        double inner = outer * Math.Clamp(ChartDrawing.Finite(InnerRadiusRatio, 0.0), 0.0, 0.98);
         double startAngle = -90.0;
         Typeface typeface = ChartDrawing.CreateTypeface(this);
 
@@ -182,30 +214,20 @@ public class LuminaPieChart : Control
                 if (!string.IsNullOrEmpty(label))
                 {
                     FormattedText text = ChartDrawing.CreateText(label, typeface, ChartDrawing.ContrastFor(fill), LabelFontSize);
-                    context.DrawText(text, new Point(labelPoint.X - text.Width / 2.0, labelPoint.Y - text.Height / 2.0));
+                    // Skip labels that do not fit along their slice; on thin neighbouring slices
+                    // they would otherwise pile up on top of each other.
+                    double arcLength = radius * sweep * Math.PI / 180.0;
+                    if (text.Width <= arcLength)
+                    {
+                        context.DrawText(text, new Point(labelPoint.X - text.Width / 2.0, labelPoint.Y - text.Height / 2.0));
+                    }
                 }
             }
 
             startAngle += sweep;
         }
 
-        if (ShowLegend)
-        {
-            // Measured before the tooltip so the tooltip can be kept clear of the legend band.
-            BuildLegendItems(slices, _legendItems);
-            _legendRect = ChartDrawing.ComputeLegendRect(
-                _legendItems,
-                ChartDrawing.MeasureLegend(_legendItems),
-                LegendPosition,
-                Bounds.Size);
-        }
-        else
-        {
-            _legendItems.Clear();
-            _legendRect = default;
-        }
-
-        if (_hoverSliceIndex >= 0 && _hoverSliceIndex < slices.Count)
+        if (_hoverSliceIndex >= 0 && _hoverSliceIndex < slices.Count && IsDrawable(slices[_hoverSliceIndex]))
         {
             DrawTooltip(context, center, slices[_hoverSliceIndex], total);
         }
@@ -217,7 +239,7 @@ public class LuminaPieChart : Control
     }
 
     /// <summary>A slice contributes to the chart only when its value is finite and positive.</summary>
-    private static bool IsDrawable(LuminaPieSlice slice)
+    private static bool IsDrawable(LuminaPieSlice? slice)
     {
         return slice != null && double.IsFinite(slice.Value) && slice.Value > 0.0;
     }
@@ -239,24 +261,18 @@ public class LuminaPieChart : Control
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
+        _isAttached = true;
         UpdateSubscriptions();
     }
 
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
-        if (_slicesSubscription != null)
-        {
-            _slicesSubscription.CollectionChanged -= OnSlicesChanged;
-            _slicesSubscription = null;
-        }
-
-        foreach (LuminaPieSlice slice in _sliceSubscriptions)
-        {
-            slice.PropertyChanged -= OnSlicePropertyChanged;
-        }
-
-        _sliceSubscriptions.Clear();
+        _isAttached = false;
+        _hoverSliceIndex = -1;
+        // With _isAttached cleared this releases every subscription, so slices owned by a
+        // long-lived view model no longer keep the chart alive.
+        UpdateSubscriptions();
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
@@ -264,12 +280,21 @@ public class LuminaPieChart : Control
         base.OnPropertyChanged(change);
         if (change.Property == SlicesProperty)
         {
+            // The hovered index points into the old list; it may be out of range or refer to a
+            // different (or null) slice in the new one.
+            _hoverSliceIndex = -1;
             UpdateSubscriptions();
         }
     }
 
     private void OnSlicesChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
+        if (!Dispatcher.UIThread.CheckAccess())
+        {
+            Dispatcher.UIThread.Post(() => OnSlicesChanged(sender, e));
+            return;
+        }
+
         _hoverSliceIndex = -1;
         UpdateSubscriptions();
         InvalidateVisual();
@@ -277,6 +302,12 @@ public class LuminaPieChart : Control
 
     private void OnSlicePropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
+        if (!Dispatcher.UIThread.CheckAccess())
+        {
+            Dispatcher.UIThread.Post(() => OnSlicePropertyChanged(sender, e));
+            return;
+        }
+
         InvalidateVisual();
     }
 
@@ -289,7 +320,7 @@ public class LuminaPieChart : Control
         }
 
         var desired = new HashSet<LuminaPieSlice>();
-        IList<LuminaPieSlice>? slices = Slices;
+        IList<LuminaPieSlice>? slices = _isAttached ? Slices : null;
         if (slices != null)
         {
             foreach (LuminaPieSlice slice in slices)
@@ -329,7 +360,21 @@ public class LuminaPieChart : Control
     protected override void OnPointerMoved(PointerEventArgs e)
     {
         base.OnPointerMoved(e);
-        Point position = e.GetPosition(this);
+        UpdateHover(e.GetPosition(this));
+    }
+
+    protected override void OnPointerPressed(PointerPressedEventArgs e)
+    {
+        base.OnPointerPressed(e);
+        // Touch and pen produce no move events before the press, so a tap selects by itself.
+        if (e.Pointer.Type != PointerType.Mouse)
+        {
+            UpdateHover(e.GetPosition(this));
+        }
+    }
+
+    private void UpdateHover(Point position)
+    {
         int index = HitTest(position);
         if (index != _hoverSliceIndex)
         {
@@ -341,6 +386,12 @@ public class LuminaPieChart : Control
     protected override void OnPointerExited(PointerEventArgs e)
     {
         base.OnPointerExited(e);
+        // A lifted finger "exits" right after the tap; keep the tooltip until the next tap.
+        if (e.Pointer.Type == PointerType.Touch)
+        {
+            return;
+        }
+
         if (_hoverSliceIndex >= 0)
         {
             _hoverSliceIndex = -1;
@@ -363,7 +414,7 @@ public class LuminaPieChart : Control
         }
 
         var (center, outer) = ComputeLayout();
-        double inner = outer * Math.Clamp(InnerRadiusRatio, 0.0, 0.98);
+        double inner = outer * Math.Clamp(ChartDrawing.Finite(InnerRadiusRatio, 0.0), 0.0, 0.98);
 
         double dx = position.X - center.X;
         double dy = position.Y - center.Y;
@@ -390,8 +441,9 @@ public class LuminaPieChart : Control
         {
             double sweep = IsDrawable(slices[index]) ? slices[index].Value / total * 360.0 : 0.0;
             // The epsilon absorbs the accumulated floating point error of the sweep sum, which
-            // otherwise leaves the slice that owns the 0/360 seam unclickable.
-            if (angle >= start && angle < start + sweep + 1e-9)
+            // otherwise leaves the slice that owns the 0/360 seam unclickable. Zero-sweep
+            // (zero, negative, NaN or null) slices are never drawn, so they are never hit.
+            if (sweep > 0.0 && angle >= start && angle < start + sweep + 1e-9)
             {
                 return index;
             }
@@ -404,11 +456,13 @@ public class LuminaPieChart : Control
 
     private (Point Center, double Outer) ComputeLayout()
     {
-        bool legendTop = ShowLegend &&
+        // _legendHeight is measured in Render; hit testing between renders reuses the last value.
+        bool showLegend = ShowLegend && _legendHeight > 0.0;
+        bool legendTop = showLegend &&
             (LegendPosition is LuminaChartLegendPosition.TopLeft or LuminaChartLegendPosition.TopCenter or LuminaChartLegendPosition.TopRight);
-        double legendSpace = ShowLegend ? ChartDrawing.LegendBandHeight + ChartDrawing.LegendBandGap : 0.0;
+        double legendSpace = showLegend ? _legendHeight + ChartDrawing.LegendBandGap : 0.0;
         double topPad = legendTop ? legendSpace : 8.0;
-        double bottomPad = (!legendTop && ShowLegend) ? legendSpace : 8.0;
+        double bottomPad = (!legendTop && showLegend) ? legendSpace : 8.0;
 
         var center = new Point(Bounds.Width / 2.0, topPad + (Bounds.Height - topPad - bottomPad) / 2.0);
         double outer = Math.Max(2.0, Math.Min(Bounds.Width, Bounds.Height - topPad - bottomPad) / 2.0 - 4.0);
@@ -417,12 +471,7 @@ public class LuminaPieChart : Control
 
     private void DrawLegend(DrawingContext context)
     {
-        ChartDrawing.DrawLegend(
-            context,
-            _legendItems,
-            ChartDrawing.MeasureLegend(_legendItems),
-            LegendPosition,
-            Bounds.Size);
+        ChartDrawing.DrawLegend(context, _legendItems, LegendPosition, Bounds.Size);
     }
 
     /// <summary>Rebuilds <paramref name="target"/> with one entry per drawable slice.</summary>
@@ -456,21 +505,25 @@ public class LuminaPieChart : Control
             var fullGeometry = new StreamGeometry();
             using (StreamGeometryContext context = fullGeometry.Open())
             {
+                // Outer and inner circles are separate closed figures. Joining them with a line
+                // in a single figure fills correctly but leaves a radial seam in the hover
+                // outline of a 100% donut slice.
                 var outerTop = new Point(center.X, center.Y - outer);
                 var outerBottom = new Point(center.X, center.Y + outer);
+                context.SetFillRule(FillRule.EvenOdd);
                 context.BeginFigure(outerTop, isFilled: true);
                 context.ArcTo(outerBottom, new Size(outer, outer), 0.0, false, SweepDirection.Clockwise);
                 context.ArcTo(outerTop, new Size(outer, outer), 0.0, false, SweepDirection.Clockwise);
+                context.EndFigure(isClosed: true);
                 if (inner > 0.5)
                 {
                     var innerTop = new Point(center.X, center.Y - inner);
                     var innerBottom = new Point(center.X, center.Y + inner);
-                    context.LineTo(innerTop);
+                    context.BeginFigure(innerTop, isFilled: true);
                     context.ArcTo(innerBottom, new Size(inner, inner), 0.0, false, SweepDirection.CounterClockwise);
                     context.ArcTo(innerTop, new Size(inner, inner), 0.0, false, SweepDirection.CounterClockwise);
+                    context.EndFigure(isClosed: true);
                 }
-
-                context.EndFigure(isClosed: true);
             }
 
             return fullGeometry;

@@ -5515,4 +5515,112 @@ await shell.PushAsync(
   <data name="Sandbox.Charts.RadarTitle" xml:space="preserve">
     <value>型号对比</value>
   </data>
+  <data name="Sandbox.Charts.Data.Revenue" xml:space="preserve">
+    <value>收入</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Expenses" xml:space="preserve">
+    <value>支出</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Visits" xml:space="preserve">
+    <value>访问量</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Samples200k" xml:space="preserve">
+    <value>20 万个采样点</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Live" xml:space="preserve">
+    <value>实时</value>
+  </data>
+  <data name="Sandbox.Charts.Data.QueueLength" xml:space="preserve">
+    <value>队列长度</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Spark" xml:space="preserve">
+    <value>迷你图</value>
+  </data>
+  <data name="Sandbox.Charts.Data.MovingAverage" xml:space="preserve">
+    <value>移动平均</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Signal" xml:space="preserve">
+    <value>信号</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Trend" xml:space="preserve">
+    <value>趋势</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Anomalies" xml:space="preserve">
+    <value>异常点</value>
+  </data>
+  <data name="Sandbox.Charts.Data.ClusterA" xml:space="preserve">
+    <value>簇 A</value>
+  </data>
+  <data name="Sandbox.Charts.Data.ClusterB" xml:space="preserve">
+    <value>簇 B</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Demand" xml:space="preserve">
+    <value>需求</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Forecast" xml:space="preserve">
+    <value>预测</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Frequency" xml:space="preserve">
+    <value>频次</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Volume" xml:space="preserve">
+    <value>销量</value>
+  </data>
+  <data name="Sandbox.Charts.Data.CumulativePercent" xml:space="preserve">
+    <value>累计 %</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Direct" xml:space="preserve">
+    <value>直接访问</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Organic" xml:space="preserve">
+    <value>自然搜索</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Referral" xml:space="preserve">
+    <value>外部引荐</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Social" xml:space="preserve">
+    <value>社交媒体</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Other" xml:space="preserve">
+    <value>其他</value>
+  </data>
+  <data name="Sandbox.Charts.Data.North" xml:space="preserve">
+    <value>北区</value>
+  </data>
+  <data name="Sandbox.Charts.Data.South" xml:space="preserve">
+    <value>南区</value>
+  </data>
+  <data name="Sandbox.Charts.Data.East" xml:space="preserve">
+    <value>东区</value>
+  </data>
+  <data name="Sandbox.Charts.Data.West" xml:space="preserve">
+    <value>西区</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Central" xml:space="preserve">
+    <value>中区</value>
+  </data>
+  <data name="Sandbox.Charts.Data.ModelA" xml:space="preserve">
+    <value>型号 A</value>
+  </data>
+  <data name="Sandbox.Charts.Data.ModelB" xml:space="preserve">
+    <value>型号 B</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Speed" xml:space="preserve">
+    <value>速度</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Reliability" xml:space="preserve">
+    <value>可靠性</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Comfort" xml:space="preserve">
+    <value>舒适度</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Safety" xml:space="preserve">
+    <value>安全性</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Efficiency" xml:space="preserve">
+    <value>能效</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Price" xml:space="preserve">
+    <value>价格</value>
+  </data>
 </root>

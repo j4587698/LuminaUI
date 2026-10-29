@@ -54,6 +54,7 @@ public class ControlSmokeTests
             + string.Join(", ", notDiscovered));
 
         List<string> failures = [];
+        using LogCapture log = LogCapture.Start();
         Window window = new() { Width = SurfaceWidth, Height = SurfaceHeight };
         window.Show();
 
@@ -92,13 +93,18 @@ public class ControlSmokeTests
             $"{failures.Count} of {candidates.Length} controls failed to render:"
             + Environment.NewLine
             + string.Join(Environment.NewLine, failures));
+
+        Assert.True(
+            log.Entries.Count == 0,
+            $"Rendering the controls logged {log.Entries.Count} warnings/errors (broken bindings, template parts or property values):"
+            + Environment.NewLine
+            + string.Join(Environment.NewLine, log.Entries.Distinct().Take(50)));
     }
 
     private static Type[] DiscoverControlTypes() =>
         [
-            .. typeof(LuminaTheme)
-                .Assembly
-                .GetTypes()
+            .. new[] { typeof(LuminaTheme).Assembly, typeof(global::LuminaUI.Charts.LuminaLineChart).Assembly }
+                .SelectMany(assembly => assembly.GetTypes())
                 .Where(type => type is { IsAbstract: false, IsPublic: true })
                 .Where(type => typeof(Control).IsAssignableFrom(type))
                 // TopLevel-derived types (Window, EmbeddableControlRoot) cannot be nested as content.

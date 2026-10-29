@@ -5515,4 +5515,112 @@ await shell.PushAsync(
   <data name="Sandbox.Charts.RadarTitle" xml:space="preserve">
     <value>Model comparison</value>
   </data>
+  <data name="Sandbox.Charts.Data.Revenue" xml:space="preserve">
+    <value>Revenue</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Expenses" xml:space="preserve">
+    <value>Expenses</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Visits" xml:space="preserve">
+    <value>Visits</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Samples200k" xml:space="preserve">
+    <value>200k samples</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Live" xml:space="preserve">
+    <value>Live</value>
+  </data>
+  <data name="Sandbox.Charts.Data.QueueLength" xml:space="preserve">
+    <value>Queue length</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Spark" xml:space="preserve">
+    <value>Spark</value>
+  </data>
+  <data name="Sandbox.Charts.Data.MovingAverage" xml:space="preserve">
+    <value>Moving average</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Signal" xml:space="preserve">
+    <value>Signal</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Trend" xml:space="preserve">
+    <value>Trend</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Anomalies" xml:space="preserve">
+    <value>Anomalies</value>
+  </data>
+  <data name="Sandbox.Charts.Data.ClusterA" xml:space="preserve">
+    <value>Cluster A</value>
+  </data>
+  <data name="Sandbox.Charts.Data.ClusterB" xml:space="preserve">
+    <value>Cluster B</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Demand" xml:space="preserve">
+    <value>Demand</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Forecast" xml:space="preserve">
+    <value>Forecast</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Frequency" xml:space="preserve">
+    <value>Frequency</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Volume" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="Sandbox.Charts.Data.CumulativePercent" xml:space="preserve">
+    <value>Cumulative %</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Direct" xml:space="preserve">
+    <value>Direct</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Organic" xml:space="preserve">
+    <value>Organic</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Referral" xml:space="preserve">
+    <value>Referral</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Social" xml:space="preserve">
+    <value>Social</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Other" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="Sandbox.Charts.Data.North" xml:space="preserve">
+    <value>North</value>
+  </data>
+  <data name="Sandbox.Charts.Data.South" xml:space="preserve">
+    <value>South</value>
+  </data>
+  <data name="Sandbox.Charts.Data.East" xml:space="preserve">
+    <value>East</value>
+  </data>
+  <data name="Sandbox.Charts.Data.West" xml:space="preserve">
+    <value>West</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Central" xml:space="preserve">
+    <value>Central</value>
+  </data>
+  <data name="Sandbox.Charts.Data.ModelA" xml:space="preserve">
+    <value>Model A</value>
+  </data>
+  <data name="Sandbox.Charts.Data.ModelB" xml:space="preserve">
+    <value>Model B</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Speed" xml:space="preserve">
+    <value>Speed</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Reliability" xml:space="preserve">
+    <value>Reliability</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Comfort" xml:space="preserve">
+    <value>Comfort</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Safety" xml:space="preserve">
+    <value>Safety</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Efficiency" xml:space="preserve">
+    <value>Efficiency</value>
+  </data>
+  <data name="Sandbox.Charts.Data.Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
 </root>

@@ -14,14 +14,12 @@ public partial class ChartsShowcaseViewModel : ObservableObject
         [
             new LuminaChartSeries
             {
-                Title = "Revenue",
                 ShowArea = true,
                 ShowMarkers = true,
                 Points = BuildWave(start: 24.0, amplitude: 10.0, period: 2.0, phase: 0.0, count: 13)
             },
             new LuminaChartSeries
             {
-                Title = "Expenses",
                 Points = BuildWave(start: 16.0, amplitude: 6.0, period: 3.0, phase: 1.0, count: 13)
             }
         ];
@@ -30,7 +28,6 @@ public partial class ChartsShowcaseViewModel : ObservableObject
         [
             new LuminaChartSeries
             {
-                Title = "Visits",
                 ShowMarkers = true,
                 Points = BuildBlips(count: 9)
             }
@@ -40,7 +37,6 @@ public partial class ChartsShowcaseViewModel : ObservableObject
         [
             new LuminaChartSeries
             {
-                Title = "200k samples",
                 ShowArea = true,
                 Points = StressWave200k
             }
@@ -50,7 +46,6 @@ public partial class ChartsShowcaseViewModel : ObservableObject
         [
             new LuminaChartSeries
             {
-                Title = "Live",
                 ShowArea = true,
                 ShowMarkers = true,
                 Points = new ObservableCollection<LuminaChartPoint>()
@@ -61,7 +56,6 @@ public partial class ChartsShowcaseViewModel : ObservableObject
         [
             new LuminaChartSeries
             {
-                Title = "Queue length",
                 IsStep = true,
                 ShowMarkers = true,
                 Points = ToPoints([4.0, 7.0, 7.0, 12.0, 12.0, 9.0, 9.0, 15.0, 15.0, 11.0])
@@ -72,12 +66,20 @@ public partial class ChartsShowcaseViewModel : ObservableObject
         [
             new LuminaChartSeries
             {
-                Title = "Spark",
                 StrokeThickness = 1.5,
                 Points = BuildStressWave(48)
             }
         ];
+
+        _texts.Titles(AreaSeries, "Revenue", "Expenses");
+        _texts.Titles(CompactSeries, "Visits");
+        _texts.Titles(StressSeries, "Samples200k");
+        _texts.Titles(LiveSeries, "Live");
+        _texts.Titles(StepSeries, "QueueLength");
+        _texts.Titles(SparkSeries, "Spark");
     }
+
+    private readonly ChartDemoTexts _texts = new();
 
     public IList<LuminaChartSeries> AreaSeries { get; }
 

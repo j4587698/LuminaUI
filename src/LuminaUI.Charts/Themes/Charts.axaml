@@ -1,47 +1,38 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:luminaCharts="using:LuminaUI.Charts">
-  <Styles.Resources>
-    <ResourceDictionary>
-      <SolidColorBrush x:Key="LuminaChartGridLineBrush" Color="{DynamicResource LuminaDivider}" />
-      <SolidColorBrush x:Key="LuminaChartAxisLabelBrush" Color="{DynamicResource LuminaTextMuted}" />
-      <SolidColorBrush x:Key="LuminaChartCrosshairBrush" Color="{DynamicResource LuminaTextMuted}" />
-      <SolidColorBrush x:Key="LuminaChartTooltipBackgroundBrush" Color="{DynamicResource LuminaSurfaceElevated}" />
-      <SolidColorBrush x:Key="LuminaChartTooltipBorderBrush" Color="{DynamicResource LuminaBorderStrong}" />
-      <SolidColorBrush x:Key="LuminaChartTooltipTextBrush" Color="{DynamicResource LuminaTextPrimary}" />
-      <SolidColorBrush x:Key="LuminaChartSurfaceBrush" Color="{DynamicResource LuminaSurface}" />
+  <!--
+    Charts use the Lumina semantic brushes directly. Those live in the Light/Dark theme
+    dictionaries and are overridden at application level by LuminaThemeManager's accent palette,
+    so a DynamicResource lookup from the chart follows both the chart's own ThemeVariantScope and
+    the current accent. (Chart-specific brushes defined here with Color="{DynamicResource ...}"
+    were resolved once against the application variant, so charts inside a dark scope of a light
+    app stayed light.)
 
-      <SolidColorBrush x:Key="LuminaChartColor1" Color="{DynamicResource LuminaPrimary}" />
-      <SolidColorBrush x:Key="LuminaChartColor2" Color="{DynamicResource LuminaTeal}" />
-      <SolidColorBrush x:Key="LuminaChartColor3" Color="{DynamicResource LuminaOrange}" />
-      <SolidColorBrush x:Key="LuminaChartColor4" Color="{DynamicResource LuminaPink}" />
-      <SolidColorBrush x:Key="LuminaChartColor5" Color="{DynamicResource LuminaIndigo}" />
-      <SolidColorBrush x:Key="LuminaChartColor6" Color="{DynamicResource LuminaSuccess}" />
-      <SolidColorBrush x:Key="LuminaChartColor7" Color="{DynamicResource LuminaWarning}" />
-      <SolidColorBrush x:Key="LuminaChartColor8" Color="{DynamicResource LuminaDanger}" />
-    </ResourceDictionary>
-  </Styles.Resources>
-
+    The series palette (LuminaChartColor1..8), the marker surface (LuminaChartSurfaceBrush) and
+    the tooltip outline (LuminaChartTooltipBorderBrush) are looked up from code: define any of
+    those keys to override them, otherwise they fall back to the matching Lumina brush.
+  -->
   <Style Selector="luminaCharts|LuminaLineChart">
-    <Setter Property="GridLineBrush" Value="{DynamicResource LuminaChartGridLineBrush}" />
-    <Setter Property="AxisLabelBrush" Value="{DynamicResource LuminaChartAxisLabelBrush}" />
-    <Setter Property="CrosshairBrush" Value="{DynamicResource LuminaChartCrosshairBrush}" />
-    <Setter Property="TooltipBackgroundBrush" Value="{DynamicResource LuminaChartTooltipBackgroundBrush}" />
-    <Setter Property="TooltipTextBrush" Value="{DynamicResource LuminaChartTooltipTextBrush}" />
-    <Setter Property="LegendTextBrush" Value="{DynamicResource LuminaChartAxisLabelBrush}" />
+    <Setter Property="GridLineBrush" Value="{DynamicResource LuminaDividerBrush}" />
+    <Setter Property="AxisLabelBrush" Value="{DynamicResource LuminaTextMutedBrush}" />
+    <Setter Property="CrosshairBrush" Value="{DynamicResource LuminaTextMutedBrush}" />
+    <Setter Property="TooltipBackgroundBrush" Value="{DynamicResource LuminaSurfaceElevatedBrush}" />
+    <Setter Property="TooltipTextBrush" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+    <Setter Property="LegendTextBrush" Value="{DynamicResource LuminaTextMutedBrush}" />
   </Style>
 
   <Style Selector="luminaCharts|LuminaPieChart">
-    <Setter Property="TooltipBackgroundBrush" Value="{DynamicResource LuminaChartTooltipBackgroundBrush}" />
-    <Setter Property="TooltipTextBrush" Value="{DynamicResource LuminaChartTooltipTextBrush}" />
-    <Setter Property="LegendTextBrush" Value="{DynamicResource LuminaChartAxisLabelBrush}" />
+    <Setter Property="TooltipBackgroundBrush" Value="{DynamicResource LuminaSurfaceElevatedBrush}" />
+    <Setter Property="TooltipTextBrush" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+    <Setter Property="LegendTextBrush" Value="{DynamicResource LuminaTextMutedBrush}" />
   </Style>
 
   <Style Selector="luminaCharts|LuminaRadarChart">
-    <Setter Property="GridLineBrush" Value="{DynamicResource LuminaChartGridLineBrush}" />
-    <Setter Property="AxisLabelBrush" Value="{DynamicResource LuminaChartAxisLabelBrush}" />
-    <Setter Property="TooltipBackgroundBrush" Value="{DynamicResource LuminaChartTooltipBackgroundBrush}" />
-    <Setter Property="TooltipTextBrush" Value="{DynamicResource LuminaChartTooltipTextBrush}" />
-    <Setter Property="LegendTextBrush" Value="{DynamicResource LuminaChartAxisLabelBrush}" />
+    <Setter Property="GridLineBrush" Value="{DynamicResource LuminaDividerBrush}" />
+    <Setter Property="AxisLabelBrush" Value="{DynamicResource LuminaTextMutedBrush}" />
+    <Setter Property="TooltipBackgroundBrush" Value="{DynamicResource LuminaSurfaceElevatedBrush}" />
+    <Setter Property="TooltipTextBrush" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+    <Setter Property="LegendTextBrush" Value="{DynamicResource LuminaTextMutedBrush}" />
   </Style>
 </Styles>

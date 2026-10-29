@@ -110,6 +110,18 @@ jobs:
           dotnet build src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
           dotnet build src/LuminaUI.Charts/LuminaUI.Charts.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
 
+      # Releases are triggered by a version bump on the default branch, independently of the CI
+      # workflow, so the test suite is re-run here: a red suite must never reach NuGet.
+      - name: Install Linux rendering dependencies
+        run: sudo apt-get update && sudo apt-get install -y libfontconfig1
+
+      - name: Test
+        run: |
+          dotnet test tests/LuminaUI.Tests/LuminaUI.Tests.csproj \
+            --configuration "$CONFIGURATION" \
+            --logger "console;verbosity=normal" \
+            /p:ContinuousIntegrationBuild=true
+
       - name: Pack
         run: |
           mkdir -p artifacts/packages

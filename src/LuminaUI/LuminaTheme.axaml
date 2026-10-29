@@ -6,13 +6,13 @@
         Lumina is a patch layer, not a full theme: most Lumina control themes are declared as
         <ControlTheme x:Key="{x:Type Foo}" BasedOn="{StaticResource {x:Type Foo}}">, which re-keys
         the existing default theme and layers Lumina setters on top of it. That only works when a
-        base theme is already registered, so Lumina embeds one and hosts no longer need to write
-        <FluentTheme /> themselves (or get it in the right order).
+        base theme is already registered.
 
-        This include must stay the first child: the resource dictionaries below are loaded while
-        this file is being parsed and resolve their BasedOn keys against it.
+        The base theme is added from code (LuminaTheme.axaml.cs) before this file is loaded, so it
+        is always the first child and the BasedOn keys below resolve against it. It is skipped when
+        the host application already registered its own base theme (for example a FluentTheme with
+        a custom DensityStyle or palette) ahead of LuminaTheme, so that theme keeps its settings.
     -->
-    <StyleInclude Source="avares://Avalonia.Themes.Fluent/FluentTheme.xaml" />
 
     <Styles.Resources>
         <ResourceDictionary>

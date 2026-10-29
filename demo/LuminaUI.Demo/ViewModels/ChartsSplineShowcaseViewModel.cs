@@ -11,10 +11,14 @@ public partial class ChartsSplineShowcaseViewModel : ObservableObject
     {
         SplineSeries =
         [
-            new LuminaSplineSeries { Title = "Demand", ShowArea = true, Points = BuildWave(24.0, 10.0, 0.9) },
-            new LuminaSplineSeries { Title = "Forecast", Points = BuildWave(16.0, 7.0, 1.3) }
+            new LuminaSplineSeries { ShowArea = true, Points = BuildWave(24.0, 10.0, 0.9) },
+            new LuminaSplineSeries { Points = BuildWave(16.0, 7.0, 1.3) }
         ];
+
+        _texts.Titles(SplineSeries, "Demand", "Forecast");
     }
+
+    private readonly ChartDemoTexts _texts = new();
 
     public IList<LuminaChartSeries> SplineSeries { get; }
 

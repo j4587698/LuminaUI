@@ -4,7 +4,7 @@
 
 LuminaUI is an Avalonia 12 component library for desktop, browser, and mobile-style application shells. It provides a shared visual system, reusable controls, navigation primitives, overlays, localization support, optional themed integrations for ColorPicker, DataGrid, and TreeDataGrid, and a themed chart package.
 
-The NuGet packages target `.NET 8`, `.NET 9`, and `.NET 10`. Demo hosts remain on `.NET 10`. The current Avalonia version is `12.0.4`.
+The NuGet packages target `.NET 8`, `.NET 9`, and `.NET 10`. Demo hosts remain on `.NET 10`. The current Avalonia version is `12.0.1`.
 
 ## Packages
 
@@ -52,7 +52,7 @@ Reference the packages or projects you need, then register the theme in `App.axa
 </Application>
 ```
 
-`LuminaTheme` already embeds the Fluent base theme it builds on, so it is the only required entry and no `<FluentTheme />` line is needed. If you are upgrading from a version that required one, delete it — keeping it would register the base theme twice, which renders identically but wastes work.
+`LuminaTheme` brings the Fluent base theme it builds on, so it is the only required entry and no `<FluentTheme />` line is needed. If the application already registers a base theme *before* `LuminaTheme` — for example `<FluentTheme DensityStyle="Compact" />` with custom palettes — Lumina uses that one instead of embedding a second copy, so its density and palette settings are kept. Existing apps that declare `<FluentTheme />` ahead of `<lumina:LuminaTheme />` therefore keep working unchanged.
 
 Use controls with the Lumina namespace:
 

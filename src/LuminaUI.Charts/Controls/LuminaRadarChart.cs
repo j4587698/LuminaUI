@@ -5,9 +5,11 @@ using System.ComponentModel;
 using System.Globalization;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Documents;
 using Avalonia.Input;
 using Avalonia.Layout;
 using Avalonia.Media;
+using Avalonia.Threading;
 
 namespace LuminaUI.Charts;
 
@@ -21,11 +23,14 @@ public class LuminaRadarChart : Control
     private const double TooltipRadius = 6.0;
 
     private (int Series, int Point)? _hover;
+    private bool _isAttached;
     private INotifyCollectionChanged? _seriesSubscription;
     private HashSet<LuminaRadarSeries> _seriesSubscriptions = new();
     private HashSet<INotifyCollectionChanged> _valuesSubscriptions = new();
     private readonly List<(FormattedText Text, IBrush Color)> _legendItems = new();
     private Rect _legendRect;
+    private double _legendHeight;
+    private Size _labelExtent;
 
     public static readonly StyledProperty<IList<LuminaRadarSeries>?> SeriesProperty =
         AvaloniaProperty.Register<LuminaRadarChart, IList<LuminaRadarSeries>?>(nameof(Series));
@@ -76,12 +81,18 @@ public class LuminaRadarChart : Control
             AxisLabelBrushProperty,
             TooltipBackgroundBrushProperty,
             TooltipTextBrushProperty,
-            LegendTextBrushProperty);
+            LegendTextBrushProperty,
+            // Labels, legend and tooltip text are all drawn with the inherited font.
+            TextElement.FontFamilyProperty);
     }
 
     public LuminaRadarChart()
     {
         ClipToBounds = true;
+        // Palette colors and translucent area fills are derived from theme resources; neither a
+        // resource change nor a theme variant switch touches an AffectsRender property.
+        ResourcesChanged += (_, _) => InvalidateVisual();
+        ActualThemeVariantChanged += (_, _) => InvalidateVisual();
     }
 
     public IList<LuminaRadarSeries>? Series
@@ -160,9 +171,18 @@ public class LuminaRadarChart : Control
         set => SetValue(LegendTextBrushProperty, value);
     }
 
+    /// <inheritdoc />
+    protected override Size MeasureOverride(Size availableSize) =>
+        ChartDrawing.MeasureChart(availableSize, 280.0, 240.0);
+
     public override void Render(DrawingContext context)
     {
         base.Render(context);
+
+        // An invisible full-bounds background makes the whole control hit-testable. Without it
+        // only painted pixels (thin grid strokes, the series polygons) receive pointer events,
+        // so HoverThreshold around a vertex mostly never fires.
+        context.FillRectangle(Brushes.Transparent, new Rect(Bounds.Size));
 
         IList<LuminaRadarSeries>? series = Series;
         if (series == null || series.Count == 0)
@@ -178,7 +198,33 @@ public class LuminaRadarChart : Control
 
         if (axes < 3)
         {
+            _legendHeight = 0.0;
             return;
+        }
+
+        // Legend rows and category labels both take room from the radar itself, so they are
+        // measured before the layout.
+        if (ShowLegend)
+        {
+            BuildLegendItems(series, _legendItems);
+            _legendHeight = ChartDrawing.MeasureLegendHeight(_legendItems, Bounds.Size);
+            _legendRect = ChartDrawing.ComputeLegendRect(_legendItems, LegendPosition, Bounds.Size);
+        }
+        else
+        {
+            _legendItems.Clear();
+            _legendHeight = 0.0;
+            _legendRect = default;
+        }
+
+        List<FormattedText>? labels = ShowLabels && Categories != null ? BuildLabels(axes, Categories) : null;
+        _labelExtent = default;
+        if (labels != null)
+        {
+            foreach (FormattedText label in labels)
+            {
+                _labelExtent = new Size(Math.Max(_labelExtent.Width, label.Width), Math.Max(_labelExtent.Height, label.Height));
+            }
         }
 
         var (center, radius) = ComputeLayout();
@@ -189,9 +235,9 @@ public class LuminaRadarChart : Control
             DrawGrid(context, center, radius, axes);
         }
 
-        if (ShowLabels && Categories != null)
+        if (labels != null)
         {
-            DrawLabels(context, center, radius, axes, Categories);
+            DrawLabels(context, center, radius, axes, labels);
         }
 
         for (int index = 0; index < series.Count; index++)
@@ -203,22 +249,6 @@ public class LuminaRadarChart : Control
             }
 
             DrawSeries(context, item, index, center, radius, axes, maxValue);
-        }
-
-        if (ShowLegend)
-        {
-            // Measured before the tooltip so the tooltip can be kept clear of the legend band.
-            BuildLegendItems(series, _legendItems);
-            _legendRect = ChartDrawing.ComputeLegendRect(
-                _legendItems,
-                ChartDrawing.MeasureLegend(_legendItems),
-                LegendPosition,
-                Bounds.Size);
-        }
-        else
-        {
-            _legendItems.Clear();
-            _legendRect = default;
         }
 
         if (_hover is { } hover)
@@ -235,30 +265,18 @@ public class LuminaRadarChart : Control
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
+        _isAttached = true;
         UpdateSubscriptions();
     }
 
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
-        if (_seriesSubscription != null)
-        {
-            _seriesSubscription.CollectionChanged -= OnSeriesCollectionChanged;
-            _seriesSubscription = null;
-        }
-
-        foreach (LuminaRadarSeries series in _seriesSubscriptions)
-        {
-            series.PropertyChanged -= OnSeriesPropertyChanged;
-        }
-
-        foreach (INotifyCollectionChanged values in _valuesSubscriptions)
-        {
-            values.CollectionChanged -= OnValuesChanged;
-        }
-
-        _seriesSubscriptions.Clear();
-        _valuesSubscriptions.Clear();
+        _isAttached = false;
+        _hover = null;
+        // With _isAttached cleared this releases every subscription, so series owned by a
+        // long-lived view model no longer keep the chart alive.
+        UpdateSubscriptions();
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
@@ -274,7 +292,22 @@ public class LuminaRadarChart : Control
     protected override void OnPointerMoved(PointerEventArgs e)
     {
         base.OnPointerMoved(e);
-        (int, int)? hit = HitTest(e.GetPosition(this));
+        UpdateHover(e.GetPosition(this));
+    }
+
+    protected override void OnPointerPressed(PointerPressedEventArgs e)
+    {
+        base.OnPointerPressed(e);
+        // Touch and pen produce no move events before the press, so a tap selects by itself.
+        if (e.Pointer.Type != PointerType.Mouse)
+        {
+            UpdateHover(e.GetPosition(this));
+        }
+    }
+
+    private void UpdateHover(Point position)
+    {
+        (int, int)? hit = HitTest(position);
         if (hit != _hover)
         {
             _hover = hit;
@@ -285,6 +318,12 @@ public class LuminaRadarChart : Control
     protected override void OnPointerExited(PointerEventArgs e)
     {
         base.OnPointerExited(e);
+        // A lifted finger "exits" right after the tap; keep the tooltip until the next tap.
+        if (e.Pointer.Type == PointerType.Touch)
+        {
+            return;
+        }
+
         if (_hover != null)
         {
             _hover = null;
@@ -294,6 +333,12 @@ public class LuminaRadarChart : Control
 
     private void OnSeriesCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
+        if (!Dispatcher.UIThread.CheckAccess())
+        {
+            Dispatcher.UIThread.Post(() => OnSeriesCollectionChanged(sender, e));
+            return;
+        }
+
         _hover = null;
         UpdateSubscriptions();
         InvalidateVisual();
@@ -301,6 +346,12 @@ public class LuminaRadarChart : Control
 
     private void OnSeriesPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
+        if (!Dispatcher.UIThread.CheckAccess())
+        {
+            Dispatcher.UIThread.Post(() => OnSeriesPropertyChanged(sender, e));
+            return;
+        }
+
         if (e.PropertyName == nameof(LuminaRadarSeries.Values))
         {
             UpdateSubscriptions();
@@ -312,6 +363,12 @@ public class LuminaRadarChart : Control
 
     private void OnValuesChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
+        if (!Dispatcher.UIThread.CheckAccess())
+        {
+            Dispatcher.UIThread.Post(() => OnValuesChanged(sender, e));
+            return;
+        }
+
         _hover = null;
         InvalidateVisual();
     }
@@ -330,7 +387,7 @@ public class LuminaRadarChart : Control
 
         var desiredSeries = new HashSet<LuminaRadarSeries>();
         var desiredValues = new HashSet<INotifyCollectionChanged>();
-        IList<LuminaRadarSeries>? series = Series;
+        IList<LuminaRadarSeries>? series = _isAttached ? Series : null;
         if (series != null)
         {
             foreach (LuminaRadarSeries item in series)
@@ -390,16 +447,27 @@ public class LuminaRadarChart : Control
         }
     }
 
+    private const double LabelGap = 8.0;
+
     private (Point Center, double Radius) ComputeLayout()
     {
-        bool legendTop = ShowLegend &&
+        // _legendHeight and _labelExtent are measured in Render; hit testing between renders
+        // reuses the last values.
+        bool showLegend = ShowLegend && _legendHeight > 0.0;
+        bool legendTop = showLegend &&
             (LegendPosition is LuminaChartLegendPosition.TopLeft or LuminaChartLegendPosition.TopCenter or LuminaChartLegendPosition.TopRight);
-        double legendSpace = ShowLegend ? ChartDrawing.LegendBandHeight + ChartDrawing.LegendBandGap : 0.0;
+        double legendSpace = showLegend ? _legendHeight + ChartDrawing.LegendBandGap : 0.0;
         double topPad = legendTop ? legendSpace : 4.0;
-        double bottomPad = (!legendTop && ShowLegend) ? legendSpace : 4.0;
+        double bottomPad = (!legendTop && showLegend) ? legendSpace : 4.0;
 
-        var center = new Point(Bounds.Width / 2.0, topPad + ((Bounds.Height - topPad - bottomPad) / 2.0));
-        double radius = Math.Max(10.0, (Math.Min(Bounds.Width, Bounds.Height - topPad - bottomPad) / 2.0) - 26.0);
+        // Labels sit outside the outermost ring, aligned away from the centre, so the radius
+        // leaves room for the widest label on the left/right and the tallest one above/below.
+        double labelWidth = _labelExtent.Width > 0.0 ? _labelExtent.Width + LabelGap + 2.0 : 10.0;
+        double labelHeight = _labelExtent.Height > 0.0 ? _labelExtent.Height + LabelGap + 2.0 : 10.0;
+        double availableHeight = Bounds.Height - topPad - bottomPad;
+
+        var center = new Point(Bounds.Width / 2.0, topPad + (availableHeight / 2.0));
+        double radius = Math.Max(10.0, Math.Min((Bounds.Width / 2.0) - labelWidth, (availableHeight / 2.0) - labelHeight));
         return (center, radius);
     }
 
@@ -426,21 +494,37 @@ public class LuminaRadarChart : Control
         }
     }
 
-    private void DrawLabels(DrawingContext context, Point center, double radius, int axes, IReadOnlyList<string> categories)
+    private List<FormattedText> BuildLabels(int axes, IReadOnlyList<string> categories)
     {
         IBrush labelBrush = AxisLabelBrush ?? Brushes.Gray;
         Typeface typeface = ChartDrawing.CreateTypeface(this);
-
-        for (int axis = 0; axis < axes; axis++)
+        var labels = new List<FormattedText>(Math.Min(axes, categories.Count));
+        for (int axis = 0; axis < axes && axis < categories.Count; axis++)
         {
-            if (axis >= categories.Count)
-            {
-                break;
-            }
+            labels.Add(ChartDrawing.CreateText(categories[axis] ?? string.Empty, typeface, labelBrush, 12.0));
+        }
 
-            Point p = PointOnRing(center, radius + 8.0, axis, axes);
-            FormattedText text = ChartDrawing.CreateText(categories[axis] ?? string.Empty, typeface, labelBrush, 12.0);
-            context.DrawText(text, new Point(p.X - (text.Width / 2.0), p.Y - (text.Height / 2.0)));
+        return labels;
+    }
+
+    private void DrawLabels(DrawingContext context, Point center, double radius, int axes, List<FormattedText> labels)
+    {
+        for (int axis = 0; axis < labels.Count; axis++)
+        {
+            FormattedText text = labels[axis];
+            Point anchor = PointOnRing(center, radius + LabelGap, axis, axes);
+            double dx = anchor.X - center.X;
+            double dy = anchor.Y - center.Y;
+            double length = Math.Max(1e-9, Math.Sqrt((dx * dx) + (dy * dy)));
+            double cos = dx / length;
+            double sin = dy / length;
+
+            // Grow away from the chart: labels on the right start at the anchor, labels on the
+            // left end there, and top/bottom labels sit above/below it, so long category names
+            // never run back over the grid.
+            double x = cos > 0.3 ? anchor.X : cos < -0.3 ? anchor.X - text.Width : anchor.X - (text.Width / 2.0);
+            double y = sin > 0.3 ? anchor.Y : sin < -0.3 ? anchor.Y - text.Height : anchor.Y - (text.Height / 2.0);
+            context.DrawText(text, new Point(x, y));
         }
     }
 
@@ -473,7 +557,7 @@ public class LuminaRadarChart : Control
             DrawClosedPolygon(context, fill, null, points);
         }
 
-        DrawClosedPolygon(context, null, new Pen(stroke, Math.Max(0.5, series.StrokeThickness)), points);
+        DrawClosedPolygon(context, null, new Pen(stroke, Math.Max(0.5, ChartDrawing.Finite(series.StrokeThickness, 1.5))), points);
     }
 
     private void DrawHover(
@@ -490,8 +574,8 @@ public class LuminaRadarChart : Control
             return;
         }
 
-        LuminaRadarSeries item = series[hover.Series];
-        IList<double>? values = item.Values;
+        LuminaRadarSeries? item = series[hover.Series];
+        IList<double>? values = item?.Values;
         if (item == null || values == null)
         {
             return;
@@ -529,12 +613,7 @@ public class LuminaRadarChart : Control
 
     private void DrawLegend(DrawingContext context)
     {
-        ChartDrawing.DrawLegend(
-            context,
-            _legendItems,
-            ChartDrawing.MeasureLegend(_legendItems),
-            LegendPosition,
-            Bounds.Size);
+        ChartDrawing.DrawLegend(context, _legendItems, LegendPosition, Bounds.Size);
     }
 
     /// <summary>Rebuilds <paramref name="target"/> with one entry per non-null series.</summary>
@@ -580,7 +659,7 @@ public class LuminaRadarChart : Control
             return null;
         }
 
-        double threshold = Math.Max(1.0, HoverThreshold);
+        double threshold = Math.Max(1.0, ChartDrawing.Finite(HoverThreshold, 20.0));
         double best = double.PositiveInfinity;
         (int, int)? bestHit = null;
         for (int s = 0; s < series.Count; s++)

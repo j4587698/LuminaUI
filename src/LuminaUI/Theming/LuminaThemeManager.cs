@@ -190,6 +190,9 @@ public static class LuminaThemeManager
         SetColor(resources, "LuminaPrimaryBg", palette.PrimaryBg);
         SetColor(resources, "LuminaNavigationPaneItemSelected", palette.NavigationItemSelected);
         SetColor(resources, "LuminaNavigationPaneItemSelectedForeground", palette.NavigationItemSelectedForeground);
+        // The keyboard focus ring is defined as "matches LuminaPrimary" in the theme
+        // dictionaries, so it has to follow the accent too.
+        SetColor(resources, "LuminaBorderFocus", palette.Primary);
 
         SetBrush(resources, "LuminaPrimaryBrush", palette.Primary);
         SetBrush(resources, "LuminaPrimaryHoverBrush", palette.PrimaryHover);
@@ -198,6 +201,7 @@ public static class LuminaThemeManager
         SetBrush(resources, "LuminaPrimaryBgBrush", palette.PrimaryBg);
         SetBrush(resources, "LuminaNavigationPaneItemSelectedBrush", palette.NavigationItemSelected);
         SetBrush(resources, "LuminaNavigationPaneItemSelectedForegroundBrush", palette.NavigationItemSelectedForeground);
+        SetBrush(resources, "LuminaBorderFocusBrush", palette.Primary);
     }
 
     private static void SetColor(IResourceDictionary resources, string key, Color color)

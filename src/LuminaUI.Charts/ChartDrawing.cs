@@ -38,9 +38,24 @@ internal static class ChartDrawing
         Color.FromRgb(0xEF, 0x44, 0x44)
     ];
 
+    /// <summary>Lumina semantic brushes backing <c>LuminaChartColor1..8</c>, in palette order.</summary>
+    private static readonly string[] PaletteFallbackKeys =
+    [
+        "LuminaPrimaryBrush",
+        "LuminaTealBrush",
+        "LuminaOrangeBrush",
+        "LuminaPinkBrush",
+        "LuminaIndigoBrush",
+        "LuminaSuccessBrush",
+        "LuminaWarningBrush",
+        "LuminaDangerBrush"
+    ];
+
     /// <summary>
-    /// Resolves <c>LuminaChartColor1..8</c> from the current theme, falling back to the built-in
-    /// palette when the Lumina theme is not loaded.
+    /// Resolves series color <paramref name="index"/>: an app-defined <c>LuminaChartColor1..8</c>
+    /// override first, then the matching Lumina semantic brush (theme-variant and accent aware,
+    /// looked up from <paramref name="owner"/>), then the built-in palette when no Lumina theme is
+    /// loaded.
     /// </summary>
     internal static IBrush ResolvePaletteBrush(Control owner, int index)
     {
@@ -50,10 +65,14 @@ internal static class ChartDrawing
             slot += DefaultPalette.Count;
         }
 
-        string key = "LuminaChartColor" + (slot + 1);
-        if (owner.TryFindResource(key, out object? value) && value is IBrush brush)
+        if (owner.TryFindResource("LuminaChartColor" + (slot + 1), owner.ActualThemeVariant, out object? value) && value is IBrush brush)
         {
             return brush;
+        }
+
+        if (owner.TryFindResource(PaletteFallbackKeys[slot], owner.ActualThemeVariant, out object? fallback) && fallback is IBrush fallbackBrush)
+        {
+            return fallbackBrush;
         }
 
         return new SolidColorBrush(DefaultPalette[slot]);
@@ -65,17 +84,35 @@ internal static class ChartDrawing
     }
 
     /// <summary>
+    /// Returns <paramref name="value"/> when it is a finite number, otherwise
+    /// <paramref name="fallback"/>. Model properties are plain doubles, and a NaN thickness or size
+    /// would otherwise flow through Math.Max/Clamp (which propagate NaN) into pens and rects.
+    /// </summary>
+    internal static double Finite(double value, double fallback) => double.IsFinite(value) ? value : fallback;
+
+    /// <summary>
+    /// Desired size of a custom-drawn chart. Charts have no content to size to, so in a finite
+    /// slot they ask for nothing and simply take what they are arranged into (unchanged
+    /// behaviour); along an unbounded axis (StackPanel, ScrollViewer, Auto row) they fall back to
+    /// a default instead of collapsing to zero.
+    /// </summary>
+    internal static Size MeasureChart(Size availableSize, double defaultWidth, double defaultHeight) =>
+        new(
+            double.IsInfinity(availableSize.Width) ? defaultWidth : 0.0,
+            double.IsInfinity(availableSize.Height) ? defaultHeight : 0.0);
+
+    /// <summary>
     /// The surface colour behind the plot, used to punch out marker centres and hover rings so
     /// they read as outlines instead of solid dots in both light and dark themes.
     /// </summary>
     internal static IBrush ResolveSurfaceBrush(Control owner)
     {
-        if (owner.TryFindResource("LuminaChartSurfaceBrush", out object? value) && value is IBrush brush)
+        if (owner.TryFindResource("LuminaChartSurfaceBrush", owner.ActualThemeVariant, out object? value) && value is IBrush brush)
         {
             return brush;
         }
 
-        if (owner.TryFindResource("LuminaSurfaceBrush", out object? fallback) && fallback is IBrush fallbackBrush)
+        if (owner.TryFindResource("LuminaSurfaceBrush", owner.ActualThemeVariant, out object? fallback) && fallback is IBrush fallbackBrush)
         {
             return fallbackBrush;
         }
@@ -121,30 +158,67 @@ internal static class ChartDrawing
         return Brushes.White;
     }
 
-    /// <summary>Total width of the legend items, including swatches and gaps.</summary>
-    internal static double MeasureLegend(IReadOnlyList<(FormattedText Text, IBrush Color)> items)
+    /// <summary>Width of a single legend entry: swatch, gap and label.</summary>
+    private static double MeasureLegendItem((FormattedText Text, IBrush Color) item) =>
+        LegendSwatchWidth + LegendSwatchGap + item.Text.Width;
+
+    /// <summary>
+    /// Splits the legend into rows that fit <paramref name="availableWidth"/>. Every row holds at
+    /// least one entry, so an entry wider than the chart still gets its own (clipped) row.
+    /// </summary>
+    private static List<(int Start, int Count, double Width)> LayoutLegendRows(
+        IReadOnlyList<(FormattedText Text, IBrush Color)> items,
+        double availableWidth)
     {
+        var rows = new List<(int Start, int Count, double Width)>();
+        int start = 0;
         double width = 0.0;
         for (int index = 0; index < items.Count; index++)
         {
-            if (index > 0)
+            double itemWidth = MeasureLegendItem(items[index]);
+            double next = index == start ? itemWidth : width + LegendItemGap + itemWidth;
+            if (index > start && next > availableWidth)
             {
-                width += LegendItemGap;
+                rows.Add((start, index - start, width));
+                start = index;
+                width = itemWidth;
             }
-
-            width += LegendSwatchWidth + LegendSwatchGap + items[index].Text.Width;
+            else
+            {
+                width = next;
+            }
         }
 
-        return width;
+        if (items.Count > start)
+        {
+            rows.Add((start, items.Count - start, width));
+        }
+
+        return rows;
+    }
+
+    private static double LegendAvailableWidth(Size bounds) => Math.Max(0.0, bounds.Width - 8.0);
+
+    /// <summary>
+    /// Height the legend band needs at the given chart size: one <see cref="LegendBandHeight"/>
+    /// per row, since long legends wrap instead of running off the edge.
+    /// </summary>
+    internal static double MeasureLegendHeight(IReadOnlyList<(FormattedText Text, IBrush Color)> items, Size bounds)
+    {
+        if (items.Count == 0)
+        {
+            return 0.0;
+        }
+
+        return LayoutLegendRows(items, LegendAvailableWidth(bounds)).Count * LegendBandHeight;
     }
 
     /// <summary>
     /// Bounds of the legend band for the given items. Callers use it to keep the tooltip out of the
-    /// legend's way; <see cref="DrawLegend"/> draws at exactly this rectangle.
+    /// legend's way; <see cref="DrawLegend"/> draws inside exactly this rectangle.
     /// </summary>
     internal static Rect ComputeLegendRect(
         IReadOnlyList<(FormattedText Text, IBrush Color)> items,
-        double contentWidth,
         LuminaChartLegendPosition position,
         Size bounds)
     {
@@ -153,34 +227,46 @@ internal static class ChartDrawing
             return default;
         }
 
-        if (contentWidth > bounds.Width - 8.0)
+        List<(int Start, int Count, double Width)> rows = LayoutLegendRows(items, LegendAvailableWidth(bounds));
+        double widest = 0.0;
+        foreach (var row in rows)
         {
-            contentWidth = bounds.Width - 8.0;
+            widest = Math.Max(widest, Math.Min(row.Width, LegendAvailableWidth(bounds)));
         }
 
-        double x = position switch
+        double x = AlignLegendRow(widest, position, bounds);
+        double y = LegendTop(rows.Count, position, bounds);
+        double height = ((rows.Count - 1) * LegendBandHeight) + LegendFontSize;
+        return new Rect(x, y, widest, height);
+    }
+
+    private static double AlignLegendRow(double rowWidth, LuminaChartLegendPosition position, Size bounds)
+    {
+        rowWidth = Math.Min(rowWidth, LegendAvailableWidth(bounds));
+        return position switch
         {
             LuminaChartLegendPosition.TopLeft or LuminaChartLegendPosition.BottomLeft => 4.0,
             LuminaChartLegendPosition.TopCenter or LuminaChartLegendPosition.BottomCenter
-                => Math.Max(0.0, (bounds.Width - contentWidth) / 2.0),
-            _ => Math.Max(0.0, bounds.Width - contentWidth - 4.0)
+                => Math.Max(0.0, (bounds.Width - rowWidth) / 2.0),
+            _ => Math.Max(0.0, bounds.Width - rowWidth - 4.0)
         };
+    }
 
+    /// <summary>Text top of the first legend row.</summary>
+    private static double LegendTop(int rowCount, LuminaChartLegendPosition position, Size bounds)
+    {
         bool isTop = position is LuminaChartLegendPosition.TopLeft
             or LuminaChartLegendPosition.TopCenter
             or LuminaChartLegendPosition.TopRight;
-
-        double cursorY = isTop
-            ? 2.0 + ((LegendBandHeight - LegendFontSize) / 2.0)
-            : bounds.Height - LegendBandHeight - 2.0 + ((LegendBandHeight - LegendFontSize) / 2.0);
-
-        return new Rect(x, cursorY, contentWidth, LegendFontSize);
+        double inset = (LegendBandHeight - LegendFontSize) / 2.0;
+        return isTop
+            ? 2.0 + inset
+            : bounds.Height - (rowCount * LegendBandHeight) - 2.0 + inset;
     }
 
     internal static void DrawLegend(
         DrawingContext context,
         IReadOnlyList<(FormattedText Text, IBrush Color)> items,
-        double contentWidth,
         LuminaChartLegendPosition position,
         Size bounds)
     {
@@ -189,20 +275,26 @@ internal static class ChartDrawing
             return;
         }
 
-        Rect band = ComputeLegendRect(items, contentWidth, position, bounds);
-        double cursorX = band.X;
-        double cursorY = band.Y;
-        foreach ((FormattedText text, IBrush color) in items)
+        List<(int Start, int Count, double Width)> rows = LayoutLegendRows(items, LegendAvailableWidth(bounds));
+        double cursorY = LegendTop(rows.Count, position, bounds);
+        foreach (var row in rows)
         {
-            var swatchRect = new Rect(
-                cursorX,
-                cursorY + ((LegendFontSize - LegendSwatchHeight) / 2.0),
-                LegendSwatchWidth,
-                LegendSwatchHeight);
-            context.DrawRectangle(color, null, swatchRect, 1.5, 1.5);
-            cursorX += LegendSwatchWidth + LegendSwatchGap;
-            context.DrawText(text, new Point(cursorX, cursorY));
-            cursorX += text.Width + LegendItemGap;
+            double cursorX = AlignLegendRow(row.Width, position, bounds);
+            for (int index = row.Start; index < row.Start + row.Count; index++)
+            {
+                (FormattedText text, IBrush color) = items[index];
+                var swatchRect = new Rect(
+                    cursorX,
+                    cursorY + ((LegendFontSize - LegendSwatchHeight) / 2.0),
+                    LegendSwatchWidth,
+                    LegendSwatchHeight);
+                context.DrawRectangle(color, null, swatchRect, 1.5, 1.5);
+                cursorX += LegendSwatchWidth + LegendSwatchGap;
+                context.DrawText(text, new Point(cursorX, cursorY));
+                cursorX += text.Width + LegendItemGap;
+            }
+
+            cursorY += LegendBandHeight;
         }
     }
 
@@ -266,9 +358,14 @@ internal static class ChartDrawing
     /// </summary>
     internal static IPen ResolveTooltipBorderPen(Control owner, double thickness = 1.0)
     {
-        if (owner.TryFindResource("LuminaChartTooltipBorderBrush", out object? value) && value is IBrush brush)
+        if (owner.TryFindResource("LuminaChartTooltipBorderBrush", owner.ActualThemeVariant, out object? value) && value is IBrush brush)
         {
             return new Pen(brush, thickness);
+        }
+
+        if (owner.TryFindResource("LuminaBorderStrongBrush", owner.ActualThemeVariant, out object? fallback) && fallback is IBrush fallbackBrush)
+        {
+            return new Pen(fallbackBrush, thickness);
         }
 
         return new Pen(new SolidColorBrush(Color.FromArgb(0x33, 0x00, 0x00, 0x00)), thickness);

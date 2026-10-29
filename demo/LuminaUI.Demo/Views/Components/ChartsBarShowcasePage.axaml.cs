@@ -14,8 +14,18 @@ public partial class ChartsBarShowcasePage : LuminaPage
         InitializeComponent();
         Chart.XAxis.Kind = LuminaChartAxisKind.Category;
         Chart.XAxis.Categories = BuildMonthLabels();
-        LuminaLocalization.LanguageChanged += OnLanguageChanged;
+        // LanguageChanged is static, so it is only held while the page is shown. Pages are
+        // cached and re-loaded, hence Loaded/Unloaded rather than constructor/Unloaded.
+        Loaded += OnLoaded;
         Unloaded += OnUnloaded;
+    }
+
+    private void OnLoaded(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        LuminaLocalization.LanguageChanged -= OnLanguageChanged;
+        LuminaLocalization.LanguageChanged += OnLanguageChanged;
+        // The language may have changed while the page was cached off-screen.
+        Chart.XAxis.Categories = BuildMonthLabels();
     }
 
     private void OnLanguageChanged(object? sender, System.EventArgs e)
@@ -26,7 +36,6 @@ public partial class ChartsBarShowcasePage : LuminaPage
     private void OnUnloaded(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         LuminaLocalization.LanguageChanged -= OnLanguageChanged;
-        Unloaded -= OnUnloaded;
     }
 
     private static IReadOnlyList<string> BuildMonthLabels()

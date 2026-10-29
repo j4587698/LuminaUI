@@ -36,7 +36,7 @@ public class LuminaLineChart : Control
     private const double TooltipCornerRadius = 6.0;
     private const double TooltipPadding = 8.0;
     private const int SubsetMarkersLimit = 600;
-    private const double LegendBandHeight = ChartDrawing.LegendBandHeight;
+    private const int MaxTickCount = 200;
     private const double LegendBandGap = ChartDrawing.LegendBandGap;
     private static readonly DashStyle CrosshairDashStyle = new([4.0, 3.0], 0.0);
 
@@ -49,7 +49,8 @@ public class LuminaLineChart : Control
     private readonly List<BarHighlight> _barHighlights = new();
     private readonly List<OverlayMatch> _scatterHighlights = new();
     private readonly List<(FormattedText Text, IBrush Color)> _cachedLegendItems = new();
-    private double _cachedLegendContentWidth;
+    private double _cachedLegendHeight;
+    private double _areaBaseline;
     private readonly Stopwatch _buildStopwatch = new();
     private readonly Stopwatch _renderStopwatch = new();
 
@@ -62,6 +63,8 @@ public class LuminaLineChart : Control
 
     private DrawingGroup? _cachedStaticDrawing;
     private Pen? _cachedCrosshairPen;
+    private IPen? _cachedTooltipBorderPen;
+    private IBrush? _cachedSurfaceBrush;
     private readonly List<FormattedText> _cachedTooltipLines = new();
     private readonly List<(LuminaChartSeries Series, double X, double Y)> _cachedTooltipMatches = new();
     private Size _cachedTooltipSize;
@@ -70,8 +73,11 @@ public class LuminaLineChart : Control
     private LuminaChartAxis _yAxis = new();
 
     private INotifyCollectionChanged? _seriesSubscription;
+    private INotifyCollectionChanged? _categoriesSubscription;
     private HashSet<INotifyCollectionChanged> _pointsSubscriptions = new();
     private HashSet<LuminaChartSeries> _seriesItemSubscriptions = new();
+    private HashSet<INotifyCollectionChanged> _spareDesiredPoints = new();
+    private HashSet<LuminaChartSeries> _spareDesiredSeries = new();
     private DispatcherTimer? _transitionTimer;
     private readonly Stopwatch _transitionSw = new();
     private List<(Point[]? Line, Point[]? Area, Point[]? Raw)>? _transitionPrev;
@@ -81,6 +87,7 @@ public class LuminaLineChart : Control
     private AxisScale _yScale;
     private Rect _plotRect;
     private Point? _hoverPosition;
+    private bool _isAttached;
     private bool _isDirty = true;
     private Size _lastLayoutSize;
     private bool _rebuildDueToDataChange;
@@ -160,6 +167,11 @@ public class LuminaLineChart : Control
         VerticalGridLineCountProperty,
         AxisLabelBrushProperty,
         AxisLabelFontSizeProperty,
+        // Axis labels and legend entries are pre-built FormattedText instances, so anything that
+        // feeds them (visibility, brush, font) needs a rebuild rather than a plain repaint.
+        ShowAxisLabelsProperty,
+        LegendTextBrushProperty,
+        TextElement.FontFamilyProperty,
         DecimationThresholdProperty,
         ShowLegendProperty,
         LegendPositionProperty,
@@ -169,7 +181,6 @@ public class LuminaLineChart : Control
     private static readonly HashSet<AvaloniaProperty> InvalidateOnlyProperties = new()
     {
         ShowGridLinesProperty,
-        ShowAxisLabelsProperty,
         GridLineThicknessProperty,
         GridLineBrushProperty,
         EnableCrosshairProperty,
@@ -177,8 +188,7 @@ public class LuminaLineChart : Control
         TooltipBackgroundBrushProperty,
         TooltipTextBrushProperty,
         HoverThresholdProperty,
-        TransitionDurationProperty,
-        LegendTextBrushProperty
+        TransitionDurationProperty
     };
 
     public LuminaLineChart()
@@ -187,9 +197,13 @@ public class LuminaLineChart : Control
         SetValue(SeriesProperty, new List<LuminaChartSeries>());
         SetValue(XAxisProperty, _xAxis);
         SetValue(YAxisProperty, _yAxis);
-        _xAxis.PropertyChanged += OnAxisChanged;
-        _yAxis.PropertyChanged += OnAxisChanged;
+        // Axis, series and point subscriptions are only held while the chart is attached to a
+        // visual tree (see OnAttachedToVisualTree); a detached chart must not be kept alive by
+        // long-lived view models.
         ResourcesChanged += OnResourcesChanged;
+        // A theme variant switch does not raise ResourcesChanged, but palette colors, translucent
+        // area fills and label brushes are all resolved from theme resources.
+        ActualThemeVariantChanged += OnActualThemeVariantChanged;
         _labelTypeface = ChartDrawing.CreateTypeface(this);
     }
 
@@ -205,6 +219,54 @@ public class LuminaLineChart : Control
 
     private void OnAxisChanged(object? sender, PropertyChangedEventArgs e)
     {
+        if (!Dispatcher.UIThread.CheckAccess())
+        {
+            Dispatcher.UIThread.Post(() => OnAxisChanged(sender, e));
+            return;
+        }
+
+        if (e.PropertyName is null or nameof(LuminaChartAxis.Categories))
+        {
+            SyncCategorySubscription();
+        }
+
+        _isDirty = true;
+        InvalidateTooltipCache();
+        InvalidateVisual();
+    }
+
+    /// <summary>
+    /// Follows an observable <see cref="LuminaChartAxis.Categories"/> list on the X axis, so
+    /// adding or renaming categories in place relabels the axis.
+    /// </summary>
+    private void SyncCategorySubscription()
+    {
+        INotifyCollectionChanged? desired = _isAttached ? _xAxis.Categories as INotifyCollectionChanged : null;
+        if (ReferenceEquals(desired, _categoriesSubscription))
+        {
+            return;
+        }
+
+        if (_categoriesSubscription != null)
+        {
+            _categoriesSubscription.CollectionChanged -= OnCategoriesChanged;
+        }
+
+        _categoriesSubscription = desired;
+        if (_categoriesSubscription != null)
+        {
+            _categoriesSubscription.CollectionChanged += OnCategoriesChanged;
+        }
+    }
+
+    private void OnCategoriesChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        if (!Dispatcher.UIThread.CheckAccess())
+        {
+            Dispatcher.UIThread.Post(() => OnCategoriesChanged(sender, e));
+            return;
+        }
+
         _isDirty = true;
         InvalidateTooltipCache();
         InvalidateVisual();
@@ -217,6 +279,16 @@ public class LuminaLineChart : Control
         _cachedTooltipSize = default;
     }
 
+    /// <summary>
+    /// Gets or sets the series to draw. Observable lists (and observable <c>Points</c>
+    /// collections) are tracked while the chart is in the visual tree.
+    /// </summary>
+    /// <remarks>
+    /// Mutate the series, their points and the axes on the UI thread. Change notifications raised
+    /// on another thread are marshalled to the UI thread, but the collections themselves are read
+    /// during rendering, so modifying them concurrently from a worker thread can still tear a
+    /// frame. Batch updates off-thread and apply them through <c>Dispatcher.UIThread.Post</c>.
+    /// </remarks>
     public IList<LuminaChartSeries>? Series
     {
         get => GetValue(SeriesProperty);
@@ -366,6 +438,10 @@ public class LuminaLineChart : Control
     /// </summary>
     public double LastRenderMilliseconds => _lastRenderMilliseconds;
 
+    /// <inheritdoc />
+    protected override Size MeasureOverride(Size availableSize) =>
+        ChartDrawing.MeasureChart(availableSize, 320.0, 200.0);
+
     public override void Render(DrawingContext context)
     {
         base.Render(context);
@@ -380,81 +456,90 @@ public class LuminaLineChart : Control
 
         try
         {
-        bool didRebuild = false;
-        if (_isDirty)
-        {
-            didRebuild = true;
-            bool wantTransition = _rebuildDueToDataChange && TransitionDuration > 0.0;
-            _transitionPrev = wantTransition ? CaptureTransitionPoints() : _transitionPrev is { Count: > 0 } ? _transitionPrev : null;
+            // An invisible full-bounds background keeps the whole chart hit-testable, so the
+            // crosshair tracks the pointer over empty plot space and not just over painted pixels.
+            context.FillRectangle(Brushes.Transparent, new Rect(Bounds.Size));
 
-            Rebuild();
-            if (_renderSeries.Count == 0)
+            bool didRebuild = false;
+            if (_isDirty)
             {
-                _inTransition = false;
-                StopTransitionTimer();
-                _renderStopwatch.Stop();
-                _lastRenderMilliseconds = _renderStopwatch.Elapsed.TotalMilliseconds;
-                RenderCompleted?.Invoke(this, EventArgs.Empty);
-                return;
+                didRebuild = true;
+                bool wantTransition = _rebuildDueToDataChange && TransitionDuration > 0.0;
+                _transitionPrev = wantTransition ? CaptureTransitionPoints() : null;
+
+                Rebuild();
+                if (_renderSeries.Count == 0)
+                {
+                    // Nothing to draw. Clear the dirty flag anyway so pointer moves over an empty
+                    // chart do not re-scan every series on each frame; data/size changes set it again.
+                    _isDirty = false;
+                    _rebuildDueToDataChange = false;
+                    _inTransition = false;
+                    _transitionPrev = null;
+                    StopTransitionTimer();
+                    _renderStopwatch.Stop();
+                    _lastRenderMilliseconds = _renderStopwatch.Elapsed.TotalMilliseconds;
+                    RenderCompleted?.Invoke(this, EventArgs.Empty);
+                    return;
+                }
+
+                if (wantTransition && _transitionPrev is { Count: > 0 })
+                {
+                    _inTransition = true;
+                    _transitionT = 0.0;
+                    _transitionSw.Restart();
+                    EnsureTransitionTimer();
+                }
+                else
+                {
+                    _inTransition = false;
+                    _transitionPrev = null;
+                    StopTransitionTimer();
+                }
+
+                _rebuildDueToDataChange = false;
+                _isDirty = false;
             }
 
-            if (wantTransition && _transitionPrev is { Count: > 0 })
+            if (_inTransition)
             {
-                _inTransition = true;
-                _transitionT = 0.0;
-                _transitionSw.Restart();
-                EnsureTransitionTimer();
+                DrawStaticLayer(context);
             }
             else
             {
-                _inTransition = false;
-                _transitionPrev = null;
-                StopTransitionTimer();
-            }
-
-            _rebuildDueToDataChange = false;
-            _isDirty = false;
-        }
-
-        if (_inTransition)
-        {
-            DrawStaticLayer(context);
-        }
-        else
-        {
-            if (_cachedStaticDrawing == null)
-            {
-                var staticDrawing = new DrawingGroup();
-                using (DrawingContext staticContext = staticDrawing.Open())
+                if (_cachedStaticDrawing == null)
                 {
-                    DrawStaticLayer(staticContext);
+                    var staticDrawing = new DrawingGroup();
+                    using (DrawingContext staticContext = staticDrawing.Open())
+                    {
+                        DrawStaticLayer(staticContext);
+                    }
+
+                    _cachedStaticDrawing = staticDrawing;
                 }
 
-                _cachedStaticDrawing = staticDrawing;
+                _cachedStaticDrawing.Draw(context);
             }
 
-            _cachedStaticDrawing.Draw(context);
-        }
+            if (_hoverPosition is { } hover)
+            {
+                DrawOverlay(context, hover);
+            }
 
-        if (_hoverPosition is { } hover)
-        {
-            DrawOverlay(context, hover);
-        }
+            // The legend stays above the hover overlay so tooltips never cover it.
+            if (ShowLegend && _renderSeries.Count > 0)
+            {
+                DrawLegend(context);
+            }
 
-        // The legend stays above the hover overlay so tooltips never cover it.
-        if (ShowLegend && _renderSeries.Count > 0)
-        {
-            DrawLegend(context);
-        }
+            _renderStopwatch.Stop();
+            _lastRenderMilliseconds = _renderStopwatch.Elapsed.TotalMilliseconds;
+            if (!didRebuild)
+            {
+                _lastMoveRenderMilliseconds = _lastRenderMilliseconds;
+            }
 
-        _renderStopwatch.Stop();
-        _lastRenderMilliseconds = _renderStopwatch.Elapsed.TotalMilliseconds;
-        if (!didRebuild)
-        {
-            _lastMoveRenderMilliseconds = _lastRenderMilliseconds;
-        }
-
-        RenderCompleted?.Invoke(this, EventArgs.Empty);
+            RenderCompleted?.Invoke(this, EventArgs.Empty);
         }
         catch (Exception exception)
         {
@@ -468,13 +553,28 @@ public class LuminaLineChart : Control
     protected override void OnPointerMoved(PointerEventArgs e)
     {
         base.OnPointerMoved(e);
+        UpdateHover(e.GetPosition(this));
+    }
+
+    protected override void OnPointerPressed(PointerPressedEventArgs e)
+    {
+        base.OnPointerPressed(e);
+        // Touch and pen produce no move events before the press, so a tap has to place the
+        // crosshair by itself.
+        if (e.Pointer.Type != PointerType.Mouse)
+        {
+            UpdateHover(e.GetPosition(this));
+        }
+    }
+
+    private void UpdateHover(Point position)
+    {
         if (!EnableCrosshair)
         {
             return;
         }
 
-        Point position = e.GetPosition(this);
-        double threshold = Math.Max(1.0, HoverThreshold);
+        double threshold = Math.Max(1.0, ChartDrawing.Finite(HoverThreshold, 28.0));
         Rect activeArea = _plotRect.Inflate(threshold);
         if (!activeArea.Contains(position))
         {
@@ -498,6 +598,12 @@ public class LuminaLineChart : Control
     protected override void OnPointerExited(PointerEventArgs e)
     {
         base.OnPointerExited(e);
+        // A lifted finger "exits" right after the tap; keep the tooltip until the next tap.
+        if (e.Pointer.Type == PointerType.Touch)
+        {
+            return;
+        }
+
         if (_hoverPosition != null)
         {
             _hoverPosition = null;
@@ -509,12 +615,14 @@ public class LuminaLineChart : Control
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
+        _isAttached = true;
         _xAxis.PropertyChanged -= OnAxisChanged;
         _xAxis.PropertyChanged += OnAxisChanged;
         _yAxis.PropertyChanged -= OnAxisChanged;
         _yAxis.PropertyChanged += OnAxisChanged;
 
-        UpdateSeriesSubscription(null, Series);
+        UpdateSeriesSubscription(Series);
+        SyncCategorySubscription();
         _isDirty = true;
         InvalidateVisual();
     }
@@ -522,23 +630,19 @@ public class LuminaLineChart : Control
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
+        _isAttached = false;
         StopTransitionTimer();
+        _inTransition = false;
+        _transitionPrev = null;
+        _hoverPosition = null;
         _cachedStaticDrawing = null;
         InvalidateTooltipCache();
         _cachedCrosshairPen = null;
-        if (_seriesSubscription != null)
-        {
-            _seriesSubscription.CollectionChanged -= OnSeriesCollectionChanged;
-            _seriesSubscription = null;
-        }
 
-        foreach (INotifyCollectionChanged sub in _pointsSubscriptions)
-        {
-            sub.CollectionChanged -= OnPointsCollectionChanged;
-        }
-
-        _pointsSubscriptions.Clear();
-
+        // Release every subscription so the series/axis objects (usually owned by a long-lived
+        // view model) no longer reference this control. They are rebuilt on re-attach.
+        UpdateSeriesSubscription(null);
+        SyncCategorySubscription();
         _xAxis.PropertyChanged -= OnAxisChanged;
         _yAxis.PropertyChanged -= OnAxisChanged;
     }
@@ -548,22 +652,14 @@ public class LuminaLineChart : Control
         base.OnPropertyChanged(change);
         if (change.Property == SeriesProperty)
         {
-            UpdateSeriesSubscription(change.GetOldValue<IList<LuminaChartSeries>?>(), change.GetNewValue<IList<LuminaChartSeries>?>());
+            UpdateSeriesSubscription(change.GetNewValue<IList<LuminaChartSeries>?>());
             _rebuildDueToDataChange = true;
             _cachedStaticDrawing = null;
         }
         else if (change.Property == XAxisProperty)
         {
-            var oldAxis = change.GetOldValue<LuminaChartAxis>();
-            var newAxis = change.GetNewValue<LuminaChartAxis>() ?? new LuminaChartAxis();
-            if (oldAxis != null && !ReferenceEquals(oldAxis, newAxis))
-            {
-                oldAxis.PropertyChanged -= OnAxisChanged;
-            }
-
-            _xAxis = newAxis;
-            _xAxis.PropertyChanged -= OnAxisChanged;
-            _xAxis.PropertyChanged += OnAxisChanged;
+            _xAxis = SwapAxis(change.GetOldValue<LuminaChartAxis>(), change.GetNewValue<LuminaChartAxis>());
+            SyncCategorySubscription();
             _cachedStaticDrawing = null;
             InvalidateTooltipCache();
             _isDirty = true;
@@ -571,16 +667,7 @@ public class LuminaLineChart : Control
         }
         else if (change.Property == YAxisProperty)
         {
-            var oldAxis = change.GetOldValue<LuminaChartAxis>();
-            var newAxis = change.GetNewValue<LuminaChartAxis>() ?? new LuminaChartAxis();
-            if (oldAxis != null && !ReferenceEquals(oldAxis, newAxis))
-            {
-                oldAxis.PropertyChanged -= OnAxisChanged;
-            }
-
-            _yAxis = newAxis;
-            _yAxis.PropertyChanged -= OnAxisChanged;
-            _yAxis.PropertyChanged += OnAxisChanged;
+            _yAxis = SwapAxis(change.GetOldValue<LuminaChartAxis>(), change.GetNewValue<LuminaChartAxis>());
             _cachedStaticDrawing = null;
             InvalidateTooltipCache();
             _isDirty = true;
@@ -593,12 +680,13 @@ public class LuminaLineChart : Control
             var newSize = new Size(bounds.Width, bounds.Height);
             if (_lastLayoutSize != newSize)
             {
+                // Everything is drawn in local coordinates, so a pure move (same size) keeps the
+                // cached static layer; only a resize has to rebuild it.
                 _lastLayoutSize = newSize;
                 _isDirty = true;
+                _cachedStaticDrawing = null;
+                InvalidateVisual();
             }
-
-            _cachedStaticDrawing = null;
-            InvalidateVisual();
         }
         else if (RebuildProperties.Contains(change.Property))
         {
@@ -617,15 +705,55 @@ public class LuminaLineChart : Control
 
     private void OnResourcesChanged(object? sender, ResourcesChangedEventArgs e)
     {
+        InvalidateThemeDependentState();
+    }
+
+    private void OnActualThemeVariantChanged(object? sender, EventArgs e)
+    {
+        InvalidateThemeDependentState();
+    }
+
+    private void InvalidateThemeDependentState()
+    {
         _cachedStaticDrawing = null;
         InvalidateTooltipCache();
         _cachedCrosshairPen = null;
+        _cachedTooltipBorderPen = null;
+        _cachedSurfaceBrush = null;
         _isDirty = true;
         InvalidateVisual();
     }
 
+    /// <summary>Theme surface brush, resolved once per theme instead of on every hover frame.</summary>
+    private IBrush SurfaceBrush => _cachedSurfaceBrush ??= ChartDrawing.ResolveSurfaceBrush(this);
+
+    private IPen TooltipBorderPen => _cachedTooltipBorderPen ??= ChartDrawing.ResolveTooltipBorderPen(this);
+
+    private LuminaChartAxis SwapAxis(LuminaChartAxis? oldAxis, LuminaChartAxis? newAxis)
+    {
+        newAxis ??= new LuminaChartAxis();
+        if (oldAxis != null)
+        {
+            oldAxis.PropertyChanged -= OnAxisChanged;
+        }
+
+        newAxis.PropertyChanged -= OnAxisChanged;
+        if (_isAttached)
+        {
+            newAxis.PropertyChanged += OnAxisChanged;
+        }
+
+        return newAxis;
+    }
+
     private void OnSeriesCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
+        if (!Dispatcher.UIThread.CheckAccess())
+        {
+            Dispatcher.UIThread.Post(() => OnSeriesCollectionChanged(sender, e));
+            return;
+        }
+
         _rebuildDueToDataChange = true;
         _isDirty = true;
         SyncDataSubscriptions();
@@ -634,6 +762,12 @@ public class LuminaLineChart : Control
 
     private void OnPointsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
+        if (!Dispatcher.UIThread.CheckAccess())
+        {
+            Dispatcher.UIThread.Post(() => OnPointsCollectionChanged(sender, e));
+            return;
+        }
+
         _rebuildDueToDataChange = true;
         _isDirty = true;
         InvalidateVisual();
@@ -641,6 +775,12 @@ public class LuminaLineChart : Control
 
     private void OnSeriesItemPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
+        if (!Dispatcher.UIThread.CheckAccess())
+        {
+            Dispatcher.UIThread.Post(() => OnSeriesItemPropertyChanged(sender, e));
+            return;
+        }
+
         // Only geometry-affecting changes need the transition animation; style-only changes
         // (color, thickness, title) still rebuild, they just skip the morph.
         if (string.IsNullOrEmpty(e.PropertyName) || e.PropertyName == nameof(LuminaChartSeries.Points))
@@ -658,7 +798,7 @@ public class LuminaLineChart : Control
         InvalidateVisual();
     }
 
-    private void UpdateSeriesSubscription(IList<LuminaChartSeries>? old, IList<LuminaChartSeries>? next)
+    private void UpdateSeriesSubscription(IList<LuminaChartSeries>? next)
     {
         if (_seriesSubscription != null)
         {
@@ -666,7 +806,7 @@ public class LuminaLineChart : Control
             _seriesSubscription = null;
         }
 
-        if (next is INotifyCollectionChanged nextObservable)
+        if (_isAttached && next is INotifyCollectionChanged nextObservable)
         {
             _seriesSubscription = nextObservable;
             _seriesSubscription.CollectionChanged += OnSeriesCollectionChanged;
@@ -678,13 +818,20 @@ public class LuminaLineChart : Control
     /// <summary>
     /// Keeps change subscriptions in sync with the current series list: one subscription per
     /// observable <c>Points</c> collection and one per series object, so both in-place point
-    /// edits and series property edits (color, thickness, title) repaint the chart.
+    /// edits and series property edits (color, thickness, title) repaint the chart. While the
+    /// chart is detached the desired set is empty, which releases every subscription.
     /// </summary>
     private void SyncDataSubscriptions()
     {
-        var desiredPoints = new HashSet<INotifyCollectionChanged>();
-        var desiredSeries = new HashSet<LuminaChartSeries>();
-        IList<LuminaChartSeries>? series = Series;
+        // Double-buffered: the previous "current" sets become the next scratch sets, so a
+        // rebuild per live-data tick does not allocate.
+        HashSet<INotifyCollectionChanged> desiredPoints = _spareDesiredPoints;
+        HashSet<LuminaChartSeries> desiredSeries = _spareDesiredSeries;
+        HashSet<INotifyCollectionChanged> stalePoints = _pointsSubscriptions;
+        HashSet<LuminaChartSeries> staleSeries = _seriesItemSubscriptions;
+        desiredPoints.Clear();
+        desiredSeries.Clear();
+        IList<LuminaChartSeries>? series = _isAttached ? Series : null;
         if (series != null)
         {
             foreach (LuminaChartSeries item in series)
@@ -736,6 +883,10 @@ public class LuminaLineChart : Control
 
         _pointsSubscriptions = desiredPoints;
         _seriesItemSubscriptions = desiredSeries;
+        stalePoints.Clear();
+        staleSeries.Clear();
+        _spareDesiredPoints = stalePoints;
+        _spareDesiredSeries = staleSeries;
     }
 
     private void EnsureTransitionTimer()
@@ -876,6 +1027,9 @@ public class LuminaLineChart : Control
         (_xScale, _yScale) = ComputeScales(visible, Math.Max(1, VerticalGridLineCount), Math.Max(1, HorizontalGridLineCount));
 
         BuildTickLabels();
+        // The legend wraps onto as many rows as it needs, so it is built before the plot rect,
+        // which reserves its height.
+        BuildLegendCache(visible);
 
         Rect plotRect = ComputePlotRect();
         if (plotRect.Width <= 0.0 || plotRect.Height <= 0.0)
@@ -884,6 +1038,12 @@ public class LuminaLineChart : Control
         }
 
         _plotRect = plotRect;
+        // Areas fill towards y = 0 when zero is in range (and towards the nearer plot edge
+        // otherwise), so negative values hang below the axis instead of filling to the bottom.
+        _areaBaseline = Math.Clamp(
+            MapY(Math.Clamp(0.0, _yScale.Min, _yScale.Max), _plotRect, _yScale),
+            _plotRect.Top,
+            _plotRect.Bottom);
         int barGroupCount = 0;
         foreach (LuminaChartSeries item in visible)
         {
@@ -894,9 +1054,10 @@ public class LuminaLineChart : Control
         }
 
         int barGroupIndex = 0;
+        double barSlot = barGroupCount > 0 ? ComputeSharedBarSlot(visible) : 0.0;
         for (int index = 0; index < visible.Count; index++)
         {
-            RenderSeries? render = BuildRenderSeries(visible[index], index, barGroupIndex, barGroupCount);
+            RenderSeries? render = BuildRenderSeries(visible[index], index, barGroupIndex, barGroupCount, barSlot);
             if (render != null)
             {
                 _renderSeries.Add(render);
@@ -906,15 +1067,13 @@ public class LuminaLineChart : Control
                 }
             }
         }
-
-        BuildLegendCache();
     }
 
-    private void BuildLegendCache()
+    private void BuildLegendCache(List<LuminaChartSeries> visible)
     {
         _cachedLegendItems.Clear();
-        _cachedLegendContentWidth = 0.0;
-        if (!ShowLegend || _renderSeries.Count == 0)
+        _cachedLegendHeight = 0.0;
+        if (!ShowLegend || visible.Count == 0)
         {
             return;
         }
@@ -922,17 +1081,18 @@ public class LuminaLineChart : Control
         IBrush textBrush = LegendTextBrush ?? AxisLabelBrush ?? Brushes.Gray;
         double fontSize = ChartDrawing.LegendFontSize;
 
-        for (int index = 0; index < _renderSeries.Count; index++)
+        for (int index = 0; index < visible.Count; index++)
         {
-            RenderSeries render = _renderSeries[index];
-            string title = string.IsNullOrEmpty(render.Source.Title)
+            LuminaChartSeries source = visible[index];
+            string title = string.IsNullOrEmpty(source.Title)
                 ? $"S{index + 1}"
-                : render.Source.Title!;
+                : source.Title!;
             FormattedText text = ChartDrawing.CreateText(title, _labelTypeface, textBrush, fontSize);
-            _cachedLegendItems.Add((text, render.Stroke));
+            // Same color resolution as BuildRenderSeries, which uses the visible index too.
+            _cachedLegendItems.Add((text, source.Stroke ?? ChartDrawing.ResolvePaletteBrush(this, index)));
         }
 
-        _cachedLegendContentWidth = ChartDrawing.MeasureLegend(_cachedLegendItems);
+        _cachedLegendHeight = ChartDrawing.MeasureLegendHeight(_cachedLegendItems, Bounds.Size);
     }
 
     private void BuildTickLabels()
@@ -940,57 +1100,123 @@ public class LuminaLineChart : Control
         _labelTypeface = ChartDrawing.CreateTypeface(this);
         IBrush labelBrush = AxisLabelBrush ?? Brushes.Gray;
         double fontSize = AxisLabelFontSize;
+        bool showLabels = ShowAxisLabels;
 
-        if (_yScale.Step > 0.0 && double.IsFinite(_yScale.Step))
+        GenerateNumericTicks(_yScale, _yTickValues);
+        if (showLabels)
         {
-            for (double y = TickStart(_yScale.Min, _yScale.Step); y <= _yScale.Max + 1e-9; y += _yScale.Step)
+            foreach (double y in _yTickValues)
             {
-                _yTickValues.Add(y);
-                if (ShowAxisLabels)
-                {
-                    string text = _yAxis.LabelFormatter?.Invoke(y) ?? FormatTick(y, _yScale.Step);
-                    _yTickLabels.Add(ChartDrawing.CreateText(text, _labelTypeface, labelBrush, fontSize));
-                }
+                string text = _yAxis.LabelFormatter?.Invoke(y) ?? FormatTick(y, _yScale.Step);
+                _yTickLabels.Add(ChartDrawing.CreateText(text, _labelTypeface, labelBrush, fontSize));
             }
         }
 
-        if (_xScale.Step > 0.0 && double.IsFinite(_xScale.Step))
+        if (_xAxis.Kind == LuminaChartAxisKind.Category)
         {
-            if (_xAxis.Kind == LuminaChartAxisKind.Category)
+            GenerateCategoryTicks(_xScale, _xTickValues);
+            if (showLabels)
             {
-                int step = Math.Max(1, (int)Math.Round(_xScale.Step));
-                int start = (int)Math.Max(0, Math.Ceiling(_xScale.Min));
-                int end = (int)Math.Floor(_xScale.Max);
-                for (int i = start; i <= end; i += step)
+                foreach (double x in _xTickValues)
                 {
-                    _xTickValues.Add(i);
-                    if (ShowAxisLabels)
-                    {
-                        string text = FormatCategoryLabel(i);
-                        _xTickLabels.Add(ChartDrawing.CreateText(text, _labelTypeface, labelBrush, fontSize));
-                    }
+                    string text = FormatCategoryLabel((long)x);
+                    _xTickLabels.Add(ChartDrawing.CreateText(text, _labelTypeface, labelBrush, fontSize));
                 }
             }
-            else
+        }
+        else
+        {
+            GenerateNumericTicks(_xScale, _xTickValues);
+            if (showLabels)
             {
-                for (double x = TickStart(_xScale.Min, _xScale.Step); x <= _xScale.Max + 1e-9; x += _xScale.Step)
+                foreach (double x in _xTickValues)
                 {
-                    _xTickValues.Add(x);
-                    if (ShowAxisLabels)
-                    {
-                        string text = _xAxis.LabelFormatter?.Invoke(x) ?? FormatTick(x, _xScale.Step);
-                        _xTickLabels.Add(ChartDrawing.CreateText(text, _labelTypeface, labelBrush, fontSize));
-                    }
+                    string text = _xAxis.LabelFormatter?.Invoke(x) ?? FormatTick(x, _xScale.Step);
+                    _xTickLabels.Add(ChartDrawing.CreateText(text, _labelTypeface, labelBrush, fontSize));
                 }
             }
         }
     }
 
-    private string FormatCategoryLabel(int index)
+    /// <summary>
+    /// Emits <c>start + i * step</c> for every tick inside the scale. Ticks are derived from an
+    /// integer index rather than by accumulating <c>step</c>, so the loop always terminates (an
+    /// accumulating loop never advances once <c>step</c> drops below the precision of the
+    /// values) and float error does not build up. The count is capped at
+    /// <see cref="MaxTickCount"/> as a last line of defence against degenerate steps.
+    /// </summary>
+    private static void GenerateNumericTicks(AxisScale scale, List<double> output)
+    {
+        double step = scale.Step;
+        if (!(step > 0.0) || !double.IsFinite(step) || !double.IsFinite(scale.Min) || !double.IsFinite(scale.Max) || scale.Max < scale.Min)
+        {
+            return;
+        }
+
+        double start = TickStart(scale.Min, step);
+        double span = (scale.Max - start) / step;
+        if (!double.IsFinite(start) || !double.IsFinite(span) || span < -1e-9)
+        {
+            return;
+        }
+
+        long count = Math.Min(MaxTickCount, (long)Math.Floor(span + 1e-9) + 1);
+        double tolerance = step * 1e-9;
+        for (long index = 0; index < count; index++)
+        {
+            double value = start + index * step;
+            if (Math.Abs(value) < tolerance)
+            {
+                // Avoid "-0" labels from (-0.5 / step) rounding or tiny accumulated error.
+                value = 0.0;
+            }
+
+            if (output.Count > 0 && value <= output[^1])
+            {
+                // The step is below the precision of the values; neighbouring ticks collapse.
+                continue;
+            }
+
+            output.Add(value);
+        }
+    }
+
+    private static void GenerateCategoryTicks(AxisScale scale, List<double> output)
+    {
+        if (!double.IsFinite(scale.Step) || !double.IsFinite(scale.Min) || !double.IsFinite(scale.Max))
+        {
+            return;
+        }
+
+        // Clamp to a range where long arithmetic is exact; category counts never get near it.
+        const double Limit = 1e15;
+        double first = Math.Max(0.0, Math.Ceiling(scale.Min));
+        double last = Math.Min(Limit, Math.Floor(scale.Max));
+        if (last < first)
+        {
+            return;
+        }
+
+        long start = (long)first;
+        long end = (long)last;
+        long step = Math.Max(1L, (long)Math.Min(Limit, Math.Round(scale.Step)));
+        long span = end - start;
+        if (span / step + 1 > MaxTickCount)
+        {
+            step = span / (MaxTickCount - 1) + 1;
+        }
+
+        for (long index = start; index <= end; index += step)
+        {
+            output.Add(index);
+        }
+    }
+
+    private string FormatCategoryLabel(long index)
     {
         if (_xAxis.Categories != null && index >= 0 && index < _xAxis.Categories.Count)
         {
-            return _xAxis.Categories[index];
+            return _xAxis.Categories[(int)index];
         }
 
         return _xAxis.LabelFormatter?.Invoke(index) ?? index.ToString(CultureInfo.CurrentCulture);
@@ -1014,15 +1240,15 @@ public class LuminaLineChart : Control
             bottomMargin += yLabelHeight + PlotBottomPad;
         }
 
-        if (ShowLegend)
+        if (ShowLegend && _cachedLegendHeight > 0.0)
         {
             if (LegendPosition is LuminaChartLegendPosition.TopLeft or LuminaChartLegendPosition.TopCenter or LuminaChartLegendPosition.TopRight)
             {
-                top += LegendBandHeight + LegendBandGap;
+                top += _cachedLegendHeight + LegendBandGap;
             }
             else
             {
-                bottomMargin += LegendBandHeight + LegendBandGap;
+                bottomMargin += _cachedLegendHeight + LegendBandGap;
             }
         }
 
@@ -1031,12 +1257,12 @@ public class LuminaLineChart : Control
         return new Rect(left, top, width, height);
     }
 
-    private RenderSeries? BuildRenderSeries(LuminaChartSeries source, int paletteIndex, int barGroupIndex, int barGroupCount)
+    private RenderSeries? BuildRenderSeries(LuminaChartSeries source, int paletteIndex, int barGroupIndex, int barGroupCount, double barSlot)
     {
         var render = new RenderSeries { Source = source };
         render.Stroke = source.Stroke ?? ChartDrawing.ResolvePaletteBrush(this, paletteIndex);
         render.Fill = source.Fill ?? (source.ShowArea ? ChartDrawing.CreateTranslucent(render.Stroke, 0.22) : null);
-        render.Thickness = Math.Max(1.0, source.StrokeThickness);
+        render.Thickness = Math.Max(1.0, ChartDrawing.Finite(source.StrokeThickness, 2.0));
         render.LinePen = new Pen(render.Stroke, render.Thickness, null, PenLineCap.Round, PenLineJoin.Round);
         render.MarkerPen = new Pen(render.Stroke, Math.Max(1.0, render.Thickness));
         render.BarPen = new Pen(render.Stroke, Math.Min(1.5, Math.Max(0.5, render.Thickness)));
@@ -1052,7 +1278,7 @@ public class LuminaLineChart : Control
         switch (source)
         {
             case LuminaBarSeries bar:
-                BuildBars(render, bar, barGroupIndex, barGroupCount);
+                BuildBars(render, bar, barGroupIndex, barGroupCount, barSlot);
                 break;
             case LuminaScatterSeries scatter:
                 BuildScatter(render, scatter);
@@ -1094,7 +1320,7 @@ public class LuminaLineChart : Control
         render.Line = BuildLineGeometry(render.LinePoints);
         if (render.AreaPoints is { Length: >= 2 })
         {
-            render.Area = BuildAreaGeometry(render.AreaPoints, _plotRect.Bottom);
+            render.Area = BuildAreaGeometry(render.AreaPoints, _areaBaseline);
         }
 
         if (source.ShowMarkers && !render.Decimated && markerPoints is { Length: <= SubsetMarkersLimit })
@@ -1121,31 +1347,46 @@ public class LuminaLineChart : Control
         return result.ToArray();
     }
 
-    private void BuildBars(RenderSeries render, LuminaBarSeries series, int barGroupIndex, int barGroupCount)
+    private void BuildBars(RenderSeries render, LuminaBarSeries series, int barGroupIndex, int barGroupCount, double slot)
     {
         render.IsBar = true;
-        render.BarCornerRadius = Math.Max(0.0, series.CornerRadius);
+        render.BarCornerRadius = Math.Max(0.0, ChartDrawing.Finite(series.CornerRadius, 0.0));
         render.Fill ??= render.Stroke;
-        render.BarRects = BuildBarRects(render, Math.Clamp(series.BarWidthRatio, 0.01, 1.0), barGroupIndex, barGroupCount);
+        render.HighlightOutlinePen = new Pen(ChartDrawing.ContrastFor(render.Fill), 1.5);
+        render.BarRects = BuildBarRects(render, Math.Clamp(ChartDrawing.Finite(series.BarWidthRatio, 0.7), 0.01, 1.0), barGroupIndex, barGroupCount, slot);
         render.Markers = null;
     }
 
     private void BuildScatter(RenderSeries render, LuminaScatterSeries series)
     {
         render.IsScatter = true;
-        render.MarkerRadius = Math.Max(0.5, series.MarkerSize);
+        render.MarkerRadius = Math.Max(0.5, ChartDrawing.Finite(series.MarkerSize, 3.0));
         render.Markers = BuildMarkerGeometry(ToPointArray(render.Px, render.Py), render.MarkerRadius);
     }
 
+    /// <summary>Upper bound for <see cref="LuminaSplineSeries.SamplesPerSegment"/>.</summary>
+    private const int MaxSplineSamplesPerSegment = 32;
+
     private void BuildSpline(RenderSeries render, LuminaSplineSeries series)
     {
-        Point[] splinePoints = BuildSplinePoints(render.Px, render.Py, Math.Max(2, series.SamplesPerSegment));
+        // Smoothing needs points ordered by x, and on large series it would only multiply the
+        // geometry by SamplesPerSegment without visible benefit - those render as a regular
+        // (decimated) line instead.
+        if (!render.Sorted || render.Px.Length > Math.Max(4, DecimationThreshold))
+        {
+            BuildLineAndArea(render, series);
+            return;
+        }
+
+        int samples = Math.Clamp(series.SamplesPerSegment, 2, MaxSplineSamplesPerSegment);
+        Point[] splinePoints = BuildSplinePoints(render.Px, render.Py, samples);
         render.LinePoints = splinePoints;
         render.RawPoints = ToPointArray(render.Px, render.Py);
         render.Line = BuildLineGeometry(splinePoints);
         if (series.ShowArea)
         {
-            render.Area = BuildAreaGeometry(splinePoints, _plotRect.Bottom);
+            render.AreaPoints = splinePoints;
+            render.Area = BuildAreaGeometry(splinePoints, _areaBaseline);
         }
 
         if (series.ShowMarkers && render.Px.Length <= SubsetMarkersLimit)
@@ -1154,18 +1395,17 @@ public class LuminaLineChart : Control
         }
     }
 
-    private Rect[] BuildBarRects(RenderSeries render, double widthRatio, int barGroupIndex, int barGroupCount)
+    private Rect[] BuildBarRects(RenderSeries render, double widthRatio, int barGroupIndex, int barGroupCount, double slot)
     {
         if (render.Px.Length == 0)
         {
             return [];
         }
 
-        double slot = ComputeBarSlot(render.Px);
         int groupCount = Math.Max(1, barGroupCount);
         double band = slot / groupCount;
         double width = Math.Max(1.0, band * widthRatio);
-        double baseline = Math.Clamp(MapY(Math.Max(0.0, _yScale.Min), _plotRect, _yScale), _plotRect.Top, _plotRect.Bottom);
+        double baseline = Math.Clamp(MapY(Math.Clamp(0.0, _yScale.Min, _yScale.Max), _plotRect, _yScale), _plotRect.Top, _plotRect.Bottom);
         var rects = new Rect[render.Px.Length];
         for (int index = 0; index < render.Px.Length; index++)
         {
@@ -1178,59 +1418,122 @@ public class LuminaLineChart : Control
         return rects;
     }
 
-    private static double ComputeBarSlot(double[] px)
+    /// <summary>
+    /// Computes one slot width (in pixels) shared by every bar series, so grouped bars line up
+    /// and a series with a single point or with gaps still gets a sensible width. A category
+    /// axis uses the width of one category; a numeric axis uses the smallest x distance between
+    /// neighbouring bars across all bar series.
+    /// </summary>
+    private double ComputeSharedBarSlot(List<LuminaChartSeries> visible)
     {
-        double minGap = double.PositiveInfinity;
-        for (int index = 1; index < px.Length; index++)
+        double slot;
+        if (_xAxis.Kind == LuminaChartAxisKind.Category)
         {
-            double gap = px[index] - px[index - 1];
-            if (gap > 0.0 && gap < minGap)
+            slot = Math.Abs(MapX(1.0, _plotRect, _xScale) - MapX(0.0, _plotRect, _xScale));
+        }
+        else
+        {
+            double gap = ComputeMinDataGap(visible);
+            slot = double.IsFinite(gap)
+                ? Math.Abs(MapX(_xScale.Min + gap, _plotRect, _xScale) - MapX(_xScale.Min, _plotRect, _xScale))
+                : double.NaN;
+        }
+
+        if (!double.IsFinite(slot) || slot <= 0.0)
+        {
+            int maxPoints = 1;
+            foreach (LuminaChartSeries item in visible)
             {
-                minGap = gap;
+                if (item is LuminaBarSeries && item.Points != null)
+                {
+                    maxPoints = Math.Max(maxPoints, item.Points.Count);
+                }
             }
+
+            slot = _plotRect.Width / maxPoints;
         }
 
-        if (double.IsFinite(minGap))
-        {
-            return minGap;
-        }
-
-        return px.Length > 1 ? (px[^1] - px[0]) / (px.Length - 1) : 0.0;
+        return Math.Min(slot, _plotRect.Width);
     }
 
-    private static Point[] BuildSplinePoints(double[] px, double[] py, int samplesPerSegment)
+    /// <summary>
+    /// Monotone cubic Hermite interpolation (Fritsch–Carlson) over points sorted by x. x advances
+    /// linearly inside each segment, so the curve is a function of x (no loops, no backtracking),
+    /// and the tangents are limited so y never overshoots the neighbouring data values.
+    /// </summary>
+    internal static Point[] BuildSplinePoints(double[] px, double[] py, int samplesPerSegment)
     {
         int count = px.Length;
-        if (count < 2)
+        if (count < 3)
         {
             return ToPointArray(px, py);
         }
 
-        var result = new List<Point>((count - 1) * samplesPerSegment + 1);
-        result.Add(new Point(px[0], py[0]));
+        var slopes = new double[count - 1];
         for (int index = 0; index < count - 1; index++)
         {
-            Point p0 = index > 0 ? new Point(px[index - 1], py[index - 1]) : new Point(px[index], py[index]);
-            Point p1 = new Point(px[index], py[index]);
-            Point p2 = new Point(px[index + 1], py[index + 1]);
-            Point p3 = index + 2 < count ? new Point(px[index + 2], py[index + 2]) : p2;
+            double h = px[index + 1] - px[index];
+            slopes[index] = h > 0.0 ? (py[index + 1] - py[index]) / h : 0.0;
+        }
+
+        var tangents = new double[count];
+        tangents[0] = slopes[0];
+        tangents[count - 1] = slopes[count - 2];
+        for (int index = 1; index < count - 1; index++)
+        {
+            // Zero at local extrema and wherever the curve flattens, so it cannot overshoot.
+            tangents[index] = slopes[index - 1] * slopes[index] <= 0.0
+                ? 0.0
+                : (slopes[index - 1] + slopes[index]) / 2.0;
+        }
+
+        for (int index = 0; index < count - 1; index++)
+        {
+            if (slopes[index] == 0.0)
+            {
+                tangents[index] = 0.0;
+                tangents[index + 1] = 0.0;
+                continue;
+            }
+
+            double alpha = tangents[index] / slopes[index];
+            double beta = tangents[index + 1] / slopes[index];
+            double magnitude = (alpha * alpha) + (beta * beta);
+            if (magnitude > 9.0)
+            {
+                double tau = 3.0 / Math.Sqrt(magnitude);
+                tangents[index] = tau * alpha * slopes[index];
+                tangents[index + 1] = tau * beta * slopes[index];
+            }
+        }
+
+        var result = new List<Point>(((count - 1) * samplesPerSegment) + 1) { new(px[0], py[0]) };
+        for (int index = 0; index < count - 1; index++)
+        {
+            double x0 = px[index];
+            double h = px[index + 1] - x0;
+            if (h <= 0.0)
+            {
+                // Duplicate x: nothing to interpolate, just connect.
+                result.Add(new Point(px[index + 1], py[index + 1]));
+                continue;
+            }
+
             for (int sample = 1; sample <= samplesPerSegment; sample++)
             {
                 double t = sample / (double)samplesPerSegment;
-                result.Add(CatmullRom(p0, p1, p2, p3, t));
+                double t2 = t * t;
+                double t3 = t2 * t;
+                double h00 = (2.0 * t3) - (3.0 * t2) + 1.0;
+                double h10 = t3 - (2.0 * t2) + t;
+                double h01 = (-2.0 * t3) + (3.0 * t2);
+                double h11 = t3 - t2;
+                double y = (h00 * py[index]) + (h10 * h * tangents[index]) + (h01 * py[index + 1]) + (h11 * h * tangents[index + 1]);
+                result.Add(new Point(x0 + (t * h), y));
             }
         }
 
         return result.ToArray();
-    }
-
-    private static Point CatmullRom(Point p0, Point p1, Point p2, Point p3, double t)
-    {
-        double t2 = t * t;
-        double t3 = t2 * t;
-        double x = 0.5 * ((2.0 * p1.X) + (-p0.X + p2.X) * t + (2.0 * p0.X - 5.0 * p1.X + 4.0 * p2.X - p3.X) * t2 + (-p0.X + 3.0 * p1.X - 3.0 * p2.X + p3.X) * t3);
-        double y = 0.5 * ((2.0 * p1.Y) + (-p0.Y + p2.Y) * t + (2.0 * p0.Y - 5.0 * p1.Y + 4.0 * p2.Y - p3.Y) * t2 + (-p0.Y + 3.0 * p1.Y - 3.0 * p2.Y + p3.Y) * t3);
-        return new Point(x, y);
     }
 
     private int MapFinitePoints(RenderSeries render, LuminaChartSeries source)
@@ -1240,6 +1543,7 @@ public class LuminaLineChart : Control
             render.Px = [];
             render.Py = [];
             render.Values = [];
+            render.DataX = [];
             return 0;
         }
 
@@ -1247,6 +1551,7 @@ public class LuminaLineChart : Control
         var px = new List<double>(Math.Min(source.Points.Count, 4096));
         var py = new List<double>(px.Capacity);
         var values = new List<LuminaChartPoint>(px.Capacity);
+        var dataX = new List<double>(px.Capacity);
         bool sorted = true;
         double previous = double.NegativeInfinity;
         int pointIndex = 0;
@@ -1264,6 +1569,7 @@ public class LuminaLineChart : Control
             double pixelY = MapY(point.Y, _plotRect, _yScale);
             px.Add(pixelX);
             py.Add(pixelY);
+            dataX.Add(xValue);
             values.Add(point);
             pointIndex++;
             if (pixelX < previous)
@@ -1277,6 +1583,7 @@ public class LuminaLineChart : Control
         render.Px = px.ToArray();
         render.Py = py.ToArray();
         render.Values = values.ToArray();
+        render.DataX = dataX.ToArray();
         render.Sorted = sorted;
         render.Order = sorted ? null : BuildOrder(render.Px);
         return render.Px.Length;
@@ -1306,11 +1613,37 @@ public class LuminaLineChart : Control
         var bottomY = new double[bucketCount];
         var valid = new bool[bucketCount];
 
+        // Points outside a fixed viewport are not bucketed: clamping them into the edge buckets
+        // used to put far-away extremes on the edge and draw the entry segment from the wrong
+        // point. Only the nearest point on each side is kept, so the line still runs off the
+        // plot edge in the right direction (the clip cuts it there).
+        Point? leftOuter = null;
+        Point? rightOuter = null;
         for (int index = 0; index < pointCount; index++)
         {
-            int bucket = (int)Math.Clamp(Math.Round(render.Px[index] - _plotRect.Left), 0.0, bucketCount - 1);
             double x = render.Px[index];
             double y = render.Py[index];
+            if (x < _plotRect.Left - 0.5)
+            {
+                if (leftOuter is not { } left || x > left.X)
+                {
+                    leftOuter = new Point(x, y);
+                }
+
+                continue;
+            }
+
+            if (x > _plotRect.Right + 0.5)
+            {
+                if (rightOuter is not { } right || x < right.X)
+                {
+                    rightOuter = new Point(x, y);
+                }
+
+                continue;
+            }
+
+            int bucket = (int)Math.Clamp(Math.Round(x - _plotRect.Left), 0.0, bucketCount - 1);
             if (!valid[bucket])
             {
                 valid[bucket] = true;
@@ -1335,8 +1668,14 @@ public class LuminaLineChart : Control
             }
         }
 
-        var line = new List<Point>(bucketCount * 2);
-        var envelope = render.Source.ShowArea ? new List<Point>(bucketCount) : null;
+        var line = new List<Point>((bucketCount * 2) + 2);
+        var envelope = render.Source.ShowArea ? new List<Point>(bucketCount + 2) : null;
+        if (leftOuter is { } leftPoint)
+        {
+            line.Add(leftPoint);
+            envelope?.Add(leftPoint);
+        }
+
         for (int bucket = 0; bucket < bucketCount; bucket++)
         {
             if (!valid[bucket])
@@ -1344,9 +1683,27 @@ public class LuminaLineChart : Control
                 continue;
             }
 
-            line.Add(new Point(topX[bucket], topY[bucket]));
-            line.Add(new Point(bottomX[bucket], bottomY[bucket]));
-            envelope?.Add(new Point(topX[bucket], topY[bucket]));
+            // Emit the bucket's extremes in x order so the polyline does not double back.
+            var top = new Point(topX[bucket], topY[bucket]);
+            var bottom = new Point(bottomX[bucket], bottomY[bucket]);
+            if (top.X <= bottom.X)
+            {
+                line.Add(top);
+                line.Add(bottom);
+            }
+            else
+            {
+                line.Add(bottom);
+                line.Add(top);
+            }
+
+            envelope?.Add(top);
+        }
+
+        if (rightOuter is { } rightPoint)
+        {
+            line.Add(rightPoint);
+            envelope?.Add(rightPoint);
         }
 
         return (line.ToArray(), envelope?.ToArray());
@@ -1535,11 +1892,13 @@ public class LuminaLineChart : Control
         else if (hasBarSeries && !_xAxis.Minimum.HasValue && !_xAxis.Maximum.HasValue)
         {
             double minGap = ComputeMinDataGap(series);
-            if (double.IsFinite(minGap) && minGap > 0.0)
+            if (!double.IsFinite(minGap))
             {
-                xMin -= minGap * 0.5;
-                xMax += minGap * 0.5;
+                minGap = 1.0;
             }
+
+            xMin -= minGap * 0.5;
+            xMax += minGap * 0.5;
         }
 
         if (!double.IsFinite(xMin) || !double.IsFinite(xMax))
@@ -1550,6 +1909,14 @@ public class LuminaLineChart : Control
         if (!double.IsFinite(yMin) || !double.IsFinite(yMax))
         {
             (yMin, yMax) = (0.0, 1.0);
+        }
+
+        if (hasBarSeries)
+        {
+            // Bars encode magnitude by their length from zero; a baseline at the data minimum
+            // would make the smallest bar vanish. Fixed axis bounds below still win.
+            yMin = Math.Min(yMin, 0.0);
+            yMax = Math.Max(yMax, 0.0);
         }
 
         ApplyAxisRange(_xAxis, ref xMin, ref xMax);
@@ -1578,7 +1945,27 @@ public class LuminaLineChart : Control
             yStep = 1.0;
         }
 
+        xStep = EnforceTickBudget(xMin, xMax, xStep);
+        yStep = EnforceTickBudget(yMin, yMax, yStep);
+
         return (new AxisScale(xMin, xMax, xStep), new AxisScale(yMin, yMax, yStep));
+    }
+
+    /// <summary>
+    /// Widens a step (typically a user-supplied <see cref="LuminaChartAxis.TickStep"/>) that would
+    /// produce more than <see cref="MaxTickCount"/> ticks, so labels stay readable and the tick
+    /// build stays bounded.
+    /// </summary>
+    private static double EnforceTickBudget(double min, double max, double step)
+    {
+        double count = (max - min) / step;
+        if (!double.IsFinite(count) || count <= MaxTickCount)
+        {
+            return step;
+        }
+
+        double widened = NiceNum((max - min) / MaxTickCount, round: false);
+        return double.IsFinite(widened) && widened > step ? widened : step;
     }
 
     /// <summary>
@@ -1588,11 +1975,13 @@ public class LuminaLineChart : Control
     /// </summary>
     private double ComputeCategoryStep(double min, double max)
     {
-        int categoryCount = (int)Math.Round(max - min);
-        if (categoryCount <= 1)
+        double span = Math.Round(max - min);
+        if (!(span > 1.0))
         {
             return 1.0;
         }
+
+        int categoryCount = span >= int.MaxValue ? int.MaxValue : (int)span;
 
         double widestLabel = EstimateCategoryLabelWidth(categoryCount);
         // Horizontal budget: control width minus the y-axis label gutter and a little padding.
@@ -1670,19 +2059,34 @@ public class LuminaLineChart : Control
             }
         }
 
-        return double.IsFinite(minGap) ? minGap : 1.0;
+        return minGap;
     }
 
     private static void ApplyAxisRange(LuminaChartAxis axis, ref double rangeMin, ref double rangeMax)
     {
-        if (axis.Minimum.HasValue)
+        // Non-finite bounds cannot be mapped to pixels (and used to stall tick generation), so
+        // they are treated as "auto".
+        if (axis.Minimum is { } minimum && double.IsFinite(minimum))
         {
-            rangeMin = axis.Minimum.Value;
+            rangeMin = minimum;
         }
 
-        if (axis.Maximum.HasValue)
+        if (axis.Maximum is { } maximum && double.IsFinite(maximum))
         {
-            rangeMax = axis.Maximum.Value;
+            rangeMax = maximum;
+        }
+
+        if (rangeMin > rangeMax)
+        {
+            (rangeMin, rangeMax) = (rangeMax, rangeMin);
+        }
+
+        if (!double.IsFinite(rangeMax - rangeMin))
+        {
+            // Finite bounds whose span overflows (e.g. ±1e308) - shrink so the scale stays finite.
+            const double Half = double.MaxValue / 4.0;
+            rangeMin = Math.Max(rangeMin, -Half);
+            rangeMax = Math.Min(rangeMax, Half);
         }
     }
 
@@ -1746,8 +2150,13 @@ public class LuminaLineChart : Control
     {
         if (ShowGridLines)
         {
-            DrawGrid(context);
+            DrawGridLines(context);
         }
+
+        // Axis labels are independent of the grid: hiding grid lines must not hide the labels
+        // that the plot rect still reserves room for. The label lists are only populated when
+        // ShowAxisLabels is on.
+        DrawAxisLabels(context);
 
         // Markers sit centred on their data point, so a point on the axis edge would be sliced in
         // half by a clip that stops exactly at the plot rect. Give the series layer enough slack to
@@ -1767,29 +2176,36 @@ public class LuminaLineChart : Control
         }
     }
 
-    private void DrawGrid(DrawingContext context)
+    private void DrawGridLines(DrawingContext context)
     {
         IBrush gridBrush = GridLineBrush ?? Brushes.Gray;
         var gridPen = new Pen(gridBrush, Math.Max(0.5, GridLineThickness));
 
-        for (int index = 0; index < _yTickValues.Count; index++)
+        foreach (double tick in _yTickValues)
         {
-            double pixelY = MapY(_yTickValues[index], _plotRect, _yScale);
+            double pixelY = MapY(tick, _plotRect, _yScale);
             context.DrawLine(gridPen, new Point(_plotRect.Left, pixelY), new Point(_plotRect.Right, pixelY));
-            if (index < _yTickLabels.Count)
-            {
-                DrawAxisLabel(context, _yTickLabels[index], _plotRect.Left - PlotLeftPad, pixelY, HorizontalAlignment.Right);
-            }
         }
 
-        for (int index = 0; index < _xTickValues.Count; index++)
+        foreach (double tick in _xTickValues)
+        {
+            double pixelX = MapX(tick, _plotRect, _xScale);
+            context.DrawLine(gridPen, new Point(pixelX, _plotRect.Top), new Point(pixelX, _plotRect.Bottom));
+        }
+    }
+
+    private void DrawAxisLabels(DrawingContext context)
+    {
+        for (int index = 0; index < _yTickLabels.Count && index < _yTickValues.Count; index++)
+        {
+            double pixelY = MapY(_yTickValues[index], _plotRect, _yScale);
+            DrawAxisLabel(context, _yTickLabels[index], _plotRect.Left - PlotLeftPad, pixelY, HorizontalAlignment.Right);
+        }
+
+        for (int index = 0; index < _xTickLabels.Count && index < _xTickValues.Count; index++)
         {
             double pixelX = MapX(_xTickValues[index], _plotRect, _xScale);
-            context.DrawLine(gridPen, new Point(pixelX, _plotRect.Top), new Point(pixelX, _plotRect.Bottom));
-            if (index < _xTickLabels.Count)
-            {
-                DrawAxisLabel(context, _xTickLabels[index], pixelX, _plotRect.Bottom + PlotBottomPad, HorizontalAlignment.Center);
-            }
+            DrawAxisLabel(context, _xTickLabels[index], pixelX, _plotRect.Bottom + PlotBottomPad, HorizontalAlignment.Center);
         }
     }
 
@@ -1806,7 +2222,7 @@ public class LuminaLineChart : Control
 
     private void DrawSeries(DrawingContext context)
     {
-        IBrush markerFill = ChartDrawing.ResolveSurfaceBrush(this);
+        IBrush markerFill = SurfaceBrush;
         for (int index = 0; index < _renderSeries.Count; index++)
         {
             RenderSeries render = _renderSeries[index];
@@ -1836,7 +2252,7 @@ public class LuminaLineChart : Control
                     ? _transitionPrev[index]
                     : ((Point[]?)null, (Point[]?)null, (Point[]?)null);
                 line = BuildInterpolatedLine(prevLine, render.LinePoints, _transitionT) ?? render.Line;
-                area = BuildInterpolatedArea(prevArea, render.AreaPoints, _transitionT, _plotRect.Bottom) ?? render.Area;
+                area = BuildInterpolatedArea(prevArea, render.AreaPoints, _transitionT, _areaBaseline) ?? render.Area;
             }
 
             if (area != null && render.Fill != null)
@@ -1895,7 +2311,7 @@ public class LuminaLineChart : Control
 
     private void DrawLegend(DrawingContext context)
     {
-        ChartDrawing.DrawLegend(context, _cachedLegendItems, _cachedLegendContentWidth, LegendPosition, Bounds.Size);
+        ChartDrawing.DrawLegend(context, _cachedLegendItems, LegendPosition, Bounds.Size);
     }
 
     private void DrawOverlay(DrawingContext context, Point hover)
@@ -1908,7 +2324,7 @@ public class LuminaLineChart : Control
         _overlayMatches.Clear();
         _barHighlights.Clear();
         _scatterHighlights.Clear();
-        double threshold = Math.Max(1.0, HoverThreshold);
+        double threshold = Math.Max(1.0, ChartDrawing.Finite(HoverThreshold, 28.0));
 
         // Pass 1: a scatter dot under the cursor is the most precise anchor. It decides the x
         // position that the crosshair, the markers and the tooltip all have to share.
@@ -1939,7 +2355,7 @@ public class LuminaLineChart : Control
 
         bool anchored = anchorSeries != null;
         double anchorX = anchored ? anchorSeries!.Px[anchorIndex] : 0.0;
-        double anchorValueX = anchored ? anchorSeries!.Values[anchorIndex].X : 0.0;
+        double anchorValueX = anchored ? anchorSeries!.DataX[anchorIndex] : 0.0;
 
         double bestLineDistance = double.PositiveInfinity;
         Point? lineTrackPixel = null;
@@ -1952,7 +2368,7 @@ public class LuminaLineChart : Control
                 if (barIndex >= 0)
                 {
                     var pixel = new Point(render.Px[barIndex], Math.Min(render.Py[barIndex], _plotRect.Bottom));
-                    _overlayMatches.Add(new OverlayMatch(render, render.Values[barIndex], pixel));
+                    _overlayMatches.Add(new OverlayMatch(render, render.Values[barIndex], pixel, render.DataX[barIndex]));
                     _barHighlights.Add(new BarHighlight(render, barIndex));
                 }
 
@@ -1967,8 +2383,8 @@ public class LuminaLineChart : Control
                 }
 
                 var pixel = new Point(anchorX, render.Py[anchorIndex]);
-                _overlayMatches.Add(new OverlayMatch(render, render.Values[anchorIndex], pixel));
-                _scatterHighlights.Add(new OverlayMatch(render, render.Values[anchorIndex], pixel));
+                _overlayMatches.Add(new OverlayMatch(render, render.Values[anchorIndex], pixel, render.DataX[anchorIndex]));
+                _scatterHighlights.Add(new OverlayMatch(render, render.Values[anchorIndex], pixel, render.DataX[anchorIndex]));
                 continue;
             }
 
@@ -1980,7 +2396,7 @@ public class LuminaLineChart : Control
                 if (TrySampleAt(render, anchorX, anchorValueX, out LuminaChartPoint? sample, out Point samplePixel) &&
                     sample != null)
                 {
-                    _overlayMatches.Add(new OverlayMatch(render, sample, samplePixel));
+                    _overlayMatches.Add(new OverlayMatch(render, sample, samplePixel, anchorValueX));
                 }
 
                 continue;
@@ -1999,7 +2415,7 @@ public class LuminaLineChart : Control
             }
 
             var linePixel = new Point(render.Px[lineIndex], render.Py[lineIndex]);
-            _overlayMatches.Add(new OverlayMatch(render, render.Values[lineIndex], linePixel));
+            _overlayMatches.Add(new OverlayMatch(render, render.Values[lineIndex], linePixel, render.DataX[lineIndex]));
             if (lineDistance < bestLineDistance)
             {
                 bestLineDistance = lineDistance;
@@ -2007,7 +2423,25 @@ public class LuminaLineChart : Control
             }
         }
 
-        double? crosshairX = anchored ? anchorX : lineTrackPixel?.X;
+        // Markers and outlines get the same slack as the series layer (a dot on the axis edge
+        // stays whole) but no more, so with a fixed viewport they do not spill over the axis
+        // labels. The tooltip is drawn afterwards, unclipped.
+        double overlaySlack = 6.0;
+        foreach (OverlayMatch match in _scatterHighlights)
+        {
+            overlaySlack = Math.Max(overlaySlack, match.Series.MarkerRadius + 4.0);
+        }
+
+        using (context.PushClip(_plotRect.Inflate(overlaySlack)))
+        {
+            DrawOverlayMarks(context, anchored ? anchorX : lineTrackPixel?.X);
+        }
+
+        DrawTooltip(context, hover);
+    }
+
+    private void DrawOverlayMarks(DrawingContext context, double? crosshairX)
+    {
         if (crosshairX is { } crosshair)
         {
             IBrush brush = CrosshairBrush ?? Brushes.Gray;
@@ -2032,11 +2466,11 @@ public class LuminaLineChart : Control
         foreach (BarHighlight highlight in _barHighlights)
         {
             Rect rect = highlight.Series.BarRects[highlight.Index];
-            var outlinePen = new Pen(ChartDrawing.ContrastFor(highlight.Series.Fill ?? highlight.Series.Stroke), 1.5);
+            var outlinePen = highlight.Series.HighlightOutlinePen ?? new Pen(ChartDrawing.ContrastFor(highlight.Series.Fill ?? highlight.Series.Stroke), 1.5);
             context.DrawRectangle(null, outlinePen, rect);
         }
 
-        IBrush hoverFill = ChartDrawing.ResolveSurfaceBrush(this);
+        IBrush hoverFill = SurfaceBrush;
         foreach (OverlayMatch match in _overlayMatches)
         {
             if (match.Series.IsBar || match.Series.IsScatter)
@@ -2047,13 +2481,42 @@ public class LuminaLineChart : Control
             var markerPen = match.Series.HighlightMarkerPen ?? new Pen(match.Series.Stroke, 2.0);
             context.DrawEllipse(hoverFill, markerPen, match.Pixel, 3.5, 3.5);
         }
-
-        DrawTooltip(context, hover);
     }
 
     private int FindBarAt(RenderSeries render, Point hover)
     {
         Rect[] rects = render.BarRects;
+        if (render.Sorted)
+        {
+            // Every bar of a series has the same width and x offset, so with sorted points both
+            // edges grow with the index: skip to the first bar whose right edge is past the
+            // pointer, then only bars that start left of it can contain it.
+            int low = 0;
+            int high = rects.Length;
+            while (low < high)
+            {
+                int middle = (low + high) >> 1;
+                if (rects[middle].Right < hover.X)
+                {
+                    low = middle + 1;
+                }
+                else
+                {
+                    high = middle;
+                }
+            }
+
+            for (int index = low; index < rects.Length && rects[index].Left <= hover.X; index++)
+            {
+                if (rects[index].Contains(hover))
+                {
+                    return index;
+                }
+            }
+
+            return -1;
+        }
+
         for (int index = 0; index < rects.Length; index++)
         {
             Rect rect = rects[index];
@@ -2206,7 +2669,7 @@ public class LuminaLineChart : Control
                 var cached = _cachedTooltipMatches[i];
                 var current = _overlayMatches[i];
                 if (!ReferenceEquals(cached.Series, current.Series.Source) ||
-                    cached.X != current.Value.X ||
+                    cached.X != current.DataX ||
                     cached.Y != current.Value.Y)
                 {
                     matchesChanged = true;
@@ -2221,9 +2684,9 @@ public class LuminaLineChart : Control
             _cachedTooltipLines.Clear();
             foreach (OverlayMatch match in _overlayMatches)
             {
-                _cachedTooltipMatches.Add((match.Series.Source, match.Value.X, match.Value.Y));
+                _cachedTooltipMatches.Add((match.Series.Source, match.DataX, match.Value.Y));
                 string title = string.IsNullOrEmpty(match.Series.Source.Title) ? "Values" : match.Series.Source.Title;
-                string text = $"{title}: ({FormatValue(match.Value.X)}, {FormatValue(match.Value.Y)})";
+                string text = $"{title}: ({FormatTooltipX(match.DataX)}, {FormatTooltipY(match.Value.Y)})";
                 _cachedTooltipLines.Add(ChartDrawing.CreateText(text, _labelTypeface, textBrush, fontSize));
             }
 
@@ -2231,7 +2694,7 @@ public class LuminaLineChart : Control
         }
 
         Rect? legendRect = ShowLegend && _cachedLegendItems.Count > 0
-            ? ChartDrawing.ComputeLegendRect(_cachedLegendItems, _cachedLegendContentWidth, LegendPosition, Bounds.Size)
+            ? ChartDrawing.ComputeLegendRect(_cachedLegendItems, LegendPosition, Bounds.Size)
             : null;
 
         Point origin = ChartDrawing.PlaceTooltip(
@@ -2244,7 +2707,7 @@ public class LuminaLineChart : Control
             context,
             _cachedTooltipLines,
             background,
-            ChartDrawing.ResolveTooltipBorderPen(this),
+            TooltipBorderPen,
             TooltipPadding,
             TooltipCornerRadius,
             origin,
@@ -2253,9 +2716,17 @@ public class LuminaLineChart : Control
 
     private static string FormatTick(double value, double step)
     {
-        int decimals = step > 0.0 && step < 1.0
-            ? Math.Min(3, (int)Math.Ceiling(-Math.Log10(step)))
-            : 0;
+        // Use as many decimals as the step needs to be represented exactly (0.25 -> 2,
+        // 0.0002 -> 4), so neighbouring labels never round to the same text.
+        int decimals = 0;
+        if (step > 0.0 && double.IsFinite(step))
+        {
+            while (decimals < 10 && Math.Abs(Math.Round(step, decimals) - step) > step * 1e-6)
+            {
+                decimals++;
+            }
+        }
+
         string format = decimals > 0 ? "0." + new string('0', decimals) : "0";
         return value.ToString(format, CultureInfo.CurrentCulture);
     }
@@ -2264,6 +2735,22 @@ public class LuminaLineChart : Control
     {
         return value.ToString("0.##", CultureInfo.CurrentCulture);
     }
+
+    /// <summary>
+    /// Tooltip X text in the same vocabulary as the axis: the category label on a category axis
+    /// (the point's own X is meaningless there), otherwise the axis label formatter if any.
+    /// </summary>
+    private string FormatTooltipX(double dataX)
+    {
+        if (_xAxis.Kind == LuminaChartAxisKind.Category)
+        {
+            return FormatCategoryLabel((long)Math.Round(dataX));
+        }
+
+        return _xAxis.LabelFormatter?.Invoke(dataX) ?? FormatValue(dataX);
+    }
+
+    private string FormatTooltipY(double value) => _yAxis.LabelFormatter?.Invoke(value) ?? FormatValue(value);
 
     private static double MapX(double value, Rect plot, AxisScale scale)
     {
@@ -2361,6 +2848,7 @@ public class LuminaLineChart : Control
         public double[] Px = [];
         public double[] Py = [];
         public LuminaChartPoint[] Values = [];
+        public double[] DataX = [];
         public int[]? Order;
         public bool Sorted = true;
         public Point[]? RawPoints;
@@ -2379,9 +2867,11 @@ public class LuminaLineChart : Control
         public Pen? BarPen;
         public Pen? HighlightRingPen;
         public Pen? HighlightMarkerPen;
+        public Pen? HighlightOutlinePen;
     }
 
-    private readonly record struct OverlayMatch(RenderSeries Series, LuminaChartPoint Value, Point Pixel);
+    /// <param name="DataX">X in axis units: the point's X on a numeric axis, its index on a category axis.</param>
+    private readonly record struct OverlayMatch(RenderSeries Series, LuminaChartPoint Value, Point Pixel, double DataX);
 
     private readonly record struct BarHighlight(RenderSeries Series, int Index);
 
