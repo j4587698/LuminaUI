@@ -72,16 +72,16 @@ jobs:
 
       - name: Build
         run: |
-          dotnet build src/LuminaUI/LuminaUI.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
-          dotnet build src/LuminaUI.ColorPicker/LuminaUI.ColorPicker.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
-          dotnet build src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
-          dotnet build src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
-          dotnet build src/LuminaUI.Charts/LuminaUI.Charts.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
-          dotnet build demo/LuminaUI.Demo.Desktop/LuminaUI.Demo.Desktop.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
+          dotnet build src/LuminaUI/LuminaUI.csproj --configuration "$CONFIGURATION" --no-restore -p:ContinuousIntegrationBuild=true
+          dotnet build src/LuminaUI.ColorPicker/LuminaUI.ColorPicker.csproj --configuration "$CONFIGURATION" --no-restore -p:ContinuousIntegrationBuild=true
+          dotnet build src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj --configuration "$CONFIGURATION" --no-restore -p:ContinuousIntegrationBuild=true
+          dotnet build src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj --configuration "$CONFIGURATION" --no-restore -p:ContinuousIntegrationBuild=true
+          dotnet build src/LuminaUI.Charts/LuminaUI.Charts.csproj --configuration "$CONFIGURATION" --no-restore -p:ContinuousIntegrationBuild=true
+          dotnet build demo/LuminaUI.Demo.Desktop/LuminaUI.Demo.Desktop.csproj --configuration "$CONFIGURATION" --no-restore -p:ContinuousIntegrationBuild=true
 
       - name: Test
         run: |
           dotnet test tests/LuminaUI.Tests/LuminaUI.Tests.csproj \
             --configuration "$CONFIGURATION" \
             --logger "console;verbosity=normal" \
-            /p:ContinuousIntegrationBuild=true
+            -p:ContinuousIntegrationBuild=true
