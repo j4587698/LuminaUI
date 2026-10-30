@@ -14,10 +14,27 @@ namespace LuminaUI.Controls;
 
 public sealed class LuminaBackdropBlur : Control
 {
+    /// <summary>
+    /// 元素在设备坐标下的两个矩形。
+    /// </summary>
+    /// <remarks>
+    /// Avalonia 只重绘失效矩形，祖先 ClipToBounds / ScrollViewer 视口和窗口边界也会裁剪，
+    /// 所以表面上"本帧有效"的背景像素只有 <see cref="Visible"/> = <see cref="Full"/> ∩ DeviceClipBounds。
+    /// clip 之外的像素是上一帧的合成结果（可能包含本元素自己上一帧的模糊、遮罩色、对话框），不能当背景用。
+    /// </remarks>
+    private readonly record struct BackdropRegion(SKRectI Full, SKRectI Visible)
+    {
+        public bool IsEmpty => Visible.Width <= 0 || Visible.Height <= 0;
+
+        /// <summary>整个元素都落在 clip 内，截到的是完整背景。</summary>
+        public bool IsComplete => Visible == Full;
+    }
+
     private sealed class CachedBackdrop : IDisposable
     {
         private readonly object _syncRoot = new();
         private SKImage? _image;
+        private SKRect _imageLocalRect;
         private int _version;
 
         public int Version
@@ -31,11 +48,19 @@ public sealed class LuminaBackdropBlur : Control
             }
         }
 
-        public void DrawOrCapture(
-            ISkiaSharpApiLease lease,
+        /// <summary>
+        /// 画缓存；没有缓存时，只有拿到完整背景才建立缓存。
+        /// 局部重绘帧（失效矩形、祖先裁剪）只画本帧的局部模糊、不入缓存，
+        /// 否则残缺快照会被长期复用。
+        /// </summary>
+        public void Draw(
             SKCanvas canvas,
+            SKSurface surface,
+            BackdropRegion region,
+            SKMatrix matrix,
+            float deviceSigmaX,
+            float deviceSigmaY,
             SKRect destination,
-            float sigma,
             int expectedVersion)
         {
             lock (_syncRoot)
@@ -47,13 +72,26 @@ public sealed class LuminaBackdropBlur : Control
 
                 if (_image == null)
                 {
-                    _image = Capture(lease, canvas, destination, sigma);
+                    if (!region.IsComplete)
+                    {
+                        DrawBlurredRegion(canvas, surface, region.Visible, deviceSigmaX, deviceSigmaY);
+                        return;
+                    }
+
+                    _image = CaptureBlurred(surface, region.Visible, deviceSigmaX, deviceSigmaY);
+                    if (_image == null)
+                    {
+                        return;
+                    }
+
+                    // 记录缓存对应的局部坐标矩形（而不是设备坐标）：元素之后平移/滚动时缓存跟着元素走，
+                    // 这是 Cached 模式"背景只取一次"的既有语义。用取整后的设备矩形反算，避免亚像素拉伸。
+                    _imageLocalRect = matrix.TryInvert(out SKMatrix inverse)
+                        ? inverse.MapRect(ToRect(region.Full))
+                        : destination;
                 }
 
-                if (_image != null)
-                {
-                    canvas.DrawImage(_image, destination);
-                }
+                canvas.DrawImage(_image, _imageLocalRect);
             }
         }
 
@@ -72,55 +110,25 @@ public sealed class LuminaBackdropBlur : Control
             Invalidate();
         }
 
-        private static SKImage? Capture(ISkiaSharpApiLease lease, SKCanvas canvas, SKRect destination, float sigma)
+        private static SKImage? CaptureBlurred(SKSurface surface, SKRectI visible, float sigmaX, float sigmaY)
         {
-            SKSurface? sourceSurface = lease.SkSurface;
-            if (sourceSurface == null)
-            {
-                return null;
-            }
-
-            SKMatrix matrix = canvas.TotalMatrix;
-            SKRect mapped = matrix.MapRect(destination);
-            SKRectI clip = canvas.DeviceClipBounds;
-            SKRectI sourceBounds = new(
-                Math.Max(clip.Left, (int)Math.Floor(mapped.Left)),
-                Math.Max(clip.Top, (int)Math.Floor(mapped.Top)),
-                Math.Min(clip.Right, (int)Math.Ceiling(mapped.Right)),
-                Math.Min(clip.Bottom, (int)Math.Ceiling(mapped.Bottom)));
-
-            if (sourceBounds.Width <= 0 || sourceBounds.Height <= 0)
-            {
-                return null;
-            }
-
-            using SKImage source = sourceSurface.Snapshot(sourceBounds);
+            using SKImage? source = SnapshotRegion(surface, visible);
             if (source == null)
             {
                 return null;
             }
 
-            SKImageInfo imageInfo = new(sourceBounds.Width, sourceBounds.Height, SKColorType.Rgba8888, SKAlphaType.Premul);
+            SKImageInfo imageInfo = new(visible.Width, visible.Height, SKColorType.Rgba8888, SKAlphaType.Premul);
             using SKSurface? blurredSurface = SKSurface.Create(imageInfo);
             if (blurredSurface == null)
             {
                 return null;
             }
 
-            float scaleX = MathF.Sqrt((matrix.ScaleX * matrix.ScaleX) + (matrix.SkewY * matrix.SkewY));
-            float scaleY = MathF.Sqrt((matrix.SkewX * matrix.SkewX) + (matrix.ScaleY * matrix.ScaleY));
-            using SKImageFilter blur = SKImageFilter.CreateBlur(
-                Math.Clamp(sigma * Math.Max(scaleX, 0.01f), 1f, 320f),
-                Math.Clamp(sigma * Math.Max(scaleY, 0.01f), 1f, 320f),
-                SKShaderTileMode.Clamp);
-            using SKPaint paint = new()
-            {
-                ImageFilter = blur,
-                IsAntialias = true
-            };
-            SKRect imageBounds = SKRect.Create(sourceBounds.Width, sourceBounds.Height);
+            using SKImageFilter blur = SKImageFilter.CreateBlur(sigmaX, sigmaY, SKShaderTileMode.Clamp);
+            using SKPaint paint = new() { ImageFilter = blur };
             blurredSurface.Canvas.Clear(SKColors.Transparent);
-            blurredSurface.Canvas.DrawImage(source, imageBounds, paint);
+            blurredSurface.Canvas.DrawImage(source, SKRect.Create(visible.Width, visible.Height), paint);
             blurredSurface.Canvas.Flush();
             return blurredSurface.Snapshot();
         }
@@ -200,15 +208,71 @@ public sealed class LuminaBackdropBlur : Control
             float sigma = Math.Clamp((float)_blurRadius, 1f, 320f);
             using SKRoundRect clip = CreateRoundRect(rect, _cornerRadius);
 
-            if (_mode == LuminaBackdropBlurMode.Cached)
+            SKMatrix matrix = canvas.TotalMatrix;
+
+            // 先算区域、再加圆角 clip：此时的 DeviceClipBounds 只反映祖先裁剪 + 失效矩形，
+            // 用它判断"是否拿到了完整背景"才有意义。
+            BackdropRegion region = ComputeRegion(canvas, matrix, rect);
+            if (region.IsEmpty)
             {
-                canvas.Save();
-                canvas.ClipRoundRect(clip, SKClipOperation.Intersect, antialias: true);
-                _cachedBackdrop.DrawOrCapture(lease, canvas, rect, sigma, _cacheVersion);
-                canvas.Restore();
                 return;
             }
 
+            canvas.Save();
+            try
+            {
+                canvas.ClipRoundRect(clip, SKClipOperation.Intersect, antialias: true);
+
+                SKSurface? surface = lease.SkSurface;
+                if (surface == null)
+                {
+                    // 拿不到表面就无法自己截背景，退回 Skia 的 backdrop 图层。
+                    DrawWithBackdropLayer(canvas, rect, sigma);
+                    return;
+                }
+
+                (float deviceSigmaX, float deviceSigmaY) = ToDeviceSigma(matrix, sigma);
+                if (_mode == LuminaBackdropBlurMode.Cached)
+                {
+                    _cachedBackdrop.Draw(canvas, surface, region, matrix, deviceSigmaX, deviceSigmaY, rect, _cacheVersion);
+                }
+                else
+                {
+                    DrawBlurredRegion(canvas, surface, region.Visible, deviceSigmaX, deviceSigmaY);
+                }
+            }
+            finally
+            {
+                canvas.Restore();
+            }
+        }
+
+        private static BackdropRegion ComputeRegion(SKCanvas canvas, SKMatrix matrix, SKRect rect)
+        {
+            // 外扩取整前先内缩一个极小量，吸收 49.99999 / 100.00001 这类浮点噪声，
+            // 不然会平白多出 1px，导致"完整背景"判定永远不成立。
+            const float epsilon = 0.01f;
+            SKRect mapped = matrix.MapRect(rect);
+            SKRectI full = new(
+                (int)MathF.Floor(mapped.Left + epsilon),
+                (int)MathF.Floor(mapped.Top + epsilon),
+                (int)MathF.Ceiling(mapped.Right - epsilon),
+                (int)MathF.Ceiling(mapped.Bottom - epsilon));
+            SKRectI visible = SKRectI.Intersect(full, canvas.DeviceClipBounds);
+            return new BackdropRegion(full, visible);
+        }
+
+        private static (float X, float Y) ToDeviceSigma(SKMatrix matrix, float sigma)
+        {
+            float scaleX = MathF.Sqrt((matrix.ScaleX * matrix.ScaleX) + (matrix.SkewY * matrix.SkewY));
+            float scaleY = MathF.Sqrt((matrix.SkewX * matrix.SkewX) + (matrix.ScaleY * matrix.ScaleY));
+            return (
+                Math.Clamp(sigma * Math.Max(scaleX, 0.01f), 1f, 320f),
+                Math.Clamp(sigma * Math.Max(scaleY, 0.01f), 1f, 320f));
+        }
+
+        private static void DrawWithBackdropLayer(SKCanvas canvas, SKRect rect, float sigma)
+        {
             using SKImageFilter backdrop = SKImageFilter.CreateBlur(sigma, sigma, SKShaderTileMode.Clamp);
             if (backdrop == null)
             {
@@ -225,12 +289,9 @@ public sealed class LuminaBackdropBlur : Control
                 Backdrop = backdrop,
                 Flags = SKCanvasSaveLayerRecFlags.None
             };
-            canvas.Save();
-            canvas.ClipRoundRect(clip, SKClipOperation.Intersect, antialias: true);
             int saveCount = canvas.SaveLayer(in layer);
             canvas.DrawRect(rect, transparentPaint);
             canvas.RestoreToCount(saveCount);
-            canvas.Restore();
         }
 
         private static SKRoundRect CreateRoundRect(SKRect rect, CornerRadius cornerRadius)
@@ -253,6 +314,53 @@ public sealed class LuminaBackdropBlur : Control
             float clamped = (float)Math.Clamp(radius, 0.0, radiusLimit);
             return new SKPoint(clamped, clamped);
         }
+    }
+
+    /// <summary>
+    /// 只截本帧有效的那块背景（<paramref name="visible"/>），模糊后按设备坐标原位画回。
+    /// </summary>
+    /// <remarks>
+    /// 不把局部快照拉伸到整个元素（旧实现的硬边色块就是这么来的），也不读 clip 之外的像素。
+    /// 失效矩形边缘因 Clamp 会有轻微接缝，但内容是正确的局部模糊。
+    /// 直接画在当前 canvas 上，GPU 后端不会产生回读。调用方需已设好圆角 clip（clip 本身在设备空间，ResetMatrix 不影响它）。
+    /// </remarks>
+    private static void DrawBlurredRegion(SKCanvas canvas, SKSurface surface, SKRectI visible, float sigmaX, float sigmaY)
+    {
+        using SKImage? source = SnapshotRegion(surface, visible);
+        if (source == null)
+        {
+            return;
+        }
+
+        using SKImageFilter blur = SKImageFilter.CreateBlur(sigmaX, sigmaY, SKShaderTileMode.Clamp);
+        using SKPaint paint = new() { ImageFilter = blur };
+        canvas.Save();
+        canvas.ResetMatrix();
+        canvas.DrawImage(source, ToRect(visible), paint);
+        canvas.Restore();
+    }
+
+    private static SKImage? SnapshotRegion(SKSurface surface, SKRectI region)
+    {
+        SKImage? image = surface.Snapshot(region);
+        if (image == null)
+        {
+            return null;
+        }
+
+        // Snapshot 会把越界部分裁掉；尺寸对不上说明 canvas 和 surface 坐标系不一致，宁可不画也不错位。
+        if (image.Width != region.Width || image.Height != region.Height)
+        {
+            image.Dispose();
+            return null;
+        }
+
+        return image;
+    }
+
+    private static SKRect ToRect(SKRectI rect)
+    {
+        return new SKRect(rect.Left, rect.Top, rect.Right, rect.Bottom);
     }
 
     public static readonly StyledProperty<double> BlurRadiusProperty;
