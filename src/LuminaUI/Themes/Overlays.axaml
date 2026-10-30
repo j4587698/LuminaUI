@@ -57,9 +57,18 @@
                         HorizontalAlignment="Stretch"
                         BoxShadow="{DynamicResource LuminaShadowPopup}">
                     
-                    <StackPanel Margin="{TemplateBinding Padding}">
+                    <!-- 注意：这里不能用 StackPanel。StackPanel 在纵向给子元素无限高度，
+                         内容永远"放得下"，对话框就会一路长到窗口外面（小窗口下取消/保存被裁掉）。
+                         改成 Auto/* 两行：内容区拿到的是"剩余高度"这个有限约束，
+                         内容想滚动就在自己内部放 ScrollViewer（这样底部按钮还能钉住）。
+                         这一层只做裁剪兜底，不再套 ScrollViewer —— 套了会给内容无限高度，
+                         反而让调用方的 * 行失去意义。
+                         前提：对话框本身要拿到有限高度约束（OverlayHost 里是居中的 ContentPresenter，满足）。
+                         若把 LuminaDialog 直接放进 StackPanel/ScrollViewer，* 行会退化成 Auto，不再限高。 -->
+                    <Grid RowDefinitions="Auto,*" Margin="{TemplateBinding Padding}">
                         <!-- 头部标题区 (去除了陈旧的分割线) -->
                         <TextBlock Name="PART_TitleText"
+                                   Grid.Row="0"
                                    Text="{TemplateBinding Title}" 
                                    FontSize="{DynamicResource LuminaDialogTitleFontSize}"
                                    FontWeight="SemiBold" 
@@ -67,9 +76,12 @@
                                    Margin="{DynamicResource LuminaDialogTitleMargin}"
                                    IsVisible="{TemplateBinding Title, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
                         
-                        <!-- 身体内容区 -->
-                        <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" />
-                    </StackPanel>
+                        <!-- 身体内容区：超出部分裁掉，避免糊到卡片外面去 -->
+                        <Border Name="PART_ContentClip" Grid.Row="1" ClipToBounds="True">
+                            <ContentPresenter Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}" />
+                        </Border>
+                    </Grid>
                 </Border>
             </ControlTemplate>
         </Setter>
