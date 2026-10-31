@@ -8,20 +8,25 @@
     <Thickness x:Key="LuminaPopConfirmPadding">14</Thickness>
     <Thickness x:Key="LuminaPopConfirmBorderThickness">1</Thickness>
     <CornerRadius x:Key="LuminaPopConfirmCornerRadius">10</CornerRadius>
-    <x:Double x:Key="LuminaPopConfirmColumnSpacing">10</x:Double>
-    <x:Double x:Key="LuminaPopConfirmIconHostSize">22</x:Double>
+    <x:Double x:Key="LuminaPopConfirmColumnSpacing">12</x:Double>
+    <x:Double x:Key="LuminaPopConfirmIconHostSize">36</x:Double>
+    <CornerRadius x:Key="LuminaPopConfirmIconHostCornerRadius">18</CornerRadius>
     <x:Double x:Key="LuminaPopConfirmIconSize">20</x:Double>
+    <!-- 实心圆 + 镂空感叹号（F0 = EvenOdd）。PathIcon 只填充不描边，开放线段画不出来，
+         所以感叹号必须是有面积的闭合图形，靠奇偶规则从圆里挖空。 -->
+    <StreamGeometry x:Key="LuminaPopConfirmDefaultIconGeometry">F0 M12,2 A10,10 0 1 1 12,22 A10,10 0 1 1 12,2 Z M12,6 C12.66,6 13.15,6.55 13.1,7.2 L12.75,12.9 C12.72,13.3 12.4,13.6 12,13.6 C11.6,13.6 11.28,13.3 11.25,12.9 L10.9,7.2 C10.85,6.55 11.34,6 12,6 Z M12,15.35 A1.25,1.25 0 1 1 12,17.85 A1.25,1.25 0 1 1 12,15.35 Z</StreamGeometry>
     <x:Double x:Key="LuminaPopConfirmContentSpacing">6</x:Double>
     <x:Double x:Key="LuminaPopConfirmContentFontSize">13</x:Double>
-    <x:Double x:Key="LuminaPopConfirmCloseIconSize">12</x:Double>
     <Thickness x:Key="LuminaPopConfirmActionsMargin">0,18,0,0</Thickness>
     <x:Double x:Key="LuminaPopConfirmActionsSpacing">8</x:Double>
     <x:Double x:Key="LuminaPopConfirmSheetMessageColumnSpacing">12</x:Double>
     <x:Double x:Key="LuminaPopConfirmSheetContentSpacing">8</x:Double>
     <x:Double x:Key="LuminaPopConfirmSheetActionsSpacing">10</x:Double>
     <x:Double x:Key="LuminaPopConfirmSheetLayoutSpacing">18</x:Double>
+    <x:Double x:Key="LuminaPopConfirmSheetIconHostSize">44</x:Double>
+    <CornerRadius x:Key="LuminaPopConfirmSheetIconHostCornerRadius">22</CornerRadius>
     <x:Double x:Key="LuminaPopConfirmSheetCustomIconSize">24</x:Double>
-    <x:Double x:Key="LuminaPopConfirmSheetDefaultIconSize">22</x:Double>
+    <x:Double x:Key="LuminaPopConfirmSheetDefaultIconSize">24</x:Double>
     <x:Double x:Key="LuminaPopConfirmSheetHeaderFontSize">18</x:Double>
     <x:Double x:Key="LuminaPopConfirmSheetContentFontSize">14</x:Double>
 
@@ -52,27 +57,38 @@
                                 CornerRadius="{DynamicResource LuminaPopConfirmCornerRadius}"
                                 BoxShadow="{DynamicResource LuminaShadowPopup}">
                             <Grid RowDefinitions="Auto,Auto"
-                                  ColumnDefinitions="Auto,*,Auto"
+                                  ColumnDefinitions="Auto,*"
                                   ColumnSpacing="{DynamicResource LuminaPopConfirmColumnSpacing}">
-                                <Panel Grid.Row="0"
-                                       Grid.Column="0"
-                                       Width="{DynamicResource LuminaPopConfirmIconHostSize}"
-                                       Height="{DynamicResource LuminaPopConfirmIconHostSize}"
-                                       VerticalAlignment="Top">
-                                    <ContentPresenter Content="{TemplateBinding Icon}"
-                                                      IsVisible="{TemplateBinding Icon, Converter={x:Static ObjectConverters.IsNotNull}}" />
-                                    <PathIcon Name="PART_DefaultIcon"
-                                              Data="M12 2 L22 20 H2 Z M12 8 V13 M12 16 V18"
-                                              Width="{DynamicResource LuminaPopConfirmIconSize}"
-                                              Height="{DynamicResource LuminaPopConfirmIconSize}"
-                                              Foreground="{DynamicResource LuminaWarningBrush}"
-                                              IsVisible="{TemplateBinding Icon, Converter={x:Static ObjectConverters.IsNull}}" />
-                                </Panel>
+                                <!-- 图标徽章：浅色圆底 + 图标，相对整块文字上下居中 -->
+                                <Border Name="PART_IconBadge"
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Width="{DynamicResource LuminaPopConfirmIconHostSize}"
+                                        Height="{DynamicResource LuminaPopConfirmIconHostSize}"
+                                        CornerRadius="{DynamicResource LuminaPopConfirmIconHostCornerRadius}"
+                                        Background="{DynamicResource LuminaWarningBgBrush}"
+                                        VerticalAlignment="Center">
+                                    <Panel>
+                                        <ContentPresenter Content="{TemplateBinding Icon}"
+                                                          HorizontalAlignment="Center"
+                                                          VerticalAlignment="Center"
+                                                          IsVisible="{TemplateBinding Icon, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                                        <PathIcon Name="PART_DefaultIcon"
+                                                  Data="{DynamicResource LuminaPopConfirmDefaultIconGeometry}"
+                                                  Width="{DynamicResource LuminaPopConfirmIconSize}"
+                                                  Height="{DynamicResource LuminaPopConfirmIconSize}"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Foreground="{DynamicResource LuminaWarningBrush}"
+                                                  IsVisible="{TemplateBinding Icon, Converter={x:Static ObjectConverters.IsNull}}" />
+                                    </Panel>
+                                </Border>
 
                                 <StackPanel Grid.Row="0"
                                             Grid.Column="1"
                                             Spacing="{DynamicResource LuminaPopConfirmContentSpacing}"
-                                            HorizontalAlignment="Stretch">
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Center">
                                     <ContentControl Content="{TemplateBinding PopupHeader}"
                                                     ContentTemplate="{TemplateBinding PopupHeaderTemplate}"
                                                     HorizontalContentAlignment="Stretch">
@@ -100,23 +116,9 @@
                                     </ContentControl>
                                 </StackPanel>
 
-                                <Button Name="PART_CloseButton"
-                                        Grid.Row="0"
-                                        Grid.Column="2"
-                                        Classes="Small Icon Ghost"
-                                        Theme="{StaticResource LuminaButton}"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Top"
-                                        Command="{TemplateBinding CancelCommand}"
-                                        CommandParameter="{TemplateBinding CancelCommandParameter}">
-                                    <PathIcon Width="{DynamicResource LuminaPopConfirmCloseIconSize}"
-                                              Height="{DynamicResource LuminaPopConfirmCloseIconSize}"
-                                              Data="M6,6 L18,18 M18,6 L6,18" />
-                                </Button>
-
                                 <StackPanel Grid.Row="1"
                                             Grid.Column="0"
-                                            Grid.ColumnSpan="3"
+                                            Grid.ColumnSpan="2"
                                             Margin="{DynamicResource LuminaPopConfirmActionsMargin}"
                                             Orientation="Horizontal"
                                             HorizontalAlignment="Right"
@@ -144,13 +146,27 @@
         <Style Selector="^.Danger /template/ PathIcon#PART_DefaultIcon">
             <Setter Property="Foreground" Value="{DynamicResource LuminaDangerBrush}" />
         </Style>
+        <Style Selector="^.Danger /template/ Border#PART_IconBadge">
+            <Setter Property="Background" Value="{DynamicResource LuminaDangerBgBrush}" />
+        </Style>
 
         <Style Selector="^.Success /template/ PathIcon#PART_DefaultIcon">
             <Setter Property="Foreground" Value="{DynamicResource LuminaSuccessBrush}" />
         </Style>
+        <Style Selector="^.Success /template/ Border#PART_IconBadge">
+            <Setter Property="Background" Value="{DynamicResource LuminaSuccessBgBrush}" />
+        </Style>
 
         <Style Selector="^.Info /template/ PathIcon#PART_DefaultIcon">
             <Setter Property="Foreground" Value="{DynamicResource LuminaPrimaryBrush}" />
+        </Style>
+        <Style Selector="^.Info /template/ Border#PART_IconBadge">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBgBrush}" />
+        </Style>
+
+        <!-- 自定义图标自带外观，不再垫浅色圆底 -->
+        <Style Selector="^:icon /template/ Border#PART_IconBadge">
+            <Setter Property="Background" Value="Transparent" />
         </Style>
     </ControlTheme>
 </ResourceDictionary>
