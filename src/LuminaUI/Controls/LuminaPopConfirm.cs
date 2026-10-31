@@ -25,6 +25,10 @@ public class LuminaPopConfirm : ContentControl
 
     public const string PART_Popup = "PART_Popup";
 
+    /// <summary>
+    /// 可选部件：默认模板不再包含关闭按钮（与底部"取消"重复）。
+    /// 自定义模板若声明了同名 Button，仍按取消处理。
+    /// </summary>
     public const string PART_CloseButton = "PART_CloseButton";
 
     public const string PART_CancelButton = "PART_CancelButton";
@@ -450,7 +454,8 @@ public class LuminaPopConfirm : ContentControl
         message.Children.Add(CreateSheetIcon());
         StackPanel textPanel = new StackPanel
         {
-            HorizontalAlignment = HorizontalAlignment.Stretch
+            HorizontalAlignment = HorizontalAlignment.Stretch,
+            VerticalAlignment = VerticalAlignment.Center
         };
         LuminaPickerResources.BindResource(textPanel, StackPanel.SpacingProperty, "LuminaPopConfirmSheetContentSpacing");
         Grid.SetColumn(textPanel, 1);
@@ -494,37 +499,56 @@ public class LuminaPopConfirm : ContentControl
 
     private Control CreateSheetIcon()
     {
+        // 与弹层模板一致：浅色圆底徽章 + 实心圆镂空感叹号，相对文字上下居中。
+        // 颜色走 DynamicResource：Application.TryFindResource 看不到主题变体里的画刷，
+        // 之前会落到硬编码的 OrangeRed 等兜底色，而且切换主题也不跟着变。
+        (string iconBrushKey, string badgeBrushKey) = Classes.Contains("Danger")
+            ? ("LuminaDangerBrush", "LuminaDangerBgBrush")
+            : Classes.Contains("Success")
+                ? ("LuminaSuccessBrush", "LuminaSuccessBgBrush")
+                : Classes.Contains("Info")
+                    ? ("LuminaPrimaryBrush", "LuminaPrimaryBgBrush")
+                    : ("LuminaWarningBrush", "LuminaWarningBgBrush");
+
+        Control glyph;
         if (Icon != null)
         {
-            return new ContentControl
+            glyph = new ContentControl
             {
                 Content = Icon,
-                Width = LuminaPickerResources.Double("LuminaPopConfirmSheetCustomIconSize", 24.0),
-                Height = LuminaPickerResources.Double("LuminaPopConfirmSheetCustomIconSize", 24.0),
-                VerticalAlignment = VerticalAlignment.Top
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center
             };
+            LuminaPickerResources.BindResource(glyph, Layoutable.WidthProperty, "LuminaPopConfirmSheetCustomIconSize");
+            LuminaPickerResources.BindResource(glyph, Layoutable.HeightProperty, "LuminaPopConfirmSheetCustomIconSize");
         }
-        PathIcon icon = new PathIcon
+        else
         {
-            Data = Geometry.Parse("M12 2 L22 20 H2 Z M12 8 V13 M12 16 V18"),
-            Width = LuminaPickerResources.Double("LuminaPopConfirmSheetDefaultIconSize", 22.0),
-            Height = LuminaPickerResources.Double("LuminaPopConfirmSheetDefaultIconSize", 22.0),
-            VerticalAlignment = VerticalAlignment.Top,
-            Foreground = Brush("LuminaWarningBrush", Brushes.Orange)
+            PathIcon icon = new PathIcon
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            LuminaPickerResources.BindResource(icon, PathIcon.DataProperty, "LuminaPopConfirmDefaultIconGeometry");
+            LuminaPickerResources.BindResource(icon, Layoutable.WidthProperty, "LuminaPopConfirmSheetDefaultIconSize");
+            LuminaPickerResources.BindResource(icon, Layoutable.HeightProperty, "LuminaPopConfirmSheetDefaultIconSize");
+            LuminaPickerResources.BindBrush(icon, TemplatedControl.ForegroundProperty, iconBrushKey);
+            glyph = icon;
+        }
+
+        Border badge = new Border
+        {
+            Child = glyph,
+            VerticalAlignment = VerticalAlignment.Center
         };
-        if (Classes.Contains("Danger"))
+        LuminaPickerResources.BindResource(badge, Layoutable.WidthProperty, "LuminaPopConfirmSheetIconHostSize");
+        LuminaPickerResources.BindResource(badge, Layoutable.HeightProperty, "LuminaPopConfirmSheetIconHostSize");
+        LuminaPickerResources.BindResource(badge, Border.CornerRadiusProperty, "LuminaPopConfirmSheetIconHostCornerRadius");
+        if (Icon == null)
         {
-            icon.Foreground = Brush("LuminaDangerBrush", Brushes.OrangeRed);
+            LuminaPickerResources.BindBrush(badge, Border.BackgroundProperty, badgeBrushKey);
         }
-        else if (Classes.Contains("Success"))
-        {
-            icon.Foreground = Brush("LuminaSuccessBrush", Brushes.SeaGreen);
-        }
-        else if (Classes.Contains("Info"))
-        {
-            icon.Foreground = Brush("LuminaPrimaryBrush", Brushes.DodgerBlue);
-        }
-        return icon;
+        return badge;
     }
 
     private static Control CreateSheetContentPresenter(object? content, IDataTemplate? template, bool isHeader)
@@ -557,13 +581,6 @@ public class LuminaPopConfirm : ContentControl
     private LuminaPopupType GetEffectivePopupType()
     {
         return IsSet(PopupTypeProperty) ? PopupType : LuminaOptions.GetPopupType(this);
-    }
-
-    private static IBrush Brush(string key, IBrush fallback)
-    {
-        Application? current = Application.Current;
-        object? resource;
-        return (current != null && current.TryFindResource(key, out resource) && resource is IBrush brush) ? brush : fallback;
     }
 
     private void OnLanguageChanged(object? sender, EventArgs e)
