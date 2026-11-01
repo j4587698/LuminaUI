@@ -984,14 +984,39 @@ public class LuminaOverlayHost : ContentControl, ILuminaOverlayHost
         }
     }
 
+    /// <summary>
+    /// Answers whether a press landed inside the named template part, which is what decides
+    /// whether a press on the overlay should dismiss the dialog, bottom sheet or drawer.
+    /// </summary>
+    /// <remarks>
+    /// Walking the visual ancestors alone is not enough. Popup content (a ComboBox drop-down, a
+    /// ContextMenu, a ToolTip) lives in a separate <see cref="PopupRoot"/> top level, so the
+    /// ancestor chain stops there and never reaches <c>PART_DialogRoot</c>. A press on a drop-down
+    /// item was therefore reported as a press on the scrim, which closed the dialog the drop-down
+    /// belonged to.
+    /// <para>
+    /// <see cref="PopupRoot.Parent"/> is the <see cref="Popup"/> control itself, and that control
+    /// does sit in the host's template. Hopping back to it when the walk hits a popup root keeps
+    /// presses inside hosted popups attributed to the dialog that owns them.
+    /// </para>
+    /// </remarks>
     private static bool IsPointerSourceInsidePart(object? source, string partName)
     {
-        if (source is not Control control)
+        Visual? visual = source as Visual;
+        while (visual != null)
         {
-            return false;
+            if (visual is Control control && control.Name == partName)
+            {
+                return true;
+            }
+
+            // Popup content is rooted at its own top level; continue from the Popup that hosts it.
+            visual = visual is PopupRoot popupRoot
+                ? popupRoot.Parent as Visual ?? popupRoot.ParentTopLevel
+                : visual.GetVisualParent();
         }
 
-        return control.Name == partName || control.GetVisualAncestors().OfType<Control>().Any(ancestor => ancestor.Name == partName);
+        return false;
     }
 
     private void DetachOverlayHandlers()
