@@ -67,6 +67,7 @@ jobs:
           dotnet restore src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj
           dotnet restore src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj
           dotnet restore src/LuminaUI.Charts/LuminaUI.Charts.csproj
+          dotnet restore src/LuminaUI.Markdown/LuminaUI.Markdown.csproj
           dotnet restore demo/LuminaUI.Demo.Desktop/LuminaUI.Demo.Desktop.csproj
           dotnet restore tests/LuminaUI.Tests/LuminaUI.Tests.csproj
 
@@ -77,6 +78,7 @@ jobs:
           dotnet build src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj --configuration "$CONFIGURATION" --no-restore -p:ContinuousIntegrationBuild=true
           dotnet build src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj --configuration "$CONFIGURATION" --no-restore -p:ContinuousIntegrationBuild=true
           dotnet build src/LuminaUI.Charts/LuminaUI.Charts.csproj --configuration "$CONFIGURATION" --no-restore -p:ContinuousIntegrationBuild=true
+          dotnet build src/LuminaUI.Markdown/LuminaUI.Markdown.csproj --configuration "$CONFIGURATION" --no-restore -p:ContinuousIntegrationBuild=true
           dotnet build demo/LuminaUI.Demo.Desktop/LuminaUI.Demo.Desktop.csproj --configuration "$CONFIGURATION" --no-restore -p:ContinuousIntegrationBuild=true
 
       - name: Test
