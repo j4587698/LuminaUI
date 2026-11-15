@@ -1,0 +1,181 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+        x:Class="LuminaUI.Markdown.LuminaMarkdownTheme">
+
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://LuminaUI.Markdown/Themes/Markdown.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+
+    <!--
+        The renderer only builds structure and sets `md-*` classes; every visual decision lives
+        here so it follows the semantic brushes and can be overridden by the application with a
+        later style.
+
+        Two selector constraints shaped this file. A bare class selector (`.md-h1`) is rejected by
+        the XAML compiler (AVLN2200), and a type selector matches only the exact type, so
+        `TextBlock.md-h1` silently never applies to the SelectableTextBlock the renderer actually
+        creates. The renderer therefore emits SelectableTextBlock for all text and every text style
+        targets it; changing that type means changing these selectors with it.
+    -->
+
+    <Style Selector="SelectableTextBlock.md-text">
+        <Setter Property="FontSize" Value="{DynamicResource LuminaMarkdownFontSize}" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+    </Style>
+
+    <!--
+        Line height belongs to the body only. Inherited by a heading it is smaller than the font
+        size, and the glyphs of a 30px h1 overlap each other.
+    -->
+    <Style Selector="SelectableTextBlock.md-paragraph">
+        <Setter Property="LineHeight" Value="{DynamicResource LuminaMarkdownLineHeight}" />
+        <Setter Property="Margin" Value="{DynamicResource LuminaMarkdownParagraphMargin}" />
+    </Style>
+
+    <Style Selector="SelectableTextBlock.md-h1">
+        <Setter Property="FontSize" Value="{DynamicResource LuminaMarkdownH1FontSize}" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+        <Setter Property="Margin" Value="{DynamicResource LuminaMarkdownHeadingMargin}" />
+    </Style>
+
+    <Style Selector="SelectableTextBlock.md-h2">
+        <Setter Property="FontSize" Value="{DynamicResource LuminaMarkdownH2FontSize}" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+        <Setter Property="Margin" Value="{DynamicResource LuminaMarkdownHeadingMargin}" />
+    </Style>
+
+    <Style Selector="SelectableTextBlock.md-h3">
+        <Setter Property="FontSize" Value="{DynamicResource LuminaMarkdownH3FontSize}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+        <Setter Property="Margin" Value="{DynamicResource LuminaMarkdownHeadingMargin}" />
+    </Style>
+
+    <Style Selector="SelectableTextBlock.md-h4">
+        <Setter Property="FontSize" Value="{DynamicResource LuminaMarkdownH4FontSize}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+        <Setter Property="Margin" Value="{DynamicResource LuminaMarkdownHeadingMargin}" />
+    </Style>
+
+    <Style Selector="SelectableTextBlock.md-h5">
+        <Setter Property="FontSize" Value="{DynamicResource LuminaMarkdownH5FontSize}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+        <Setter Property="Margin" Value="{DynamicResource LuminaMarkdownHeadingMargin}" />
+    </Style>
+
+    <Style Selector="SelectableTextBlock.md-h6">
+        <Setter Property="FontSize" Value="{DynamicResource LuminaMarkdownH6FontSize}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextMutedBrush}" />
+        <Setter Property="Margin" Value="{DynamicResource LuminaMarkdownHeadingMargin}" />
+    </Style>
+
+    <!--
+        LineHeight is set here as well as on the paragraph: the marker and the first line of the
+        item must share a baseline, and without it the number sits visibly above the text.
+        The minimum width keeps "1." and "10." on the same left edge.
+    -->
+    <Style Selector="SelectableTextBlock.md-list-marker">
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextMutedBrush}" />
+        <Setter Property="Margin" Value="{DynamicResource LuminaMarkdownListMarkerMargin}" />
+        <Setter Property="LineHeight" Value="{DynamicResource LuminaMarkdownLineHeight}" />
+        <Setter Property="MinWidth" Value="{DynamicResource LuminaMarkdownListMarkerMinWidth}" />
+    </Style>
+
+    <!--
+        Task state is a real CheckBox on the core package's compact theme. The default template
+        reserves a 32px row for touch input and would blow out the line height of a document; the
+        compact theme keeps the control and its states and only shrinks the box.
+        The document is read-only, so the box takes no pointer or keyboard input.
+    -->
+    <Style Selector="CheckBox.md-task">
+        <Setter Property="Theme" Value="{DynamicResource LuminaCompactCheckBox}" />
+        <Setter Property="Margin" Value="{DynamicResource LuminaMarkdownTaskMargin}" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="Focusable" Value="False" />
+    </Style>
+
+    <Style Selector="Grid.md-list-item">
+        <Setter Property="Margin" Value="{DynamicResource LuminaMarkdownListItemMargin}" />
+    </Style>
+
+    <Style Selector="lumina|LuminaImage.md-image">
+        <Setter Property="Margin" Value="{DynamicResource LuminaMarkdownParagraphMargin}" />
+    </Style>
+
+    <Style Selector="SelectableTextBlock.md-code-text">
+        <Setter Property="FontFamily" Value="{DynamicResource LuminaMarkdownCodeFontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource LuminaMarkdownCodeFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+    </Style>
+
+    <Style Selector="SelectableTextBlock.md-code-language">
+        <Setter Property="FontSize" Value="{DynamicResource LuminaTextBlockCaptionFontSize}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextMutedBrush}" />
+        <Setter Property="Margin" Value="0,0,0,6" />
+    </Style>
+
+    <Style Selector="Border.md-quote">
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderStrongBrush}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource LuminaMarkdownQuoteBorderThickness}" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaMarkdownQuotePadding}" />
+        <Setter Property="Margin" Value="{DynamicResource LuminaMarkdownQuoteMargin}" />
+    </Style>
+
+    <Style Selector="Border.md-code-block">
+        <Setter Property="Background" Value="{DynamicResource LuminaFillTertiaryBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaMarkdownCodeBlockPadding}" />
+        <Setter Property="Margin" Value="{DynamicResource LuminaMarkdownCodeBlockMargin}" />
+    </Style>
+
+    <Style Selector="Border.md-rule">
+        <Setter Property="Height" Value="{DynamicResource LuminaMarkdownRuleHeight}" />
+        <Setter Property="Background" Value="{DynamicResource LuminaBorderBrush}" />
+        <Setter Property="Margin" Value="{DynamicResource LuminaMarkdownRuleMargin}" />
+    </Style>
+
+    <Style Selector="Border.md-table-frame">
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Setter Property="Margin" Value="{DynamicResource LuminaMarkdownParagraphMargin}" />
+    </Style>
+
+    <Style Selector="Border.md-table-cell">
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderBrush}" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+        <Setter Property="Padding" Value="{DynamicResource LuminaMarkdownTableCellPadding}" />
+    </Style>
+
+    <Style Selector="Border.md-table-header-cell">
+        <Setter Property="Background" Value="{DynamicResource LuminaFillTertiaryBrush}" />
+    </Style>
+
+    <Style Selector="Run.md-link">
+        <Setter Property="Foreground" Value="{DynamicResource LuminaPrimaryBrush}" />
+        <Setter Property="TextDecorations" Value="Underline" />
+    </Style>
+
+    <Style Selector="Run.md-code">
+        <Setter Property="FontFamily" Value="{DynamicResource LuminaMarkdownCodeFontFamily}" />
+        <Setter Property="Background" Value="{DynamicResource LuminaFillTertiaryBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextPrimaryBrush}" />
+    </Style>
+
+</Styles>

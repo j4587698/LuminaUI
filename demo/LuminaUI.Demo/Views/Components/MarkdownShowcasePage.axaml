@@ -1,0 +1,27 @@
+<lumina:LuminaPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l10n="clr-namespace:LuminaUI.Localization;assembly=LuminaUI"
+             xmlns:lumina="clr-namespace:LuminaUI.Controls;assembly=LuminaUI"
+             xmlns:luminaMd="clr-namespace:LuminaUI.Markdown.Controls;assembly=LuminaUI.Markdown"
+             x:Class="LuminaUI.Demo.Views.MarkdownShowcasePage">
+
+    <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="14"
+                    Width="{Binding #PageScroll.Bounds.Width}"
+                    HorizontalAlignment="Stretch"
+                    Margin="0,4,0,24">
+            <StackPanel Spacing="4">
+                <TextBlock Classes="Display" Text="{l10n:Loc Sandbox.Text.1365}" />
+                <TextBlock Classes="Body"
+                           Text="{l10n:Loc Sandbox.Text.1366}"
+                           Foreground="{DynamicResource LuminaTextMutedBrush}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+
+            <lumina:LuminaCard Padding="24">
+                <luminaMd:LuminaMarkdown x:Name="Document" MaxWidth="760" HorizontalAlignment="Left" />
+            </lumina:LuminaCard>
+        </StackPanel>
+    </ScrollViewer>
+
+</lumina:LuminaPage>

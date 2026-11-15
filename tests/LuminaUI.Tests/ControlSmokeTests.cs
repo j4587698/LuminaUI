@@ -103,7 +103,12 @@ public class ControlSmokeTests
 
     private static Type[] DiscoverControlTypes() =>
         [
-            .. new[] { typeof(LuminaTheme).Assembly, typeof(global::LuminaUI.Charts.LuminaLineChart).Assembly }
+            .. new[]
+            {
+                typeof(LuminaTheme).Assembly,
+                typeof(global::LuminaUI.Charts.LuminaLineChart).Assembly,
+                typeof(global::LuminaUI.Markdown.Controls.LuminaMarkdown).Assembly,
+            }
                 .SelectMany(assembly => assembly.GetTypes())
                 .Where(type => type is { IsAbstract: false, IsPublic: true })
                 .Where(type => typeof(Control).IsAssignableFrom(type))

@@ -32,13 +32,24 @@ public class ResourceContractTests
         "TopView.axaml",
     ];
 
+    /// <summary>
+    /// Every directory whose XAML contributes resources to the theme. A package that ships its own
+    /// control themes is checked here too, so a mistyped key in an optional package is caught by
+    /// the same static contract as the core ones.
+    /// </summary>
+    private static readonly string[] ThemeDirectories =
+    [
+        RepoPaths.CoreThemeDirectory,
+        RepoPaths.MarkdownThemeDirectory,
+    ];
+
     [Fact]
     public void EveryReferencedLuminaKeyIsDefined()
     {
-        Dictionary<string, List<string>> defined = CollectDefinitions(RepoPaths.CoreThemeDirectory);
+        Dictionary<string, List<string>> defined = CollectDefinitions(ThemeDirectories);
         List<string> missing = [];
 
-        foreach ((string key, string location) in CollectReferences(RepoPaths.CoreThemeDirectory, "Lumina"))
+        foreach ((string key, string location) in CollectReferences(ThemeDirectories, "Lumina"))
         {
             if (!defined.ContainsKey(key))
             {
@@ -125,49 +136,55 @@ public class ResourceContractTests
         return keys;
     }
 
-    private static Dictionary<string, List<string>> CollectDefinitions(string root)
+    private static Dictionary<string, List<string>> CollectDefinitions(params string[] roots)
     {
         Dictionary<string, List<string>> definitions = new(StringComparer.Ordinal);
 
-        foreach (string file in Directory.GetFiles(root, "*.axaml", SearchOption.AllDirectories))
+        foreach (string root in roots)
         {
-            foreach (XElement element in Load(file).Descendants())
+            foreach (string file in Directory.GetFiles(root, "*.axaml", SearchOption.AllDirectories))
             {
-                XAttribute? key = element.Attribute(Xaml + "Key");
-
-                if (key is null || key.Value.StartsWith('{'))
+                foreach (XElement element in Load(file).Descendants())
                 {
-                    continue;
-                }
+                    XAttribute? key = element.Attribute(Xaml + "Key");
 
-                if (!definitions.TryGetValue(key.Value, out List<string>? locations))
-                {
-                    locations = [];
-                    definitions[key.Value] = locations;
-                }
+                    if (key is null || key.Value.StartsWith('{'))
+                    {
+                        continue;
+                    }
 
-                locations.Add(Describe(file, key));
+                    if (!definitions.TryGetValue(key.Value, out List<string>? locations))
+                    {
+                        locations = [];
+                        definitions[key.Value] = locations;
+                    }
+
+                    locations.Add(Describe(file, key));
+                }
             }
         }
 
         return definitions;
     }
 
-    private static IEnumerable<(string Key, string Location)> CollectReferences(string root, string prefix)
+    private static IEnumerable<(string Key, string Location)> CollectReferences(string[] roots, string prefix)
     {
-        foreach (string file in Directory.GetFiles(root, "*.axaml", SearchOption.AllDirectories))
+        foreach (string root in roots)
         {
-            foreach (XElement element in Load(file).Descendants())
+            foreach (string file in Directory.GetFiles(root, "*.axaml", SearchOption.AllDirectories))
             {
-                foreach (XAttribute attribute in element.Attributes())
+                foreach (XElement element in Load(file).Descendants())
                 {
-                    foreach (Match match in ResourceReference.Matches(attribute.Value))
+                    foreach (XAttribute attribute in element.Attributes())
                     {
-                        string key = match.Groups["key"].Value;
-
-                        if (key.StartsWith(prefix, StringComparison.Ordinal))
+                        foreach (Match match in ResourceReference.Matches(attribute.Value))
                         {
-                            yield return (key, Describe(file, attribute));
+                            string key = match.Groups["key"].Value;
+
+                            if (key.StartsWith(prefix, StringComparison.Ordinal))
+                            {
+                                yield return (key, Describe(file, attribute));
+                            }
                         }
                     }
                 }

@@ -5,6 +5,7 @@
              xmlns:dataGrid="clr-namespace:LuminaUI.DataGrid;assembly=LuminaUI.DataGrid"
              xmlns:treeDataGrid="clr-namespace:LuminaUI.TreeDataGrid;assembly=LuminaUI.TreeDataGrid"
              xmlns:charts="clr-namespace:LuminaUI.Charts;assembly=LuminaUI.Charts"
+             xmlns:markdown="clr-namespace:LuminaUI.Markdown;assembly=LuminaUI.Markdown"
              xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              x:Class="LuminaUI.Demo.App"
              Name="LuminaUI Demo"
@@ -18,5 +19,6 @@
         <dataGrid:LuminaDataGridTheme />
         <treeDataGrid:LuminaTreeDataGridTheme />
         <charts:LuminaChartsTheme />
+        <markdown:LuminaMarkdownTheme />
     </Application.Styles>
 </Application>

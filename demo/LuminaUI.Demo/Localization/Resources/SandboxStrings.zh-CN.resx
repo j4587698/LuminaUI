@@ -696,4 +696,7 @@
   <data name="Sandbox.Nav.ChartsPieRadar" xml:space="preserve">
     <value>饼图与雷达图</value>
   </data>
+  <data name="Sandbox.Nav.Markdown" xml:space="preserve">
+    <value>Markdown</value>
+  </data>
 </root>

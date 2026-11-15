@@ -101,6 +101,7 @@ jobs:
           dotnet restore src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj
           dotnet restore src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj
           dotnet restore src/LuminaUI.Charts/LuminaUI.Charts.csproj
+          dotnet restore src/LuminaUI.Markdown/LuminaUI.Markdown.csproj
 
       - name: Build
         run: |
@@ -109,6 +110,7 @@ jobs:
           dotnet build src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
           dotnet build src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
           dotnet build src/LuminaUI.Charts/LuminaUI.Charts.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
+          dotnet build src/LuminaUI.Markdown/LuminaUI.Markdown.csproj --configuration "$CONFIGURATION" --no-restore /p:ContinuousIntegrationBuild=true
 
       # Releases are triggered by a version bump on the default branch, independently of the CI
       # workflow, so the test suite is re-run here: a red suite must never reach NuGet.
@@ -130,6 +132,7 @@ jobs:
           dotnet pack src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj --configuration "$CONFIGURATION" --no-build --output artifacts/packages /p:ContinuousIntegrationBuild=true
           dotnet pack src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj --configuration "$CONFIGURATION" --no-build --output artifacts/packages /p:ContinuousIntegrationBuild=true
           dotnet pack src/LuminaUI.Charts/LuminaUI.Charts.csproj --configuration "$CONFIGURATION" --no-build --output artifacts/packages /p:ContinuousIntegrationBuild=true
+          dotnet pack src/LuminaUI.Markdown/LuminaUI.Markdown.csproj --configuration "$CONFIGURATION" --no-build --output artifacts/packages /p:ContinuousIntegrationBuild=true
 
       - name: Upload NuGet artifacts
         uses: actions/upload-artifact@v4

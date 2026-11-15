@@ -15,6 +15,7 @@ The NuGet packages target `.NET 8`, `.NET 9`, and `.NET 10`. Demo hosts remain o
 | `LuminaUI.DataGrid` | Lumina theme integration for Avalonia DataGrid. |
 | `LuminaUI.TreeDataGrid` | Lumina theme integration for TreeDataGrid.Avalonia. |
 | `LuminaUI.Charts` | Lumina-themed, custom-drawn chart controls: line/area, bar, scatter, pie/donut, and radar. |
+| `LuminaUI.Markdown` | Lumina-themed Markdown renderer: headings, lists, tables, code blocks, quotes, images, and clickable links. |
 
 ## Features
 
@@ -25,6 +26,7 @@ The NuGet packages target `.NET 8`, `.NET 9`, and `.NET 10`. Demo hosts remain o
 - Navigation and layout: navigation view, navigation pages, drawer pages, tab pages, tab strips, tab controls, carousel, breadcrumb, split view, and transitioning content.
 - Data entry and display: text inputs, OTP input, forms, selection controls, pickers, date range picker, range slider, pagination, descriptions, properties, timeline, steps, indexed lists, and linked categories.
 - Charts: a themable chart family including Cartesian line/area, grouped bar, scatter, spline, step-line, and combo/mixed series; plus pie/donut and radar charts. Configurable numeric/category axes, custom tick steps and label formatters, per-pixel decimation for large series, hover crosshairs and slice/polygon tooltips, reactive live data via observable collections, animated data-change transitions (including continuous live-stream morph), and fixed-axis viewports for real-time dashboards.
+- Markdown: a Markdig-backed renderer whose document tree is themed by Lumina - headings, lists, tables, code blocks, quotes, images and clickable links, with selection and copy.
 - Localization resources with application-level override support.
 - Shared demo project with Desktop, Browser, Android, and iOS hosts.
 
@@ -39,7 +41,8 @@ Reference the packages or projects you need, then register the theme in `App.axa
              xmlns:luminaColorPicker="using:LuminaUI.ColorPicker"
              xmlns:luminaDataGrid="using:LuminaUI.DataGrid"
              xmlns:luminaTreeDataGrid="using:LuminaUI.TreeDataGrid"
-             xmlns:luminaCharts="using:LuminaUI.Charts">
+             xmlns:luminaCharts="using:LuminaUI.Charts"
+             xmlns:luminaMarkdown="using:LuminaUI.Markdown">
   <Application.Styles>
     <lumina:LuminaTheme />
 
@@ -48,6 +51,7 @@ Reference the packages or projects you need, then register the theme in `App.axa
     <luminaDataGrid:LuminaDataGridTheme />
     <luminaTreeDataGrid:LuminaTreeDataGridTheme />
     <luminaCharts:LuminaChartsTheme />
+    <luminaMarkdown:LuminaMarkdownTheme />
   </Application.Styles>
 </Application>
 ```
@@ -122,6 +126,7 @@ src/
   LuminaUI.DataGrid/     Optional DataGrid theme package.
   LuminaUI.TreeDataGrid/ Optional TreeDataGrid theme package.
   LuminaUI.Charts/       Optional chart controls package.
+  LuminaUI.Markdown/     Optional Markdown renderer package.
 
 demo/
   LuminaUI.Demo/         Shared demo views and view models.
@@ -229,6 +234,7 @@ dotnet pack src/LuminaUI.ColorPicker/LuminaUI.ColorPicker.csproj -c Release
 dotnet pack src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj -c Release
 dotnet pack src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj -c Release
 dotnet pack src/LuminaUI.Charts/LuminaUI.Charts.csproj -c Release
+dotnet pack src/LuminaUI.Markdown/LuminaUI.Markdown.csproj -c Release
 ```
 
 ## Versioning
