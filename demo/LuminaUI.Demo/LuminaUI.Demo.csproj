@@ -19,6 +19,7 @@
     <ProjectReference Include="..\..\src\LuminaUI.DataGrid\LuminaUI.DataGrid.csproj" />
     <ProjectReference Include="..\..\src\LuminaUI.TreeDataGrid\LuminaUI.TreeDataGrid.csproj" />
     <ProjectReference Include="..\..\src\LuminaUI.Charts\LuminaUI.Charts.csproj" />
+    <ProjectReference Include="..\..\src\LuminaUI.Markdown\LuminaUI.Markdown.csproj" />
   </ItemGroup>
 
   <ItemGroup>

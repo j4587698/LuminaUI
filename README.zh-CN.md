@@ -15,6 +15,7 @@ NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NE
 | `LuminaUI.DataGrid` | Avalonia DataGrid 的 Lumina 主题集成。 |
 | `LuminaUI.TreeDataGrid` | TreeDataGrid.Avalonia 的 Lumina 主题集成。 |
 | `LuminaUI.Charts` | 基于 Lumina 主题的手绘图表控件：折线/面积、柱状、散点、饼图/环形图与雷达图。 |
+| `LuminaUI.Markdown` | 基于 Lumina 主题的 Markdown 渲染控件：标题、列表、表格、代码块、引用、图片与可点击链接。 |
 
 ## 功能概览
 
@@ -25,6 +26,7 @@ NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NE
 - 导航与布局：导航视图、导航页、抽屉页、标签页容器、标签条、标签页、轮播、面包屑、拆分视图和过渡内容。
 - 数据录入与展示：文本输入、验证码输入、表单、选择控件、选择器、日期范围、范围滑块、分页、描述列表、属性列表、时间线、步骤条、索引列表和联动分类。
 - 图表：一个可主题化的图表家族，包含笛卡尔折线/面积、分组柱状、散点、样条、阶梯折线、组合/混合序列；以及饼图/环形图和雷达图。支持可配置的数值/类别轴、自定义刻度步长与标签格式化、大数据逐像素降采样、悬停十字线与扇区/多边形提示框、基于可观察集合的响应式实时数据、数据变化过渡动画（含连续实时流动形变）、固定轴实时仪表盘视口。
+- Markdown：基于 Markdig 解析、由 Lumina 主题渲染的文档控件，支持标题、列表、表格、代码块、引用、图片与可点击链接，文本可选中复制。
 - 支持应用层覆盖的本地化资源。
 - 共享 Demo 项目，并提供 Desktop、Browser、Android 和 iOS 宿主。
 
@@ -39,7 +41,8 @@ NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NE
              xmlns:luminaColorPicker="using:LuminaUI.ColorPicker"
              xmlns:luminaDataGrid="using:LuminaUI.DataGrid"
              xmlns:luminaTreeDataGrid="using:LuminaUI.TreeDataGrid"
-             xmlns:luminaCharts="using:LuminaUI.Charts">
+             xmlns:luminaCharts="using:LuminaUI.Charts"
+             xmlns:luminaMarkdown="using:LuminaUI.Markdown">
   <Application.Styles>
     <lumina:LuminaTheme />
 
@@ -48,6 +51,7 @@ NuGet 包当前支持 `.NET 8`、`.NET 9` 和 `.NET 10`。Demo 宿主保持 `.NE
     <luminaDataGrid:LuminaDataGridTheme />
     <luminaTreeDataGrid:LuminaTreeDataGridTheme />
     <luminaCharts:LuminaChartsTheme />
+    <luminaMarkdown:LuminaMarkdownTheme />
   </Application.Styles>
 </Application>
 ```
@@ -122,6 +126,7 @@ src/
   LuminaUI.DataGrid/     可选 DataGrid 主题包。
   LuminaUI.TreeDataGrid/ 可选 TreeDataGrid 主题包。
   LuminaUI.Charts/       可选图表控件包。
+  LuminaUI.Markdown/     可选 Markdown 渲染包。
 
 demo/
   LuminaUI.Demo/         共享 Demo 视图和 ViewModel。
@@ -229,6 +234,7 @@ dotnet pack src/LuminaUI.ColorPicker/LuminaUI.ColorPicker.csproj -c Release
 dotnet pack src/LuminaUI.DataGrid/LuminaUI.DataGrid.csproj -c Release
 dotnet pack src/LuminaUI.TreeDataGrid/LuminaUI.TreeDataGrid.csproj -c Release
 dotnet pack src/LuminaUI.Charts/LuminaUI.Charts.csproj -c Release
+dotnet pack src/LuminaUI.Markdown/LuminaUI.Markdown.csproj -c Release
 ```
 
 ## 版本策略

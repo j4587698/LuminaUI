@@ -1,0 +1,52 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:md="clr-namespace:LuminaUI.Markdown.Controls;assembly=LuminaUI.Markdown">
+
+    <!--
+        Markdown typography scale. Everything the renderer needs to look like Lumina lives here or
+        in the class-based styles of LuminaMarkdownTheme.axaml, so an application can retune the
+        document without touching the control: override a key below, or add a later
+        <Style Selector="Run.md-link"> for the pieces the semantic brushes drive.
+    -->
+
+    <x:Double x:Key="LuminaMarkdownFontSize">14</x:Double>
+    <x:Double x:Key="LuminaMarkdownLineHeight">23</x:Double>
+    <x:Double x:Key="LuminaMarkdownH1FontSize">30</x:Double>
+    <x:Double x:Key="LuminaMarkdownH2FontSize">24</x:Double>
+    <x:Double x:Key="LuminaMarkdownH3FontSize">20</x:Double>
+    <x:Double x:Key="LuminaMarkdownH4FontSize">17</x:Double>
+    <x:Double x:Key="LuminaMarkdownH5FontSize">15</x:Double>
+    <x:Double x:Key="LuminaMarkdownH6FontSize">14</x:Double>
+    <x:Double x:Key="LuminaMarkdownCodeFontSize">13</x:Double>
+    <FontFamily x:Key="LuminaMarkdownCodeFontFamily">Consolas</FontFamily>
+
+    <Thickness x:Key="LuminaMarkdownParagraphMargin">0,0,0,10</Thickness>
+    <Thickness x:Key="LuminaMarkdownHeadingMargin">0,14,0,8</Thickness>
+    <Thickness x:Key="LuminaMarkdownQuotePadding">14,4,0,4</Thickness>
+    <Thickness x:Key="LuminaMarkdownQuoteMargin">0,0,0,10</Thickness>
+    <Thickness x:Key="LuminaMarkdownCodeBlockPadding">12,10</Thickness>
+    <Thickness x:Key="LuminaMarkdownCodeBlockMargin">0,0,0,12</Thickness>
+    <Thickness x:Key="LuminaMarkdownTableCellPadding">10,7</Thickness>
+    <Thickness x:Key="LuminaMarkdownListMarkerMargin">0,0,8,0</Thickness>
+    <Thickness x:Key="LuminaMarkdownListItemMargin">0,0,0,4</Thickness>
+    <!--
+        A 20px box on a 23px line: 2px of top margin centres it on the first line without moving
+        the text. The marker column is 20 wide so bullets and checkboxes share one left edge.
+    -->
+    <Thickness x:Key="LuminaMarkdownTaskMargin">0,2,8,0</Thickness>
+    <x:Double x:Key="LuminaMarkdownListMarkerMinWidth">20</x:Double>
+    <Thickness x:Key="LuminaMarkdownRuleMargin">0,14,0,14</Thickness>
+    <Thickness x:Key="LuminaMarkdownQuoteBorderThickness">3,0,0,0</Thickness>
+    <x:Double x:Key="LuminaMarkdownRuleHeight">1</x:Double>
+
+    <ControlTheme x:Key="{x:Type md:LuminaMarkdown}" TargetType="md:LuminaMarkdown">
+        <Setter Property="FontSize" Value="{DynamicResource LuminaMarkdownFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel Name="PART_DocumentHost" />
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+</ResourceDictionary>

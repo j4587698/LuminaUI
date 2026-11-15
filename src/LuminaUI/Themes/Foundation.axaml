@@ -32,6 +32,9 @@
     <x:Double x:Key="LuminaHyperlinkButtonFontSize">14</x:Double>
     <Thickness x:Key="LuminaHyperlinkButtonBorderThickness">1</Thickness>
     <CornerRadius x:Key="LuminaHyperlinkButtonCornerRadius">6</CornerRadius>
+    <x:Double x:Key="LuminaCheckBoxSize">20</x:Double>
+    <CornerRadius x:Key="LuminaCheckBoxCornerRadius">4</CornerRadius>
+    <x:Double x:Key="LuminaCheckBoxGlyphStrokeThickness">1.8</x:Double>
     <Thickness x:Key="LuminaHyperlinkButtonLikePadding">12,6</Thickness>
     <Thickness x:Key="LuminaDataValidationErrorMargin">0,6,0,0</Thickness>
     <x:Double x:Key="LuminaDataValidationErrorFontSize">12</x:Double>

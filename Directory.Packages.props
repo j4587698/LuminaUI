@@ -11,6 +11,7 @@
     <MicrosoftExtensionsHostingVersion>10.0.8</MicrosoftExtensionsHostingVersion>
     <ModelContextProtocolVersion>1.4.0</ModelContextProtocolVersion>
     <MaterialIconsAvaloniaVersion>3.0.2</MaterialIconsAvaloniaVersion>
+    <MarkdigVersion>1.5.1</MarkdigVersion>
     <MicrosoftNETTestSdkVersion>17.12.0</MicrosoftNETTestSdkVersion>
     <XunitVersion>3.2.2</XunitVersion>
     <XunitRunnerVisualStudioVersion>3.1.5</XunitRunnerVisualStudioVersion>
@@ -36,6 +37,7 @@
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="$(MicrosoftExtensionsHostingVersion)" />
     <PackageVersion Include="ModelContextProtocol" Version="$(ModelContextProtocolVersion)" />
     <PackageVersion Include="Material.Icons.Avalonia" Version="$(MaterialIconsAvaloniaVersion)" />
+    <PackageVersion Include="Markdig" Version="$(MarkdigVersion)" />
     <PackageVersion Include="LuminaUI.Diagnostics" Version="$(LuminaUIDiagnosticsVersion)" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkVersion)" />
     <PackageVersion Include="xunit.v3" Version="$(XunitVersion)" />

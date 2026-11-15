@@ -15,6 +15,50 @@
         </Style>
     </ControlTheme>
 
+    <!--
+        Compact variant for rows that own their line height: tables, tree items and rendered
+        documents. The default template reserves 32px for a touch target, which is right for a form
+        but blows out a 23px text line, and no property can shrink it. Same colours as the default
+        checkbox, only the box and the row are smaller.
+    -->
+    <ControlTheme x:Key="LuminaCompactCheckBox" TargetType="CheckBox">
+        <Setter Property="Width" Value="{DynamicResource LuminaCheckBoxSize}" />
+        <Setter Property="Height" Value="{DynamicResource LuminaCheckBoxSize}" />
+        <Setter Property="MinWidth" Value="0" />
+        <Setter Property="MinHeight" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LuminaBorderStrongBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LuminaCheckBoxCornerRadius}" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                    <Path Name="PART_CheckMark"
+                          Data="M5,10.2 L8.4,13.4 L15,6.4"
+                          Stroke="{DynamicResource LuminaPrimaryForegroundBrush}"
+                          StrokeThickness="{DynamicResource LuminaCheckBoxGlyphStrokeThickness}"
+                          StrokeLineCap="Round"
+                          StrokeJoin="Round"
+                          IsVisible="False" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+        <Style Selector="^:checked">
+            <Setter Property="Background" Value="{DynamicResource LuminaPrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LuminaPrimaryBrush}" />
+        </Style>
+        <Style Selector="^:checked /template/ Path#PART_CheckMark">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+        <Style Selector="^:disabled">
+            <Setter Property="Opacity" Value="0.5" />
+        </Style>
+    </ControlTheme>
+
     <ControlTheme x:Key="{x:Type RadioButton}" TargetType="RadioButton" BasedOn="{StaticResource {x:Type RadioButton}}">
         <Setter Property="Foreground" Value="{DynamicResource LuminaTextSecondaryBrush}" />
         <Setter Property="MinHeight" Value="32" />

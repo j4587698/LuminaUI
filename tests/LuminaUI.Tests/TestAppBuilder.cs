@@ -35,5 +35,6 @@ public sealed class TestApp : Application
         Styles.Add(new LuminaUI.DataGrid.LuminaDataGridTheme());
         Styles.Add(new LuminaUI.TreeDataGrid.LuminaTreeDataGridTheme());
         Styles.Add(new LuminaUI.Charts.LuminaChartsTheme());
+        Styles.Add(new LuminaUI.Markdown.LuminaMarkdownTheme());
     }
 }

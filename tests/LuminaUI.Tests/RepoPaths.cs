@@ -14,6 +14,8 @@ internal static class RepoPaths
 
     public static string CoreThemeDirectory => Path.Combine(Root, "src", "LuminaUI");
 
+    public static string MarkdownThemeDirectory => Path.Combine(Root, "src", "LuminaUI.Markdown");
+
     public static string LocalizationDirectory => Path.Combine(CoreThemeDirectory, "Localization");
 
     public static string DemoDirectory => Path.Combine(Root, "demo", "LuminaUI.Demo");

@@ -401,6 +401,8 @@ internal static class SandboxLocalization
 
 	public const string NavChartsPieRadar = "Sandbox.Nav.ChartsPieRadar";
 
+	public const string NavMarkdown = "Sandbox.Nav.Markdown";
+
 	public const string ChartsLineTitle = "Sandbox.Charts.LineTitle";
 
 	public const string ChartsLineSubtitle = "Sandbox.Charts.LineSubtitle";

@@ -5623,4 +5623,10 @@ await shell.PushAsync(
   <data name="Sandbox.Charts.Data.Price" xml:space="preserve">
     <value>Price</value>
   </data>
+  <data name="Sandbox.Text.1365" xml:space="preserve">
+    <value>Markdown</value>
+  </data>
+  <data name="Sandbox.Text.1366" xml:space="preserve">
+    <value>Render Markdown documents with the Lumina visual system: headings, lists, tables, code blocks and clickable links.</value>
+  </data>
 </root>
