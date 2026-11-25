@@ -22,11 +22,11 @@ public sealed class TreeDataGridShowcaseViewModel : ObservableObject
     {
         var records = new ObservableCollection<TreePackageRecord>
         {
-            new("LuminaUI", "Core", "net10.0", 42, true),
-            new("LuminaUI.ColorPicker", "Optional", "net10.0", 6, true),
-            new("LuminaUI.DataGrid", "Optional", "net10.0", 6, true),
-            new("LuminaUI.TreeDataGrid", "Optional", "net10.0", 7, true),
-            new("LuminaUI.Demo", "Sandbox", "net10.0", 128, false)
+            new("LuminaUI", "Core", "net11.0", 42, true),
+            new("LuminaUI.ColorPicker", "Optional", "net11.0", 6, true),
+            new("LuminaUI.DataGrid", "Optional", "net11.0", 6, true),
+            new("LuminaUI.TreeDataGrid", "Optional", "net11.0", 7, true),
+            new("LuminaUI.Demo", "Sandbox", "net11.0", 128, false)
         };
 
         return new FlatTreeDataGridSource<TreePackageRecord>(records)

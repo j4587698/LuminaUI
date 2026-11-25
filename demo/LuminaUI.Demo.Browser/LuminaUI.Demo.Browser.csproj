@@ -1,6 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk.WebAssembly">
   <PropertyGroup>
-    <TargetFramework>net10.0-browser</TargetFramework>
+    <!-- Avalonia 12.2 ships .NET 11 WebAssembly native assets (SkiaSharp 4 / HarfBuzzSharp 14),
+         so the browser host targets the same framework as the other demo hosts. -->
+    <TargetFramework>net11.0-browser</TargetFramework>
     <OutputType>Exe</OutputType>
     <Nullable>enable</Nullable>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
@@ -12,7 +14,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(RunAOTCompilation)' == 'true'">
-    <!-- Avalonia.Controls.DataGrid 12.0.0 emits assembly-level trim summaries; keep concrete LuminaUI IL warnings visible. -->
+    <!-- Avalonia.Controls.DataGrid emits assembly-level trim summaries; keep concrete LuminaUI IL warnings visible. -->
     <NoWarn>$(NoWarn);IL2104;IL3053</NoWarn>
   </PropertyGroup>
 

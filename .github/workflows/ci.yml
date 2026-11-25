@@ -46,6 +46,7 @@ jobs:
             8.0.x
             9.0.x
             10.0.x
+            11.0.x
           cache: true
           cache-dependency-path: |
             Directory.Packages.props
@@ -57,7 +58,7 @@ jobs:
 
       # The Android, iOS and WebAssembly hosts pull in platform workloads that are slow and
       # irrelevant to a PR gate, so they are skipped. The desktop host and the shared demo UI are
-      # plain net10.0, and they are built here on purpose: the demo is by far the largest consumer
+      # plain net11.0, and they are built here on purpose: the demo is by far the largest consumer
       # of the library's public API and XAML resources, so building it turns every demo binding and
       # style into a compile-time check that a breaking change cannot slip past.
       - name: Restore
