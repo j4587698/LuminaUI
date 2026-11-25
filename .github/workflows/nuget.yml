@@ -369,6 +369,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      # Lets the job request a GitHub OIDC token for NuGet.org trusted publishing.
+      id-token: write
 
     steps:
       - name: Checkout
@@ -386,15 +388,25 @@ jobs:
         with:
           path: artifacts/release
 
+      # Exchanges the job's GitHub OIDC token for a temporary (about one hour) NuGet API
+      # key, which nuget.org issues against the trusted publishing policy configured for
+      # this repository and workflow. No long-lived API key secret is stored here.
+      - name: NuGet login (OIDC -> temporary API key)
+        id: nuget-login
+        uses: NuGet/login@v1
+        with:
+          # The nuget.org profile name that owns the LuminaUI packages.
+          user: j4587698
+
       - name: Publish packages to NuGet
         env:
-          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+          NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
         shell: bash
         run: |
           shopt -s nullglob
 
           if [ -z "$NUGET_API_KEY" ]; then
-            echo "NUGET_API_KEY secret is required to publish packages."
+            echo "NuGet OIDC login did not produce a temporary API key."
             exit 1
           fi
 
