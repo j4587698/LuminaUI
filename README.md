@@ -4,7 +4,7 @@
 
 LuminaUI is an Avalonia 12 component library for desktop, browser, and mobile-style application shells. It provides a shared visual system, reusable controls, navigation primitives, overlays, localization support, optional themed integrations for ColorPicker, DataGrid, and TreeDataGrid, and a themed chart package.
 
-The NuGet packages target `.NET 8`, `.NET 9`, and `.NET 10`. Demo hosts remain on `.NET 10`. The current Avalonia version is `12.0.1`.
+The NuGet packages target `.NET 8`, `.NET 9`, `.NET 10`, and `.NET 11`. All demo hosts (desktop, browser, Android, and iOS) compile for `.NET 11`. The current Avalonia version is `12.2.0`; ColorPicker tracks Avalonia while DataGrid remains on `12.1.2` until its separate repository ships a 12.2 release.
 
 ## Packages
 

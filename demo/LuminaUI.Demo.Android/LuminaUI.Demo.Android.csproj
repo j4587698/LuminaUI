@@ -1,8 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net10.0-android</TargetFramework>
-    <SupportedOSPlatformVersion>23</SupportedOSPlatformVersion>
+    <TargetFramework>net11.0-android</TargetFramework>
+    <!-- .NET 11 raises the minimum supported Android API level from 21 to 24. -->
+    <SupportedOSPlatformVersion>24</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
     <ApplicationId>dev.lumina.ui.demo</ApplicationId>
     <ApplicationVersion>1</ApplicationVersion>

@@ -1,13 +1,16 @@
 <Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <AvaloniaVersion>12.0.1</AvaloniaVersion>
-    <AvaloniaControlsVersion>12.0.0</AvaloniaControlsVersion>
+    <AvaloniaVersion>12.2.0</AvaloniaVersion>
+    <AvaloniaColorPickerVersion>12.2.0</AvaloniaColorPickerVersion>
+    <!-- Avalonia.Controls.DataGrid ships from its own repo (AvaloniaUI/Avalonia.Controls.DataGrid)
+         and has no 12.2 release yet. 12.1.2 is the latest and works with Avalonia 12.2. -->
+    <AvaloniaDataGridVersion>12.1.2</AvaloniaDataGridVersion>
     <TreeDataGridAvaloniaVersion>12.0.0</TreeDataGridAvaloniaVersion>
     <CommunityToolkitMvvmVersion>8.4.2</CommunityToolkitMvvmVersion>
     <LuminaUIDiagnosticsVersion>0.2.0</LuminaUIDiagnosticsVersion>
-    <AndroidXSplashScreenVersion>1.2.0.2</AndroidXSplashScreenVersion>
-    <AndroidXAppCompatVersion>1.7.1.3</AndroidXAppCompatVersion>
+    <AndroidXSplashScreenVersion>1.2.0.3</AndroidXSplashScreenVersion>
+    <AndroidXAppCompatVersion>1.8.0</AndroidXAppCompatVersion>
     <MicrosoftExtensionsHostingVersion>10.0.8</MicrosoftExtensionsHostingVersion>
     <ModelContextProtocolVersion>1.4.0</ModelContextProtocolVersion>
     <MaterialIconsAvaloniaVersion>3.0.2</MaterialIconsAvaloniaVersion>
@@ -28,8 +31,8 @@
     <PackageVersion Include="Avalonia.Headless" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Headless.XUnit" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
-    <PackageVersion Include="Avalonia.Controls.ColorPicker" Version="$(AvaloniaControlsVersion)" />
-    <PackageVersion Include="Avalonia.Controls.DataGrid" Version="$(AvaloniaControlsVersion)" />
+    <PackageVersion Include="Avalonia.Controls.ColorPicker" Version="$(AvaloniaColorPickerVersion)" />
+    <PackageVersion Include="Avalonia.Controls.DataGrid" Version="$(AvaloniaDataGridVersion)" />
     <PackageVersion Include="TreeDataGrid.Avalonia" Version="$(TreeDataGridAvaloniaVersion)" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="$(CommunityToolkitMvvmVersion)" />
     <PackageVersion Include="Xamarin.AndroidX.Core.SplashScreen" Version="$(AndroidXSplashScreenVersion)" />
