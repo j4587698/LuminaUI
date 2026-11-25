@@ -13,6 +13,17 @@
     <RootNamespace>LuminaUI.Demo.Android</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(PublishAot)' == 'true'">
+    <!-- .NET 11 Android NativeAOT is still experimental; this acknowledges XA1040. -->
+    <EnablePreviewFeatures>true</EnablePreviewFeatures>
+    <!-- Avalonia.Controls.DataGrid emits assembly-level trim summaries; keep concrete LuminaUI IL warnings visible. -->
+    <NoWarn>$(NoWarn);IL2104;IL3053</NoWarn>
+    <!-- Workaround for a .NET 11 ILC bug: writing the Java Callable Wrapper scan DGML graph fails with
+         "The Writer is closed or in error state" (XmlWellFormedWriter). Skipping the DGML-based wrapper
+         trim keeps the publish working; it only leaves unused Java callable wrappers in the APK. -->
+    <_AndroidTrimmableTypemapTrimJavaCode>false</_AndroidTrimmableTypemapTrimJavaCode>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Avalonia.Android" />
     <PackageReference Include="Xamarin.AndroidX.Core.SplashScreen" />

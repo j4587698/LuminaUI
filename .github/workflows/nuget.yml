@@ -228,7 +228,7 @@ jobs:
           path: artifacts/*.zip
 
   demo-android:
-    name: Build Android demo AOT
+    name: Build Android demo Native AOT
     needs: prepare
     if: needs.prepare.outputs.should_release == 'true'
     runs-on: ubuntu-latest
@@ -251,7 +251,7 @@ jobs:
       - name: Install Android workload
         run: dotnet workload install android
 
-      - name: Publish Android AOT demo
+      - name: Publish Android Native AOT demo
         shell: bash
         run: |
           version="${{ needs.prepare.outputs.package_version }}"
@@ -259,14 +259,15 @@ jobs:
           asset_path="artifacts/LuminaUI.Demo.Android.aot.${version}.zip"
           apk_asset_path="artifacts/LuminaUI.Demo.Android.aot.${version}.apk"
 
-          # .NET 11 Android uses CoreCLR, where ReadyToRun (an AOT model) is enabled by
-          # default for Release builds. The Mono-only RunAOTCompilation property triggers
-          # XA1044 on CoreCLR, so it must not be passed anymore.
+          # .NET 11 Android defaults to CoreCLR with ReadyToRun. PublishAot=true selects the
+          # experimental NativeAOT runtime instead; the project acknowledges XA1040 through
+          # EnablePreviewFeatures. RunAOTCompilation is Mono-only and triggers XA1044 here.
           dotnet publish demo/LuminaUI.Demo.Android/LuminaUI.Demo.Android.csproj \
             --configuration "$CONFIGURATION" \
             --output "$publish_dir" \
             /p:AndroidPackageFormat=apk \
             /p:AndroidKeyStore=false \
+            /p:PublishAot=true \
             /p:ContinuousIntegrationBuild=true
 
           apk_path="$(find "$publish_dir" -type f -name "*-Signed.apk" | sort | head -n 1)"
