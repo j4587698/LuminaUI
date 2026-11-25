@@ -1,6 +1,5 @@
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
 using Avalonia.Media;
 using LuminaUI.Enums;
 
@@ -8,8 +7,6 @@ namespace LuminaUI.Controls;
 
 public class LuminaBlurBackground : ContentControl
 {
-    private LuminaBackdropBlur? _backdropBlur;
-
     public static readonly StyledProperty<LuminaGlassMode> GlassModeProperty =
         AvaloniaProperty.Register<LuminaBlurBackground, LuminaGlassMode>(
             nameof(GlassMode),
@@ -66,14 +63,9 @@ public class LuminaBlurBackground : ContentControl
         set => SetValue(EdgeThicknessProperty, value);
     }
 
+    /// <summary>Retained for compatibility. Backdrops update automatically.</summary>
+    [System.Obsolete("Backdrop blur updates automatically; this method is no longer needed.")]
     public void RefreshBackdrop()
     {
-        _backdropBlur?.RefreshBackdrop();
-    }
-
-    protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
-    {
-        base.OnApplyTemplate(e);
-        _backdropBlur = e.NameScope.Find<LuminaBackdropBlur>("PART_BackdropBlur");
     }
 }

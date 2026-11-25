@@ -6,6 +6,8 @@ LuminaUI is an Avalonia 12 component library for desktop, browser, and mobile-st
 
 The NuGet packages target `.NET 8`, `.NET 9`, `.NET 10`, and `.NET 11`. All demo hosts (desktop, browser, Android, and iOS) compile for `.NET 11`. The current Avalonia version is `12.2.0`; ColorPicker tracks Avalonia while DataGrid remains on `12.1.2` until its separate repository ships a 12.2 release.
 
+Backdrop blur updates automatically. The deprecated `AcrylicCached` and `Cached` modes now use live blur instead of a frozen snapshot; `RefreshBackdrop()` and `Refresh()` remain for compatibility but do nothing.
+
 ## Packages
 
 | Package | Purpose |

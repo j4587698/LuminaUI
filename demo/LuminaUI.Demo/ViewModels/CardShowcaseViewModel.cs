@@ -35,12 +35,6 @@ public partial class CardShowcaseViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private static void RefreshCachedGlass(LuminaCard? card)
-    {
-        card?.RefreshBackdrop();
-    }
-
-    [RelayCommand]
     private void RefreshGlass(object? parameter)
     {
         var owner = parameter switch

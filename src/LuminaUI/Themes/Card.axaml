@@ -156,7 +156,8 @@
         <Style Selector="^[GlassMode=AcrylicCached]">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="{DynamicResource LuminaCardGlassBorderBrush}" />
-            <Setter Property="BorderThickness" Value="{DynamicResource LuminaCardGlassBorderThickness}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="GlassEdgeBrush" Value="Transparent" />
             <Style Selector="^ /template/ Grid#PART_SurfaceLayer">
                 <Setter Property="Margin" Value="0" />
                 <Setter Property="RenderTransform" Value="translateY(0px)" />
@@ -182,7 +183,8 @@
         <Style Selector="^[GlassMode=AcrylicDynamic]">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="{DynamicResource LuminaCardGlassBorderBrush}" />
-            <Setter Property="BorderThickness" Value="{DynamicResource LuminaCardGlassBorderThickness}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="GlassEdgeBrush" Value="Transparent" />
             <Style Selector="^ /template/ Grid#PART_SurfaceLayer">
                 <Setter Property="Margin" Value="0" />
                 <Setter Property="RenderTransform" Value="translateY(0px)" />

@@ -40,7 +40,7 @@ LuminaUI defines 3 levels of elevation for the `LuminaCard` component:
 
 1.  **Solid (Default)**: Flat against the background. Uses `LuminaSurface` and a 1px `LuminaBorder`. Shadow is extremely faint (`0 1 3`).
 2.  **Elevated (IsElevated="True")**: Floating above the surface. Uses `LuminaSurfaceElevated`. Casts a distinct drop shadow (`0 4 12`). Ideal for forms and important distinct regions.
-3.  **Glass (`GlassMode`)**: `Pseudo` uses a translucent tint, static noise texture, gradient highlight, and gradient edge without backdrop sampling; `AcrylicCached` samples and blurs once, automatically refreshes after a theme-variant change, and can be manually refreshed with `RefreshBackdrop()`; `AcrylicDynamic` performs live backdrop blur. A plain translucent surface uses `Off` with an alpha `Background`. `Classes="Glass"`, `Classes="CachedGlass"`, and `Classes="PseudoGlass"` remain concise aliases for cards.
+3.  **Glass (`GlassMode`)**: `Pseudo` uses a translucent tint, static noise texture, gradient highlight, and gradient edge without backdrop sampling; `AcrylicDynamic` performs live backdrop blur. The deprecated `AcrylicCached` and `Classes="CachedGlass"` are compatibility aliases for live blur; they no longer freeze the backdrop, and `RefreshBackdrop()` is no longer needed. A plain translucent surface uses `Off` with an alpha `Background`. `Classes="Glass"` and `Classes="PseudoGlass"` remain concise aliases for cards.
 
 ## 5. Typography
 
