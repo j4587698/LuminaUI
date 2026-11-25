@@ -305,6 +305,9 @@ jobs:
       contents: read
       pages: write
       id-token: write
+      # Lets the cleanup and index-wait steps query the run's artifacts with the
+      # default token.
+      actions: read
     concurrency:
       group: pages
       cancel-in-progress: true
@@ -345,6 +348,20 @@ jobs:
           find "$site_dir" -type f -iname "*.pdb" -delete
           touch "$site_dir/.nojekyll"
 
+      - name: Remove stale Pages artifacts
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # A failed deploy attempt leaves its "github-pages" artifact behind, and a retry
+          # would then find two artifacts with the same name, which deploy-pages refuses.
+          artifact_ids="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts?per_page=100" \
+            --jq '.artifacts[] | select(.name == "github-pages") | .id')"
+          for artifact_id in $artifact_ids; do
+            gh api -X DELETE "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id"
+            echo "Deleted stale github-pages artifact $artifact_id."
+          done
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
@@ -352,6 +369,25 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: artifacts/pages/site
+
+      - name: Wait for the Pages artifact to be indexed
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # The artifacts search API indexes uploads asynchronously; deploying too fast
+          # fails with "No artifacts named github-pages were found".
+          for attempt in $(seq 1 30); do
+            count="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts?name=github-pages" \
+              --jq '.total_count')"
+            if [ "${count:-0}" -ge 1 ]; then
+              echo "The github-pages artifact is visible (total_count=$count)."
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "The github-pages artifact never became visible." >&2
+          exit 1
 
       - name: Deploy to GitHub Pages
         id: deployment
