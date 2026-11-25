@@ -201,10 +201,6 @@
                         <Button Margin="0,0,8,0"
                                 Content="{l10n:Loc Sandbox.Card.MoveBackdrop}"
                                 Command="{Binding MoveGlassBackdropCommand}" />
-                        <Button Classes="Primary"
-                                Content="{l10n:Loc Sandbox.Card.RefreshCached}"
-                                Command="{Binding RefreshCachedGlassCommand}"
-                                CommandParameter="{Binding #CachedGlassCard}" />
                     </WrapPanel>
                 </StackPanel>
 
@@ -237,7 +233,7 @@
                                            Foreground="#B3FFFFFF" />
                                 <TextBlock Canvas.Left="176"
                                            Canvas.Top="150"
-                                           Text="OFF   PSEUDO   CACHED   DYNAMIC"
+                                           Text="OFF   PSEUDO   DYNAMIC"
                                            FontSize="28"
                                            FontWeight="Black"
                                            Foreground="#99000000" />
@@ -303,23 +299,6 @@
                                 </StackPanel>
                             </lumina:LuminaCard>
 
-                            <lumina:LuminaCard x:Name="CachedGlassCard"
-                                               GlassMode="AcrylicCached"
-                                               BackdropBlurRadius="18"
-                                               MinHeight="176"
-                                               Padding="16">
-                                <StackPanel Spacing="9">
-                                    <TextBlock Text="AcrylicCached" FontSize="18" FontWeight="Bold" />
-                                    <TextBlock Text="{l10n:Loc Sandbox.Card.GlassCachedDescription}"
-                                               Foreground="{DynamicResource LuminaTextMutedBrush}"
-                                               TextWrapping="Wrap" />
-                                    <TextBlock Text="GlassMode=&quot;AcrylicCached&quot;"
-                                               FontSize="12"
-                                               TextWrapping="Wrap"
-                                               Foreground="{DynamicResource LuminaTextSecondaryBrush}" />
-                                </StackPanel>
-                            </lumina:LuminaCard>
-
                             <lumina:LuminaCard GlassMode="AcrylicDynamic"
                                                BackdropBlurRadius="18"
                                                MinHeight="176"
@@ -340,7 +319,10 @@
                 </Border>
             </StackPanel>
 
-            <lumina:LuminaCard Classes="Glass" Padding="20">
+            <lumina:LuminaCard Classes="Glass"
+                               Padding="20"
+                               BorderThickness="1"
+                               BorderBrush="{DynamicResource LuminaBorderDefaultBrush}">
                 <lumina:LuminaResponsivePanel MinItemWidth="220" HorizontalSpacing="20" VerticalSpacing="20">
                     <StackPanel Spacing="14">
                         <StackPanel Spacing="8">

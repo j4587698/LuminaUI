@@ -6,6 +6,8 @@ LuminaUI 是一套面向 Avalonia 12 的组件库，覆盖桌面、浏览器和�
 
 NuGet 包当前支持 `.NET 8`、`.NET 9`、`.NET 10` 和 `.NET 11`。桌面、浏览器、Android 和 iOS Demo 宿主均使用 `.NET 11` 编译。Avalonia 版本为 `12.2.0`；ColorPicker 跟随 Avalonia 版本，DataGrid 则保持在 `12.1.2`，等待其独立仓库发布 12.2。
 
+背景模糊会自动更新。已弃用的 `AcrylicCached` 和 `Cached` 模式现在使用实时模糊，不再冻结快照；`RefreshBackdrop()` 和 `Refresh()` 为兼容性保留，但不再执行操作。
+
 ## 包结构
 
 | 包名 | 用途 |
